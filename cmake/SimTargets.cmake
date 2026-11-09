@@ -31,12 +31,12 @@ function(add_turboquant_sim_targets)
   # The fused decode's service headers reach for src/common and the decode's own subdirectories;
   # the kernel's own includes are relative to its directory, so these -I flags are only for the
   # shared contracts.
-  ## ascendc_library(tq_decode_sim SHARED src/decode/turboquant_fused_decode.cpp)
-  ## ascendc_compile_definitions(tq_decode_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
-  ## ascendc_compile_options(tq_decode_sim PRIVATE
-  ##     -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS} ${TQ_REDUCE_DEFINES}
-  ##     -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH
-  ##     "-I${SRC}/src/decode" "-I${SRC}/src/common" "-I${SRC}/include")
+  ascendc_library(tq_decode_sim SHARED src/decode/turboquant_fused_decode.cpp)
+  ascendc_compile_definitions(tq_decode_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
+  ascendc_compile_options(tq_decode_sim PRIVATE
+      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS} ${TQ_REDUCE_DEFINES}
+      -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH
+      "-I${SRC}/src/decode" "-I${SRC}/src/common" "-I${SRC}/include")
 
   # ---------------------------------------------------------------- the runners
   # add_sim_runner(<name> <source> <kernel targets...>)
