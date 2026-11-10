@@ -243,9 +243,29 @@ inline void run()
             fdt::DecodeTilingStatus::kOk);
     {
         const auto* d = reinterpret_cast<const fdt::TurboQuantDecodeTilingData*>(image.data());
+        // Page 7 tile 1 is rows 960..1023 of a 1024-row context: a FULL tile, so no tail.
         require(d->num_tiles == 1 && d->block_start_idx == 7 && d->tile_origin == 1 &&
-                d->blocks_in_split == 1 && d->tail_rows == 0);
+                d->blocks_in_split == 1 && d->tail_rows == 0 && d->regular_tiles == 1);
     }
+    // A probe that lands on the sequence's own short tile is probed AS a short tile: without
+    // this the one tile worth isolating -- where the tail mask and `lastValid` come into it --
+    // is unreachable through this ABI.
+    length = 100;  // rows 64..99 of tile 1, so 36 live
+    r.probe_page = 0; r.probe_tile = 1;
+    require(fdt::build_decode_tiling(r, &length, nullptr, image.data()) ==
+            fdt::DecodeTilingStatus::kOk);
+    {
+        const auto* d = reinterpret_cast<const fdt::TurboQuantDecodeTilingData*>(image.data());
+        require(d->num_tiles == 1 && d->tail_rows == 36 && d->regular_tiles == 0 &&
+                (d->flags & fdt::kDecodeSplitCarriesTail) != 0u);
+    }
+    // And a probe past the live context is refused rather than served as a full tile, so a
+    // sweep walking off the end of the grid says so instead of launching over dead rows.
+    length = 64;
+    require(fdt::build_decode_tiling(r, &length, nullptr, image.data()) ==
+            fdt::DecodeTilingStatus::kProbeOutOfRange);
+    length = 1024;
+    r.probe_page = 7; r.probe_tile = 1;
     // Nothing may be written past the descriptors and the dispatch records.
     for (std::size_t i = fdt::decode_tiling_words(1, 1, 1); i < image.size(); ++i)
         require(image[i] == 0);

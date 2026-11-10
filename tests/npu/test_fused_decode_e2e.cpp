@@ -41,6 +41,12 @@
 // observed can have come from a perf re-launch. It is still not an overlap claim: a median wall
 // interval says the launch got faster or slower and nothing about which pipe was busy.
 //
+// `--reproduce` replaces the ladder with ONE geometry: the serving launch that faults on an A5
+// with AIV error 341, run through both entry points so the result says whether the raw-query
+// prologue or the group_heads 6 work split is what the ladder was missing. It takes no other
+// flag. See the block above `reproduce()` for the device log it was built from, the two axes no
+// rung covers, and how to read each of the three outcomes.
+//
 // It also does not canary the TAIL ROWS of a mapped page: a masked
 // lane's scale still flows through the Gather and the Muls in front of the mask, so a
 // 0x5A5A5A5A scale there (~3.8e15) would be testing the masking phase's numerical headroom
@@ -208,27 +214,30 @@ struct OracleResult {
 };
 
 // Every live output channel against the fixture's FP64 oracle, plus the output tail canary.
-OracleResult check_output(const std::vector<std::uint8_t>& image, const Fixture& f,
-                          std::size_t payload_bytes)
+// `expected` rather than `f.expected` because the raw-query entry's output stage is not the
+// fixture's stage-0 context: --reproduce passes Pi applied once more. `ulp_budget` likewise --
+// see kReproUlpBudget for why that leg's is looser and what a failure there would mean.
+OracleResult check_output(const std::vector<std::uint8_t>& image, const std::vector<float>& expected,
+                          std::size_t payload_bytes, int ulp_budget)
 {
     OracleResult result;
-    const std::size_t live = f.expected.size();
+    const std::size_t live = expected.size();
     for (std::size_t i = 0; i < live; ++i) {
         std::uint16_t bits;
         std::memcpy(&bits, image.data() + kGuard + 2 * i, 2);
-        const std::uint16_t reference = fused_decode_fixture::reference_bfloat16(f.expected[i]);
+        const std::uint16_t reference = fused_decode_fixture::reference_bfloat16(expected[i]);
         // The fixture's results are positive finite normals, so the bf16 bit distance IS the
         // ULP distance -- no sign or subnormal case to fold in.
         const int ulp = std::abs(int(bits) - int(reference));
         const double got = tq_test::bf16_to_float(bits);
-        const double absolute = std::fabs(got - double(f.expected[i]));
+        const double absolute = std::fabs(got - double(expected[i]));
         if (ulp > result.worst_ulp) result.worst_ulp = ulp;
         if (absolute > result.worst_abs) result.worst_abs = absolute;
-        if (ulp > kUlpBudget) {
+        if (ulp > ulp_budget) {
             std::fprintf(stderr,
                          "oracle mismatch at channel %zu: got %g (%04x) expected %g (%04x), "
                          "%d bf16 ULP over a budget of %d\n",
-                         i, got, bits, double(f.expected[i]), reference, ulp, kUlpBudget);
+                         i, got, bits, double(expected[i]), reference, ulp, ulp_budget);
             require(false, "fused-opt NPU validation: output disagrees with the FP64 oracle");
         }
     }
@@ -389,7 +398,7 @@ int run(bool camodel_smoke, int perf_iters)
             // 1 and 2d: the oracle and the output's tail canary.
             const auto image = out.Download();
             out.CheckGuards(image, "output");
-            const OracleResult oracle = check_output(image, f, out.bytes);
+            const OracleResult oracle = check_output(image, f.expected, out.bytes, kUlpBudget);
             worst_ulp = std::max(worst_ulp, oracle.worst_ulp);
             worst_abs = std::max(worst_abs, oracle.worst_abs);
 
@@ -505,17 +514,532 @@ int run(bool camodel_smoke, int perf_iters)
     return 0;
 }
 
+
+// ------------------------------------------------------------------- --reproduce
+//
+// THE SERVING GEOMETRY THAT FAULTS, as the vllm-ascend TurboQuant backend launched it.
+//
+// Reported from a live vLLM EngineCore on an A5, out of the backend's own decode trace:
+//
+//     query        [1, 24, 256] bf16     output [1, 24, 256] bf16
+//     key_cache    [6363, 128, 4, 128]   block_size 128   scale_cache [2, 6363, 4, 128]
+//     block_tables [1, 518]              context_lens [272], then [316] on the next step
+//     num_heads 24, num_kv_heads 4, group_heads 6, scale 0.0625, inv_sqrt_len 0.0625
+//
+// and the device answered, on that launch:
+//
+//     aivec error, error code = 341, "The address for VEC to access UB is out of bounds"
+//         AIV core ids 0..3 and 38..41, every one at the same pc
+//     aicore error, "timeout or trap error" subErrType 0x4, mte error: 0
+//         AIC core ids 0, 1, 19, 20
+//
+// Eight AIVs and four AICs is a KERNEL_TYPE_MIX_AIC_1_2 launch of grid 4, which is what this
+// geometry derives below. The 341 is the FAULT and the AIC line is its COLLATERAL -- the Cube
+// halves left in CrossCoreWaitFlag until the watchdog reported them, which is why the device
+// log prints the Cube first. The AIV is where to look.
+//
+// WHY THE LADDER ABOVE DOES NOT COVER IT -- two axes, and this flag runs both legs of the
+// second so a run says which one matters:
+//
+//   group_heads 6. Every rung in both ladders is group_heads 16, which is kCubeTileM exactly:
+//   one full M fractal, an even 8/8 dual-destination Fixpipe split, and heads.mine 8 against
+//   the kHalfRows 8 the UB arena is sized for. 6 gives evenM 6, a 3/3 split and heads.mine 3.
+//
+//   the RAW-QUERY entry. Nothing under tests/ calls Fixture::launch_raw or RawQueryBasis, so
+//   launch_fused_decode_opt_raw_query -- its AIV rotation prologue, its own SyncAll<false>()
+//   and the kUnrotated output stage -- has never run on a device. Production uses exactly that
+//   entry, at output_stage 1, with a NULL gate pointer.
+//
+// So each case runs twice, pre-rotated first and raw-query second, on one fixture:
+//
+//   pre-rotated passes, raw-query faults  -> the prologue or the output stage
+//   both fault                            -> group_heads 6, common to the two
+//   neither faults                        -> the geometry is not the whole story and what the
+//                                            serving cache HELD is, which this fixture replaces
+//
+// FOR THE NPU RUNNER, not the CAModel one. Both contexts are over 256 rows, which is past the
+// working limit the simulator is held to here (the --camodel-smoke ladder tops out at 257 for
+// the same reason), and the fault this reproduces is a device report with no simulator
+// equivalent. --reproduce refuses to combine with --camodel-smoke, but nothing stops
+// test_fused_decode_e2e_sim from being handed it, so: run it from the NPU target.
+//
+// TWO DELIBERATE DEPARTURES from the serving launch, neither of them reachable by the device:
+// `max_blocks` is this fixture's own page count rather than 518 (with one request the block
+// table row base is 0 either way), and the host tiling is built with the fixture's real block
+// table where the binding passes nullptr (the live span is dense in both, so the descriptors
+// come out identical -- and the table is what keeps the unmapped-page canaries meaningful).
+struct ReproCase {
+    int context;
+    int tail;  // context % 64, stated so a case note cannot drift from its own geometry
+    const char* note;
+};
+
+// Serving-side geometry, from the trace above.
+constexpr int kReproRequests = 1;
+constexpr int kReproKvHeads = 4;
+constexpr int kReproGroupHeads = 6;
+constexpr int kReproSplits = 1;
+constexpr unsigned kReproOutputStage = 1;  // TurboQuantOutputStage::kUnrotated
+constexpr unsigned kReproCubeChunk = 0;    // 6 vectors a block is below kQueryBasisMinCubeVectors
+constexpr std::uint32_t kReproFusedContextLimit = 4096;
+// What the vllm-ascend binding derives for this geometry, restated so a drift in either
+// derivation fails here instead of quietly making this a different launch.
+constexpr std::uint32_t kReproGrid = 4;
+constexpr std::uint32_t kReproTasksPerBlock = 1;
+constexpr std::uint32_t kReproReduceTasksPerBlock = 6;
+constexpr std::uint32_t kReproPrologueVectors = 6;
+// Looser than the ladder's 2 ON PURPOSE, and only for the kUnrotated leg: that oracle applies
+// Pi in double over the fixture's fp64 context, while the device applies it as eight fp32
+// butterfly stages to an fp32 accumulator, so a few ULP of cancellation is expected and is not
+// what this flag is hunting. A failure HERE is still a real finding -- a wrong rotation rather
+// than a fault -- just a different one, so the summary names which leg produced which number.
+constexpr int kReproUlpBudget = 8;
+
+// The oracle rows for one launch: the fixture's stage-0 context, or Pi applied once more at the
+// stages only the raw-query entry can emit.
+std::vector<float> oracle_image(const Fixture& f, const fused_decode_fixture::RawQueryBasis& basis,
+                                unsigned output_stage)
+{
+    if (output_stage == 0) return f.expected;
+    std::vector<float> out(f.expected.size(), 0.0f);
+    const std::size_t rows = f.expected.size() / fd::kHeadSize;
+    for (std::size_t row = 0; row < rows; ++row) {
+        const std::vector<float> image = f.expected_row(basis, row, output_stage);
+        std::copy(image.begin(), image.end(), out.begin() + row * fd::kHeadSize);
+    }
+    return out;
+}
+
+int reproduce()
+{
+    camodel::Session session;
+    const fused_decode_fixture::RawQueryBasis basis;
+
+    const std::vector<ReproCase> cases = {
+        {272, 16, "the first faulting step: 3 pages, 5 tiles, a 16-row live tail"},
+        {316, 60, "the next step: the same 5 tiles with a 60-row tail"},
+    };
+
+    int launches = 0, worst_ulp_pre = 0, worst_ulp_raw = 0;
+    for (const ReproCase& c : cases) {
+        const Fixture f(c.context, kReproRequests, kReproKvHeads, kReproGroupHeads, kPageTokens,
+                        fused_decode_fixture::Element::kBf16);
+        require(f.context % 64 == c.tail,
+                "fused-opt --reproduce: a case's stated tail is not its geometry's");
+        require(f.tiles() == 5, "fused-opt --reproduce: the serving steps were 5 tiles each");
+        require(f.valid_rows(f.tiles() - 1) == c.tail,
+                "fused-opt --reproduce: the last tile is not the short one");
+
+        CanaryPlan plan = plan_canaries(f);
+        std::vector<std::uint8_t> key = f.key, value = f.value;
+        std::vector<float> scales = f.scales;
+        const std::size_t page_bytes = std::size_t(f.page_tokens) * f.kv_heads * 128;
+        paint_unmapped(key, plan, page_bytes);
+        paint_unmapped(value, plan, page_bytes);
+        paint_scales(scales, f, plan);
+
+        const std::vector<std::uint16_t> raw = f.raw_query(basis);
+        const std::vector<std::int32_t> pool = basis.tables();
+        const std::vector<std::uint16_t> hadamard = basis.h16();
+
+        // Leg 0 is the pre-rotated entry, leg 1 the raw-query one. Same fixture, same cache,
+        // same split count: the only thing that moves between them is the entry point.
+        for (int leg = 0; leg < 2; ++leg) {
+            const bool raw_entry = leg == 1;
+            fd::Launch config = raw_entry
+                                    ? f.launch_raw(kReproSplits, kReproOutputStage, kReproCubeChunk)
+                                    : f.launch(kReproSplits);
+            config.fused_context_limit = kReproFusedContextLimit;
+
+            require(config.grid == kReproGrid && config.tasks_per_block == kReproTasksPerBlock &&
+                        config.reduce_tasks_per_block == kReproReduceTasksPerBlock,
+                    "fused-opt --reproduce: the derived work split is not the serving launch's");
+            require(config.heads == unsigned(kReproKvHeads * kReproGroupHeads) &&
+                        config.heads_per_task == unsigned(kReproGroupHeads) &&
+                        config.block_size == unsigned(kPageTokens),
+                    "fused-opt --reproduce: the derived geometry is not the serving launch's");
+            if (raw_entry)
+                require(config.prologue_vectors_per_block == kReproPrologueVectors &&
+                            config.prologue_cube_chunk_vectors == kReproCubeChunk &&
+                            config.output_stage == kReproOutputStage,
+                        "fused-opt --reproduce: the raw-query prologue share drifted");
+
+            Guarded keys(key.size()), values(value.size()), scale(scales.size() * 4),
+                table(f.table.size() * 4), lengths(f.lengths.size() * 4), modes(32),
+                workspace(std::size_t(f.requests) * config.heads * kReproSplits * (256 + 16) * 4 +
+                          4096),
+                out(f.query.size() * 2 + 32),
+                tiling(ascend_micro::fused_decode::decode_tiling_bytes_for(config));
+            // The fp32 rotated query. The pre-rotated entry READS it; the raw-query entry's
+            // prologue WRITES it, so that leg uploads canary and checks the guards afterwards
+            // rather than checking the allocation unchanged.
+            Guarded query(f.query.size() * 4);
+            if (raw_entry) {
+                query.FillGuard();
+            } else {
+                query.Upload(f.query);
+            }
+            Guarded raw_query(raw.size() * 2), signs(basis.signs.size() * 4),
+                tables(pool.size() * 4), h16(hadamard.size() * 2);
+            if (raw_entry) {
+                raw_query.Upload(raw);
+                signs.Upload(basis.signs);
+                tables.Upload(pool);
+                h16.Upload(hadamard);
+            }
+            keys.Upload(key);
+            values.Upload(value);
+            scale.Upload(scales);
+            table.Upload(f.table);
+            lengths.Upload(f.lengths);
+            modes.Upload(std::vector<std::uint32_t>(8, 0));
+            {
+                namespace fd_tiling = ascend_micro::fused_decode;
+                std::vector<std::uint32_t> image(
+                    fd_tiling::decode_tiling_words(config.tokens, config.splits, config.grid), 0);
+                const auto status = fd_tiling::build_decode_tiling(
+                    fd_tiling::decode_tiling_request(config), f.lengths.data(), f.table.data(),
+                    image.data());
+                require(status == fd_tiling::DecodeTilingStatus::kOk,
+                        fd_tiling::decode_tiling_status_text(status));
+                tiling.Upload(image);
+            }
+            workspace.FillGuard();
+            out.FillGuard();
+
+            const fd::Buffers buffers{query.ptr(), keys.ptr(), values.ptr(), scale.ptr(),
+                                      table.ptr(), lengths.ptr(), modes.ptr(), workspace.ptr(),
+                                      out.ptr(), tiling.ptr()};
+            // Printed BEFORE the launch and flushed: a device fault takes the process with it,
+            // so this line is what says which leg of which case was on the stream.
+            std::printf("  launch  N %4d  %-11s entry  grid %u  tiles %d  tail %2d  "
+                        "heads %u/%u  %s\n",
+                        f.context, raw_entry ? "RAW-QUERY" : "pre-rotated", config.grid, f.tiles(),
+                        c.tail, config.heads, config.kv_heads, c.note);
+            std::fflush(stdout);
+            check(aclrtSynchronizeStream(session.stream), "pre-launch synchronize");
+            if (raw_entry) {
+                // gate is NULL exactly as the binding passes it at this stage. The launch
+                // header says stages 1 and 2 read the gate, while the kernel returns before
+                // touching gateGm_ unless the stage is kGated; if this leg faults and the
+                // pre-rotated one does not, that disagreement is the first thing to test.
+                const fd::RawQueryBuffers raw_buffers{raw_query.ptr(), signs.ptr(), tables.ptr(),
+                                                      h16.ptr(), nullptr, buffers};
+                launch_fused_decode_opt_raw_query(session.stream, &config, &raw_buffers);
+            } else {
+                launch_fused_decode_opt(session.stream, &config, &buffers);
+            }
+            check(aclrtSynchronizeStream(session.stream), "post-launch synchronize");
+            ++launches;
+
+            const auto image = out.Download();
+            out.CheckGuards(image, "output");
+            const std::vector<float> expected =
+                oracle_image(f, basis, raw_entry ? kReproOutputStage : 0u);
+            const int budget = raw_entry ? kReproUlpBudget : kUlpBudget;
+            const OracleResult oracle = check_output(image, expected, out.bytes, budget);
+            int& worst = raw_entry ? worst_ulp_raw : worst_ulp_pre;
+            worst = std::max(worst, oracle.worst_ulp);
+
+            keys.CheckUnchanged("key cache");
+            values.CheckUnchanged("value cache");
+            scale.CheckUnchanged("scale cache");
+            table.CheckUnchanged("block table");
+            lengths.CheckUnchanged("context lengths");
+            modes.CheckUnchanged("mode tables");
+            tiling.CheckUnchanged("tiling");
+            if (raw_entry) {
+                raw_query.CheckUnchanged("raw query");
+                signs.CheckUnchanged("pi signs");
+                tables.CheckUnchanged("rotation tables");
+                h16.CheckUnchanged("h16");
+                // The prologue's own output: its payload moved, so only the guards bound it.
+                query.CheckGuards(query.Download(), "rotated query");
+            } else {
+                query.CheckUnchanged("query");
+            }
+            // S = 1 is the fused path, so NeedsReduction() is false and nothing may touch the
+            // workspace at all -- the same invariant the ladder checks at S = 1.
+            const auto partials = workspace.Download();
+            workspace.CheckGuards(partials, "workspace");
+            require(partials == workspace.snapshot,
+                    "fused-opt --reproduce: the workspace was written on the fused path");
+        }
+    }
+
+    std::printf("PASS fused decode opt --reproduce: %d launches over %zu serving geometries, "
+                "group_heads %d on %d KV heads (%d query heads), D=%d, %d-token pages, S=%d, "
+                "BOTH entries -- pre-rotated, and raw-query at output_stage %u with a null "
+                "gate. Worst bf16 ULP %d pre-rotated against a budget of %d, %d raw-query "
+                "against %d. Every guard band, the unmapped-page and scale-padding canaries, "
+                "every input allocation and the untouched fused-path workspace all held. The "
+                "serving GEOMETRY therefore does not fault on its own: what the serving cache "
+                "HELD is the remaining difference, and this fixture replaces it.\n",
+                launches, cases.size(), kReproGroupHeads, kReproKvHeads,
+                kReproKvHeads * kReproGroupHeads, int(fd::kHeadSize), kPageTokens, kReproSplits,
+                kReproOutputStage, worst_ulp_pre, kUlpBudget, worst_ulp_raw, kReproUlpBudget);
+    return 0;
+}
+
+
+// ---------------------------------------------------------------------- --probe
+//
+// ONE TILE PER LAUNCH, at the edges of the grid the serving decode faulted on.
+//
+// This is the cheap half of --reproduce. The serving fault is a geometry/addressing report
+// (AIV 341, "The address for VEC to access UB is out of bounds"), not a handshake one, so it
+// does not need the real 5-tile ring to show up: it needs the right TILE, with the right live
+// row count, at the right page. `Launch::probe_page` / `probe_tile` ask the host tiling for
+// exactly one 64-row tile, which makes every launch here S = 64 -- inside the simulator's
+// working range, so this mode runs on the CAModel target where --reproduce cannot.
+//
+// WHAT THE SWEEP SEPARATES. Three axes, and each one is a line of the printed table:
+//
+//   group_heads 6 against 16. 16 is kCubeTileM and the only value any rung has ever used:
+//   a full M fractal, an 8/8 dual-destination Fixpipe split, heads.mine 8 against the
+//   kHalfRows 8 the arena is sized for, and -- the reason this matters for the reduction --
+//   `ReduceRepeat(row_reduce, scores, 64, heads, ...)` at the full repeat count, followed by
+//   a Brcb that reads 8 source elements whatever `heads` was. 6 gives evenM 6, a 3/3 split
+//   and heads.mine 3.
+//
+//   the ENTRY POINT, and with it rotate_q. The pre-rotated entry reads the fp32 rotated query
+//   straight from GM; the raw-query entry rotates it first, in a prologue nothing under tests/
+//   has ever launched (grep for launch_raw). Both are run over the identical single tile, so
+//   pre-rotated passing and raw-query faulting puts the fault in the prologue or the output
+//   stage and NOWHERE in the tile pipeline.
+//
+//   the prologue's own two paths. cube_chunk 0 rotates every vector of the block's share with
+//   ApplyPi on the vector cores; 16 rotates whole 16-vector chunks on the Cube. At group_heads
+//   6 the share is 6 vectors, so `share / cubeChunk_` is 0 and 16 degenerates to the same
+//   per-vector path -- which is why the Cube leg is swept at group_heads 16, where the share
+//   is 16 and the chunk path actually runs.
+//
+//   the TILE. (0,0) is the first full tile, (1,1) a full tile at the far side of a page
+//   boundary, and (2,0) the sequence's own short tile -- 16 live rows of 64 at context 272,
+//   which is where the tail mask and `lastValid` come into it. The host tiling now gives a
+//   probe its tile's real live count, so that last one is probed AS a short tile.
+//
+// WHAT IT CHECKS, and what it deliberately does not. A probe computes attention over ONE tile
+// of one page, so the fixture's `expected` -- the closed form over the WHOLE live context --
+// does not apply and no oracle is checked. What is checked is everything that still holds: no
+// device fault, every 0x5A guard band, every input allocation byte-identical, and every live
+// output float finite. That is the contract a fault hunt needs; --reproduce is where the
+// numbers are checked, against the real grid.
+struct ProbeTile {
+    std::uint32_t page;
+    std::uint32_t tile;
+    const char* note;
+};
+
+struct ProbeLeg {
+    bool raw_entry;
+    unsigned cube_chunk;   // raw entry only
+    int min_group_heads;   // the Cube chunk path needs a share of at least kQueryBasisCubeVectors
+    const char* name;
+};
+
+// Every live output channel finite. A probe has no oracle, so this is the arithmetic half of
+// its contract: one tile of one page cannot produce a NaN or an infinity from finite inputs,
+// and a mask or a scale read off the wrong rows is the way it would.
+void check_output_finite(const std::vector<std::uint8_t>& image, std::size_t live,
+                         std::size_t payload_bytes, const char* what)
+{
+    for (std::size_t i = 0; i < live; ++i) {
+        std::uint16_t bits;
+        std::memcpy(&bits, image.data() + kGuard + 2 * i, 2);
+        const double got = tq_test::bf16_to_float(bits);
+        if (!std::isfinite(got)) {
+            std::fprintf(stderr, "%s: output channel %zu is %g (%04x)\n", what, i, got, bits);
+            require(false, "fused-opt --probe: a probed tile produced a non-finite output");
+        }
+    }
+    for (std::size_t i = 2 * live; i < payload_bytes; ++i)
+        if (image[kGuard + i] != kGuardByte)
+            require(false, "fused-opt --probe: output tail canary clobbered");
+}
+
+int probe()
+{
+    camodel::Session session;
+    const fused_decode_fixture::RawQueryBasis basis;
+
+    // The serving context, so the short tile is the serving one: 272 rows is 4 full tiles and
+    // 16 live rows in page 2 tile 0.
+    constexpr int kProbeContext = 272;
+    const std::vector<int> group_head_sweep = {kReproGroupHeads, 16};
+    const std::vector<ProbeLeg> legs = {
+        {false, 0, 1, "pre-rotated"},
+        {true, 0, 1, "raw-query/vec"},
+        {true, 16, 16, "raw-query/cube"},
+    };
+    const std::vector<ProbeTile> probes = {
+        {0, 0, "first full tile"},
+        {1, 1, "full tile past a page boundary"},
+        {2, 0, "the sequence's own short tile, 16 live rows of 64"},
+    };
+
+    int launches = 0;
+    for (const int group_heads : group_head_sweep) {
+        const Fixture f(kProbeContext, kReproRequests, kReproKvHeads, group_heads, kPageTokens,
+                        fused_decode_fixture::Element::kBf16);
+        CanaryPlan plan = plan_canaries(f);
+        std::vector<std::uint8_t> key = f.key, value = f.value;
+        std::vector<float> scales = f.scales;
+        const std::size_t page_bytes = std::size_t(f.page_tokens) * f.kv_heads * 128;
+        paint_unmapped(key, plan, page_bytes);
+        paint_unmapped(value, plan, page_bytes);
+        paint_scales(scales, f, plan);
+
+        const std::vector<std::uint16_t> raw = f.raw_query(basis);
+        const std::vector<std::int32_t> pool = basis.tables();
+        const std::vector<std::uint16_t> hadamard = basis.h16();
+
+        for (const ProbeLeg& leg : legs) {
+            if (group_heads < leg.min_group_heads) continue;
+            for (const ProbeTile& probe_tile : probes) {
+                fd::Launch config =
+                    leg.raw_entry
+                        ? f.launch_raw(kReproSplits, kReproOutputStage, leg.cube_chunk)
+                        : f.launch(kReproSplits);
+                config.fused_context_limit = kReproFusedContextLimit;
+                config.probe_page = probe_tile.page;
+                config.probe_tile = probe_tile.tile;
+
+                Guarded keys(key.size()), values(value.size()), scale(scales.size() * 4),
+                    table(f.table.size() * 4), lengths(f.lengths.size() * 4), modes(32),
+                    workspace(std::size_t(f.requests) * config.heads * kReproSplits * (256 + 16) *
+                                  4 +
+                              4096),
+                    out(f.query.size() * 2 + 32),
+                    tiling(ascend_micro::fused_decode::decode_tiling_bytes_for(config));
+                Guarded query(f.query.size() * 4);
+                if (leg.raw_entry) {
+                    query.FillGuard();
+                } else {
+                    query.Upload(f.query);
+                }
+                Guarded raw_query(raw.size() * 2), signs(basis.signs.size() * 4),
+                    tables(pool.size() * 4), h16(hadamard.size() * 2);
+                if (leg.raw_entry) {
+                    raw_query.Upload(raw);
+                    signs.Upload(basis.signs);
+                    tables.Upload(pool);
+                    h16.Upload(hadamard);
+                }
+                keys.Upload(key);
+                values.Upload(value);
+                scale.Upload(scales);
+                table.Upload(f.table);
+                lengths.Upload(f.lengths);
+                modes.Upload(std::vector<std::uint32_t>(8, 0));
+                {
+                    namespace fd_tiling = ascend_micro::fused_decode;
+                    std::vector<std::uint32_t> image(
+                        fd_tiling::decode_tiling_words(config.tokens, config.splits, config.grid),
+                        0);
+                    const auto status = fd_tiling::build_decode_tiling(
+                        fd_tiling::decode_tiling_request(config), f.lengths.data(),
+                        f.table.data(), image.data());
+                    require(status == fd_tiling::DecodeTilingStatus::kOk,
+                            fd_tiling::decode_tiling_status_text(status));
+                    // The descriptor the device is about to act on, so the printed line is the
+                    // launch and not an intention: one tile, this page, this live row count.
+                    const auto* d =
+                        reinterpret_cast<const ascend_micro::fused_decode::TurboQuantDecodeTilingData*>(
+                            image.data());
+                    require(d->num_tiles == 1 && d->block_start_idx == probe_tile.page &&
+                                d->tile_origin == probe_tile.tile,
+                            "fused-opt --probe: the isolated descriptor is not the probe asked "
+                            "for");
+                    const unsigned valid = d->tail_rows ? d->tail_rows : 64u;
+                    std::printf("  probe  gh %2d  %-14s  page %u tile %u  valid %2u  grid %u  %s\n",
+                                group_heads, leg.name, probe_tile.page, probe_tile.tile, valid,
+                                config.grid, probe_tile.note);
+                    std::fflush(stdout);
+                    tiling.Upload(image);
+                }
+                workspace.FillGuard();
+                out.FillGuard();
+
+                const fd::Buffers buffers{query.ptr(),     keys.ptr(),  values.ptr(),
+                                          scale.ptr(),     table.ptr(), lengths.ptr(),
+                                          modes.ptr(),     workspace.ptr(), out.ptr(),
+                                          tiling.ptr()};
+                check(aclrtSynchronizeStream(session.stream), "pre-launch synchronize");
+                if (leg.raw_entry) {
+                    const fd::RawQueryBuffers raw_buffers{raw_query.ptr(), signs.ptr(),
+                                                          tables.ptr(),    h16.ptr(),
+                                                          nullptr,         buffers};
+                    launch_fused_decode_opt_raw_query(session.stream, &config, &raw_buffers);
+                } else {
+                    launch_fused_decode_opt(session.stream, &config, &buffers);
+                }
+                check(aclrtSynchronizeStream(session.stream), "post-launch synchronize");
+                ++launches;
+
+                const auto image = out.Download();
+                out.CheckGuards(image, "output");
+                check_output_finite(image, f.expected.size(), out.bytes, leg.name);
+                keys.CheckUnchanged("key cache");
+                values.CheckUnchanged("value cache");
+                scale.CheckUnchanged("scale cache");
+                table.CheckUnchanged("block table");
+                lengths.CheckUnchanged("context lengths");
+                modes.CheckUnchanged("mode tables");
+                tiling.CheckUnchanged("tiling");
+                if (leg.raw_entry) {
+                    raw_query.CheckUnchanged("raw query");
+                    signs.CheckUnchanged("pi signs");
+                    tables.CheckUnchanged("rotation tables");
+                    h16.CheckUnchanged("h16");
+                    query.CheckGuards(query.Download(), "rotated query");
+                } else {
+                    query.CheckUnchanged("query");
+                }
+                const auto partials = workspace.Download();
+                workspace.CheckGuards(partials, "workspace");
+                require(partials == workspace.snapshot,
+                        "fused-opt --probe: the workspace was written on the fused path");
+            }
+        }
+    }
+
+    std::printf("PASS fused decode opt --probe: %d single-tile launches, context %d, "
+                "group_heads {%d, 16} x {pre-rotated, raw-query on the vector prologue, "
+                "raw-query on the Cube chunk prologue} x {first full tile, a full tile past a "
+                "page boundary, the short last tile}. Every launch is ONE 64-row tile, so no "
+                "oracle: what held is the absence of a device fault, every 0x5A guard band, "
+                "every input allocation byte-identical, a finite output and an untouched "
+                "fused-path workspace. A fault here would have named its own line above.\n",
+                launches, kProbeContext, kReproGroupHeads);
+    return 0;
+}
+
 }  // namespace
 
 int main(int argc, char** argv)
 {
     try {
         bool camodel_smoke = false;
+        bool reproduce_only = false;
+        bool probe_only = false;
         int perf_iters = 0;
         for (int i = 1; i < argc; ++i) {
             const std::string arg = argv[i];
             if (arg == "--camodel-smoke") {
                 camodel_smoke = true;
+                continue;
+            }
+            // Its own mode rather than another rung: the ladder's summary asserts a ragged
+            // single-row tail, a multi-KV-head rung and the non-power-of-2 split sweep, none
+            // of which this geometry has, and it launches an entry the ladder never does.
+            if (arg == "--reproduce") {
+                reproduce_only = true;
+                continue;
+            }
+            // One tile per launch, so S is 64 and this one DOES run on the CAModel target.
+            if (arg == "--probe") {
+                probe_only = true;
                 continue;
             }
             if (arg == "--perf") {
@@ -536,7 +1060,18 @@ int main(int argc, char** argv)
                 continue;
             }
             throw std::runtime_error("usage: test_fused_decode_e2e [--camodel-smoke] "
-                                     "[--perf [iterations]]");
+                                     "[--reproduce] [--probe] [--perf [iterations]]");
+        }
+        if (probe_only) {
+            require(!reproduce_only && !camodel_smoke && perf_iters == 0,
+                    "fused-opt --probe: takes no other flag");
+            return probe();
+        }
+        if (reproduce_only) {
+            require(!camodel_smoke && perf_iters == 0,
+                    "fused-opt --reproduce: takes no other flag -- it is one geometry, two "
+                    "launches, and a device fault is the result it is looking for");
+            return reproduce();
         }
         return run(camodel_smoke, perf_iters);
     } catch (const std::exception& error) {
