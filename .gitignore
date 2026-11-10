@@ -3,3 +3,20 @@ build-*/
 *.o
 *.so
 *.a
+
+# CAModel / device run artifacts, written into the CURRENT WORKING DIRECTORY by
+# the simulator and the profiler rather than into the build tree, so a runner
+# invoked from the repository root leaves them here. One CAModel run of the
+# decode drops a dump per log per vector and cube subcore per AI Core -- 423
+# files and ~20 MB each for the instruction logs at 32 cores -- which buries
+# `git status` and is one `git add -A` away from being committed.
+#
+# They are evidence, and the README is explicit that a PASS line is not to be
+# read without auditing the trace. Ignoring them is about not versioning them:
+# keep the ones that matter somewhere outside the working tree, or run from a
+# scratch directory.
+*.dump
+profile_*_log*.toml
+
+# Editor state.
+.vscode/
