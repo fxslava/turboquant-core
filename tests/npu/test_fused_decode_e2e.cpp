@@ -588,12 +588,25 @@ constexpr std::uint32_t kReproGrid = 4;
 constexpr std::uint32_t kReproTasksPerBlock = 1;
 constexpr std::uint32_t kReproReduceTasksPerBlock = 6;
 constexpr std::uint32_t kReproPrologueVectors = 6;
-// Looser than the ladder's 2 ON PURPOSE, and only for the kUnrotated leg: that oracle applies
-// Pi in double over the fixture's fp64 context, while the device applies it as eight fp32
-// butterfly stages to an fp32 accumulator, so a few ULP of cancellation is expected and is not
-// what this flag is hunting. A failure HERE is still a real finding -- a wrong rotation rather
-// than a fault -- just a different one, so the summary names which leg produced which number.
-constexpr int kReproUlpBudget = 8;
+// Every live output channel finite. A probe has no oracle, so this is the arithmetic half of
+// its contract: one tile of one page cannot produce a NaN or an infinity from finite inputs,
+// and a mask or a scale read off the wrong rows is the way it would.
+void check_output_finite(const std::vector<std::uint8_t>& image, std::size_t live,
+                         std::size_t payload_bytes, const char* what)
+{
+    for (std::size_t i = 0; i < live; ++i) {
+        std::uint16_t bits;
+        std::memcpy(&bits, image.data() + kGuard + 2 * i, 2);
+        const double got = tq_test::bf16_to_float(bits);
+        if (!std::isfinite(got)) {
+            std::fprintf(stderr, "%s: output channel %zu is %g (%04x)\n", what, i, got, bits);
+            require(false, "fused-opt --probe: a probed tile produced a non-finite output");
+        }
+    }
+    for (std::size_t i = 2 * live; i < payload_bytes; ++i)
+        if (image[kGuard + i] != kGuardByte)
+            require(false, "fused-opt --probe: output tail canary clobbered");
+}
 
 // The oracle rows for one launch: the fixture's stage-0 context, or Pi applied once more at the
 // stages only the raw-query entry can emit.
@@ -644,10 +657,40 @@ int reproduce()
 
         // Leg 0 is the pre-rotated entry, leg 1 the raw-query one. Same fixture, same cache,
         // same split count: the only thing that moves between them is the entry point.
-        for (int leg = 0; leg < 2; ++leg) {
-            const bool raw_entry = leg == 1;
+        struct ReproLeg {
+            bool raw_entry;
+            unsigned stage;
+            bool oracle;
+            const char* name;
+        };
+        // THREE LEGS, and the middle one is the point.
+        //
+        //   pre-rotated, stage 0   the fixture's own entry, exact against its fp64 oracle
+        //   RAW-QUERY,  stage 0    the SAME oracle, because the prologue's whole contract is
+        //                          that it reproduces the pre-rotated `query` BIT FOR BIT from
+        //                          `raw_query` -- fused_decode_fixture.hpp says so and builds
+        //                          raw_query exact in both element formats. So this leg is a
+        //                          bit-exact test OF ROTATE_Q: a rotation wrong by one ULP
+        //                          anywhere misses the attention oracle on top of it, at the
+        //                          same budget of 2.
+        //   RAW-QUERY,  stage 1    what production launches. NO oracle: reference_bfloat16
+        //                          refuses anything outside [1,15], which is the range the
+        //                          fixture engineers its stage-0 context into, and Pi applied
+        //                          once more is signed and unbounded. Finiteness and guards
+        //                          instead, which is what a fault hunt needs.
+        //
+        // Asking the stage-0 oracle for a stage-1 output is what the first version of this did,
+        // and on the device the fixture threw "oracle result outside fixture range" without
+        // reporting anything about the launch. The stage was why, not the launch.
+        static constexpr ReproLeg kLegs[] = {
+            {false, 0u, true, "pre-rotated"},
+            {true, 0u, true, "raw-query/st0"},
+            {true, kReproOutputStage, false, "raw-query/st1"},
+        };
+        for (const ReproLeg& leg : kLegs) {
+            const bool raw_entry = leg.raw_entry;
             fd::Launch config = raw_entry
-                                    ? f.launch_raw(kReproSplits, kReproOutputStage, kReproCubeChunk)
+                                    ? f.launch_raw(kReproSplits, leg.stage, kReproCubeChunk)
                                     : f.launch(kReproSplits);
             config.fused_context_limit = kReproFusedContextLimit;
 
@@ -661,7 +704,7 @@ int reproduce()
             if (raw_entry)
                 require(config.prologue_vectors_per_block == kReproPrologueVectors &&
                             config.prologue_cube_chunk_vectors == kReproCubeChunk &&
-                            config.output_stage == kReproOutputStage,
+                            config.output_stage == leg.stage,
                         "fused-opt --reproduce: the raw-query prologue share drifted");
 
             Guarded keys(key.size()), values(value.size()), scale(scales.size() * 4),
@@ -712,10 +755,10 @@ int reproduce()
                                       out.ptr(), tiling.ptr()};
             // Printed BEFORE the launch and flushed: a device fault takes the process with it,
             // so this line is what says which leg of which case was on the stream.
-            std::printf("  launch  N %4d  %-11s entry  grid %u  tiles %d  tail %2d  "
+            std::printf("  launch  N %4d  %-14s stage %u  %-6s  grid %u  tiles %d  tail %2d  "
                         "heads %u/%u  %s\n",
-                        f.context, raw_entry ? "RAW-QUERY" : "pre-rotated", config.grid, f.tiles(),
-                        c.tail, config.heads, config.kv_heads, c.note);
+                        f.context, leg.name, leg.stage, leg.oracle ? "oracle" : "finite",
+                        config.grid, f.tiles(), c.tail, config.heads, config.kv_heads, c.note);
             std::fflush(stdout);
             check(aclrtSynchronizeStream(session.stream), "pre-launch synchronize");
             if (raw_entry) {
@@ -734,12 +777,14 @@ int reproduce()
 
             const auto image = out.Download();
             out.CheckGuards(image, "output");
-            const std::vector<float> expected =
-                oracle_image(f, basis, raw_entry ? kReproOutputStage : 0u);
-            const int budget = raw_entry ? kReproUlpBudget : kUlpBudget;
-            const OracleResult oracle = check_output(image, expected, out.bytes, budget);
-            int& worst = raw_entry ? worst_ulp_raw : worst_ulp_pre;
-            worst = std::max(worst, oracle.worst_ulp);
+            if (leg.oracle) {
+                const OracleResult oracle =
+                    check_output(image, oracle_image(f, basis, leg.stage), out.bytes, kUlpBudget);
+                int& worst = raw_entry ? worst_ulp_raw : worst_ulp_pre;
+                worst = std::max(worst, oracle.worst_ulp);
+            } else {
+                check_output_finite(image, f.expected.size(), out.bytes, leg.name);
+            }
 
             keys.CheckUnchanged("key cache");
             values.CheckUnchanged("value cache");
@@ -768,16 +813,21 @@ int reproduce()
     }
 
     std::printf("PASS fused decode opt --reproduce: %d launches over %zu serving geometries, "
-                "group_heads %d on %d KV heads (%d query heads), D=%d, %d-token pages, S=%d, "
-                "BOTH entries -- pre-rotated, and raw-query at output_stage %u with a null "
-                "gate. Worst bf16 ULP %d pre-rotated against a budget of %d, %d raw-query "
-                "against %d. Every guard band, the unmapped-page and scale-padding canaries, "
-                "every input allocation and the untouched fused-path workspace all held. The "
-                "serving GEOMETRY therefore does not fault on its own: what the serving cache "
-                "HELD is the remaining difference, and this fixture replaces it.\n",
+                "group_heads %d on %d KV heads (%d query heads), D=%d, %d-token pages, S=%d. "
+                "Three legs each: the pre-rotated entry; the raw-query entry at stage 0, which "
+                "is a BIT-EXACT test of the rotation prologue, because its contract is to "
+                "reproduce the pre-rotated query exactly; and the raw-query entry at the "
+                "output_stage %u production launches, with a null gate and NO oracle, because "
+                "the fixture's own range guard admits only [1,15] and Pi applied once more is "
+                "signed and unbounded. Worst bf16 ULP %d pre-rotated and %d raw-query, both "
+                "against a budget of %d. Every guard band, the unmapped-page and scale-padding "
+                "canaries, every input allocation and the untouched fused-path workspace all "
+                "held. So the serving GEOMETRY does not fault on its own AND the prologue "
+                "rotates correctly over it: what the serving cache HELD is the remaining "
+                "difference, and this fixture replaces it.\n",
                 launches, cases.size(), kReproGroupHeads, kReproKvHeads,
                 kReproKvHeads * kReproGroupHeads, int(fd::kHeadSize), kPageTokens, kReproSplits,
-                kReproOutputStage, worst_ulp_pre, kUlpBudget, worst_ulp_raw, kReproUlpBudget);
+                kReproOutputStage, worst_ulp_pre, worst_ulp_raw, kUlpBudget);
     return 0;
 }
 
@@ -837,26 +887,6 @@ struct ProbeLeg {
     int min_group_heads;   // the Cube chunk path needs a share of at least kQueryBasisCubeVectors
     const char* name;
 };
-
-// Every live output channel finite. A probe has no oracle, so this is the arithmetic half of
-// its contract: one tile of one page cannot produce a NaN or an infinity from finite inputs,
-// and a mask or a scale read off the wrong rows is the way it would.
-void check_output_finite(const std::vector<std::uint8_t>& image, std::size_t live,
-                         std::size_t payload_bytes, const char* what)
-{
-    for (std::size_t i = 0; i < live; ++i) {
-        std::uint16_t bits;
-        std::memcpy(&bits, image.data() + kGuard + 2 * i, 2);
-        const double got = tq_test::bf16_to_float(bits);
-        if (!std::isfinite(got)) {
-            std::fprintf(stderr, "%s: output channel %zu is %g (%04x)\n", what, i, got, bits);
-            require(false, "fused-opt --probe: a probed tile produced a non-finite output");
-        }
-    }
-    for (std::size_t i = 2 * live; i < payload_bytes; ++i)
-        if (image[kGuard + i] != kGuardByte)
-            require(false, "fused-opt --probe: output tail canary clobbered");
-}
 
 int probe()
 {
