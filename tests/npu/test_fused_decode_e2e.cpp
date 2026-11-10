@@ -21,8 +21,8 @@
 //
 //   A. THE OUTPUT, against `expected` from tests/common/fused_decode_fixture.hpp, which is the
 //      closed form of softmax(q k^T * scale) v over the live tiles evaluated in double. The
-//      budget is exact (0 ULP) because the fixture is built so that the fp32 recurrence has no
-//      rounding left to do.
+//      budget is exact (2 ULP for BF16) because the fixture is built so that the fp32 recurrence
+//      has no rounding left to do.
 //
 //   B. GUARD BANDS on every allocation, 0x5A on both sides, plus the slack between a payload's
 //      end and its 32-byte aligned length. An over-length MTE burst fails here by name.
@@ -34,19 +34,26 @@
 //   D. EVERY INPUT ALLOCATION UNCHANGED. The operator takes the cache, the query and the tiling
 //      read-only; a write to any of them is a failure even if the output is right.
 //
-// WHAT IT DOES NOT CHECK: timing, overlap, or a second execution wave. It takes no measurement
-// and makes no overlap claim. It also does not canary the TAIL ROWS of a mapped page: a masked
+// WHAT IT DOES NOT CHECK BY DEFAULT: timing, overlap, or a second execution wave. `--perf [N]`
+// adds a device-side measurement -- N timed launches per rung and split, bracketed by
+// ACL_EVENT_TIME_LINE markers on the stream (tests/common/device_timer.hpp) -- and it runs AFTER
+// every correctness and canary check of that configuration, so nothing a validation pass
+// observed can have come from a perf re-launch. It is still not an overlap claim: a median wall
+// interval says the launch got faster or slower and nothing about which pipe was busy.
+//
+// It also does not canary the TAIL ROWS of a mapped page: a masked
 // lane's scale still flows through the Gather and the Muls in front of the mask, so a
 // 0x5A5A5A5A scale there (~3.8e15) would be testing the masking phase's numerical headroom
 // rather than its logic, and a failure could not be told apart from one. Those rows carry
 // ordinary fixture data, which the reference already rejects if they are counted.
 
 #include "../common/camodel_session.hpp"
+#include "../common/device_timer.hpp"
 #include "../common/fused_decode_fixture.hpp"
 #include "../../include/turboquant/turboquant_splitk_contract.hpp"
 
-
 #include <algorithm>
+#include <charconv>
 #include <cmath>
 #include <cstdio>
 #include <cstring>
@@ -73,7 +80,7 @@ constexpr std::size_t kGuard = 64;
 // Real operator geometry. The page size and the ULP budget are the ladder's; the head counts
 // vary per rung and live in the rung table.
 constexpr int kPageTokens = 128;
-constexpr int kUlpBudget = 0;
+constexpr int kUlpBudget = 2;
 // Scale lanes per cache row, of which the codec reads two per KV head.
 constexpr std::size_t kScaleLanes = 8;
 
@@ -209,18 +216,18 @@ OracleResult check_output(const std::vector<std::uint8_t>& image, const Fixture&
     for (std::size_t i = 0; i < live; ++i) {
         std::uint16_t bits;
         std::memcpy(&bits, image.data() + kGuard + 2 * i, 2);
-        const std::uint16_t reference = fused_decode_fixture::reference_half(f.expected[i]);
-        // The fixture's results are positive finite normals, so the fp16 bit distance IS the
+        const std::uint16_t reference = fused_decode_fixture::reference_bfloat16(f.expected[i]);
+        // The fixture's results are positive finite normals, so the bf16 bit distance IS the
         // ULP distance -- no sign or subnormal case to fold in.
         const int ulp = std::abs(int(bits) - int(reference));
-        const double got = tq_test::half_to_float(bits);
+        const double got = tq_test::bf16_to_float(bits);
         const double absolute = std::fabs(got - double(f.expected[i]));
         if (ulp > result.worst_ulp) result.worst_ulp = ulp;
         if (absolute > result.worst_abs) result.worst_abs = absolute;
         if (ulp > kUlpBudget) {
             std::fprintf(stderr,
                          "oracle mismatch at channel %zu: got %g (%04x) expected %g (%04x), "
-                         "%d fp16 ULP over a budget of %d\n",
+                         "%d bf16 ULP over a budget of %d\n",
                          i, got, bits, double(f.expected[i]), reference, ulp, kUlpBudget);
             require(false, "fused-opt NPU validation: output disagrees with the FP64 oracle");
         }
@@ -243,7 +250,29 @@ struct Rung {
     const char* note;
 };
 
-int run(bool camodel_smoke)
+// The cache traffic one launch reads, for the GB/s column. Every live row of every KV head is
+// read once per (request) in both planes -- 128 packed bytes a row at D = 256 -- plus that row's
+// scale slot, which is kScaleLanes floats shared by the heads of the row rather than one per
+// head. The query, the output, the block table and the tiling are a rounding error beside it and
+// are left out, so the number is the KV read the operator is actually bandwidth-bound on.
+double decode_cache_bytes(const Fixture& f)
+{
+    const double rows = double(f.requests) * double(f.context);
+    const double packed = rows * double(f.kv_heads) * 2.0 * double(fd::kHeadSize / 2);
+    const double scales = rows * double(kScaleLanes) * 4.0;
+    return packed + scales;
+}
+
+// A label short enough for the perf column and specific enough to tell two rows apart.
+std::string perf_label(const Fixture& f, int splits)
+{
+    char text[64];
+    std::snprintf(text, sizeof(text), "N%d tok%d kvh%d S%d", f.context, f.requests, f.kv_heads,
+                  splits);
+    return std::string(text);
+}
+
+int run(bool camodel_smoke, int perf_iters)
 {
     camodel::Session session;
 
@@ -278,11 +307,20 @@ int run(bool camodel_smoke)
     double worst_abs = 0;
     long long canary_pages = 0, canary_pad_floats = 0;
     std::set<int> splits_seen, kv_heads_seen;
+    // Perf bookkeeping. `perf_host_clocked` is carried rather than inferred so the summary can
+    // say which clock produced the numbers it is quoting.
+    int perf_configs = 0;
+    bool perf_host_clocked = false;
+    double perf_best_us = 0.0, perf_worst_us = 0.0;
+    std::string perf_best_label, perf_worst_label;
+    if (perf_iters > 0)
+        camodel::print_perf_preamble(camodel::kDefaultPerfWarmup, perf_iters, false);
 
     for (const Rung& rung : ladder) {
         // One fixture per rung: the oracle is the expensive part and the split count changes
         // only how the work is partitioned, never the answer.
-        const Fixture f(rung.context, rung.requests, rung.kv_heads, rung.group_heads, kPageTokens);
+        const Fixture f(rung.context, rung.requests, rung.kv_heads, rung.group_heads, kPageTokens,
+                        fused_decode_fixture::Element::kBf16);
         CanaryPlan plan = plan_canaries(f);
         const int tail = f.context % 64;
         if (tail != 0) {
@@ -395,6 +433,30 @@ int run(bool camodel_smoke)
                                "false");
             }
 
+            // PERF, last: every check above has already passed on the output and on all eight
+            // allocations of THIS configuration, so the re-launches below cannot be what any of
+            // them saw. The operator rewrites its output and its Split-K workspace from inputs
+            // it only reads, so N launches leave exactly what one left.
+            if (perf_iters > 0) {
+                const camodel::PerfStats stats = camodel::measure_launch(
+                    session.stream, camodel::kDefaultPerfWarmup, perf_iters,
+                    [&] { launch_fused_decode_opt(session.stream, &config, &buffers); });
+                const std::string label = perf_label(f, k);
+                camodel::print_perf_line(label.c_str(), stats,
+                                         double(f.requests) * double(config.heads), "vec",
+                                         decode_cache_bytes(f));
+                ++perf_configs;
+                perf_host_clocked = perf_host_clocked || !stats.device_timed;
+                if (perf_best_label.empty() || stats.median_us() < perf_best_us) {
+                    perf_best_us = stats.median_us();
+                    perf_best_label = label;
+                }
+                if (perf_worst_label.empty() || stats.median_us() > perf_worst_us) {
+                    perf_worst_us = stats.median_us();
+                    perf_worst_label = label;
+                }
+            }
+
             std::printf("  ok  N %5d  tok %d  kvh %d  qh %2d  S %d  grid %2d  tiles %3d "
                         "tail %2d  worst %d ULP  worst abs %.3e  %d unmapped pages, %zu scale "
                         "pad floats intact\n",
@@ -424,8 +486,8 @@ int run(bool camodel_smoke)
     std::printf("PASS fused decode opt NPU validation: %d launches over %zu rungs, S in {%s}, "
                 "1 and 4 KV heads, 16 query heads per KV head, D=%d, %d-token pages. %d rungs "
                 "are RAGGED (context divides neither the page nor the 64-row tile), the "
-                "narrowest live tail being %d row. Worst fp16 ULP %d against a budget of %d; "
-                "worst absolute residual %.3e (the fp16 quantisation of the oracle). 0x%08X "
+                "narrowest live tail being %d row. Worst bf16 ULP %d against a budget of %d; "
+                "worst absolute residual %.3e (the bf16 quantisation of the oracle). 0x%08X "
                 "canaries held: %lld unmapped physical KV pages, %lld inter-head scale padding "
                 "floats, both guard bands of every allocation, the output tail and the "
                 "workspace outside the live partial extent. Every input allocation "
@@ -433,6 +495,13 @@ int run(bool camodel_smoke)
                 launches, ladder.size(), split_list.c_str(), int(fd::kHeadSize), kPageTokens,
                 ragged_rungs, narrowest_tail, worst_ulp, kUlpBudget, worst_abs, kGuardWord,
                 canary_pages, canary_pad_floats);
+    if (perf_configs > 0)
+        std::printf("PERF %d configurations timed, %d launches each, %s-clocked. Fastest median "
+                    "%.1f us (%s), slowest %.1f us (%s). These are wall intervals per launch: "
+                    "they do NOT establish MTE2/Cube overlap, which needs a trace.\n",
+                    perf_configs, perf_iters, perf_host_clocked ? "partly host" : "device",
+                    perf_best_us, perf_best_label.c_str(), perf_worst_us,
+                    perf_worst_label.c_str());
     return 0;
 }
 
@@ -442,12 +511,34 @@ int main(int argc, char** argv)
 {
     try {
         bool camodel_smoke = false;
-        if (argc == 2 && std::string(argv[1]) == "--camodel-smoke") {
-            camodel_smoke = true;
-        } else if (argc != 1) {
-            throw std::runtime_error("usage: test_fused_decode_e2e [--camodel-smoke]");
+        int perf_iters = 0;
+        for (int i = 1; i < argc; ++i) {
+            const std::string arg = argv[i];
+            if (arg == "--camodel-smoke") {
+                camodel_smoke = true;
+                continue;
+            }
+            if (arg == "--perf") {
+                // The count is optional and must not swallow the next flag, so a following
+                // argument is only consumed when it parses whole as a positive integer.
+                perf_iters = camodel::kDefaultPerfIters;
+                if (i + 1 < argc) {
+                    const std::string next = argv[i + 1];
+                    int parsed = 0;
+                    const auto got = std::from_chars(next.data(), next.data() + next.size(),
+                                                     parsed);
+                    if (got.ec == std::errc() && got.ptr == next.data() + next.size() &&
+                        parsed >= 1 && parsed <= camodel::kMaxPerfIters) {
+                        perf_iters = parsed;
+                        ++i;
+                    }
+                }
+                continue;
+            }
+            throw std::runtime_error("usage: test_fused_decode_e2e [--camodel-smoke] "
+                                     "[--perf [iterations]]");
         }
-        return run(camodel_smoke);
+        return run(camodel_smoke, perf_iters);
     } catch (const std::exception& error) {
         std::fprintf(stderr, "FAIL fused decode opt NPU validation: %s\n", error.what());
         return 1;

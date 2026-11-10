@@ -22,6 +22,13 @@
 //                  value plane is a read-modify-write of one 2048-byte strip.
 //   --op both      (default) each in turn.
 //
+//   --perf [N]     both rigs: after every correctness and canary check of a launch has passed,
+//                  re-issue that same launch N times (default 20) and report the DEVICE-side
+//                  per-launch median -- ACL_EVENT_TIME_LINE markers on the stream, see
+//                  tests/common/device_timer.hpp. Both writers are pure functions of their
+//                  inputs, so the re-launches leave the cache byte for byte as the checks found
+//                  it. A median wall interval is a timing, NOT an overlap or liveness claim.
+//
 // WHAT MAKES THIS A GATE AND NOT A SMOKE TEST
 //
 // 1. BIT EQUALITY, NOT A TOLERANCE. The fixtures are integer-valued in BF16, so every
@@ -45,6 +52,7 @@
 // alone.
 
 #include "../common/camodel_session.hpp"
+#include "../common/device_timer.hpp"
 #include "../common/turboquant_golden_oracle.hpp"
 #include "../common/turboquant_scatter_oracle.hpp"
 #include "../../include/turboquant/turboquant_wave_protocol.hpp"
@@ -102,7 +110,7 @@ int chunk_head(int chunk) { return chunk % kHeads; }
 void usage(std::FILE* output, const char* argv0)
 {
     std::fprintf(output,
-                 "Usage: %s [--slices N] [--strips-per-block S]\n"
+                 "Usage: %s [--slices N] [--strips-per-block S] [--perf [iterations]]\n"
                  "  N aligned 16-token strips in ONE monolithic grid. There is no launch\n"
                  "  window: a grid wider than the AI Core count spans several physical waves\n"
                  "  inside the single dispatch, which is the case the inter-wave protocol\n"
@@ -112,11 +120,16 @@ void usage(std::FILE* output, const char* argv0)
                  "  at a strip boundary. N must be a multiple of S.\n"
                  "  Do not read the PASS line alone -- audit the trace. A bit-exact result says\n"
                  "  nothing about whether an announcement overtook the pipeline work it\n"
-                 "  reports; only the fence and census audit does.\n",
-                 argv0, kMaxSlices);
+                 "  reports; only the fence and census audit does.\n"
+                 "  --perf times the launch on the DEVICE after every correctness and canary\n"
+                 "  check has passed: `iterations` timed launches (default %d, max %d)\n"
+                 "  bracketed by ACL_EVENT_TIME_LINE markers on the stream. The writer is a\n"
+                 "  pure function of its inputs, so the re-launches leave the same cache bytes\n"
+                 "  the checks saw. A median wall interval is not an overlap claim either.\n",
+                 argv0, kMaxSlices, camodel::kDefaultPerfIters, camodel::kMaxPerfIters);
 }
 
-int run(int slices, int strips_per_block)
+int run(int slices, int strips_per_block, int perf_iters)
 {
     Shape shape;
     shape.num_tokens = slices * kBlockSize;
@@ -303,6 +316,44 @@ int run(int slices, int strips_per_block)
         }
     if (failing != 0) throw std::runtime_error("packed cache page mismatch");
 
+    // ---- perf, after every check ------------------------------------------
+    // The writer is a pure function of its inputs: N launches leave byte for byte what the one
+    // verified above left, so re-launching here cannot invalidate a check -- and the checks have
+    // already run, so it cannot influence one either. Nothing but the launch is inside the
+    // measured interval; the caches are left on the device untouched by host traffic.
+    if (perf_iters > 0) {
+        const camodel::PerfStats stats = camodel::measure_launch(
+            session.stream, camodel::kDefaultPerfWarmup, perf_iters, [&] {
+                launch_turboquant_reshape_and_cache_bf16(
+                    session.stream, static_cast<const std::uint16_t*>(key.payload()),
+                    static_cast<const std::uint16_t*>(value.payload()),
+                    static_cast<std::int8_t*>(key_cache.payload()),
+                    static_cast<std::int8_t*>(value_cache.payload()),
+                    static_cast<float*>(scale_cache.payload()),
+                    static_cast<const std::int32_t*>(slot_mapping.payload()),
+                    static_cast<const float*>(pi_signs.payload()),
+                    static_cast<const std::int32_t*>(tables.payload()),
+                    static_cast<std::uint32_t>(shape.num_tokens),
+                    static_cast<std::uint32_t>(shape.num_kv_heads),
+                    static_cast<std::uint32_t>(shape.head_size),
+                    static_cast<std::uint32_t>(shape.block_size),
+                    static_cast<std::uint32_t>(shape.num_blocks),
+                    static_cast<std::uint32_t>(shape.block_size * strips_per_block),
+                    shape.inv_sqrt_len());
+            });
+        camodel::print_perf_preamble(camodel::kDefaultPerfWarmup, perf_iters,
+                                     !stats.device_timed);
+        char label[64];
+        std::snprintf(label, sizeof(label), "prefill %dstrip/blk x%d", strips_per_block,
+                      tq_golden::strip_count(shape) / strips_per_block);
+        // Traffic: both BF16 activation planes in, both packed planes and both scale planes out.
+        const double rows = double(shape.num_tokens) * double(shape.num_kv_heads);
+        const double bytes = rows * double(shape.head_size) * 2.0 * 2.0 +
+                             rows * double(shape.head_size / 2) * 2.0 +
+                             rows * 2.0 * 4.0;
+        camodel::print_perf_line(label, stats, double(shape.num_tokens), "tok", bytes);
+    }
+
     const int chunks = tq_golden::strip_count(shape) * 2 * kHeads;
     std::printf("PASS turboquant_reshape_and_cache_bf16: %d strips x 16 tokens x %d "
                 "channels, %d chunks, BF16 activations\n",
@@ -335,7 +386,8 @@ int run_main(int argc, char** argv)
 {
     int slices = 1;
     int strips_per_block = 1;
-    bool saw_slices = false, saw_share = false;
+    int perf_iters = 0;
+    bool saw_slices = false, saw_share = false, saw_perf = false;
     const auto parse = [](std::string_view text, int& out, int lo, int hi) {
         int value = 0;
         const auto got = std::from_chars(text.data(), text.data() + text.size(), value);
@@ -361,6 +413,20 @@ int run_main(int argc, char** argv)
             saw_share = true;
             continue;
         }
+        // The iteration count is optional, so a following argument is consumed only when it
+        // parses whole as a count in range -- otherwise it is the next flag.
+        if (arg == "--perf" && !saw_perf) {
+            saw_perf = true;
+            perf_iters = camodel::kDefaultPerfIters;
+            if (i + 1 < argc) {
+                int parsed = 0;
+                if (parse(argv[i + 1], parsed, 1, camodel::kMaxPerfIters)) {
+                    perf_iters = parsed;
+                    ++i;
+                }
+            }
+            continue;
+        }
         usage(stderr, argv[0]);
         return 2;
     }
@@ -371,7 +437,7 @@ int run_main(int argc, char** argv)
         return 2;
     }
     try {
-        return run(slices, strips_per_block);
+        return run(slices, strips_per_block, perf_iters);
     } catch (const std::exception& error) {
         std::fprintf(stderr, "FAIL turboquant_reshape_and_cache_bf16 (%d strips, %d a block): "
                      "%s\n", slices, strips_per_block, error.what());
@@ -479,7 +545,8 @@ bool in_written_strip(const Shape& shape, const std::vector<StripKey>& strips,
 Outcome run_launch(camodel::Session& session, const Shape& shape, std::uint32_t head,
                    const std::vector<int>& token_slots, int zero_token,
                    std::vector<std::int8_t>& key_image, std::vector<std::int8_t>& value_image,
-                   std::vector<float>& scale_image, bool first_launch, const char* tag)
+                   std::vector<float>& scale_image, bool first_launch, const char* tag,
+                   int perf_iters)
 {
     const int tokens = static_cast<int>(token_slots.size());
     const std::vector<float> signs = rot_oracle::canonical_signs();
@@ -657,6 +724,44 @@ Outcome run_launch(camodel::Session& session, const Shape& shape, std::uint32_t 
     key_image.assign(dev_key, dev_key + ref.key_cache.size());
     value_image.assign(dev_value, dev_value + ref.value_cache.size());
     scale_image.assign(dev_scale, dev_scale + ref.scale_cache.size());
+
+    // ---- perf, after the images are already captured ---------------------
+    // Everything the caller judges this launch on has been downloaded and compared above, so
+    // the timed re-launches below cannot reach any of it. They are also idempotent in the cache
+    // they write into: the key plane and the scale lanes are plain overwrites, and the value
+    // plane's read-modify-write splices the same owned nibbles into a strip whose unowned
+    // nibbles it already preserved once -- a second pass over the result of the first changes
+    // nothing. Only the launch is inside the measured interval.
+    if (perf_iters > 0) {
+        const camodel::PerfStats stats = camodel::measure_launch(
+            session.stream, camodel::kDefaultPerfWarmup, perf_iters, [&] {
+                launch_turboquant_reshape_scatter_aiv(
+                    session.stream, 1u, static_cast<std::uint16_t*>(d_key.payload()),
+                    static_cast<std::uint16_t*>(d_value.payload()),
+                    static_cast<std::int8_t*>(d_key_cache.payload()),
+                    static_cast<std::int8_t*>(d_value_cache.payload()),
+                    static_cast<float*>(d_scale.payload()),
+                    static_cast<std::int32_t*>(d_slots.payload()),
+                    static_cast<float*>(d_signs.payload()),
+                    static_cast<std::int32_t*>(d_cu.payload()), 1u,
+                    static_cast<std::uint32_t>(shape.num_kv_heads),
+                    static_cast<std::uint32_t>(shape.head_size),
+                    static_cast<std::uint32_t>(shape.block_size),
+                    static_cast<std::uint32_t>(shape.num_blocks), item, 1u,
+                    shape.inv_sqrt_len());
+            });
+        char label[64];
+        std::snprintf(label, sizeof(label), "scatter %s %dtok", tag, tokens);
+        // Traffic: both BF16 activation planes in for the one owned head, both packed planes and
+        // both scale lanes out, plus the 2048-byte value strip the read-modify-write reads back
+        // once per strip the launch touches.
+        const double head_channels = double(shape.head_size);
+        const double rows = double(tokens);
+        const double bytes = rows * head_channels * 2.0 * 2.0 +
+                             rows * (head_channels / 2.0) * 2.0 + rows * 2.0 * 4.0 +
+                             double(strips.size()) * double(kStripHeight) * head_channels / 2.0;
+        camodel::print_perf_line(label, stats, rows, "tok", bytes);
+    }
     return out;
 }
 
@@ -696,10 +801,22 @@ int run_main(int argc, char** argv)
     std::string_view mode = "canary";
     std::uint32_t head = 0;
     std::uint32_t tokens = 1;
+    int perf_iters = 0;
     for (int i = 1; i < argc; ++i) {
         const std::string_view arg = argv[i];
         if (arg == "--mode" && i + 1 < argc) {
             mode = argv[++i];
+        } else if (arg == "--perf") {
+            // Optional count: consumed only when the next argument parses whole and in range.
+            perf_iters = camodel::kDefaultPerfIters;
+            if (i + 1 < argc) {
+                std::uint32_t parsed = 0;
+                if (parse_u32(argv[i + 1], parsed) == 0 && parsed >= 1 &&
+                    parsed <= static_cast<std::uint32_t>(camodel::kMaxPerfIters)) {
+                    perf_iters = static_cast<int>(parsed);
+                    ++i;
+                }
+            }
         } else if (arg == "--head" && i + 1 < argc) {
             if (parse_u32(argv[++i], head) != 0 || head > 3) {
                 std::fprintf(stderr, "--head must be 0..3\n");
@@ -722,6 +839,10 @@ int run_main(int argc, char** argv)
         std::fprintf(stderr, "fixture shape is not valid\n");
         return 2;
     }
+    // Said once, before any number: a per-launch median is reported for every launch of the
+    // selected mode, and `--mode sequential` deliberately makes those launches different sizes.
+    if (perf_iters > 0)
+        camodel::print_perf_preamble(camodel::kDefaultPerfWarmup, perf_iters, false);
     std::printf("turboquant_reshape_scatter_aiv CAModel: mode %.*s, head %u, "
                 "d %d, S %d, P %d, strip %zu B\n",
                 static_cast<int>(mode.size()), mode.data(), head, shape.head_size,
@@ -758,7 +879,7 @@ int run_main(int argc, char** argv)
             slots.push_back(kActivePage * shape.block_size + static_cast<int>(t));
         const int zero_token = mode == "zero" ? 0 : -1;
         const Outcome out = run_launch(session, shape, head, slots, zero_token, key_image,
-                                       value_image, scale_image, true, "run");
+                                       value_image, scale_image, true, "run", perf_iters);
         check(out, "run");
         if (mode == "zero") {
             // The branch under test: an all-zero row must store scale 1.0f and
@@ -784,7 +905,8 @@ int run_main(int argc, char** argv)
             char tag[32];
             std::snprintf(tag, sizeof(tag), "n=%u", n);
             const Outcome out = run_launch(session, shape, head, slots, -1, key_image,
-                                           value_image, scale_image, n == 1, tag);
+                                           value_image, scale_image, n == 1, tag,
+                                           perf_iters);
             check(out, tag);
         }
     } else if (mode == "sequential") {
@@ -803,7 +925,8 @@ int run_main(int argc, char** argv)
             char tag[32];
             std::snprintf(tag, sizeof(tag), "step%d", step);
             const Outcome out = run_launch(session, shape, head, slots, -1, key_image,
-                                           value_image, scale_image, step == 0, tag);
+                                           value_image, scale_image, step == 0, tag,
+                                           perf_iters);
             check(out, tag);
             ++step;
         }
@@ -845,9 +968,26 @@ int main(int argc, char** argv)
         return 2;
     }
     // Both rigs take their own flags; `both` runs each with its defaults so one invocation
-    // covers the batch writer and the scatter writer.
-    char* bare[1] = {argv[0]};
-    const int prefill = prefill_rig::run_main(1, bare);
-    const int scatter = scatter_rig::run_main(1, bare);
+    // covers the batch writer and the scatter writer. `--perf` is the one flag both understand,
+    // so it is the one forwarded: a `--op both --perf` run is meant to time the pair, and
+    // dropping it here would silently give two correctness runs instead.
+    std::vector<char*> shared;
+    shared.push_back(argv[0]);
+    for (std::size_t i = 1; i < rest.size(); ++i) {
+        const std::string_view arg = rest[i];
+        if (arg != "--perf") continue;
+        shared.push_back(rest[i]);
+        if (i + 1 < rest.size()) {
+            std::uint32_t parsed = 0;
+            const std::string_view next = rest[i + 1];
+            const auto got = std::from_chars(next.data(), next.data() + next.size(), parsed);
+            if (got.ec == std::errc() && parsed >= 1 &&
+                parsed <= static_cast<std::uint32_t>(camodel::kMaxPerfIters))
+                shared.push_back(rest[++i]);
+        }
+    }
+    const int shared_argc = static_cast<int>(shared.size());
+    const int prefill = prefill_rig::run_main(shared_argc, shared.data());
+    const int scatter = scatter_rig::run_main(shared_argc, shared.data());
     return prefill != 0 ? prefill : scatter;
 }

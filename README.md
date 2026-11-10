@@ -85,12 +85,58 @@ tests/
   common/fused_decode_fixture.hpp      the decode's gold model, `expected` in double
   common/decode_tiling_gate.hpp        the host tiling equivalence gate
   common/camodel_session.hpp           device session and guarded GM allocations
+  common/device_timer.hpp              device-side launch timing for --perf
   cpu/test_contract_gates.cpp          UB arena, host tiling, launch guards, mode-2 channels,
                                        marked-graph token balance, shared recurrence
   cpu/test_layout_bridge.cpp           NZ writer == decode reader, bijections, co-byte pairings
   npu/test_live_write.cpp              batch prefill + scatter RMW against the oracle
   npu/test_fused_decode_e2e.cpp        end-to-end decode against the FP64 reference
 ```
+
+## Measuring the kernels (`--perf`)
+
+Both device runners take `--perf [N]`. It does not replace the gate: every correctness, canary
+and unchanged-input check of a configuration runs first and in full, and only then is that same
+launch re-issued `N` times (default 20, max 512) and timed.
+
+```bash
+./build/tests/test_fused_decode_e2e_sim --camodel-smoke --perf 50
+```
+
+```bash
+./build/tests/test_live_write_sim --op both --perf
+```
+
+```bash
+./build-npu/tests/test_live_write_npu --op prefill --slices 64 --strips-per-block 8 --perf 100
+```
+
+**A sample is device time.** Two `ACL_EVENT_TIME_LINE` events are recorded on the stream either
+side of one launch, so the interval is timestamped by the device as it retires each marker: the
+kernel's own residency plus the stream's dispatch of it, with no host round trip inside it. The
+timed batch is issued back to back and synchronised once at the end -- stream order already
+serialises the launches, and not returning to the host between them is what makes the samples a
+steady state instead of a row of cold starts. Warm-up launches (3) are discarded first; the
+first launch of one of these operators pays for its binary registration and runs several times
+the steady one. Reported per configuration: median, min, mean, max, the sample count, and the
+operator's own rate columns (tokens/s for a writer, query vectors/s for the decode, plus the
+GB/s of KV traffic the launch moves).
+
+**Re-launching is sound because all three operators are pure in their arguments.** Both writers
+recompute the identical cache bytes -- the value plane's read-modify-write splices the same
+owned nibbles into a strip whose unowned nibbles it already preserved once -- and the decode
+rewrites its output and its Split-K workspace from inputs it only reads. The checks have also
+already run, so a perf re-launch is neither observed by one nor able to invalidate one.
+
+**If the driver will not give timeline events** (a CAModel build that does not implement them),
+the batch is timed on the host clock instead and every line says `host-clocked`. That number
+includes the launch path and is not comparable with a device-clocked one; the flag is carried
+through the struct rather than inferred so the two can never be quoted as the same measurement.
+
+**It is a timing and nothing more.** A median wall interval says a change moved the number; it
+does not establish MTE2/Cube overlap, per-pipe occupancy or bank behaviour, and in particular it
+is **not** the trace audit the seamless chunk pipeline still needs (see below). Use `msprof` for
+that.
 
 ## What the extraction changed
 
@@ -177,5 +223,11 @@ tests/
   PASS from either would still say nothing about whether a cross-core announcement overtook the
   pipeline work it reports — both earlier revisions of the batch writer passed numerically while
   their traces showed a wait retiring before its set. Audit the trace.
+* **`--perf` has never produced a number.** The timing path compiles and links -- all four ACL
+  calls it uses (`aclrtCreateEventWithFlag`, `aclrtRecordEvent`, `aclrtEventElapsedTime`,
+  `aclrtDestroyEvent`) are exported by the `libascendcl` both runners already link -- but no
+  device or simulator has executed it here, so whether CAModel implements timeline events at all
+  is unknown and the host-clock fallback is likewise untried. Treat the first measured run as
+  bring-up, not as data.
 * `tests/npu/*` are compiled only as a syntax check here (`g++ -fsyntax-only` against the ACL
   headers). They have never been linked against the kernel libraries.
