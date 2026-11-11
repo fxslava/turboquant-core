@@ -45,49 +45,49 @@ public:
 
     __aicore__ inline void Rotate(const uint32_t numVectors, const uint32_t vectorsPerBlock)
     {
-        if ASCEND_IS_AIC return;
+        if ASCEND_IS_AIV {
+            const uint32_t start = MixBlockIdx() * vectorsPerBlock;
+            uint32_t       end   = start + vectorsPerBlock;
 
-        const uint32_t start = MixBlockIdx() * vectorsPerBlock;
-        uint32_t       end   = start + vectorsPerBlock;
-        
-        if (end > numVectors) {
-            end = numVectors;
+            if (end > numVectors) {
+                end = numVectors;
+            }
+
+            const uint32_t share = start < end ? end - start : 0;
+            if (share > 0) {
+                const uint32_t first_half     = CeilDiv(share, kVectorSubcoresPerBlock);
+                const bool     second_subcore = AscendC::GetSubBlockIdx() != 0;
+                const uint32_t from           = second_subcore ? start + first_half : start;
+                const uint32_t to             = second_subcore ? end : start + first_half;
+
+                const AscendC::LocalTensor<scalar_t> query_resident = in_buf_.Get<scalar_t>();
+                const AscendC::LocalTensor<float>    query_f32      = float_buf_.Get<float>();
+                const AscendC::LocalTensor<float>    signs          = sign_buf_.Get<float>();
+
+                for (uint32_t v = from; v < to; v += kScratchRows) {
+                    const uint32_t rows  = (v + kScratchRows <= to) ? kScratchRows : (to - v);
+                    const uint32_t elems = rows * head_size_;
+                    const uint64_t elem  = static_cast<uint64_t>(v) * head_size_;
+
+                    AscendC::DataCopy(query_resident, query_gm_[elem], elems);
+                    SyncMte2ToVector();
+
+                    AscendC::Cast(query_f32, query_resident, AscendC::RoundMode::CAST_NONE, elems);
+
+                    __ubuf__ float* query_base = reinterpret_cast<__ubuf__ float*>(query_f32.GetPhyAddr());
+                    __ubuf__ float* signs_base = reinterpret_cast<__ubuf__ float*>(signs.GetPhyAddr());
+
+                    ascend_micro::rotate_butterfly_shuffle_vf(query_base, query_base, signs_base, inv_sqrt_len_, static_cast<uint16_t>(rows));
+                    SyncVectorToMte3();
+
+                    AscendC::DataCopy(query_rot_gm_[elem], query_f32, elems);
+                    SyncEvent<AscendC::HardEvent::MTE3_MTE2>();
+                    SyncMte3ToVector();
+                }
+            }
         }
-        
-        const uint32_t share = start < end ? end - start : 0;
-        if (share == 0) {
-            return;
-        }
-
-        const uint32_t first_half     = CeilDiv(share, kVectorSubcoresPerBlock);
-        const bool     second_subcore = AscendC::GetSubBlockIdx() != 0;
-        const uint32_t from           = second_subcore ? start + first_half : start;
-        const uint32_t to             = second_subcore ? end : start + first_half;
-
-        const AscendC::LocalTensor<scalar_t> query_resident = in_buf_.Get<scalar_t>();
-        const AscendC::LocalTensor<float>    query_f32      = float_buf_.Get<float>();
-        const AscendC::LocalTensor<float>    signs          = sign_buf_.Get<float>();
-
-        for (uint32_t v = from; v < to; v += kScratchRows) {
-            const uint32_t rows  = (v + kScratchRows <= to) ? kScratchRows : (to - v);
-            const uint32_t elems = rows * head_size_;
-            const uint64_t elem  = static_cast<uint64_t>(v) * head_size_;
-
-            AscendC::DataCopy(query_resident, query_gm_[elem], elems);
-            SyncMte2ToVector();
-            
-            AscendC::Cast(query_f32, query_resident, AscendC::RoundMode::CAST_NONE, elems);
-
-            __ubuf__ float* query_base = reinterpret_cast<__ubuf__ float*>(query_f32.GetPhyAddr());
-            __ubuf__ float* signs_base = reinterpret_cast<__ubuf__ float*>(signs.GetPhyAddr());
-
-            ascend_micro::rotate_butterfly_shuffle_vf(query_base, query_base, signs_base, inv_sqrt_len_, static_cast<uint16_t>(rows));
-            SyncVectorToMte3();
-            
-            AscendC::DataCopy(query_rot_gm_[elem], query_f32, elems);
-            SyncEvent<AscendC::HardEvent::MTE3_MTE2>();
-            SyncMte3ToVector();
-        }
+        // SyncAll<false> is the MIX full-core barrier (AIC<->AIV per core, then across cores): every
+        // AIC and every AIV of every block must reach it, including AICs and empty-share blocks.
         AscendC::SyncAll<false>();
     }
 
