@@ -15,23 +15,34 @@ function(add_turboquant_sim_targets)
   set(SRC "${CMAKE_CURRENT_SOURCE_DIR}")
   set(SIM_LIB_DIR "${ASCEND_HOME_PATH}/tools/simulator/${SOC_VERSION}/lib")
 
-  # ---------------------------------------------------------------- the kernels
+# ---------------------------------------------------------------- the kernels
   ascendc_library(tq_prefill_sim SHARED src/prefill/turboquant_reshape_batch.cpp)
+  set_property(SOURCE src/prefill/turboquant_reshape_batch.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/prefill/turboquant_reshape_batch.cpp)
   ascendc_compile_definitions(tq_prefill_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_prefill_sim PRIVATE
       -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH)
 
+  # The same writer with the write-time NZ-tiled ingress on. Its own library, not an option on
+  # the one above: the two layouts are two operators behind one entry point, and the strip gate
+  # (test_live_write) has to keep running against the strip writer in the same configure. Both
+  # export the same symbol, so each is linked by its own runner and never by both.
+  ascendc_library(tq_prefill_nz_sim SHARED src/prefill/turboquant_reshape_batch.cpp)
+  set_property(SOURCE src/prefill/turboquant_reshape_batch.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/prefill/turboquant_reshape_batch.cpp)
+  ascendc_compile_definitions(tq_prefill_nz_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_INGRESS_NZ=1)
+  ascendc_compile_options(tq_prefill_nz_sim PRIVATE
+      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
+
   ascendc_library(tq_scatter_sim SHARED src/scatter/turboquant_reshape_scatter.cpp)
+  set_property(SOURCE src/scatter/turboquant_reshape_scatter.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/scatter/turboquant_reshape_scatter.cpp)
   ascendc_compile_definitions(tq_scatter_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_scatter_sim PRIVATE
       -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH)
 
-  # The fused decode's service headers reach for src/common and the decode's own subdirectories;
-  # the kernel's own includes are relative to its directory, so these -I flags are only for the
-  # shared contracts.
   ascendc_library(tq_decode_sim SHARED src/decode/turboquant_fused_decode.cpp)
+  set_property(SOURCE src/decode/turboquant_fused_decode.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/decode/turboquant_fused_decode.cpp)
   ascendc_compile_definitions(tq_decode_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_decode_sim PRIVATE
       -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS} ${TQ_REDUCE_DEFINES}
@@ -58,9 +69,11 @@ function(add_turboquant_sim_targets)
 
   add_sim_runner(test_live_write_sim tests/npu/test_live_write.cpp
       tq_prefill_sim tq_scatter_sim)
+  add_sim_runner(test_nz_ingress_canary_sim tests/npu/test_nz_ingress_canary.cpp
+      tq_prefill_nz_sim)
   add_sim_runner(test_fused_decode_e2e_sim tests/npu/test_fused_decode_e2e.cpp tq_decode_sim)
 
   add_custom_target(tq_sim_kernels
-      DEPENDS tq_prefill_sim tq_scatter_sim tq_decode_sim
-              test_live_write_sim test_fused_decode_e2e_sim)
+      DEPENDS tq_prefill_sim tq_prefill_nz_sim tq_scatter_sim tq_decode_sim
+              test_live_write_sim test_nz_ingress_canary_sim test_fused_decode_e2e_sim)
 endfunction()

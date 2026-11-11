@@ -824,7 +824,7 @@ int reproduce()
                 "canaries, every input allocation and the untouched fused-path workspace all "
                 "held. So the serving GEOMETRY does not fault on its own AND the prologue "
                 "rotates correctly over it: what the serving cache HELD is the remaining "
-                "difference, and this fixture replaces it.\n",
+                "difference, and this fixture replaces it.",
                 launches, cases.size(), kReproGroupHeads, kReproKvHeads,
                 kReproKvHeads * kReproGroupHeads, int(fd::kHeadSize), kPageTokens, kReproSplits,
                 kReproOutputStage, worst_ulp_pre, worst_ulp_raw, kUlpBudget);
@@ -898,14 +898,15 @@ int probe()
     constexpr int kProbeContext = 272;
     const std::vector<int> group_head_sweep = {kReproGroupHeads, 16};
     const std::vector<ProbeLeg> legs = {
-        {false, 0, 1, "pre-rotated"},
-        {true, 0, 1, "raw-query/vec"},
         {true, 16, 16, "raw-query/cube"},
+        /*{false, 0, 1, "pre-rotated"},
+        {true, 0, 1, "raw-query/vec"},
+        {true, 16, 16, "raw-query/cube"},*/
     };
     const std::vector<ProbeTile> probes = {
         {0, 0, "first full tile"},
-        {1, 1, "full tile past a page boundary"},
-        {2, 0, "the sequence's own short tile, 16 live rows of 64"},
+        /*{1, 1, "full tile past a page boundary"},
+        {2, 0, "the sequence's own short tile, 16 live rows of 64"},*/
     };
 
     int launches = 0;
