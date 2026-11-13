@@ -73,6 +73,25 @@ function(add_turboquant_sim_targets)
       tq_prefill_nz_sim)
   add_sim_runner(test_fused_decode_e2e_sim tests/npu/test_fused_decode_e2e.cpp tq_decode_sim)
 
+  # The golden-dump comparison runners: one source, one binary per kernel, the
+  # prefill twice -- the strip build and the NZ build export the same symbol
+  # and are therefore linked by separate runners, exactly like test_live_write
+  # and test_nz_ingress_canary above.
+  add_sim_runner(test_golden_prefill_strip_sim tests/npu/test_golden_dump.cpp tq_prefill_sim)
+  target_compile_definitions(test_golden_prefill_strip_sim PRIVATE
+      TQ_GOLDEN_KERNEL_PREFILL=1 TQ_GOLDEN_PREFILL_NZ=0)
+  add_sim_runner(test_golden_prefill_nz_sim tests/npu/test_golden_dump.cpp tq_prefill_nz_sim)
+  target_compile_definitions(test_golden_prefill_nz_sim PRIVATE
+      TQ_GOLDEN_KERNEL_PREFILL=1 TQ_GOLDEN_PREFILL_NZ=1)
+  add_sim_runner(test_golden_scatter_sim tests/npu/test_golden_dump.cpp tq_scatter_sim)
+  target_compile_definitions(test_golden_scatter_sim PRIVATE TQ_GOLDEN_KERNEL_SCATTER=1)
+  add_sim_runner(test_golden_decode_sim tests/npu/test_golden_dump.cpp tq_decode_sim)
+  target_compile_definitions(test_golden_decode_sim PRIVATE TQ_GOLDEN_KERNEL_DECODE=1)
+
+  add_custom_target(tq_golden_sim
+      DEPENDS test_golden_prefill_strip_sim test_golden_prefill_nz_sim
+              test_golden_scatter_sim test_golden_decode_sim)
+
   add_custom_target(tq_sim_kernels
       DEPENDS tq_prefill_sim tq_prefill_nz_sim tq_scatter_sim tq_decode_sim
               test_live_write_sim test_nz_ingress_canary_sim test_fused_decode_e2e_sim)

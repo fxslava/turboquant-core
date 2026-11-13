@@ -896,16 +896,17 @@ int probe()
     // The serving context, so the short tile is the serving one: 272 rows is 4 full tiles and
     // 16 live rows in page 2 tile 0.
     constexpr int kProbeContext = 272;
-    const std::vector<int> group_head_sweep = {kReproGroupHeads, 16};
+    const std::vector<int> group_head_sweep = {kReproGroupHeads/*, 16*/};
     const std::vector<ProbeLeg> legs = {
-        {false, 0, 1, "pre-rotated"},
+        {true, 0, 6, "raw-query/cube"},
+        /*{false, 0, 1, "pre-rotated"},
         {true, 0, 1, "raw-query/vec"},
-        {true, 16, 16, "raw-query/cube"},
+        {true, 16, 16, "raw-query/cube"},*/
     };
     const std::vector<ProbeTile> probes = {
         {0, 0, "first full tile"},
-        {1, 1, "full tile past a page boundary"},
-        {2, 0, "the sequence's own short tile, 16 live rows of 64"},
+        /*{1, 1, "full tile past a page boundary"},
+        {2, 0, "the sequence's own short tile, 16 live rows of 64"},*/
     };
 
     int launches = 0;

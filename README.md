@@ -64,6 +64,12 @@ include/turboquant/      normative contracts, no kernel toolchain required
   turboquant_fused_decode_opt.hpp  decode launch ABI, UB map, flag budget
   turboquant_gemm_reduce.hpp       Cube GEMM reduction contract
   turboquant_splitk_contract.hpp   Split-K partial layout
+golden/
+  turboquant_golden.py           the PyTorch golden model (a standalone copy of
+                                 vllm-ascend's turboquant_dry_run.py golden path),
+                                 plus the fp64 decode reference
+  generate_dumps.py              writes golden/dumps/: synthetic fixtures and the
+                                 golden's expected images, per kernel
 src/
   prefill/turboquant_reshape_batch.cpp     MIX_AIC_1_2 BF16 prefill, mode-2 only
   prefill/routine_stage_page_zn_bf16.hpp
@@ -91,7 +97,56 @@ tests/
   cpu/test_layout_bridge.cpp           NZ writer == decode reader, bijections, co-byte pairings
   npu/test_live_write.cpp              batch prefill + scatter RMW against the oracle
   npu/test_fused_decode_e2e.cpp        end-to-end decode against the FP64 reference
+  npu/test_golden_dump.cpp             every kernel against the PyTorch golden dumps
 ```
+
+## The golden-dump comparison (kernel vs the PyTorch golden)
+
+`golden/` holds a standalone copy of the PyTorch golden model from vllm-ascend's
+`turboquant_dry_run.py` (no vLLM or torch_npu dependency) and a generator that
+turns it into binary dumps: synthetic BF16-exact integer fixtures, the operands
+the kernels read (LCG `pi_signs`, BF16 codec tables, `h16`) and the golden's
+expected cache images and decode outputs. `tests/npu/test_golden_dump.cpp`
+builds four CAModel runners — one per kernel, the prefill twice (strip and NZ
+builds) — that upload the dumps, launch, and compare. The ingestion writers are
+compared **bit for bit**; the decode is compared against the golden's fp64
+attention with a bf16 ULP budget (`--ulp-budget`, default 8), the one place a
+tolerance is honest.
+
+```bash
+python golden/generate_dumps.py            # writes golden/dumps/ (gitignored)
+./build/tests/test_golden_prefill_strip_sim --dump-root golden/dumps
+./build/tests/test_golden_prefill_nz_sim   --dump-root golden/dumps
+./build/tests/test_golden_scatter_sim      --dump-root golden/dumps
+./build/tests/test_golden_decode_sim       --dump-root golden/dumps
+```
+
+**What it established on CAModel, at the current revision:**
+
+* **The scatter writer is bit-identical to the PyTorch golden**, both steps of
+  a read-modify-write ladder, poisoned unowned lanes included.
+* **The prefill writer is bit-identical in both packed planes**, in both
+  layouts (the strip build and the `TURBOQUANT_INGRESS_NZ` build), including
+  the in-page strip offsets of `block_size = 128` pages — the geometry
+  `DRY_RUN_COMPATIBILITY.md` §7.1 flagged as untested. The scale plane matches
+  except on all-zero rows, where the kernel floors absmax at 1.0 and stores
+  2^-6 while the golden branches on `absmax == 0` and stores 1.0; the codes
+  are zero on both sides, so the dequantised value is 0 either way. The runner
+  counts and names exactly those rows and fails on any other scale byte.
+* **The fused decode is NOT compatible with the golden's cache convention.**
+  Its raw-query rotation prologue reproduces the golden's rotated query bit
+  for bit, but the decode dequantises a cache row as
+  `(code + 0.5) * scale / kGain` (the KV4_FP8 centroid grid of
+  `turboquant_mode.h`, kGain = 2.9832882881) where the writers — and the
+  PyTorch golden — store `code * scale` with `scale = 2^(e-2) / sqrt(D)`.
+  Against the fp64 golden its stage-0 output is therefore wrong by a
+  systematic, channel-varying amount (worst ~34k bf16 ULP); against the same
+  reference evaluated under the kernel's own convention it agrees to within
+  the fp8 operand rounding of the Cube pipeline. And its `kUnrotated` output
+  stage emits `Pi^T` of the accumulator with **no `1/sqrt(D)` fold**, 16x the
+  model-basis context the dry run expects. Both are named, with numbers, in
+  the runner's output; the runner fails the decode until the kernel and the
+  contract are reconciled.
 
 ## Measuring the kernels (`--perf`)
 
