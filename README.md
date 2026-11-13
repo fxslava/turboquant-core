@@ -89,7 +89,11 @@ tests/
   cpu/test_contract_gates.cpp          UB arena, host tiling, launch guards, mode-2 channels,
                                        marked-graph token balance, shared recurrence
   cpu/test_layout_bridge.cpp           NZ writer == decode reader, bijections, co-byte pairings
-  npu/test_live_write.cpp              batch prefill + scatter RMW against the oracle
+  npu/test_live_write.cpp              batch prefill + scatter RMW against the oracle; built
+                                       twice for the scatter: plain (strip RMW) and
+                                       TQ_SCATTER_NZ=1 (the NZ-tiled ingress, --probe for the
+                                       single-tile fast check)
+  npu/test_nz_ingress_canary.cpp       the NZ prefill over one 64-row tile
   npu/test_fused_decode_e2e.cpp        end-to-end decode against the FP64 reference
 ```
 

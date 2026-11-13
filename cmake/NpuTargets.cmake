@@ -32,6 +32,14 @@ function(add_turboquant_npu_targets)
       -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH)
 
+  # The same scatter writer with the NZ-tiled ingress on; see SimTargets.cmake.
+  ascendc_library(tq_scatter_nz_npu SHARED src/scatter/turboquant_reshape_scatter.cpp)
+  set_property(SOURCE src/scatter/turboquant_reshape_scatter.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/scatter/turboquant_reshape_scatter.cpp)
+  ascendc_compile_definitions(tq_scatter_nz_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_INGRESS_NZ=1)
+  ascendc_compile_options(tq_scatter_nz_npu PRIVATE
+      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
+
   ascendc_library(tq_decode_npu SHARED src/decode/turboquant_fused_decode.cpp)
   set_property(SOURCE src/decode/turboquant_fused_decode.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/decode/turboquant_fused_decode.cpp)
   ascendc_compile_definitions(tq_decode_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH)
@@ -52,11 +60,15 @@ function(add_turboquant_npu_targets)
 
   add_npu_runner(test_live_write_npu tests/npu/test_live_write.cpp
       tq_prefill_npu tq_scatter_npu)
+  add_npu_runner(test_live_write_nz_npu tests/npu/test_live_write.cpp
+      tq_scatter_nz_npu)
+  target_compile_definitions(test_live_write_nz_npu PRIVATE TQ_SCATTER_NZ=1)
   add_npu_runner(test_nz_ingress_canary_npu tests/npu/test_nz_ingress_canary.cpp
       tq_prefill_nz_npu)
   add_npu_runner(test_fused_decode_e2e_npu tests/npu/test_fused_decode_e2e.cpp tq_decode_npu)
 
   add_custom_target(tq_npu_kernels
-      DEPENDS tq_prefill_npu tq_prefill_nz_npu tq_scatter_npu tq_decode_npu
-              test_live_write_npu test_nz_ingress_canary_npu test_fused_decode_e2e_npu)
+      DEPENDS tq_prefill_npu tq_prefill_nz_npu tq_scatter_npu tq_scatter_nz_npu tq_decode_npu
+              test_live_write_npu test_live_write_nz_npu test_nz_ingress_canary_npu
+              test_fused_decode_e2e_npu)
 endfunction()

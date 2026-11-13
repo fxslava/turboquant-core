@@ -55,7 +55,16 @@
 #include "../common/device_timer.hpp"
 #include "../common/turboquant_golden_oracle.hpp"
 #include "../common/turboquant_scatter_oracle.hpp"
+#include "../common/turboquant_nz_ingress.hpp"
 #include "../../include/turboquant/turboquant_wave_protocol.hpp"
+
+// This runner is built TWICE for the scatter writer: plain, linking the RFC 3.1 strip
+// read-modify-write build of turboquant_reshape_scatter_aiv, and with TQ_SCATTER_NZ=1, linking
+// the NZ-tiled ingress build of the same kernel and selecting scatter_nz_rig below. The NZ
+// prefill is gated by test_nz_ingress_canary, not by this runner.
+#ifndef TQ_SCATTER_NZ
+#define TQ_SCATTER_NZ 0
+#endif
 
 #include <algorithm>
 #include <charconv>
@@ -67,6 +76,7 @@
 #include <string_view>
 #include <vector>
 
+#if !TQ_SCATTER_NZ
 extern "C" void launch_turboquant_reshape_and_cache_bf16(
     void* stream, const std::uint16_t* key, const std::uint16_t* value,
     std::int8_t* key_cache, std::int8_t* value_cache, float* scale_cache,
@@ -446,12 +456,14 @@ int run_main(int argc, char** argv)
 }
 
 }  // namespace prefill_rig
+#endif  // !TQ_SCATTER_NZ
 
 extern "C" void launch_turboquant_reshape_scatter_aiv(
     void*, std::uint32_t, std::uint16_t*, std::uint16_t*, std::int8_t*, std::int8_t*, float*,
     std::int32_t*, float*, std::int32_t*, std::uint32_t, std::uint32_t, std::uint32_t,
     std::uint32_t, std::uint32_t, std::uint32_t, std::uint32_t, float);
 
+#if !TQ_SCATTER_NZ
 namespace scatter_rig {
 
 using namespace tq_scatter;
@@ -946,6 +958,516 @@ int run_main(int argc, char** argv)
 }
 
 }  // namespace scatter_rig
+#endif  // !TQ_SCATTER_NZ
+
+#if TQ_SCATTER_NZ
+// ============================================================ the NZ scatter rig
+//
+// The same live-write gate for turboquant_reshape_scatter_aiv built with
+// TURBOQUANT_INGRESS_NZ=1, against the NZ-tiled cache contract. The differences from the strip
+// rig are the geometry and the shape of the check:
+//
+//   GEOMETRY. One 64-row NZ tile per physical block (block_size = kCubeTileRows), four blocks,
+//   the active tile the LAST one -- an off-by-one in the tile term runs into the guard band,
+//   not into another page.
+//
+//   THE CHECK. A byte of the NZ cache is wholly owned by one (token, kv head) -- the kv4fp8
+//   pairing puts two channels of ONE token in it -- so there is no read-modify-write to audit
+//   for preservation. What remains is stronger and simpler: a byte-for-byte comparison of the
+//   WHOLE cache against a reference that starts from the pre-launch image and overwrites
+//   exactly the owned bytes, classified so a mismatch where the launch owns nothing is a
+//   "foreign moved" failure by name. The scale plane gets the same treatment at float
+//   granularity, including the inter-head padding lanes, which must stay poison.
+//
+//   --probe      ONE launch, sixteen tokens at tile rows 8..23: the run that crosses the
+//                16-token strip boundary, which the strip writer has to split into two
+//                read-modify-writes and this writer issues as one transaction. The fast
+//                single-tile check.
+//   (default)    the ladder: the probe case, a single token, one whole 64-row tile in one
+//                launch (four 16-token runs back to back), the sequential accumulation ladder
+//                into one tile, and the zero-row branch.
+namespace scatter_nz_rig {
+
+using tq_nz_ingress::NzGeometry;
+using tq_nz_ingress::nz_nibble;
+using tq_nz_ingress::nz_scale_index;
+using tq_scatter::activation;
+using tq_scatter::quantise_row;
+using tq_test::bf16_is_exact;
+using tq_test::bf16_to_float;
+using tq_test::float_to_bf16_rne;
+
+constexpr std::uint32_t kPoison = 0x7FC0BEEFu;
+
+int failures = 0;
+
+void expect(bool condition, const char* what)
+{
+    if (condition) return;
+    std::fprintf(stderr, "FAIL %s\n", what);
+    ++failures;
+}
+
+std::uint32_t bits_of(float value)
+{
+    std::uint32_t raw = 0;
+    std::memcpy(&raw, &value, sizeof(raw));
+    return raw;
+}
+
+int parse_u32(std::string_view text, std::uint32_t& out)
+{
+    const auto result = std::from_chars(text.data(), text.data() + text.size(), out);
+    return result.ec == std::errc() ? 0 : -1;
+}
+
+NzGeometry make_geometry()
+{
+    NzGeometry g;
+    g.num_kv_heads = 4;
+    g.head_size = 256;
+    g.block_size = static_cast<int>(vllm_ascend::turboquant::kCubeTileRows);
+    g.num_blocks = 4;
+    return g;
+}
+constexpr int kActivePage = 3;
+
+// One launch's golden image: the prior images with exactly this launch's owned bytes and scale
+// lanes overwritten, placed through the layout contract's own address functions.
+struct NzRef {
+    std::vector<std::uint8_t> key, value;
+    std::vector<float> scale;
+    int zero_rows = 0;
+    int clamped_rows = 0;
+};
+
+NzRef compute_nz_reference(const NzGeometry& g, const std::vector<int>& slots, int head,
+                           int zero_token, const std::vector<std::uint8_t>& prior_key,
+                           const std::vector<std::uint8_t>& prior_value,
+                           const std::vector<float>& prior_scale)
+{
+    NzRef ref{prior_key, prior_value, prior_scale, 0, 0};
+    const std::vector<float> signs = rot_oracle::canonical_signs();
+    tq_scatter::Shape row_shape;  // quantise_row reads only head_size and inv_sqrt_len
+    row_shape.head_size = g.head_size;
+    std::vector<float> x(static_cast<std::size_t>(g.head_size));
+    for (std::size_t t = 0; t < slots.size(); ++t) {
+        const int slot = slots[t];
+        if (slot < 0) continue;
+        for (int plane = 0; plane < tq_test::kPlanes; ++plane) {
+            for (int c = 0; c < g.head_size; ++c)
+                x[static_cast<std::size_t>(c)] = bf16_to_float(float_to_bf16_rne(
+                    activation(0, plane, head, static_cast<int>(t), c, zero_token)));
+            const tq_scatter::RowRef row = quantise_row(row_shape, x, signs);
+            if (row.zero_row) ++ref.zero_rows;
+            if (row.clamped) ++ref.clamped_rows;
+            auto& image = plane == 0 ? ref.key : ref.value;
+            for (int c = 0; c < g.head_size; ++c) {
+                const tq_nz_ingress::NzNibble at = nz_nibble(g, slot, head, c);
+                tq_test::require(at.byte < image.size(), "the NZ reference ran off the cache");
+                const auto nib =
+                    static_cast<std::uint8_t>(row.q[static_cast<std::size_t>(c)] & 0xF);
+                std::uint8_t& byte = image[at.byte];
+                byte = at.half == 0 ? static_cast<std::uint8_t>((byte & 0xF0u) | nib)
+                                    : static_cast<std::uint8_t>((byte & 0x0Fu) |
+                                                                static_cast<std::uint8_t>(nib << 4));
+            }
+            ref.scale[nz_scale_index(g, slot, head, plane)] = row.scale;
+        }
+    }
+    return ref;
+}
+
+struct Outcome {
+    std::size_t key_bytes_wrong = 0;
+    std::size_t value_bytes_wrong = 0;
+    std::size_t scale_words_wrong = 0;
+    std::size_t owned_wrong = 0;      // the launch owns it and the value is wrong
+    std::size_t foreign_moved = 0;    // the launch owns nothing there and it moved
+    std::size_t owned_unwritten = 0;  // the launch owns it and it still reads as the prior image
+};
+
+// One launch, start to finish: poison or carried-forward images in, the kernel run, the whole
+// of Global Memory compared against the reference byte for byte.
+Outcome run_launch(camodel::Session& session, const NzGeometry& g, std::uint32_t head,
+                   const std::vector<int>& rows, int zero_token,
+                   std::vector<std::uint8_t>& key_image, std::vector<std::uint8_t>& value_image,
+                   std::vector<float>& scale_image, const char* tag, int perf_iters)
+{
+    const int tokens = static_cast<int>(rows.size());
+    const std::vector<float> signs = rot_oracle::canonical_signs();
+    const float inv_sqrt_len = 1.0f / std::sqrt(static_cast<float>(g.head_size));
+
+    std::vector<int> slots;
+    slots.reserve(rows.size());
+    for (const int row : rows) slots.push_back(kActivePage * g.block_size + row);
+
+    // The activations: tokens x heads x d BF16 rows. The launch owns one head; the other heads'
+    // rows exist so the staged read addresses what production would have there.
+    const std::size_t channels = static_cast<std::size_t>(g.num_kv_heads) * g.head_size;
+    std::vector<std::uint16_t> key_rows(static_cast<std::size_t>(tokens) * channels, 0);
+    std::vector<std::uint16_t> value_rows(key_rows.size(), 0);
+    for (int t = 0; t < tokens; ++t)
+        for (int h = 0; h < g.num_kv_heads; ++h)
+            for (int c = 0; c < g.head_size; ++c) {
+                const std::size_t off = static_cast<std::size_t>(t) * channels +
+                                        static_cast<std::size_t>(h) * g.head_size + c;
+                key_rows[off] = float_to_bf16_rne(activation(0, 0, h, t, c, zero_token));
+                value_rows[off] = float_to_bf16_rne(activation(0, 1, h, t, c, zero_token));
+            }
+
+    const NzRef ref = compute_nz_reference(g, slots, static_cast<int>(head), zero_token,
+                                           key_image, value_image, scale_image);
+
+    camodel::GuardedDeviceBuffer d_key(key_rows.size() * 2);
+    camodel::GuardedDeviceBuffer d_value(value_rows.size() * 2);
+    camodel::GuardedDeviceBuffer d_key_cache(g.cache_bytes());
+    camodel::GuardedDeviceBuffer d_value_cache(g.cache_bytes());
+    camodel::GuardedDeviceBuffer d_scale(g.scale_floats() * 4);
+    camodel::GuardedDeviceBuffer d_slots(((slots.size() * 4 + 31) / 32) * 32);
+    camodel::GuardedDeviceBuffer d_signs(signs.size() * 4);
+    camodel::GuardedDeviceBuffer d_cu(64);
+
+    std::memcpy(d_key.host_payload(), key_rows.data(), key_rows.size() * 2);
+    std::memcpy(d_value.host_payload(), value_rows.data(), value_rows.size() * 2);
+    std::memcpy(d_signs.host_payload(), signs.data(), signs.size() * 4);
+    std::memcpy(d_key_cache.host_payload(), key_image.data(), key_image.size());
+    std::memcpy(d_value_cache.host_payload(), value_image.data(), value_image.size());
+    std::memcpy(d_scale.host_payload(), scale_image.data(), scale_image.size() * 4);
+    {
+        auto* slot_words = static_cast<std::int32_t*>(d_slots.host_payload());
+        for (std::size_t i = 0; i < d_slots.payload_bytes / 4; ++i) slot_words[i] = -1;
+        for (std::size_t i = 0; i < slots.size(); ++i) slot_words[i] = slots[i];
+        auto* cu = static_cast<std::int32_t*>(d_cu.host_payload());
+        cu[0] = 0;
+        cu[1] = tokens;
+    }
+    d_key.upload();
+    d_value.upload();
+    d_key_cache.upload();
+    d_value_cache.upload();
+    d_scale.upload();
+    d_slots.upload();
+    d_signs.upload();
+    d_cu.upload();
+
+    // One work item, one block: head `head` of request 0 and nothing else.
+    const std::uint32_t item = 0u * static_cast<std::uint32_t>(g.num_kv_heads) + head;
+    std::printf("  [%s] launch: head %u, %d token(s), tile page %d, grid 1\n", tag, head, tokens,
+                kActivePage);
+    const auto launch = [&] {
+        launch_turboquant_reshape_scatter_aiv(
+            session.stream, 1u, static_cast<std::uint16_t*>(d_key.payload()),
+            static_cast<std::uint16_t*>(d_value.payload()),
+            static_cast<std::int8_t*>(d_key_cache.payload()),
+            static_cast<std::int8_t*>(d_value_cache.payload()),
+            static_cast<float*>(d_scale.payload()),
+            static_cast<std::int32_t*>(d_slots.payload()),
+            static_cast<float*>(d_signs.payload()), static_cast<std::int32_t*>(d_cu.payload()),
+            1u, static_cast<std::uint32_t>(g.num_kv_heads),
+            static_cast<std::uint32_t>(g.head_size), static_cast<std::uint32_t>(g.block_size),
+            static_cast<std::uint32_t>(g.num_blocks), item, 1u, inv_sqrt_len);
+    };
+    launch();
+    camodel::check(aclrtSynchronizeStream(session.stream), "aclrtSynchronizeStream");
+
+    d_key_cache.download();
+    d_value_cache.download();
+    d_scale.download();
+    d_key.download();
+    d_value.download();
+    d_signs.download();
+    d_key.assert_guards();
+    d_value.assert_guards();
+    d_key_cache.assert_guards();
+    d_value_cache.assert_guards();
+    d_scale.assert_guards();
+    d_slots.download();
+    d_slots.assert_guards();
+    d_signs.assert_guards();
+
+    // ---- the comparison, classified --------------------------------------
+    const auto* dev_key = static_cast<const std::uint8_t*>(d_key_cache.host_payload());
+    const auto* dev_value = static_cast<const std::uint8_t*>(d_value_cache.host_payload());
+    const auto* dev_scale = static_cast<const float*>(d_scale.host_payload());
+
+    Outcome out;
+    bool said = false;
+    int dumped = 0;
+    for (std::size_t i = 0; i < ref.key.size(); ++i) {
+        if (dev_key[i] == ref.key[i]) continue;
+        ++out.key_bytes_wrong;
+        if (dumped < 8) {
+            std::fprintf(stderr, "  [%s] keyCache byte %zu: device 0x%02X oracle 0x%02X\n", tag,
+                         i, dev_key[i], ref.key[i]);
+            ++dumped;
+        }
+        if (ref.key[i] == key_image[i]) {
+            ++out.foreign_moved;
+            if (!said) {
+                std::fprintf(stderr,
+                             "  [%s] first foreign move: keyCache byte %zu, device 0x%02X prior "
+                             "0x%02X\n",
+                             tag, i, dev_key[i], key_image[i]);
+                said = true;
+            }
+        } else {            ++out.owned_wrong;
+            if (!said) {
+                std::fprintf(stderr,
+                             "  [%s] first owned divergence: keyCache byte %zu, device 0x%02X "
+                             "oracle 0x%02X\n",
+                             tag, i, dev_key[i], ref.key[i]);
+                said = true;
+            }
+        }
+    }
+    for (std::size_t i = 0; i < ref.value.size(); ++i) {
+        if (dev_value[i] == ref.value[i]) continue;
+        ++out.value_bytes_wrong;
+        if (ref.value[i] == value_image[i])
+            ++out.foreign_moved;
+        else
+            ++out.owned_wrong;
+    }
+    int dumped_sc = 0;
+    for (std::size_t i = 0; i < ref.scale.size(); ++i) {
+        if (bits_of(dev_scale[i]) == bits_of(ref.scale[i])) continue;
+        ++out.scale_words_wrong;
+        if (dumped_sc < 8) {
+            std::fprintf(stderr, "  [%s] scale float %zu: device 0x%08X oracle 0x%08X\n", tag, i,
+                         bits_of(dev_scale[i]), bits_of(ref.scale[i]));
+            ++dumped_sc;
+        }
+        if (bits_of(ref.scale[i]) == bits_of(scale_image[i]))
+            ++out.foreign_moved;
+        else
+            ++out.owned_wrong;
+    }
+    for (std::size_t i = 0; i < ref.key.size(); ++i) {
+        if (ref.key[i] != key_image[i] && dev_key[i] == key_image[i]) ++out.owned_unwritten;
+        if (ref.value[i] != value_image[i] && dev_value[i] == value_image[i])
+            ++out.owned_unwritten;
+    }
+    for (std::size_t i = 0; i < ref.scale.size(); ++i)
+        if (bits_of(ref.scale[i]) != bits_of(scale_image[i]) &&
+            bits_of(dev_scale[i]) == bits_of(scale_image[i]))
+            ++out.owned_unwritten;
+
+    std::printf("  [%s] zero rows %d, clamped rows %d; key bytes wrong %zu, value bytes wrong "
+                "%zu, scale words wrong %zu\n",
+                tag, ref.zero_rows, ref.clamped_rows, out.key_bytes_wrong, out.value_bytes_wrong,
+                out.scale_words_wrong);
+    std::printf("  [%s] census: owned wrong %zu, foreign moved %zu, owned unwritten %zu\n", tag,
+                out.owned_wrong, out.foreign_moved, out.owned_unwritten);
+
+    // Carry the device images forward: the accumulation ladder's next reference starts from
+    // what THIS launch actually left, not from what it was supposed to leave.
+    key_image.assign(dev_key, dev_key + ref.key.size());
+    value_image.assign(dev_value, dev_value + ref.value.size());
+    scale_image.assign(dev_scale, dev_scale + ref.scale.size());
+
+    // ---- perf, after the images are already captured ----------------------
+    // The NZ writer is a pure function of its inputs with no read-modify-write anywhere, so the
+    // timed re-launches rewrite exactly the bytes the checks above already validated.
+    if (perf_iters > 0) {
+        const camodel::PerfStats stats =
+            camodel::measure_launch(session.stream, camodel::kDefaultPerfWarmup, perf_iters,
+                                    launch);
+        char label[64];
+        std::snprintf(label, sizeof(label), "scatter-nz %s %dtok", tag, tokens);
+        // Traffic: both BF16 activation planes in for the one owned head, both packed planes
+        // and both scale lanes out -- and no strip readback, which is the whole point of the NZ
+        // ingress for a scatter writer.
+        const double rows = double(tokens);
+        const double bytes = rows * double(g.head_size) * 2.0 * 2.0 +
+                             rows * double(g.packed_bytes()) * 2.0 + rows * 2.0 * 4.0;
+        camodel::print_perf_line(label, stats, rows, "tok", bytes);
+    }
+    return out;
+}
+
+void check(const Outcome& out, const char* tag)
+{
+    char what[192];
+    std::snprintf(what, sizeof(what), "%s: the packed planes are byte-identical to the oracle",
+                  tag);
+    expect(out.key_bytes_wrong == 0 && out.value_bytes_wrong == 0, what);
+    std::snprintf(what, sizeof(what), "%s: the scale plane is bit-exact", tag);
+    expect(out.scale_words_wrong == 0, what);
+    std::snprintf(what, sizeof(what), "%s: no byte or lane outside the owned set moved", tag);
+    expect(out.foreign_moved == 0, what);
+    std::snprintf(what, sizeof(what), "%s: every owned byte and lane was written", tag);
+    expect(out.owned_unwritten == 0, what);
+}
+
+void poison_caches(const NzGeometry& g, std::vector<std::uint8_t>& key_image,
+                   std::vector<std::uint8_t>& value_image, std::vector<float>& scale_image)
+{
+    key_image.assign(g.cache_bytes(), 0);
+    value_image.assign(g.cache_bytes(), 0);
+    scale_image.assign(g.scale_floats(), 0.0f);
+    for (std::size_t i = 0; i + 4 <= key_image.size(); i += 4) {
+        std::memcpy(key_image.data() + i, &kPoison, 4);
+        std::memcpy(value_image.data() + i, &kPoison, 4);
+    }
+    for (float& value : scale_image) std::memcpy(&value, &kPoison, 4);
+}
+
+int run_main(int argc, char** argv)
+{
+    bool probe = false;
+    std::uint32_t head = 0;
+    int perf_iters = 0;
+    for (int i = 1; i < argc; ++i) {
+        const std::string_view arg = argv[i];
+        if (arg == "--probe") {
+            probe = true;
+        } else if (arg == "--perf") {
+            // Optional count: consumed only when the next argument parses whole and in range.
+            perf_iters = camodel::kDefaultPerfIters;
+            if (i + 1 < argc) {
+                std::uint32_t parsed = 0;
+                if (parse_u32(argv[i + 1], parsed) == 0 && parsed >= 1 &&
+                    parsed <= static_cast<std::uint32_t>(camodel::kMaxPerfIters)) {
+                    perf_iters = static_cast<int>(parsed);
+                    ++i;
+                }
+            }
+        } else if (arg == "--head" && i + 1 < argc) {
+            if (parse_u32(argv[++i], head) != 0 || head > 3) {
+                std::fprintf(stderr, "--head must be 0..3\n");
+                return 2;
+            }
+        } else {
+            std::fprintf(stderr, "unknown argument: %s\n", argv[i]);
+            return 2;
+        }
+    }
+
+    const NzGeometry g = make_geometry();
+    if (!g.valid()) {
+        std::fprintf(stderr, "fixture geometry is not a whole number of NZ tiles\n");
+        return 2;
+    }
+    if (perf_iters > 0)
+        camodel::print_perf_preamble(camodel::kDefaultPerfWarmup, perf_iters, false);
+    std::printf("turboquant_reshape_scatter_aiv (TURBOQUANT_INGRESS_NZ=1) CAModel: %s, head %u, "
+                "d %d, tile %d, P %d, tile plane %d B\n",
+                probe ? "--probe" : "ladder", head, g.head_size, g.block_size, g.num_blocks,
+                g.head_size / 2 * g.block_size);
+    std::printf("  head %u isolated\n", head);
+
+    // The fixture's own precondition: the rotated panel must stay exactly representable, or
+    // none of the bit-equality gates below means anything.
+    {
+        const std::vector<float> signs = rot_oracle::canonical_signs();
+        tq_scatter::Shape row_shape;
+        row_shape.head_size = g.head_size;
+        std::vector<float> x(static_cast<std::size_t>(g.head_size));
+        double peak = 0.0;
+        for (int c = 0; c < g.head_size; ++c) {
+            const float raw = activation(0, 0, static_cast<int>(head), 0, c, -1);
+            expect(bf16_is_exact(raw), "the fixture activation is exact in BF16");
+            x[static_cast<std::size_t>(c)] = raw;
+        }
+        const tq_scatter::RowRef row = quantise_row(row_shape, x, signs);
+        for (float value : row.rotated) peak = std::fmax(peak, std::fabs(value));
+        expect(peak < 16777216.0, "the rotated panel is exactly representable in FP32");
+        std::printf("  fixture: peak |Pi . x| %.0f, absmax %.0f, exponent %d, scale %.9g\n", peak,
+                    static_cast<double>(row.absmax), row.exponent,
+                    static_cast<double>(row.scale));
+    }
+
+    camodel::Session session;
+    std::vector<std::uint8_t> key_image, value_image;
+    std::vector<float> scale_image;
+
+    // The probe case, shared by both paths: sixteen consecutive tokens at tile rows 8..23, the
+    // run that crosses the strip boundary at row 16 -- ONE transaction for this writer, two
+    // read-modify-writes for the strip writer.
+    std::vector<int> crossing;
+    for (int row = 8; row < 24; ++row) crossing.push_back(row);
+
+    if (probe) {
+        poison_caches(g, key_image, value_image, scale_image);
+        const Outcome out = run_launch(session, g, head, crossing, -1, key_image, value_image,
+                                       scale_image, "probe", perf_iters);
+        check(out, "probe");
+    } else {
+        {
+            poison_caches(g, key_image, value_image, scale_image);
+            const Outcome out = run_launch(session, g, head, crossing, -1, key_image, value_image,
+                                           scale_image, "cross", perf_iters);
+            check(out, "cross");
+        }
+        {
+            poison_caches(g, key_image, value_image, scale_image);
+            const Outcome out = run_launch(session, g, head, {0}, -1, key_image, value_image,
+                                           scale_image, "single", perf_iters);
+            check(out, "single");
+        }
+        {
+            // One whole 64-row tile in one launch: four 16-token runs back to back through the
+            // same buffer set, the deep end of the run splitter.
+            poison_caches(g, key_image, value_image, scale_image);
+            std::vector<int> tile;
+            for (int row = 0; row < g.block_size; ++row) tile.push_back(row);
+            const Outcome out = run_launch(session, g, head, tile, -1, key_image, value_image,
+                                           scale_image, "tile", perf_iters);
+            check(out, "tile");
+        }
+        {
+            // The accumulation ladder: three launches into ONE tile, each reference starting
+            // from what the previous launch actually left. No read-modify-write exists in this
+            // layout, but a writer that clobbered a neighbouring row is caught at step two.
+            poison_caches(g, key_image, value_image, scale_image);
+            const std::vector<std::vector<int>> steps = {{40}, {41}, {42, 43, 44}};
+            int step = 0;
+            for (const std::vector<int>& rows : steps) {
+                char tag[32];
+                std::snprintf(tag, sizeof(tag), "seq%d", step);
+                const Outcome out = run_launch(session, g, head, rows, -1, key_image, value_image,
+                                               scale_image, tag, perf_iters);
+                check(out, tag);
+                ++step;
+            }
+        }
+        {
+            // The absmax == 0 branch: an all-zero row must store scale 1.0f and all-zero codes,
+            // and the oracle must have produced that case at all.
+            poison_caches(g, key_image, value_image, scale_image);
+            const Outcome out = run_launch(session, g, head, {0, 1, 2, 3}, 0, key_image,
+                                           value_image, scale_image, "zero", perf_iters);
+            check(out, "zero");
+            const std::vector<float> signs = rot_oracle::canonical_signs();
+            tq_scatter::Shape row_shape;
+            row_shape.head_size = g.head_size;
+            std::vector<float> zeros(static_cast<std::size_t>(g.head_size), 0.0f);
+            const tq_scatter::RowRef zero_row = quantise_row(row_shape, zeros, signs);
+            expect(zero_row.zero_row, "the zero fixture reaches the absmax == 0 branch");
+            expect(zero_row.scale == 1.0f, "the absmax == 0 branch stores scale 1.0f");
+            bool all_zero = true;
+            for (int code : zero_row.q)
+                if (code != 0) all_zero = false;
+            expect(all_zero, "the absmax == 0 branch stores all-zero codes");
+        }
+    }
+
+    if (failures == 0) {
+        std::printf("turboquant_reshape_scatter_aiv (TURBOQUANT_INGRESS_NZ=1) CAModel (%s, head "
+                    "%u): PASS\n",
+                    probe ? "--probe" : "ladder", head);
+        return 0;
+    }
+    std::fprintf(stderr,
+                 "turboquant_reshape_scatter_aiv (TURBOQUANT_INGRESS_NZ=1) CAModel (%s, head "
+                 "%u): %d FAILURES\n",
+                 probe ? "--probe" : "ladder", head, failures);
+    return 1;
+}
+
+}  // namespace scatter_nz_rig
+#endif  // TQ_SCATTER_NZ
 
 int main(int argc, char** argv)
 {
@@ -961,6 +1483,16 @@ int main(int argc, char** argv)
         rest.push_back(argv[i]);
     }
     const int n = static_cast<int>(rest.size());
+#if TQ_SCATTER_NZ
+    // This build links the NZ scatter writer only; the NZ prefill gate is
+    // test_nz_ingress_canary, and the strip writers are the plain test_live_write binary.
+    if (op != "scatter" && op != "both") {
+        std::fprintf(stderr, "--op must be scatter in the NZ build (the NZ prefill gate is "
+                             "test_nz_ingress_canary)\n");
+        return 2;
+    }
+    return scatter_nz_rig::run_main(n, rest.data());
+#else
     if (op == "prefill") return prefill_rig::run_main(n, rest.data());
     if (op == "scatter") return scatter_rig::run_main(n, rest.data());
     if (op != "both") {
@@ -990,4 +1522,5 @@ int main(int argc, char** argv)
     const int prefill = prefill_rig::run_main(shared_argc, shared.data());
     const int scatter = scatter_rig::run_main(shared_argc, shared.data());
     return prefill != 0 ? prefill : scatter;
+#endif  // TQ_SCATTER_NZ
 }

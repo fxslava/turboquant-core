@@ -77,6 +77,11 @@ it belongs to the *decode's* NZ cache (`NzScaleSlotFloats`,
 [turboquant_layout.h:149](include/turboquant/turboquant_layout.h:149)) — §4. The module docstring
 now says this.
 
+**Since then:** the scatter writer has grown an NZ build of its own —
+`TURBOQUANT_INGRESS_NZ=1` emits the NZ-tiled cache directly (no strip RMW: a byte of the NZ
+cache is wholly owned by one (token, kv head)), gated by `test_live_write_nz_sim --probe` /
+the NZ ladder. The strip build remains the default and is unchanged.
+
 Also matching: `TURBOQUANT_STRIP_TOKENS` 16 = `kStripTokens`/`kStripHeight`; the
 `TURBOQUANT_STAGE_*` values 0/1/2 = `TurboQuantOutputStage::{kRotatedBasis, kUnrotated, kGated}`;
 `TURBOQUANT_DECODE_SPLITS` 1 and `TURBOQUANT_DECODE_MAX_HEADS_PER_TASK` 16 are both inside what
