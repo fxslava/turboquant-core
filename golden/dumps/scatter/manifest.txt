@@ -1,0 +1,31 @@
+kernel scatter
+# AIV scatter RMW ladder: step A writes even token lanes of page 3's first
+# strip, step B the odd lanes sharing their bytes. blockDim 4, one request,
+# item_begin 0, item_count 4 (all four KV heads).
+geom num_requests 1
+geom num_kv_heads 4
+geom head_size 256
+geom block_size 128
+geom num_blocks 8
+geom tokens_step_a 6
+geom tokens_step_b 4
+geom block_dim 4
+geom item_begin 0
+geom item_count 4
+float inv_sqrt_len 0.0625
+tensor key_a u16 6144 key_a.bin
+tensor value_a u16 6144 value_a.bin
+tensor slots_a i32 6 slots_a.bin
+tensor key_b u16 4096 key_b.bin
+tensor value_b u16 4096 value_b.bin
+tensor slots_b i32 4 slots_b.bin
+tensor pi_signs f32 256 pi_signs.bin
+tensor init_key u8 524288 init_key.bin
+tensor init_value u8 524288 init_value.bin
+tensor init_scale f32 8192 init_scale.bin
+tensor expected_key_step1 u8 524288 expected_key_step1.bin
+tensor expected_value_step1 u8 524288 expected_value_step1.bin
+tensor expected_scale_step1 f32 8192 expected_scale_step1.bin
+tensor expected_key_step2 u8 524288 expected_key_step2.bin
+tensor expected_value_step2 u8 524288 expected_value_step2.bin
+tensor expected_scale_step2 f32 8192 expected_scale_step2.bin

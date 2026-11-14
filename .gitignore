@@ -18,9 +18,5 @@ build-*/
 *.dump
 profile_*_log*.toml
 
-# Generated golden dumps (golden/generate_dumps.py output): binary fixtures,
-# regenerated on demand rather than versioned.
-golden/dumps/
-
 # Editor state.
 .vscode/

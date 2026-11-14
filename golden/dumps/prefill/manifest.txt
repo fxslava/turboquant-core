@@ -1,0 +1,21 @@
+kernel prefill
+# 8 whole 16-token strips; strip s -> physical page 2s+1; block_size 128.
+# tokens_per_core 16: one strip per grid block, in-page strip offsets 0..7.
+geom num_tokens 128
+geom num_kv_heads 4
+geom head_size 256
+geom block_size 128
+geom num_blocks 18
+geom tokens_per_core 16
+float inv_sqrt_len 0.0625
+tensor key u16 131072 key.bin
+tensor value u16 131072 value.bin
+tensor slot_mapping i32 128 slot_mapping.bin
+tensor pi_signs f32 256 pi_signs.bin
+tensor tables u16 16384 tables.bin
+tensor expected_key_strip u8 1179648 expected_key_strip.bin
+tensor expected_value_strip u8 1179648 expected_value_strip.bin
+tensor expected_scale_strip f32 18432 expected_scale_strip.bin
+tensor expected_key_nz u8 1179648 expected_key_nz.bin
+tensor expected_value_nz u8 1179648 expected_value_nz.bin
+tensor expected_scale_nz f32 18432 expected_scale_nz.bin

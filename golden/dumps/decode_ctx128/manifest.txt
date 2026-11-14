@@ -1,0 +1,30 @@
+kernel decode
+# fused decode: one request, context 128, 1 page(s), physical table [1] of 4.
+# 4 KV heads x 16 group heads = 64 query heads, splits 1, heads_per_task 16.
+geom requests 1
+geom context 128
+geom num_heads 64
+geom num_kv_heads 4
+geom head_size 256
+geom block_size 128
+geom max_blocks 1
+geom physical_pages 4
+geom splits 1
+geom heads_per_task 16
+float scale 0.0009765625
+float inv_sqrt_len 0.0625
+tensor raw_query u16 16384 raw_query.bin
+tensor query_rot f32 16384 query_rot.bin
+tensor key_cache u8 262144 key_cache.bin
+tensor value_cache u8 262144 value_cache.bin
+tensor scale_cache f32 4096 scale_cache.bin
+tensor block_table i32 8 block_table.bin
+tensor context_lens i32 1 context_lens.bin
+tensor pi_signs f32 256 pi_signs.bin
+tensor h16 u16 256 h16.bin
+tensor rot_tables u16 16384 rot_tables.bin
+tensor mode_tables i32 8 mode_tables.bin
+tensor expected_stage1 f32 16384 expected_stage1.bin
+tensor expected_stage0 f32 16384 expected_stage0.bin
+tensor kernel_stage1 f32 16384 kernel_stage1.bin
+tensor kernel_stage0 f32 16384 kernel_stage0.bin
