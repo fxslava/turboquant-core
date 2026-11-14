@@ -137,9 +137,10 @@ __aicore__ inline void vector_cube_tail_mask(
 }
 
 // The task's kv head picked out of every tile row's scale slot, K lanes first and V lanes
-// behind, from byte offsets the caller built once for the task. The score scale carries the
-// CODEC's gain and not the mode's, so the value scale is that gain's reciprocal: a non-uniform
-// codebook reconstructs inside the operand and leaves nothing to divide out.
+// behind, from byte offsets the caller built once for the task. The stored scale is the whole
+// per-row scale (the writers' convention, turboquant_codec_mx.h): the score scale carries the
+// bare attention scale and the inverse gain is 1 -- a non-uniform codebook would reconstruct
+// inside the operand and leave nothing to divide out either.
 __aicore__ inline void vector_cube_tile_scales(
     const AscendC::LocalTensor<float>&         key_scale,
     const AscendC::LocalTensor<float>&         value_scale,

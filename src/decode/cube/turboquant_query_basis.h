@@ -103,7 +103,7 @@ public:
         __ubuf__ float* acc_base = reinterpret_cast<__ubuf__ float*>(acc.GetPhyAddr());
         __ubuf__ float* signs_base = reinterpret_cast<__ubuf__ float*>(signs.GetPhyAddr());
 
-        ascend_micro::rotate_butterfly_gather_vf<ascend_micro::RotateDirection::Egress>(acc_base, acc_base, signs_base, 1.0f, static_cast<uint16_t>(heads));
+        ascend_micro::rotate_butterfly_gather_vf<ascend_micro::RotateDirection::Egress>(acc_base, acc_base, signs_base, inv_sqrt_len_, static_cast<uint16_t>(heads));
 
         if (output_stage_ != static_cast<uint32_t>(TurboQuantOutputStage::kGated)) {
             return;

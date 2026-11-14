@@ -3,11 +3,13 @@ name: turboquant-sim-build
 description: Build turboquant-core kernels and run CAModel sim tests (test_live_write_nz_sim --probe, test_fused_decode_e2e_sim --probe etc.) in WSL with the natively installed CANN 9.2.0-beta.2, including the merge-step .o purge that every rebuild needs. Use when building BiSheng/AscendC device legs or running simulator tests for this repo on the Windows host without an NPU.
 ---
 
-# turboquant-core build + CAModel run recipe (native WSL, no docker, no NPU)
+# turboquant-core build + CAModel run recipe (WSL, optional docker, no NPU)
 
 Target: Ascend 950PR / dav-3510, CANN `9.2.0-beta.2`, installed NATIVELY in WSL at
-`/usr/local/Ascend/cann-9.2.0-beta.2` (the docker image the old recipe used is not on this
-host; do not go looking for it).
+`/usr/local/Ascend/cann-9.2.0-beta.2`. Runs can also go through docker with the
+`quay.io/ascend/vllm-ascend:v0.26.0rc1-a5` image (its own CANN is 9.1.0, which is
+too old — the native 9.2.0-beta.2 is bind-mounted over it; see "The docker route"
+below). Both routes work; the docker one is what the golden-dump flow uses.
 
 The repo lives at `C:\Ascend\turboquant-core` = `/mnt/c/Ascend/turboquant-core` in WSL. Its
 `build/` was configured on that path. Editing happens on the Windows side; for build+run speed
@@ -82,15 +84,38 @@ Expected gates:
 (`test_golden_prefill_strip_sim`, `test_golden_prefill_nz_sim`,
 `test_golden_scatter_sim`, `test_golden_decode_sim`) that compare every kernel
 against the PyTorch golden (`golden/turboquant_golden.py`) via the dumps in
-`golden/dumps/` (regenerate on the Windows host: `python
-golden/generate_dumps.py`). They take `--dump-root <dir>` (default
-`golden/dumps` relative to CWD) and, for the decode, `--ulp-budget N`. The
-helper `build/run_golden_sim.sh [runner ...]` runs them inside the container
-with the exact working environment above and a scratch CWD per runner:
+`golden/dumps/` (regenerate with `python golden/generate_dumps.py`; needs torch —
+run it inside the container, which carries a CPU torch, with
+`TORCH_DEVICE_BACKEND_AUTOLOAD=0` so torch_npu is not auto-loaded). They take
+`--dump-root <dir>` (default `golden/dumps` relative to CWD) and, for the decode,
+`--ulp-budget N`.
+
+### The docker route (vllm-ascend image + native CANN mount)
+
+`build/wsl_docker.sh <command...>` runs a command inside
+`quay.io/ascend/vllm-ascend:v0.26.0rc1-a5` with:
+
+- the ext4 copy mounted AT ITS OWN PATH (`$HOME/tqwork/turboquant-core`), so the
+  configured CMake build tree's absolute paths stay valid;
+- the WSL-native CANN 9.2.0-beta.2 bind-mounted over the image's CANN 9.1.0 at
+  the same path (the kernels target dav-3510 / Ascend950PR, which only
+  9.2.0-beta.2 carries);
+- the WSL `/usr/bin/ccache` bind-mounted in (the build was configured with it as
+  the compiler launcher and the image does not carry it), with `CCACHE_DIR` on
+  the ext4 volume so the warm cache survives `--rm` runs;
+- `build/docker_inner.sh` as the entrypoint chain: clean PATH, then the 9.2
+  `set_env.sh`.
+
+`build/run_golden_sim.sh <runner> [args...]` is the CAModel runner inside the
+container (same environment rules as `wsl_run_camodel.sh`), and
+`build/docker_build.sh <target> [kernel...]` is the docker-side analogue of
+`wsl_build.sh` (same mandatory preprocess `.o` purge, then the build):
 
 ```bash
-wsl -- bash -lc 'docker run --rm -v /mnt/f/turboquant-core:/workspace -w /workspace \
-  ascendai/cann:9.2.0-beta.2-910b-ubuntu22.04-py3.12 bash build/run_golden_sim.sh'
+wsl -- bash -lc 'bash ~/tqwork/turboquant-core/build/wsl_docker.sh \
+  bash build/run_golden_sim.sh test_golden_decode_sim'
+wsl -- bash -lc 'bash ~/tqwork/turboquant-core/build/wsl_docker.sh \
+  bash build/docker_build.sh tq_decode_sim'
 ```
 
 Build them with the `/fast` route: `gmake -C build test_golden_prefill_strip_sim/fast

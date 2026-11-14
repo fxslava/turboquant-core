@@ -37,14 +37,19 @@
 //   TQ_GOLDEN_KERNEL_DECODE
 //       the fused decode, three legs per case: the pre-rotated entry, the
 //       raw-query entry at output_stage 0 and at output_stage 1. The fp64
-//       golden attention is compared in bf16 ULP against --ulp-budget
-//       (default 8): the one comparison here that honestly has a tolerance,
-//       because the kernel accumulates in fp32 against a float64 reference.
+//       golden attention is compared with two budgets: --ulp-budget in bf16
+//       ULP (default 8), and --rel-budget as a fraction of the row's max
+//       magnitude (default 0.08); a channel passes on EITHER. The relative
+//       half exists because the pipeline rounds its Cube operands to fp8
+//       e4m3: the dump's query is built so the query operand is exact
+//       (+-448 everywhere), but the softmax probabilities are rounded, and
+//       that leaves a few-percent-of-row-max residual no fixture escapes.
 //       The raw-query prologue's own output (query_rot) is compared BIT-EXACT.
 //
 //   --dump-root DIR   where golden/dumps lives (default "golden/dumps")
 //   --case NAME       one case directory instead of the kernel's default list
 //   --ulp-budget N    decode only (default 8)
+//   --rel-budget R    decode only (default 0.08, of the row's max magnitude)
 
 #include "../common/camodel_session.hpp"
 #include "../common/turboquant_test_common.hpp"
@@ -649,14 +654,21 @@ struct FloatDiff {
     double worst_abs = 0.0;
     double worst_rel = 0.0;
     double scale_ratio = 0.0;  // sum(got*want)/sum(want*want): 1.0 unless a uniform factor is off
+    double worst_row_rel = 0.0;  // |got - want| / row max|want|, the fp8-operand residual's unit
     std::size_t live = 0;
 };
 
-FloatDiff compare_output(const std::vector<std::uint8_t>& image, const Tensor& expected,
-                         int ulp_budget)
+// The output image is [rows, 256] with rows = requests * heads. A channel passes on the bf16
+// ULP budget or, failing that, on the row-relative budget -- the one comparison here that
+// honestly has a tolerance, because the kernel accumulates in fp32 against a float64 reference
+// and its Cube operands are fp8 e4m3.
+FloatDiff compare_output(const char* what, const std::vector<std::uint8_t>& image, const Tensor& expected,
+                         int ulp_budget, double rel_budget)
 {
     const std::vector<float> want = typed<float>(expected);
     require(image.size() >= want.size() * 2, "output image is short");
+    const std::size_t row_width = 256;  // fd::kHeadSize, the decode's one head size
+    require(want.size() % row_width == 0, "output image is not a whole number of rows");
     FloatDiff diff;
     double dot = 0.0, norm = 0.0;
     for (std::size_t i = 0; i < want.size(); ++i) {
@@ -674,18 +686,26 @@ FloatDiff compare_output(const std::vector<std::uint8_t>& image, const Tensor& e
         diff.worst_rel = std::max(diff.worst_rel, relative);
         dot += got * reference;
         norm += reference * reference;
-        if (ulp > ulp_budget && diff.live < 4) {
+        double row_max = 0.0;
+        const std::size_t row = i / row_width * row_width;
+        for (std::size_t c = 0; c < row_width; ++c)
+            row_max = std::max(row_max, std::fabs(static_cast<double>(want[row + c])));
+        const double row_rel = row_max > 0.0 ? absolute / row_max : absolute;
+        diff.worst_row_rel = std::max(diff.worst_row_rel, row_rel);
+        if (ulp <= ulp_budget || row_rel <= rel_budget) continue;
+        if (diff.live < 4) {
             std::fprintf(stderr,
-                         "  channel %zu: got %.9g (0x%04x) golden %.9g (0x%04x), %d bf16 ULP\n", i,
-                         got, got_bits, reference, want_bits, ulp);
+                         "  channel %zu: got %.9g (0x%04x) %s %.9g (0x%04x), %d bf16 ULP, "
+                         "%.4f of the row max\n", i, got, got_bits, what, reference, want_bits, ulp,
+                         row_rel);
         }
-        if (ulp > ulp_budget) ++diff.live;
+        ++diff.live;
     }
     diff.scale_ratio = norm > 0.0 ? dot / norm : 1.0;
     return diff;
 }
 
-int run_case(const std::string& case_dir, int ulp_budget, camodel::Session& session)
+int run_case(const std::string& case_dir, int ulp_budget, double rel_budget, camodel::Session& session)
 {
     const Manifest dump = load_manifest(case_dir);
     require(dump.kernel == "decode", case_dir + " is not a decode dump");
@@ -816,28 +836,29 @@ int run_case(const std::string& case_dir, int ulp_budget, camodel::Session& sess
         }
         camodel::check(aclrtSynchronizeStream(session.stream), "post-launch synchronize");
 
-        // The output against the fp64 golden, in bf16 ULP. The same values are
-        // also checked against the KV4_FP8 mode's own codec convention, so a
-        // disagreement is NAMED -- a kernel that implements
-        // (code + 0.5) * scale / kGain is not the writers' code * scale, and
-        // the two conventions are what this runner exists to tell apart.
+        // The output against the fp64 golden. The same values are also checked
+        // against the KV4_FP8 mode's own codec convention, so a disagreement is
+        // NAMED -- a kernel that implements (code + 0.5) * scale / kGain is not
+        // the writers' code * scale, and the two conventions are what this
+        // runner exists to tell apart.
         output.download();
         output.assert_guards();
         const auto* out_image = static_cast<const std::uint8_t*>(output.host_payload());
         const std::vector<std::uint8_t> out_bytes{out_image, out_image + live_out * 2};
         const FloatDiff diff =
-            compare_output(out_bytes, dump.tensor(leg.expected), ulp_budget);
+            compare_output("golden", out_bytes, dump.tensor(leg.expected), ulp_budget, rel_budget);
         const std::string kernel_expected =
             std::string("kernel_stage") + (leg.stage == 0 ? "0" : "1");
         const FloatDiff kernel_diff =
-            compare_output(out_bytes, dump.tensor(kernel_expected), ulp_budget);
+            compare_output("KV4_FP8 convention", out_bytes, dump.tensor(kernel_expected), ulp_budget, rel_budget);
         for (std::size_t i = live_out * 2; i < output.payload_bytes; ++i)
             require(out_image[i] == kGuardByteValue ||
                         out_image[i] == 0xAD || out_image[i] == 0xBE || out_image[i] == 0xEF,
                     "output tail canary clobbered");
-        std::printf("    golden: worst %d bf16 ULP (budget %d), worst abs %.3e, scale ratio "
-                    "%.6f\n",
-                    diff.worst_ulp, ulp_budget, diff.worst_abs, diff.scale_ratio);
+        std::printf("    golden: worst %d bf16 ULP (budget %d), worst abs %.3e, worst "
+                    "%.4f of row max (budget %.4f), scale ratio %.6f\n",
+                    diff.worst_ulp, ulp_budget, diff.worst_abs, diff.worst_row_rel, rel_budget,
+                    diff.scale_ratio);
         std::printf("    KV4_FP8 (code+0.5)/kGain convention: worst %d bf16 ULP, worst abs "
                     "%.3e, scale ratio %.6f%s\n",
                     kernel_diff.worst_ulp, kernel_diff.worst_abs, kernel_diff.scale_ratio,
@@ -845,7 +866,7 @@ int run_case(const std::string& case_dir, int ulp_budget, camodel::Session& sess
                         ? "  <-- the kernel implements THIS convention, not the golden's"
                         : "");
         if (diff.live != 0) {
-            std::fprintf(stderr, "    %zu channels over the ULP budget against the golden\n",
+            std::fprintf(stderr, "    %zu channels over budget against the golden\n",
                          diff.live);
             ++failures;
         }
@@ -913,6 +934,7 @@ int main(int argc, char** argv)
     std::string dump_root = "golden/dumps";
     std::string case_override;
     int ulp_budget = 8;
+    double rel_budget = 0.08;
     for (int i = 1; i < argc; ++i) {
         const std::string arg = argv[i];
         if (arg == "--dump-root" && i + 1 < argc) {
@@ -928,9 +950,16 @@ int main(int argc, char** argv)
                 return 2;
             }
             ++i;
+        } else if (arg == "--rel-budget" && i + 1 < argc) {
+            rel_budget = std::stod(argv[++i]);
+            if (!(rel_budget >= 0.0)) {
+                std::fprintf(stderr, "--rel-budget needs a non-negative number\n");
+                return 2;
+            }
         } else {
             std::fprintf(stderr,
-                         "usage: %s [--dump-root DIR] [--case DIR] [--ulp-budget N]\n", argv[0]);
+                         "usage: %s [--dump-root DIR] [--case DIR] [--ulp-budget N] "
+                         "[--rel-budget R]\n", argv[0]);
             return 2;
         }
     }
@@ -957,7 +986,7 @@ int main(int argc, char** argv)
             const std::string dir =
                 case_override.empty() ? dump_root + "/" + name : case_override;
             try {
-                golden_dump::run_case(dir, ulp_budget, session);
+                golden_dump::run_case(dir, ulp_budget, rel_budget, session);
             } catch (const std::exception& error) {
                 std::fprintf(stderr, "FAIL %s: %s\n", dir.c_str(), error.what());
                 ++failed;
@@ -965,6 +994,7 @@ int main(int argc, char** argv)
         }
 #else
         static_cast<void>(ulp_budget);
+        static_cast<void>(rel_budget);
         for (const std::string& name : cases) {
             const std::string dir =
                 case_override.empty() ? dump_root + "/" + name : case_override;

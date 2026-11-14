@@ -630,11 +630,11 @@ private:
         rowRepeatParams_        = AscendC::BinaryRepeatParams{1, 1, 0, rowBlocks, rowBlocks, 1};
         tileByBlockParams_      = AscendC::BinaryRepeatParams{1, 1, 0, kTileBlocks, kTileBlocks, 1};
         tileByVectorParams_     = AscendC::BinaryRepeatParams{1, 1, 1, kTileBlocks, kTileBlocks, 0};
-        // The codec's gain, not the mode's: a non-uniform codebook carries its reconstruction in the
-        // operand and leaves nothing to divide out, so Codec::kGain is 1 there and these two collapse to
-        // the bare attention scale and to unity.
-        scoreScale_ = scale / Codec::kGain;
-        invGain_    = 1.0f / Codec::kGain;
+        // The writers' dequantisation contract (turboquant_codec_mx.h): a row reconstructs as
+        // code * stored_scale with no centroid offset and no codebook gain, so the score scale is
+        // the bare attention scale and the value scale is 1.
+        scoreScale_ = scale;
+        invGain_    = 1.0f;
     }
 
     // LocalTensor<fp4x2> indexes individual 4-bit values, while all operand sizes and DMA

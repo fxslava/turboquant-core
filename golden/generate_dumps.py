@@ -358,14 +358,25 @@ def generate_decode(root: Path, emulator: TurboQuantEmulator, context: int, case
         nz_key, nz_value, nz_scale, HEADS, HEAD_SIZE,
     )
 
-    # The raw query: integer-valued, exact in BF16, no zero channels so the
-    # scores vary. The pre-rotated image is what the raw-query prologue
-    # writes: Pi q * inv_sqrt_len, in fp32.
-    query = torch.tensor(
-        lcg_ints(num_heads * HEAD_SIZE, 0xDEC200 + context, -8, 8), dtype=torch.float32
-    ).reshape(1, num_heads, HEAD_SIZE)
-    query += (query == 0).float()
+    # The raw query, designed so the decode's e4m3 query operand is EXACT. The
+    # kernel quantises each query head onto the fp8 grid with the per-head scale
+    # 448 / amax, so make every channel of query_rot +-16 (LCG signs, per head):
+    # the scale is then 448/16 = 28 exactly and every operand lane is +-448, the
+    # e4m3 max -- no rounding anywhere in the query quantisation. The raw query
+    # is the inverse rotation of that image: every entry is a signed sum of 256
+    # +-1s, an integer in [-256, 256], hence exactly representable in BF16, and
+    # the prologue's fp32 butterflies stay integer-exact, so the bit-exact
+    # query_rot check still applies. What remains against the fp64 reference is
+    # the e4m3 rounding of the softmax probabilities, which no fixture escapes.
+    sign_bits = lcg_ints(num_heads * HEAD_SIZE, 0xDEC200 + context, 0, 1)
+    signs = torch.tensor(sign_bits, dtype=torch.float32).reshape(1, num_heads, HEAD_SIZE) * 2 - 1
+    query_rot_designed = signs * 16.0
+    query = emulator.inverse_rotate(query_rot_designed)
+    if not bool((query == query.round()).all() and (query.abs() <= 256).all()):
+        raise ValueError("the inverse-rotated query is not the integer vector the design requires")
     query_rot = emulator.rotate(query) * emulator.inv_sqrt_len
+    if not bool((query_rot == query_rot_designed).all()):
+        raise ValueError("the query round-trip is not exact: the prologue check would not be bit-exact")
 
     block_tables = torch.tensor([block_table], dtype=torch.int64)
     context_lens = torch.tensor([context], dtype=torch.int32)
