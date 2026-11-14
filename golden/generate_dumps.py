@@ -330,10 +330,15 @@ def generate_scatter(root: Path, emulator: TurboQuantEmulator) -> None:
     print(f"  scatter: page {page}, steps {tokens_a}+{tokens_b} tokens, RMW on the odd lanes")
 
 
-def generate_decode(root: Path, emulator: TurboQuantEmulator, context: int, case: str) -> None:
-    """One request of `context` tokens, the cache written by this golden model."""
+def generate_decode(root: Path, emulator: TurboQuantEmulator, context: int, case: str,
+                    group_heads: int = 16) -> None:
+    """One request of `context` tokens, the cache written by this golden model.
+
+    `group_heads` is 16 for the full-tile cases and 6 for the serving geometry
+    (batch 1, 4 KV heads x 6 query heads, head_size 256, block_size 128): the
+    launch the vllm-ascend backend drives in production, ragged tails included.
+    """
     requests = 1
-    group_heads = 16
     num_heads = HEADS * group_heads
     pages = (context + BLOCK_SIZE - 1) // BLOCK_SIZE
     physical_pages = 2 * requests * pages + 2
@@ -401,7 +406,8 @@ def generate_decode(root: Path, emulator: TurboQuantEmulator, context: int, case
     dump = DumpWriter(root / case)
     dump.comment(f"fused decode: one request, context {context}, {pages} page(s), "
                  f"physical table {block_table} of {physical_pages}.")
-    dump.comment("4 KV heads x 16 group heads = 64 query heads, splits 1, heads_per_task 16.")
+    dump.comment(f"{HEADS} KV heads x {group_heads} group heads = {num_heads} query heads, "
+                 f"splits 1, heads_per_task {group_heads}.")
     for key_, val in (
         ("requests", requests), ("context", context), ("num_heads", num_heads),
         ("num_kv_heads", HEADS), ("head_size", HEAD_SIZE), ("block_size", BLOCK_SIZE),
@@ -443,6 +449,10 @@ def main() -> None:
     generate_scatter(root, emulator)
     generate_decode(root, emulator, 128, "decode_ctx128")
     generate_decode(root, emulator, 200, "decode_ctx200")
+    # The serving geometry (gh=6) with its ragged tails: the two contexts the
+    # vllm-ascend backend's decode trace faulted on, through the same harness.
+    generate_decode(root, emulator, 272, "decode_serving_ctx272", group_heads=6)
+    generate_decode(root, emulator, 316, "decode_serving_ctx316", group_heads=6)
     meta = {
         "head_size": HEAD_SIZE,
         "num_kv_heads": HEADS,

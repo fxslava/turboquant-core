@@ -14,13 +14,18 @@ the diagnosis and the fix. The comparison harness:
   against the pre-fix kernel's measured residual (sim 2.042 / ratio 0.996723 vs
   the device's ~2.1 / 0.9968 against `kernel_stage0`); predicts the post-fix
   residual to within 0.02%.
-* `tests/npu/test_golden_dump.cpp` — four CAModel runners
-  (`test_golden_prefill_strip_sim`, `test_golden_prefill_nz_sim`,
-  `test_golden_scatter_sim`, `test_golden_decode_sim`). Writers compared bit
-  for bit; the decode against the fp64 golden with `--ulp-budget` (default 8)
-  OR-ed with `--rel-budget` (default 0.08 of the row's max magnitude) — see
-  "The residual after both fixes" for why a pure ULP budget cannot gate this
-  pipeline.
+* `tests/npu/test_golden_dump.cpp` — four runners per leg
+  (`test_golden_prefill_strip_*`, `test_golden_prefill_nz_*`,
+  `test_golden_scatter_*`, `test_golden_decode_*`), built for CAModel (`_sim`,
+  SimTargets.cmake) and for the physical device (`_npu`, NpuTargets.cmake).
+  Writers compared bit for bit; the decode against the fp64 golden with
+  `--ulp-budget` (default 8) OR-ed with `--rel-budget` (default 0.08 of the
+  row's max magnitude) — see "The residual after both fixes" for why a pure
+  ULP budget cannot gate this pipeline. The decode cases are `decode_ctx128`,
+  `decode_ctx200`, and the serving geometry `decode_serving_ctx272` /
+  `decode_serving_ctx316` (batch 1, 4 KV heads x 6 query heads, block_size
+  128, ragged 16- and 60-row tails) — the exact launch the backend's decode
+  trace faulted on.
 
 Run: `python golden/generate_dumps.py` (needs torch; inside the vllm-ascend
 container with `TORCH_DEVICE_BACKEND_AUTOLOAD=0`), then the runners via
@@ -137,3 +142,11 @@ it.
   worst 0 bf16 ULP against the updated fixture, but the smoke ladder then
   fails its own `ragged_rungs >= 3` bookkeeping assertion (it has 2 ragged
   rungs) — a pre-existing ladder defect, not the decode.
+* On hardware (`test_fused_decode_e2e_npu`, `test_golden_decode_npu`): the
+  full ladder carries the serving geometry (272 and 316 contexts, gh=6) with
+  the stage-0 oracle; `--reproduce` additionally runs the raw-query stage-1
+  leg WITH an oracle now — the fixture's stage-0 row with Pi applied once
+  more, compared with a sign-aware ULP distance at `kReproUlpBudget` 4 (the
+  [1,15] guard would throw on those values; the unguarded rounding path in
+  `fused_decode_fixture.hpp` exists for this leg). With the egress fold
+  missing, that leg lands ~512 bf16 ULP away; with it, it passes.

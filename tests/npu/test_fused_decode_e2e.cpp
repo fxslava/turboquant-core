@@ -87,6 +87,11 @@ constexpr std::size_t kGuard = 64;
 // vary per rung and live in the rung table.
 constexpr int kPageTokens = 128;
 constexpr int kUlpBudget = 2;
+// The stage-1 (unrotated) oracle's budget in --reproduce. The leg is the ladder's stage-0
+// values plus the egress butterfly's fp32 adds, so an RNE tie can land one step further out;
+// 4 is still two orders of magnitude tighter than the defect the leg exists to catch (a missing
+// inv_sqrt_len fold puts every channel ~512 bf16 ULP away, one exponent quadrupling of Pi^T).
+constexpr int kReproUlpBudget = 4;
 // Scale lanes per cache row, of which the codec reads two per KV head.
 constexpr std::size_t kScaleLanes = 8;
 
@@ -213,22 +218,41 @@ struct OracleResult {
     double worst_abs = 0;
 };
 
+// The ordered-integer ULP distance between two bf16 words, valid for any signs: map sign-magnitude
+// onto the integers so that distance along the reals is distance along the map. The stage-1 oracle
+// is signed, unlike the ladder's engineered [1,15] outputs.
+int bf16_ulp_ordered(std::uint16_t a, std::uint16_t b)
+{
+    const auto order = [](std::uint16_t w) -> int {
+        return (w & 0x8000u) ? -static_cast<int>(w & 0x7FFFu) : static_cast<int>(w & 0x7FFFu);
+    };
+    return std::abs(order(a) - order(b));
+}
+
 // Every live output channel against the fixture's FP64 oracle, plus the output tail canary.
 // `expected` rather than `f.expected` because the raw-query entry's output stage is not the
 // fixture's stage-0 context: --reproduce passes Pi applied once more. `ulp_budget` likewise --
 // see kReproUlpBudget for why that leg's is looser and what a failure there would mean.
+// `unguarded` selects the sign-aware comparison without the fixture's [1,15] range guard, which
+// the stage-1 oracle needs by design (the egress rotation is signed and unbounded).
 OracleResult check_output(const std::vector<std::uint8_t>& image, const std::vector<float>& expected,
-                          std::size_t payload_bytes, int ulp_budget)
+                          std::size_t payload_bytes, int ulp_budget, bool unguarded = false)
 {
     OracleResult result;
     const std::size_t live = expected.size();
     for (std::size_t i = 0; i < live; ++i) {
         std::uint16_t bits;
         std::memcpy(&bits, image.data() + kGuard + 2 * i, 2);
-        const std::uint16_t reference = fused_decode_fixture::reference_bfloat16(expected[i]);
-        // The fixture's results are positive finite normals, so the bf16 bit distance IS the
-        // ULP distance -- no sign or subnormal case to fold in.
-        const int ulp = std::abs(int(bits) - int(reference));
+        // The fixture's stage-0 results are positive finite normals, so there the bf16 bit
+        // distance IS the ULP distance -- no sign or subnormal case to fold in. The stage-1
+        // oracle leaves that range and takes the ordered map instead.
+        const std::uint16_t reference =
+            unguarded
+                ? fused_decode_fixture::reference_bits_unguarded(fused_decode_fixture::Element::kBf16,
+                                                                 expected[i])
+                : fused_decode_fixture::reference_bfloat16(expected[i]);
+        const int ulp =
+            unguarded ? bf16_ulp_ordered(bits, reference) : std::abs(int(bits) - int(reference));
         const double got = tq_test::bf16_to_float(bits);
         const double absolute = std::fabs(got - double(expected[i]));
         if (ulp > result.worst_ulp) result.worst_ulp = ulp;
@@ -304,11 +328,20 @@ int run(bool camodel_smoke, int perf_iters)
          "4 KV heads, 64 query heads: grid reaches exactly the 32-block bound at S=8"},
         {1055, 1, 4, 16, {3, 7},
          "4 KV heads, ragged tail and a non-power-of-2 split count at once"},
+        // THE SERVING GEOMETRY, with the oracle: batch 1, 4 KV heads x 6 query heads (gh=6,
+        // kCubeTileM is 16, so the M fractal is ragged too), both serving contexts and their
+        // ragged tails. These are the --reproduce geometry driven through the ladder's
+        // stage-0 oracle; --reproduce adds the raw-query entry and the stage-1 oracle on top.
+        {272, 1, 4, 6, {1}, "serving step: gh 6, 3 pages, 5 tiles, a 16-row live tail"},
+        {316, 1, 4, 6, {1}, "serving next step: gh 6, 5 tiles, a 60-row live tail"},
     };
     const std::vector<Rung> smoke_ladder = {
         {kPageTokens, 1, 1, 16, {1, 2}, "aligned one-page CAModel smoke"},
         {79, 1, 1, 16, {1, 2}, "ragged 15-row CAModel smoke"},
         {257, 1, 1, 16, {1, 3}, "single-row tail CAModel smoke"},
+        {128, 1, 4, 6, {1}, "serving geometry: 4 KV heads x 6 = 24 heads, aligned"},
+        {200, 1, 4, 6, {1}, "serving geometry: 4 KV heads x 6 = 24 heads, ragged 8-row tail"},
+        {1055, 1, 4, 6, {1}, "serving geometry: 4 KV heads x 6, 31-row tail"},
     };
     const auto& ladder = camodel_smoke ? smoke_ladder : full_ladder;
 
@@ -673,19 +706,17 @@ int reproduce()
         //                          bit-exact test OF ROTATE_Q: a rotation wrong by one ULP
         //                          anywhere misses the attention oracle on top of it, at the
         //                          same budget of 2.
-        //   RAW-QUERY,  stage 1    what production launches. NO oracle: reference_bfloat16
-        //                          refuses anything outside [1,15], which is the range the
-        //                          fixture engineers its stage-0 context into, and Pi applied
-        //                          once more is signed and unbounded. Finiteness and guards
-        //                          instead, which is what a fault hunt needs.
-        //
-        // Asking the stage-0 oracle for a stage-1 output is what the first version of this did,
-        // and on the device the fixture threw "oracle result outside fixture range" without
-        // reporting anything about the launch. The stage was why, not the launch.
+        //   RAW-QUERY,  stage 1    what production launches, and since the convention fix it HAS
+        //                          an oracle: the fixture's stage-0 row with Pi applied once
+        //                          more, compared with the sign-aware ULP distance at
+        //                          kReproUlpBudget (the [1,15] guard would throw on these
+        //                          values, which is what the unguarded path is for). This is the
+        //                          leg that catches the 16x egress-scale defect -- with the fold
+        //                          missing, every channel lands ~512 bf16 ULP away.
         static constexpr ReproLeg kLegs[] = {
             {false, 0u, true, "pre-rotated"},
             {true, 0u, true, "raw-query/st0"},
-            {true, kReproOutputStage, false, "raw-query/st1"},
+            {true, kReproOutputStage, true, "raw-query/st1"},
         };
         for (const ReproLeg& leg : kLegs) {
             const bool raw_entry = leg.raw_entry;
@@ -778,8 +809,10 @@ int reproduce()
             const auto image = out.Download();
             out.CheckGuards(image, "output");
             if (leg.oracle) {
+                const bool stage1 = leg.stage != 0;
                 const OracleResult oracle =
-                    check_output(image, oracle_image(f, basis, leg.stage), out.bytes, kUlpBudget);
+                    check_output(image, oracle_image(f, basis, leg.stage), out.bytes,
+                                 stage1 ? kReproUlpBudget : kUlpBudget, stage1);
                 int& worst = raw_entry ? worst_ulp_raw : worst_ulp_pre;
                 worst = std::max(worst, oracle.worst_ulp);
             } else {
@@ -814,20 +847,21 @@ int reproduce()
 
     std::printf("PASS fused decode opt --reproduce: %d launches over %zu serving geometries, "
                 "group_heads %d on %d KV heads (%d query heads), D=%d, %d-token pages, S=%d. "
-                "Three legs each: the pre-rotated entry; the raw-query entry at stage 0, which "
-                "is a BIT-EXACT test of the rotation prologue, because its contract is to "
-                "reproduce the pre-rotated query exactly; and the raw-query entry at the "
-                "output_stage %u production launches, with a null gate and NO oracle, because "
-                "the fixture's own range guard admits only [1,15] and Pi applied once more is "
-                "signed and unbounded. Worst bf16 ULP %d pre-rotated and %d raw-query, both "
-                "against a budget of %d. Every guard band, the unmapped-page and scale-padding "
-                "canaries, every input allocation and the untouched fused-path workspace all "
-                "held. So the serving GEOMETRY does not fault on its own AND the prologue "
-                "rotates correctly over it: what the serving cache HELD is the remaining "
-                "difference, and this fixture replaces it.",
+                "Three legs each, all with oracles: the pre-rotated entry; the raw-query entry "
+                "at stage 0, which is a BIT-EXACT test of the rotation prologue, because its "
+                "contract is to reproduce the pre-rotated query exactly; and the raw-query entry "
+                "at the output_stage %u production launches, with a null gate and the sign-aware "
+                "stage-1 oracle (budget %d -- the fixture's [1,15] guard would throw on these "
+                "values, so the unguarded comparison handles them). Worst bf16 ULP %d "
+                "pre-rotated and %d raw-query, the stage-0 legs against a budget of %d. Every "
+                "guard band, the unmapped-page and scale-padding canaries, every input "
+                "allocation and the untouched fused-path workspace all held. So the serving "
+                "GEOMETRY does not fault on its own, the prologue rotates correctly over it, "
+                "AND the egress rotation now meets its oracle: what the serving cache HELD is "
+                "the remaining difference, and this fixture replaces it.",
                 launches, cases.size(), kReproGroupHeads, kReproKvHeads,
                 kReproKvHeads * kReproGroupHeads, int(fd::kHeadSize), kPageTokens, kReproSplits,
-                kReproOutputStage, worst_ulp_pre, worst_ulp_raw, kUlpBudget);
+                kReproOutputStage, kReproUlpBudget, worst_ulp_pre, worst_ulp_raw, kUlpBudget);
     return 0;
 }
 

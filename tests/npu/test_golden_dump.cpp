@@ -965,7 +965,12 @@ int main(int argc, char** argv)
     }
 
 #if defined(TQ_GOLDEN_KERNEL_DECODE)
-    const std::vector<std::string> default_cases = {"decode_ctx128", "decode_ctx200"};
+    // The two original cases, then the serving geometry (batch 1, 4 KV heads x 6 query
+    // heads, block_size 128) with the two ragged tails the backend's decode trace faulted
+    // on. The serving cases are primarily for the NPU runners (test_golden_decode_npu);
+    // --case selects a subset when the CAModel envelope is the constraint.
+    const std::vector<std::string> default_cases = {"decode_ctx128", "decode_ctx200",
+                                                    "decode_serving_ctx272", "decode_serving_ctx316"};
 #else
     const std::vector<std::string> default_cases = {
 #if defined(TQ_GOLDEN_KERNEL_PREFILL)

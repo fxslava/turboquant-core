@@ -67,8 +67,25 @@ function(add_turboquant_npu_targets)
       tq_prefill_nz_npu)
   add_npu_runner(test_fused_decode_e2e_npu tests/npu/test_fused_decode_e2e.cpp tq_decode_npu)
 
+  # The golden-dump comparison runners on the physical device: the same source and the same
+  # per-kernel split as the CAModel ones in SimTargets.cmake. The dumps are host-generated
+  # (golden/generate_dumps.py), so a hardware run is: generate the dumps, then
+  # `build/tests/test_golden_*_npu --dump-root golden/dumps` from the repo root.
+  add_npu_runner(test_golden_prefill_strip_npu tests/npu/test_golden_dump.cpp tq_prefill_npu)
+  target_compile_definitions(test_golden_prefill_strip_npu PRIVATE
+      TQ_GOLDEN_KERNEL_PREFILL=1 TQ_GOLDEN_PREFILL_NZ=0)
+  add_npu_runner(test_golden_prefill_nz_npu tests/npu/test_golden_dump.cpp tq_prefill_nz_npu)
+  target_compile_definitions(test_golden_prefill_nz_npu PRIVATE
+      TQ_GOLDEN_KERNEL_PREFILL=1 TQ_GOLDEN_PREFILL_NZ=1)
+  add_npu_runner(test_golden_scatter_npu tests/npu/test_golden_dump.cpp tq_scatter_npu)
+  target_compile_definitions(test_golden_scatter_npu PRIVATE TQ_GOLDEN_KERNEL_SCATTER=1)
+  add_npu_runner(test_golden_decode_npu tests/npu/test_golden_dump.cpp tq_decode_npu)
+  target_compile_definitions(test_golden_decode_npu PRIVATE TQ_GOLDEN_KERNEL_DECODE=1)
+
   add_custom_target(tq_npu_kernels
       DEPENDS tq_prefill_npu tq_prefill_nz_npu tq_scatter_npu tq_scatter_nz_npu tq_decode_npu
               test_live_write_npu test_live_write_nz_npu test_nz_ingress_canary_npu
-              test_fused_decode_e2e_npu)
+              test_fused_decode_e2e_npu
+              test_golden_prefill_strip_npu test_golden_prefill_nz_npu
+              test_golden_scatter_npu test_golden_decode_npu)
 endfunction()

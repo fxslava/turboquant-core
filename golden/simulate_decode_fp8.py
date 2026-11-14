@@ -143,9 +143,7 @@ def simulate(case: str, bias: float, gain: float, round_query: bool = True, roun
 
 if __name__ == "__main__":
     root = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).parent / "dumps"
-    for case in ("decode_ctx128", "decode_ctx200"):
+    cases = sys.argv[2:] or ("decode_ctx128", "decode_ctx200")
+    for case in cases:
         simulate(str(root / case), 0.5, GAIN)  # the OLD kernel convention
         simulate(str(root / case), 0.0, 1.0)  # the writers'/golden convention, both roundings
-        simulate(str(root / case), 0.0, 1.0, round_probs=False)  # query rounding only
-        simulate(str(root / case), 0.0, 1.0, round_query=False)  # prob rounding only
-        simulate(str(root / case), 0.0, 1.0, round_query=False, round_probs=False)  # neither

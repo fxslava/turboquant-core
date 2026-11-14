@@ -79,12 +79,16 @@ inline unsigned element_mantissa_bits(Element e) { return e == Element::kBf16 ? 
 
 // Positive normal results are in [1,15]. Round the FP32 significand before
 // rebiasing, so a mantissa carry correctly increments the FP16 exponent.
-inline std::uint16_t reference_half(float value)
+inline std::uint16_t reference_half_round(float value)
 {
-    if (!(value >= 1 && value <= 15)) throw std::runtime_error("oracle result outside fixture range");
     std::uint32_t bits;
     std::memcpy(&bits, &value, 4);
     return static_cast<std::uint16_t>(((bits + 0xfffu + ((bits >> 13) & 1u)) >> 13) - (112u << 10));
+}
+inline std::uint16_t reference_half(float value)
+{
+    if (!(value >= 1 && value <= 15)) throw std::runtime_error("oracle result outside fixture range");
+    return reference_half_round(value);
 }
 
 // The same for bf16, and deliberately NOT by the add-and-shift that
@@ -93,9 +97,8 @@ inline std::uint16_t reference_half(float value)
 // tests/cpu/test_fused_decode_opt_fixture.cpp pins that agreement over the fixture's own values and
 // over the tie cases. A carry out of the 7-bit significand lands in the exponent field by
 // construction, exactly as it does for fp16 above, because the fields are adjacent.
-inline std::uint16_t reference_bfloat16(float value)
+inline std::uint16_t reference_bfloat16_round(float value)
 {
-    if (!(value >= 1 && value <= 15)) throw std::runtime_error("oracle result outside fixture range");
     std::uint32_t bits;
     std::memcpy(&bits, &value, 4);
     const std::uint32_t keep = bits >> 16;             // sign | exponent | 7 significand bits
@@ -103,11 +106,28 @@ inline std::uint16_t reference_bfloat16(float value)
     const bool round_up = dropped > 0x8000u || (dropped == 0x8000u && (keep & 1u));
     return static_cast<std::uint16_t>(keep + (round_up ? 1u : 0u));
 }
+inline std::uint16_t reference_bfloat16(float value)
+{
+    if (!(value >= 1 && value <= 15)) throw std::runtime_error("oracle result outside fixture range");
+    return reference_bfloat16_round(value);
+}
 
 // The correctly-rounded 16-bit word of an fp32 oracle value, in the instance's own format.
 inline std::uint16_t reference_bits(Element e, float value)
 {
     return e == Element::kBf16 ? reference_bfloat16(value) : reference_half(value);
+}
+
+// The same WITHOUT the [1,15] fixture-range guard, for the raw-query entry's stage-1 oracle:
+// the egress rotation leaves the fixture's engineered range by design (signed, unbounded), and
+// the guard exists to keep the LADDER's stage-0 fixture honest, not to forbid that. bf16 only:
+// the split-word rounding above is sign-agnostic, while the fp16 add-and-rebias assumes a
+// positive normal input, and nothing runs the stage-1 oracle in fp16.
+inline std::uint16_t reference_bits_unguarded(Element e, float value)
+{
+    if (e != Element::kBf16)
+        throw std::runtime_error("the unguarded reference rounding is implemented for bf16 only");
+    return reference_bfloat16_round(value);
 }
 
 // The value the DEVICE sees after widening a stored word: exact for both formats, since fp32 holds
