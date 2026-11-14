@@ -48,11 +48,40 @@ function(add_turboquant_npu_targets)
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH
       "-I${SRC}/src/decode" "-I${SRC}/src/common" "-I${SRC}/include")
 
+  # The runner link must resolve libruntime.so's own NEEDED entries -- libascend_hal.so and
+  # the drv/hdc providers (drvHdcSessionConnect, halGetDeviceInfo, drvGetDevNum, ...) -- which
+  # live in the DRIVER package, not the toolkit. Without -rpath-link pointing there, ld fails
+  # with "libascend_hal.so ... not found" plus a screen of undefined drvHdc* references even
+  # though nothing the runner calls needs them. The driver's install root is registered in
+  # /etc/ascend_install.info (the same file set_env.sh reads); default to the standard layout.
+  set(TQ_DRIVER_HOME "/usr/local/Ascend/driver")
+  if(EXISTS "/etc/ascend_install.info")
+    file(STRINGS "/etc/ascend_install.info" _tq_drv_line
+         REGEX "^[Dd]river_[Ii]nstall_[Pp]ath_[Pp]aram=")
+    if(_tq_drv_line)
+      string(REGEX REPLACE "^[^=]*=" "" _tq_drv_root "${_tq_drv_line}")
+      if(EXISTS "${_tq_drv_root}/driver")
+        set(TQ_DRIVER_HOME "${_tq_drv_root}/driver")
+      endif()
+    endif()
+  endif()
+  set(TQ_DRIVER_RPATH_LINKS "")
+  foreach(_tq_drv_lib "${TQ_DRIVER_HOME}/lib64" "${TQ_DRIVER_HOME}/lib64/driver")
+    if(EXISTS "${_tq_drv_lib}")
+      list(APPEND TQ_DRIVER_RPATH_LINKS "-Wl,-rpath-link,${_tq_drv_lib}")
+    endif()
+  endforeach()
+  if(NOT TQ_DRIVER_RPATH_LINKS)
+    message(WARNING "No Ascend driver lib dir found under ${TQ_DRIVER_HOME}; NPU runner links "
+                    "may fail on libruntime.so's indirect driver dependencies.")
+  endif()
+
   function(add_npu_runner name source)
     add_executable(${name} EXCLUDE_FROM_ALL "${source}")
     target_include_directories(${name} PRIVATE "${SRC}" "${ASCEND_HOME_PATH}/include")
     target_compile_options(${name} PRIVATE -std=c++17 -Wall -Wextra -Werror)
     target_link_libraries(${name} PRIVATE ${ARGN} turboquant_host ascendcl)
+    target_link_options(${name} PRIVATE ${TQ_DRIVER_RPATH_LINKS})
     set_target_properties(${name} PROPERTIES
         BUILD_WITH_INSTALL_RPATH TRUE
         INSTALL_RPATH "$ORIGIN;$ORIGIN/../lib;${ASCEND_HOME_PATH}/lib64")
