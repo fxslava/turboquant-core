@@ -26,15 +26,25 @@ Configure once: `cmake -B build -DRUN_MODE=sim -DTQ_BUILD_KERNELS=ON` in the cop
 Checked into the repo (`build/` is gitignored, so copy it back if lost). It rsyncs the tree,
 then builds. **The purge it does is mandatory, not optional:**
 
-CANN's `ascendc_library` runs `merge_obj_text.sh`, which does
-`ld.lld -m aicorelinux -Ttext=0 file.o -o file.o` **in place**, turning the preprocess object
-REL -> EXEC. The merge target is phony inside a BUILD_ALWAYS ExternalProject, so EVERY build
-that touches a kernel target re-runs it, and on an already-merged EXEC input ld.lld dies with
-`ld.lld: error: ...cpp.o: unknown file type`. This is NOT a source error and NOT a 9P
-filesystem problem (the old "9P truncation" theory was wrong — it reproduces on ext4). The
-script deletes the preprocess `.o` of the kernels named (default: the ones the target depends
-on) so the inner make regenerates a REL object. Kernel keys: `prefill prefill_nz scatter
-scatter_nz decode`.
+Workarounds:
+- Build the one target you need (`tq_decode_sim`, `tq_prefill_sim`,
+  `tq_scatter_sim`) instead of the aggregate, retry on failure, prefer `-j1`
+  when it misbehaves.
+- If a preprocess `.o` is already corrupted, delete it
+  (`build/tq_<k>_sim_preprocess-prefix/src/*-build/CMakeFiles/{aic,aiv}_obj.dir/.../*.o`)
+  and rebuild — the inner make regenerates it.
+- Runner binaries can be (re)linked without re-triggering the kernel
+  ExternalProjects: `gmake -C build test_fused_decode_e2e_sim/fast -j4`
+  (the `/fast` target skips dependency re-checks; needs `build/lib/libtq_decode_sim.so`
+  and `build/libturboquant_host.a`, both already present).
+- **The `/fast` route also works for NEW runner targets** added after the last
+  full configure: re-run `cmake -B build -DRUN_MODE=sim -DTQ_BUILD_KERNELS=ON`
+  (cheap, no kernel rebuild), then `gmake -C build <new_runner>/fast -j4`.
+  Building a new runner with `cmake --build build --target <new_runner>`
+  instead re-enters the kernel ExternalProjects and can corrupt the preprocess
+  `.o` files again (see above) even though the kernels did not change.
+- Runners dlopen the kernel `.so`; rebuilding `libtq_decode_sim.so` alone is
+  enough to pick up kernel-side changes — no runner relink needed.
 
 ```bash
 wsl -- bash -lc 'bash /mnt/c/Ascend/turboquant-core/build/wsl_build.sh test_live_write_nz_sim'
@@ -66,7 +76,28 @@ Expected gates:
 - `test_fused_decode_e2e_sim --probe`: one `probe gh 16 raw-query/cube ...` line, `PASS fused
   decode opt --probe`, ~40 s wall.
 
-## Runtime pitfalls (all observed, do not repeat)
+### Golden-dump comparison runners
+
+`tests/npu/test_golden_dump.cpp` builds four runners
+(`test_golden_prefill_strip_sim`, `test_golden_prefill_nz_sim`,
+`test_golden_scatter_sim`, `test_golden_decode_sim`) that compare every kernel
+against the PyTorch golden (`golden/turboquant_golden.py`) via the dumps in
+`golden/dumps/` (regenerate on the Windows host: `python
+golden/generate_dumps.py`). They take `--dump-root <dir>` (default
+`golden/dumps` relative to CWD) and, for the decode, `--ulp-budget N`. The
+helper `build/run_golden_sim.sh [runner ...]` runs them inside the container
+with the exact working environment above and a scratch CWD per runner:
+
+```bash
+wsl -- bash -lc 'docker run --rm -v /mnt/f/turboquant-core:/workspace -w /workspace \
+  ascendai/cann:9.2.0-beta.2-910b-ubuntu22.04-py3.12 bash build/run_golden_sim.sh'
+```
+
+Build them with the `/fast` route: `gmake -C build test_golden_prefill_strip_sim/fast
+test_golden_prefill_nz_sim/fast test_golden_scatter_sim/fast
+test_golden_decode_sim/fast -j4`.
+
+### Runtime pitfalls (all observed, do not repeat)
 
 - **Do not `LD_PRELOAD` the simulator libs.** `tools/simulator/Ascend950PR_9599` is a symlink
   to `x86_64-linux/simulator/dav_3510`, whose `lib/` and `camodel/` subdirs carry DIFFERENT
