@@ -75,8 +75,16 @@ target_link_libraries(test_contract_gates PRIVATE turboquant_host)
 add_executable(test_layout_bridge tests/cpu/test_layout_bridge.cpp)
 target_link_libraries(test_layout_bridge PRIVATE turboquant_host)
 
+add_executable(test_golden_decode_oracle tests/cpu/test_golden_decode_oracle.cpp)
+target_link_libraries(test_golden_decode_oracle PRIVATE turboquant_host)
+
 add_test(NAME contract_gates COMMAND test_contract_gates)
 add_test(NAME layout_bridge COMMAND test_layout_bridge)
+# The oracle comparison reads golden/dumps; run it from the source tree so the
+# default --dump-root resolves.
+add_test(NAME golden_decode_oracle COMMAND test_golden_decode_oracle)
+set_tests_properties(golden_decode_oracle PROPERTIES
+                     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 
 # ------------------------------------------------------------------ the device legs
 option(TQ_BUILD_KERNELS "Configure the BiSheng device legs (tens of minutes to build)" OFF)
@@ -94,4 +102,10 @@ else()
   include(cmake/NpuTargets.cmake)
   add_turboquant_npu_targets()
   message(STATUS "Device leg: physical ${SOC_VERSION}, target tq_npu_kernels.")
+endif()
+
+# The vendored-decode probe (see cmake/VendoredDecodeProbe.cmake for what it arbitrates).
+if(TQ_VENDORED_DECODE_PROBE)
+  include(cmake/VendoredDecodeProbe.cmake)
+  add_vendored_decode_probe()
 endif()

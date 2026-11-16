@@ -66,10 +66,12 @@ include/turboquant/      normative contracts, no kernel toolchain required
   turboquant_splitk_contract.hpp   Split-K partial layout
 golden/
   turboquant_golden.py           the PyTorch golden model (a standalone copy of
-                                 vllm-ascend's turboquant_dry_run.py golden path),
+                                 vllm-ascend's turboquant_v1.py golden path),
                                  plus the fp64 decode reference
   generate_dumps.py              writes golden/dumps/: synthetic fixtures and the
-                                 golden's expected images, per kernel
+                                 golden's expected images, per kernel, plus the
+                                 real serving-geometry decode cases (randn data,
+                                 6496-block cache, sparse-stored)
 src/
   prefill/turboquant_reshape_batch.cpp     MIX_AIC_1_2 BF16 prefill, mode-2 only
   prefill/routine_stage_page_zn_bf16.hpp
@@ -85,7 +87,11 @@ tests/
   common/turboquant_test_common.hpp    failure harness, bit helpers, guarded buffers,
                                        the RFC 3.1 index maps
   common/turboquant_golden_oracle.hpp  reference integer quantiser, power-of-two scale
-                                       extractor, FP64 attention reference
+                                       extractor, FP64 attention reference, and the
+                                       real-decode-case reference (LCG pi_signs,
+                                       dense Pi, fp64 decode over the NZ cache)
+  common/golden_dump_manifest.hpp      the golden dump manifest/tensor reader (sparse
+                                       tensors materialised), shared by every runner
   common/turboquant_scatter_oracle.hpp the scatter writer's golden cache image
   common/rotate_butterfly_oracle.hpp   host model of the vector butterfly
   common/fused_decode_fixture.hpp      the decode's gold model, `expected` in double
@@ -95,6 +101,8 @@ tests/
   cpu/test_contract_gates.cpp          UB arena, host tiling, launch guards, mode-2 channels,
                                        marked-graph token balance, shared recurrence
   cpu/test_layout_bridge.cpp           NZ writer == decode reader, bijections, co-byte pairings
+  cpu/test_golden_decode_oracle.cpp    the plain-C golden oracle against the PyTorch
+                                       golden over every decode dump case
   npu/test_live_write.cpp              batch prefill + scatter RMW against the oracle; built
                                        twice for the scatter: plain (strip RMW) and
                                        TQ_SCATTER_NZ=1 (the NZ-tiled ingress, --probe for the
@@ -107,18 +115,28 @@ tests/
 ## The golden-dump comparison (kernel vs the PyTorch golden)
 
 `golden/` holds a standalone copy of the PyTorch golden model from vllm-ascend's
-`turboquant_dry_run.py` (no vLLM or torch_npu dependency) and a generator that
+`turboquant_v1.py` (no vLLM or torch_npu dependency) and a generator that
 turns it into binary dumps: synthetic BF16-exact integer fixtures, the operands
 the kernels read (LCG `pi_signs`, BF16 codec tables, `h16`) and the golden's
-expected cache images and decode outputs. `tests/npu/test_golden_dump.cpp`
-builds four CAModel runners — one per kernel, the prefill twice (strip and NZ
-builds) — that upload the dumps, launch, and compare. The ingestion writers are
-compared **bit for bit**; the decode is compared against the golden's fp64
-attention with a bf16 ULP budget (`--ulp-budget`, default 8), the one place a
-tolerance is honest.
+expected cache images and decode outputs — plus the **real serving decode
+cases** of the vllm-ascend unit test (`decode_real_ctx{64,128,200,1055}`:
+group_heads 6, randn bf16 data, the production softmax scale, a 6496-block
+cache with a 512-wide block table, the planes stored sparsely as a fill word
+plus the live pages). `tests/npu/test_golden_dump.cpp` builds four CAModel
+runners — one per kernel, the prefill twice (strip and NZ builds) — that
+upload the dumps, launch, and compare. The ingestion writers are compared
+**bit for bit**; the decode is compared against the golden's fp64 attention
+with a bf16 ULP budget (`--ulp-budget`, default 8), the one place a tolerance
+is honest. `tests/cpu/test_golden_decode_oracle.cpp` is the mirror gate on the
+host side: it holds the plain-C golden oracle
+(`tests/common/turboquant_golden_oracle.hpp`) to the same PyTorch golden over
+every decode case — LCG `pi_signs` bit-exact, the dense-Pi `query_rot`
+bit-exact on the integer fixtures and within a row-relative budget on the
+random ones, and both output stages at fp32-ULP budget against the dump's fp64
+reference.
 
 ```bash
-python golden/generate_dumps.py            # writes golden/dumps/ (gitignored)
+python golden/generate_dumps.py            # writes golden/dumps/ (tracked; needs torch)
 ./build/tests/test_golden_prefill_strip_sim --dump-root golden/dumps
 ./build/tests/test_golden_prefill_nz_sim   --dump-root golden/dumps
 ./build/tests/test_golden_scatter_sim      --dump-root golden/dumps

@@ -757,6 +757,198 @@ inline std::vector<double> attention_reference(const DecodeGeometry& g, const fl
     return out;
 }
 
+// ==================================================== the real decode cases
+// The comparison against the PyTorch golden of vllm-ascend's turboquant_v1.py,
+// as dumped by golden/generate_dumps.py. Everything above this line is the
+// oracle's OWN fixture: its polynomial pi_sign, its synthetic closed-form
+// decode. Everything below is the golden's fixture: the LCG pi_signs the real
+// kernels ingest, the dense Pi of the golden's arithmetic contract, and an
+// fp64 decode reference that starts from the raw query in the model basis --
+// the shape of a real decode step, ragged tails included.
+//
+// WHY THE SIGNS MUST COME FROM THE LCG. The dumps and the production kernels
+// share the sign vector of turboquant_v1.py::turboquant_pi_signs: an explicit
+// numerical-recipes LCG seeded by TURBOQUANT_PI_SEED + head_size, bit 16 of
+// each step deciding the sign. The prefill/scatter oracle above keeps its own
+// pi_sign because its fixtures are self-consistent -- the kernel is handed
+// whatever signs the oracle computed with. A decode comparison against the
+// PyTorch golden has no such freedom: the dump's cache was rotated with the
+// LCG vector, so reproducing the golden's attention with any other vector
+// fails on the rotation itself rather than on anything the comparison means
+// to measure.
+
+constexpr std::uint32_t kPiSeed = 0x5F3759DFu;  // TURBOQUANT_PI_SEED
+constexpr std::uint32_t kLcgMultiplier = 1664525u;
+constexpr std::uint32_t kLcgIncrement = 1013904223u;
+constexpr int kLcgSignBit = 16;
+
+// turboquant_pi_signs(head_size), bit for bit: uint32 wraparound IS the
+// golden's _LCG_MODULUS_MASK. Checked against a dump's pi_signs tensor by the
+// comparison runner before the rotation is trusted.
+inline std::vector<float> kernel_pi_signs(int head_size)
+{
+    std::uint32_t state = kPiSeed + static_cast<std::uint32_t>(head_size);
+    std::vector<float> signs(static_cast<std::size_t>(head_size));
+    for (int c = 0; c < head_size; ++c) {
+        state = state * kLcgMultiplier + kLcgIncrement;
+        signs[static_cast<std::size_t>(c)] = ((state >> kLcgSignBit) & 1u) ? 1.0f : -1.0f;
+    }
+    return signs;
+}
+
+// The dense Pi of the golden's arithmetic contract, in double:
+//
+//   Pi[c1*32 + c0][g*32 + i] = H_groups[c1][g] . signs[g*32 + c0] . H32[c0][i]
+//
+// Dense, not the butterfly cascade, for the same reason the PyTorch golden is
+// dense: the cascade is what the kernel does, and an oracle that repeated its
+// stage order would let a wrong order hide behind a matching bug.
+struct DensePi {
+    int dim = 0;
+    double inv_sqrt_len = 0.0;
+    std::vector<double> matrix;  // dim * dim, row-major [out_channel][in_channel]
+
+    explicit DensePi(const std::vector<float>& signs)
+    {
+        dim = static_cast<int>(signs.size());
+        require(dim > 0 && dim % kGroup == 0, "the dense Pi needs a whole number of groups");
+        const int groups = dim / kGroup;
+        require((groups & (groups - 1)) == 0,
+                "the outer Hadamard factor needs a power-of-two group count");
+        inv_sqrt_len = 1.0 / std::sqrt(static_cast<double>(dim));
+        matrix.assign(static_cast<std::size_t>(dim) * dim, 0.0);
+        for (int c1 = 0; c1 < groups; ++c1)
+            for (int c0 = 0; c0 < kGroup; ++c0)
+                for (int g = 0; g < groups; ++g)
+                    for (int i = 0; i < kGroup; ++i)
+                        matrix[static_cast<std::size_t>(c1 * kGroup + c0) *
+                                   static_cast<std::size_t>(dim) +
+                               static_cast<std::size_t>(g * kGroup + i)] =
+                            static_cast<double>(hadamard(c1, g)) *
+                            static_cast<double>(signs[static_cast<std::size_t>(g * kGroup + c0)]) *
+                            static_cast<double>(hadamard(c0, i));
+    }
+
+    // y = (x @ Pi^T) * inv_sqrt_len: the ingress direction with the 1/sqrt(D)
+    // fold. Applied to the raw query this is the decode prologue's query_rot,
+    // and decode_reference's q_rot.
+    void rotate_query(const double* x, double* y) const
+    {
+        for (int j = 0; j < dim; ++j) {
+            double acc = 0.0;
+            for (int i = 0; i < dim; ++i)
+                acc += x[i] * matrix[static_cast<std::size_t>(j) * dim + i];
+            y[j] = acc * inv_sqrt_len;
+        }
+    }
+
+    // x = (y @ Pi) * inv_sqrt_len: the egress direction. With the stored
+    // scale's fold this is Pi^T Pi / D == I, so it returns a rotated-basis
+    // context to the model's basis -- decode_reference's stage 1.
+    void unrotate_context(const double* y, double* x) const
+    {
+        for (int i = 0; i < dim; ++i) {
+            double acc = 0.0;
+            for (int j = 0; j < dim; ++j)
+                acc += y[j] * matrix[static_cast<std::size_t>(j) * dim + i];
+            x[i] = acc * inv_sqrt_len;
+        }
+    }
+};
+
+struct DecodeOutputs {
+    std::vector<double> stage0;  // the context in the rotated basis (expected_stage0)
+    std::vector<double> stage1;  // the context in the model's basis (expected_stage1)
+};
+
+// softmax(q_rot k^T * score_scale) v over the NZ cache, in double, with q_rot
+// derived from the RAW query through the dense Pi -- golden/turboquant_golden.py's
+// decode_reference, which is the standalone copy of turboquant_v1.py's golden
+// decode. `query` is [requests][query heads][head_size] fp32 in the model's
+// basis, widened from its bf16 storage exactly as the device widens it.
+//
+// The reconstruction rule is attention_reference's: a stored signed nibble n
+// dequantises as n * stored_scale, through the production address functions of
+// turboquant_layout.h. The golden's Python gather restates those addresses, so
+// agreeing with the dumps here also pins the two addressings to each other.
+template <vllm_ascend::turboquant::TurboQuantMode Mode =
+              vllm_ascend::turboquant::TurboQuantMode::KV4_FP8>
+inline DecodeOutputs decode_reference(const DecodeGeometry& g, const DensePi& pi,
+                                      const float* query, const std::uint8_t* key,
+                                      const std::uint8_t* value, const float* scales,
+                                      const std::int32_t* table, const std::int32_t* lengths)
+{
+    require(g.requests > 0 && g.kv_heads > 0 && g.group_heads > 0,
+            "the decode reference needs a non-empty geometry");
+    require(g.head_size == pi.dim, "the dense Pi and the geometry disagree on the head size");
+    require(g.page_tokens > 0 &&
+                g.page_tokens % static_cast<int>(vllm_ascend::turboquant::kCubeTileRows) == 0,
+            "a cache page must be a whole number of 64-row Cube tiles");
+    constexpr double offset = affine_offset<Mode>();
+    const int heads = g.query_heads();
+    DecodeOutputs out;
+    out.stage0.assign(static_cast<std::size_t>(g.requests) * heads * g.head_size, 0.0);
+    out.stage1.assign(out.stage0.size(), 0.0);
+
+    std::vector<double> q_rot(static_cast<std::size_t>(g.head_size));
+    std::vector<double> q_row(static_cast<std::size_t>(g.head_size));
+    for (int request = 0; request < g.requests; ++request) {
+        const int context = lengths[request] > 0 ? lengths[request] : 0;
+        const int pages = (context + g.page_tokens - 1) / g.page_tokens;
+        require(pages <= g.max_pages, "a context longer than the block table can address");
+        for (int qh = 0; qh < heads; ++qh) {
+            const int kv_head = qh / g.group_heads;
+            const float* q = query + (static_cast<std::size_t>(request) * heads + qh) * g.head_size;
+            const std::size_t base =
+                (static_cast<std::size_t>(request) * heads + qh) * g.head_size;
+            for (int c = 0; c < g.head_size; ++c) q_row[static_cast<std::size_t>(c)] = q[c];
+            pi.rotate_query(q_row.data(), q_rot.data());
+            if (context == 0) continue;
+
+            // Pass one: the scores and their maximum.
+            std::vector<double> scores(static_cast<std::size_t>(context), 0.0);
+            double max_score = -std::numeric_limits<double>::infinity();
+            for (int row = 0; row < context; ++row) {
+                const int page = row / g.page_tokens;
+                const std::int32_t physical =
+                    table[static_cast<std::size_t>(request) * g.max_pages + page];
+                require(physical >= 0, "a live logical page is unmapped in the block table");
+                const int slot = physical * g.page_tokens + row % g.page_tokens;
+                double dot = 0.0;
+                for (int c = 0; c < g.head_size; ++c)
+                    dot += q_rot[static_cast<std::size_t>(c)] *
+                           dequantise_nz(g, key, scales, 0, slot, kv_head, c, offset);
+                const double s = dot * static_cast<double>(g.score_scale);
+                scores[static_cast<std::size_t>(row)] = s;
+                if (s > max_score) max_score = s;
+            }
+
+            // Pass two: the normalised weights and the context vector.
+            double denominator = 0.0;
+            for (int row = 0; row < context; ++row) {
+                const double w = std::exp(scores[static_cast<std::size_t>(row)] - max_score);
+                scores[static_cast<std::size_t>(row)] = w;
+                denominator += w;
+            }
+            require(denominator > 0.0, "a degenerate softmax denominator");
+            double* stage0 = out.stage0.data() + base;
+            for (int row = 0; row < context; ++row) {
+                const double w = scores[static_cast<std::size_t>(row)];
+                if (w == 0.0) continue;
+                const int page = row / g.page_tokens;
+                const std::int32_t physical =
+                    table[static_cast<std::size_t>(request) * g.max_pages + page];
+                const int slot = physical * g.page_tokens + row % g.page_tokens;
+                for (int c = 0; c < g.head_size; ++c)
+                    stage0[c] += w * dequantise_nz(g, value, scales, 1, slot, kv_head, c, offset);
+            }
+            for (int c = 0; c < g.head_size; ++c) stage0[c] /= denominator;
+            pi.unrotate_context(stage0, out.stage1.data() + base);
+        }
+    }
+    return out;
+}
+
 }  // namespace tq_golden
 
 #endif  // TURBOQUANT_GOLDEN_ORACLE_HPP
