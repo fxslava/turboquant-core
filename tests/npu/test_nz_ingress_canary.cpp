@@ -80,11 +80,16 @@ extern "C" void launch_turboquant_reshape_and_cache_bf16(
     const std::int32_t* slot_mapping, const float* pi_signs,
     const std::int32_t* tables, std::uint32_t num_tokens,
     std::uint32_t num_kv_heads, std::uint32_t head_size, std::uint32_t block_size,
-    std::uint32_t num_blocks, std::uint32_t tokens_per_core, float inv_sqrt_len);
+    std::uint32_t num_blocks, std::uint32_t tokens_per_core, float inv_sqrt_len,
+    std::uint32_t quant_mode);
 
 namespace nz_canary {
 
 namespace tq = vllm_ascend::turboquant;
+
+// --lloyd-max: launch the writer at quant_mode 1 and take the reference on the Lloyd-Max
+// codebook instead of the uniform grid.
+bool g_lloyd_max = false;
 
 constexpr int kHeads = 4;
 constexpr int kHeadSize = 256;
@@ -112,11 +117,13 @@ void require(bool ok, const char* what)
 void usage(std::FILE* output, const char* argv0)
 {
     std::fprintf(output,
-                 "Usage: %s [--perf [iterations]]\n"
+                 "Usage: %s [--perf [iterations]] [--lloyd-max]\n"
                  "  One 64-row NZ tile: four sequential 16-token strips in ONE grid block, on\n"
                  "  physical block %d of %d. Compares every packed byte and every FP32 scale\n"
                  "  lane of that block against the strip->NZ repack oracle, bit for bit, and\n"
                  "  requires the other %d blocks to still read back as 0x%02X.\n"
+                 "  --lloyd-max quantises on the Lloyd-Max codebook (quant_mode 1) instead of\n"
+                 "  the uniform grid, against the codebook oracle.\n"
                  "  --perf times the launch on the DEVICE after every check has passed:\n"
                  "  `iterations` timed launches (default %d, max %d) bracketed by\n"
                  "  ACL_EVENT_TIME_LINE markers. A median wall interval is a timing, not an\n"
@@ -156,15 +163,18 @@ int run(int perf_iters)
     std::vector<std::int32_t> oracle_slots(static_cast<std::size_t>(kTileRows));
     for (int t = 0; t < kTileRows; ++t) oracle_slots[static_cast<std::size_t>(t)] = t;
     const tq_golden::Reference ref = tq_golden::compute_oracle_reference(
-        strip_shape, key_in.data(), value_in.data(), oracle_slots.data());
+        strip_shape, key_in.data(), value_in.data(), oracle_slots.data(), nullptr, g_lloyd_max);
     require(ref.bad_slot_strip < 0, "the oracle's slot mapping breaks its one-strip-one-page form");
 
     const tq_golden::Audit audit = tq_golden::audit_reference(ref);
     require(audit.nibbles_in_range, "the oracle produced a value outside INT4");
     require(audit.nibbles_covered == 16, "the fixture does not exercise all sixteen nibbles");
-    require(audit.clamped_chunks > 0, "the INT4 upper clamp is never taken");
-    require(audit.mixed_exponent_chunks > 0, "no chunk carries two different scale exponents");
-    require(audit.distinct_exponents >= 3, "the scale exponent barely varies");
+    // The clamp and the scale exponent are uniform-grid properties: the Lloyd-Max codebook
+    // saturates into its outer bins instead and its scale is an RMS, not a power of two.
+    require(g_lloyd_max || audit.clamped_chunks > 0, "the INT4 upper clamp is never taken");
+    require(g_lloyd_max || audit.mixed_exponent_chunks > 0,
+            "no chunk carries two different scale exponents");
+    require(g_lloyd_max || audit.distinct_exponents >= 3, "the scale exponent barely varies");
     require(audit.pages_distinct, "two chunks of one strip pack to identical pages");
     require(audit.tokens_distinct, "two tokens of one chunk quantise identically");
     require(audit.strips_distinct, "two strips of the tile pack to identical pages");
@@ -263,7 +273,7 @@ int run(int perf_iters)
             static_cast<std::uint32_t>(kTileRows), static_cast<std::uint32_t>(kHeads),
             static_cast<std::uint32_t>(kHeadSize), static_cast<std::uint32_t>(nz.block_size),
             static_cast<std::uint32_t>(nz.num_blocks), static_cast<std::uint32_t>(kTileRows),
-            strip_shape.inv_sqrt_len());
+            strip_shape.inv_sqrt_len(), g_lloyd_max ? 1u : 0u);
     };
 
     // ONE grid block: tokensPerCore = 64 is four strips, so the tile is a single chunk stream.
@@ -442,6 +452,10 @@ int run_main(int argc, char** argv)
                 }
                 ++i;
             }
+            continue;
+        }
+        if (arg == "--lloyd-max") {
+            g_lloyd_max = true;
             continue;
         }
         usage(stderr, argv[0]);

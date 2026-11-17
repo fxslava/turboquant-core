@@ -73,10 +73,19 @@ Expected gates:
   tile; `... (--probe, head 0): PASS`, ~40 s wall.
 - `test_live_write_nz_sim`: the full NZ ladder (strip-crossing run, single token, one whole
   64-row tile as four runs, the sequential accumulation ladder, the zero-row branch).
-- `test_live_write_sim --op scatter [--mode sweep]`: the strip writer, unchanged.
-- `test_nz_ingress_canary_sim`: the NZ prefill, one 64-row tile.
-- `test_fused_decode_e2e_sim --probe`: one `probe gh 16 raw-query/cube ...` line, `PASS fused
-  decode opt --probe`, ~40 s wall.
+- `test_live_write_nz_sim [--probe] --lloyd-max`: the same runs at quant_mode 1 (the Lloyd-Max
+  codebook on the per-row RMS scale), bit-exact against the codebook oracle; ~2x wall of the
+  uniform run. The strip rig `test_live_write_sim --op scatter --lloyd-max` and the prefill rig
+  `test_live_write_sim --op prefill --lloyd-max` take the same flag.
+- `test_nz_ingress_canary_sim [--lloyd-max]`: the NZ prefill, one 64-row tile; the flag runs it
+  at quant_mode 1 against the codebook oracle.
+- `test_fused_decode_e2e_sim --probe`: `probe gh 16 raw-query/cube ...` lines plus the
+  `raw-query/cube/lm` and `pre-rotated/lm` legs (the kLloydMaxLut gather expand, centroids
+  uploaded in mode_tables), `PASS fused decode opt --probe`, ~2 min wall.
+- quant_mode ABI: `launch_turboquant_reshape_scatter_aiv(..., inv_sqrt_len, quant_mode)` and
+  `launch_turboquant_reshape_and_cache_bf16(..., inv_sqrt_len, quant_mode)`, 0 uniform / 1
+  Lloyd-Max; the decode selects kLloydMaxLut via `Launch::decode_unpack` (mode_tables then
+  carries the 16 fp32 centroids).
 
 ### Golden-dump comparison runners
 

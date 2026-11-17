@@ -83,7 +83,8 @@ extern "C" void launch_turboquant_reshape_and_cache_bf16(
     const std::int32_t* slot_mapping, const float* pi_signs,
     const std::int32_t* tables, std::uint32_t num_tokens,
     std::uint32_t num_kv_heads, std::uint32_t head_size, std::uint32_t block_size,
-    std::uint32_t num_blocks, std::uint32_t tokens_per_core, float inv_sqrt_len);
+    std::uint32_t num_blocks, std::uint32_t tokens_per_core, float inv_sqrt_len,
+    std::uint32_t quant_mode);
 
 namespace prefill_rig {
 
@@ -91,6 +92,10 @@ constexpr int kHeads = 4;
 constexpr int kHeadSize = 256;
 constexpr int kBlockSize = 16;
 constexpr int kMaxSlices = 64;
+
+// --lloyd-max: launch the writer at quant_mode 1 and take the reference on the Lloyd-Max
+// codebook instead of the uniform grid.
+bool g_lloyd_max = false;
 
 using tq_golden::ChunkRef;
 using tq_golden::Shape;
@@ -157,7 +162,7 @@ int run(int slices, int strips_per_block, int perf_iters)
     const std::vector<std::int32_t> slot_map = tq_golden::build_slot_mapping(shape);
     const std::vector<std::int8_t> table_blob = tq_golden::build_tables(shape);
     const tq_golden::Reference ref = tq_golden::compute_oracle_reference(
-        shape, key_in.data(), value_in.data(), slot_map.data());
+        shape, key_in.data(), value_in.data(), slot_map.data(), nullptr, g_lloyd_max);
     require(ref.bad_slot_strip < 0,
             "the fixture's slot mapping breaks the one-strip-one-page contract");
 
@@ -165,10 +170,12 @@ int run(int slices, int strips_per_block, int perf_iters)
     require(audit.nibbles_in_range, "the oracle produced a value outside INT4");
     require(audit.nibbles_covered == 16,
             "the fixture does not exercise all sixteen nibbles");
-    require(audit.clamped_chunks > 0, "the INT4 upper clamp is never taken");
-    require(audit.mixed_exponent_chunks > 0,
+    // The clamp and the scale exponent are uniform-grid properties: the Lloyd-Max codebook
+    // saturates into its outer bins instead and its scale is an RMS, not a power of two.
+    require(g_lloyd_max || audit.clamped_chunks > 0, "the INT4 upper clamp is never taken");
+    require(g_lloyd_max || audit.mixed_exponent_chunks > 0,
             "no chunk carries two different scale exponents");
-    require(audit.distinct_exponents >= 3, "the scale exponent barely varies");
+    require(g_lloyd_max || audit.distinct_exponents >= 3, "the scale exponent barely varies");
     require(audit.pages_distinct, "two chunks of one strip pack to identical pages");
     require(audit.tokens_distinct, "two tokens of one chunk quantise identically");
     require(audit.strips_distinct, "two strips pack to identical pages");
@@ -230,7 +237,8 @@ int run(int slices, int strips_per_block, int perf_iters)
         static_cast<std::uint32_t>(shape.head_size),
         static_cast<std::uint32_t>(shape.block_size),
         static_cast<std::uint32_t>(shape.num_blocks),
-        static_cast<std::uint32_t>(shape.block_size * strips_per_block), shape.inv_sqrt_len());
+        static_cast<std::uint32_t>(shape.block_size * strips_per_block), shape.inv_sqrt_len(),
+        g_lloyd_max ? 1u : 0u);
     camodel::check(aclrtSynchronizeStream(session.stream), "aclrtSynchronizeStream");
 
     key_cache.download();
@@ -349,7 +357,7 @@ int run(int slices, int strips_per_block, int perf_iters)
                     static_cast<std::uint32_t>(shape.block_size),
                     static_cast<std::uint32_t>(shape.num_blocks),
                     static_cast<std::uint32_t>(shape.block_size * strips_per_block),
-                    shape.inv_sqrt_len());
+                    shape.inv_sqrt_len(), g_lloyd_max ? 1u : 0u);
             });
         camodel::print_perf_preamble(camodel::kDefaultPerfWarmup, perf_iters,
                                      !stats.device_timed);
@@ -437,6 +445,10 @@ int run_main(int argc, char** argv)
             }
             continue;
         }
+        if (arg == "--lloyd-max") {
+            g_lloyd_max = true;
+            continue;
+        }
         usage(stderr, argv[0]);
         return 2;
     }
@@ -461,7 +473,7 @@ int run_main(int argc, char** argv)
 extern "C" void launch_turboquant_reshape_scatter_aiv(
     void*, std::uint32_t, std::uint16_t*, std::uint16_t*, std::int8_t*, std::int8_t*, float*,
     std::int32_t*, float*, std::int32_t*, std::uint32_t, std::uint32_t, std::uint32_t,
-    std::uint32_t, std::uint32_t, std::uint32_t, std::uint32_t, float);
+    std::uint32_t, std::uint32_t, std::uint32_t, std::uint32_t, float, std::uint32_t);
 
 #if !TQ_SCATTER_NZ
 namespace scatter_rig {
@@ -469,6 +481,10 @@ namespace scatter_rig {
 using namespace tq_scatter;
 
 constexpr std::uint32_t kPoison = 0x7FC0BEEFu;
+
+// --lloyd-max: launch the writer at quant_mode 1 and take the reference on the Lloyd-Max
+// codebook (quantise_row_lloyd_max) instead of the uniform grid.
+bool g_lloyd_max = false;
 
 int failures = 0;
 
@@ -588,7 +604,7 @@ Outcome run_launch(camodel::Session& session, const Shape& shape, std::uint32_t 
     // comparison below checks rather than something it is corrected for.
     const Reference ref =
         compute_reference(shape, plan, signs, zero_token, key_image, value_image, scale_image,
-                          static_cast<int>(head));
+                          static_cast<int>(head), g_lloyd_max);
 
     // ---- device side ----------------------------------------------------
     camodel::GuardedDeviceBuffer d_key(key_rows.size() * 2);
@@ -639,7 +655,8 @@ Outcome run_launch(camodel::Session& session, const Shape& shape, std::uint32_t 
         static_cast<std::uint32_t>(shape.num_kv_heads),
         static_cast<std::uint32_t>(shape.head_size),
         static_cast<std::uint32_t>(shape.block_size),
-        static_cast<std::uint32_t>(shape.num_blocks), item, 1u, shape.inv_sqrt_len());
+        static_cast<std::uint32_t>(shape.num_blocks), item, 1u, shape.inv_sqrt_len(),
+        g_lloyd_max ? 1u : 0u);
     camodel::check(aclrtSynchronizeStream(session.stream), "aclrtSynchronizeStream");
 
     d_key_cache.download();
@@ -760,7 +777,7 @@ Outcome run_launch(camodel::Session& session, const Shape& shape, std::uint32_t 
                     static_cast<std::uint32_t>(shape.head_size),
                     static_cast<std::uint32_t>(shape.block_size),
                     static_cast<std::uint32_t>(shape.num_blocks), item, 1u,
-                    shape.inv_sqrt_len());
+                    shape.inv_sqrt_len(), g_lloyd_max ? 1u : 0u);
             });
         char label[64];
         std::snprintf(label, sizeof(label), "scatter %s %dtok", tag, tokens);
@@ -840,6 +857,8 @@ int run_main(int argc, char** argv)
                 std::fprintf(stderr, "--tokens must be 1..%d\n", kStripHeight);
                 return 2;
             }
+        } else if (arg == "--lloyd-max") {
+            g_lloyd_max = true;
         } else {
             std::fprintf(stderr, "unknown argument: %s\n", argv[i]);
             return 2;
@@ -855,10 +874,10 @@ int run_main(int argc, char** argv)
     // selected mode, and `--mode sequential` deliberately makes those launches different sizes.
     if (perf_iters > 0)
         camodel::print_perf_preamble(camodel::kDefaultPerfWarmup, perf_iters, false);
-    std::printf("turboquant_reshape_scatter_aiv CAModel: mode %.*s, head %u, "
+    std::printf("turboquant_reshape_scatter_aiv CAModel: mode %.*s%s, head %u, "
                 "d %d, S %d, P %d, strip %zu B\n",
-                static_cast<int>(mode.size()), mode.data(), head, shape.head_size,
-                shape.block_size, shape.num_blocks, shape.strip_bytes());
+                static_cast<int>(mode.size()), mode.data(), g_lloyd_max ? " --lloyd-max" : "",
+                head, shape.head_size, shape.block_size, shape.num_blocks, shape.strip_bytes());
     std::printf("  head %u isolated\n", head);
 
     // The fixture's own precondition: the rotated panel must stay exactly
@@ -1032,6 +1051,10 @@ NzGeometry make_geometry()
 }
 constexpr int kActivePage = 3;
 
+// --lloyd-max: the launch runs at quant_mode 1 and the reference quantises on the Lloyd-Max
+// codebook (tq_scatter::quantise_row_lloyd_max) instead of the uniform grid.
+bool g_lloyd_max = false;
+
 // One launch's golden image: the prior images with exactly this launch's owned bytes and scale
 // lanes overwritten, placed through the layout contract's own address functions.
 struct NzRef {
@@ -1058,7 +1081,9 @@ NzRef compute_nz_reference(const NzGeometry& g, const std::vector<int>& slots, i
             for (int c = 0; c < g.head_size; ++c)
                 x[static_cast<std::size_t>(c)] = bf16_to_float(float_to_bf16_rne(
                     activation(0, plane, head, static_cast<int>(t), c, zero_token)));
-            const tq_scatter::RowRef row = quantise_row(row_shape, x, signs);
+            const tq_scatter::RowRef row =
+                g_lloyd_max ? tq_scatter::quantise_row_lloyd_max(row_shape, x, signs)
+                            : quantise_row(row_shape, x, signs);
             if (row.zero_row) ++ref.zero_rows;
             if (row.clamped) ++ref.clamped_rows;
             auto& image = plane == 0 ? ref.key : ref.value;
@@ -1166,7 +1191,8 @@ Outcome run_launch(camodel::Session& session, const NzGeometry& g, std::uint32_t
             static_cast<float*>(d_signs.payload()), static_cast<std::int32_t*>(d_cu.payload()),
             1u, static_cast<std::uint32_t>(g.num_kv_heads),
             static_cast<std::uint32_t>(g.head_size), static_cast<std::uint32_t>(g.block_size),
-            static_cast<std::uint32_t>(g.num_blocks), item, 1u, inv_sqrt_len);
+            static_cast<std::uint32_t>(g.num_blocks), item, 1u, inv_sqrt_len,
+            g_lloyd_max ? 1u : 0u);
     };
     launch();
     camodel::check(aclrtSynchronizeStream(session.stream), "aclrtSynchronizeStream");
@@ -1338,6 +1364,8 @@ int run_main(int argc, char** argv)
                 std::fprintf(stderr, "--head must be 0..3\n");
                 return 2;
             }
+        } else if (arg == "--lloyd-max") {
+            g_lloyd_max = true;
         } else {
             std::fprintf(stderr, "unknown argument: %s\n", argv[i]);
             return 2;
@@ -1351,10 +1379,10 @@ int run_main(int argc, char** argv)
     }
     if (perf_iters > 0)
         camodel::print_perf_preamble(camodel::kDefaultPerfWarmup, perf_iters, false);
-    std::printf("turboquant_reshape_scatter_aiv (TURBOQUANT_INGRESS_NZ=1) CAModel: %s, head %u, "
+    std::printf("turboquant_reshape_scatter_aiv (TURBOQUANT_INGRESS_NZ=1) CAModel: %s%s, head %u, "
                 "d %d, tile %d, P %d, tile plane %d B\n",
-                probe ? "--probe" : "ladder", head, g.head_size, g.block_size, g.num_blocks,
-                g.head_size / 2 * g.block_size);
+                probe ? "--probe" : "ladder", g_lloyd_max ? " --lloyd-max" : "", head, g.head_size,
+                g.block_size, g.num_blocks, g.head_size / 2 * g.block_size);
     std::printf("  head %u isolated\n", head);
 
     // The fixture's own precondition: the rotated panel must stay exactly representable, or

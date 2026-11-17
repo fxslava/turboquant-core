@@ -259,6 +259,16 @@ inline void run()
         require(d->num_tiles == 1 && d->tail_rows == 36 && d->regular_tiles == 0 &&
                 (d->flags & fdt::kDecodeSplitCarriesTail) != 0u);
     }
+    // DIRTY-DATA (N4): a context length outside [0, max_blocks * block_size] is refused, not
+    // clamped; the device would otherwise build a tile count from a value the block table cannot
+    // cover. 16 pages x 128 rows is this request's hard ceiling.
+    length = -1;
+    require(fdt::build_decode_tiling(r, &length, nullptr, image.data()) ==
+            fdt::DecodeTilingStatus::kContextOutOfRange);
+    length = 16 * 128 + 1;
+    require(fdt::build_decode_tiling(r, &length, nullptr, image.data()) ==
+            fdt::DecodeTilingStatus::kContextOutOfRange);
+    length = 1024;
     // And a probe past the live context is refused rather than served as a full tile, so a
     // sweep walking off the end of the grid says so instead of launching over dead rows.
     length = 64;

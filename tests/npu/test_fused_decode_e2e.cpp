@@ -919,6 +919,7 @@ struct ProbeLeg {
     bool raw_entry;
     unsigned cube_chunk;   // raw entry only
     int min_group_heads;   // the Cube chunk path needs a share of at least kQueryBasisCubeVectors
+    bool lloyd_max;        // decode through the Lloyd-Max gather expand (Launch::decode_unpack)
     const char* name;
 };
 
@@ -932,10 +933,16 @@ int probe()
     constexpr int kProbeContext = 272;
     const std::vector<int> group_head_sweep = {kReproGroupHeads/*, 16*/};
     const std::vector<ProbeLeg> legs = {
-        {true, 0, 6, "raw-query/cube"},
-        /*{false, 0, 1, "pre-rotated"},
-        {true, 0, 1, "raw-query/vec"},
-        {true, 16, 16, "raw-query/cube"},*/
+        {true, 0, 6, false, "raw-query/cube"},
+        // The same single tile decoded through the Lloyd-Max gather expand: the fixture's cache
+        // is uniform-grid, so there is no oracle here either -- the leg exists to prove the
+        // kLloydMaxLut pipeline boots, gathers its codebook and stays finite, guard-clean and
+        // workspace-clean end to end.
+        {true, 0, 6, true, "raw-query/cube/lm"},
+        {false, 0, 1, true, "pre-rotated/lm"},
+        /*{false, 0, 1, false, "pre-rotated"},
+        {true, 0, 1, false, "raw-query/vec"},
+        {true, 16, 16, false, "raw-query/cube"},*/
     };
     const std::vector<ProbeTile> probes = {
         {0, 0, "first full tile"},
@@ -961,6 +968,18 @@ int probe()
 
         for (const ProbeLeg& leg : legs) {
             if (group_heads < leg.min_group_heads) continue;
+            // The Lloyd-Max expand gathers its codebook from the head of modeTables: the 16 fp32
+            // e4m3-rounded centroids of TurboQuantLloydMaxTraits. A native launch reads nothing,
+            // so its table stays zero.
+            std::vector<std::uint32_t> mode_words(16, 0);
+            if (leg.lloyd_max) {
+                for (int level = 0; level < 16; ++level) {
+                    const float centroid =
+                        vllm_ascend::turboquant::TurboQuantLloydMaxTraits<
+                            vllm_ascend::turboquant::TurboQuantMode::KV4_FP8>::kCentroids[level];
+                    std::memcpy(&mode_words[static_cast<std::size_t>(level)], &centroid, 4);
+                }
+            }
             for (const ProbeTile& probe_tile : probes) {
                 fd::Launch config =
                     leg.raw_entry
@@ -969,9 +988,15 @@ int probe()
                 config.fused_context_limit = kReproFusedContextLimit;
                 config.probe_page = probe_tile.page;
                 config.probe_tile = probe_tile.tile;
+                config.decode_unpack =
+                    leg.lloyd_max
+                        ? static_cast<std::uint32_t>(
+                              vllm_ascend::turboquant::DecodeUnpack::kLloydMaxLut)
+                        : 0u;
 
                 Guarded keys(key.size()), values(value.size()), scale(scales.size() * 4),
-                    table(f.table.size() * 4), lengths(f.lengths.size() * 4), modes(32),
+                    table(f.table.size() * 4), lengths(f.lengths.size() * 4),
+                    modes(mode_words.size() * 4),
                     workspace(std::size_t(f.requests) * config.heads * kReproSplits * (256 + 16) *
                                   4 +
                               4096),
@@ -996,7 +1021,7 @@ int probe()
                 scale.Upload(scales);
                 table.Upload(f.table);
                 lengths.Upload(f.lengths);
-                modes.Upload(std::vector<std::uint32_t>(8, 0));
+                modes.Upload(mode_words);
                 {
                     namespace fd_tiling = ascend_micro::fused_decode;
                     std::vector<std::uint32_t> image(
@@ -1017,7 +1042,7 @@ int probe()
                             "fused-opt --probe: the isolated descriptor is not the probe asked "
                             "for");
                     const unsigned valid = d->tail_rows ? d->tail_rows : 64u;
-                    std::printf("  probe  gh %2d  %-14s  page %u tile %u  valid %2u  grid %u  %s\n",
+                    std::printf("  probe  gh %2d  %-18s  page %u tile %u  valid %2u  grid %u  %s\n",
                                 group_heads, leg.name, probe_tile.page, probe_tile.tile, valid,
                                 config.grid, probe_tile.note);
                     std::fflush(stdout);
@@ -1071,11 +1096,12 @@ int probe()
 
     std::printf("PASS fused decode opt --probe: %d single-tile launches, context %d, "
                 "group_heads {%d, 16} x {pre-rotated, raw-query on the vector prologue, "
-                "raw-query on the Cube chunk prologue} x {first full tile, a full tile past a "
-                "page boundary, the short last tile}. Every launch is ONE 64-row tile, so no "
-                "oracle: what held is the absence of a device fault, every 0x5A guard band, "
-                "every input allocation byte-identical, a finite output and an untouched "
-                "fused-path workspace. A fault here would have named its own line above.\n",
+                "raw-query on the Cube chunk prologue} x {kNative and Lloyd-Max gather expands} "
+                "x {first full tile, a full tile past a page boundary, the short last tile}. "
+                "Every launch is ONE 64-row tile, so no oracle: what held is the absence of a "
+                "device fault, every 0x5A guard band, every input allocation byte-identical, a "
+                "finite output and an untouched fused-path workspace. A fault here would have "
+                "named its own line above.\n",
                 launches, kProbeContext, kReproGroupHeads);
     return 0;
 }

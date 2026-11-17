@@ -1,9 +1,11 @@
 """TurboQuant PyTorch golden model, standalone copy for dump generation.
 
-Copied from ``vllm-ascend/vllm_ascend/attention/turboquant_dry_run.py`` (the
-``_golden_*`` half of ``TurboQuantOpsAdapter`` plus the codec it builds on),
-stripped of its vLLM backend, torch_npu and the ``torch.ops`` seam so it runs
-on a plain CPU torch. The arithmetic contract is unchanged:
+Copied from ``vllm-ascend/vllm_ascend/attention/turboquant_v1.py`` (the
+``_golden_*`` half of ``TurboQuantOpsAdapter`` plus the :class:`TurboQuantEmulator`
+codec it builds on), stripped of its vLLM backend, torch_npu and the
+``torch.ops`` seam so it runs on a plain CPU torch. ``turboquant_v1.py``
+superseded ``turboquant_dry_run.py``, which no longer exists in vllm-ascend;
+this copy tracks the v1 file. The arithmetic contract is unchanged:
 
     Pi = (H_{D/32} (x) I_32) . diag(pi_signs) . (I_{D/32} (x) H_32)
     Pi[c1*32 + c0][g*32 + i] = H8[c1][g] . pi_signs[g*32 + c0] . H32[c0][i]
@@ -33,10 +35,15 @@ in this repository:
   token, low nibble first; scales slot-major,
   ``slot * NzScaleSlotFloats(H) + kv * H + head``.
 
-The decode reference gathers the NZ cache, dequantises and un-rotates it and
-runs a plain softmax attention in float64 -- the same numbers the fused decode
-computes in fp32 in the rotated basis, because the rotation cancels:
-``Pi q . Pi k = D q . k`` and the two ``1/sqrt(D)`` folds compose to one.
+The decode reference mirrors the v1 backend's golden decode. In
+``turboquant_v1.py`` that fallback gathers the NZ cache, dequantises and
+un-rotates it and hands dense K/V to ``npu_fused_infer_attention_score`` -- the
+un-rotated basis, over torch_npu. This standalone copy cannot call FIA, so
+:func:`decode_reference` attends in the rotated basis instead (``Pi q`` against
+the cache as stored) and un-rotates the context at the end. The two are the
+same numbers up to floating-point summation order, because the rotation
+cancels: ``Pi q . Pi k = D q . k`` and the two ``1/sqrt(D)`` folds compose to
+one -- which is also the basis the fused decode kernel itself contracts in.
 """
 
 from __future__ import annotations
@@ -95,6 +102,24 @@ TURBOQUANT_KERNEL_KV_HEADS: Final[int] = 4
 # (TurboQuantModeTraits<TurboQuantMode::KV4_FP8>::kGain). The fused decode
 # folds it out of its dequantised operands; see decode_reference.
 TURBOQUANT_KV4_FP8_GAIN: Final[float] = 2.9832882881
+
+# The KV4_FP8 Lloyd-Max codebook, from the same header (TurboQuantLloydMaxTraits):
+# Max's 16 levels of a unit Gaussian, each rounded to nearest fp8 e4m3, and the
+# exact midpoints between the rounded centroids. On this codebook a packed
+# nibble n is bin n + 8 and reconstructs as centroid * stored_scale, with the
+# stored scale the row's RMS (times inv_sqrt_len) instead of the absmax power
+# of two -- the thresholds move with the levels, so the writers and the decode
+# agree on the same nearest-neighbour partition.
+TURBOQUANT_LM_CENTROIDS: Final[tuple[float, ...]] = (
+    -2.75, -2.0, -1.625, -1.25, -0.9375, -0.6875, -0.375, -0.125,
+    +0.125, +0.375, +0.6875, +0.9375, +1.25, +1.625, +2.0, +2.75,
+)
+TURBOQUANT_LM_THRESHOLDS: Final[tuple[float, ...]] = (
+    -2.375, -1.8125, -1.4375, -1.09375, -0.8125, -0.53125, -0.25, 0.0,
+    +0.25, +0.53125, +0.8125, +1.09375, +1.4375, +1.8125, +2.375,
+)
+# Guards Sqrt's non-positive-input contract on a zero row, as in the writers.
+TURBOQUANT_LM_EPS: Final[float] = 1e-20
 
 # The Cube's resident h16 sign matrix order and the rotation operand's dtype.
 TURBOQUANT_H16_ORDER: Final[int] = 16
@@ -217,6 +242,76 @@ class TurboQuantEmulator:
         return codes.to(torch.float32) * scales.to(torch.float32).unsqueeze(-1)
 
     @staticmethod
+    def _lloyd_max_sumsq(row: torch.Tensor, fold: str) -> torch.Tensor:
+        """One rotated row's sum of squares, in a writer's own fp32 fold order.
+
+        ``fold="key"`` is the prefill key plane's register butterfly (the four
+        64-lane quarters folded in sequence, then six XOR rounds at strides
+        1, 2, 4, 8, 16, 32 -- the scatter writer's tree); ``fold="value"`` the
+        prefill value plane (pairwise halves throughout); ``fold="butterfly"``
+        is an alias of the key tree. The trees round differently, and a cache
+        written by one and checked against another would flip an occasional bin
+        near a threshold.
+        """
+        acc = (row * row).to(torch.float32).clone()
+        n = acc.numel()
+
+        def halves(acc: torch.Tensor, stop: int) -> torch.Tensor:
+            width = acc.numel()
+            while width > stop:
+                width //= 2
+                acc = acc[:width] + acc[width : 2 * width]
+            return acc
+
+        if fold == "value":
+            acc = halves(acc, 1)
+        elif fold in ("key", "butterfly"):
+            quarters = [acc[q * 64 : (q + 1) * 64] for q in range(n // 64)]
+            acc = ((quarters[0] + quarters[1]) + quarters[2]) + quarters[3]
+            for stride in (1, 2, 4, 8, 16, 32):
+                prev = acc.clone()
+                idx = torch.arange(64) ^ stride
+                acc = prev + prev[idx]
+        else:
+            raise ValueError(f"unknown Lloyd-Max fold {fold!r}")
+        return acc[0]
+
+    def quantize_lloyd_max(
+        self, rotated: torch.Tensor, fold: str = "key"
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        """Dynamic per-row Lloyd-Max quantisation of a rotated panel.
+
+        ``rotated`` is ``[..., D]``; returns ``(codes, scales)`` with codes INT8
+        bin indices in ``[-8, 7]`` and one fp32 scale per row:
+        ``sigma_e = sqrt(sumsq + eps) * inv_sqrt_len`` (the row's RMS),
+        ``u = y * (-1 / sigma_e)``, and a bin counts the codebook thresholds
+        ``u`` exceeds -- the writers' own fp32 sequence, so the result is
+        bit-comparable against them when ``fold`` names the writer's tree.
+        """
+        y = rotated.to(torch.float32)
+        thresholds = torch.tensor(TURBOQUANT_LM_THRESHOLDS, dtype=torch.float32)
+        flat = y.reshape(-1, y.shape[-1])
+        codes = torch.empty_like(flat, dtype=torch.int8)
+        scales = torch.empty(flat.shape[0], dtype=torch.float32)
+        for r in range(flat.shape[0]):
+            row = flat[r]
+            sumsq = self._lloyd_max_sumsq(row, fold)
+            sigma_e = torch.sqrt(sumsq + TURBOQUANT_LM_EPS) * self.inv_sqrt_len
+            u = row * (-1.0 / sigma_e)
+            # The writers count one FP32 Adds per threshold and its sign bit:
+            # bin += (threshold + u) < 0, initialised at -8.
+            margins = thresholds.unsqueeze(0) + u.unsqueeze(-1)
+            bins = (margins < 0).sum(dim=-1).to(torch.int32) - 8
+            codes[r] = bins.to(torch.int8)
+            scales[r] = sigma_e * self.inv_sqrt_len
+        return codes.reshape(y.shape), scales
+
+    def dequantize_lloyd_max(self, codes: torch.Tensor, scales: torch.Tensor) -> torch.Tensor:
+        """``centroid[codes + 8] * scales`` in fp32: the codebook reconstruction."""
+        centroids = torch.tensor(TURBOQUANT_LM_CENTROIDS, dtype=torch.float32)
+        return centroids[(codes.to(torch.int16) + 8).long()] * scales.to(torch.float32).unsqueeze(-1)
+
+    @staticmethod
     def pack(codes: torch.Tensor) -> torch.Tensor:
         """Pack INT4 codes two to a byte along the last axis, low nibble first."""
         if codes.shape[-1] % TURBOQUANT_PACK_FACTOR:
@@ -235,6 +330,17 @@ class TurboQuantEmulator:
         pair = torch.stack((low, high), dim=-1)
         signed = torch.where(pair >= 8, pair - TURBOQUANT_NIBBLE_LEVELS, pair)
         return signed.reshape(*packed.shape[:-1], packed.shape[-1] * TURBOQUANT_PACK_FACTOR).to(torch.int8)
+
+    # -- the composite round trip, for tests and offline reproduction -------
+
+    def encode(self, x: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+        """``x -> (packed bytes, fp32 scales)``: rotate, quantise, pack."""
+        codes, scales = self.quantize(self.rotate(x))
+        return self.pack(codes), scales
+
+    def decode(self, packed: torch.Tensor, scales: torch.Tensor) -> torch.Tensor:
+        """``(packed bytes, fp32 scales) -> x_hat``: unpack, dequantise, un-rotate."""
+        return self.inverse_rotate(self.dequantize(self.unpack(packed), scales))
 
 
 # ---------------------------------------------------------------------------
@@ -455,6 +561,7 @@ def decode_reference(
     block_size: int,
     scale: float,
     kernel_convention: bool = False,
+    lloyd_max: bool = False,
 ) -> tuple[torch.Tensor, torch.Tensor]:
     """The fused decode's gold output, computed in float64.
 
@@ -487,9 +594,19 @@ def decode_reference(
     rotation = emulator.rotation64()
     inv_sqrt = emulator.inv_sqrt_len
 
-    def dense(codes: torch.Tensor, scales: torch.Tensor) -> torch.Tensor:
-        rotated = (codes.to(torch.float64) + bias) * scales.to(torch.float64).unsqueeze(-1) / gain
-        return rotated
+    if lloyd_max:
+        # The codebook cache: a nibble is a bin index and reconstructs as
+        # centroid[bin] * stored_scale. No bias, no gain -- the centroid IS the
+        # reconstruction, which is also the fused decode's kLloydMaxLut expand.
+        centroids = torch.tensor(TURBOQUANT_LM_CENTROIDS, dtype=torch.float64)
+
+        def dense(codes: torch.Tensor, scales: torch.Tensor) -> torch.Tensor:
+            return centroids[(codes.to(torch.int16) + 8).long()] * scales.to(torch.float64).unsqueeze(-1)
+    else:
+
+        def dense(codes: torch.Tensor, scales: torch.Tensor) -> torch.Tensor:
+            rotated = (codes.to(torch.float64) + bias) * scales.to(torch.float64).unsqueeze(-1) / gain
+            return rotated
 
     dense_key = dense(codes_k, scales_k)
     dense_value = dense(codes_v, scales_v)

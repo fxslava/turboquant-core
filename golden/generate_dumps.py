@@ -1,4 +1,4 @@
-"""Generate synthetic golden dumps for the CAModel comparison tests.
+"""Generate the golden dumps for the CAModel comparison tests.
 
 For every kernel in this repository this writes a case directory under
 ``golden/dumps/`` holding a line-based ``manifest.txt`` and one raw
@@ -14,13 +14,24 @@ little-endian ``.bin`` per tensor:
                     NZ-tiled cache written by this golden model, one aligned
                     page and one ragged 8-row tail. Expected fp32 output in
                     the model basis (stage 1) and the rotated basis (stage 0).
+* ``decode_serving_ctx272/`` and ``decode_serving_ctx316/`` -- the serving
+                    geometry (group_heads 6) with ragged tails, same harness.
+* ``decode_real_ctx{64,128,200,1055}/`` -- the REAL serving decode unit test
+                    of vllm-ascend (test_turboquant_live_write_npu.py section
+                    5): group_heads 6, randn bf16 activations and query, the
+                    production softmax scale, the engine's cache geometry
+                    (6496 blocks, block table [1, 512]), the cache planes
+                    stored sparsely as a fill word plus the live pages.
 
-All activations are small integers, exact in BF16, and every rotation
-intermediate is an exact integer in FP32 (|Pi x| <= 256 * 128 < 2^24), so the
-packed planes and scale floats of the writers are BIT-comparable against the
-kernels -- there is no tolerance anywhere in an ingestion comparison. The
-decode's fp32 accumulation is compared against this model's float64 reference
-with a bf16 ULP budget, the one place a tolerance is honest.
+The prefill, scatter and synthetic decode activations are small integers, exact
+in BF16, and every rotation intermediate is an exact integer in FP32
+(|Pi x| <= 256 * 128 < 2^24), so the packed planes and scale floats of the
+writers are BIT-comparable against the kernels -- there is no tolerance
+anywhere in an ingestion comparison. The decode's fp32 accumulation is compared
+against this model's float64 reference with a bf16 ULP budget, the one place a
+tolerance is honest. The real decode cases are random bf16 instead: nothing
+there is bit-exact by construction, and the C++ oracle and this model agree as
+two fp64 references of the same case.
 
 Run:  python golden/generate_dumps.py [output_root]     (default golden/dumps)
 """
@@ -29,6 +40,7 @@ from __future__ import annotations
 
 import json
 import math
+import struct
 import sys
 from pathlib import Path
 
@@ -149,6 +161,39 @@ class DumpWriter:
         path.write_bytes(raw)
         self.line("tensor", name, dtype, flat.numel(), path.name)
 
+    def sparse_tensor(
+        self,
+        name: str,
+        tensor: torch.Tensor,
+        dtype: str,
+        total_count: int,
+        segments: list[tuple[int, int]],
+        fill_word: int = GUARD_WORD,
+    ) -> None:
+        """A tensor stored as a fill word plus its live byte segments.
+
+        ``tensor`` is the COMPACT image holding exactly the segments' bytes;
+        ``total_count`` is the element count of the full allocation the reader
+        materialises (fill word everywhere else). ``segments`` is a list of
+        ``(byte_offset, byte_count)`` into that full image. The engine-scale
+        caches of the real decode cases (6496 blocks, ~400 MB a plane, almost
+        all guard fill) would otherwise make the dump untractably large.
+        """
+        raw = tensor.contiguous().reshape(-1).numpy().tobytes()
+        index = bytearray()
+        payload = bytearray()
+        for offset, count in segments:
+            index += struct.pack("<QQ", offset, count)
+            payload += raw[offset : offset + count]
+        index_path = self.case_dir / f"{name}.index.bin"
+        data_path = self.case_dir / f"{name}.bin"
+        index_path.write_bytes(bytes(index))
+        data_path.write_bytes(bytes(payload))
+        self.line(
+            "sparse_tensor", name, dtype, total_count, f"{fill_word:08x}",
+            len(segments), index_path.name, data_path.name,
+        )
+
     def write(self, kernel: str) -> None:
         manifest = self.case_dir / "manifest.txt"
         header = [f"kernel {kernel}"]
@@ -174,7 +219,10 @@ def poison_floats(count: int) -> torch.Tensor:
     return guard_floats(count, POISON_WORD)
 
 
-def audit_quantisation(tag: str, codes: torch.Tensor, scales: torch.Tensor) -> None:
+def audit_quantisation(
+    tag: str, codes: torch.Tensor, scales: torch.Tensor,
+    require_zero_rows: bool = True, min_exponents: int = 3,
+) -> None:
     """Fail the generation if the fixture does not exercise the codec."""
     covered = torch.unique(codes).numel()
     clamped = int((codes == 7).sum())
@@ -188,19 +236,20 @@ def audit_quantisation(tag: str, codes: torch.Tensor, scales: torch.Tensor) -> N
         raise ValueError(f"{tag}: the fixture does not exercise all sixteen nibbles")
     if clamped == 0:
         raise ValueError(f"{tag}: the INT4 upper clamp is never taken")
-    if zero_rows == 0:
+    if require_zero_rows and zero_rows == 0:
         raise ValueError(f"{tag}: the absmax == 0 branch is never taken")
-    if exponents < 3:
+    if exponents < min_exponents:
         raise ValueError(f"{tag}: the scale exponent barely varies")
 
 
 def quantise_planes(
-    emulator: TurboQuantEmulator, key: torch.Tensor, value: torch.Tensor
+    emulator: TurboQuantEmulator, key: torch.Tensor, value: torch.Tensor,
+    require_zero_rows: bool = True, min_exponents: int = 3,
 ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
     codes_k, scales_k = emulator.quantize(emulator.rotate(key))
     codes_v, scales_v = emulator.quantize(emulator.rotate(value))
-    audit_quantisation("key", codes_k, scales_k)
-    audit_quantisation("value", codes_v, scales_v)
+    audit_quantisation("key", codes_k, scales_k, require_zero_rows, min_exponents)
+    audit_quantisation("value", codes_v, scales_v, require_zero_rows, min_exponents)
     return codes_k, scales_k, codes_v, scales_v
 
 
@@ -412,7 +461,7 @@ def generate_decode(root: Path, emulator: TurboQuantEmulator, context: int, case
         ("requests", requests), ("context", context), ("num_heads", num_heads),
         ("num_kv_heads", HEADS), ("head_size", HEAD_SIZE), ("block_size", BLOCK_SIZE),
         ("max_blocks", pages), ("physical_pages", physical_pages),
-        ("splits", 1), ("heads_per_task", group_heads),
+        ("splits", 1), ("heads_per_task", group_heads), ("integer_fixture", 1),
     ):
         dump.line("geom", key_, val)
     dump.line("float", "scale", repr(softmax_scale))
@@ -440,6 +489,141 @@ def generate_decode(root: Path, emulator: TurboQuantEmulator, context: int, case
           f"physical_pages {physical_pages}")
 
 
+# ---------------------------------------------------------------------------
+# The real decode cases: the serving geometry of the vllm-ascend unit test
+# ---------------------------------------------------------------------------
+#
+# tests/ut/attention/test_turboquant_live_write_npu.py section 5 is THE real
+# decode unit test: batch 1, 24 query heads over 4 KV heads (group_heads 6),
+# head_size 256, block_size 128, randn activations and query in bf16 -- not the
+# integer fixtures above -- at the production softmax scale 1/sqrt(256), over
+# contexts with ragged tails (64, 128, 200, 1055). The cache geometry is the
+# engine's: 6496 blocks and a 512-wide block table, so the decode's tile cursor
+# and the descriptor stride see real launch parameters. The data reproduces
+# the unit test's exactly: one torch.Generator per seed, key then value from
+# 6000+context, the query from 7000+context.
+#
+# The three cache planes are stored SPARSELY (a fill word plus the live pages):
+# 6496 blocks is ~400 MB a plane, of which at most nine pages are live, and the
+# NZ address functions depend only on the slot -- so a compact image of the
+# live pages carries every byte the readers will touch, and the reader
+# materialises the full allocation around it.
+
+REAL_NUM_BLOCKS = 6496
+REAL_MAX_BLOCKS = 512
+REAL_GROUP_HEADS = 6
+# The production softmax scale, 1/sqrt(head_size). Numerically identical to
+# inv_sqrt_len at head_size 256, which is why the two float lines agree.
+REAL_SOFTMAX_SCALE = 1.0 / math.sqrt(HEAD_SIZE)
+
+
+def generate_decode_real(root: Path, emulator: TurboQuantEmulator, context: int, case: str) -> None:
+    """The real serving decode case: random bf16 data, engine cache geometry.
+
+    Nothing here is integer-valued, so nothing in the comparison is bit-exact
+    by construction: the C++ oracle and this model both compute the fp64
+    reference and agree to within fp64 summation order, and the kernel is held
+    to its row-relative budget (the fp8 e4m3 operand rounding is its own).
+    """
+    requests = 1
+    num_heads = HEADS * REAL_GROUP_HEADS
+    pages = (context + BLOCK_SIZE - 1) // BLOCK_SIZE
+
+    # The unit test's exact data: one generator per seed, key then value.
+    kv_generator = torch.Generator().manual_seed(6000 + context)
+    key = torch.randn((context, HEADS, HEAD_SIZE), generator=kv_generator, dtype=torch.float32)
+    value = torch.randn((context, HEADS, HEAD_SIZE), generator=kv_generator, dtype=torch.float32)
+    # The writer quantises the bf16-widened activation, not the fp32 ideal.
+    codes_k, scales_k, codes_v, scales_v = quantise_planes(
+        emulator,
+        key.to(torch.bfloat16).to(torch.float32),
+        value.to(torch.bfloat16).to(torch.float32),
+        # Random data has no all-zero rows, and Gaussian rows cluster their
+        # absmax into a couple of scale exponents -- both synthetic-fixture
+        # requirements relaxed, the codec coverage requirements kept.
+        require_zero_rows=False,
+        min_exponents=2,
+    )
+
+    # A compact cache of exactly the live pages. The NZ addresses of slots
+    # [0, context) are functions of the slot alone, so these bytes are the
+    # live-page segments of the full 6496-block allocation, unchanged.
+    packed_bytes = HEAD_SIZE // 2
+    plane_bytes = pages * BLOCK_SIZE * HEADS * packed_bytes
+    nz_key = torch.zeros(plane_bytes, dtype=torch.int8)
+    nz_value = torch.zeros(plane_bytes, dtype=torch.int8)
+    nz_scale = torch.zeros(pages * BLOCK_SIZE * nz_scale_slot_floats(HEADS), dtype=torch.float32)
+    slots = torch.arange(context, dtype=torch.int64)
+    write_nz_cache(
+        codes_k, codes_v, scales_k, scales_v, slots,
+        nz_key, nz_value, nz_scale, HEADS, HEAD_SIZE,
+    )
+
+    query_generator = torch.Generator().manual_seed(7000 + context)
+    query = torch.randn((requests, num_heads, HEAD_SIZE), generator=query_generator, dtype=torch.float32)
+    query_bf16 = query.to(torch.bfloat16)
+    query_rot = emulator.rotate(query_bf16.to(torch.float32)) * emulator.inv_sqrt_len
+
+    block_tables = torch.arange(pages, dtype=torch.int64).unsqueeze(0)
+    context_lens = torch.tensor([context], dtype=torch.int32)
+    expected1, expected0 = decode_reference(
+        query_bf16.to(torch.float32), nz_key, nz_value, nz_scale, block_tables, context_lens,
+        emulator, num_heads, HEADS, BLOCK_SIZE, REAL_SOFTMAX_SCALE,
+    )
+    kernel1, kernel0 = decode_reference(
+        query_bf16.to(torch.float32), nz_key, nz_value, nz_scale, block_tables, context_lens,
+        emulator, num_heads, HEADS, BLOCK_SIZE, REAL_SOFTMAX_SCALE, kernel_convention=True,
+    )
+
+    page_bytes = BLOCK_SIZE * HEADS * packed_bytes
+    scale_page_floats = BLOCK_SIZE * nz_scale_slot_floats(HEADS)
+    packed_segments = [(p * page_bytes, page_bytes) for p in range(pages)]
+    scale_segments = [(p * scale_page_floats * 4, scale_page_floats * 4) for p in range(pages)]
+
+    padded_table = torch.full((REAL_MAX_BLOCKS,), -1, dtype=torch.int32)
+    padded_table[:pages] = torch.arange(pages, dtype=torch.int32)
+
+    dump = DumpWriter(root / case)
+    dump.comment(f"REAL serving decode: batch 1, {num_heads} query heads ({HEADS} KV x "
+                 f"{REAL_GROUP_HEADS}), context {context}, {pages} page(s), randn bf16 data.")
+    dump.comment(f"The vllm-ascend unit test's exact case (test_turboquant_live_write_npu.py "
+                 f"section 5, seeds 6000/7000+context), at the engine's cache geometry: "
+                 f"{REAL_NUM_BLOCKS} blocks, block table [1, {REAL_MAX_BLOCKS}].")
+    dump.comment("The cache planes are sparse: guard fill plus the live pages' segments; "
+                 "the reader materialises the full allocation.")
+    for key_, val in (
+        ("requests", requests), ("context", context), ("num_heads", num_heads),
+        ("num_kv_heads", HEADS), ("head_size", HEAD_SIZE), ("block_size", BLOCK_SIZE),
+        ("max_blocks", REAL_MAX_BLOCKS), ("physical_pages", REAL_NUM_BLOCKS),
+        ("splits", 1), ("heads_per_task", REAL_GROUP_HEADS), ("integer_fixture", 0),
+    ):
+        dump.line("geom", key_, val)
+    dump.line("float", "scale", repr(REAL_SOFTMAX_SCALE))
+    dump.line("float", "inv_sqrt_len", repr(emulator.inv_sqrt_len))
+    dump.tensor("raw_query", query_bf16.reshape(-1).view(torch.uint16), "u16")
+    dump.tensor("query_rot", query_rot, "f32")
+    dump.sparse_tensor("key_cache", nz_key.view(torch.uint8), "u8",
+                       REAL_NUM_BLOCKS * page_bytes, packed_segments)
+    dump.sparse_tensor("value_cache", nz_value.view(torch.uint8), "u8",
+                       REAL_NUM_BLOCKS * page_bytes, packed_segments)
+    dump.sparse_tensor("scale_cache", nz_scale, "f32",
+                       REAL_NUM_BLOCKS * scale_page_floats, scale_segments)
+    dump.tensor("block_table", padded_table, "i32")
+    dump.tensor("context_lens", context_lens, "i32")
+    dump.tensor("pi_signs", emulator.pi_signs, "f32")
+    dump.tensor("h16", h16_operand().view(torch.uint16), "u16")
+    dump.tensor("rot_tables", build_codec_tables(emulator).view(torch.uint16), "u16")
+    dump.tensor("mode_tables", torch.zeros(8, dtype=torch.int32), "i32")
+    dump.tensor("expected_stage1", expected1, "f32")
+    dump.tensor("expected_stage0", expected0, "f32")
+    dump.tensor("kernel_stage1", kernel1, "f32")
+    dump.tensor("kernel_stage0", kernel0, "f32")
+    dump.write("decode")
+    tail = context % 64
+    print(f"  {case}: context {context}, {pages} page(s), tail {tail or 64} rows, "
+          f"{REAL_NUM_BLOCKS} blocks (sparse), table [1, {REAL_MAX_BLOCKS}]")
+
+
 def main() -> None:
     root = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parent / "dumps"
     torch.manual_seed(0)  # belt and braces; the fixtures are LCG-driven anyway
@@ -453,6 +637,10 @@ def main() -> None:
     # vllm-ascend backend's decode trace faulted on, through the same harness.
     generate_decode(root, emulator, 272, "decode_serving_ctx272", group_heads=6)
     generate_decode(root, emulator, 316, "decode_serving_ctx316", group_heads=6)
+    # The REAL decode unit test's cases: the same serving geometry over random
+    # bf16 data at the engine's cache allocation, sparse-stored.
+    for context in (64, 128, 200, 1055):
+        generate_decode_real(root, emulator, context, f"decode_real_ctx{context}")
     meta = {
         "head_size": HEAD_SIZE,
         "num_kv_heads": HEADS,

@@ -260,7 +260,8 @@ extern "C" void launch_turboquant_reshape_and_cache_bf16(
     const std::int32_t* slot_mapping, const float* pi_signs,
     const std::int32_t* tables, std::uint32_t num_tokens,
     std::uint32_t num_kv_heads, std::uint32_t head_size, std::uint32_t block_size,
-    std::uint32_t num_blocks, std::uint32_t tokens_per_core, float inv_sqrt_len);
+    std::uint32_t num_blocks, std::uint32_t tokens_per_core, float inv_sqrt_len,
+    std::uint32_t quant_mode);
 
 namespace golden_dump {
 
@@ -321,7 +322,7 @@ int run_case(const std::string& case_dir)
         static_cast<const std::int32_t*>(slot_mapping.payload()),
         static_cast<const float*>(pi_signs.payload()),
         static_cast<const std::int32_t*>(tables.payload()), tokens, heads, dim, page, blocks,
-        share, inv_sqrt_len);
+        share, inv_sqrt_len, /*quant_mode=*/0u);
     camodel::check(aclrtSynchronizeStream(session.stream), "aclrtSynchronizeStream");
 
     key_cache.download();
@@ -388,7 +389,7 @@ int run_case(const std::string& case_dir)
 extern "C" void launch_turboquant_reshape_scatter_aiv(
     void*, std::uint32_t, std::uint16_t*, std::uint16_t*, std::int8_t*, std::int8_t*, float*,
     std::int32_t*, float*, std::int32_t*, std::uint32_t, std::uint32_t, std::uint32_t,
-    std::uint32_t, std::uint32_t, std::uint32_t, std::uint32_t, float);
+    std::uint32_t, std::uint32_t, std::uint32_t, std::uint32_t, float, std::uint32_t);
 
 namespace golden_dump {
 
@@ -465,7 +466,8 @@ int run_case(const std::string& case_dir)
             static_cast<float*>(scale_cache.payload()),
             static_cast<std::int32_t*>(slots.payload()),
             static_cast<float*>(pi_signs.payload()), static_cast<std::int32_t*>(cu.payload()),
-            requests, heads, dim, page, blocks, item_begin, item_count, inv_sqrt_len);
+            requests, heads, dim, page, blocks, item_begin, item_count, inv_sqrt_len,
+            /*quant_mode=*/0u);
         camodel::check(aclrtSynchronizeStream(session.stream), "aclrtSynchronizeStream");
 
         key_cache.download();
@@ -529,6 +531,9 @@ fd::Launch derive_launch(const DecodeGeometry& g, bool raw_entry, unsigned outpu
     config.heads = g.heads;
     config.block_size = g.page;
     config.max_blocks = g.max_blocks;
+    // DIRTY-DATA (D1/N3): the cache the dump's table indexes holds this many physical pages;
+    // the device bounds every table entry against it.
+    config.num_blocks = g.physical_pages;
     config.splits = g.splits;
     config.heads_per_task = g.heads_per_task;
     config.fused_context_limit = 4096;
