@@ -61,7 +61,7 @@ function(add_turboquant_sim_targets)
   set_property(SOURCE src/decode/turboquant_fused_decode.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/decode/turboquant_fused_decode.cpp)
   ascendc_compile_definitions(tq_decode_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_decode_sim PRIVATE
-      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS} ${TQ_REDUCE_DEFINES}
+      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS} ${TQ_REDUCE_DEFINES} ${TQ_TELEMETRY_DEFINES}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH
       "-I${SRC}/src/decode" "-I${SRC}/src/common" "-I${SRC}/include")
 
@@ -72,7 +72,7 @@ function(add_turboquant_sim_targets)
   function(add_sim_runner name source)
     add_executable(${name} EXCLUDE_FROM_ALL "${source}")
     target_include_directories(${name} PRIVATE "${SRC}" "${ASCEND_HOME_PATH}/include")
-    target_compile_options(${name} PRIVATE -std=c++17 -Wall -Wextra -Werror)
+    target_compile_options(${name} PRIVATE -std=c++17 -Wall -Wextra -Werror ${TQ_TELEMETRY_DEFINES})
     target_link_libraries(${name} PRIVATE ${ARGN} turboquant_host ascendcl
         "${SIM_LIB_DIR}/libnpu_drv_camodel.so"
         "${SIM_LIB_DIR}/libmodel_top.so")

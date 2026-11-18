@@ -35,6 +35,63 @@ struct NativeCubeSoftmaxEngine {
     float                         operand_max, epsilon;
     AscendC::BinaryRepeatParams   by_vector, by_block;
 
+    // The attention telemetry probe (ASCEND_TQ_DECODE_TELEMETRY, turboquant_layout.h). The
+    // caller carves this arena out of a buffer that is dead for the whole tile loop and fills
+    // probe_pos/probe_page with the sentinel and probe_ramp with 0..63 before the first tile;
+    // probe_context_base is the context index of this tile's first row and probe_page_id the
+    // physical cache page it was read from. argmax_probe() runs between update_max_and_alpha
+    // and exponentiate_scores (vector_online_softmax_probabilities_probed), the only point
+    // where the finished logits, their per-head maxima and the PRE-commit running maxima are
+    // all live. With the macro off the phase compiles to nothing and the operands are unread.
+    AscendC::LocalTensor<float>   probe_pos, probe_page, probe_ramp;
+    AscendC::LocalTensor<float>   probe_bc, probe_diff, probe_sel;
+    AscendC::LocalTensor<float>   probe_stage, probe_cand_pos, probe_cand_page;
+    AscendC::LocalTensor<float>   probe_pred;  // 32 bytes, reinterpreted as the predicate
+    std::uint32_t                 probe_context_base = 0, probe_page_id = 0;
+
+    // Per-head running argmax fold. A head "improved" this tile when tile_max > run_max
+    // (strictly: ties keep the EARLIER position, within a tile by the MIN reduce over the
+    // ascending index ramp and across tiles by the strict comparison). The candidate position
+    // is the tile's context base plus the first lane whose logit equals the tile maximum --
+    // score == tile_max exactly, because the maximum is one of the lanes and x - x is +0.
+    // Everything is vector instructions over replicated head blocks; no scalar readback, no
+    // events, no GM. probe_bc is reused for both per-head broadcasts; probe_diff holds the
+    // row difference first and the wide improvement test after the loop.
+    __aicore__ inline void argmax_probe()
+    {
+#if defined(ASCEND_TQ_DECODE_TELEMETRY) && ASCEND_TQ_DECODE_TELEMETRY
+        const std::uint32_t lanes = heads * kStateLanes;
+        const AscendC::LocalTensor<std::uint8_t> predicate =
+            probe_pred.template ReinterpretCast<std::uint8_t>();
+        for (std::uint32_t head = 0; head < heads; ++head) {
+            AscendC::Brcb(probe_bc, tile_max[head * kStateLanes], 1, {1, 8});
+            AscendC::Sub(probe_diff, scores[head * kCubeTileKeys], probe_bc,
+                         std::uint64_t{kCubeTileKeys});
+            AscendC::Compares(predicate, probe_diff, 0.0f, AscendC::CMPMODE::EQ,
+                              std::uint32_t{kCubeTileKeys});
+            AscendC::Select(probe_sel, predicate, probe_ramp,
+                            static_cast<float>(kCubeTileKeys),
+                            AscendC::SELMODE::VSEL_TENSOR_SCALAR_MODE,
+                            std::uint32_t{kCubeTileKeys});
+            AscendC::ReduceRepeat<AscendC::ReduceType::MIN>(
+                probe_stage, probe_sel, static_cast<std::int32_t>(kCubeTileKeys), 1, 1, 1,
+                static_cast<std::int32_t>(kCubeTileBlocks), AscendC::ReduceOrder::ORDER_ONLY_VALUE);
+            AscendC::Brcb(probe_bc, probe_stage, 1, {1, 8});
+            AscendC::Adds(probe_cand_pos[head * kStateLanes], probe_bc, 0.0f,
+                          std::uint64_t{kStateLanes});
+        }
+        AscendC::Adds(probe_cand_pos, probe_cand_pos, static_cast<float>(probe_context_base),
+                      lanes);
+        AscendC::Sub(probe_diff, tile_max, run_max, lanes);
+        AscendC::Compares(predicate, probe_diff, 0.0f, AscendC::CMPMODE::GT, lanes);
+        AscendC::Select(probe_pos, predicate, probe_cand_pos, probe_pos,
+                        AscendC::SELMODE::VSEL_TENSOR_TENSOR_MODE, lanes);
+        AscendC::Duplicate(probe_cand_page, static_cast<float>(probe_page_id), lanes);
+        AscendC::Select(probe_page, predicate, probe_cand_page, probe_page,
+                        AscendC::SELMODE::VSEL_TENSOR_TENSOR_MODE, lanes);
+#endif
+    }
+
     template <AscendC::ReduceType Kind>
     __aicore__ inline void reduce(const AscendC::LocalTensor<float>& dst)
     {

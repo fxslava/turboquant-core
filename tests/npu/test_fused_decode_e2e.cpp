@@ -57,6 +57,7 @@
 #include "../common/device_timer.hpp"
 #include "../common/fused_decode_fixture.hpp"
 #include "../../include/turboquant/turboquant_splitk_contract.hpp"
+#include "../../src/host/turboquant_telemetry.h"
 
 #include <algorithm>
 #include <charconv>

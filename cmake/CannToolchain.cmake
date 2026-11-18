@@ -37,6 +37,19 @@ if(TQ_GEMM_REDUCE)
   set(TQ_REDUCE_DEFINES -DASCEND_TQ_FUSED_DECODE_GEMM_REDUCE=1)
 endif()
 
+# The fused decode's attention telemetry probe. ON by default: the kernel records the
+# per-(token, head) argmax context position and its logical page into the Split-K workspace's
+# dead lanes (include/turboquant/turboquant_layout.h), piggybacking the existing buffer, and
+# the runners' workspace contract verifies the records instead of requiring a pristine
+# workspace. The define goes to BOTH the kernel legs and the runners so a build never checks
+# for records the kernel was not compiled to write; layout.h carries the same ON default so a
+# downstream build without this option (the torch binding) gets the probe compiled in too.
+option(TQ_DECODE_TELEMETRY "Record the per-(token, head) attention argmax into the Split-K workspace" ON)
+set(TQ_TELEMETRY_DEFINES "")
+if(NOT TQ_DECODE_TELEMETRY)
+  set(TQ_TELEMETRY_DEFINES -DASCEND_TQ_DECODE_TELEMETRY=0)
+endif()
+
 # CANN's legacy pipeline expands each ascendc_library into nested ExternalProjects -- precompile,
 # preprocess, aic_device, aiv_device and host -- so one kernel is compiled five to seven times and
 # every one of those projects carries BUILD_ALWAYS. A compiler cache is the difference between

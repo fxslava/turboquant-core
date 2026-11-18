@@ -113,6 +113,12 @@ public:
         maxBlocksPerSeq_ = maxBlocksPerSeq;
         numSplits_ = numSplits;
         fusedContextLimit_ = fusedContextLimit;
+        // log2(blockSize): the probe's tile-to-context arithmetic is shift-only, like the
+        // cursor's; valid_launch has already refused a non-power-of-two page.
+        blockSizeShift_ = 0;
+        while ((1u << blockSizeShift_) < blockSize) {
+            ++blockSizeShift_;
+        }
         // DIRTY-DATA (D1/N3): the physical page count of the cache planes. Every block-table
         // entry the tile cursor turns into a GM read is bound-checked against it; see
         // PrefetchBlockTable. 0 is refused by the launcher, never treated as "unbounded".
@@ -272,6 +278,10 @@ private:
         uint32_t tileOrigin = 0;
         uint32_t pageShift = 0;
         uint32_t pageMask = 0;
+        // The split's first logical page in the token's block-table row. The telemetry probe
+        // turns a tile's (page, row base) back into a context position and a logical page
+        // index with it -- the same arithmetic the host dump mirrors.
+        uint32_t blockStart = 0;
         uint32_t tile = 0;
     };
 
@@ -322,18 +332,29 @@ private:
             task.tileOrigin = tileOrigin;
             task.pageShift = pageShift;
             task.pageMask = (1u << pageShift) - 1u;
+            task.blockStart = blockStart;
 
             if ASCEND_IS_AIV {
                 vector_.StageQuery(mm_, token, kvHead, heads);
                 if (heads.mine > 0 && tailRows != 0) {
                     vector_.ComputeTailMask(tailRows);
                 }
+                // Arm the probe AFTER StageQuery: the arena is carved from the buffer
+                // StageQuery stages the query through, so arming earlier would be clobbered.
+                vector_.BeginArgmaxProbe(heads);
             }
             if ASCEND_IS_AIV {
                 RunVectorPipeline(task, heads);
             }
             if ASCEND_IS_AIC {
                 RunCubePipeline(task, heads.rows);
+            }
+        } else {
+            if ASCEND_IS_AIV {
+                // A worker with no live tiles never enters the pipeline, but its
+                // StageTaskOutput still publishes the probe record: arm the sentinels so the
+                // host reads "no record" rather than a stale arena.
+                vector_.BeginArgmaxProbe(heads);
             }
         }
 
@@ -538,8 +559,18 @@ private:
         const uint32_t tile = task.consumeTile;
         ++task.consumeTile;
         const uint32_t valid = tile == task.lastTile ? task.lastValid : kCubeTileRows;
+        // The tile's place in the token's context: its absolute index inside the split span,
+        // decomposed the way ReadPipelineTile decomposes it. contextBase is the context index
+        // of the tile's first row; logicalPage is its logical page in the token's block-table
+        // row (the host maps that to the physical page the row was read from).
+        const uint32_t absolute = task.tileOrigin + tile;
+        const uint32_t contextBase =
+            ((task.blockStart + (absolute >> task.pageShift)) << blockSizeShift_) +
+            ((absolute & task.pageMask) << fd::kDecodeTileRowsShift);
+        const uint32_t logicalPage = task.blockStart + (absolute >> task.pageShift);
         AscendC::CrossCoreWaitFlag(static_cast<uint16_t>(kOptFlagScoresReady + kWindow));
-        vector_.ComputeSoftmaxAndStageProbs(mm_, valid, heads, kSlot, kWindow);
+        vector_.ComputeSoftmaxAndStageProbs(mm_, valid, heads, kSlot, kWindow, contextBase,
+                                            logicalPage);
         vllm_ascend::turboquant::SyncEvent<AscendC::HardEvent::MTE3_S>();
         AscendC::CrossCoreSetFlag<kSubBlockSyncMode, PIPE_MTE3>(static_cast<uint16_t>(kOptFlagProbsReady));
     }
@@ -654,6 +685,7 @@ private:
     uint32_t chunksPerGroup_ = 1;
     uint32_t headSize_ = 0;
     uint32_t blockSize_ = 0;
+    uint32_t blockSizeShift_ = 0;
     uint32_t maxBlocksPerSeq_ = 0;
     uint32_t numSplits_ = 1;
     uint32_t fusedContextLimit_ = 0;
