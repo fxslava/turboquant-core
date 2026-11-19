@@ -106,6 +106,34 @@ function(add_turboquant_sim_targets)
       tq_prefill_nz_sim)
   add_sim_runner(test_fused_decode_e2e_sim tests/npu/test_fused_decode_e2e.cpp tq_decode_sim)
 
+  set(TQ_CYCLE_MODEL_DIR "${ASCEND_HOME_PATH}/x86_64-linux/simulator/dav_3510/camodel")
+  ascendc_library(tq_qwen35_reduce_canary_sim SHARED tests/npu/qwen35_reduce_canary.cpp)
+  ascendc_compile_definitions(tq_qwen35_reduce_canary_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
+  ascendc_compile_options(tq_qwen35_reduce_canary_sim PRIVATE
+      -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -forward-options-to-host-compiler -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -DASCEND_MICRO_CANN_LAUNCH)
+  tq_scope_cann_wrapper_warnings(tq_qwen35_reduce_canary_sim)
+  foreach(canary IN ITEMS bench_qwen35_decode_sim test_qwen35_reduce_canary_sim)
+    if(canary STREQUAL "bench_qwen35_decode_sim")
+      set(canary_source tests/npu/bench_qwen35_decode.cpp)
+      set(canary_kernel tq_decode_sim)
+    else()
+      set(canary_source tests/npu/test_qwen35_reduce_canary.cpp)
+      set(canary_kernel tq_qwen35_reduce_canary_sim)
+    endif()
+    add_executable(${canary} EXCLUDE_FROM_ALL ${canary_source})
+    target_include_directories(${canary} PRIVATE "${SRC}" "${ASCEND_HOME_PATH}/include")
+    target_compile_options(${canary} PRIVATE -std=c++17 -Wall -Wextra -Werror)
+    target_compile_definitions(${canary} PRIVATE TQ_BENCH_CAMODEL=1)
+    target_link_directories(${canary} BEFORE PRIVATE "${TQ_CYCLE_MODEL_DIR}")
+    target_link_libraries(${canary} PRIVATE ${canary_kernel} turboquant_host ascendcl
+        "${TQ_CYCLE_MODEL_DIR}/libnpu_drv_camodel.so")
+    target_link_options(${canary} PRIVATE "-Wl,-rpath-link,${TQ_CYCLE_MODEL_DIR}")
+    set_target_properties(${canary} PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE
+        INSTALL_RPATH "$ORIGIN/../lib;${TQ_CYCLE_MODEL_DIR};${ASCEND_HOME_PATH}/lib64")
+  endforeach()
+
   # DIRTY-DATA (D2/D3): the bounded poison canary. `--tail` runs one tile at context 64 and two
   # tiles at 72/80 with the unmapped pages and the dead tail rows poisoned; `--blocktable` runs a
   # synthetic >64-page span whose entry 64 is negative / past num_blocks. Both are ctest entries

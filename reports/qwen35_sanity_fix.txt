@@ -10,6 +10,20 @@ The user supplied these physical Ascend950PR_9579 results:
 Only heads 3..5 have substantially incorrect merged partials. This identifies
 corrupted attention partials, rather than inaccurate arithmetic in the final merge.
 
+Packing and descriptor audit
+----------------------------
+The benchmark writes the same NzTiledPackedByte and NzTiledScaleIndex contract
+used by tq_test helpers. For one KV head, each scale row is 8 floats (32 bytes):
+K is lane 0 and V lane 1. The table reverses physical page IDs and is shared by
+the descriptor builder and FP64 golden reference. Global slot is physical_page *
+block_size + row_in_page. A packed K or V page is block_size * 128 bytes, and its
+scale plane is block_size * 8 floats: 16,384/131,072 packed bytes and 1,024/8,192
+scale floats for page sizes 128/1024 respectively. D does not bound page size.
+The 64-row tile cursor uses shift=log2(block_size)-6 (1 or 4), and host splits
+partition whole pages. At 2K and split=2 this yields 8+8 pages or 1+1 pages,
+16 tiles per split in either case. All 32 tiles are visited exactly once. The
+online-softmax state and output channel loops operate on 64 rows and 256
+channels separately; the alias occurs when publishing their statistics tail.
 Root cause
 ----------
 BeginArgmaxProbe creates the fixed position-publication predicate (only lane 1)
@@ -50,7 +64,7 @@ match after ignoring comments, whitespace and repository-specific include paths.
 The shared decode_launch_split helper and dense-padding/launch-coverage host
 regression are also imported. Both repositories have the same additional layout
 regressions for 16x128 and 2x1024 pages with one KV head and D=256.
-Existing unrelated changes in the vLLM checkout are left in place.
+The matching vLLM layout regressions are committed as c36faa24c. Existing unrelated changes in that checkout are left in place.
 
 Verification and execution policy
 ---------------------------------
@@ -70,6 +84,17 @@ Use --canary --device 0, optionally --split-k 1 or --split-k 2.
 Before this fix, isolated reduction arithmetic passed at relative L2 0 (split 1)
 and 0.00173810671 (split 2), including the shared-pool offset control. These are
 reducer controls, not post-fix full-decode verification.
+
+Post-fix synthetic CAModel kernels completed and downloaded all six heads:
+  split 1: relative_l2=0, max_abs=0
+  split 2: relative_l2=0.00173810671, max_abs=0.00376403572
+Both used D=256, three reduction rows per block, the production reducer, the
+attention L1 prefix and the same 43,200-byte UB prefix/shared transient pool.
+The simulator joined its threads after the host parity check, but its teardown
+exceeded the 180-second process budget. These are completed kernel parity
+checks, not clean process-exit passes. No 2K simulation was used for this check.
+Evidence: build-qwen35-fix/reduce-fixed-s1/result.log and reduce-fixed-s2/result.log.
+The retained runner accepts exactly one split (1 or 2) per process.
 
 Post-fix device build and tiny full-decode verification are recorded below when
 completed. Physical 2K parity must be checked on the 950PR after rebuilding the
