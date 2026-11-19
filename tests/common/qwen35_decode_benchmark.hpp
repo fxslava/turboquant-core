@@ -88,12 +88,14 @@ struct Plan {
     std::vector<std::uint32_t> descriptors;
     std::uint32_t live_splits = 0;
     std::string reason;
-    explicit Plan(Geometry g) : geometry(g), config(g.launch())
+    explicit Plan(Geometry g, bool canary = false) : geometry(g), config(g.launch())
     {
-        if (std::find(kBlocks.begin(), kBlocks.end(), g.block) == kBlocks.end() ||
+        const bool tiny = canary && (g.context == 64 || g.context == 128) && g.block == 64 &&
+            g.batch == 1 && (g.splits == 1 || g.splits == 2);
+        if (!tiny && (std::find(kBlocks.begin(), kBlocks.end(), g.block) == kBlocks.end() ||
             std::find(kBatches.begin(), kBatches.end(), g.batch) == kBatches.end() ||
             std::find(kContexts.begin(), kContexts.end(), g.context) == kContexts.end() ||
-            std::find(kSplits.begin(), kSplits.end(), g.splits) == kSplits.end()) {
+            std::find(kSplits.begin(), kSplits.end(), g.splits) == kSplits.end())) {
             reason = "outside the requested 64-configuration sweep";
             return;
         }

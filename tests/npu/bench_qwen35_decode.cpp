@@ -77,7 +77,48 @@ void verify_partials(const bench::Plan& plan, const camodel::Buffer& workspace)
             }
 }
 
-void verify(const std::vector<std::uint16_t>& actual, const std::vector<double>& expected)
+void diagnose_merge(const bench::Plan& plan, const camodel::Buffer& workspace,
+    const std::vector<std::uint16_t>& actual, const std::vector<double>& expected)
+{
+    const auto g = plan.geometry;
+    if (g.splits == 1) return;
+    std::vector<float> partials(g.workspace_bytes() / sizeof(float));
+    workspace.download(partials);
+    double partial_error = 0, reduction_error = 0, reference2 = 0;
+    for (std::size_t head = 0; head < std::size_t(g.batch) * 6; ++head) {
+        const auto base = head * g.splits * (256 + bench::tq::kPartialTail);
+        double maximum = -std::numeric_limits<double>::infinity();
+        for (std::uint32_t s = 0; s < g.splits; ++s)
+            maximum = std::max(maximum, double(partials[base + s * 272 + 256]));
+        double denominator = 0;
+        std::array<double, 256> merged{};
+        for (std::uint32_t s = 0; s < g.splits; ++s) {
+            const auto offset = base + s * 272;
+            const double weight = std::exp(double(partials[offset + 256]) - maximum);
+            denominator += weight * partials[offset + 256 + bench::tq::kPartialSumLane];
+            for (std::size_t c = 0; c < 256; ++c) merged[c] += weight * partials[offset + c];
+        }
+        double got_mean = 0, merged_mean = 0, expected_mean = 0;
+        for (std::size_t c = 0; c < 256; ++c) {
+            const auto i = head * 256 + c;
+            merged[c] /= denominator;
+            const double got = tq_test::bf16_to_float(actual[i]);
+            partial_error += (merged[c] - expected[i]) * (merged[c] - expected[i]);
+            reduction_error += (merged[c] - got) * (merged[c] - got);
+            reference2 += expected[i] * expected[i];
+            got_mean += got;
+            merged_mean += merged[c];
+            expected_mean += expected[i];
+        }
+        std::fprintf(stderr, "merge head=%zu got_mean=%.6g partial_mean=%.6g expected_mean=%.6g\n",
+            head, got_mean / 256, merged_mean / 256, expected_mean / 256);
+    }
+    std::fprintf(stderr, "merge: partial_reference_l2=%.6g device_merge_l2=%.6g\n",
+        std::sqrt(partial_error / reference2), std::sqrt(reduction_error / reference2));
+}
+
+void verify(const bench::Geometry& g, const std::vector<std::uint16_t>& actual,
+    const std::vector<double>& expected)
 {
     double error2 = 0, reference2 = 0, max_abs = 0;
     for (std::size_t i = 0; i < actual.size(); ++i) {
@@ -89,8 +130,9 @@ void verify(const std::vector<std::uint16_t>& actual, const std::vector<double>&
         max_abs = std::max(max_abs, std::abs(error));
     }
     const double relative_l2 = std::sqrt(error2 / std::max(reference2, 1e-30));
-    std::fprintf(stderr, "oracle: relative_l2=%.6g max_abs=%.6g\n", relative_l2, max_abs);
-    if (relative_l2 > 0.025 || max_abs > 0.06)
+    std::fprintf(stderr, "oracle: block=%u batch=%u context=%u split=%u head_dim=256 relative_l2=%.6g max_abs=%.6g\n",
+        g.block, g.batch, g.context, g.splits, relative_l2, max_abs);
+    if (relative_l2 >= 0.01 || max_abs > 0.06)
         throw std::runtime_error("2K host golden sanity check failed");
 }
 
@@ -112,10 +154,10 @@ void print_static()
 }
 
 void run_geometry(Session& session, std::uint32_t block, std::uint32_t batch,
-    std::uint32_t context, bool validation_only)
+    std::uint32_t context, bool validation_only, std::uint32_t only_split = 0)
 {
     const bench::Geometry base{block, batch, context, 1};
-    const bench::Plan first(base);
+    const bench::Plan first(base, context <= 128);
     if (!first.valid()) throw std::runtime_error(first.reason);
     const bench::Fixture fixture(base);
     const auto expected = validation_only ? fixture.expected(first) : std::vector<double>{};
@@ -139,8 +181,10 @@ void run_geometry(Session& session, std::uint32_t block, std::uint32_t batch,
     double best_mean = std::numeric_limits<double>::infinity();
     std::uint32_t best_split = 0;
     for (auto splits : bench::kSplits) {
+        if (only_split != 0 && splits != only_split) continue;
         const bench::Geometry g{block, batch, context, splits};
-        const bench::Plan p(g);
+        if (context <= 128 && splits > 2) continue;
+        const bench::Plan p(g, context <= 128);
         if (!p.valid()) {
             std::printf("%u,%u,%u,%u,UNSUPPORTED,%s,,,,,,,\n", block, batch, context, splits, p.reason.c_str());
             continue;
@@ -159,7 +203,8 @@ void run_geometry(Session& session, std::uint32_t block, std::uint32_t batch,
             check(aclrtSynchronizeStream(session.stream), "golden synchronize");
             std::vector<std::uint16_t> actual(fixture.raw.size());
             output.download(actual);
-            verify(actual, expected);
+            diagnose_merge(p, workspace, actual, expected);
+            verify(g, actual, expected);
             verify_partials(p, workspace);
         }
         if (validation_only) continue;
@@ -205,19 +250,49 @@ int main(int argc, char** argv)
             print_static();
             return 0;
         }
-        if (argc != 4 || std::string(argv[1]) != "--run" || std::string(argv[2]) != "--device")
-            throw std::invalid_argument("usage: bench_qwen35_decode [--static | --run --device ID]");
+        const bool canary = argc >= 2 && std::string(argv[1]) == "--canary";
+        const bool verify_only = canary || (argc >= 2 && std::string(argv[1]) == "--verify");
+        if (argc < 4 || (!verify_only && std::string(argv[1]) != "--run") ||
+            std::string(argv[2]) != "--device" || (argc != 4 && !verify_only) || argc % 2 != 0)
+            throw std::invalid_argument("usage: bench_qwen35_decode [--static | --run --device ID | --canary --device ID | --verify --device ID [--block-size N] [--batch-size N] [--split-k N]]");
+#if defined(TQ_BENCH_CAMODEL)
+        if (!canary) throw std::invalid_argument("CAModel permits only --static or --canary (at most 128 tokens)");
+#endif
+        if (canary && argc != 4) throw std::invalid_argument("the canary geometry is fixed");
         const std::string id(argv[3]);
         std::size_t used = 0;
         const int device = std::stoi(id, &used);
         if (used != id.size() || device < 0) throw std::invalid_argument("invalid device ID");
+        std::uint32_t only_block = 0, only_batch = 0, only_split = 0;
+        for (int arg = 4; arg < argc; arg += 2) {
+            const std::string value(argv[arg + 1]);
+            used = 0;
+            const int number = std::stoi(value, &used);
+            if (used != value.size() || number <= 0) throw std::invalid_argument("invalid verification filter");
+            const std::string key(argv[arg]);
+            if (key == "--block-size" && std::find(bench::kBlocks.begin(), bench::kBlocks.end(), number) != bench::kBlocks.end())
+                only_block = static_cast<std::uint32_t>(number);
+            else if (key == "--batch-size" && std::find(bench::kBatches.begin(), bench::kBatches.end(), number) != bench::kBatches.end())
+                only_batch = static_cast<std::uint32_t>(number);
+            else if (key == "--split-k" && std::find(bench::kSplits.begin(), bench::kSplits.end(), number) != bench::kSplits.end())
+                only_split = static_cast<std::uint32_t>(number);
+            else throw std::invalid_argument("unsupported verification filter");
+        }
         Session session(device);
         const char* soc = aclrtGetSocName();
         if (!soc || std::string(soc).find("Ascend950PR") != 0)
             throw std::runtime_error("benchmark requires Ascend950PR hardware");
-        std::fprintf(stderr, "device=%d soc=%s warmup=10 samples=50 clock=ACL_EVENT_TIME_LINE output_stage=0 fused_context_limit=0\n", device, soc);
+        std::fprintf(stderr, "device=%d soc=%s mode=%s output_stage=0 fused_context_limit=0\n", device, soc,
+            canary ? "canary" : (verify_only ? "verify" : "benchmark"));
+        if (canary) {
+            run_geometry(session, 64, 1, 64, true, 1);
+            run_geometry(session, 64, 1, 128, true, 2);
+            return 0;
+        }
         for (auto block : bench::kBlocks) for (auto batch : bench::kBatches)
-            run_geometry(session, block, batch, 2048, true);
+            if ((only_block == 0 || block == only_block) && (only_batch == 0 || batch == only_batch))
+                run_geometry(session, block, batch, 2048, true, only_split);
+        if (verify_only) return 0;
         std::fprintf(stderr, "all 16 short-context golden checks passed; starting timing sweep\n");
         std::puts("block_size,batch_size,seq_len,split_k,status,reason,live_splits,min_us,p50_us,mean_us,p99_us,kv_read_bytes,effective_kv_GB_s");
         for (auto block : bench::kBlocks) for (auto batch : bench::kBatches)

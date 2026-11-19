@@ -83,9 +83,13 @@ target_link_libraries(test_golden_decode_oracle PRIVATE turboquant_host)
 add_executable(test_telemetry_dump tests/cpu/test_telemetry_dump.cpp)
 target_link_libraries(test_telemetry_dump PRIVATE turboquant_host)
 
+add_executable(test_qwen35_decode tests/cpu/test_qwen35_decode.cpp)
+target_link_libraries(test_qwen35_decode PRIVATE turboquant_host)
+
 add_test(NAME contract_gates COMMAND test_contract_gates)
 add_test(NAME layout_bridge COMMAND test_layout_bridge)
 add_test(NAME telemetry_dump COMMAND test_telemetry_dump)
+add_test(NAME qwen35_decode COMMAND test_qwen35_decode)
 # The oracle comparison reads golden/dumps; run it from the source tree so the
 # default --dump-root resolves.
 add_test(NAME golden_decode_oracle COMMAND test_golden_decode_oracle)
