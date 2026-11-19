@@ -52,6 +52,18 @@ CANN's own headers are reclassified as system headers so they cannot spend that 
 
 If the CANN toolkit is absent, configure still succeeds and says the device leg was skipped.
 
+The fused decode tail regression uses queries of +1, zero live K/V, and finite +1 nibbles
+with K/V scales 10/100 throughout the unwritten page tail, including past `align16(context_len)`.
+Every output channel must equal zero exactly. Contexts 17, 80 and 81 cover aligned/unaligned
+16-row bounds, one/two live tiles and an empty Split-K worker. A positive control admits one
+spike and must return ~100.
+Run it in the CAModel environment after configuring the simulator leg:
+
+```bash
+cmake --build build --target test_dirty_data_canary_sim -j16
+ctest --test-dir build -R '^dirty_tail_canary$' --output-on-failure
+```
+
 ## Layout
 
 ```

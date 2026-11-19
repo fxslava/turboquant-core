@@ -17,30 +17,25 @@
 // THE DIRTY-DATA CANARY: one or two 64-row tiles of the fused decode, with every byte the
 // kernel is not allowed to consume poisoned.
 //
-// WHY THIS IS SMALL. A tile is the unit the decode's dirty-data safety is defined on: the tail
-// mask is per tile, the page cursor is per tile, and the block-table validation is per worker.
-// Two tiles (context 72 or 80) exercise the live tile plus the short tile; one tile (context 64)
-// exercises an aligned page. Anything larger only repeats those states, so the runner stays at
-// 1-2 tiles and the simulator run stays bounded.
+// Tail cases stay at 1-2 live tiles: contexts 17, 80 and 81 cover unaligned/aligned align16
+// bounds and a whole dead tile inside a mapped page. Split-K exercises an empty worker too.
 //
 // WHAT IS POISONED
 //
-//   * every physical page the block table does not map -- 0xDEADBEEF bytes in both packed
-//     planes and 0x7FC0BEEF (a NaN) in every scale lane;
-//   * on the mapped page, every row at or past the live context -- the rows the Cube's 64-row
-//     tile still reads but the mask must discard. Key/value bytes are 0xDEADBEEF garbage and
-//     every scale lane is a NaN, so a softmax that merely Min-ed the dead logits could still
-//     let 0 * NaN through the value-scale multiply;
-//   * the per-row scale lanes past 2 * num_kv_heads, which no gather may name.
+//   * every unmapped physical page and every mapped row at/past context_len, all the way to
+//     the page end (including past align16(context_len)): signed +1 nibbles, K_scale=10 and
+//     V_scale=100. Queries are all +1; live K/V nibbles and scales are zero. All inputs are
+//     finite. A leaked spike has logit 160 versus live logits 0 and drives output near 100.
+//     NaNs are unsuitable here: bitwise Select and maxNum can silently neutralize them.
 //
 // WHAT IS CHECKED
 //
-//   1. the output of every live channel against the fixture's double-precision oracle, at the
-//      same 2-ULP bf16 budget the e2e ladder uses;
-//   2. 0xDEADBEEF guard bands on every allocation, so a read/write past a plane is named;
+//   1. every output channel is exactly zero (no tolerance); a positive control admits one
+//      spike by incrementing context_len and must instead produce approximately 100;
+//   2. 0xDEADBEEF guard bands on every allocation, so a write past a plane is named;
 //   3. the input allocations are unchanged (the operator is read-only over them).
 //
-// The third case is a synthetic tiling descriptor: blocks_in_split = 65 (past the kernel's
+// The --blocktable mode uses a synthetic tiling descriptor: blocks_in_split = 65 (past the kernel's
 // 64-entry block-table cache) while only the first tile is live, with entry 64 negative on one
 // token and equal to num_blocks on the other. Both are outside [0, num_blocks), so the hardened
 // PrefetchBlockTable must skip both workers and write zeros. The old sign-OR over the first 64
@@ -50,6 +45,7 @@
 #include "../common/fused_decode_fixture.hpp"
 #include "../../src/host/turboquant_tiling.h"
 
+#include <algorithm>
 #include <chrono>
 #include <cmath>
 #include <cstdint>
@@ -66,9 +62,7 @@ namespace fdt = ascend_micro::fused_decode;
 using fused_decode_fixture::Element;
 using fused_decode_fixture::Fixture;
 
-constexpr std::uint32_t kGuardWord = 0xDEADBEEFu;
 constexpr std::uint32_t kNaNBits = 0x7FC0BEEFu;
-constexpr int kUlpBudget = 2;
 constexpr std::size_t kScaleSlot = 8;  // NzScaleSlotFloats at H <= 4
 
 void require(bool ok, const char* what)
@@ -84,23 +78,6 @@ float bits_float(std::uint32_t bits)
     float value;
     std::memcpy(&value, &bits, sizeof(value));
     return value;
-}
-
-std::uint8_t poison_byte(std::size_t i)
-{
-    return static_cast<std::uint8_t>(kGuardWord >> ((i % 4u) * 8u));
-}
-
-// One page of a packed plane, entirely 0xDEADBEEF words.
-void poison_page(std::vector<std::uint8_t>& plane, std::size_t page, std::size_t page_bytes)
-{
-    for (std::size_t i = 0; i < page_bytes; ++i) plane[page * page_bytes + i] = poison_byte(i);
-}
-
-void poison_scale_row(std::vector<float>& scales, int slot, float poison)
-{
-    const std::size_t base = std::size_t(slot) * kScaleSlot;
-    for (std::size_t lane = 0; lane < kScaleSlot; ++lane) scales[base + lane] = poison;
 }
 
 std::size_t packed_byte(int physical, int page_tokens, int row, int head, int col, int num_kv_heads)
@@ -182,62 +159,56 @@ struct LaunchBuffers {
 std::size_t aligned32(std::size_t bytes) { return (bytes + 31u) / 32u * 32u; }
 
 // One fixture launch with the cache poisoned the way the header describes.
-void run_tail_case(int context, int page_tokens, camodel::Session& session)
+void run_tail_case(int context, int page_tokens, int splits, camodel::Session& session,
+                   bool admit_spike = false)
 {
-    const int requests = 1, kv_heads = 4, group_heads = 4;
+    const int requests = 1, kv_heads = 1, group_heads = 4;
     Fixture f(context, requests, kv_heads, group_heads, page_tokens, Element::kBf16);
     const int physical_pages = f.physical_pages;
-    const std::size_t page_bytes = std::size_t(page_tokens) * kv_heads * 128u;
-
-    std::vector<std::uint8_t> key = f.key, value = f.value;
-    std::vector<float> scales = f.scales;
-    const float poison = bits_float(kNaNBits);
-
-    // Every physical page the table does not map is entirely poison.
-    std::vector<bool> mapped(std::size_t(physical_pages), false);
-    int mapped_pages = 0;
-    for (int request = 0; request < requests; ++request)
-        for (int page = 0; page < f.pages; ++page) {
-            mapped[std::size_t(f.table[std::size_t(request) * f.pages + page])] = true;
-            ++mapped_pages;
-        }
+    std::fill(f.query.begin(), f.query.end(), 1.0f);
+    // Start with finite spikes everywhere, then clear ONLY live rows using the NZ layout.
+    // Leaving the entire page tail intact catches bounds rounded past align16(context).
+    std::vector<std::uint8_t> key(f.key.size(), 0x11u), value(f.value.size(), 0x11u);
+    std::vector<float> scales(f.scales.size(), 0.0f);
     for (int physical = 0; physical < physical_pages; ++physical) {
-        if (mapped[std::size_t(physical)]) continue;
-        poison_page(key, std::size_t(physical), page_bytes);
-        poison_page(value, std::size_t(physical), page_bytes);
         for (int row = 0; row < page_tokens; ++row)
-            poison_scale_row(scales, physical * page_tokens + row, poison);
+            for (int head = 0; head < kv_heads; ++head) {
+                const auto base = std::size_t(physical * page_tokens + row) * kScaleSlot;
+                scales[base + head] = 10.0f;
+                scales[base + kv_heads + head] = 100.0f;
+            }
     }
 
-    // On the mapped page, rows at/past the live context are the dead rows of the last tile. The
-    // scale lanes are set to NaN on purpose: 0 * NaN is NaN, which is the leak the value-scale
-    // SELECT in quantize_probabilities exists to stop.
     int dead_rows = 0;
     for (int request = 0; request < requests; ++request)
         for (int page = 0; page < f.pages; ++page) {
             const int physical = f.table[std::size_t(request) * f.pages + page];
             const int live = f.page_rows(page);
-            for (int row = live; row < page_tokens; ++row) {
-                for (int head = 0; head < kv_heads; ++head)
+            dead_rows += page_tokens - live;
+            for (int row = 0; row < live; ++row) {
+                for (int head = 0; head < kv_heads; ++head) {
+                    const auto base = std::size_t(physical * page_tokens + row) * kScaleSlot;
+                    scales[base + head] = scales[base + kv_heads + head] = 0.0f;
                     for (int col = 0; col < 128; ++col) {
                         key[packed_byte(physical, page_tokens, row, head, col, kv_heads)] =
-                            poison_byte(std::size_t(col));
+                            0x00u;
                         value[packed_byte(physical, page_tokens, row, head, col, kv_heads)] =
-                            poison_byte(std::size_t(col + 2));
+                            0x00u;
                     }
-                poison_scale_row(scales, physical * page_tokens + row, poison);
-                ++dead_rows;
+                }
             }
         }
+    require(dead_rows > 0, "tail test has no poisoned mapped rows");
+    if (admit_spike) ++f.lengths[0];  // Same cache/query: only the mask/tiling bound changes.
 
-    const fd::Launch config = f.launch(1);
+    const fd::Launch config = f.launch(splits);
     require(config.num_blocks == static_cast<std::uint32_t>(physical_pages),
             "the fixture did not publish its physical page count");
 
     const std::size_t table_bytes = aligned32(f.table.size() * sizeof(std::int32_t));
     const std::size_t length_bytes = aligned32(f.lengths.size() * sizeof(std::int32_t));
     const std::size_t workspace_bytes =
-        std::size_t(requests) * config.heads * (256 + 16) * sizeof(float);
+        std::size_t(requests) * config.heads * splits * (256 + 16) * sizeof(float);
     const std::size_t tiling_bytes =
         aligned32(fdt::decode_tiling_words(config.tokens, config.splits, config.grid) *
                   sizeof(std::uint32_t));
@@ -282,6 +253,12 @@ void run_tail_case(int context, int page_tokens, camodel::Session& session)
     guard.modes.upload();
     guard.tiling.upload();
 
+    const std::vector<camodel::GuardedDeviceBuffer*> inputs{
+        &guard.query, &guard.keys, &guard.values, &guard.scales,
+        &guard.table, &guard.lengths, &guard.modes, &guard.tiling};
+    std::vector<std::vector<std::uint32_t>> input_images;
+    for (const auto* input : inputs) input_images.push_back(input->host);
+
     const fd::Buffers buffers = guard.buffers();
     camodel::check(aclrtSynchronizeStream(session.stream), "pre-launch synchronize");
     launch_fused_decode_opt(session.stream, &config, &buffers);
@@ -289,28 +266,30 @@ void run_tail_case(int context, int page_tokens, camodel::Session& session)
 
     guard.download_all();
     guard.assert_guards();
+    for (std::size_t i = 0; i < inputs.size(); ++i)
+        require(inputs[i]->host == input_images[i], "decode changed an input allocation");
 
-    const std::size_t live = f.expected.size();
+    const std::size_t live = f.query.size();
     require(live == std::size_t(requests) * config.heads * fd::kHeadSize,
-            "the fixture's expected image is not [requests, heads, 256]");
+            "the output shape is not [requests, heads, 256]");
     const auto* got = static_cast<const std::uint16_t*>(guard.out.host_payload());
-    int worst_ulp = 0;
+    float max_abs = 0.0f;
     for (std::size_t i = 0; i < live; ++i) {
-        const std::uint16_t want = fused_decode_fixture::reference_bfloat16(f.expected[i]);
-        const int ulp = std::abs(int(got[i]) - int(want));
-        if (ulp > worst_ulp) worst_ulp = ulp;
-        if (ulp > kUlpBudget) {
+        const float output = tq_test::bf16_to_float(got[i]);
+        // Test equality per lane BEFORE reducing: NaN must fail, even if maxNum ignores it.
+        const bool ok = admit_spike ? std::fabs(output - 100.0f) <= 1.0f : output == 0.0f;
+        if (!ok) {
             std::fprintf(stderr,
-                         "context %d live channel %zu: got %g (%04x) expected %g (%04x), %d ULP\n",
-                         context, i, double(tq_test::bf16_to_float(got[i])), got[i],
-                         double(f.expected[i]), want, ulp);
-            require(false, "a poisoned tail/unmapped page changed a live output channel");
+                         "context %d splits %d control %d channel %zu: got %g (%04x), expected %g\n",
+                         context, splits, int(admit_spike), i, double(output), got[i],
+                         admit_spike ? 100.0 : 0.0);
+            require(false, "zero-live / finite-spike output mismatch");
         }
+        max_abs = std::max(max_abs, std::fabs(output));
     }
-    std::printf("  ok  context %3d  page %3d  tiles %d  tail %2d  worst %d ULP  %d unmapped "
-                "pages (%d) and %d dead rows poisoned\n",
-                context, page_tokens, f.tiles(), context % 64, worst_ulp, physical_pages - mapped_pages,
-                physical_pages, dead_rows);
+    std::printf("  ok  context %3d  page %3d  splits %d  max_abs %g  %d finite-spike tail rows%s\n",
+                context, page_tokens, splits, double(max_abs), dead_rows,
+                admit_spike ? " (positive control: first spike admitted)" : "");
 }
 
 // The synthetic >64-page span: one live tile per token, but blocks_in_split = 65 so the worker
@@ -460,9 +439,10 @@ int main(int argc, char** argv)
         const auto started = std::chrono::steady_clock::now();
         camodel::Session session;
         if (mode == "--tail") {
-            run_tail_case(64, 64, session);
-            run_tail_case(72, 128, session);
-            run_tail_case(80, 128, session);
+            for (int context : {17, 80})
+                run_tail_case(context, 128, 1, session);
+            run_tail_case(81, 128, 3, session);  // Includes an empty split.
+            run_tail_case(17, 128, 1, session, true);
         } else {
             run_blocktable_case(session);
         }
