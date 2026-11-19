@@ -32,6 +32,12 @@ No GM layout, tiling stride, head partition, kernel argument, UB allocation or
 numerical tolerance was relaxed. The golden threshold remains relative_l2 < 0.01.
 The predicate offsets are shared with a host regression that exercises all eight
 three-head improvement masks and checks that max/sum lanes remain unchanged.
+An independent host counterexample evaluates the actual 2K fixture's attention
+partials and last-tile improvement masks. Applying the old alias gives head means
+1.426866, 0.751270, 1.064988 for heads 3..5, and relative L2 0.317362321.
+Keeping the publication mask intact gives relative L2 2.22809739e-15. This
+reproduces the physical failure's pattern without modeling FP8 rounding or running
+2K on a simulator. test_qwen35_telemetry retains both controls as a regression.
 
 Synchronization with C:/vllm-ascend
 ---------------------------------
