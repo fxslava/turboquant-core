@@ -283,6 +283,7 @@ constexpr bool TurboQuantModeIsValid(int32_t raw)
            raw == static_cast<int32_t>(TurboQuantMode::KV5_FP8);
 }
 
+#if !defined(__CCE_AICORE__)
 inline const char *TurboQuantModeName(TurboQuantMode mode)
 {
     switch (mode) {
@@ -296,6 +297,7 @@ inline const char *TurboQuantModeName(TurboQuantMode mode)
     return "kv5fp8";
 }
 
+#endif
 constexpr int64_t TurboQuantOperandBytes(TurboQuantOperand operand, int64_t elems)
 {
     return operand == TurboQuantOperand::kFp4E2m1 ? elems / 2 : elems;

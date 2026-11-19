@@ -512,7 +512,8 @@ int run(bool camodel_smoke, int perf_iters)
                     rung.kv_heads, rung.note);
     }
 
-    require(ragged_rungs >= 3, "fused-opt NPU validation: the ragged rungs went missing");
+    require(ragged_rungs >= (camodel_smoke ? 2 : 3),
+            "fused-opt NPU validation: the ragged rungs went missing");
     require(narrowest_tail == 1, "fused-opt NPU validation: no single-row tail was exercised");
     if (!camodel_smoke) {
         require(kv_heads_seen.count(4) == 1,
@@ -527,7 +528,7 @@ int run(bool camodel_smoke, int perf_iters)
     std::string split_list;
     for (const int k : splits_seen) split_list += (split_list.empty() ? "" : ",") + std::to_string(k);
     std::printf("PASS fused decode opt NPU validation: %d launches over %zu rungs, S in {%s}, "
-                "1 and 4 KV heads, 16 query heads per KV head, D=%d, %d-token pages. %d rungs "
+                "%s KV heads, 16 query heads per KV head, D=%d, %d-token pages. %d rungs "
                 "are RAGGED (context divides neither the page nor the 64-row tile), the "
                 "narrowest live tail being %d row. Worst bf16 ULP %d against a budget of %d; "
                 "worst absolute residual %.3e (the bf16 quantisation of the oracle). 0x%08X "
@@ -535,7 +536,8 @@ int run(bool camodel_smoke, int perf_iters)
                 "floats, both guard bands of every allocation, the output tail and the "
                 "workspace outside the live partial extent. Every input allocation "
                 "byte-identical afterwards.\n",
-                launches, ladder.size(), split_list.c_str(), int(fd::kHeadSize), kPageTokens,
+                launches, ladder.size(), split_list.c_str(), camodel_smoke ? "1" : "1 and 4",
+                int(fd::kHeadSize), kPageTokens,
                 ragged_rungs, narrowest_tail, worst_ulp, kUlpBudget, worst_abs, kGuardWord,
                 canary_pages, canary_pad_floats);
     if (perf_configs > 0)

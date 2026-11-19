@@ -574,7 +574,7 @@ public:
 
     template <std::uint32_t PHASE>
     __aicore__ inline void StagePage(bool stage_next) {
-        using namespace AscendC::Te;
+        using namespace asc::te;
         constexpr std::uint32_t slot = kL1Slot<PHASE>;
         constexpr std::int32_t evt = static_cast<std::int32_t>(slot);
         std::uint32_t offset = cube_.strip_elems;
@@ -584,70 +584,70 @@ public:
         auto* src_ptr = const_cast<__gm__ bfloat16_t*>(base) + offset + kChunkHead<PHASE> * cube_.head_size;
         auto* dst_ptr = reinterpret_cast<__cbuf__ bfloat16_t*>(kL1PageBase<slot>);
 
-        auto shape = MakeShape(MakeShape(_1{}, kTokens), MakeShape(_1{}, kHeadSize));
-        auto stride = MakeStride(MakeStride(_0{}, cube_.row_pitch), MakeStride(_0{}, _1{}));
-        auto src = MakeTensor(MakeMemPtr(src_ptr), MakePatternLayout<NDExtLayoutPtn, LayoutTrait<AscendC::Std::ignore_t, _1>>(shape, stride));
-        auto dst = MakeTensor(MakeMemPtr(dst_ptr), MakeFrameLayout<NZLayoutPtn, bfloat16_t>(kTokens, kHeadSize));
+        auto shape = make_shape(make_shape(_1{}, kTokens), make_shape(_1{}, kHeadSize));
+        auto stride = make_stride(make_stride(_0{}, cube_.row_pitch), make_stride(_0{}, _1{}));
+        auto src = make_tensor(make_mem_ptr(src_ptr), make_pattern_layout<nd_ext_layout_ptn, layout_trait<AscendC::Std::ignore_t, _1>>(shape, stride));
+        auto dst = make_tensor(make_mem_ptr(dst_ptr), make_frame_layout<nz_layout_ptn, bfloat16_t>(kTokens, kHeadSize));
 
         AscendC::WaitFlag<AscendC::HardEvent::MTE1_MTE2>(evt);
-        Copy(MakeCopy(CopyGM2L1{}), dst, src);
+        copy(make_copy(copy_gm_to_l1{}), dst, src);
         AscendC::SetFlag<AscendC::HardEvent::MTE2_MTE1>(evt);
     }
 
     template <std::uint32_t PHASE, std::uint32_t G>
     __aicore__ inline void GemmGroupLoad(__ca__ bfloat16_t* l0a, __cb__ bfloat16_t* l0b) {
-        using namespace AscendC::Te;
+        using namespace asc::te;
         constexpr std::uint32_t slot = kL1Slot<PHASE>;
         auto* page = reinterpret_cast<__cbuf__ bfloat16_t*>(kL1PageBase<slot> + G * kFractalBytes);
         if constexpr (kIsKey<PHASE>) {
-            auto src = MakeTensor(MakeMemPtr(page), MakeFrameLayout<NZLayoutPtn, bfloat16_t>(kTokens, kGroup));
-            auto dst = MakeTensor(MakeMemPtr(l0a + kL0TableElems + G * kFractalElems), MakeFrameLayout<NZLayoutPtn, bfloat16_t>(kTokens, kGroup));
-            Copy(MakeCopy(CopyL12L0A{}), dst, src);
+            auto src = make_tensor(make_mem_ptr(page), make_frame_layout<nz_layout_ptn, bfloat16_t>(kTokens, kGroup));
+            auto dst = make_tensor(make_mem_ptr(l0a + kL0TableElems + G * kFractalElems), make_frame_layout<nz_layout_ptn, bfloat16_t>(kTokens, kGroup));
+            copy(make_copy(copy_l1_to_l0a{}), dst, src);
         } else {
-            auto src = MakeTensor(MakeMemPtr(page), MakeFrameLayout<ZNLayoutPtn, bfloat16_t>(kGroup, kTokens));
-            auto dst = MakeTensor(MakeMemPtr(l0b + kL0TableElems + G * kFractalElems), MakeFrameLayout<ZNLayoutPtn, bfloat16_t>(kGroup, kTokens));
-            Copy(MakeCopy(CopyL12L0B{}), dst, src);
+            auto src = make_tensor(make_mem_ptr(page), make_frame_layout<zn_layout_ptn, bfloat16_t>(kGroup, kTokens));
+            auto dst = make_tensor(make_mem_ptr(l0b + kL0TableElems + G * kFractalElems), make_frame_layout<zn_layout_ptn, bfloat16_t>(kGroup, kTokens));
+            copy(make_copy(copy_l1_to_l0b{}), dst, src);
         }
     }
 
     template <std::uint32_t PHASE, std::uint32_t C1, std::uint32_t G>
     __aicore__ inline void GemmBlock(__ca__ bfloat16_t* l0a, __cb__ bfloat16_t* l0b, __cc__ float* l0c) {
-        using namespace AscendC::Te;
+        using namespace asc::te;
         constexpr std::uint32_t block = kSignBlock<C1, G> * kBlockElems;
         constexpr bool init = (G == 0u);
         auto* c_ptr = l0c + C1 * kTokens * kGroup;
 
         if constexpr (kIsKey<PHASE>) {
-            auto a = MakeTensor(MakeMemPtr(l0a + kL0TableElems + G * kFractalElems), MakeFrameLayout<NZLayoutPtn, bfloat16_t>(kTokens, kGroup));
-            auto b = MakeTensor(MakeMemPtr(l0b + block), MakeFrameLayout<ZNLayoutPtn, bfloat16_t>(kGroup, kGroup));
-            auto c = MakeTensor(MakeMemPtr(c_ptr), MakeFrameLayout<NZLayoutPtn, 16>(kTokens, kGroup));
-            MmadParams mp(static_cast<std::uint16_t>(kTokens), static_cast<std::uint16_t>(kGroup), static_cast<std::uint16_t>(kGroup), 0, init);
-            Mmad(MakeMmad(MmadOperation{}, MmadTraitDefault{}).with(mp), c, a, b);
+            auto a = make_tensor(make_mem_ptr(l0a + kL0TableElems + G * kFractalElems), make_frame_layout<nz_layout_ptn, bfloat16_t>(kTokens, kGroup));
+            auto b = make_tensor(make_mem_ptr(l0b + block), make_frame_layout<zn_layout_ptn, bfloat16_t>(kGroup, kGroup));
+            auto c = make_tensor(make_mem_ptr(c_ptr), make_frame_layout<nz_layout_ptn, 16>(kTokens, kGroup));
+            mmad_params mp(static_cast<std::uint16_t>(kTokens), static_cast<std::uint16_t>(kGroup), static_cast<std::uint16_t>(kGroup), unit_flag_mode::disable, init);
+            mmad(make_mmad(mmad_operation{}, mmad_trait_default{}).with(mp), c, a, b);
         } else {
-            auto a = MakeTensor(MakeMemPtr(l0a + block), MakeFrameLayout<NZLayoutPtn, bfloat16_t>(kGroup, kGroup));
-            auto b = MakeTensor(MakeMemPtr(l0b + kL0TableElems + G * kFractalElems), MakeFrameLayout<ZNLayoutPtn, bfloat16_t>(kGroup, kTokens));
-            auto c = MakeTensor(MakeMemPtr(c_ptr), MakeFrameLayout<NZLayoutPtn, 16>(kGroup, kTokens));
-            MmadParams mp(static_cast<std::uint16_t>(kGroup), static_cast<std::uint16_t>(kTokens), static_cast<std::uint16_t>(kGroup), 0, init);
-            Mmad(MakeMmad(MmadOperation{}, MmadTraitDefault{}).with(mp), c, a, b);
+            auto a = make_tensor(make_mem_ptr(l0a + block), make_frame_layout<nz_layout_ptn, bfloat16_t>(kGroup, kGroup));
+            auto b = make_tensor(make_mem_ptr(l0b + kL0TableElems + G * kFractalElems), make_frame_layout<zn_layout_ptn, bfloat16_t>(kGroup, kTokens));
+            auto c = make_tensor(make_mem_ptr(c_ptr), make_frame_layout<nz_layout_ptn, 16>(kGroup, kTokens));
+            mmad_params mp(static_cast<std::uint16_t>(kGroup), static_cast<std::uint16_t>(kTokens), static_cast<std::uint16_t>(kGroup), unit_flag_mode::disable, init);
+            mmad(make_mmad(mmad_operation{}, mmad_trait_default{}).with(mp), c, a, b);
         }
     }
 
     template <std::uint32_t PHASE>
     __aicore__ inline void FixpipeChunk(__cc__ float* l0c) {
-        using namespace AscendC::Te;
+        using namespace asc::te;
         constexpr std::uint32_t land = kLandSlot<PHASE>;
         auto* ub = reinterpret_cast<__ubuf__ float*>(kLandBase<land>);
-        FixpipeParams fp;
-        fp.unitFlag = 0;
-        fp.subBlockId = (kOwner<PHASE> == 1u);
+        l0c_to_ub_params fp;
+        fp.unit_flag = unit_flag_mode::disable;
+        fp.sub_block_id = (kOwner<PHASE> == 1u);
         if constexpr (kIsKey<PHASE>) {
-            auto c = MakeTensor(MakeMemPtr(l0c), MakeFrameLayout<NZLayoutPtn, 16>(kTokens, kHeadSize));
-            auto y = MakeTensor(MakeMemPtr(ub), MakeFrameLayout<NDExtLayoutPtn>(kTokens, kHeadSize));
-            Copy(MakeCopy(CopyL0C2UB{}).with(fp), y, c);
+            auto c = make_tensor(make_mem_ptr(l0c), make_frame_layout<nz_layout_ptn, 16>(kTokens, kHeadSize));
+            auto y = make_tensor(make_mem_ptr(ub), make_frame_layout<nd_ext_layout_ptn>(kTokens, kHeadSize));
+            copy(make_copy(copy_l0c_to_ub{}).with(fp), y, c);
         } else {
-            auto c = MakeTensor(MakeMemPtr(l0c), MakeFrameLayout<NZLayoutPtn, 16>(kHeadSize, kTokens));
-            auto y = MakeTensor(MakeMemPtr(ub), MakeFrameLayout<NDExtLayoutPtn>(kHeadSize, kTokens));
-            Copy(MakeCopy(CopyL0C2UB{}).with(fp), y, c);
+            auto c = make_tensor(make_mem_ptr(l0c), make_frame_layout<nz_layout_ptn, 16>(kHeadSize, kTokens));
+            auto y = make_tensor(make_mem_ptr(ub), make_frame_layout<nd_ext_layout_ptn>(kHeadSize, kTokens));
+            copy(make_copy(copy_l0c_to_ub{}).with(fp), y, c);
         }
     }
 
@@ -1042,13 +1042,13 @@ public:
         AscendC::SetFlag<AscendC::HardEvent::MTE2_MTE1>(kEvtEpilogue);
         AscendC::WaitFlag<AscendC::HardEvent::MTE2_MTE1>(kEvtEpilogue);
 
-        using namespace AscendC::Te;
-        auto ta_src = MakeTensor(MakeMemPtr(l1_table), MakeFrameLayout<NZLayoutPtn, bfloat16_t>(kTableRows, kGroup));
-        auto ta_dst = MakeTensor(MakeMemPtr(cube_.l0_a), MakeFrameLayout<NZLayoutPtn, bfloat16_t>(kTableRows, kGroup));
-        Copy(MakeCopy(CopyL12L0A{}), ta_dst, ta_src);
-        auto tb_src = MakeTensor(MakeMemPtr(l1_table), MakeFrameLayout<ZNLayoutPtn, bfloat16_t>(kGroup, kTableRows));
-        auto tb_dst = MakeTensor(MakeMemPtr(cube_.l0_b), MakeFrameLayout<ZNLayoutPtn, bfloat16_t>(kGroup, kTableRows));
-        Copy(MakeCopy(CopyL12L0B{}), tb_dst, tb_src);
+        using namespace asc::te;
+        auto ta_src = make_tensor(make_mem_ptr(l1_table), make_frame_layout<nz_layout_ptn, bfloat16_t>(kTableRows, kGroup));
+        auto ta_dst = make_tensor(make_mem_ptr(cube_.l0_a), make_frame_layout<nz_layout_ptn, bfloat16_t>(kTableRows, kGroup));
+        copy(make_copy(copy_l1_to_l0a{}), ta_dst, ta_src);
+        auto tb_src = make_tensor(make_mem_ptr(l1_table), make_frame_layout<zn_layout_ptn, bfloat16_t>(kGroup, kTableRows));
+        auto tb_dst = make_tensor(make_mem_ptr(cube_.l0_b), make_frame_layout<zn_layout_ptn, bfloat16_t>(kGroup, kTableRows));
+        copy(make_copy(copy_l1_to_l0b{}), tb_dst, tb_src);
         AscendC::SetFlag<AscendC::HardEvent::MTE1_M>(kEvtEpilogue);
         AscendC::WaitFlag<AscendC::HardEvent::MTE1_M>(kEvtEpilogue);
 

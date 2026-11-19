@@ -146,6 +146,7 @@ struct Launch {
 // The element type as the operator's own enum, refusing anything the kernel has no instance for
 // rather than returning a value the `_impl` dispatch would silently drop on the floor. A launch that
 // quietly computes nothing is the exact failure this operator's audit trail exists to prevent.
+#if !defined(__CCE_AICORE__)
 inline vllm_ascend::AscendType ascend_type_of(std::uint32_t element_type)
 {
     switch (element_type) {
@@ -154,6 +155,7 @@ inline vllm_ascend::AscendType ascend_type_of(std::uint32_t element_type)
     default: throw std::invalid_argument("fused decode launch with no kernel instance for its element type");
     }
 }
+#endif
 // How wide one output element is, for a caller sizing its output or gate buffer. Both instances are
 // 16-bit; see the kBasisUbBytes note above for why that is load-bearing rather than incidental.
 constexpr std::uint32_t element_bytes(std::uint32_t) { return 2; }

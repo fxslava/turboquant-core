@@ -202,6 +202,7 @@ DecodeTilingStatus build_decode_tiling(const DecodeTilingRequest &r,
 
 // The launch descriptor's tiling subset, taken from whatever launch structure the caller has.
 // Templated rather than overloaded on `Launch` so this header stays free of the launch ABI.
+#if !defined(__CCE_AICORE__)
 template <typename LaunchT>
 inline DecodeTilingRequest decode_tiling_request(const LaunchT &c)
 {
@@ -230,6 +231,8 @@ inline std::size_t decode_tiling_bytes_for(const LaunchT &c)
 {
     return decode_tiling_bytes(c.tokens, c.splits, c.grid);
 }
+
+#endif
 
 }  // namespace ascend_micro::fused_decode
 
