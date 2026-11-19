@@ -101,13 +101,6 @@ static_assert(kAlignedSplits(1) == 8 && kAlignedSplits(8) == 8);
 // Every legal split count is one C0 block: no K tiling, one Mmad.
 static_assert(kAlignedSplits(kMaxSplits) == kC0Floats);
 
-// Those padding lanes are a CORRECTNESS hazard and not merely waste, because section 3 floods every
-// GM payload with 0x7FC0BEEF (an fp32 quiet NaN) and 0 * NaN is NaN, not 0. Two independent
-// guards, both exercised by the S < 8 rungs of the ladder:
-//   * the weight row's lanes S..7 are zeroed, so a padding partial cannot reach the sum, and
-//   * DataCopy's DN2NZ conversion zero-fills the destination when dValue * sizeof(T) is not
-//     32-byte aligned, which is exactly the S < 8 case.
-// Relying on either alone would be relying on an undocumented half of the pair.
 constexpr bool kZeroPadWeightLanes = true;
 
 // ---------------------------------------------------------------------------------------------
@@ -350,12 +343,6 @@ static_assert(!kValidReduceGeometry(kHeadSize, 9) && !kValidReduceGeometry(128, 
 // gives the Fixpipe sixteen live rows to split between the two vector subcores, which is what
 // §5's idle-AIV1 defect needed.
 //
-// TWO PROPERTIES OF THE BLOCK-DIAGONAL A THAT ARE GATES, NOT REMARKS
-//
-//  * A dead row cannot contaminate a live one. Out[q, c] reads only K block q, so garbage in
-//    B's block q -- a ragged batch's padding row, whose L1 fractal still holds the 0x7FC0BEEF
-//    flood of §3 -- reaches output row q and nothing else. The M = 1 form had no such
-//    guarantee: there, one NaN lane in K poisoned every channel of the product.
 //  * The padding lane guards of the M = 1 form still apply WITHIN a row. For splits < 8 the
 //    weight row's lanes s..7 are zero and DN2NZ zero-fills the destination to the 32-byte
 //    boundary, which is the S < 8 case; both halves of that pair are kept.
@@ -403,9 +390,6 @@ static_assert(kSliceL1Bytes == kGemmBatchRows * kSliceFractalFloats * kFloatByte
 // rather than a paired hand-off.
 constexpr std::uint32_t kSliceSlots = 2;
 
-// Dn2NzParams for the batched slice ingest. dnNum is the batch's live row count, so a ragged
-// batch fetches exactly its live rows and the padding fractals are never written -- which is
-// safe only because of the block-diagonal containment above.
 constexpr std::uint32_t kSliceDn2NzNValue = kGemmSliceCols;
 constexpr std::uint32_t kSliceDn2NzDstNzC0Stride = kGemmSliceCols;
 constexpr std::uint32_t kSliceDn2NzDstNzNStride = 1;
@@ -440,13 +424,6 @@ static_assert(kSliceSrcMatrixStrideFloats(8) == 8 * kPartialStride);
 // and erase it. With static halves each core only ever touches its own eight fractals and the
 // race cannot be constructed.
 //
-// The cost of static halves is that mSize is always kGemmBatchRows and k always kGemmKMax, so
-// a ragged batch's dead fractals ARE read by the Mmad. That is safe only because of the
-// block-diagonal containment above: output row m reads K block m alone, so a dead fractal's
-// stale or flooded content reaches its own output row and no live one, and no vector
-// instruction ever reads a dead row (NormalizeHeads and WriteHeads are given the live count).
-// It is also why each core zeroes its dead rows' diagonal blocks per batch: a dead row's
-// garbage must not depend on which batch ran before it.
 constexpr std::uint32_t kGemmPanelRows = kGemmBatchRows / 2;  // 8, the Fixpipe's split point
 
 // Live rows subcore `sub` must normalise and write, and the batch row its first one occupies.
@@ -475,6 +452,19 @@ static_assert(kGemmLiveRowsOf(1, 0) == 1 && kGemmLiveRowsOf(1, 1) == 0);
 static_assert(kGemmLiveRowsOf(kGemmBatchRows, 0) == kGemmPanelRows &&
               kGemmLiveRowsOf(kGemmBatchRows, 1) == kGemmPanelRows);
 static_assert(kGemmFirstTaskOf(5, 1) == 3 && kGemmFirstRowOf(1) == 8);
+
+ASCEND_MICRO_REDUCE_FN std::uint32_t kGemmPaddingFirstRowOf(std::uint32_t live, std::uint32_t sub)
+{
+    return kGemmFirstRowOf(sub) + kGemmLiveRowsOf(live, sub);
+}
+ASCEND_MICRO_REDUCE_FN std::uint32_t kGemmPaddingRowsOf(std::uint32_t live, std::uint32_t sub)
+{
+    return kGemmPanelRows - kGemmLiveRowsOf(live, sub);
+}
+static_assert(kGemmPaddingFirstRowOf(2, 0) == 1 && kGemmPaddingRowsOf(2, 0) == 7);
+static_assert(kGemmPaddingFirstRowOf(2, 1) == 9 && kGemmPaddingRowsOf(2, 1) == 7);
+static_assert(kGemmPaddingRowsOf(kGemmBatchRows, 0) == 0 &&
+    kGemmPaddingRowsOf(kGemmBatchRows, 1) == 0);
 
 // Budgets the batched form adds. Two batch slots (the AIV stages batch b + 1's weights while
 // the Cube multiplies b and normalises b - 1) and two inner slice slots.

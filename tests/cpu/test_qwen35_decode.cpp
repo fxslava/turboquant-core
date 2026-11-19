@@ -7,9 +7,38 @@
 
 namespace bench = qwen35_bench;
 
+void check_predicate_lifetime()
+{
+    using Layout = bench::tq::TelemetryPredicateLayout;
+    for (std::uint32_t improved = 0; improved < 8; ++improved) {
+        std::array<std::uint8_t, Layout::kArenaFloats * sizeof(float)> arena{};
+        arena[Layout::kPosition * sizeof(float)] = 1u << bench::tq::kTelemetryPosLane;
+        arena[Layout::kPage * sizeof(float)] = 1u << bench::tq::kTelemetryPageLane;
+        std::uint32_t dynamic = 0;
+        for (std::uint32_t head = 0; head < 3; ++head)
+            if ((improved >> head) & 1u) dynamic |= 0xffu << (head * 8);
+        std::memcpy(arena.data() + Layout::kArgmax * sizeof(float), &dynamic, sizeof(dynamic));
+        std::uint16_t position_mask = 0, page_mask = 0;
+        std::memcpy(&position_mask, arena.data() + Layout::kPosition * sizeof(float), sizeof(position_mask));
+        std::memcpy(&page_mask, arena.data() + Layout::kPage * sizeof(float), sizeof(page_mask));
+        std::array<float, 16> tail{};
+        tail[bench::tq::kPartialMaxLane] = 1.25f;
+        tail[bench::tq::kPartialSumLane] = 64.0f;
+        for (std::size_t lane = 0; lane < tail.size(); ++lane) {
+            if ((position_mask >> lane) & 1u) tail[lane] = 37.0f;
+            if ((page_mask >> lane) & 1u) tail[lane] = 2.0f;
+        }
+        if (tail[bench::tq::kPartialMaxLane] != 1.25f || tail[bench::tq::kPartialSumLane] != 64.0f ||
+            tail[bench::tq::kTelemetryPosLane] != 37.0f || tail[bench::tq::kTelemetryPageLane] != 2.0f)
+            throw std::runtime_error("argmax scratch corrupted the partial-tail publication masks");
+    }
+    std::puts("PASS telemetry: all three-head improvement masks preserve softmax max/sum");
+}
+
 int main()
 {
     try {
+        check_predicate_lifetime();
         for (auto block : bench::kBlocks) for (auto batch : bench::kBatches)
             for (auto context : bench::kContexts) for (auto splits : bench::kSplits) {
                 const bench::Geometry g{block, batch, context, splits};

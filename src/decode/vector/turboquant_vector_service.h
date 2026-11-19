@@ -663,11 +663,13 @@ private:
     static constexpr uint32_t kProbeDiff     = 256;  // 64 floats: row diff / improvement test
     static constexpr uint32_t kProbeSel      = 320;  // 64 floats: selected indices
     static constexpr uint32_t kProbeStage    = 384;  // 8 floats: MIN-reduce landing
-    static constexpr uint32_t kProbePred     = 392;  // 8 floats: predicate, lane 1 of the tail
-    static constexpr uint32_t kProbePred2    = 400;  // 8 floats: predicate, lane 2 of the tail
+    static constexpr uint32_t kProbePred = TelemetryPredicateLayout::kPosition;
+    static constexpr uint32_t kProbePred2 = TelemetryPredicateLayout::kPage;
     static constexpr uint32_t kProbeCandPos  = 408;  // 64 floats: candidate position blocks
     static constexpr uint32_t kProbeCandPage = 472;  // 64 floats: candidate page blocks
-    static constexpr uint32_t kProbeArenaFloats = 536;
+    static constexpr uint32_t kProbeArgmaxPred = TelemetryPredicateLayout::kArgmax;
+    static constexpr uint32_t kProbeArenaFloats = TelemetryPredicateLayout::kArenaFloats;
+    static_assert(kProbeCandPage + kHalfRows * kFp32PerBlock <= kProbeArgmaxPred);
 
     __aicore__ inline void ComputeLayout(const uint32_t numHeads, const uint32_t numKvHeads, const uint32_t headSize,
                                          const uint32_t blockSize, const uint32_t numSplits, const float scale)
@@ -937,7 +939,7 @@ private:
                                                                      arena[kProbeStage],
                                                                      arena[kProbeCandPos],
                                                                      arena[kProbeCandPage],
-                                                                     arena[kProbePred],
+                                                                     arena[kProbeArgmaxPred],
                                                                      contextBase,
                                                                      logicalPage};
         ascend_micro::vector_online_softmax_probabilities_probed(engine);

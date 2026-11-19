@@ -203,6 +203,38 @@ DecodeTilingStatus build_decode_tiling(const DecodeTilingRequest &r,
 // The launch descriptor's tiling subset, taken from whatever launch structure the caller has.
 // Templated rather than overloaded on `Launch` so this header stays free of the launch ABI.
 #if !defined(__CCE_AICORE__)
+struct DecodeLaunchSplit {
+    std::uint32_t grid;
+    std::uint32_t tasks_per_block;
+    std::uint32_t reduce_tasks_per_block;
+    std::uint32_t prologue_vectors_per_block;
+    std::uint32_t chunks_per_group;
+    std::uint32_t tasks;
+};
+
+inline DecodeLaunchSplit decode_launch_split(const DecodeTilingRequest &r, const std::uint32_t max_grid)
+{
+    const auto ceil_div = [](const std::uint32_t a, const std::uint32_t b) -> std::uint32_t {
+        return b ? (a + b - 1) / b : 0;
+    };
+    const std::uint32_t group_heads = r.num_kv_heads ? r.num_heads / r.num_kv_heads : r.num_heads;
+
+    std::uint32_t heads_per_task = r.heads_per_task > group_heads ? group_heads : r.heads_per_task;
+    if (!heads_per_task) heads_per_task = 1;
+
+    DecodeLaunchSplit s{};
+    s.chunks_per_group = ceil_div(group_heads, heads_per_task);
+    s.tasks = r.tokens * r.num_kv_heads * r.splits * s.chunks_per_group;
+    const std::uint32_t reduce_total = r.tokens * r.num_heads;
+
+    const std::uint32_t live_tasks = s.tasks ? s.tasks : 1u;
+    s.grid = live_tasks < max_grid ? live_tasks : max_grid;
+    s.tasks_per_block = ceil_div(s.tasks, s.grid);
+    s.reduce_tasks_per_block = ceil_div(reduce_total, s.grid);
+    s.prologue_vectors_per_block = s.reduce_tasks_per_block;
+    return s;
+}
+
 template <typename LaunchT>
 inline DecodeTilingRequest decode_tiling_request(const LaunchT &c)
 {

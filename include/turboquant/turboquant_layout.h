@@ -85,6 +85,17 @@ constexpr uint32_t kTelemetryMaxLane = kPartialMaxLane;
 constexpr uint32_t kTelemetryPosLane = 1;
 constexpr uint32_t kTelemetryPageLane = 2;
 constexpr float kTelemetryInvalid = -1.0f;
+struct TelemetryPredicateLayout {
+    static constexpr uint32_t kPosition = 392;
+    static constexpr uint32_t kPage = 400;
+    static constexpr uint32_t kArgmax = 536;
+    static constexpr uint32_t kWidth = 8;
+    static constexpr uint32_t kArenaFloats = kArgmax + kWidth;
+};
+static_assert(TelemetryPredicateLayout::kPosition + TelemetryPredicateLayout::kWidth <=
+    TelemetryPredicateLayout::kPage);
+static_assert(TelemetryPredicateLayout::kPage + TelemetryPredicateLayout::kWidth <=
+    TelemetryPredicateLayout::kArgmax);
 static_assert(kTelemetryPosLane > kPartialMaxLane && kTelemetryPageLane < kPartialSumLane,
               "the probe lanes must sit in the first tail block's dead padding");
 // Positions and pages travel as fp32: exact for every geometry the launch gate admits

@@ -258,7 +258,6 @@ int main(int argc, char** argv)
 #if defined(TQ_BENCH_CAMODEL)
         if (!canary) throw std::invalid_argument("CAModel permits only --static or --canary (at most 128 tokens)");
 #endif
-        if (canary && argc != 4) throw std::invalid_argument("the canary geometry is fixed");
         const std::string id(argv[3]);
         std::size_t used = 0;
         const int device = std::stoi(id, &used);
@@ -266,10 +265,10 @@ int main(int argc, char** argv)
         std::uint32_t only_block = 0, only_batch = 0, only_split = 0;
         for (int arg = 4; arg < argc; arg += 2) {
             const std::string value(argv[arg + 1]);
+            const std::string key(argv[arg]);
             used = 0;
             const int number = std::stoi(value, &used);
             if (used != value.size() || number <= 0) throw std::invalid_argument("invalid verification filter");
-            const std::string key(argv[arg]);
             if (key == "--block-size" && std::find(bench::kBlocks.begin(), bench::kBlocks.end(), number) != bench::kBlocks.end())
                 only_block = static_cast<std::uint32_t>(number);
             else if (key == "--batch-size" && std::find(bench::kBatches.begin(), bench::kBatches.end(), number) != bench::kBatches.end())
@@ -278,6 +277,8 @@ int main(int argc, char** argv)
                 only_split = static_cast<std::uint32_t>(number);
             else throw std::invalid_argument("unsupported verification filter");
         }
+        if (canary && (only_block != 0 || only_batch != 0 || only_split > 2))
+            throw std::invalid_argument("canary permits only --split-k 1 or 2");
         Session session(device);
         const char* soc = aclrtGetSocName();
         if (!soc || std::string(soc).find("Ascend950PR") != 0)
@@ -285,8 +286,8 @@ int main(int argc, char** argv)
         std::fprintf(stderr, "device=%d soc=%s mode=%s output_stage=0 fused_context_limit=0\n", device, soc,
             canary ? "canary" : (verify_only ? "verify" : "benchmark"));
         if (canary) {
-            run_geometry(session, 64, 1, 64, true, 1);
-            run_geometry(session, 64, 1, 128, true, 2);
+            if (only_split == 0 || only_split == 1) run_geometry(session, 64, 1, 64, true, 1);
+            if (only_split == 0 || only_split == 2) run_geometry(session, 64, 1, 128, true, 2);
             return 0;
         }
         for (auto block : bench::kBlocks) for (auto batch : bench::kBatches)

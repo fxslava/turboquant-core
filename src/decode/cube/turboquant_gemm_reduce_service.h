@@ -957,11 +957,6 @@ private:
                                   stats[kLaneWeight + i * kFp32PerBlock], kFp32PerBlock);
             }
         }
-        // A dead row's diagonal block is zeroed rather than left holding a previous batch's
-        // weights. Its product row is garbage either way -- the block-diagonal A confines a
-        // dead fractal's contribution to its own output row, and no vector instruction reads
-        // that row -- but garbage that does not depend on which batch ran before it is the
-        // difference between a reproducible run and a puzzling one.
         for (uint32_t i = mine; i < kGemmPanelRows; ++i) {
             AscendC::DataCopy(cube[kWeightRowOffsetFloats(firstRow + i)], zero, kFp32PerBlock);
         }
@@ -1160,9 +1155,19 @@ private:
         params.dstNzNStride = static_cast<uint16_t>(kSliceDn2NzDstNzNStride);
         params.dstNzMatrixStride = kSliceDn2NzDstMatrixStrideFloats;
         const uint32_t column = j * kGemmSliceCols;
-        // Two bursts, because the subcore halves are static: subcore 0's rows occupy fractals
-        // 0.. and subcore 1's fractals kGemmPanelRows.., with the dead fractals between them
-        // untouched. The contract header says why that is the right trade.
+        if (j < kSliceSlots) {
+            const uint32_t live = rows0 + rows1;
+            for (uint32_t sub = 0; sub < 2; ++sub) {
+                const uint32_t padding = kGemmPaddingRowsOf(live, sub);
+                if (padding == 0) continue;
+                AscendC::InitConstValueParams<float> zero;
+                zero.repeatTimes = 1;
+                zero.blockNum = static_cast<uint16_t>(padding * kFractalBytes / kC0Bytes);
+                zero.dstGap = 0;
+                zero.initValue = 0.0f;
+                AscendC::Fill(sliceL1[kGemmPaddingFirstRowOf(live, sub) * kSliceFractalFloats], zero);
+            }
+        }
         params.dnNum = static_cast<uint16_t>(rows0);
         AscendC::DataCopy(sliceL1, workspaceGm_[PartialRowOf(firstTask) + column], params);
         if (rows1) {
@@ -1193,10 +1198,6 @@ private:
     __aicore__ inline void MmadSlice(const uint32_t ss)
     {
         AscendC::MmadParams mmad;
-        // Dense on both axes, every batch: kGemmBatchRows output rows and kGemmSliceCols
-        // channels. m and k are constant because the subcore halves are static -- a ragged
-        // batch's dead fractals are read and their products confined to their own rows, which
-        // is the block-diagonal containment the contract header states.
         mmad.m = static_cast<uint16_t>(kGemmBatchRows);
         mmad.n = static_cast<uint16_t>(kGemmSliceCols);
         mmad.k = static_cast<uint16_t>(kGemmKMax);

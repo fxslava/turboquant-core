@@ -1,0 +1,77 @@
+Qwen3.5 2K sanity failure: source diagnosis and synchronization
+
+The first two preflight calls are page=128, batch=1, context=2048, splits=1 and 2.
+kBlocks is {128,1024}, but the split loop runs before the next batch or page size.
+The user supplied these physical Ascend950PR_9579 results:
+  split 1: relative_l2=0.00138769, max_abs=0.00751397
+  split 2: relative_l2=0.317554, max_abs=1.16969
+  host-merged partials versus golden: relative_l2=0.317527
+  device result versus host-merged partials: relative_l2=0.00113101
+Only heads 3..5 have substantially incorrect merged partials. This identifies
+corrupted attention partials, rather than inaccurate arithmetic in the final merge.
+
+Root cause
+----------
+BeginArgmaxProbe creates the fixed position-publication predicate (only lane 1)
+at kProbePred, offset 392 floats in queryInBuf_. The online argmax fold was also
+given arena[kProbePred] as its temporary predicate. Its comparisons replace the
+fixed mask with equality/improvement masks, with eight repeated bits per head.
+StagePartials then uses that overwritten mask in Select over the 16-float tail.
+An improvement in the first head can overwrite lane 0 (the partial maximum);
+an improvement in the second can overwrite lane 8 (the softmax mass). Argmax
+positions are substituted into the statistics that Split-K reduction consumes.
+The fused split=1 path normalizes its output before publishing the telemetry
+record, so its numerical output can pass despite the same bad publication mask.
+
+Fix
+---
+Give argmax comparisons a separate aligned 32-byte predicate at offset 536.
+Keep position and page publication predicates at offsets 392 and 400. The arena
+now spans 544 floats, still inside the existing 8192-byte query staging buffer.
+No GM layout, tiling stride, head partition, kernel argument, UB allocation or
+numerical tolerance was relaxed. The golden threshold remains relative_l2 < 0.01.
+The predicate offsets are shared with a host regression that exercises all eight
+three-head improvement masks and checks that max/sum lanes remain unchanged.
+
+Synchronization with C:/vllm-ascend
+---------------------------------
+That checkout has already removed the inline attention telemetry from its vector
+service and softmax leaf, so this particular predicate alias is absent there.
+Its separate telemetry system is preserved; the inline probe is not reintroduced.
+Its unused Split-K B-fractal zero-fill fix is imported into turboquant-core.
+The executable tokens of turboquant_gemm_reduce.hpp and the Cube reducer service
+match after ignoring comments, whitespace and repository-specific include paths.
+The shared decode_launch_split helper and dense-padding/launch-coverage host
+regression are also imported. Both repositories have the same additional layout
+regressions for 16x128 and 2x1024 pages with one KV head and D=256.
+Existing unrelated changes in the vLLM checkout are left in place.
+
+Verification and execution policy
+---------------------------------
+Host tests pass for physical tile coverage of all 64 launch configurations, both
+2K page sizes, telemetry predicate lifetime, dense poisoned padding, dispatch,
+and layout bijections. The 2K host golden difference between page sizes is
+2.20e-15 (batch 1) and 2.34e-15 (batch 2) relative L2.
+The four vLLM host contract gates pass with external pytest plugins disabled.
+The standalone telemetry_dump and golden_decode_oracle tests also fail on the
+unchanged committed baseline; those existing failures are not attributed to this
+patch. Their baseline output is retained under build-qwen35-fix/baseline-head/.
+
+CAModel is restricted to one 64-token page at split=1, two 64-token pages at
+split=2, and a synthetic partial-reduction canary. No 2K CAModel result is claimed.
+The simulator benchmark target rejects --verify and --run before ACL startup.
+Use --canary --device 0, optionally --split-k 1 or --split-k 2.
+Before this fix, isolated reduction arithmetic passed at relative L2 0 (split 1)
+and 0.00173810671 (split 2), including the shared-pool offset control. These are
+reducer controls, not post-fix full-decode verification.
+
+Post-fix device build and tiny full-decode verification are recorded below when
+completed. Physical 2K parity must be checked on the 950PR after rebuilding the
+kernel library as well as the executable; an old library retains the bug.
+
+Physical commands, never run on CAModel:
+  bench_qwen35_decode --verify --device 2 --block-size 128 --batch-size 1 --split-k 2
+  bench_qwen35_decode --verify --device 2 --block-size 1024 --batch-size 1 --split-k 2
+  bench_qwen35_decode --run --device 2
+--verify runs only golden checks. --run checks all 16 short-context combinations
+before starting the 64-configuration timing sweep.
