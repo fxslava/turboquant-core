@@ -33,7 +33,7 @@ function(add_vendored_decode_probe)
   ascendc_compile_definitions(tq_decode_vendored_npu PRIVATE
       ASCEND_MICRO_CANN_LAUNCH ASCEND_TQ_FUSED_DECODE_GEMM_REDUCE=1 TURBOQUANT_INGRESS_NZ=1)
   ascendc_compile_options(tq_decode_vendored_npu PRIVATE
-      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler
       -DASCEND_MICRO_CANN_LAUNCH
       -DASCEND_TQ_FUSED_DECODE_GEMM_REDUCE=1

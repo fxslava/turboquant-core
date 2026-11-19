@@ -15,6 +15,7 @@ set(SOC_VERSION "Ascend950PR_9599" CACHE STRING "Device SoC / CAModel variant")
 
 set(TQ_CANN_SYSTEM_OPTIONS "")
 foreach(path IN ITEMS
+    include
     asc/impl/adv_api asc/impl/basic_api asc/impl/c_api
     asc/impl/basic_api/reg_compute asc/impl/simt_api asc/impl/utils
     asc asc/include asc/include/adv_api asc/include/basic_api

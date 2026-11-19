@@ -14,6 +14,9 @@ function(add_turboquant_sim_targets)
   set(RUN_MODE sim)
   set(SRC "${CMAKE_CURRENT_SOURCE_DIR}")
   set(SIM_LIB_DIR "${ASCEND_HOME_PATH}/tools/simulator/${SOC_VERSION}/lib")
+  if(NOT EXISTS "${SIM_LIB_DIR}/libmodel_top.so" AND SOC_VERSION MATCHES "^Ascend950")
+    set(SIM_LIB_DIR "${ASCEND_HOME_PATH}/x86_64-linux/simulator/dav_3510/lib")
+  endif()
   # The CAModel runner needs the HAL devlib and the simulator DSOs on its loader path; the
   # install RPATH already carries $ORIGIN and the toolkit lib64, not these. ctest therefore runs
   # the canary with the same environment `source set_env.sh` would have produced.
@@ -26,7 +29,7 @@ function(add_turboquant_sim_targets)
   set_property(SOURCE src/prefill/turboquant_reshape_batch.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/prefill/turboquant_reshape_batch.cpp)
   ascendc_compile_definitions(tq_prefill_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_prefill_sim PRIVATE
-      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH)
 
   # The same writer with the write-time NZ-tiled ingress on. Its own library, not an option on
@@ -37,14 +40,14 @@ function(add_turboquant_sim_targets)
   set_property(SOURCE src/prefill/turboquant_reshape_batch.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/prefill/turboquant_reshape_batch.cpp)
   ascendc_compile_definitions(tq_prefill_nz_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_INGRESS_NZ=1)
   ascendc_compile_options(tq_prefill_nz_sim PRIVATE
-      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
 
   ascendc_library(tq_scatter_sim SHARED src/scatter/turboquant_reshape_scatter.cpp)
   set_property(SOURCE src/scatter/turboquant_reshape_scatter.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/scatter/turboquant_reshape_scatter.cpp)
   ascendc_compile_definitions(tq_scatter_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_scatter_sim PRIVATE
-      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH)
 
   # The same scatter writer with the NZ-tiled ingress on. Its own library for the reason given
@@ -54,14 +57,14 @@ function(add_turboquant_sim_targets)
   set_property(SOURCE src/scatter/turboquant_reshape_scatter.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/scatter/turboquant_reshape_scatter.cpp)
   ascendc_compile_definitions(tq_scatter_nz_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_INGRESS_NZ=1)
   ascendc_compile_options(tq_scatter_nz_sim PRIVATE
-      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
 
   ascendc_library(tq_decode_sim SHARED src/decode/turboquant_fused_decode.cpp)
   set_property(SOURCE src/decode/turboquant_fused_decode.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/decode/turboquant_fused_decode.cpp)
   ascendc_compile_definitions(tq_decode_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_decode_sim PRIVATE
-      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS} ${TQ_REDUCE_DEFINES} ${TQ_TELEMETRY_DEFINES}
+      -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS} ${TQ_REDUCE_DEFINES} ${TQ_TELEMETRY_DEFINES}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH
       "-I${SRC}/src/decode" "-I${SRC}/src/common" "-I${SRC}/include")
 

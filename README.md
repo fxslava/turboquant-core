@@ -8,7 +8,7 @@ Everything here is extracted **exclusively** from
 `vllm-ascend/csrc`, from the harness root (`include/`, `tests/`, `routines/`), or from the
 `baseline/` and `fused_decode/` prototype trees.
 
-Target: Ascend 950PR / arch35 / dav-3510, CANN 9.2.0-beta.2, `__NPU_ARCH__ == 3510`.
+Target: Ascend 950PR / arch35 / dav-3510, CANN 9.2.1, `__NPU_ARCH__ == 3510`.
 
 ## Build and test
 
@@ -63,6 +63,20 @@ Run it in the CAModel environment after configuring the simulator leg:
 cmake --build build --target test_dirty_data_canary_sim -j16
 ctest --test-dir build -R '^dirty_tail_canary$' --output-on-failure
 ```
+
+The Tensor API sources use the current `asc::te` interface. Select the installed release
+explicitly with `-DASCEND_HOME_PATH=/path/to/cann-9.2.1` when configuring either device leg;
+the older 9.2.0-beta.2 headers do not provide this interface.
+
+CANN 9.2.1's legacy stub generator leaves its overflow-status argument unused in non-debug
+kernels. Apply the included parameter-annotation fix once before building with `-Wextra`:
+
+```bash
+patch -p1 -d "$ASCEND_HOME_PATH" < cmake/patches/cann-9.2.1-unused-overflow-parameter.patch
+```
+
+This SDK patch marks only that generated parameter `[[maybe_unused]]`; it changes no kernel
+arguments or behavior and adds no warning-suppression flags.
 
 ## Layout
 

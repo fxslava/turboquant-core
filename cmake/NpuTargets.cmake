@@ -13,7 +13,7 @@ function(add_turboquant_npu_targets)
   set_property(SOURCE src/prefill/turboquant_reshape_batch.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/prefill/turboquant_reshape_batch.cpp)
   ascendc_compile_definitions(tq_prefill_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_prefill_npu PRIVATE
-      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH)
 
   # The same writer with the write-time NZ-tiled ingress on; see SimTargets.cmake for why it is
@@ -22,14 +22,14 @@ function(add_turboquant_npu_targets)
   set_property(SOURCE src/prefill/turboquant_reshape_batch.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/prefill/turboquant_reshape_batch.cpp)
   ascendc_compile_definitions(tq_prefill_nz_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_INGRESS_NZ=1)
   ascendc_compile_options(tq_prefill_nz_npu PRIVATE
-      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
 
   ascendc_library(tq_scatter_npu SHARED src/scatter/turboquant_reshape_scatter.cpp)
   set_property(SOURCE src/scatter/turboquant_reshape_scatter.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/scatter/turboquant_reshape_scatter.cpp)
   ascendc_compile_definitions(tq_scatter_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_scatter_npu PRIVATE
-      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH)
 
   # The same scatter writer with the NZ-tiled ingress on; see SimTargets.cmake.
@@ -37,14 +37,14 @@ function(add_turboquant_npu_targets)
   set_property(SOURCE src/scatter/turboquant_reshape_scatter.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/scatter/turboquant_reshape_scatter.cpp)
   ascendc_compile_definitions(tq_scatter_nz_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_INGRESS_NZ=1)
   ascendc_compile_options(tq_scatter_nz_npu PRIVATE
-      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
 
   ascendc_library(tq_decode_npu SHARED src/decode/turboquant_fused_decode.cpp)
   set_property(SOURCE src/decode/turboquant_fused_decode.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/decode/turboquant_fused_decode.cpp)
   ascendc_compile_definitions(tq_decode_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_decode_npu PRIVATE
-      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS} ${TQ_REDUCE_DEFINES} ${TQ_TELEMETRY_DEFINES}
+      -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS} ${TQ_REDUCE_DEFINES} ${TQ_TELEMETRY_DEFINES}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH
       "-I${SRC}/src/decode" "-I${SRC}/src/common" "-I${SRC}/include")
 
