@@ -104,6 +104,7 @@ function(add_turboquant_npu_targets)
   add_npu_runner(test_nz_ingress_canary_npu tests/npu/test_nz_ingress_canary.cpp
       tq_prefill_nz_npu)
   add_npu_runner(test_fused_decode_e2e_npu tests/npu/test_fused_decode_e2e.cpp tq_decode_npu)
+  add_npu_runner(bench_qwen35_decode tests/npu/bench_qwen35_decode.cpp tq_decode_npu)
 
   # The golden-dump comparison runners on the physical device: the same source and the same
   # per-kernel split as the CAModel ones in SimTargets.cmake. The dumps are host-generated
@@ -124,6 +125,7 @@ function(add_turboquant_npu_targets)
       DEPENDS tq_prefill_npu tq_prefill_nz_npu tq_scatter_npu tq_scatter_nz_npu tq_decode_npu
               test_live_write_npu test_live_write_nz_npu test_nz_ingress_canary_npu
               test_fused_decode_e2e_npu
+              bench_qwen35_decode
               test_golden_prefill_strip_npu test_golden_prefill_nz_npu
               test_golden_scatter_npu test_golden_decode_npu)
 endfunction()

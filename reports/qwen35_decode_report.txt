@@ -1,0 +1,222 @@
+Qwen3.5 fused-decode benchmark preparation — 2026-11-19
+
+Execution scope
+---------------
+The user explicitly requested no benchmark execution. No NPU or CAModel kernel
+was launched, including numerical preflight, warmups, timing, or --static mode.
+All latency and bandwidth fields in qwen35_decode_static.csv are intentionally
+empty and measurement_status is NOT_RUN. No optimal split or measured bottleneck
+can be established from this work.
+
+The workload is exactly B in {1,2}, Hq=6, Hkv=1, D=256, BF16 query/output,
+KV4 signed uniform-grid cache, page size in {128,1024}, context in
+{2048,32768,262144,1048576}, splits in {1,2,4,8}: 64 configurations.
+
+Layout and memory
+-----------------
+The source of truth for cache storage is include/turboquant/turboquant_layout.h,
+not the host descriptor builder alone. NzTiledPackedByte and NzTiledScaleIndex
+define the physical NZ image, and NzScaleSlotFloats(1)=8 defines scale padding.
+For each token of one KV head:
+  packed K: 128 bytes; packed V: 128 bytes;
+  scale slot: 8 float32 = 32 bytes, including K and V scales and six padding lanes.
+  total: 288 bytes, versus BF16/FP16 baseline 1024 bytes.
+The two useful scales occupy 8 bytes; alignment costs another 24 bytes PER TOKEN.
+There is no additional page padding for either page size in this sweep.
+
+Page bytes:       K        V       padded scales       total
+128 tokens:    16384    16384              4096       36864
+1024 tokens:  131072   131072             32768      294912
+
+Compression is exactly 1024/288 = 32/9 = 3.555555...x, for every configuration.
+Savings are 736 * B * seq_len bytes per layer, 71.875% of the baseline.
+Across 64 identical attention layers, multiply each footprint and saving by 64.
+This extrapolation assumes every layer uses the supplied geometry; it does not
+assert that every layer of an actual Qwen3.5 model has this cache layout.
+Cache footprints exclude block tables, query/output, descriptors and workspace;
+the CSV gives workspace and descriptor bytes separately. All 64 CSV rows include
+exact bytes, MiB and GiB for each cache footprint and per-layer saving, plus
+64-layer byte footprints and savings in bytes, MiB and GiB.
+
+Per-layer memory table (compression is 32/9 for every row)
+page B seq_len FP16_bytes TQ_bytes FP16_MiB TQ_MiB FP16_GiB TQ_GiB saved_layer_MiB saved_64_GiB
+128 1 2048 2097152 589824 2 0.5625 0.001953125 0.00054931640625 1.4375 0.08984375
+128 1 32768 33554432 9437184 32 9 0.03125 0.0087890625 23 1.4375
+128 1 262144 268435456 75497472 256 72 0.25 0.0703125 184 11.5
+128 1 1048576 1073741824 301989888 1024 288 1 0.28125 736 46
+128 2 2048 4194304 1179648 4 1.125 0.00390625 0.0010986328125 2.875 0.1796875
+128 2 32768 67108864 18874368 64 18 0.0625 0.017578125 46 2.875
+128 2 262144 536870912 150994944 512 144 0.5 0.140625 368 23
+128 2 1048576 2147483648 603979776 2048 576 2 0.5625 1472 92
+1024 1 2048 2097152 589824 2 0.5625 0.001953125 0.00054931640625 1.4375 0.08984375
+1024 1 32768 33554432 9437184 32 9 0.03125 0.0087890625 23 1.4375
+1024 1 262144 268435456 75497472 256 72 0.25 0.0703125 184 11.5
+1024 1 1048576 1073741824 301989888 1024 288 1 0.28125 736 46
+1024 2 2048 4194304 1179648 4 1.125 0.00390625 0.0010986328125 2.875 0.1796875
+1024 2 32768 67108864 18874368 64 18 0.0625 0.017578125 46 2.875
+1024 2 262144 536870912 150994944 512 144 0.5 0.140625 368 23
+1024 2 1048576 2147483648 603979776 2048 576 2 0.5625 1472 92
+
+Static feasibility
+------------------
+All 64 tuples are statically VALID for this repository's launch ABI. VALID means
+admitted by the source constraints, not execution or numerical proof. The new
+shared benchmark header checks all 64 valid_launch admissions and integer bounds
+at compile time. Plan also calls build_decode_tiling before any eventual launch,
+checks the dense physical mapping, and checks complete, disjoint tile coverage.
+Those runtime host checks were compiled but not executed in this session.
+There is no build_decode_plan symbol in this checkout; build_decode_tiling and
+fused_decode_opt::valid_launch are the applicable implementations.
+
+Each entry below gives status and live splits per sequence. The four split
+columns explicitly account for every tuple; VALID/2 means two nonempty splits.
+
+page   B    seq_len    pages/seq      split=1    split=2    split=4    split=8
+128    1       2048           16      VALID/1    VALID/2    VALID/4    VALID/8
+128    1      32768          256      VALID/1    VALID/2    VALID/4    VALID/8
+128    1     262144         2048      VALID/1    VALID/2    VALID/4    VALID/8
+128    1    1048576         8192      VALID/1    VALID/2    VALID/4    VALID/8
+128    2       2048           16      VALID/1    VALID/2    VALID/4    VALID/8
+128    2      32768          256      VALID/1    VALID/2    VALID/4    VALID/8
+128    2     262144         2048      VALID/1    VALID/2    VALID/4    VALID/8
+128    2    1048576         8192      VALID/1    VALID/2    VALID/4    VALID/8
+1024   1       2048            2      VALID/1    VALID/2    VALID/2    VALID/2
+1024   1      32768           32      VALID/1    VALID/2    VALID/4    VALID/8
+1024   1     262144          256      VALID/1    VALID/2    VALID/4    VALID/8
+1024   1    1048576         1024      VALID/1    VALID/2    VALID/4    VALID/8
+1024   2       2048            2      VALID/1    VALID/2    VALID/2    VALID/2
+1024   2      32768           32      VALID/1    VALID/2    VALID/4    VALID/8
+1024   2     262144          256      VALID/1    VALID/2    VALID/4    VALID/8
+1024   2    1048576         1024      VALID/1    VALID/2    VALID/4    VALID/8
+
+For pages < splits, the host leaves descriptors empty, and the kernel publishes
+neutral partials for empty workers. These cases are supported, with reduced
+parallelism; they are not rejected merely because splits exceed page count.
+
+The page is NOT the SRAM staging unit. ReadPlane in
+src/decode/vector/turboquant_vector_service.h stages fixed 64-token tiles:
+8192 bytes of packed data plus 2048 bytes of scales per plane, per ring slot.
+There are three ingest slots, independent of page size. A 1024-token page has
+16 tiles rather than 2, not eightfold UB/L1 allocation.
+The conservative source UB bound is 142304 + 46432 + 3360 + 256 = 192352 bytes,
+under the stricter 192 KiB source assertion as well as the 256 KiB physical UB.
+This leaves 69792 bytes versus 256 KiB for reserve/cache needs. The source's
+basis bound is conservative; it is not a measured compiler allocation census.
+Attention L1 is 103424 bytes; Cube reduction adds 17408 bytes, total 120832 bytes,
+under 512 KiB. Reduction aliases the dead 32768-byte transient UB pool.
+Source L0 assertions also constrain the reduction operands and product buffers.
+
+The largest case (B=2, context=1048576) has 2097152 physical slots, last slot
+2097151; each packed plane is 268435456 bytes, last byte 268435455. Scales are
+67108864 bytes, last byte 67108863. These fit signed 32-bit slot and unsigned
+32-bit byte ranges. Device ReadPlane widens physical*block_size to uint64 before
+forming packed/scale offsets. Context and page arithmetic are also in range.
+
+Workspace is B*6*split_k*(256+16)*4 bytes, from 6528 to 104448 bytes. Each partial
+is 272 float32 values, including aligned max/sum/telemetry tails. Reduction K is
+at most eight splits and fits one b32 C0 block; padding is accounted for by the
+existing reducer. Descriptors plus dispatch records occupy 96*B*split_k bytes
+(64-byte descriptor and 32-byte dispatch), at most 1536 bytes for this launch.
+Grid=B*split_k is at most 16 of the ABI's 32 blocks; heads_per_task=6. One task
+per block covers all token/split combinations, and reduction/prologue shares use
+ceil(B*6/grid) to cover all heads, including idle blocks at split=8.
+
+Harness behavior when explicitly run in the future
+------------------------------------------------
+tests/npu/bench_qwen35_decode.cpp is registered as bench_qwen35_decode under
+RUN_MODE=npu and is part of tq_npu_kernels. New C++ code contains no inline
+comments and compiles as C++17 with -Wall -Wextra -Werror.
+The default/--static path only prints the host audit; --run --device ID is the
+explicit execution path. There is no automatic physical-device selection.
+
+The harness allocates device-resident NZ K/V and padded float scales for every
+token of both requests, a reversed dense block table, BF16 raw queries, Pi signs,
+FP32 rotated-query scratch, BF16 outputs, tiling and Split-K workspace. Inputs
+use deterministic hashed signed keys, nonzero value nibbles and power-of-two
+scales; value scale varies across context quartiles to expose omitted spans.
+The timed entry is launch_fused_decode_opt_raw_query, output_stage=0, so timing
+includes the BF16 query rotation and attention/reduction, with rotated-basis
+BF16 output. The current kernel ignores rot_tables/h16 at this entry; initialized
+placeholder pointers are supplied. No output unrotation or gating is timed.
+
+All 16 combinations of page/B/splits at seq_len=2048 must first pass the existing
+host FP64 decode_reference oracle before any configuration is timed. Tolerances
+are relative L2 <= 0.025 and maximum absolute error <= 0.06, to allow the real
+FP8 query/probability arithmetic and BF16 egress. They are declared sanity
+budgets, not calibrated hardware accuracy results. Split partial sums are also
+checked for positive live workers and zero empty workers. For splits>1,
+fused_context_limit=0 forces the actual reduction at 2K; the production default
+4096 would otherwise bypass it and make that part of the sweep misleading.
+
+Each measured tuple gets exactly 10 discarded warmups, a stream drain, then 50
+launches bracketed by 100 distinct ACL_EVENT_TIME_LINE events. Only kernel
+dispatch sits between each pair. Synchronizing the final stop event waits for
+all samples; aclrtEventElapsedTime supplies every interval. No host-clock
+fallback exists. Statistics: min=p0; p50=average of samples 25 and 26; mean over
+all 50; p99=nearest rank ceil(0.99*50), the largest sample. CSV latency is us.
+
+The bandwidth numerator is issued KV read payload: B*seq_len*320 bytes. Both AIV
+planes load their own 128-byte packed row and all 32 scale bytes, so the scale
+slot is fetched twice, even though its storage occupies only 32 bytes. This
+excludes queries, block tables, descriptors, workspace reads/writes and outputs.
+effective_kv_GB_s = kv_read_bytes / mean_us / 1000. It is an effective device-read
+rate, not measured DRAM traffic: L2 reuse can reduce physical HBM reads,
+especially over repeated short-context steps. The same definition is used for
+both page sizes and all splits. No HBM saturation claim follows from it alone.
+
+Future execution, not performed here:
+  1. On a physical Ascend 950PR host, use npu-smi info to select an idle device.
+  2. Source the matching toolkit set_env.sh; configure RUN_MODE=npu with
+     TQ_BUILD_KERNELS=ON and SOC_VERSION=Ascend950PR_9599.
+  3. cmake --build build-npu --target bench_qwen35_decode -j8
+  4. build-npu/tests/bench_qwen35_decode --run --device ID > qwen35-hardware.csv
+     Replace ID with the verified idle device. Avoid active devices.
+
+Performance interpretation pending hardware
+------------------------------------------
+No regime has an experimentally established bottleneck or optimal split.
+2K: launch, query prologue and reduction overhead are plausible dominant costs.
+    1024-token pages cap useful splits at two; larger splits add idle workers.
+32K: useful parallelism and reduction overhead should be compared directly.
+256K and 1M: KV reads and tile decode/Cube work grow linearly, so memory traffic
+    becomes a candidate limit; dequantization, Cube throughput and scalar page
+    handling can also dominate. Hardware latency and counters are required.
+At the same context, 1024-token pages use 1/8 as many block-table entries and page
+transitions. Both page sizes have identical tile count and KV storage/read bytes;
+there is no 8x SRAM penalty. Sweep results, followed by profiling if needed,
+must determine the actual trade-off. The harness prints the split with the lowest measured mean for each (page, batch, context) to stderr. No simulated time is presented as hardware.
+
+Verification record
+-------------------
+WSL distro: Ubuntu-22.04 (WSL2).
+Toolkit: /usr/local/Ascend/cann-9.2.0-beta.2.
+CAModel directory: x86_64-linux/simulator/dav_3510/camodel, with runtime, driver,
+model libraries and camodel_v100.json installed. ldd on libruntime_camodel.so
+resolves every dependency with that directory, dav_3510/lib, and toolkit lib64
+on LD_LIBRARY_PATH. set_env.sh alone does not select every simulator directory.
+The existing build/lib/libtq_decode_sim.so is an ELF x86-64 shared library.
+These checks establish installation and loader dependencies only, not simulator
+functional correctness. No runtime initialization or kernel execution was used.
+
+C++17 -Wall -Wextra -Werror syntax verification passed.
+The benchmark compiled and linked against the existing CAModel decode library;
+ldd -r on the resulting ELF resolved all dependencies and relocations with the
+explicit simulator/toolkit path. The toolkit exports all four timing API calls.
+Artifacts (ignored build tree):
+  build-qwen35-npu/bench_qwen35_decode_camodel_link_check
+  build-qwen35-npu/camodel-relocations.txt
+  build-qwen35-npu/benchmark-camodel-relocations.txt
+Native RUN_MODE=npu build PASSED for SOC_VERSION=Ascend950PR_9599.
+Both AIC and AIV device legs, the host library, and bench_qwen35_decode linked.
+Artifacts:
+  build-qwen35-npu/tests/bench_qwen35_decode
+  build-qwen35-npu/lib/libtq_decode_npu.so
+  build-qwen35-npu/build.log
+The executable and library are ELF x86-64; the library exports both decode entry
+points. This WSL offline link used CANN's HAL development stub search path:
+  -DCMAKE_EXE_LINKER_FLAGS=-Wl,-rpath-link,/usr/local/Ascend/cann-9.2.0-beta.2/x86_64-linux/devlib
+Project sources retained C++17 -Wall -Wextra -Werror. CANN-generated wrappers
+emitted unused overflow_status warnings under the repository's existing scoped
+warning exception. No project-source warning required a suppression.
+The native binary was not executed. No claim of physical-device validation,
+CAModel numerical correctness, measured latency or measured bandwidth is made.
