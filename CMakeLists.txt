@@ -63,7 +63,9 @@ target_include_directories(tq_strict INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}")
 # One translation unit, linked by every gate and every runner: the fused decode's descriptors and
 # dispatch records are read by the device BY WORD OFFSET, and nothing in the toolchain diagnoses
 # two sides disagreeing about which word is which, so there is exactly one definition of them.
-add_library(turboquant_host STATIC src/host/turboquant_tiling.cpp)
+# turboquant_telemetry.cpp rides the same library: the probe records are the other GM layout the
+# device writes by word offset and the host parses by the same, so they share the one definition.
+add_library(turboquant_host STATIC src/host/turboquant_tiling.cpp src/host/turboquant_telemetry.cpp)
 target_link_libraries(turboquant_host PUBLIC tq_strict)
 
 # ------------------------------------------------------------------ the CPU gates
@@ -75,8 +77,20 @@ target_link_libraries(test_contract_gates PRIVATE turboquant_host)
 add_executable(test_layout_bridge tests/cpu/test_layout_bridge.cpp)
 target_link_libraries(test_layout_bridge PRIVATE turboquant_host)
 
+add_executable(test_golden_decode_oracle tests/cpu/test_golden_decode_oracle.cpp)
+target_link_libraries(test_golden_decode_oracle PRIVATE turboquant_host)
+
+add_executable(test_telemetry_dump tests/cpu/test_telemetry_dump.cpp)
+target_link_libraries(test_telemetry_dump PRIVATE turboquant_host)
+
 add_test(NAME contract_gates COMMAND test_contract_gates)
 add_test(NAME layout_bridge COMMAND test_layout_bridge)
+add_test(NAME telemetry_dump COMMAND test_telemetry_dump)
+# The oracle comparison reads golden/dumps; run it from the source tree so the
+# default --dump-root resolves.
+add_test(NAME golden_decode_oracle COMMAND test_golden_decode_oracle)
+set_tests_properties(golden_decode_oracle PROPERTIES
+                     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 
 # ------------------------------------------------------------------ the device legs
 option(TQ_BUILD_KERNELS "Configure the BiSheng device legs (tens of minutes to build)" OFF)
@@ -94,4 +108,10 @@ else()
   include(cmake/NpuTargets.cmake)
   add_turboquant_npu_targets()
   message(STATUS "Device leg: physical ${SOC_VERSION}, target tq_npu_kernels.")
+endif()
+
+# The vendored-decode probe (see cmake/VendoredDecodeProbe.cmake for what it arbitrates).
+if(TQ_VENDORED_DECODE_PROBE)
+  include(cmake/VendoredDecodeProbe.cmake)
+  add_vendored_decode_probe()
 endif()

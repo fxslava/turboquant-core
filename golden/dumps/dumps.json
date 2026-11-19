@@ -1,0 +1,6 @@
+{
+  "head_size": 256,
+  "num_kv_heads": 4,
+  "block_size": 128,
+  "pi_seed_note": "pi_signs come from the LCG of turboquant_golden.py"
+}

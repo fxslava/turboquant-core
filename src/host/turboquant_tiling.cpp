@@ -55,8 +55,11 @@ const char *decode_tiling_status_text(const DecodeTilingStatus status)
         case DecodeTilingStatus::kUnmappedPage:
             return "a live split holds an unmapped logical page; the closed-form tile cursor "
                    "cannot skip pages";
+        case DecodeTilingStatus::kContextOutOfRange:
+            return "a context length is negative or exceeds max_blocks * block_size";
         case DecodeTilingStatus::kProbeOutOfRange:
-            return "isolated-canary page/tile outside the block table";
+            return "isolated-canary page/tile outside the block table, or naming a tile the "
+                   "context does not reach";
     }
     return "unknown decode tiling status";
 }
@@ -88,7 +91,15 @@ DecodeTilingStatus build_decode_tiling(const DecodeTilingRequest &r,
 
     for (std::uint32_t token = 0; token < r.tokens; ++token) {
         const std::int32_t raw = context_lengths[token];
-        const std::uint32_t context = raw > 0 ? static_cast<std::uint32_t>(raw) : 0;
+        // DIRTY-DATA (N4): check the range the device acts on before it names a page. A negative
+        // length used to be silently clamped to zero and a length past the table's reach only
+        // failed later (or, with a stale device copy, not at all); refuse both here, where the
+        // values the tiling is actually built from are visible without a device sync.
+        const std::uint64_t max_context =
+            static_cast<std::uint64_t>(r.max_blocks) * static_cast<std::uint64_t>(r.block_size);
+        if (raw < 0 || static_cast<std::uint64_t>(raw) > max_context)
+            return DecodeTilingStatus::kContextOutOfRange;
+        const std::uint32_t context = static_cast<std::uint32_t>(raw);
         const bool fused =
             r.splits <= 1 || raw <= static_cast<std::int32_t>(r.fused_context_limit);
         const std::uint32_t seq_blocks = CeilDiv(context, r.block_size);
@@ -105,12 +116,24 @@ DecodeTilingStatus build_decode_tiling(const DecodeTilingRequest &r,
                 // One 64-row tile of one logical page, on split zero of token zero, with the
                 // full cache and table allocations left exactly as the fixture built them.
                 if (token || split) continue;
+                // THE PROBED TILE'S OWN LIVE ROW COUNT, so an edge tile is probed AS the ragged
+                // tile it is in the real grid. Without this a probe always claimed 64 live rows
+                // and the one tile worth isolating -- the short last one, where the mask and
+                // `lastValid` come into it -- could not be reached through this ABI at all.
+                const std::uint32_t tile_first =
+                    r.probe_page * r.block_size + r.probe_tile * kDecodeTileRows;
+                const std::uint32_t live = tile_first < context ? context - tile_first : 0u;
+                // A probe naming a tile the sequence does not reach is a caller error. It used
+                // to be served as a full live tile, which is a launch over rows the context
+                // never had: refused instead, so a sweep that walks off the end says so.
+                if (live == 0) return DecodeTilingStatus::kProbeOutOfRange;
                 d->num_tiles = 1;
-                d->regular_tiles = 1;
+                d->tail_rows = live < kDecodeTileRows ? live : 0u;
+                d->regular_tiles = d->tail_rows ? 0u : 1u;
                 d->block_start_idx = r.probe_page;
                 d->blocks_in_split = 1;
                 d->tile_origin = r.probe_tile;
-                d->flags = kDecodeSplitLive;
+                d->flags = kDecodeSplitLive | (d->tail_rows ? kDecodeSplitCarriesTail : 0u);
                 continue;
             }
             if (fused && split) continue;  // the duplicate workers of a fused token: no work

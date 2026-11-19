@@ -79,12 +79,16 @@ inline unsigned element_mantissa_bits(Element e) { return e == Element::kBf16 ? 
 
 // Positive normal results are in [1,15]. Round the FP32 significand before
 // rebiasing, so a mantissa carry correctly increments the FP16 exponent.
-inline std::uint16_t reference_half(float value)
+inline std::uint16_t reference_half_round(float value)
 {
-    if (!(value >= 1 && value <= 15)) throw std::runtime_error("oracle result outside fixture range");
     std::uint32_t bits;
     std::memcpy(&bits, &value, 4);
     return static_cast<std::uint16_t>(((bits + 0xfffu + ((bits >> 13) & 1u)) >> 13) - (112u << 10));
+}
+inline std::uint16_t reference_half(float value)
+{
+    if (!(value >= 1 && value <= 15)) throw std::runtime_error("oracle result outside fixture range");
+    return reference_half_round(value);
 }
 
 // The same for bf16, and deliberately NOT by the add-and-shift that
@@ -93,9 +97,8 @@ inline std::uint16_t reference_half(float value)
 // tests/cpu/test_fused_decode_opt_fixture.cpp pins that agreement over the fixture's own values and
 // over the tie cases. A carry out of the 7-bit significand lands in the exponent field by
 // construction, exactly as it does for fp16 above, because the fields are adjacent.
-inline std::uint16_t reference_bfloat16(float value)
+inline std::uint16_t reference_bfloat16_round(float value)
 {
-    if (!(value >= 1 && value <= 15)) throw std::runtime_error("oracle result outside fixture range");
     std::uint32_t bits;
     std::memcpy(&bits, &value, 4);
     const std::uint32_t keep = bits >> 16;             // sign | exponent | 7 significand bits
@@ -103,11 +106,28 @@ inline std::uint16_t reference_bfloat16(float value)
     const bool round_up = dropped > 0x8000u || (dropped == 0x8000u && (keep & 1u));
     return static_cast<std::uint16_t>(keep + (round_up ? 1u : 0u));
 }
+inline std::uint16_t reference_bfloat16(float value)
+{
+    if (!(value >= 1 && value <= 15)) throw std::runtime_error("oracle result outside fixture range");
+    return reference_bfloat16_round(value);
+}
 
 // The correctly-rounded 16-bit word of an fp32 oracle value, in the instance's own format.
 inline std::uint16_t reference_bits(Element e, float value)
 {
     return e == Element::kBf16 ? reference_bfloat16(value) : reference_half(value);
+}
+
+// The same WITHOUT the [1,15] fixture-range guard, for the raw-query entry's stage-1 oracle:
+// the egress rotation leaves the fixture's engineered range by design (signed, unbounded), and
+// the guard exists to keep the LADDER's stage-0 fixture honest, not to forbid that. bf16 only:
+// the split-word rounding above is sign-agnostic, while the fp16 add-and-rebias assumes a
+// positive normal input, and nothing runs the stage-1 oracle in fp16.
+inline std::uint16_t reference_bits_unguarded(Element e, float value)
+{
+    if (e != Element::kBf16)
+        throw std::runtime_error("the unguarded reference rounding is implemented for bf16 only");
+    return reference_bfloat16_round(value);
 }
 
 // The value the DEVICE sees after widening a stored word: exact for both formats, since fp32 holds
@@ -306,7 +326,11 @@ struct Fixture {
         scales.assign(std::size_t(physical_pages) * block * 8, poison);
         table.assign(aligned(std::size_t(b) * pages * 4) / 4, -1);
         lengths.assign(aligned(b * 4) / 4, 0);
-        const float scale = tq::TurboQuantModeTraits<tq::TurboQuantMode::KV4_FP8>::kGain * 2;
+        // The dequantisation contract is the writers' and the PyTorch golden's: a stored signed
+        // nibble n reconstructs as n * stored_scale, with no centroid offset and no codebook gain.
+        // A stored scale of 2 makes the key row's dequantised level 2 * key_level and a value
+        // channel's 2 * value_level -- integers the fp32 recurrence reproduces exactly.
+        const float scale = 2.0f;
         for (int request = 0; request < b; ++request) {
             lengths[request] = n;
             for (int page = 0; page < pages; ++page) {
@@ -334,9 +358,9 @@ struct Fixture {
                     double numerator = 0, denominator = 0;
                     for (int tile = 0; tile < tiles(); ++tile) {
                         const int live = valid_rows(tile);
-                        const double score = (2 * key_level(request, head, tile) + 1) * coefficient / 16.0;
+                        const double score = 2 * key_level(request, head, tile) * coefficient / 16.0;
                         const double weight = live * std::exp(score);
-                        numerator += weight * (2 * value_level(request, head, tile, col) + 1);
+                        numerator += weight * (2 * value_level(request, head, tile, col));
                         denominator += weight;
                     }
                     expected[base + col] = static_cast<float>(numerator / denominator);
@@ -361,10 +385,13 @@ struct Fixture {
     }
     static unsigned key_level(int request, int head, int tile)
     { return (tile + 2 * request + 3 * head) % 8; }
+    // In [1, 7] rather than [0, 7]: the oracle's expected row is a weighted average of
+    // 2 * value_level over the tiles, and reference_bfloat16 admits only [1, 15]. A zero level
+    // would put a tile-dominated average under 1; [1, 7] keeps every expected value in [2, 14].
     static unsigned value_level(int request, int head, int tile, int channel)
     {
         const int col = channel < 128 ? channel : (channel - 128 + 3) % 128;
-        return (tile + 3 * request + 5 * head + col) % 8;
+        return 1u + (tile + 3 * request + 5 * head + col) % 7;
     }
     // The raw-query inputs. `raw_query` is the ORIGINAL-basis query whose rotation is the
     // pre-rotated `query` above: Pi is an involution, so that is simply Pi(query). It is encoded in
@@ -455,6 +482,10 @@ struct Fixture {
         c.element_type = static_cast<std::uint32_t>(element);
         c.tokens = requests; c.kv_heads = kv_heads; c.heads = kv_heads * group_heads;
         c.block_size = page_tokens; c.max_blocks = pages; c.splits = splits;
+        // DIRTY-DATA (D1/N3): the device bounds every block-table entry against this. The
+        // fixture's cache plane really does hold `physical_pages` pages, so a table naming one
+        // past it is refused on the device instead of read.
+        c.num_blocks = static_cast<std::uint32_t>(physical_pages);
         c.heads_per_task = group_heads; c.fused_context_limit = 0;
         const unsigned tasks = requests * kv_heads * splits;
         c.tasks_per_block = (tasks + 31) / 32;

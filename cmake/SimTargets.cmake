@@ -14,27 +14,54 @@ function(add_turboquant_sim_targets)
   set(RUN_MODE sim)
   set(SRC "${CMAKE_CURRENT_SOURCE_DIR}")
   set(SIM_LIB_DIR "${ASCEND_HOME_PATH}/tools/simulator/${SOC_VERSION}/lib")
+  # The CAModel runner needs the HAL devlib and the simulator DSOs on its loader path; the
+  # install RPATH already carries $ORIGIN and the toolkit lib64, not these. ctest therefore runs
+  # the canary with the same environment `source set_env.sh` would have produced.
+  set(TQ_SIM_TEST_ENV
+      "LD_LIBRARY_PATH=${ASCEND_HOME_PATH}/x86_64-linux/devlib:${ASCEND_HOME_PATH}/lib64:${SIM_LIB_DIR}:$ENV{LD_LIBRARY_PATH}"
+      "ASCEND_HOME_PATH=${ASCEND_HOME_PATH}")
 
-  # ---------------------------------------------------------------- the kernels
+# ---------------------------------------------------------------- the kernels
   ascendc_library(tq_prefill_sim SHARED src/prefill/turboquant_reshape_batch.cpp)
+  set_property(SOURCE src/prefill/turboquant_reshape_batch.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/prefill/turboquant_reshape_batch.cpp)
   ascendc_compile_definitions(tq_prefill_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_prefill_sim PRIVATE
       -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH)
 
+  # The same writer with the write-time NZ-tiled ingress on. Its own library, not an option on
+  # the one above: the two layouts are two operators behind one entry point, and the strip gate
+  # (test_live_write) has to keep running against the strip writer in the same configure. Both
+  # export the same symbol, so each is linked by its own runner and never by both.
+  ascendc_library(tq_prefill_nz_sim SHARED src/prefill/turboquant_reshape_batch.cpp)
+  set_property(SOURCE src/prefill/turboquant_reshape_batch.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/prefill/turboquant_reshape_batch.cpp)
+  ascendc_compile_definitions(tq_prefill_nz_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_INGRESS_NZ=1)
+  ascendc_compile_options(tq_prefill_nz_sim PRIVATE
+      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
+
   ascendc_library(tq_scatter_sim SHARED src/scatter/turboquant_reshape_scatter.cpp)
+  set_property(SOURCE src/scatter/turboquant_reshape_scatter.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/scatter/turboquant_reshape_scatter.cpp)
   ascendc_compile_definitions(tq_scatter_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_scatter_sim PRIVATE
       -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH)
 
-  # The fused decode's service headers reach for src/common and the decode's own subdirectories;
-  # the kernel's own includes are relative to its directory, so these -I flags are only for the
-  # shared contracts.
+  # The same scatter writer with the NZ-tiled ingress on. Its own library for the reason given
+  # at tq_prefill_nz_sim: the two layouts are two operators behind one entry point, and the
+  # strip gate has to keep running against the strip writer in the same configure.
+  ascendc_library(tq_scatter_nz_sim SHARED src/scatter/turboquant_reshape_scatter.cpp)
+  set_property(SOURCE src/scatter/turboquant_reshape_scatter.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/scatter/turboquant_reshape_scatter.cpp)
+  ascendc_compile_definitions(tq_scatter_nz_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_INGRESS_NZ=1)
+  ascendc_compile_options(tq_scatter_nz_sim PRIVATE
+      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
+
   ascendc_library(tq_decode_sim SHARED src/decode/turboquant_fused_decode.cpp)
+  set_property(SOURCE src/decode/turboquant_fused_decode.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/decode/turboquant_fused_decode.cpp)
   ascendc_compile_definitions(tq_decode_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_decode_sim PRIVATE
-      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS} ${TQ_REDUCE_DEFINES}
+      -std=c++17 -Wall -Werror ${TQ_CANN_SYSTEM_OPTIONS} ${TQ_REDUCE_DEFINES} ${TQ_TELEMETRY_DEFINES}
       -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH
       "-I${SRC}/src/decode" "-I${SRC}/src/common" "-I${SRC}/include")
 
@@ -45,7 +72,7 @@ function(add_turboquant_sim_targets)
   function(add_sim_runner name source)
     add_executable(${name} EXCLUDE_FROM_ALL "${source}")
     target_include_directories(${name} PRIVATE "${SRC}" "${ASCEND_HOME_PATH}/include")
-    target_compile_options(${name} PRIVATE -std=c++17 -Wall -Wextra -Werror)
+    target_compile_options(${name} PRIVATE -std=c++17 -Wall -Wextra -Werror ${TQ_TELEMETRY_DEFINES})
     target_link_libraries(${name} PRIVATE ${ARGN} turboquant_host ascendcl
         "${SIM_LIB_DIR}/libnpu_drv_camodel.so"
         "${SIM_LIB_DIR}/libmodel_top.so")
@@ -58,9 +85,46 @@ function(add_turboquant_sim_targets)
 
   add_sim_runner(test_live_write_sim tests/npu/test_live_write.cpp
       tq_prefill_sim tq_scatter_sim)
+  # The NZ scatter gate: the same source, the NZ scatter library, and the NZ scatter rig
+  # selected by TQ_SCATTER_NZ=1. The NZ prefill stays gated by test_nz_ingress_canary_sim.
+  add_sim_runner(test_live_write_nz_sim tests/npu/test_live_write.cpp
+      tq_scatter_nz_sim)
+  target_compile_definitions(test_live_write_nz_sim PRIVATE TQ_SCATTER_NZ=1)
+  add_sim_runner(test_nz_ingress_canary_sim tests/npu/test_nz_ingress_canary.cpp
+      tq_prefill_nz_sim)
   add_sim_runner(test_fused_decode_e2e_sim tests/npu/test_fused_decode_e2e.cpp tq_decode_sim)
 
+  # DIRTY-DATA (D2/D3): the bounded poison canary. `--tail` runs one tile at context 64 and two
+  # tiles at 72/80 with the unmapped pages and the dead tail rows poisoned; `--blocktable` runs a
+  # synthetic >64-page span whose entry 64 is negative / past num_blocks. Both are ctest entries
+  # so the count grows with the gate, and both are 1-2 tile launches.
+  add_sim_runner(test_dirty_data_canary_sim tests/npu/test_dirty_data_canary.cpp tq_decode_sim)
+  add_test(NAME dirty_tail_canary COMMAND test_dirty_data_canary_sim --tail)
+  add_test(NAME dirty_blocktable_canary COMMAND test_dirty_data_canary_sim --blocktable)
+  set_tests_properties(dirty_tail_canary dirty_blocktable_canary
+      PROPERTIES ENVIRONMENT "${TQ_SIM_TEST_ENV}")
+
+  # The golden-dump comparison runners: one source, one binary per kernel, the
+  # prefill twice -- the strip build and the NZ build export the same symbol
+  # and are therefore linked by separate runners, exactly like test_live_write
+  # and test_nz_ingress_canary above.
+  add_sim_runner(test_golden_prefill_strip_sim tests/npu/test_golden_dump.cpp tq_prefill_sim)
+  target_compile_definitions(test_golden_prefill_strip_sim PRIVATE
+      TQ_GOLDEN_KERNEL_PREFILL=1 TQ_GOLDEN_PREFILL_NZ=0)
+  add_sim_runner(test_golden_prefill_nz_sim tests/npu/test_golden_dump.cpp tq_prefill_nz_sim)
+  target_compile_definitions(test_golden_prefill_nz_sim PRIVATE
+      TQ_GOLDEN_KERNEL_PREFILL=1 TQ_GOLDEN_PREFILL_NZ=1)
+  add_sim_runner(test_golden_scatter_sim tests/npu/test_golden_dump.cpp tq_scatter_sim)
+  target_compile_definitions(test_golden_scatter_sim PRIVATE TQ_GOLDEN_KERNEL_SCATTER=1)
+  add_sim_runner(test_golden_decode_sim tests/npu/test_golden_dump.cpp tq_decode_sim)
+  target_compile_definitions(test_golden_decode_sim PRIVATE TQ_GOLDEN_KERNEL_DECODE=1)
+
+  add_custom_target(tq_golden_sim
+      DEPENDS test_golden_prefill_strip_sim test_golden_prefill_nz_sim
+              test_golden_scatter_sim test_golden_decode_sim)
+
   add_custom_target(tq_sim_kernels
-      DEPENDS tq_prefill_sim tq_scatter_sim tq_decode_sim
-              test_live_write_sim test_fused_decode_e2e_sim)
+      DEPENDS tq_prefill_sim tq_prefill_nz_sim tq_scatter_sim tq_scatter_nz_sim tq_decode_sim
+              test_live_write_sim test_live_write_nz_sim test_nz_ingress_canary_sim
+              test_fused_decode_e2e_sim test_dirty_data_canary_sim)
 endfunction()

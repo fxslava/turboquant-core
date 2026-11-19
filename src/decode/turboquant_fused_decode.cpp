@@ -102,7 +102,8 @@ public:
                                 const uint32_t numKvHeads,
                                 const uint32_t headSize, const uint32_t blockSize, const uint32_t maxBlocksPerSeq,
                                 const uint32_t numSplits, const uint32_t headsPerTask,
-                                const uint32_t fusedContextLimit, const float scale, const float invSqrtLen)
+                                const uint32_t fusedContextLimit, const float scale, const float invSqrtLen,
+                                const uint32_t numBlocks)
     {
         numTokens_ = numTokens;
         numHeads_ = numHeads;
@@ -112,6 +113,16 @@ public:
         maxBlocksPerSeq_ = maxBlocksPerSeq;
         numSplits_ = numSplits;
         fusedContextLimit_ = fusedContextLimit;
+        // log2(blockSize): the probe's tile-to-context arithmetic is shift-only, like the
+        // cursor's; valid_launch has already refused a non-power-of-two page.
+        blockSizeShift_ = 0;
+        while ((1u << blockSizeShift_) < blockSize) {
+            ++blockSizeShift_;
+        }
+        // DIRTY-DATA (D1/N3): the physical page count of the cache planes. Every block-table
+        // entry the tile cursor turns into a GM read is bound-checked against it; see
+        // PrefetchBlockTable. 0 is refused by the launcher, never treated as "unbounded".
+        numBlocks_ = numBlocks;
         blockTableGm_.SetGlobalBuffer(reinterpret_cast<__gm__ int32_t *>(blockTables));
         contextLenGm_.SetGlobalBuffer(reinterpret_cast<__gm__ int32_t *>(contextLens), numTokens);
         tilingGm_.SetGlobalBuffer(reinterpret_cast<__gm__ uint32_t *>(tiling));
@@ -267,6 +278,10 @@ private:
         uint32_t tileOrigin = 0;
         uint32_t pageShift = 0;
         uint32_t pageMask = 0;
+        // The split's first logical page in the token's block-table row. The telemetry probe
+        // turns a tile's (page, row base) back into a context position and a logical page
+        // index with it -- the same arithmetic the host dump mirrors.
+        uint32_t blockStart = 0;
         uint32_t tile = 0;
     };
 
@@ -317,18 +332,29 @@ private:
             task.tileOrigin = tileOrigin;
             task.pageShift = pageShift;
             task.pageMask = (1u << pageShift) - 1u;
+            task.blockStart = blockStart;
 
             if ASCEND_IS_AIV {
                 vector_.StageQuery(mm_, token, kvHead, heads);
                 if (heads.mine > 0 && tailRows != 0) {
                     vector_.ComputeTailMask(tailRows);
                 }
+                // Arm the probe AFTER StageQuery: the arena is carved from the buffer
+                // StageQuery stages the query through, so arming earlier would be clobbered.
+                vector_.BeginArgmaxProbe(heads);
             }
             if ASCEND_IS_AIV {
                 RunVectorPipeline(task, heads);
             }
             if ASCEND_IS_AIC {
                 RunCubePipeline(task, heads.rows);
+            }
+        } else {
+            if ASCEND_IS_AIV {
+                // A worker with no live tiles never enters the pipeline, but its
+                // StageTaskOutput still publishes the probe record: arm the sentinels so the
+                // host reads "no record" rather than a stale arena.
+                vector_.BeginArgmaxProbe(heads);
             }
         }
 
@@ -339,23 +365,55 @@ private:
 
     static constexpr uint32_t kBlockCacheEntries = 64;
 
+    // DIRTY-DATA (D1/N3): a block-table word names a physical cache page, so its valid range is
+    // [0, numBlocks_). The old code only OR-ed the first 64 entries together and tested the sign
+    // of the aggregate; a negative entry in the UNCHECKED tail became a huge uint32 page index in
+    // TilePhysical and a GM read far past the cache plane.
+    __aicore__ inline bool PageIndexValid(const int32_t entry) const
+    {
+        return entry >= 0 && static_cast<uint32_t>(entry) < numBlocks_;
+    }
+
     __aicore__ inline void PrefetchBlockTable(const uint32_t token, const uint32_t blockStart,
                                               const uint32_t blocksInSplit)
     {
         blockCacheBase_ = blockStart;
-        pagesMapped_ = true;
         blockCacheCount_ = blocksInSplit < kBlockCacheEntries ? blocksInSplit : kBlockCacheEntries;
+        blockSpan_ = blocksInSplit;
+        pagesMapped_ = true;
         if (blockCacheCount_ == 0) {
             return;
         }
+        // DIRTY-DATA (D1): a corrupt tiling descriptor could make the row displacement itself
+        // leave the block-table row. Refuse the worker instead of reading a neighbouring row.
+        if (blockStart > maxBlocksPerSeq_ || blocksInSplit > maxBlocksPerSeq_ - blockStart) {
+            pagesMapped_ = false;
+            blockCacheCount_ = 0;
+            return;
+        }
         const uint64_t row = static_cast<uint64_t>(token) * maxBlocksPerSeq_;
-        int32_t signs = 0;
         for (uint32_t i = 0; i < blockCacheCount_; ++i) {
             const int32_t entry = blockTableGm_.GetValue(row + blockStart + i);
             blockCache_[i] = entry;
-            signs |= entry;
+            if (!PageIndexValid(entry)) {
+                pagesMapped_ = false;
+                return;
+            }
         }
-        pagesMapped_ = signs >= 0;
+        // DIRTY-DATA (D1): entries past the 64-entry cache used to be read straight from GM by
+        // TilePhysical, with no sign or range check at all. Validate the WHOLE span the worker
+        // may read before entering the pipeline, so a bad entry skips the task (safe zero output)
+        // rather than surfacing halfway through the tile ring where it cannot be cancelled
+        // without touching the cross-core protocol. This is O(blocksInSplit) scalar loads per
+        // task for spans over 64 pages; the alternative -- validating lazily at TilePhysical --
+        // cannot skip a tile whose operands are already in flight.
+        for (uint32_t i = blockCacheCount_; i < blocksInSplit; ++i) {
+            const int32_t entry = blockTableGm_.GetValue(row + blockStart + i);
+            if (!PageIndexValid(entry)) {
+                pagesMapped_ = false;
+                return;
+            }
+        }
     }
 
     __aicore__ inline uint32_t TilePhysical(const PipelineTask &task, const uint32_t absolute)
@@ -364,6 +422,13 @@ private:
         if (page < blockCacheCount_) {
             return static_cast<uint32_t>(blockCache_[page]);
         }
+        // DIRTY-DATA (D1): the tiling contract makes this unreachable (page < blocks_in_split),
+        // but a corrupt descriptor must not turn it into an unchecked GM read. Page zero is a
+        // valid cache page whenever the worker is live, so this is in-bounds even here.
+        if (page >= blockSpan_) {
+            return 0;
+        }
+        // Every entry of the span was validated by PrefetchBlockTable before the pipeline began.
         return static_cast<uint32_t>(blockTableGm_.GetValue(
             static_cast<uint64_t>(task.token) * maxBlocksPerSeq_ + blockCacheBase_ + page));
     }
@@ -494,8 +559,18 @@ private:
         const uint32_t tile = task.consumeTile;
         ++task.consumeTile;
         const uint32_t valid = tile == task.lastTile ? task.lastValid : kCubeTileRows;
+        // The tile's place in the token's context: its absolute index inside the split span,
+        // decomposed the way ReadPipelineTile decomposes it. contextBase is the context index
+        // of the tile's first row; logicalPage is its logical page in the token's block-table
+        // row (the host maps that to the physical page the row was read from).
+        const uint32_t absolute = task.tileOrigin + tile;
+        const uint32_t contextBase =
+            ((task.blockStart + (absolute >> task.pageShift)) << blockSizeShift_) +
+            ((absolute & task.pageMask) << fd::kDecodeTileRowsShift);
+        const uint32_t logicalPage = task.blockStart + (absolute >> task.pageShift);
         AscendC::CrossCoreWaitFlag(static_cast<uint16_t>(kOptFlagScoresReady + kWindow));
-        vector_.ComputeSoftmaxAndStageProbs(mm_, valid, heads, kSlot, kWindow);
+        vector_.ComputeSoftmaxAndStageProbs(mm_, valid, heads, kSlot, kWindow, contextBase,
+                                            logicalPage);
         vllm_ascend::turboquant::SyncEvent<AscendC::HardEvent::MTE3_S>();
         AscendC::CrossCoreSetFlag<kSubBlockSyncMode, PIPE_MTE3>(static_cast<uint16_t>(kOptFlagProbsReady));
     }
@@ -589,6 +664,10 @@ private:
     int32_t blockCache_[kBlockCacheEntries] = {};
     uint32_t blockCacheBase_ = 0;
     uint32_t blockCacheCount_ = 0;
+    // DIRTY-DATA (D1): the validated span and the physical page bound. blockSpan_ is how many
+    // block-table entries this worker owns; numBlocks_ is the cache plane's page count.
+    uint32_t blockSpan_ = 0;
+    uint32_t numBlocks_ = 0;
     bool pagesMapped_ = true;
     AscendC::GlobalTensor<uint32_t> tilingGm_;
     TaskCursor taskStart_;
@@ -606,6 +685,7 @@ private:
     uint32_t chunksPerGroup_ = 1;
     uint32_t headSize_ = 0;
     uint32_t blockSize_ = 0;
+    uint32_t blockSizeShift_ = 0;
     uint32_t maxBlocksPerSeq_ = 0;
     uint32_t numSplits_ = 1;
     uint32_t fusedContextLimit_ = 0;
@@ -639,22 +719,22 @@ static_assert(!ascend_micro::fused_decode_opt::valid_launch(1, 1, 16, 1, 256, 12
     } while (0)
 #endif
 
-#define ASCEND_TQ_DECLARE_MM_FUSED_DECODE_OPT(NAME, MODE, TYPE)                                                      \
+#define ASCEND_TQ_DECLARE_MM_FUSED_DECODE_OPT(NAME, MODE, TYPE, UNPACK)                                              \
     extern "C" __global__ __aicore__ void NAME(                                                                      \
         GM_ADDR queryRot, GM_ADDR keyCache, GM_ADDR valueCache, GM_ADDR scaleCache, GM_ADDR blockTables,             \
         GM_ADDR contextLens, GM_ADDR modeTables, GM_ADDR workspace, GM_ADDR output, GM_ADDR tiling,                  \
         uint32_t numTokens,                                                                                          \
         uint32_t numHeads, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t maxBlocksPerSeq,      \
         uint32_t numSplits, uint32_t headsPerTask, uint32_t tasksPerBlock, uint32_t reduceTasksPerBlock,              \
-        uint32_t fusedContextLimit, float scale, float invSqrtLen)                                                   \
+        uint32_t fusedContextLimit, float scale, float invSqrtLen, uint32_t numBlocks)                               \
     {                                                                                                                \
         KERNEL_TASK_TYPE_DEFAULT(KERNEL_TYPE_MIX_AIC_1_2); \
         AscendC::InitSocState(); \
         AscendC::TPipe pipe;                                                                                         \
-        TurboQuantFusedDecodeOpt<MODE, TYPE> op(&pipe);                                                               \
+        TurboQuantFusedDecodeOpt<MODE, TYPE, true, UNPACK> op(&pipe);                                                 \
         op.Init(queryRot, keyCache, valueCache, scaleCache, blockTables, contextLens, modeTables, workspace, output,  \
                 tiling, numTokens, numHeads, numKvHeads, headSize, blockSize, maxBlocksPerSeq, numSplits,             \
-                headsPerTask, fusedContextLimit, scale, invSqrtLen);                                                  \
+                headsPerTask, fusedContextLimit, scale, invSqrtLen, numBlocks);                                       \
         op.Process(tasksPerBlock);                                                                                    \
         if (op.NeedsReduction()) {                                                                                    \
             AscendC::SyncAll<false>();                                                                                \
@@ -663,7 +743,7 @@ static_assert(!ascend_micro::fused_decode_opt::valid_launch(1, 1, 16, 1, 256, 12
         DrainFusedDecodeTask(); \
     }
 
-#define ASCEND_TQ_DECLARE_MM_FUSED_DECODE_OPT_RAW_QUERY(NAME, MODE, TYPE)                                            \
+#define ASCEND_TQ_DECLARE_MM_FUSED_DECODE_OPT_RAW_QUERY(NAME, MODE, TYPE, UNPACK)                                    \
     extern "C" __global__ __aicore__ void NAME(                                                                      \
         GM_ADDR query, GM_ADDR piSigns, GM_ADDR rotTables, GM_ADDR h16, GM_ADDR gate, GM_ADDR queryRot,              \
         GM_ADDR keyCache, GM_ADDR valueCache, GM_ADDR scaleCache, GM_ADDR blockTables, GM_ADDR contextLens,          \
@@ -672,15 +752,15 @@ static_assert(!ascend_micro::fused_decode_opt::valid_launch(1, 1, 16, 1, 256, 12
         uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t maxBlocksPerSeq, uint32_t numSplits,     \
         uint32_t headsPerTask, uint32_t tasksPerBlock, uint32_t reduceTasksPerBlock,                                 \
         uint32_t prologueVectorsPerBlock, uint32_t prologueCubeChunkVectors, uint32_t outputStage,                   \
-        uint32_t fusedContextLimit, float scale, float invSqrtLen)                                                   \
+        uint32_t fusedContextLimit, float scale, float invSqrtLen, uint32_t numBlocks)                               \
     {                                                                                                                \
         KERNEL_TASK_TYPE_DEFAULT(KERNEL_TYPE_MIX_AIC_1_2); \
         AscendC::InitSocState(); \
         AscendC::TPipe pipe;                                                                                         \
-        TurboQuantFusedDecodeOpt<MODE, TYPE, false> op(&pipe);                                                        \
+        TurboQuantFusedDecodeOpt<MODE, TYPE, false, UNPACK> op(&pipe);                                                \
         op.Init(queryRot, keyCache, valueCache, scaleCache, blockTables, contextLens, modeTables, workspace, output,  \
                 tiling, numTokens, numHeads, numKvHeads, headSize, blockSize, maxBlocksPerSeq, numSplits,             \
-                headsPerTask, fusedContextLimit, scale, invSqrtLen);                                                  \
+                headsPerTask, fusedContextLimit, scale, invSqrtLen, numBlocks);                                       \
         op.InitBasis(query, piSigns, rotTables, h16, gate, queryRot, prologueCubeChunkVectors, outputStage,           \
                      invSqrtLen);                                                                                     \
         op.RotateQuery(prologueVectorsPerBlock);                                                                       \
@@ -692,8 +772,14 @@ static_assert(!ascend_micro::fused_decode_opt::valid_launch(1, 1, 16, 1, 256, 12
         DrainFusedDecodeTask(); \
     }
 
-ASCEND_TQ_DECLARE_MM_FUSED_DECODE_OPT(turboquant_mm_fused_decode_opt_kv4fp8_bf16, TurboQuantMode::KV4_FP8, bfloat16_t)
-ASCEND_TQ_DECLARE_MM_FUSED_DECODE_OPT_RAW_QUERY(turboquant_mm_fused_decode_opt_raw_query_kv4fp8_bf16, TurboQuantMode::KV4_FP8, bfloat16_t)
+ASCEND_TQ_DECLARE_MM_FUSED_DECODE_OPT(turboquant_mm_fused_decode_opt_kv4fp8_bf16, TurboQuantMode::KV4_FP8, bfloat16_t, DecodeUnpack::kNative)
+ASCEND_TQ_DECLARE_MM_FUSED_DECODE_OPT_RAW_QUERY(turboquant_mm_fused_decode_opt_raw_query_kv4fp8_bf16, TurboQuantMode::KV4_FP8, bfloat16_t, DecodeUnpack::kNative)
+// The Lloyd-Max pair: the same tile pipeline with the codec's 16-entry Gather expand resolving
+// every nibble through TurboQuantLloydMaxTraits' e4m3-rounded codebook, which the launcher reaches
+// when Launch::decode_unpack names DecodeUnpack::kLloydMaxLut. modeTables then carries the 16 fp32
+// centroids, and the writers that produced the cache must have encoded on the same codebook.
+ASCEND_TQ_DECLARE_MM_FUSED_DECODE_OPT(turboquant_mm_fused_decode_opt_kv4fp8_bf16_lm, TurboQuantMode::KV4_FP8, bfloat16_t, DecodeUnpack::kLloydMaxLut)
+ASCEND_TQ_DECLARE_MM_FUSED_DECODE_OPT_RAW_QUERY(turboquant_mm_fused_decode_opt_raw_query_kv4fp8_bf16_lm, TurboQuantMode::KV4_FP8, bfloat16_t, DecodeUnpack::kLloydMaxLut)
 
 #elif defined(ASCEND_MICRO_CANN_LAUNCH)
 #include "kernel_operator.h"
@@ -702,12 +788,21 @@ ASCEND_TQ_DECLARE_MM_FUSED_DECODE_OPT_RAW_QUERY(turboquant_mm_fused_decode_opt_r
 extern "C" __global__ __aicore__ void turboquant_mm_fused_decode_opt_kv4fp8_bf16(
     GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR,
     uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t,
-    uint32_t, uint32_t, uint32_t, float, float);
+    uint32_t, uint32_t, uint32_t, float, float, uint32_t);
 extern "C" __global__ __aicore__ void turboquant_mm_fused_decode_opt_raw_query_kv4fp8_bf16(
     GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR,
     GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR,
     uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t,
-    uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, float, float);
+    uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, float, float, uint32_t);
+extern "C" __global__ __aicore__ void turboquant_mm_fused_decode_opt_kv4fp8_bf16_lm(
+    GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR,
+    uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t,
+    uint32_t, uint32_t, uint32_t, float, float, uint32_t);
+extern "C" __global__ __aicore__ void turboquant_mm_fused_decode_opt_raw_query_kv4fp8_bf16_lm(
+    GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR,
+    GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR,
+    uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t,
+    uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, float, float, uint32_t);
 
 namespace vllm_ascend {
 
@@ -724,9 +819,12 @@ void turboquant_mm_fused_decode_opt_impl(int32_t mode, AscendType type, void *st
                                          uint32_t headSize, uint32_t blockSize, uint32_t maxBlocksPerSeq,
                                          uint32_t numSplits, uint32_t headsPerTask, uint32_t tasksPerBlock,
                                          uint32_t reduceTasksPerBlock, uint32_t fusedContextLimit, float scale,
-                                         float invSqrtLen)
+                                         float invSqrtLen, uint32_t numBlocks, uint32_t decodeUnpack)
 {
     if (!tiling) throw std::invalid_argument("fused decode launch without host tiling descriptors");
+    // DIRTY-DATA (D1/N3): without the physical page count the device could not bound a
+    // block-table entry, so refuse the launch instead of silently skipping the check.
+    if (!numBlocks) throw std::invalid_argument("fused decode launch without a cache page count");
     if (!ascend_micro::fused_decode_opt::valid_launch(blockDim, numTokens, numHeads,
             numKvHeads, headSize, blockSize, maxBlocksPerSeq, numSplits,
             headsPerTask, tasksPerBlock, reduceTasksPerBlock))
@@ -734,14 +832,28 @@ void turboquant_mm_fused_decode_opt_impl(int32_t mode, AscendType type, void *st
     if (blockDim == 0 || static_cast<turboquant::TurboQuantMode>(mode) != turboquant::TurboQuantMode::KV4_FP8) {
         return;
     }
-    
+    // Only the two expands with declared kernels: kNative and the Lloyd-Max gather. A Lloyd-Max
+    // launch reads its 16 fp32 centroids from modeTables, so the buffer must actually carry them.
+    if (decodeUnpack != static_cast<uint32_t>(turboquant::DecodeUnpack::kNative) &&
+        decodeUnpack != static_cast<uint32_t>(turboquant::DecodeUnpack::kLloydMaxLut))
+        throw std::invalid_argument("fused decode launch with an unpack variant no kernel declares");
+
     if (type == AscendType::BF16) {
-        turboquant_mm_fused_decode_opt_kv4fp8_bf16<<<blockDim, nullptr, stream>>>(
-            AsGmAddr(queryRot), AsGmAddr(keyCache), AsGmAddr(valueCache), AsGmAddr(scaleCache),
-            AsGmAddr(blockTables), AsGmAddr(contextLens), AsGmAddr(modeTables), AsGmAddr(workspace),
-            AsGmAddr(output), AsGmAddr(tiling), numTokens, numHeads, numKvHeads, headSize, blockSize,
-            maxBlocksPerSeq, numSplits, headsPerTask, tasksPerBlock, reduceTasksPerBlock,
-            fusedContextLimit, scale, invSqrtLen);
+        if (decodeUnpack == static_cast<uint32_t>(turboquant::DecodeUnpack::kLloydMaxLut)) {
+            turboquant_mm_fused_decode_opt_kv4fp8_bf16_lm<<<blockDim, nullptr, stream>>>(
+                AsGmAddr(queryRot), AsGmAddr(keyCache), AsGmAddr(valueCache), AsGmAddr(scaleCache),
+                AsGmAddr(blockTables), AsGmAddr(contextLens), AsGmAddr(modeTables), AsGmAddr(workspace),
+                AsGmAddr(output), AsGmAddr(tiling), numTokens, numHeads, numKvHeads, headSize, blockSize,
+                maxBlocksPerSeq, numSplits, headsPerTask, tasksPerBlock, reduceTasksPerBlock,
+                fusedContextLimit, scale, invSqrtLen, numBlocks);
+        } else {
+            turboquant_mm_fused_decode_opt_kv4fp8_bf16<<<blockDim, nullptr, stream>>>(
+                AsGmAddr(queryRot), AsGmAddr(keyCache), AsGmAddr(valueCache), AsGmAddr(scaleCache),
+                AsGmAddr(blockTables), AsGmAddr(contextLens), AsGmAddr(modeTables), AsGmAddr(workspace),
+                AsGmAddr(output), AsGmAddr(tiling), numTokens, numHeads, numKvHeads, headSize, blockSize,
+                maxBlocksPerSeq, numSplits, headsPerTask, tasksPerBlock, reduceTasksPerBlock,
+                fusedContextLimit, scale, invSqrtLen, numBlocks);
+        }
     }
 }
 
@@ -753,9 +865,12 @@ void turboquant_mm_fused_decode_opt_raw_query_impl(
     uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t maxBlocksPerSeq, uint32_t numSplits,
     uint32_t headsPerTask, uint32_t tasksPerBlock, uint32_t reduceTasksPerBlock, uint32_t prologueVectorsPerBlock,
     uint32_t prologueCubeChunkVectors, uint32_t outputStage, uint32_t fusedContextLimit, float scale,
-    float invSqrtLen)
+    float invSqrtLen, uint32_t numBlocks, uint32_t decodeUnpack)
 {
     if (!tiling) throw std::invalid_argument("fused decode launch without host tiling descriptors");
+    // DIRTY-DATA (D1/N3): see the pre-rotated entry: a launch without the cache page count cannot
+    // bound a block-table page, so it is refused rather than run with the check disabled.
+    if (!numBlocks) throw std::invalid_argument("fused decode launch without a cache page count");
     if (uint64_t{blockDim} * prologueVectorsPerBlock < uint64_t{numTokens} * numHeads ||
         (prologueCubeChunkVectors != 0 && prologueCubeChunkVectors != 16) || outputStage > 2)
         throw std::invalid_argument("unsupported raw query basis tiling");
@@ -766,16 +881,31 @@ void turboquant_mm_fused_decode_opt_raw_query_impl(
     if (blockDim == 0 || static_cast<turboquant::TurboQuantMode>(mode) != turboquant::TurboQuantMode::KV4_FP8) {
         return;
     }
-    
+    // See the pre-rotated entry: kNative and kLloydMaxLut are the two declared expands.
+    if (decodeUnpack != static_cast<uint32_t>(turboquant::DecodeUnpack::kNative) &&
+        decodeUnpack != static_cast<uint32_t>(turboquant::DecodeUnpack::kLloydMaxLut))
+        throw std::invalid_argument("fused decode launch with an unpack variant no kernel declares");
+
     if (type == AscendType::BF16) {
-        turboquant_mm_fused_decode_opt_raw_query_kv4fp8_bf16<<<blockDim, nullptr, stream>>>(
-            AsGmAddr(query), AsGmAddr(piSigns), AsGmAddr(rotTables), AsGmAddr(h16), AsGmAddr(gate),
-            AsGmAddr(queryRot), AsGmAddr(keyCache), AsGmAddr(valueCache), AsGmAddr(scaleCache),
-            AsGmAddr(blockTables), AsGmAddr(contextLens), AsGmAddr(modeTables), AsGmAddr(workspace),
-            AsGmAddr(output), AsGmAddr(tiling), numTokens, numHeads, numKvHeads, headSize,
-            blockSize, maxBlocksPerSeq, numSplits, headsPerTask, tasksPerBlock, reduceTasksPerBlock,
-            prologueVectorsPerBlock, prologueCubeChunkVectors, outputStage, fusedContextLimit, scale,
-            invSqrtLen);
+        if (decodeUnpack == static_cast<uint32_t>(turboquant::DecodeUnpack::kLloydMaxLut)) {
+            turboquant_mm_fused_decode_opt_raw_query_kv4fp8_bf16_lm<<<blockDim, nullptr, stream>>>(
+                AsGmAddr(query), AsGmAddr(piSigns), AsGmAddr(rotTables), AsGmAddr(h16), AsGmAddr(gate),
+                AsGmAddr(queryRot), AsGmAddr(keyCache), AsGmAddr(valueCache), AsGmAddr(scaleCache),
+                AsGmAddr(blockTables), AsGmAddr(contextLens), AsGmAddr(modeTables), AsGmAddr(workspace),
+                AsGmAddr(output), AsGmAddr(tiling), numTokens, numHeads, numKvHeads, headSize,
+                blockSize, maxBlocksPerSeq, numSplits, headsPerTask, tasksPerBlock, reduceTasksPerBlock,
+                prologueVectorsPerBlock, prologueCubeChunkVectors, outputStage, fusedContextLimit, scale,
+                invSqrtLen, numBlocks);
+        } else {
+            turboquant_mm_fused_decode_opt_raw_query_kv4fp8_bf16<<<blockDim, nullptr, stream>>>(
+                AsGmAddr(query), AsGmAddr(piSigns), AsGmAddr(rotTables), AsGmAddr(h16), AsGmAddr(gate),
+                AsGmAddr(queryRot), AsGmAddr(keyCache), AsGmAddr(valueCache), AsGmAddr(scaleCache),
+                AsGmAddr(blockTables), AsGmAddr(contextLens), AsGmAddr(modeTables), AsGmAddr(workspace),
+                AsGmAddr(output), AsGmAddr(tiling), numTokens, numHeads, numKvHeads, headSize,
+                blockSize, maxBlocksPerSeq, numSplits, headsPerTask, tasksPerBlock, reduceTasksPerBlock,
+                prologueVectorsPerBlock, prologueCubeChunkVectors, outputStage, fusedContextLimit, scale,
+                invSqrtLen, numBlocks);
+        }
     }
 }
 
@@ -795,7 +925,7 @@ extern "C" void launch_fused_decode_opt_raw_query(void* stream,
         c->tokens, c->heads, c->kv_heads, c->head_size, c->block_size, c->max_blocks, c->splits,
         c->heads_per_task, c->tasks_per_block, c->reduce_tasks_per_block,
         c->prologue_vectors_per_block, c->prologue_cube_chunk_vectors, c->output_stage,
-        c->fused_context_limit, c->scale, c->inv_sqrt_len);
+        c->fused_context_limit, c->scale, c->inv_sqrt_len, c->num_blocks, c->decode_unpack);
 }
 
 extern "C" void launch_fused_decode_opt(void* stream,
@@ -809,7 +939,7 @@ extern "C" void launch_fused_decode_opt(void* stream,
         b->context_lengths, b->mode_tables, b->workspace, b->output, b->tiling, c->tokens,
         c->heads, c->kv_heads, c->head_size, c->block_size, c->max_blocks, c->splits,
         c->heads_per_task, c->tasks_per_block, c->reduce_tasks_per_block,
-        c->fused_context_limit, c->scale, c->inv_sqrt_len);
+        c->fused_context_limit, c->scale, c->inv_sqrt_len, c->num_blocks, c->decode_unpack);
 }
 
 #endif

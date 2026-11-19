@@ -46,6 +46,9 @@
 //   6. THE SHARED ONLINE-SOFTMAX RECURRENCE. Both entry points run their phases in the one
 //      order the recurrence is valid in.
 //
+//   7. THE PROBED RECURRENCE. The telemetry probe's four-phase order: update_max_and_alpha,
+//      argmax_probe, exponentiate_scores, update_denominator.
+//
 // The prefill geometry below comes from the kernel source itself: its strip geometry and ring
 // depths sit outside the `__CCE_AICORE__` / `ASCEND_MICRO_CANN_LAUNCH` guards precisely so that
 // a toolkit-free translation unit can include the file and audit them, instead of a test keeping
@@ -378,6 +381,41 @@ void check_recurrence()
     std::printf("  recurrence: shared phases in order on both entry points\n");
 }
 
+// ------------------------------------------------------------------ 7. the probed recurrence
+// The telemetry probe's four-phase recurrence (routine_vector_online_softmax.hpp): the argmax
+// probe runs against the finished logits AFTER update_max_and_alpha -- the only point where
+// tile_max and the pre-commit run_max are both live -- and BEFORE exponentiate_scores
+// overwrites the logits. Any other order and the probe reads either logits that are already
+// exponentials or a running maximum that already moved.
+struct ProbedPhases {
+    unsigned phase = 0;
+    void update_max_and_alpha()
+    {
+        if (phase++ != 0) throw std::runtime_error("probed softmax: max/alpha out of order");
+    }
+    void argmax_probe()
+    {
+        if (phase++ != 1) throw std::runtime_error("probed softmax: argmax probe out of order");
+    }
+    void exponentiate_scores()
+    {
+        if (phase++ != 2) throw std::runtime_error("probed softmax: exponentiate out of order");
+    }
+    void update_denominator()
+    {
+        if (phase++ != 3) throw std::runtime_error("probed softmax: denominator out of order");
+    }
+};
+
+void check_probed_recurrence()
+{
+    ProbedPhases probed;
+    ascend_micro::vector_online_softmax_probabilities_probed(probed);
+    g_fail.check(probed.phase == 4,
+                 "the probed Cube-backed softmax runs max, probe, exponentiate, denominator");
+    std::printf("  probed recurrence: the argmax probe sits between max and exponentiate\n");
+}
+
 // ------------------------------------------------------------------ strip geometry
 void check_strip_geometry()
 {
@@ -417,6 +455,7 @@ int main()
         check_mode2_channels();
         check_marked_graph();
         check_recurrence();
+        check_probed_recurrence();
     } catch (const std::exception& error) {
         std::printf("FAIL test_contract_gates: %s\n", error.what());
         return 1;

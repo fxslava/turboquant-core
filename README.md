@@ -64,6 +64,14 @@ include/turboquant/      normative contracts, no kernel toolchain required
   turboquant_fused_decode_opt.hpp  decode launch ABI, UB map, flag budget
   turboquant_gemm_reduce.hpp       Cube GEMM reduction contract
   turboquant_splitk_contract.hpp   Split-K partial layout
+golden/
+  turboquant_golden.py           the PyTorch golden model (a standalone copy of
+                                 vllm-ascend's turboquant_v1.py golden path),
+                                 plus the fp64 decode reference
+  generate_dumps.py              writes golden/dumps/: synthetic fixtures and the
+                                 golden's expected images, per kernel, plus the
+                                 real serving-geometry decode cases (randn data,
+                                 6496-block cache, sparse-stored)
 src/
   prefill/turboquant_reshape_batch.cpp     MIX_AIC_1_2 BF16 prefill, mode-2 only
   prefill/routine_stage_page_zn_bf16.hpp
@@ -79,18 +87,133 @@ tests/
   common/turboquant_test_common.hpp    failure harness, bit helpers, guarded buffers,
                                        the RFC 3.1 index maps
   common/turboquant_golden_oracle.hpp  reference integer quantiser, power-of-two scale
-                                       extractor, FP64 attention reference
+                                       extractor, FP64 attention reference, and the
+                                       real-decode-case reference (LCG pi_signs,
+                                       dense Pi, fp64 decode over the NZ cache)
+  common/golden_dump_manifest.hpp      the golden dump manifest/tensor reader (sparse
+                                       tensors materialised), shared by every runner
   common/turboquant_scatter_oracle.hpp the scatter writer's golden cache image
   common/rotate_butterfly_oracle.hpp   host model of the vector butterfly
   common/fused_decode_fixture.hpp      the decode's gold model, `expected` in double
   common/decode_tiling_gate.hpp        the host tiling equivalence gate
   common/camodel_session.hpp           device session and guarded GM allocations
+  common/device_timer.hpp              device-side launch timing for --perf
   cpu/test_contract_gates.cpp          UB arena, host tiling, launch guards, mode-2 channels,
                                        marked-graph token balance, shared recurrence
   cpu/test_layout_bridge.cpp           NZ writer == decode reader, bijections, co-byte pairings
-  npu/test_live_write.cpp              batch prefill + scatter RMW against the oracle
+  cpu/test_golden_decode_oracle.cpp    the plain-C golden oracle against the PyTorch
+                                       golden over every decode dump case
+  npu/test_live_write.cpp              batch prefill + scatter RMW against the oracle; built
+                                       twice for the scatter: plain (strip RMW) and
+                                       TQ_SCATTER_NZ=1 (the NZ-tiled ingress, --probe for the
+                                       single-tile fast check)
+  npu/test_nz_ingress_canary.cpp       the NZ prefill over one 64-row tile
   npu/test_fused_decode_e2e.cpp        end-to-end decode against the FP64 reference
+  npu/test_golden_dump.cpp             every kernel against the PyTorch golden dumps
 ```
+
+## The golden-dump comparison (kernel vs the PyTorch golden)
+
+`golden/` holds a standalone copy of the PyTorch golden model from vllm-ascend's
+`turboquant_v1.py` (no vLLM or torch_npu dependency) and a generator that
+turns it into binary dumps: synthetic BF16-exact integer fixtures, the operands
+the kernels read (LCG `pi_signs`, BF16 codec tables, `h16`) and the golden's
+expected cache images and decode outputs — plus the **real serving decode
+cases** of the vllm-ascend unit test (`decode_real_ctx{64,128,200,1055}`:
+group_heads 6, randn bf16 data, the production softmax scale, a 6496-block
+cache with a 512-wide block table, the planes stored sparsely as a fill word
+plus the live pages). `tests/npu/test_golden_dump.cpp` builds four CAModel
+runners — one per kernel, the prefill twice (strip and NZ builds) — that
+upload the dumps, launch, and compare. The ingestion writers are compared
+**bit for bit**; the decode is compared against the golden's fp64 attention
+with a bf16 ULP budget (`--ulp-budget`, default 8), the one place a tolerance
+is honest. `tests/cpu/test_golden_decode_oracle.cpp` is the mirror gate on the
+host side: it holds the plain-C golden oracle
+(`tests/common/turboquant_golden_oracle.hpp`) to the same PyTorch golden over
+every decode case — LCG `pi_signs` bit-exact, the dense-Pi `query_rot`
+bit-exact on the integer fixtures and within a row-relative budget on the
+random ones, and both output stages at fp32-ULP budget against the dump's fp64
+reference.
+
+```bash
+python golden/generate_dumps.py            # writes golden/dumps/ (tracked; needs torch)
+./build/tests/test_golden_prefill_strip_sim --dump-root golden/dumps
+./build/tests/test_golden_prefill_nz_sim   --dump-root golden/dumps
+./build/tests/test_golden_scatter_sim      --dump-root golden/dumps
+./build/tests/test_golden_decode_sim       --dump-root golden/dumps
+```
+
+**What it established on CAModel, at the current revision:**
+
+* **The scatter writer is bit-identical to the PyTorch golden**, both steps of
+  a read-modify-write ladder, poisoned unowned lanes included.
+* **The prefill writer is bit-identical in both packed planes**, in both
+  layouts (the strip build and the `TURBOQUANT_INGRESS_NZ` build), including
+  the in-page strip offsets of `block_size = 128` pages — the geometry
+  `DRY_RUN_COMPATIBILITY.md` §7.1 flagged as untested. The scale plane matches
+  except on all-zero rows, where the kernel floors absmax at 1.0 and stores
+  2^-6 while the golden branches on `absmax == 0` and stores 1.0; the codes
+  are zero on both sides, so the dequantised value is 0 either way. The runner
+  counts and names exactly those rows and fails on any other scale byte.
+* **The fused decode is NOT compatible with the golden's cache convention.**
+  Its raw-query rotation prologue reproduces the golden's rotated query bit
+  for bit, but the decode dequantises a cache row as
+  `(code + 0.5) * scale / kGain` (the KV4_FP8 centroid grid of
+  `turboquant_mode.h`, kGain = 2.9832882881) where the writers — and the
+  PyTorch golden — store `code * scale` with `scale = 2^(e-2) / sqrt(D)`.
+  Against the fp64 golden its stage-0 output is therefore wrong by a
+  systematic, channel-varying amount (worst ~34k bf16 ULP); against the same
+  reference evaluated under the kernel's own convention it agrees to within
+  the fp8 operand rounding of the Cube pipeline. And its `kUnrotated` output
+  stage emits `Pi^T` of the accumulator with **no `1/sqrt(D)` fold**, 16x the
+  model-basis context the dry run expects. Both are named, with numbers, in
+  the runner's output; the runner fails the decode until the kernel and the
+  contract are reconciled.
+
+## Measuring the kernels (`--perf`)
+
+Both device runners take `--perf [N]`. It does not replace the gate: every correctness, canary
+and unchanged-input check of a configuration runs first and in full, and only then is that same
+launch re-issued `N` times (default 20, max 512) and timed.
+
+```bash
+./build/tests/test_fused_decode_e2e_sim --camodel-smoke --perf 50
+```
+
+```bash
+./build/tests/test_live_write_sim --op both --perf
+```
+
+```bash
+./build-npu/tests/test_live_write_npu --op prefill --slices 64 --strips-per-block 8 --perf 100
+```
+
+**A sample is device time.** Two `ACL_EVENT_TIME_LINE` events are recorded on the stream either
+side of one launch, so the interval is timestamped by the device as it retires each marker: the
+kernel's own residency plus the stream's dispatch of it, with no host round trip inside it. The
+timed batch is issued back to back and synchronised once at the end -- stream order already
+serialises the launches, and not returning to the host between them is what makes the samples a
+steady state instead of a row of cold starts. Warm-up launches (3) are discarded first; the
+first launch of one of these operators pays for its binary registration and runs several times
+the steady one. Reported per configuration: median, min, mean, max, the sample count, and the
+operator's own rate columns (tokens/s for a writer, query vectors/s for the decode, plus the
+GB/s of KV traffic the launch moves).
+
+**Re-launching is sound because all three operators are pure in their arguments.** Both writers
+recompute the identical cache bytes -- the value plane's read-modify-write splices the same
+owned nibbles into a strip whose unowned nibbles it already preserved once -- and the decode
+rewrites its output and its Split-K workspace from inputs it only reads. The checks have also
+already run, so a perf re-launch is neither observed by one nor able to invalidate one.
+
+**If the driver will not give timeline events** (a CAModel build that does not implement them),
+the batch is timed on the host clock instead and every line says `host-clocked`. That number
+includes the launch path and is not comparable with a device-clocked one; the flag is carried
+through the struct rather than inferred so the two can never be quoted as the same measurement.
+
+**It is a timing and nothing more.** A median wall interval says a change moved the number; it
+does not establish MTE2/Cube overlap, per-pipe occupancy or bank behaviour, and in particular it
+is **not** the trace audit the seamless chunk pipeline still needs (see below). Use `msprof` for
+that.
 
 ## What the extraction changed
 
@@ -177,5 +300,11 @@ tests/
   PASS from either would still say nothing about whether a cross-core announcement overtook the
   pipeline work it reports — both earlier revisions of the batch writer passed numerically while
   their traces showed a wait retiring before its set. Audit the trace.
+* **`--perf` has never produced a number.** The timing path compiles and links -- all four ACL
+  calls it uses (`aclrtCreateEventWithFlag`, `aclrtRecordEvent`, `aclrtEventElapsedTime`,
+  `aclrtDestroyEvent`) are exported by the `libascendcl` both runners already link -- but no
+  device or simulator has executed it here, so whether CAModel implements timeline events at all
+  is unknown and the host-clock fallback is likewise untried. Treat the first measured run as
+  bring-up, not as data.
 * `tests/npu/*` are compiled only as a syntax check here (`g++ -fsyntax-only` against the ACL
   headers). They have never been linked against the kernel libraries.
