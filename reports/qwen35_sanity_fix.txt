@@ -96,8 +96,15 @@ checks, not clean process-exit passes. No 2K simulation was used for this check.
 Evidence: build-qwen35-fix/reduce-fixed-s1/result.log and reduce-fixed-s2/result.log.
 The retained runner accepts exactly one split (1 or 2) per process.
 
-Post-fix device build and tiny full-decode verification are recorded below when
-completed. Physical 2K parity must be checked on the 950PR after rebuilding the
+Post-fix full SIM and NPU builds completed successfully with CANN 9.2.0-beta.2,
+C++17, -Wall -Wextra -Werror, the Cube reducer, and telemetry enabled. These
+completed builds used the repository default SOC_VERSION=Ascend950PR_9599 and
+dav-c310 ISA. An explicit Ascend950PR_9579 NPU build is recorded separately below.
+The 64-token split-1 and 128-token split-2 full-decode attempts each reached their
+120-second budget before golden output, so full-decode SIM parity is unverified.
+Their exit code is 124; logs are in build-qwen35-fix/decode-fixed-s1/ and
+build-qwen35-fix/decode-fixed-s2/. No further simulator execution is planned.
+The SIM executable's --verify refusal and its 64-row static matrix were checked. Physical 2K parity must be checked on the 950PR after rebuilding the
 kernel library as well as the executable; an old library retains the bug.
 
 Physical commands, never run on CAModel:
