@@ -56,15 +56,11 @@ The Tensor API sources use the current `asc::te` interface. Select the installed
 explicitly with `-DASCEND_HOME_PATH=/path/to/cann-9.2.1` when configuring either device leg;
 the older 9.2.0-beta.2 headers do not provide this interface.
 
-CANN 9.2.1's legacy stub generator leaves its overflow-status argument unused in non-debug
-kernels. Apply the included parameter-annotation fix once before building with `-Wextra`:
-
-```bash
-patch -p1 -d "$ASCEND_HOME_PATH" < cmake/patches/cann-9.2.1-unused-overflow-parameter.patch
-```
-
-This SDK patch marks only that generated parameter `[[maybe_unused]]`; it changes no kernel
-arguments or behavior and adds no warning-suppression flags.
+CANN 9.2+ device builds require CMake 3.19 or newer for generated-wrapper warning
+isolation. The SDK's wrapper targets keep `-Wall -Wextra -Werror` and add only
+`-Wno-error=unused-parameter`; first-party preprocessing, `tq_strict`, the host tiling
+library and test runners retain the strict flags without that exception. The SDK itself
+does not need patching.
 
 ## Layout
 

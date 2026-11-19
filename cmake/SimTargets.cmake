@@ -11,6 +11,7 @@
 # into `cmake --build`. The fused decode is the expensive one, because it pulls the cube, vector
 # and reduction services in through templates. The aggregate target is `tq_sim_kernels`.
 function(add_turboquant_sim_targets)
+  include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/CannWrapperWarnings.cmake")
   set(RUN_MODE sim)
   set(SRC "${CMAKE_CURRENT_SOURCE_DIR}")
   set(SIM_LIB_DIR "${ASCEND_HOME_PATH}/tools/simulator/${SOC_VERSION}/lib")
@@ -30,7 +31,8 @@ function(add_turboquant_sim_targets)
   ascendc_compile_definitions(tq_prefill_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_prefill_sim PRIVATE
       -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
-      -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH)
+      -forward-options-to-host-compiler -Wall -Wextra -Werror
+      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH)
 
   # The same writer with the write-time NZ-tiled ingress on. Its own library, not an option on
   # the one above: the two layouts are two operators behind one entry point, and the strip gate
@@ -41,14 +43,16 @@ function(add_turboquant_sim_targets)
   ascendc_compile_definitions(tq_prefill_nz_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_INGRESS_NZ=1)
   ascendc_compile_options(tq_prefill_nz_sim PRIVATE
       -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
-      -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
+      -forward-options-to-host-compiler -Wall -Wextra -Werror
+      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
 
   ascendc_library(tq_scatter_sim SHARED src/scatter/turboquant_reshape_scatter.cpp)
   set_property(SOURCE src/scatter/turboquant_reshape_scatter.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/scatter/turboquant_reshape_scatter.cpp)
   ascendc_compile_definitions(tq_scatter_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_scatter_sim PRIVATE
       -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
-      -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH)
+      -forward-options-to-host-compiler -Wall -Wextra -Werror
+      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH)
 
   # The same scatter writer with the NZ-tiled ingress on. Its own library for the reason given
   # at tq_prefill_nz_sim: the two layouts are two operators behind one entry point, and the
@@ -58,20 +62,25 @@ function(add_turboquant_sim_targets)
   ascendc_compile_definitions(tq_scatter_nz_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_INGRESS_NZ=1)
   ascendc_compile_options(tq_scatter_nz_sim PRIVATE
       -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
-      -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
+      -forward-options-to-host-compiler -Wall -Wextra -Werror
+      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
 
   ascendc_library(tq_decode_sim SHARED src/decode/turboquant_fused_decode.cpp)
   set_property(SOURCE src/decode/turboquant_fused_decode.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/decode/turboquant_fused_decode.cpp)
   ascendc_compile_definitions(tq_decode_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_decode_sim PRIVATE
       -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS} ${TQ_REDUCE_DEFINES} ${TQ_TELEMETRY_DEFINES}
-      -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH
+      -forward-options-to-host-compiler -Wall -Wextra -Werror
+      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH
       "-I${SRC}/src/decode" "-I${SRC}/src/common" "-I${SRC}/include")
 
   # ---------------------------------------------------------------- the runners
   # add_sim_runner(<name> <source> <kernel targets...>)
   # The CAModel libraries depend on further simulator DSOs; -rpath-link lets the link resolve
   # those indirect dependencies, and the install RPATH lets the runner find them at run time.
+  tq_scope_cann_wrapper_warnings(
+      tq_prefill_sim tq_prefill_nz_sim tq_scatter_sim tq_scatter_nz_sim tq_decode_sim)
+
   function(add_sim_runner name source)
     add_executable(${name} EXCLUDE_FROM_ALL "${source}")
     target_include_directories(${name} PRIVATE "${SRC}" "${ASCEND_HOME_PATH}/include")

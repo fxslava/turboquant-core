@@ -6,6 +6,7 @@
 # legs compile the same translation unit with the same definitions. RUN_MODE is set inside the
 # function for the reason given there.
 function(add_turboquant_npu_targets)
+  include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/CannWrapperWarnings.cmake")
   set(RUN_MODE npu)
   set(SRC "${CMAKE_CURRENT_SOURCE_DIR}")
 
@@ -14,7 +15,8 @@ function(add_turboquant_npu_targets)
   ascendc_compile_definitions(tq_prefill_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_prefill_npu PRIVATE
       -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
-      -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH)
+      -forward-options-to-host-compiler -Wall -Wextra -Werror
+      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH)
 
   # The same writer with the write-time NZ-tiled ingress on; see SimTargets.cmake for why it is
   # its own library rather than an option on the one above.
@@ -23,14 +25,16 @@ function(add_turboquant_npu_targets)
   ascendc_compile_definitions(tq_prefill_nz_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_INGRESS_NZ=1)
   ascendc_compile_options(tq_prefill_nz_npu PRIVATE
       -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
-      -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
+      -forward-options-to-host-compiler -Wall -Wextra -Werror
+      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
 
   ascendc_library(tq_scatter_npu SHARED src/scatter/turboquant_reshape_scatter.cpp)
   set_property(SOURCE src/scatter/turboquant_reshape_scatter.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/scatter/turboquant_reshape_scatter.cpp)
   ascendc_compile_definitions(tq_scatter_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_scatter_npu PRIVATE
       -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
-      -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH)
+      -forward-options-to-host-compiler -Wall -Wextra -Werror
+      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH)
 
   # The same scatter writer with the NZ-tiled ingress on; see SimTargets.cmake.
   ascendc_library(tq_scatter_nz_npu SHARED src/scatter/turboquant_reshape_scatter.cpp)
@@ -38,14 +42,16 @@ function(add_turboquant_npu_targets)
   ascendc_compile_definitions(tq_scatter_nz_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_INGRESS_NZ=1)
   ascendc_compile_options(tq_scatter_nz_npu PRIVATE
       -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
-      -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
+      -forward-options-to-host-compiler -Wall -Wextra -Werror
+      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
 
   ascendc_library(tq_decode_npu SHARED src/decode/turboquant_fused_decode.cpp)
   set_property(SOURCE src/decode/turboquant_fused_decode.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/decode/turboquant_fused_decode.cpp)
   ascendc_compile_definitions(tq_decode_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH)
   ascendc_compile_options(tq_decode_npu PRIVATE
       -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS} ${TQ_REDUCE_DEFINES} ${TQ_TELEMETRY_DEFINES}
-      -forward-options-to-host-compiler -DASCEND_MICRO_CANN_LAUNCH
+      -forward-options-to-host-compiler -Wall -Wextra -Werror
+      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH
       "-I${SRC}/src/decode" "-I${SRC}/src/common" "-I${SRC}/include")
 
   # The runner link must resolve libruntime.so's own NEEDED entries -- libascend_hal.so and
@@ -75,6 +81,9 @@ function(add_turboquant_npu_targets)
     message(WARNING "No Ascend driver lib dir found under ${TQ_DRIVER_HOME}; NPU runner links "
                     "may fail on libruntime.so's indirect driver dependencies.")
   endif()
+
+  tq_scope_cann_wrapper_warnings(
+      tq_prefill_npu tq_prefill_nz_npu tq_scatter_npu tq_scatter_nz_npu tq_decode_npu)
 
   function(add_npu_runner name source)
     add_executable(${name} EXCLUDE_FROM_ALL "${source}")

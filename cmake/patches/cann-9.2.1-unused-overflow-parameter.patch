@@ -1,8 +1,0 @@
---- a/tools/tikcpp/ascendc_kernel_cmake/legacy_modules/util/extract_host_stub.py
-+++ b/tools/tikcpp/ascendc_kernel_cmake/legacy_modules/util/extract_host_stub.py
-@@ -1853 +1853 @@
--        suffix_extra_param = ", GM_ADDR overflow_status"
-+        suffix_extra_param = ", GM_ADDR overflow_status [[maybe_unused]]"
-@@ -1855 +1855 @@
--            suffix_extra_param = "GM_ADDR overflow_status"
-+            suffix_extra_param = "GM_ADDR overflow_status [[maybe_unused]]"

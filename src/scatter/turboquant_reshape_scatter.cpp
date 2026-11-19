@@ -18,6 +18,7 @@
 // Ascend 950PR / arch35 / dav-3510 / CANN 9.2, KERNEL_TYPE_AIV_ONLY.
 
 #include <cstdint>
+#include <stdexcept>
 
 // What it is for
 // --------------

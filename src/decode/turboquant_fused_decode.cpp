@@ -1,3 +1,5 @@
+#include <cstdint>
+
 #include "../../include/turboquant/turboquant_fused_decode_opt.hpp"
 #include "../../include/turboquant/turboquant_types.h"
 

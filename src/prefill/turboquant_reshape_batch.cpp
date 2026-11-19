@@ -20,11 +20,18 @@
 #define TURBOQUANT_INGRESS_NZ 0
 #endif
 
+#if defined(__CCE_AICORE__) || !defined(ASCEND_MICRO_CANN_LAUNCH) || TURBOQUANT_INGRESS_NZ
 namespace turboquant_bf16 {
 
-constexpr std::uint32_t kTokens = 16;
 constexpr std::uint32_t kHeads = 4;
 constexpr std::uint32_t kHeadSize = 256;
+#if TURBOQUANT_INGRESS_NZ
+constexpr std::uint32_t kNzTileRows = 64u;
+#endif
+
+#if defined(__CCE_AICORE__) || !defined(ASCEND_MICRO_CANN_LAUNCH)
+
+constexpr std::uint32_t kTokens = 16;
 constexpr std::uint32_t kGroup = 32;
 constexpr std::uint32_t kGroups = kHeadSize / kGroup;
 constexpr std::uint32_t kChunks = 2u * kHeads;
@@ -66,7 +73,6 @@ constexpr std::uint32_t kIngressLookahead = kStageDepth - 1u;
 // quarters are independent: each writes its own 16 tile rows of each column group, so no two
 // strips -- and no two grid blocks -- ever touch the same byte. That is why this layout change
 // needs no cross-block protocol and no read-modify-write.
-constexpr std::uint32_t kNzTileRows = 64u;
 constexpr std::uint32_t kNzC0 = 32u;
 constexpr std::uint32_t kNzRowBytes = kHeadSize / 2u;              // packedBytes of one row
 constexpr std::uint32_t kNzGroups = kNzRowBytes / kNzC0;           // column groups in a row
@@ -130,7 +136,10 @@ static_assert(kNzScaleSlabFloats == kTokens * tq_contract::kFp32PerBlock,
               "the scale lane image is one FP32 DataBlock a token");
 #endif
 
+#endif
+
 }
+#endif
 
 #if defined(__CCE_AICORE__)
 
