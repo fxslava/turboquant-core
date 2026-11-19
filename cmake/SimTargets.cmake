@@ -114,10 +114,20 @@ function(add_turboquant_sim_targets)
       -forward-options-to-host-compiler -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -DASCEND_MICRO_CANN_LAUNCH)
   tq_scope_cann_wrapper_warnings(tq_qwen35_reduce_canary_sim)
-  foreach(canary IN ITEMS bench_qwen35_decode_sim test_qwen35_reduce_canary_sim)
+  ascendc_library(tq_qwen35_tail_canary_sim SHARED tests/npu/qwen35_tail_canary.cpp)
+  ascendc_compile_definitions(tq_qwen35_tail_canary_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)
+  ascendc_compile_options(tq_qwen35_tail_canary_sim PRIVATE
+      -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -forward-options-to-host-compiler -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+      -DASCEND_MICRO_CANN_LAUNCH)
+  tq_scope_cann_wrapper_warnings(tq_qwen35_tail_canary_sim)
+  foreach(canary IN ITEMS bench_qwen35_decode_sim test_qwen35_reduce_canary_sim test_qwen35_tail_canary_sim)
     if(canary STREQUAL "bench_qwen35_decode_sim")
       set(canary_source tests/npu/bench_qwen35_decode.cpp)
       set(canary_kernel tq_decode_sim)
+    elseif(canary STREQUAL "test_qwen35_tail_canary_sim")
+      set(canary_source tests/npu/test_qwen35_tail_canary.cpp)
+      set(canary_kernel tq_qwen35_tail_canary_sim)
     else()
       set(canary_source tests/npu/test_qwen35_reduce_canary.cpp)
       set(canary_kernel tq_qwen35_reduce_canary_sim)

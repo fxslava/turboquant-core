@@ -96,16 +96,30 @@ checks, not clean process-exit passes. No 2K simulation was used for this check.
 Evidence: build-qwen35-fix/reduce-fixed-s1/result.log and reduce-fixed-s2/result.log.
 The retained runner accepts exactly one split (1 or 2) per process.
 
+An instruction-level CAModel tail-publication canary also completed its host
+checks: real Compare/Select operations reproduce corruption with the old alias,
+while the separate predicate preserves every max/sum, position and page across
+both AIVs (six heads). It runs one MIX block, reads no KV sequence, and uses the
+production vector_cube_pack_partial_tails routine. Its PASS record is retained
+under build-qwen35-fix/tail-fixed/result.log. This canary also completed simulator
+teardown and exited 0 within its 120-second budget.
+
 Post-fix full SIM and NPU builds completed successfully with CANN 9.2.0-beta.2,
 C++17, -Wall -Wextra -Werror, the Cube reducer, and telemetry enabled. These
 completed builds used the repository default SOC_VERSION=Ascend950PR_9599 and
-dav-c310 ISA. An explicit Ascend950PR_9579 NPU build is recorded separately below.
+dav-c310 ISA. An additional explicit Ascend950PR_9579 build was stopped during
+compilation after the user confirmed the physical fix worked on the latest commit.
+It is not counted as a completed local build.
 The 64-token split-1 and 128-token split-2 full-decode attempts each reached their
 120-second budget before golden output, so full-decode SIM parity is unverified.
 Their exit code is 124; logs are in build-qwen35-fix/decode-fixed-s1/ and
-build-qwen35-fix/decode-fixed-s2/. No further simulator execution is planned.
-The SIM executable's --verify refusal and its 64-row static matrix were checked. Physical 2K parity must be checked on the 950PR after rebuilding the
-kernel library as well as the executable; an old library retains the bug.
+build-qwen35-fix/decode-fixed-s2/. No further full-decode simulator execution is planned.
+The SIM executable's --verify refusal and its 64-row static matrix were checked.
+
+Physical verification: the user reports that the fix works after testing the
+latest commit, in response to the request to rebuild kernel and benchmark and run
+--verify --device 2 --batch-size 1 on the 950PR. No new per-geometry numeric output
+was supplied; the physical result is user-reported, not independently captured here.
 
 Physical commands, never run on CAModel:
   bench_qwen35_decode --verify --device 2 --block-size 128 --batch-size 1 --split-k 2
