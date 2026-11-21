@@ -24,6 +24,201 @@ constexpr std::uint32_t kCubeTileBlocks = kCubeTileKeys * sizeof(float) / 32;
 // value at all.
 constexpr float kTailDeadLogit = -3.4028235e38f;
 
+// The paired register VF owns exactly three rows per AIV.
+constexpr std::uint32_t kRegisterSoftmaxHeads = 3;
+static_assert(kCubeTileKeys * sizeof(float) == 256);
+static_assert(kStateLanes * sizeof(float) == 32);
+
+// Preserve the prepared FP32 -> FP8 numerator quantizer's operation order.
+__simd_callee__ inline void quantize_native_probability_row(
+    AscendC::Reg::RegTensor<float>& weighted_row, __ubuf__ float* scale_out,
+    __ubuf__ fp8_e4m3fn_t* operand_out, AscendC::Reg::MaskReg& live_mask,
+    float operand_max, float epsilon)
+{
+    namespace reg = AscendC::Reg;
+    auto row_mask = reg::CreateMask<float, reg::MaskPattern::ALL>();
+    auto state_mask = reg::CreateMask<float, reg::MaskPattern::VL8>();
+    reg::RegTensor<float> zero, reduced, denominator, numerator, scale, broadcast;
+    // Invalid values may already be NaN after value scaling. Select exact +0.
+    reg::Duplicate<float>(zero, 0.0f);
+    reg::Select<float>(weighted_row, weighted_row, zero, live_mask);
+    reg::Reduce<reg::ReduceType::MAX>(reduced, weighted_row, row_mask);
+    reg::Duplicate(denominator, reduced, state_mask);
+    reg::Adds(denominator, denominator, epsilon, state_mask);
+    reg::Duplicate<float>(numerator, operand_max);
+    // The tensor Div default uses DivAlgo::INTRINSIC with ZEROING.
+    reg::Div<float, reg::MaskMergeMode::ZEROING>(scale, numerator, denominator, state_mask);
+    reg::StoreAlign(scale_out, scale, state_mask);
+    reg::Duplicate(broadcast, scale, row_mask);
+    reg::Mul(weighted_row, weighted_row, broadcast, row_mask);
+    // Same SAT + RINT and FP32-lane packed store as AscendC::Cast.
+    static constexpr reg::CastTrait cast_trait = {
+        reg::RegLayout::ZERO, reg::SatMode::SAT, reg::MaskMergeMode::ZEROING,
+        AscendC::RoundMode::CAST_RINT};
+    reg::RegTensor<fp8_e4m3fn_t> packed;
+    reg::Cast<fp8_e4m3fn_t, float, cast_trait>(packed, weighted_row, row_mask);
+    reg::StoreAlign<fp8_e4m3fn_t, reg::StoreDist::DIST_PACK4_B32>(operand_out, packed, row_mask);
+}
+
+// Runs one online recurrence over two consecutive, independently staged
+// score windows. The two PVs still consume distinct probability generations.
+template <bool PACK_NOW>
+__simd_callee__ inline void online_softmax_loaded_row(
+    AscendC::Reg::RegTensor<float>& row, __ubuf__ float* decay_out, __ubuf__ float* maximum_out,
+    __ubuf__ float* ramp, std::uint32_t context_base, std::uint32_t logical_page,
+    AscendC::Reg::RegTensor<float>& run_max, AscendC::Reg::RegTensor<float>& run_sum,
+    AscendC::Reg::RegTensor<float>& position, AscendC::Reg::RegTensor<float>& page,
+    AscendC::Reg::RegTensor<float>& value_scale,
+    AscendC::Reg::RegTensor<float>& key_scale, AscendC::Reg::RegTensor<float>& q_inv,
+    AscendC::Reg::RegTensor<float>& dead, AscendC::Reg::MaskReg& live_mask,
+    __ubuf__ float* probability_scale = nullptr, __ubuf__ fp8_e4m3fn_t* probability = nullptr,
+    float operand_max = 0.0f, float epsilon = 0.0f)
+{
+    namespace reg = AscendC::Reg;
+    auto row_mask = reg::CreateMask<float, reg::MaskPattern::ALL>();
+    auto state_mask = reg::CreateMask<float, reg::MaskPattern::VL8>();
+    reg::RegTensor<float> reduced, tile_max, next_max, decay, scaled;
+    // Match the two original FP32 multiply rounds and select away dirty tail NaNs.
+    reg::Mul(row, row, key_scale, row_mask);
+    reg::Mul(row, row, q_inv, row_mask);
+    reg::Select<float>(row, row, dead, live_mask);
+    reg::Reduce<reg::ReduceType::MAX>(reduced, row, row_mask);
+    reg::Duplicate(tile_max, reduced, row_mask);
+    reg::Max(next_max, run_max, tile_max, row_mask);
+#if defined(ASCEND_TQ_DECODE_TELEMETRY) && ASCEND_TQ_DECODE_TELEMETRY
+    // Match the earliest-lane and earlier-tile tie rules of argmax_probe().
+    reg::RegTensor<float> diff, zero, ramp_row, sentinel, candidate;
+    reg::MaskReg equal, improved;
+    reg::Duplicate<float>(zero, 0.0f);
+    reg::Duplicate<float>(sentinel, static_cast<float>(kCubeTileKeys));
+    reg::Sub(diff, row, tile_max, row_mask);
+    reg::Compare<float, AscendC::CMPMODE::EQ>(equal, diff, zero, row_mask);
+    reg::LoadAlign(ramp_row, ramp);
+    reg::Select<float>(candidate, ramp_row, sentinel, equal);
+    reg::Reduce<reg::ReduceType::MIN>(reduced, candidate, row_mask);
+    reg::Duplicate(candidate, reduced, state_mask);
+    reg::Adds(candidate, candidate, static_cast<float>(context_base), state_mask);
+    reg::Sub(diff, tile_max, run_max, state_mask);
+    reg::Compare<float, AscendC::CMPMODE::GT>(improved, diff, zero, state_mask);
+    reg::Select<float>(position, candidate, position, improved);
+    reg::Duplicate<float>(candidate, static_cast<float>(logical_page));
+    reg::Select<float>(page, candidate, page, improved);
+#else
+    static_cast<void>(position);
+    static_cast<void>(page);
+    static_cast<void>(ramp);
+    static_cast<void>(context_base);
+    static_cast<void>(logical_page);
+#endif
+    reg::Sub(decay, run_max, next_max, state_mask);
+    reg::Sub(row, row, next_max, row_mask);
+    reg::Exp(decay, decay, state_mask);
+    reg::Exp(row, row, row_mask);
+    reg::Reduce<reg::ReduceType::SUM>(reduced, row, row_mask);
+    reg::Duplicate(tile_max, reduced, state_mask);
+    // Keep the separate FP32 multiply and add of the approved recurrence.
+    reg::Mul(scaled, run_sum, decay, state_mask);
+    reg::Add(run_sum, scaled, tile_max, state_mask);
+    reg::Mul(row, row, value_scale, row_mask);
+    reg::StoreAlign(decay_out, decay, state_mask);
+    reg::StoreAlign(maximum_out, next_max, state_mask);
+    reg::Move(run_max, next_max);
+    if constexpr (PACK_NOW) {
+        quantize_native_probability_row(row, probability_scale, probability, live_mask, operand_max, epsilon);
+    }
+}
+
+
+// The two Cube score windows are disjoint and already ready before the paired VF.
+__simd_callee__ inline void load_native_softmax_pair_head(
+    AscendC::Reg::RegTensor<float>& first, AscendC::Reg::RegTensor<float>& second,
+    AscendC::Reg::RegTensor<float>& m, AscendC::Reg::RegTensor<float>& l,
+    AscendC::Reg::RegTensor<float>& pos, AscendC::Reg::RegTensor<float>& page_id,
+    AscendC::Reg::RegTensor<float>& q_scale,
+    __ubuf__ float* first_scores, __ubuf__ float* second_scores, __ubuf__ float* run_max,
+    __ubuf__ float* run_sum, __ubuf__ float* position, __ubuf__ float* page,
+    __ubuf__ float* q_inv, std::uint32_t head)
+{
+    namespace reg = AscendC::Reg;
+    const std::uint32_t row = head * kCubeTileKeys;
+    const std::uint32_t state = head * kStateLanes;
+    reg::LoadAlign(first, first_scores + row);
+    reg::LoadAlign(second, second_scores + row);
+    reg::LoadAlign<float, reg::LoadDist::DIST_BRC_B32>(q_scale, q_inv + state);
+    reg::LoadAlign<float, reg::LoadDist::DIST_BRC_B32>(m, run_max + state);
+    reg::LoadAlign<float, reg::LoadDist::DIST_BRC_B32>(l, run_sum + state);
+#if defined(ASCEND_TQ_DECODE_TELEMETRY) && ASCEND_TQ_DECODE_TELEMETRY
+    reg::LoadAlign<float, reg::LoadDist::DIST_BRC_B32>(pos, position + state);
+    reg::LoadAlign<float, reg::LoadDist::DIST_BRC_B32>(page_id, page + state);
+#else
+    static_cast<void>(pos);
+    static_cast<void>(page_id);
+    static_cast<void>(position);
+    static_cast<void>(page);
+#endif
+}
+
+__simd_vf__ inline void native_cube_softmax_pair_vf(
+    __ubuf__ float* first_scores, __ubuf__ float* second_scores,
+    __ubuf__ float* first_value_scale, __ubuf__ float* second_value_scale,
+    __ubuf__ float* run_max, __ubuf__ float* run_sum,
+    __ubuf__ float* first_max, __ubuf__ float* first_alpha,
+    __ubuf__ float* second_max, __ubuf__ float* second_alpha,
+    __ubuf__ float* position, __ubuf__ float* page, __ubuf__ float* ramp,
+    std::uint32_t first_context, std::uint32_t first_page,
+    std::uint32_t second_context, std::uint32_t second_page,
+    __ubuf__ float* first_k, __ubuf__ float* second_k, __ubuf__ float* q_inv,
+    std::uint32_t second_valid, __ubuf__ float* first_probability_scale, __ubuf__ float* second_probability_scale,
+    __ubuf__ fp8_e4m3fn_t* first_probability, __ubuf__ fp8_e4m3fn_t* second_probability,
+    float operand_max, float epsilon)
+{
+    namespace reg = AscendC::Reg;
+    auto state_mask = reg::CreateMask<float, reg::MaskPattern::VL8>();
+    reg::RegTensor<float> first_values, second_values;
+    reg::LoadAlign(first_values, first_value_scale);
+    reg::LoadAlign(second_values, second_value_scale);
+    auto first_live = reg::CreateMask<float, reg::MaskPattern::ALL>();
+    auto second_live = reg::UpdateMask<float>(second_valid);
+    reg::RegTensor<float> first_keys, second_keys, dead;
+    reg::LoadAlign(first_keys, first_k);
+    reg::LoadAlign(second_keys, second_k);
+    reg::Duplicate<float>(dead, kTailDeadLogit);
+    reg::RegTensor<float> first_row, second_row, next_second_row;
+    reg::RegTensor<float> m, l, pos, page_id, q_scale;
+    load_native_softmax_pair_head(first_row, second_row, m, l, pos, page_id, q_scale, first_scores,
+                           second_scores, run_max, run_sum, position, page, q_inv, 0);
+    // Keep one head's successor in flight. No next-head load is permitted at drain.
+    #pragma clang loop unroll(disable)
+    for (std::uint32_t head = 0; head < kRegisterSoftmaxHeads; ++head) {
+        const std::uint32_t state = head * kStateLanes;
+        const std::uint32_t row = head * kCubeTileKeys;
+        online_softmax_loaded_row<true>(
+            first_row, first_alpha + state, first_max + state, ramp, first_context, first_page,
+            m, l, pos, page_id, first_values, first_keys, q_scale, dead, first_live,
+            first_probability_scale + state, first_probability + row, operand_max, epsilon);
+        online_softmax_loaded_row<false>(
+            second_row, second_alpha + state, second_max + state, ramp, second_context, second_page,
+            m, l, pos, page_id, second_values, second_keys, q_scale, dead, second_live,
+            second_probability_scale + state, second_probability + row, operand_max, epsilon);
+        reg::StoreAlign(run_sum + state, l, state_mask);
+#if defined(ASCEND_TQ_DECODE_TELEMETRY) && ASCEND_TQ_DECODE_TELEMETRY
+        reg::StoreAlign(position + state, pos, state_mask);
+        reg::StoreAlign(page + state, page_id, state_mask);
+#endif
+        const std::uint32_t next_head = head + 1;
+        if (next_head < kRegisterSoftmaxHeads) {
+            load_native_softmax_pair_head(first_row, next_second_row, m, l, pos, page_id, q_scale,
+                                   first_scores, second_scores, run_max, run_sum, position, page,
+                                   q_inv, next_head);
+        }
+        quantize_native_probability_row(second_row, second_probability_scale + state,
+                                         second_probability + row, second_live, operand_max, epsilon);
+        if (next_head < kRegisterSoftmaxHeads) {
+            reg::Move(second_row, next_second_row);
+        }
+    }
+}
+
 template <class Codec, class Operand>
 struct NativeCubeSoftmaxEngine {
     AscendC::LocalTensor<float>   scores, key_scale, value_scale, q_inv, mask;
