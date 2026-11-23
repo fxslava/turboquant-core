@@ -1,2 +1,2 @@
-* -text
+* -text whitespace=cr-at-eol
 *.log whitespace=-blank-at-eol

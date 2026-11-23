@@ -3,8 +3,8 @@
   "evidence": "CAModel dav_3510, not physical NPU",
   "native_probe": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\dmin\\work\\checkpoint2_20261123\\slot03",
   "files": {
-    ".gitattributes": "945bba23cb6ba7bed05e4ad6840bbfde2318fcdfaa251d8b0df697c0ced99e22",
-    "aka_gate_final_source.json": "bc5bb2dd19f24b8c5059e38639363f4dfcf9391563bc20eec3426a3475df66ae",
+    ".gitattributes": "b498ff8bf52d1b4ea85484a122759c793669552cb80cdbea77bedd5436eb2c99",
+    "aka_scalar.json.gz": "bbc95d3213f681cf2eb82b24a4946c4623456f1aa8659cff68e2752b3914322b",
     "build-exit.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
     "build.log": "9e0ff33bee6f316c659b618153ae7415358069b17d1e6b4dd0b8f60c071338df",
     "cpu-ctest.log": "204a45d25b514e00b63566e62dc89aae09b4f7975d537b0a9c098d91d935821f",
