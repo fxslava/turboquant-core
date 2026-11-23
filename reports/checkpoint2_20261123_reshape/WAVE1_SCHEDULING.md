@@ -31,6 +31,12 @@ the exact registers, DCache MISS and CCU attempts are retained. No new
 unaccounted repeated-issue class remains. CCU-silent delivery gaps are reported
 separately without inventing an instruction-cache explanation.
 
+Under the strict scalar policy,04/05 are rejected for promotion: their newly
+exposed97/89-tick implicit ABI dependencies remain real costs even though they
+are now explained. Both also regress total ticks. Accounting for a stall does
+not remove it or turn it into a performance pass. The source reviews and
+numerical/canary passes above remain valid within their separate scopes.
+
 ## The original CPM ranking was not predictively validated
 
 | Implemented case | Conditional pre-run estimate | Observed | Residual |
