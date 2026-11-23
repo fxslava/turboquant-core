@@ -1,0 +1,33 @@
+{
+  "status": "PASS_DIFFERENTIAL",
+  "baseline_commit": "7c31a112c5e2250e55dbe37c3355079f7ab76629",
+  "integration_commit": "5231e2c",
+  "scope": [
+    "src/decode/turboquant_fused_decode.cpp",
+    "src/decode/vector/turboquant_vector_service.h",
+    "src/decode/vector/routine_vector_cube_softmax.hpp"
+  ],
+  "chip": "ascend950pr",
+  "usable_ub_bytes": 221184,
+  "solver": "interval",
+  "baseline": {
+    "distinct_findings": 338,
+    "distinct_fatal": 240,
+    "distinct_warning": 98,
+    "occurrences": 1998,
+    "fatal_occurrences": 1876,
+    "warning_occurrences": 122,
+    "sha256": "b465639bd93b62eb0b538bad2d5a9d4ea2695a6ae96330802c69ca0656221127"
+  },
+  "after_baseline": {
+    "fatal": 0,
+    "warning": 0,
+    "info": 0
+  },
+  "category_suppressions": [],
+  "source_hashes_match_verified_baseline": true,
+  "full_baseline": "/home/dmin/work/checkpoint1_20261123_i1/aka-baseline-fingerprints.json",
+  "full_delta": "/home/dmin/work/checkpoint1_20261123_i1/aka-integration-delta.json",
+  "full_delta_sha256": "fc96c8fd0c367bf79f0bede864dc04116e8337f560151b348545534748f5e96d",
+  "limits": "Exact fingerprint suppression of the verified Wave-v11 backlog; this is a scoped regression gate, not a claim that raw findings are zero or a formal proof of device correctness."
+}

@@ -103,9 +103,10 @@ add_test(NAME telemetry_dump COMMAND test_telemetry_dump)
 add_test(NAME qwen35_decode COMMAND test_qwen35_decode)
 add_test(NAME decode_reduce COMMAND test_decode_reduce)
 add_test(NAME qwen35_telemetry COMMAND test_qwen35_telemetry)
-# The oracle comparison reads golden/dumps; run it from the source tree so the
-# default --dump-root resolves.
-add_test(NAME golden_decode_oracle COMMAND test_golden_decode_oracle)
+set(TQ_GOLDEN_DUMP_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/golden/dumps"
+    CACHE PATH "Golden dump directory for the CPU oracle comparison")
+add_test(NAME golden_decode_oracle COMMAND test_golden_decode_oracle
+    --dump-root "${TQ_GOLDEN_DUMP_ROOT}")
 set_tests_properties(golden_decode_oracle PROPERTIES
                      WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 

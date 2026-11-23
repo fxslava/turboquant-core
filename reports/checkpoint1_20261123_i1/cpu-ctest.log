@@ -1,0 +1,247 @@
+Start testing: Nov 23 11:15 MSK
+----------------------------------------------------------
+1/8 Testing: wave_v11_fixture
+1/8 Test: wave_v11_fixture
+Command: "/home/dmin/work/checkpoint1_20261123_i1/cpu-build/tests/test_wave_v11_fixture"
+Directory: /home/dmin/work/checkpoint1_20261123_i1/cpu-build
+"wave_v11_fixture" start time: Nov 23 11:15 MSK
+Output:
+----------------------------------------------------------
+PASS Wave-v11 host fixture: 4 tiles, 208 rows, 6 heads, signed-nibble wire, independent packed-cache mean
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"wave_v11_fixture" end time: Nov 23 11:15 MSK
+"wave_v11_fixture" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/8 Testing: contract_gates
+2/8 Test: contract_gates
+Command: "/home/dmin/work/checkpoint1_20261123_i1/cpu-build/tests/test_contract_gates"
+Directory: /home/dmin/work/checkpoint1_20261123_i1/cpu-build
+"contract_gates" start time: Nov 23 11:15 MSK
+Output:
+----------------------------------------------------------
+test_contract_gates
+  strip geometry: 16 tokens, 8 chunks, rings 4/2/2
+  host tiling: 13 geometries, dispatch odometer and descriptors, 5 refusals
+  launch guards: 2 admitted, 5 refused
+  mode-2 channels: prefill ids 8/9/10, skew bound 3 <= 15; decode flags 0..9, join 10, reserved from 11
+  marked graph: 7 strip counts audited; 64 strips = 512 bursts, 512 Mmad groups, 258 rendezvous (1 strip = 8/8/6)
+  recurrence: shared phases in order on both entry points
+  probed recurrence: the argmax probe sits between max and exponentiate
+PASS test_contract_gates: UB arena 142336 bytes (transient pool 32768, basis 46432, reducer 3360), host tiling, launch guards, mode-2 channels, marked-graph token balance over 1..64 strips, shared recurrence
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"contract_gates" end time: Nov 23 11:15 MSK
+"contract_gates" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/8 Testing: layout_bridge
+3/8 Test: layout_bridge
+Command: "/home/dmin/work/checkpoint1_20261123_i1/cpu-build/tests/test_layout_bridge"
+Directory: /home/dmin/work/checkpoint1_20261123_i1/cpu-build
+"layout_bridge" start time: Nov 23 11:15 MSK
+Output:
+----------------------------------------------------------
+geometry: 1 pages x 1 kv heads x 64 tokens x 256 channels
+  check 1: 16384 logical elements, writer == reader
+  check 2: NZ map is a bijection over 16384 nibbles
+  check 3: strip maps bijective; co-byte pairings as contracted
+  check 4: 32758 of 32768 addresses differ; byte groupings are incompatible
+  check 5: scale planes bijective (NZ 512 floats, strip 128 floats)
+geometry: 2 pages x 4 kv heads x 64 tokens x 256 channels
+  check 1: 131072 logical elements, writer == reader
+  check 2: NZ map is a bijection over 131072 nibbles
+  check 3: strip maps bijective; co-byte pairings as contracted
+  check 4: 32758 of 32768 addresses differ; byte groupings are incompatible
+  check 5: scale planes bijective (NZ 1024 floats, strip 1024 floats)
+geometry: 3 pages x 2 kv heads x 128 tokens x 256 channels
+  check 1: 196608 logical elements, writer == reader
+  check 2: NZ map is a bijection over 196608 nibbles
+  check 3: strip maps bijective; co-byte pairings as contracted
+  check 4: 65526 of 65536 addresses differ; byte groupings are incompatible
+  check 5: scale planes bijective (NZ 3072 floats, strip 1536 floats)
+geometry: 1 pages x 4 kv heads x 128 tokens x 256 channels
+  check 1: 131072 logical elements, writer == reader
+  check 2: NZ map is a bijection over 131072 nibbles
+  check 3: strip maps bijective; co-byte pairings as contracted
+  check 4: 65526 of 65536 addresses differ; byte groupings are incompatible
+  check 5: scale planes bijective (NZ 1024 floats, strip 1024 floats)
+geometry: 16 pages x 1 kv heads x 128 tokens x 256 channels
+  check 1: 524288 logical elements, writer == reader
+  check 2: NZ map is a bijection over 524288 nibbles
+  check 3: strip maps bijective; co-byte pairings as contracted
+  check 4: 65516 of 65536 addresses differ; byte groupings are incompatible
+  check 5: scale planes bijective (NZ 16384 floats, strip 4096 floats)
+geometry: 2 pages x 1 kv heads x 1024 tokens x 256 channels
+  check 1: 524288 logical elements, writer == reader
+  check 2: NZ map is a bijection over 524288 nibbles
+  check 3: strip maps bijective; co-byte pairings as contracted
+  check 4: 524128 of 524288 addresses differ; byte groupings are incompatible
+  check 5: scale planes bijective (NZ 16384 floats, strip 4096 floats)
+PASS test_layout_bridge: NZ writer == decode reader, both contracts bijective, co-byte pairings incompatible, scale planes bijective
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"layout_bridge" end time: Nov 23 11:15 MSK
+"layout_bridge" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/8 Testing: telemetry_dump
+4/8 Test: telemetry_dump
+Command: "/home/dmin/work/checkpoint1_20261123_i1/cpu-build/tests/test_telemetry_dump"
+Directory: /home/dmin/work/checkpoint1_20261123_i1/cpu-build
+"telemetry_dump" start time: Nov 23 11:15 MSK
+Output:
+----------------------------------------------------------
+test_telemetry_dump
+  record layout: stride 272 floats, lanes max=0 pos=1 page=2 sum=8
+  live splits: 14 contexts match build_decode_tiling's descriptors
+  fold and merge: fused, 8-split and dead-split tokens over 4 heads, ties included, all against the direct argmax
+    rejected at word 257: the winning position is outside the live context
+    rejected at word 258: the record's page disagrees with its position
+    rejected at word 259: a telemetry record's padding lanes are not zero
+    rejected at word 264: a fused record carries a run_sum lane
+    rejected at word 128: workspace written outside the fused telemetry record
+    rejected at word 8979: a partial accumulator lane is not finite
+    rejected at word 9240: a live split's run_sum lane is not positive and finite
+    rejected at word 10865: a dead slot's probe lanes are not the sentinel
+    rejected at word 26111: workspace written outside the fused telemetry record
+  verify: a correct image, the range override, and 9 named corruptions
+  dump: fused winner, physical page mapping, row, split merge, no-record
+PASS test_telemetry_dump: record layout, live-split arithmetic, the per-tile fold against the direct argmax, verify() over a correct image and 9 named corruptions, and the dump format
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"telemetry_dump" end time: Nov 23 11:15 MSK
+"telemetry_dump" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/8 Testing: qwen35_decode
+5/8 Test: qwen35_decode
+Command: "/home/dmin/work/checkpoint1_20261123_i1/cpu-build/tests/test_qwen35_decode"
+Directory: /home/dmin/work/checkpoint1_20261123_i1/cpu-build
+"qwen35_decode" start time: Nov 23 11:15 MSK
+Output:
+----------------------------------------------------------
+PASS telemetry: all three-head improvement masks preserve softmax max/sum
+host: batch=1 context=2048 pages=128/1024 relative_l2=2.1977759e-15
+host: batch=2 context=2048 pages=128/1024 relative_l2=2.34472711e-15
+PASS Qwen3.5: 64 physical tile partitions and both 2K page layouts
+<end of output>
+Test time =   0.35 sec
+----------------------------------------------------------
+Test Passed.
+"qwen35_decode" end time: Nov 23 11:15 MSK
+"qwen35_decode" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/8 Testing: decode_reduce
+6/8 Test: decode_reduce
+Command: "/home/dmin/work/checkpoint1_20261123_i1/cpu-build/tests/test_decode_reduce"
+Directory: /home/dmin/work/checkpoint1_20261123_i1/cpu-build
+"decode_reduce" start time: Nov 23 11:15 MSK
+Output:
+----------------------------------------------------------
+PASS decode reduction: mixed-batch output coverage; NaN/Inf padding, live rows 1..16, splits 1..8
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"decode_reduce" end time: Nov 23 11:15 MSK
+"decode_reduce" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/8 Testing: qwen35_telemetry
+7/8 Test: qwen35_telemetry
+Command: "/home/dmin/work/checkpoint1_20261123_i1/cpu-build/tests/test_qwen35_telemetry"
+Directory: /home/dmin/work/checkpoint1_20261123_i1/cpu-build
+"qwen35_telemetry" start time: Nov 23 11:15 MSK
+Output:
+----------------------------------------------------------
+head=0 old=1.87622953 fixed=1.87622953 golden=1.87622953 last_improved=0,0
+head=1 old=1.86991083 fixed=1.86991083 golden=1.86991083 last_improved=0,0
+head=2 old=1.88220183 fixed=1.88220183 golden=1.88220183 last_improved=0,0
+head=3 old=1.42686568 fixed=1.87527693 golden=1.87527693 last_improved=0,0
+head=4 old=0.751269716 fixed=1.88003577 golden=1.88003577 last_improved=0,1
+head=5 old=1.06498841 fixed=1.87218043 golden=1.87218043 last_improved=0,0
+old_relative_l2=0.317362321 fixed_relative_l2=2.22809739e-15
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"qwen35_telemetry" end time: Nov 23 11:15 MSK
+"qwen35_telemetry" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/8 Testing: golden_decode_oracle
+8/8 Test: golden_decode_oracle
+Command: "/home/dmin/work/checkpoint1_20261123_i1/cpu-build/tests/test_golden_decode_oracle" "--dump-root" "/home/dmin/work/checkpoint1_20261123/golden_validation/dumps"
+Directory: /mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core
+"golden_decode_oracle" start time: Nov 23 11:15 MSK
+Output:
+----------------------------------------------------------
+decode oracle /home/dmin/work/checkpoint1_20261123/golden_validation/dumps/decode_ctx128: context 128, 4 KV heads x 16 = 64 heads, page 128, table width 1
+  pi_signs: bit-exact (256 entries)
+  query_rot: bit-exact (integer fixture, held bit-exact)
+    stage0 (rotated)       worst 0 fp32 ULP (budget 4), worst abs 0.000e+00, worst 0 of row max (budget 1e-05), scale ratio 1.00000000
+    stage1 (model basis)   worst 8 fp32 ULP (budget 4), worst abs 2.842e-14, worst 2.03e-16 of row max (budget 1e-05), scale ratio 1.00000000
+PASS /home/dmin/work/checkpoint1_20261123/golden_validation/dumps/decode_ctx128: the C++ golden oracle reproduces the PyTorch golden
+decode oracle /home/dmin/work/checkpoint1_20261123/golden_validation/dumps/decode_ctx200: context 200, 4 KV heads x 16 = 64 heads, page 128, table width 2
+  pi_signs: bit-exact (256 entries)
+  query_rot: bit-exact (integer fixture, held bit-exact)
+    stage0 (rotated)       worst 0 fp32 ULP (budget 4), worst abs 0.000e+00, worst 0 of row max (budget 1e-05), scale ratio 1.00000000
+    stage1 (model basis)   worst 7168 fp32 ULP (budget 4), worst abs 3.730e-14, worst 2.66e-16 of row max (budget 1e-05), scale ratio 1.00000000
+PASS /home/dmin/work/checkpoint1_20261123/golden_validation/dumps/decode_ctx200: the C++ golden oracle reproduces the PyTorch golden
+decode oracle /home/dmin/work/checkpoint1_20261123/golden_validation/dumps/decode_serving_ctx272: context 272, 4 KV heads x 6 = 24 heads, page 128, table width 3
+  pi_signs: bit-exact (256 entries)
+  query_rot: bit-exact (integer fixture, held bit-exact)
+    stage0 (rotated)       worst 0 fp32 ULP (budget 4), worst abs 0.000e+00, worst 0 of row max (budget 1e-05), scale ratio 1.00000000
+    stage1 (model basis)   worst 0 fp32 ULP (budget 4), worst abs 0.000e+00, worst 0 of row max (budget 1e-05), scale ratio 1.00000000
+PASS /home/dmin/work/checkpoint1_20261123/golden_validation/dumps/decode_serving_ctx272: the C++ golden oracle reproduces the PyTorch golden
+decode oracle /home/dmin/work/checkpoint1_20261123/golden_validation/dumps/decode_serving_ctx316: context 316, 4 KV heads x 6 = 24 heads, page 128, table width 3
+  pi_signs: bit-exact (256 entries)
+  query_rot: bit-exact (integer fixture, held bit-exact)
+    stage0 (rotated)       worst 0 fp32 ULP (budget 4), worst abs 0.000e+00, worst 0 of row max (budget 1e-05), scale ratio 1.00000000
+    stage1 (model basis)   worst 0 fp32 ULP (budget 4), worst abs 0.000e+00, worst 0 of row max (budget 1e-05), scale ratio 1.00000000
+PASS /home/dmin/work/checkpoint1_20261123/golden_validation/dumps/decode_serving_ctx316: the C++ golden oracle reproduces the PyTorch golden
+decode oracle /home/dmin/work/checkpoint1_20261123/golden_validation/dumps/decode_real_ctx64: context 64, 4 KV heads x 6 = 24 heads, page 128, table width 512
+  pi_signs: bit-exact (256 entries)
+  query_rot: worst 16 fp32 ULP, worst 1.99e-08 of row max (budget 1e-05, random fixture)
+    stage0 (rotated)       worst 0 fp32 ULP (budget 4), worst abs 0.000e+00, worst 0 of row max (budget 1e-05), scale ratio 1.00000000
+    stage1 (model basis)   worst 0 fp32 ULP (budget 4), worst abs 0.000e+00, worst 0 of row max (budget 1e-05), scale ratio 1.00000000
+PASS /home/dmin/work/checkpoint1_20261123/golden_validation/dumps/decode_real_ctx64: the C++ golden oracle reproduces the PyTorch golden
+decode oracle /home/dmin/work/checkpoint1_20261123/golden_validation/dumps/decode_real_ctx128: context 128, 4 KV heads x 6 = 24 heads, page 128, table width 512
+  pi_signs: bit-exact (256 entries)
+  query_rot: worst 1 fp32 ULP, worst 3.86e-08 of row max (budget 1e-05, random fixture)
+    stage0 (rotated)       worst 0 fp32 ULP (budget 4), worst abs 0.000e+00, worst 0 of row max (budget 1e-05), scale ratio 1.00000000
+    stage1 (model basis)   worst 0 fp32 ULP (budget 4), worst abs 0.000e+00, worst 0 of row max (budget 1e-05), scale ratio 1.00000000
+PASS /home/dmin/work/checkpoint1_20261123/golden_validation/dumps/decode_real_ctx128: the C++ golden oracle reproduces the PyTorch golden
+decode oracle /home/dmin/work/checkpoint1_20261123/golden_validation/dumps/decode_real_ctx200: context 200, 4 KV heads x 6 = 24 heads, page 128, table width 512
+  pi_signs: bit-exact (256 entries)
+  query_rot: worst 64 fp32 ULP, worst 4.54e-08 of row max (budget 1e-05, random fixture)
+    stage0 (rotated)       worst 0 fp32 ULP (budget 4), worst abs 0.000e+00, worst 0 of row max (budget 1e-05), scale ratio 1.00000000
+    stage1 (model basis)   worst 0 fp32 ULP (budget 4), worst abs 0.000e+00, worst 0 of row max (budget 1e-05), scale ratio 1.00000000
+PASS /home/dmin/work/checkpoint1_20261123/golden_validation/dumps/decode_real_ctx200: the C++ golden oracle reproduces the PyTorch golden
+decode oracle /home/dmin/work/checkpoint1_20261123/golden_validation/dumps/decode_real_ctx1055: context 1055, 4 KV heads x 6 = 24 heads, page 128, table width 512
+  pi_signs: bit-exact (256 entries)
+  query_rot: worst 64 fp32 ULP, worst 1.83e-08 of row max (budget 1e-05, random fixture)
+    stage0 (rotated)       worst 0 fp32 ULP (budget 4), worst abs 0.000e+00, worst 0 of row max (budget 1e-05), scale ratio 1.00000000
+    stage1 (model basis)   worst 0 fp32 ULP (budget 4), worst abs 0.000e+00, worst 0 of row max (budget 1e-05), scale ratio 1.00000000
+PASS /home/dmin/work/checkpoint1_20261123/golden_validation/dumps/decode_real_ctx1055: the C++ golden oracle reproduces the PyTorch golden
+PASS: the C++ golden oracle agrees with the PyTorch golden on all 8 cases
+<end of output>
+Test time =   3.01 sec
+----------------------------------------------------------
+Test Passed.
+"golden_decode_oracle" end time: Nov 23 11:15 MSK
+"golden_decode_oracle" time elapsed: 00:00:03
+----------------------------------------------------------
+
+End testing: Nov 23 11:15 MSK
