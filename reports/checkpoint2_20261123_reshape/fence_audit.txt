@@ -1,0 +1,28 @@
+cross-core announcement fence audit (MICROROUTINE_DESIGN_GUIDELINES.md section 6.2a)
+
+/mnt/c/ascend-micro-harness/reports/checkpoint2_20261123/slot03/fence_alias_resolved.cpp
+  ok     line 703   kSync2AicAnnounce=PIPE_FIX kSync2PanelReady                             mode 2, FIX_S(kEvtL0)
+  ok     line 843   kSync2AivAnnounce=PIPE_V kSync2PanelFree                              mode 2, V_S(pack_evt)
+  ok     line 1111  kSync2AicAnnounce=PIPE_FIX kSync2PageDrained                            mode 2, FIX_S(kEvtDrain)
+  exempt line 1124  kSync2AivAnnounce=PIPE_V kSync2PanelFreePrime                         priming set, by name: no earlier pipe work
+  exempt line 1125  kSync2AivAnnounce=PIPE_V kSync2PanelFreePrime                         priming set, by name: no earlier pipe work
+
+self-test (the audit must fail on an unfenced announcement)
+  unfenced set                 rejected
+  wrong scalar route           rejected
+  work between fence and set   rejected
+  correctly fenced set         accepted
+  diagnostic between the two   accepted
+  unfenced mode-2 set          rejected
+  correctly fenced mode-2 set  accepted
+  structural priming set       accepted
+  work on the announced pipe first rejected
+  named pipe, fenced           accepted
+  named pipe, wrong route      rejected
+  pipe name declared elsewhere rejected
+  announcement alone inside a guard rejected
+  priming set alone inside a guard accepted
+  deferred fence, set in another function accepted
+  deferred wait with no set anywhere rejected
+
+PASS cross-core fence audit: every mode-2 and mode-4 announcement is behind a matching scalar drain, and every priming set is accounted for

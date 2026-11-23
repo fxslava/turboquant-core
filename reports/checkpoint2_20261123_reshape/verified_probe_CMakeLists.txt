@@ -1,0 +1,27 @@
+cmake_minimum_required(VERSION 3.22)
+project(checkpoint1_baseline LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_BUILD_TYPE Release CACHE STRING "" FORCE)
+include(cmake/CannToolchain.cmake)
+include(cmake/CannWrapperWarnings.cmake)
+set(RUN_MODE sim)
+set(CMAKE_SKIP_RPATH FALSE)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+ascendc_library(tq_baseline SHARED src/prefill/turboquant_reshape_batch.cpp)
+ascendc_compile_definitions(tq_baseline PRIVATE ASCEND_MICRO_CANN_LAUNCH)
+ascendc_compile_options(tq_baseline PRIVATE
+    -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+    -forward-options-to-host-compiler -Wall -Wextra -Werror
+    ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH)
+tq_scope_cann_wrapper_warnings(tq_baseline)
+set(SIM_LIB_DIR "${ASCEND_HOME_PATH}/tools/simulator/${SOC_VERSION}/lib")
+add_executable(baseline tests/camodel/baseline.cpp)
+target_include_directories(baseline PRIVATE "${ASCEND_HOME_PATH}/include")
+target_compile_options(baseline PRIVATE -Wall -Wextra -Werror)
+target_link_libraries(baseline PRIVATE tq_baseline ascendcl
+    "${SIM_LIB_DIR}/libnpu_drv_camodel.so" "${SIM_LIB_DIR}/libmodel_top.so")
+target_link_options(baseline PRIVATE "-Wl,-rpath-link,${SIM_LIB_DIR}" "-Wl,--disable-new-dtags")
+set_target_properties(baseline PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE
+    INSTALL_RPATH "$ORIGIN/../lib;${SIM_LIB_DIR};${ASCEND_HOME_PATH}/lib64;${ASCEND_HOME_PATH}/x86_64-linux/devlib")

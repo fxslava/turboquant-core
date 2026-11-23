@@ -1124,27 +1124,34 @@ public:
         AscendC::CrossCoreSetFlag<2, kSync2AivAnnounce>(kSync2PanelFreePrime);
         AscendC::CrossCoreSetFlag<2, kSync2AivAnnounce>(kSync2PanelFreePrime);
 
+        // First metadata load/address chain is issued during producer startup,
+        // before the first long Vector quantization rendezvous.
+        StripAddr current = CalculateStripAddr(slot_mapping, 0u, num_kv_heads,
+            vector_.head_bytes, block_size, num_blocks);
         if constexpr (kOwner<0> == Core) RotateAndQuantise<0>();
 
         for (std::uint32_t strip = 0u; strip + 1u < strips; ++strip) {
-            const StripAddr a = CalculateStripAddr(slot_mapping, strip, num_kv_heads, vector_.head_bytes, block_size, num_blocks);
-            vector_.page_bytes = a.page_bytes;
-            vector_.key_scale = a.key_scale;
-            vector_.value_scale = a.value_scale;
+            vector_.page_bytes = current.page_bytes;
+            vector_.key_scale = current.key_scale;
+            vector_.value_scale = current.value_scale;
             RunVectorSteadyPhase<0, Core>(true);
             RunVectorSteadyPhase<1, Core>(true);
             RunVectorSteadyPhase<2, Core>(true);
             RunVectorSteadyPhase<3, Core>(true);
             RunVectorSteadyPhase<4, Core>(true);
+            // Hold the successor addresses in scalar registers while the rest
+            // of this strip runs. Exactly one mapping load per strip remains.
+            const StripAddr next = CalculateStripAddr(slot_mapping, strip + 1u,
+                num_kv_heads, vector_.head_bytes, block_size, num_blocks);
             RunVectorSteadyPhase<5, Core>(true);
             RunVectorSteadyPhase<6, Core>(true);
             RunVectorSteadyPhase<7, Core>(true);
+            current = next;
         }
         {
-            const StripAddr a = CalculateStripAddr(slot_mapping, strips - 1u, num_kv_heads, vector_.head_bytes, block_size, num_blocks);
-            vector_.page_bytes = a.page_bytes;
-            vector_.key_scale = a.key_scale;
-            vector_.value_scale = a.value_scale;
+            vector_.page_bytes = current.page_bytes;
+            vector_.key_scale = current.key_scale;
+            vector_.value_scale = current.value_scale;
             RunVectorSteadyPhase<0, Core>(false);
             RunVectorSteadyPhase<1, Core>(false);
             RunVectorSteadyPhase<2, Core>(false);

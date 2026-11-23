@@ -1,0 +1,1021 @@
+{
+  "checked": 76,
+  "violations": [],
+  "records": [
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 0,
+      "wait_issue": 5662,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 5664,
+      "required_announcements": [
+        1446,
+        1534
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 1,
+      "wait_issue": 7706,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 7708,
+      "required_announcements": [
+        1447,
+        1535
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 2,
+      "wait_issue": 9817,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 9819,
+      "required_announcements": [
+        7718,
+        7583
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 3,
+      "wait_issue": 11873,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 11875,
+      "required_announcements": [
+        10677,
+        9717
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 4,
+      "wait_issue": 14027,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 14029,
+      "required_announcements": [
+        12411,
+        11385
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 5,
+      "wait_issue": 16076,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 16078,
+      "required_announcements": [
+        15600,
+        13530
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 6,
+      "wait_issue": 18125,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 18303,
+      "required_announcements": [
+        18293,
+        15588
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 7,
+      "wait_issue": 20260,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 20262,
+      "required_announcements": [
+        19708,
+        17631
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 8,
+      "wait_issue": 22419,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 22421,
+      "required_announcements": [
+        21121,
+        19772
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 9,
+      "wait_issue": 24618,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 24620,
+      "required_announcements": [
+        22584,
+        21922
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 10,
+      "wait_issue": 26809,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 26811,
+      "required_announcements": [
+        24130,
+        24130
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 11,
+      "wait_issue": 28978,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 28980,
+      "required_announcements": [
+        26316,
+        26315
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 12,
+      "wait_issue": 31176,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 31178,
+      "required_announcements": [
+        28489,
+        28490
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 13,
+      "wait_issue": 33340,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 33342,
+      "required_announcements": [
+        30679,
+        30679
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 14,
+      "wait_issue": 35531,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 35533,
+      "required_announcements": [
+        32852,
+        32852
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 15,
+      "wait_issue": 37700,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 37702,
+      "required_announcements": [
+        35038,
+        35037
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 16,
+      "wait_issue": 39898,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 39900,
+      "required_announcements": [
+        37211,
+        37212
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 17,
+      "wait_issue": 42062,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 42064,
+      "required_announcements": [
+        39401,
+        39401
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 18,
+      "wait_issue": 44253,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 44255,
+      "required_announcements": [
+        41574,
+        41574
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 19,
+      "wait_issue": 46422,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 46424,
+      "required_announcements": [
+        43760,
+        43759
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 20,
+      "wait_issue": 48622,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 48624,
+      "required_announcements": [
+        45933,
+        45934
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 21,
+      "wait_issue": 50786,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 50788,
+      "required_announcements": [
+        48123,
+        48123
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 22,
+      "wait_issue": 52974,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 52976,
+      "required_announcements": [
+        50296,
+        50293
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 23,
+      "wait_issue": 55058,
+      "pipe": "FIXP",
+      "drain_id": 2,
+      "scalar_release": 55060,
+      "required_announcements": [
+        52484,
+        52483
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 24,
+      "wait_issue": 56463,
+      "pipe": "FIXP",
+      "drain_id": 0,
+      "scalar_release": 58778,
+      "required_announcements": [
+        54579,
+        54579
+      ],
+      "valid": true
+    },
+    {
+      "role": "cubecore0",
+      "channel": 9,
+      "index": 25,
+      "wait_issue": 56464,
+      "pipe": "FIXP",
+      "drain_id": 0,
+      "scalar_release": 58778,
+      "required_announcements": [
+        58768,
+        57861
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 0,
+      "wait_issue": 2002,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 7058,
+      "required_announcements": [
+        7048
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 1,
+      "wait_issue": 10515,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 10517,
+      "required_announcements": [
+        9154
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 2,
+      "wait_issue": 11596,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 12252,
+      "required_announcements": [
+        11215
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 3,
+      "wait_issue": 15437,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 15439,
+      "required_announcements": [
+        13359
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 4,
+      "wait_issue": 17662,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 18133,
+      "required_announcements": [
+        15418
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 5,
+      "wait_issue": 18815,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 19548,
+      "required_announcements": [
+        17462
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 6,
+      "wait_issue": 19816,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 20962,
+      "required_announcements": [
+        19602
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 7,
+      "wait_issue": 21701,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 22423,
+      "required_announcements": [
+        21751
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 8,
+      "wait_issue": 22782,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 23970,
+      "required_announcements": [
+        23960
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 9,
+      "wait_issue": 24264,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 26156,
+      "required_announcements": [
+        26146
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 10,
+      "wait_issue": 26424,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 28330,
+      "required_announcements": [
+        28320
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 11,
+      "wait_issue": 29109,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 30518,
+      "required_announcements": [
+        30508
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 12,
+      "wait_issue": 30877,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 32692,
+      "required_announcements": [
+        32682
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 13,
+      "wait_issue": 32986,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 34878,
+      "required_announcements": [
+        34868
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 14,
+      "wait_issue": 35146,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 37052,
+      "required_announcements": [
+        37042
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 15,
+      "wait_issue": 37888,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 39240,
+      "required_announcements": [
+        39230
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 16,
+      "wait_issue": 39599,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 41414,
+      "required_announcements": [
+        41404
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 17,
+      "wait_issue": 41708,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 43600,
+      "required_announcements": [
+        43590
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 18,
+      "wait_issue": 43868,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 45774,
+      "required_announcements": [
+        45764
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 19,
+      "wait_issue": 46662,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 47962,
+      "required_announcements": [
+        47952
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 20,
+      "wait_issue": 48321,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 50136,
+      "required_announcements": [
+        50126
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 21,
+      "wait_issue": 50446,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 52327,
+      "required_announcements": [
+        52317
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 22,
+      "wait_issue": 54183,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 54421,
+      "required_announcements": [
+        54411
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 8,
+      "index": 23,
+      "wait_issue": 58276,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 58606,
+      "required_announcements": [
+        56456
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore0",
+      "channel": 10,
+      "index": 0,
+      "wait_issue": 62106,
+      "pipe": "VEC",
+      "drain_id": 0,
+      "scalar_release": 63019,
+      "required_announcements": [
+        58779
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 0,
+      "wait_issue": 2276,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 7058,
+      "required_announcements": [
+        7048
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 1,
+      "wait_issue": 7701,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 9558,
+      "required_announcements": [
+        9154
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 2,
+      "wait_issue": 9827,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 11225,
+      "required_announcements": [
+        11215
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 3,
+      "wait_issue": 12441,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 13369,
+      "required_announcements": [
+        13359
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 4,
+      "wait_issue": 13739,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 15428,
+      "required_announcements": [
+        15418
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 5,
+      "wait_issue": 15706,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 17472,
+      "required_announcements": [
+        17462
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 6,
+      "wait_issue": 17741,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 19612,
+      "required_announcements": [
+        19602
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 7,
+      "wait_issue": 20397,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 21761,
+      "required_announcements": [
+        21751
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 8,
+      "wait_issue": 22131,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 23970,
+      "required_announcements": [
+        23960
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 9,
+      "wait_issue": 24248,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 26156,
+      "required_announcements": [
+        26146
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 10,
+      "wait_issue": 26425,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 28330,
+      "required_announcements": [
+        28320
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 11,
+      "wait_issue": 29241,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 30518,
+      "required_announcements": [
+        30508
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 12,
+      "wait_issue": 30888,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 32692,
+      "required_announcements": [
+        32682
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 13,
+      "wait_issue": 32970,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 34878,
+      "required_announcements": [
+        34868
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 14,
+      "wait_issue": 35147,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 37052,
+      "required_announcements": [
+        37042
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 15,
+      "wait_issue": 37903,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 39240,
+      "required_announcements": [
+        39230
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 16,
+      "wait_issue": 39610,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 41414,
+      "required_announcements": [
+        41404
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 17,
+      "wait_issue": 41692,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 43600,
+      "required_announcements": [
+        43590
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 18,
+      "wait_issue": 43869,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 45774,
+      "required_announcements": [
+        45764
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 19,
+      "wait_issue": 46678,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 47962,
+      "required_announcements": [
+        47952
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 20,
+      "wait_issue": 48344,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 50136,
+      "required_announcements": [
+        50126
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 21,
+      "wait_issue": 50435,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 52327,
+      "required_announcements": [
+        52317
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 22,
+      "wait_issue": 53120,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 54421,
+      "required_announcements": [
+        54411
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 8,
+      "index": 23,
+      "wait_issue": 57696,
+      "pipe": "VEC",
+      "drain_id": 2,
+      "scalar_release": 57699,
+      "required_announcements": [
+        56456
+      ],
+      "valid": true
+    },
+    {
+      "role": "veccore1",
+      "channel": 10,
+      "index": 0,
+      "wait_issue": 61961,
+      "pipe": "VEC",
+      "drain_id": 0,
+      "scalar_release": 62840,
+      "required_announcements": [
+        58779
+      ],
+      "valid": true
+    }
+  ],
+  "scope": "source-pipe-matched scalar-release bounds, not isolated IPC latency"
+}

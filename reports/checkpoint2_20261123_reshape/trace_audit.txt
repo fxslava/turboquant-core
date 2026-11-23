@@ -1,0 +1,40 @@
+cross-core discipline: mode-2 quorum and broadcast, 3 ids [8, 9, 10] for 24 landing generations over 6 strip(s) per block
+  m2:8 release broadcast: AIC 24 announcements -> AIV0 24 waits + AIV1 24 waits
+  m2:9 readiness quorum: AIV0 and AIV1 26 announcements each (2 priming + 24 per generation) -> AIC 26 waits (24 in the schedule + 2 epilogue drains), so the counters end at zero and nothing leaks to the next wave
+  m2:10 inter-wave join: AIC 1 -> both AIVs 1
+  pipes: AIC SET m2:8 on FIXP, AIC SET m2:10 on FIXP, AIC WAIT m2:9 on FIXP, AIV0 SET m2:9 on VEC, AIV0 WAIT m2:8 on VEC, AIV0 WAIT m2:10 on VEC, AIV1 SET m2:9 on VEC, AIV1 WAIT m2:8 on VEC, AIV1 WAIT m2:10 on VEC
+ORDER IS NOT CHECKED HERE. A cross-core wait is logged at its ISSUE tick, so an issue-order comparison reports an artefact on every correct run. Run the release-tick audit as well, it is part of this gate:
+    python3 scripts/audit_mode4_tick_order.py <rundir> --block 0 --cross
+intra-core HardEvents: 549 sets / 549 waits across 34 (route, ID) pairs on 3 cores; zero residual
+cross-core calls: 77 sets / 76 waits over 3 ids [8, 9, 10]
+panel accounting: the Cube made 24 announcements each AIV0 and AIV1 consumed; the cores released 26 and 26 panels (2 primed each)
+  AIV0: 59280 instructions (RVECEX 25831, RVECLD 13026, RVECST 12258, SCALAR 5687, FLOWCTRL 718, PUSHQ 533, RVECSU 531, RVECLP 495, MTE3 100, VEC 99, MTE2 2)
+  AIV1: 59436 instructions (RVECEX 25831, RVECLD 13026, RVECST 12258, SCALAR 5838, FLOWCTRL 723, PUSHQ 533, RVECSU 531, RVECLP 495, MTE3 100, VEC 99, MTE2 2)
+  AIC: 9320 instructions (SCALAR 4929, CUBE 3268, MTE1 585, FIXP 242, MTE2 231, FLOWCTRL 65)
+egress: AIV0 48 GM stores, AIV1 48 GM stores, AIC 0
+page staging: 64 GM->L1 ND->NZ page moves and 64 MTE2 data moves in all on the Cube, 0 UB->L1 moves, so every page reached L1 from Global Memory in one burst with no Unified Buffer hop
+rotation on the Cube: 3072 Mmads (8 chunks x 8 output groups x 8 source groups) and 48 L0C->UB transfers, one per chunk, so no part of the rotation runs on a Vector core
+per-chunk cadence. CUBE-pipe mnemonics: MMAD x3072
+  Mmad dispatch (per chunk)   : 48 events, deltas 979 1065 979 1132 985 1071 1060 1094 984 1065 979 1070 1064 1071 1078 1081 1134 1065 1121 1070 1098 1071 1117 1081 1099 1065 1121 1070 1098 1071 1117 1081 1099 1065 1121 1070 1098 1071 1117 1083 1097 1067 1119 1068 1025 1060 985
+                                steady state (44 intervals): min 979, median 1071, max 1134
+  Fixpipe dispatch (per chunk): 48 events, deltas 979 1065 979 1132 985 1071 1060 1094 984 1065 979 1070 1064 1071 1078 1081 1134 1065 1121 1070 1098 1071 1117 1081 1099 1065 1121 1070 1098 1071 1117 1081 1099 1065 1121 1070 1098 1071 1117 1083 1097 1067 1119 1068 1025 1060 985
+                                steady state (44 intervals): min 979, median 1071, max 1134
+  AIV0 egress                 : 24 events, deltas 1744 3057 2824 1415 1414 1461 1464 1498 2185 2221 2191 2125 2185 2221 2191 2125 2185 2221 2191 2125 2668 4387 3830
+                                steady state (22 intervals): min 1414, median 2191, max 4387
+  AIV1 egress                 : 24 events, deltas 1414 2312 1549 2010 2043 2190 2149 2160 2185 2224 2188 2125 2185 2224 2188 2125 2185 2224 2188 2087 2180 3987 4612
+                                steady state (22 intervals): min 1549, median 2185, max 4612
+  steady-state interval: 2191 cycles per chunk, the slowest of the measured streams (AIV0 egress)
+dispatch span: cycles 700..63296 (62596 cycles, 128036 instructions)
+completion span: cycles 704..63316 (62612 cycles, 127984 instructions)
+engine busy cycles: MTE2 33318, Cube 55987, Vector 56405, MTE3 18791
+  overlap Cube   + Vector: 53238 cycles (widest 2303..5089)
+  overlap Cube   + MTE2  : 32413 cycles (widest 2303..4068)
+  overlap Cube   + MTE3  : 17551 cycles (widest 53694..54409)
+  overlap Vector + MTE2  : 32020 cycles (widest 2007..4068)
+  overlap Vector + MTE3  : 18145 cycles (widest 10509..11544)
+  overlap MTE2   + MTE3  :  4160 cycles (widest 22434..23009)
+Vector register traffic (merged busy cycles, load+store vs execute):
+  AIV0: RVECLD 24371 (13026 instr), RVECST 24743 (12258), RVECEX 22015 (25831); load+store 69.0% of load+store+execute
+  AIV1: RVECLD 24376 (13026 instr), RVECST 24735 (12258), RVECEX 22017 (25831); load+store 69.0% of load+store+execute
+four-engine overlap: 3979 cycles, widest CAModel cycles 22434..22980
+AIV0 + AIV1 concurrent: 54397 cycles, widest CAModel cycles 17601..28329

@@ -1,0 +1,179 @@
+[  2%] Creating directories for 'tq_baseline_precompile'
+[  4%] No download step for 'tq_baseline_precompile'
+[  6%] No update step for 'tq_baseline_precompile'
+[  8%] No patch step for 'tq_baseline_precompile'
+[ 10%] Performing configure step for 'tq_baseline_precompile'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    DYNAMIC_MODE
+    INCLUDE_DIR
+
+
+-- Build files have been written to: /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_precompile-prefix/src/tq_baseline_precompile-build
+[ 13%] Performing build step for 'tq_baseline_precompile'
+[100%] Building CXX object CMakeFiles/precompile_obj.dir/home/dmin/work/checkpoint2_20261123/slot03/src/src/prefill/turboquant_reshape_batch.cpp.o
+[100%] Built target precompile_obj
+[100%] Built target check_src_template
+[ 15%] No install step for 'tq_baseline_precompile'
+[ 17%] Completed 'tq_baseline_precompile'
+[ 17%] Built target tq_baseline_precompile
+[ 19%] Creating directories for 'tq_baseline_preprocess'
+[ 21%] No download step for 'tq_baseline_preprocess'
+[ 23%] No update step for 'tq_baseline_preprocess'
+[ 26%] No patch step for 'tq_baseline_preprocess'
+[ 28%] Performing configure step for 'tq_baseline_preprocess'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_preprocess-prefix/src/tq_baseline_preprocess-build
+[ 30%] Performing build step for 'tq_baseline_preprocess'
+[ 33%] Building CXX object CMakeFiles/preprocess_obj.dir/home/dmin/work/checkpoint2_20261123/slot03/src/src/prefill/turboquant_reshape_batch.cpp.o
+[ 66%] Building CXX object CMakeFiles/aic_obj.dir/home/dmin/work/checkpoint2_20261123/slot03/src/src/prefill/turboquant_reshape_batch.cpp.o
+[100%] Building CXX object CMakeFiles/aiv_obj.dir/home/dmin/work/checkpoint2_20261123/slot03/src/src/prefill/turboquant_reshape_batch.cpp.o
+[100%] Built target preprocess_obj
+[100%] Built target aiv_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_preprocess-prefix/src/tq_baseline_preprocess-build/CMakeFiles/aiv_obj.dir/home/dmin/work/checkpoint2_20261123/slot03/src/src/prefill/turboquant_reshape_batch.cpp.o -o /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_preprocess-prefix/src/tq_baseline_preprocess-build/CMakeFiles/aiv_obj.dir/home/dmin/work/checkpoint2_20261123/slot03/src/src/prefill/turboquant_reshape_batch.cpp.o[100%] Built target merge_aiv_obj_text
+[100%] Built target aic_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_preprocess-prefix/src/tq_baseline_preprocess-build/CMakeFiles/aic_obj.dir/home/dmin/work/checkpoint2_20261123/slot03/src/src/prefill/turboquant_reshape_batch.cpp.o -o /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_preprocess-prefix/src/tq_baseline_preprocess-build/CMakeFiles/aic_obj.dir/home/dmin/work/checkpoint2_20261123/slot03/src/src/prefill/turboquant_reshape_batch.cpp.o[100%] Built target merge_aic_obj_text
+[100%] Built target _host_cpp
+[ 32%] No install step for 'tq_baseline_preprocess'
+[ 34%] Completed 'tq_baseline_preprocess'
+[ 34%] Built target tq_baseline_preprocess
+[ 36%] Creating directories for 'tq_baseline_host'
+[ 39%] Creating directories for 'tq_baseline_aiv_device'
+[ 41%] Creating directories for 'tq_baseline_aic_device'
+[ 43%] No download step for 'tq_baseline_host'
+[ 45%] No download step for 'tq_baseline_aiv_device'
+[ 47%] No download step for 'tq_baseline_aic_device'
+[ 50%] No update step for 'tq_baseline_host'
+[ 52%] No update step for 'tq_baseline_aiv_device'
+[ 54%] No update step for 'tq_baseline_aic_device'
+[ 56%] No patch step for 'tq_baseline_host'
+[ 58%] No patch step for 'tq_baseline_aiv_device'
+[ 60%] No patch step for 'tq_baseline_aic_device'
+[ 63%] Performing configure step for 'tq_baseline_host'
+[ 65%] Performing configure step for 'tq_baseline_aiv_device'
+[ 67%] Performing configure step for 'tq_baseline_aic_device'
+-- The C compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    ASCEND_PYTHON_EXECUTABLE
+
+
+-- Build files have been written to: /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_host-prefix/src/tq_baseline_host-build
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compiler ABI info - done
+[ 69%] Performing build step for 'tq_baseline_host'
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_aiv_device-prefix/src/tq_baseline_aiv_device-build
+-- Generating done
+-- Build files have been written to: /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_aic_device-prefix/src/tq_baseline_aic_device-build
+[ 71%] Performing tq_wrapper_warning_policy step for 'tq_baseline_aiv_device'
+[ 73%] Performing tq_wrapper_warning_policy step for 'tq_baseline_aic_device'
+[100%] Building CXX object CMakeFiles/host_bisheng_obj.dir/home/dmin/work/checkpoint2_20261123/slot03/src/src/prefill/turboquant_reshape_batch.cpp.o
+-- Configuring done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_aiv_device-prefix/src/tq_baseline_aiv_device-build
+-- Generating done
+-- Build files have been written to: /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_aic_device-prefix/src/tq_baseline_aic_device-build
+[ 76%] Performing build step for 'tq_baseline_aiv_device'
+[ 78%] Performing build step for 'tq_baseline_aic_device'
+[100%] Building CXX object CMakeFiles/device_obj.dir/home/dmin/work/checkpoint2_20261123/slot03/build/auto_gen/tq_baseline/auto_gen_turboquant_reshape_batch.cpp.o
+[100%] Building CXX object CMakeFiles/device_obj.dir/home/dmin/work/checkpoint2_20261123/slot03/build/auto_gen/tq_baseline/auto_gen_turboquant_reshape_batch.cpp.o
+[100%] Built target host_bisheng_obj
+[ 80%] Performing install step for 'tq_baseline_host'
+Consolidate compiler generated dependencies of target host_bisheng_obj
+[100%] Built target host_bisheng_obj
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_host_dir/./objects-Release/host_bisheng_obj/home/dmin/work/checkpoint2_20261123/slot03/src/src/prefill/turboquant_reshape_batch.cpp.o
+[ 82%] Completed 'tq_baseline_host'
+[ 82%] Built target tq_baseline_host
+[100%] Built target device_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld  -m aicorelinux -r  -Ttext=0 /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_aiv_device-prefix/src/tq_baseline_aiv_device-build/CMakeFiles/device_obj.dir/home/dmin/work/checkpoint2_20261123/slot03/build/auto_gen/tq_baseline/auto_gen_turboquant_reshape_batch.cpp.o -static -o /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_aiv_device_dir/device.o
+[100%] Built target merge_device_obj
+[ 84%] No install step for 'tq_baseline_aiv_device'
+[ 86%] Completed 'tq_baseline_aiv_device'
+[ 86%] Built target tq_baseline_aiv_device
+[100%] Built target device_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld  -m aicorelinux -r  -Ttext=0 /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_aic_device-prefix/src/tq_baseline_aic_device-build/CMakeFiles/device_obj.dir/home/dmin/work/checkpoint2_20261123/slot03/build/auto_gen/tq_baseline/auto_gen_turboquant_reshape_batch.cpp.o -static -o /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_aic_device_dir/device.o
+[100%] Built target merge_device_obj
+[ 89%] No install step for 'tq_baseline_aic_device'
+[ 91%] Completed 'tq_baseline_aic_device'
+[ 91%] Built target tq_baseline_aic_device
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -x -m aicorelinux   -Ttext=0 /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_aic_device_dir/device.o /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_aiv_device_dir/device.o -static -o /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_merge_obj_dir/device.o
+[ 91%] Built target tq_baseline_merge_obj
+[ 93%] Building CXX object CMakeFiles/tq_baseline_host_stub_obj.dir/auto_gen/tq_baseline/host_stub.cpp.o
+[ 93%] Built target tq_baseline_host_stub_obj
+[ 95%] Linking CXX shared library lib/libtq_baseline.so
+/home/dmin/Ascend-9.2.1/cann-9.2.1/bin/ascendc_pack_kernel /home/dmin/work/checkpoint2_20261123/slot03/build/CMakeFiles/tq_baseline_host_stub_obj.dir/auto_gen/tq_baseline/host_stub.cpp.o /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_merge_obj_dir/device.o 0 /home/dmin/work/checkpoint2_20261123/slot03/build/CMakeFiles/tq_baseline_host_stub_obj.dir/auto_gen/tq_baseline/host_stub.cpp.o
+recompile: /usr/bin/c++ -fPIC -O3 -DNDEBUG -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -s -shared -Wl,-soname,libtq_baseline.so -o lib/libtq_baseline.so CMakeFiles/tq_baseline_host_stub_obj.dir/auto_gen/tq_baseline/host_stub.cpp.o /home/dmin/work/checkpoint2_20261123/slot03/build/tq_baseline_host_dir/objects-Release/host_bisheng_obj/home/dmin/work/checkpoint2_20261123/slot03/src/src/prefill/turboquant_reshape_batch.cpp.o    -L/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64  -L/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib  -Wl,-rpath,/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib: /home/dmin/Ascend-9.2.1/cann-9.2.1/lib64/libascendc_runtime.a -lascend_dump -lc_sec
+[ 95%] Built target tq_baseline
+[ 97%] Building CXX object CMakeFiles/baseline.dir/tests/camodel/baseline.cpp.o
+[100%] Linking CXX executable bin/baseline
+[100%] Built target baseline
