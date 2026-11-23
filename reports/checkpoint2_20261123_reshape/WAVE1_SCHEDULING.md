@@ -24,10 +24,12 @@ FP32 scales, 65536 untouched cache bytes and1024 exterior guard bytes. All four
 implementations completed three pre-simulator reviews, strict builds and the
 baseline-relative AKA gate (zero fatal / zero new warnings). Source-pipe-matched
 release audits pass76 waits for03/04/05; the owner-aware06 audit passes150.
-Slot03's post-trace audit establishes all twelve scalar metadata dependency
-chains and accounts for generated fixed-frame scalar I/O. The04/05 detailed
-post-trace scalar classification is still being finalized; numerical correctness
-alone does not close that audit.
+Post-trace audits establish all twelve scalar metadata dependency chains in
+each case and account for generated fixed-frame scalar I/O. Slots04/05 expose
+an additional kernel-argument LDP-to-frame-store dependency of97/89 ticks;
+the exact registers, DCache MISS and CCU attempts are retained. No new
+unaccounted repeated-issue class remains. CCU-silent delivery gaps are reported
+separately without inventing an instruction-cache explanation.
 
 ## The original CPM ranking was not predictively validated
 
@@ -54,5 +56,6 @@ tick winner. No Wave2 implementation or additional timing launch is authorized
 by this selection report itself.
 
 Evidence: slot03/POST_TRACE_I2.md; slot03/analysis/trace_summary.json;
+slot04/POST_TRACE_I2.md; slot05/POST_TRACE_I2.md;
 slot04/analysis/trace_summary.json; slot05/analysis/trace_summary.json;
 slot06/MEASURED_RESULT.md and its bound protocol/dynamic audit JSONs.
