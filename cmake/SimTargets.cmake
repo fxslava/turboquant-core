@@ -105,6 +105,7 @@ function(add_turboquant_sim_targets)
   add_sim_runner(test_nz_ingress_canary_sim tests/npu/test_nz_ingress_canary.cpp
       tq_prefill_nz_sim)
   add_sim_runner(test_fused_decode_e2e_sim tests/npu/test_fused_decode_e2e.cpp tq_decode_sim)
+  add_sim_runner(test_wave_v11_exact_sim tests/npu/test_wave_v11_exact.cpp tq_decode_sim)
 
   set(TQ_CYCLE_MODEL_DIR "${ASCEND_HOME_PATH}/x86_64-linux/simulator/dav_3510/camodel")
   ascendc_library(tq_qwen35_reduce_canary_sim SHARED tests/npu/qwen35_reduce_canary.cpp)

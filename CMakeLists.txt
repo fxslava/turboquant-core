@@ -92,6 +92,11 @@ target_link_libraries(test_decode_reduce PRIVATE turboquant_host)
 add_executable(test_qwen35_telemetry tests/cpu/test_qwen35_telemetry.cpp)
 target_link_libraries(test_qwen35_telemetry PRIVATE turboquant_host)
 
+add_executable(test_wave_v11_fixture tests/npu/test_wave_v11_exact.cpp)
+target_compile_definitions(test_wave_v11_fixture PRIVATE TQ_WAVE_V11_HOST_ONLY=1)
+target_link_libraries(test_wave_v11_fixture PRIVATE turboquant_host)
+add_test(NAME wave_v11_fixture COMMAND test_wave_v11_fixture)
+
 add_test(NAME contract_gates COMMAND test_contract_gates)
 add_test(NAME layout_bridge COMMAND test_layout_bridge)
 add_test(NAME telemetry_dump COMMAND test_telemetry_dump)
