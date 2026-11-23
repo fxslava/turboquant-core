@@ -1,0 +1,359 @@
+{
+  "schema_version": 1,
+  "findings": [
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA1004|Reg::And() argument 0 ('dst') must live in UB, but 'bit' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 8,
+      "message": "Reg::And() argument 0 ('dst') must live in UB, but 'bit' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA1004|Reg::And() argument 1 ('src0') must live in UB, but 'lane' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 8,
+      "message": "Reg::And() argument 1 ('src0') must live in UB, but 'lane' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA1004|Reg::And() argument 2 ('src1') must live in UB, but 'stride' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 8,
+      "message": "Reg::And() argument 2 ('src1') must live in UB, but 'stride' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA1004|Reg::Duplicate() argument 0 ('dst') must live in UB, but 'one_bits' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 8,
+      "message": "Reg::Duplicate() argument 0 ('dst') must live in UB, but 'one_bits' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA1004|Reg::Duplicate() argument 0 ('dst') must live in UB, but 'stride' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 8,
+      "message": "Reg::Duplicate() argument 0 ('dst') must live in UB, but 'stride' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA1004|Reg::Gather() argument 0 ('dstLocal') must live in UB, but 'partner' is in REG (TPosition::?)",
+      "count": 6,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 466,
+      "message": "Reg::Gather() argument 0 ('dstLocal') must live in UB, but 'partner' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA1004|Reg::Gather() argument 1 ('srcLocal') must live in UB, but 'm' is in REG (TPosition::?)",
+      "count": 6,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 466,
+      "message": "Reg::Gather() argument 1 ('srcLocal') must live in UB, but 'm' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA1004|Reg::Or() argument 0 ('dst') must live in UB, but 'sgn_bits' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 8,
+      "message": "Reg::Or() argument 0 ('dst') must live in UB, but 'sgn_bits' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA1004|Reg::Or() argument 1 ('src0') must live in UB, but 'shifted' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 8,
+      "message": "Reg::Or() argument 1 ('src0') must live in UB, but 'shifted' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA1004|Reg::Or() argument 2 ('src1') must live in UB, but 'one_bits' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 8,
+      "message": "Reg::Or() argument 2 ('src1') must live in UB, but 'one_bits' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3002|tensor 'd_ptr' has an unresolvable base offset and byte size (offset=reinterpret_cast</*cbuf*/ bfloat16_t*>( ..., size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 7,
+      "message": "tensor 'd_ptr' has an unresolvable base offset and byte size (offset=reinterpret_cast</*cbuf*/ bfloat16_t*>( ..., size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3002|tensor 'd_ptr' has an unresolvable base offset and byte size (offset=reinterpret_cast</*cbuf*/ bfloat16_t*>(l1_byt..., size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 7,
+      "message": "tensor 'd_ptr' has an unresolvable base offset and byte size (offset=reinterpret_cast</*cbuf*/ bfloat16_t*>(l1_byt..., size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3002|tensor 'dst_ptr' has an unresolvable base offset and byte size (offset=reinterpret_cast</*cbuf*/ bfloat16_t*>(kL1Pag..., size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 594,
+      "message": "tensor 'dst_ptr' has an unresolvable base offset and byte size (offset=reinterpret_cast</*cbuf*/ bfloat16_t*>(kL1Pag..., size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3002|tensor 'dst_ptr' has an unresolvable base offset and byte size (offset=reinterpret_cast</*cbuf*/ bfloat16_t*>(l1_byt..., size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 7,
+      "message": "tensor 'dst_ptr' has an unresolvable base offset and byte size (offset=reinterpret_cast</*cbuf*/ bfloat16_t*>(l1_byt..., size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3002|tensor 'l1_table' has an unresolvable base offset and byte size (offset=reinterpret_cast</*cbuf*/ bfloat16_t*>(kL1Table), size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 1049,
+      "message": "tensor 'l1_table' has an unresolvable base offset and byte size (offset=reinterpret_cast</*cbuf*/ bfloat16_t*>(kL1Table), size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3002|tensor 'page' has an unresolvable base offset and byte size (offset=reinterpret_cast</*cbuf*/ bfloat16_t*>(kL1Pag..., size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 610,
+      "message": "tensor 'page' has an unresolvable base offset and byte size (offset=reinterpret_cast</*cbuf*/ bfloat16_t*>(kL1Pag..., size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3002|tensor 'row' has an unresolvable base offset and byte size (offset=squares + (static_cast<std::uint32_t>(r) * 256), size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 457,
+      "message": "tensor 'row' has an unresolvable base offset and byte size (offset=squares + (static_cast<std::uint32_t>(r) * 256), size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3002|tensor 'ub' has an unresolvable base offset and byte size (offset=reinterpret_cast</*ubuf*/ float*>(kLandBase<l..., size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 648,
+      "message": "tensor 'ub' has an unresolvable base offset and byte size (offset=reinterpret_cast</*ubuf*/ float*>(kLandBase<l..., size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3010|SetFlag<MTE1_MTE2>(static_cast<std::int32_t>(slot)) uses an event id the analyzer cannot resolve (static_cast<std::int32_t>(slot)); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 685,
+      "message": "SetFlag<MTE1_MTE2>(static_cast<std::int32_t>(slot)) uses an event id the analyzer cannot resolve (static_cast<std::int32_t>(slot)); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3010|SetFlag<MTE2_MTE1>(evt) uses an event id the analyzer cannot resolve (evt); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 603,
+      "message": "SetFlag<MTE2_MTE1>(evt) uses an event id the analyzer cannot resolve (evt); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3010|SetFlag<MTE3_V>(pack_evt) uses an event id the analyzer cannot resolve (pack_evt); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 1020,
+      "message": "SetFlag<MTE3_V>(pack_evt) uses an event id the analyzer cannot resolve (pack_evt); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3010|SetFlag<V_MTE3>(pack_evt) uses an event id the analyzer cannot resolve (pack_evt); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 969,
+      "message": "SetFlag<V_MTE3>(pack_evt) uses an event id the analyzer cannot resolve (pack_evt); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3010|SetFlag<V_S>(pack_evt) uses an event id the analyzer cannot resolve (pack_evt); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 841,
+      "message": "SetFlag<V_S>(pack_evt) uses an event id the analyzer cannot resolve (pack_evt); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3010|WaitFlag<MTE1_MTE2>(evt) uses an event id the analyzer cannot resolve (evt); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 601,
+      "message": "WaitFlag<MTE1_MTE2>(evt) uses an event id the analyzer cannot resolve (evt); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3010|WaitFlag<MTE2_MTE1>(static_cast<std::int32_t>(slot)) uses an event id the analyzer cannot resolve (static_cast<std::int32_t>(slot)); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 681,
+      "message": "WaitFlag<MTE2_MTE1>(static_cast<std::int32_t>(slot)) uses an event id the analyzer cannot resolve (static_cast<std::int32_t>(slot)); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3010|WaitFlag<MTE3_V>(pack_evt) uses an event id the analyzer cannot resolve (pack_evt); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 960,
+      "message": "WaitFlag<MTE3_V>(pack_evt) uses an event id the analyzer cannot resolve (pack_evt); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3010|WaitFlag<V_MTE3>(pack_evt) uses an event id the analyzer cannot resolve (pack_evt); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 1011,
+      "message": "WaitFlag<V_MTE3>(pack_evt) uses an event id the analyzer cannot resolve (pack_evt); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3010|WaitFlag<V_S>(pack_evt) uses an event id the analyzer cannot resolve (pack_evt); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 842,
+      "message": "WaitFlag<V_S>(pack_evt) uses an event id the analyzer cannot resolve (pack_evt); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/prefill/turboquant_reshape_batch.cpp|AKA3012|consecutive PipeBarrier(PIPE_V) has no effect; the preceding barrier already drained these pipelines",
+      "count": 1,
+      "code": "AKA3012",
+      "severity": "INFO",
+      "file": "src/prefill/turboquant_reshape_batch.cpp",
+      "line": 764,
+      "message": "consecutive PipeBarrier(PIPE_V) has no effect; the preceding barrier already drained these pipelines"
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Duplicate() argument 0 ('dst') must live in UB, but 'dead' is in REG (TPosition::?)",
+      "count": 1
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Duplicate() argument 0 ('dst') must live in UB, but 'one' is in REG (TPosition::?)",
+      "count": 1
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Duplicate() argument 0 ('dst') must live in UB, but 'reduced' is in REG (TPosition::?)",
+      "count": 1
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Duplicate() argument 0 ('dst') must live in UB, but 'tile' is in REG (TPosition::?)",
+      "count": 1
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Max() argument 0 ('dst') must live in UB, but 'next' is in REG (TPosition::?)",
+      "count": 1
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Max() argument 1 ('src0') must live in UB, but 'm' is in REG (TPosition::?)",
+      "count": 1
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Max() argument 2 ('src1') must live in UB, but 'tile' is in REG (TPosition::?)",
+      "count": 1
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Muls() argument 0 ('dst') must live in UB, but 'row' is in REG (TPosition::?)",
+      "count": 1
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Muls() argument 1 ('src') must live in UB, but 'row' is in REG (TPosition::?)",
+      "count": 1
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Select() argument 0 ('dst') must live in UB, but 'row' is in REG (TPosition::?)",
+      "count": 1
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Select() argument 1 ('mask') must live in UB, but 'row' is in REG (TPosition::?)",
+      "count": 1
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Select() argument 2 ('src0') must live in UB, but 'dead' is in REG (TPosition::?)",
+      "count": 1
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Sub() argument 0 ('dst') must live in UB, but 'decay' is in REG (TPosition::?)",
+      "count": 1
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Sub() argument 0 ('dst') must live in UB, but 'row' is in REG (TPosition::?)",
+      "count": 1
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Sub() argument 1 ('src0') must live in UB, but 'm' is in REG (TPosition::?)",
+      "count": 1
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Sub() argument 1 ('src0') must live in UB, but 'row' is in REG (TPosition::?)",
+      "count": 1
+    },
+    {
+      "fingerprint": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp|AKA1004|Reg::Sub() argument 2 ('src1') must live in UB, but 'next' is in REG (TPosition::?)",
+      "count": 2
+    }
+  ],
+  "root": "C:/Ascend/turboquant-core",
+  "chip": "ascend950pr",
+  "tool_version": "0.1.0",
+  "slot09_register_api_provenance": {
+    "Muls": {
+      "path": "/mnt/c/PipeSim/docs/ascendc_api/SIMD-API/basic_api/reg_vector_compute/basic_arithmetic/Muls-27.md",
+      "sha256": "60f44e8de16dc6b22441aafd4a4190d5ccb3d24bf81e104f859e79a6a8e81db1"
+    },
+    "Duplicate": {
+      "path": "/mnt/c/PipeSim/docs/ascendc_api/SIMD-API/basic_api/reg_vector_compute/data_padding/Duplicate-48.md",
+      "sha256": "fa8e8e572780528427f687a177750de4a81f8d74a38e9680349e9ca7f3129188"
+    },
+    "Select": {
+      "path": "/mnt/c/PipeSim/docs/ascendc_api/SIMD-API/basic_api/reg_vector_compute/compare_and_select/Select-43.md",
+      "sha256": "8c986830202c303984113bb016ca2b63c1701bfaf6d60e88621116da6c9e2138"
+    },
+    "Max": {
+      "path": "/mnt/c/PipeSim/docs/ascendc_api/SIMD-API/basic_api/reg_vector_compute/basic_arithmetic/Max-24.md",
+      "sha256": "495e5033a1b9da319478aec11bcf7b9ffd7399fbca01183121facd42c2af38d2"
+    },
+    "Sub": {
+      "path": "/mnt/c/PipeSim/docs/ascendc_api/SIMD-API/basic_api/reg_vector_compute/basic_arithmetic/Sub-21.md",
+      "sha256": "70574230264ffe7e124bb1a03610a638ccb219d56cffcdbcb56469254a7282e5"
+    }
+  }
+}

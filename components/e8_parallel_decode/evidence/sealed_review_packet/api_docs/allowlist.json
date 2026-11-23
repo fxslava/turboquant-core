@@ -1,0 +1,122 @@
+[
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMT-API/SIMD_SIMT_hybrid_programming_intro/programming_model_140.md",
+    "packet": "api_docs/SIMT-API/SIMD_SIMT_hybrid_programming_intro/programming_model_140.md",
+    "sha256": "98eb692ec6c21546b7cc9e12d3f3bf49c44aabbd09f023d0e4e8fb2a9c10e986"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMT-API/SIMD_SIMT_hybrid_programming_intro/extended_syntax/built_in_macros_146.md",
+    "packet": "api_docs/SIMT-API/SIMD_SIMT_hybrid_programming_intro/extended_syntax/built_in_macros_146.md",
+    "sha256": "e76b63e975bb0325f038ce7373fece9d4a334483e2f3d5c9cc299d1b53941cce"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMT-API/SIMD_SIMT_hybrid_programming_intro/extended_syntax/built_in_variables_145.md",
+    "packet": "api_docs/SIMT-API/SIMD_SIMT_hybrid_programming_intro/extended_syntax/built_in_variables_145.md",
+    "sha256": "9d76e688740aac6f71b68498c5d0197c0311d960179dbd2896f05b52f037a0b6"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMT-API/math_functions/bfloat16_type/bfloat16_precision_conversion_functions/__float2bfloat16_rn.md",
+    "packet": "api_docs/SIMT-API/math_functions/bfloat16_type/bfloat16_precision_conversion_functions/__float2bfloat16_rn.md",
+    "sha256": "9eafa470633c9a38406caed4aef56c3c8ad5f08d4af27f11ff9758a6dfeb02f8"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMT-API/math_functions/bfloat16_type/bfloat16_precision_conversion_functions/__bfloat162float.md",
+    "packet": "api_docs/SIMT-API/math_functions/bfloat16_type/bfloat16_precision_conversion_functions/__bfloat162float.md",
+    "sha256": "3efebbd66684899c9856cd22504afa7e8d54a9a17f70ce29a2d7152bc78888c7"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMT-API/math_functions/data_type_conversion/type_conversion_functions/__float2int_rn.md",
+    "packet": "api_docs/SIMT-API/math_functions/data_type_conversion/type_conversion_functions/__float2int_rn.md",
+    "sha256": "9e5ec37cf0424c8b932dae22b0ba858f8e98c6ccf82c9d7d0c4651b489eaba6a"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/sync_control/intra_core_sync/SetFlag_WaitFlag_ISASI.md",
+    "packet": "api_docs/SIMD-API/basic_api/sync_control/intra_core_sync/SetFlag_WaitFlag_ISASI.md",
+    "sha256": "d854b75c9d20d0728c12766db6759da6ce382276d864fd18a3237ec145316ac2"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/sync_control/intra_core_sync/DataSyncBarrier_ISASI.md",
+    "packet": "api_docs/SIMD-API/basic_api/sync_control/intra_core_sync/DataSyncBarrier_ISASI.md",
+    "sha256": "758c4aa639f3f3dce6a362bf8c4b6637628cae28cd6cc14b45fa7e664b684285"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/sync_control/inter_core_sync/CrossCoreSetFlag_ISASI.md",
+    "packet": "api_docs/SIMD-API/basic_api/sync_control/inter_core_sync/CrossCoreSetFlag_ISASI.md",
+    "sha256": "1949101d696192369c18f68007878d61c286f46b057938be5736fdea13dcd13e"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/sync_control/inter_core_sync/CrossCoreWaitFlag_ISASI.md",
+    "packet": "api_docs/SIMD-API/basic_api/sync_control/inter_core_sync/CrossCoreWaitFlag_ISASI.md",
+    "sha256": "05be04399acadeea52124bf5dc244e0f8194bd9803d93ab3156bd00d3fe8d5ea"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/reg_vector_compute/vf_call/asc_vf_call.md",
+    "packet": "api_docs/SIMD-API/basic_api/reg_vector_compute/vf_call/asc_vf_call.md",
+    "sha256": "f6305519a2136207fb6629267788d1b2d558da395222ecdea3bcbb5bb5dfbd34"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/data_structures/LocalTensor/localtensor_constructor.md",
+    "packet": "api_docs/SIMD-API/basic_api/data_structures/LocalTensor/localtensor_constructor.md",
+    "sha256": "930a74e91786d606b9a0f07f55ff409dd0af3d5c1c71ecc3328a209b4ea2b081"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/tool_interface/system_init/InitSocState.md",
+    "packet": "api_docs/SIMD-API/basic_api/tool_interface/system_init/InitSocState.md",
+    "sha256": "e988faa72bb6a44d3d22db664ea753d30e496119a0d7b274fe9c5dd4cf5e5404"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/cube_compute_ISASI/mmad_compute/Mmad.md",
+    "packet": "api_docs/SIMD-API/basic_api/cube_compute_ISASI/mmad_compute/Mmad.md",
+    "sha256": "7a7551dc1ffb5782c9d26a91040cdc500d5594cd4ca7cb25326e62826ca2cab1"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/cube_compute_ISASI/mmad_compute_aux_config/SetHF32Mode.md",
+    "packet": "api_docs/SIMD-API/basic_api/cube_compute_ISASI/mmad_compute_aux_config/SetHF32Mode.md",
+    "sha256": "798a82b09fb369a667b9f31e60fbd95e4aa3174ef824acbc6e7ae7eef530a7e5"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/cube_compute_ISASI/cube_compute_store/Fixpipe_L0CToUB.md",
+    "packet": "api_docs/SIMD-API/basic_api/cube_compute_ISASI/cube_compute_store/Fixpipe_L0CToUB.md",
+    "sha256": "ca429377d4742dbbd633e6daf816a10f648ee92370daf2fef5114267e7b3aa08"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/cube_compute_ISASI/cube_compute_load/DataCopy_UBToL1_highdim_split.md",
+    "packet": "api_docs/SIMD-API/basic_api/cube_compute_ISASI/cube_compute_load/DataCopy_UBToL1_highdim_split.md",
+    "sha256": "1a6a5fbf64719c2c237547f9a87349ef7f450582099cb743ef622c3fd86bc252"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/cube_compute_TensorAPI/cube_compute_load/Copy_L1ToL0A.md",
+    "packet": "api_docs/SIMD-API/basic_api/cube_compute_TensorAPI/cube_compute_load/Copy_L1ToL0A.md",
+    "sha256": "a1abe862133fb0b8d549859c158531392a92ae841c49ce8cddd1e253c07d8c1e"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/cube_compute_TensorAPI/cube_compute_load/Copy_L1ToL0B.md",
+    "packet": "api_docs/SIMD-API/basic_api/cube_compute_TensorAPI/cube_compute_load/Copy_L1ToL0B.md",
+    "sha256": "13803142099e949fc3e05ef3b694b5cfef31a357252ca792f8de809406edcaef"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/reg_vector_compute/basic_arithmetic/Muls-27.md",
+    "packet": "api_docs/SIMD-API/basic_api/reg_vector_compute/basic_arithmetic/Muls-27.md",
+    "sha256": "60f44e8de16dc6b22441aafd4a4190d5ccb3d24bf81e104f859e79a6a8e81db1"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/reg_vector_compute/basic_arithmetic/Max-24.md",
+    "packet": "api_docs/SIMD-API/basic_api/reg_vector_compute/basic_arithmetic/Max-24.md",
+    "sha256": "495e5033a1b9da319478aec11bcf7b9ffd7399fbca01183121facd42c2af38d2"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/reg_vector_compute/basic_arithmetic/Sub-21.md",
+    "packet": "api_docs/SIMD-API/basic_api/reg_vector_compute/basic_arithmetic/Sub-21.md",
+    "sha256": "70574230264ffe7e124bb1a03610a638ccb219d56cffcdbcb56469254a7282e5"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/reg_vector_compute/data_padding/Duplicate-48.md",
+    "packet": "api_docs/SIMD-API/basic_api/reg_vector_compute/data_padding/Duplicate-48.md",
+    "sha256": "fa8e8e572780528427f687a177750de4a81f8d74a38e9680349e9ca7f3129188"
+  },
+  {
+    "source": "C:/PipeSim/docs/ascendc_api/SIMD-API/basic_api/reg_vector_compute/compare_and_select/Select-43.md",
+    "packet": "api_docs/SIMD-API/basic_api/reg_vector_compute/compare_and_select/Select-43.md",
+    "sha256": "8c986830202c303984113bb016ca2b63c1701bfaf6d60e88621116da6c9e2138"
+  }
+]

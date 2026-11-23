@@ -1,0 +1,28 @@
+{
+  "status": "event-model specification; physical coefficients not fully identifiable; no PipeSim implementation changes",
+  "validity_constraints": ["all memory-domain capacities and lifetimes", "dynamic UB pointer legality", "compiled VF/code/register/stack limits", "balanced generation-aware event ownership", "producer-to-scalar publication drains", "numeric and canary parity"],
+  "finish_recurrence": "F[v] = d[v](theta) + max(F[u] + lag[u,v](theta) for u in predecessors[v])",
+  "total": "max(F[v] for v in sinks) + launch_envelope",
+  "dma_ready_service": "alpha[p] + bytes/(eta[p]*rate[p]) + contention[p]*competing_bytes/hbm_rate",
+  "scalar_load_dependency": "max(0, load_latency - independent_scalar_issue_window), attached to dependent consumer",
+  "dual_owner_quorum": "max(owner0_credit_ready, owner1_credit_ready) + composite_handoff_lag",
+  "per_owner_credit": "owner_credit_ready + composite_handoff_lag, plus proved structural credit/window edges",
+  "parameter_ledger": [
+    {"name":"fixed_six_strip_total_mean", "value":64475, "units":"CAModel ticks", "status":"fitted; one fixed geometry only"},
+    {"name":"dependent_metadata_consumer_retry_mean", "value":473.25, "units":"ticks/consumer", "status":"descriptive fit to 60 intervals nested in 5 runs; not additive total penalty"},
+    {"name":"ready_to_scalar_drain_lag", "value":10, "units":"ticks", "status":"baseline composite trace calibration; not transport-only nor protocol-general validation"},
+    {"name":"MTE2_startup", "value":200, "units":"cycles", "status":"PipeSim prior, not fitted"},
+    {"name":"MTE2_bandwidth", "value":128, "units":"bytes/cycle", "status":"PipeSim prior, not fitted"},
+    {"name":"MTE3_startup_and_rate", "value":null, "status":"not independently identifiable"},
+    {"name":"HBM_contention_and_eta", "value":null, "status":"not independently identifiable"},
+    {"name":"scalar_issue_throughput", "value":null, "status":"not independently identifiable; instruction latency is not issue throughput"},
+    {"name":"SIMD_SIMT_transition_cost", "value":null, "status":"not calibrated; package default 64 cycles is not a hardware guarantee"},
+    {"name":"launch_fill_drain_components", "value":null, "status":"not separately identifiable at one strip count"}
+  ],
+  "prediction_feature_policy": {
+    "allowed_at_holdout_prediction": ["source geometry", "compiled ISA graph and legal instruction counts", "proved token/ownership topology", "calibrations fitted only on training cases"],
+    "forbidden_at_holdout_prediction": ["holdout measured engine spans", "holdout DCache retry intervals", "holdout observed issue gaps", "holdout frame endpoints", "case-ID fitted coefficients", "aggregated totals from different launch sets"]
+  },
+  "cross_workload_validation": "unavailable; no verified aligned raw decode/E8 training and holdout pairs located",
+  "ranking_policy": "abstain where omitted dependencies or unsupported domain transfer dominate; present observed error magnitudes as empirical sensitivity, not confidence bounds"
+}

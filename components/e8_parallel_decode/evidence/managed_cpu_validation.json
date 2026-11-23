@@ -1,0 +1,22 @@
+{
+  "device_build": false,
+  "CAModel_launch": false,
+  "source": "/mnt/c/Users/Admin/.codex/worktrees/e8-packet-writers/turboquant-core/components/e8_parallel_decode",
+  "CMake_option": "E8_PARALLEL_BUILD_DEVICE=OFF",
+  "strict_flags": [
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-fast-math",
+    "-ffp-contract=off"
+  ],
+  "CPU_tests": {
+    "test_parallel": "PASS",
+    "test_api": "PASS",
+    "reader_fixture_uniform": "PASS",
+    "reader_fixture_nonuniform": "PASS"
+  },
+  "numerical_scope": "Exhaustive 65536 labels x24 scales x8 coordinates for BF16+INT8; public layouts; host fixtures only",
+  "CTest_log_sha256": "b80ea29c049d0910d7d8c9ad09794e2177e5ef711d01137adc0f149516239786",
+  "configure_build_log_sha256": "ed43d3a5184cf584abde29c3f49f1bc197fe10f4afecc26fba386ebb6b6d234a"
+}

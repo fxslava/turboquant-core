@@ -1,0 +1,230 @@
+--- baseline/routine_e8_int8_dequant_simt.hpp
++++ candidate/routine_e8_int8_dequant_simt.hpp
+@@ -10,6 +10,17 @@
+ #else
+ #define E8_THREAD inline
+ #define E8_UB
++#endif
++#ifdef E8_CPU_TEST
++#ifndef E8_PARALLEL_CPU
++#define E8_PARALLEL_CPU
++#define E8_PARALLEL_UNDEFINE_CPU
++#endif
++#endif
++#include "../e8_parallel_decode.hpp"
++#ifdef E8_PARALLEL_UNDEFINE_CPU
++#undef E8_PARALLEL_CPU
++#undef E8_PARALLEL_UNDEFINE_CPU
+ #endif
+ namespace ascend_micro::e8_int8_simt {
+ enum class Backend { SIMD, SIMT };
+@@ -35,13 +46,14 @@
+ template <TableLayout Layout>
+ E8_THREAD void CompactProject(unsigned label, E8_UB const int8_t* partialTable,
+                               int (&projectedDoubled)[8]) {
+-#pragma unroll
+-  for (unsigned coordinate = 0; coordinate < 8; ++coordinate) {
+-    projectedDoubled[coordinate] =
+-        int(partialTable[PartialOffset<Layout>(label & 255, coordinate)]) +
+-        int(partialTable[PartialTableFootprint<Layout>::PartialBytes +
+-                         PartialOffset<Layout>(label >> 8, coordinate)]);
+-  }
++  projectedDoubled[0] = int(partialTable[PartialOffset<Layout>(label & 255, 0)]) + int(partialTable[PartialTableFootprint<Layout>::PartialBytes + PartialOffset<Layout>(label >> 8, 0)]);
++  projectedDoubled[1] = int(partialTable[PartialOffset<Layout>(label & 255, 1)]) + int(partialTable[PartialTableFootprint<Layout>::PartialBytes + PartialOffset<Layout>(label >> 8, 1)]);
++  projectedDoubled[2] = int(partialTable[PartialOffset<Layout>(label & 255, 2)]) + int(partialTable[PartialTableFootprint<Layout>::PartialBytes + PartialOffset<Layout>(label >> 8, 2)]);
++  projectedDoubled[3] = int(partialTable[PartialOffset<Layout>(label & 255, 3)]) + int(partialTable[PartialTableFootprint<Layout>::PartialBytes + PartialOffset<Layout>(label >> 8, 3)]);
++  projectedDoubled[4] = int(partialTable[PartialOffset<Layout>(label & 255, 4)]) + int(partialTable[PartialTableFootprint<Layout>::PartialBytes + PartialOffset<Layout>(label >> 8, 4)]);
++  projectedDoubled[5] = int(partialTable[PartialOffset<Layout>(label & 255, 5)]) + int(partialTable[PartialTableFootprint<Layout>::PartialBytes + PartialOffset<Layout>(label >> 8, 5)]);
++  projectedDoubled[6] = int(partialTable[PartialOffset<Layout>(label & 255, 6)]) + int(partialTable[PartialTableFootprint<Layout>::PartialBytes + PartialOffset<Layout>(label >> 8, 6)]);
++  projectedDoubled[7] = int(partialTable[PartialOffset<Layout>(label & 255, 7)]) + int(partialTable[PartialTableFootprint<Layout>::PartialBytes + PartialOffset<Layout>(label >> 8, 7)]);
+ }
+ #ifndef E8_SIMT_THREAD_COUNT
+ #define E8_SIMT_THREAD_COUNT 128
+@@ -84,152 +96,26 @@
+                       : ((TableBytes + 31) & ~31u) + FullRegisterReadPadBytes;
+ };
+ namespace detail {
+-E8_THREAD int Floor8(int x) { return x >= 0 ? x / 8 : -((-x + 7) / 8); }
+-E8_THREAD void Project(unsigned label, int (&projectedDoubled)[8]) {
+-  int coefficient0 = 2 * int((label >> 14) & 1) + int((label >> 15) & 1) - 2;
+-  int coefficient1 = int(label & 3) - 2,
+-      coefficient2 = int((label >> 2) & 3) - 2,
+-      coefficient3 = int((label >> 4) & 3) - 2;
+-  int coefficient4 = int((label >> 6) & 3) - 2,
+-      coefficient5 = int((label >> 8) & 3) - 2,
+-      coefficient6 = int((label >> 10) & 3) - 2,
+-      coefficient7 = int((label >> 12) & 3) - 2;
+-  projectedDoubled[0] = coefficient0;
+-  projectedDoubled[1] = coefficient0 + 2 * coefficient1;
+-  projectedDoubled[2] = coefficient0 - 2 * coefficient1 + 2 * coefficient2;
+-  projectedDoubled[3] = coefficient0 - 2 * coefficient2 + 2 * coefficient3;
+-  projectedDoubled[4] = coefficient0 - 2 * coefficient3 + 2 * coefficient4;
+-  projectedDoubled[5] = coefficient0 - 2 * coefficient4 + 2 * coefficient5;
+-  projectedDoubled[6] =
+-      coefficient0 - 2 * coefficient5 + 2 * coefficient6 + 2 * coefficient7;
+-  projectedDoubled[7] = coefficient0 - 2 * coefficient6 + 2 * coefficient7;
++E8_THREAD e8_parallel::I8 ToRegisters(const int (&p)[8]) {
++  return {p[0],p[1],p[2],p[3],p[4],p[5],p[6],p[7]};
+ }
+-// Exact rational nearest E8: candidates in D8 and D8+h, doubled coordinates.
+-// Equal distance chooses largest nearest point, hence smallest residual lex.
+-E8_THREAD void Shape(int (&projectedDoubled)[8]) {
+-  int bestNearestDoubled[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+-  int bestDistance = 0x7fffffff;
+-#pragma unroll
+-  for (int halfCoset = 0; halfCoset < 2; ++halfCoset) {
+-    int nearestDoubled[8], residualDoubled[8];
+-    int parity = 0;
+-#pragma unroll
+-    for (int coordinate = 0; coordinate < 8; ++coordinate) {
+-      int integerCoordinate =
+-          Floor8(projectedDoubled[coordinate] - 4 * halfCoset + 4);
+-      nearestDoubled[coordinate] = 2 * integerCoordinate + halfCoset;
+-      residualDoubled[coordinate] =
+-          projectedDoubled[coordinate] - 4 * nearestDoubled[coordinate];
+-      parity += integerCoordinate;
+-    }
+-    if (parity & 1) {
+-      int maximumAbsoluteResidual = -1, repairCoordinate = 0;
+-      bool repairPositive = false;
+-#pragma unroll
+-      for (int coordinate = 0; coordinate < 8; ++coordinate) {
+-        int absoluteResidual = residualDoubled[coordinate] < 0
+-                                   ? -residualDoubled[coordinate]
+-                                   : residualDoubled[coordinate];
+-        if (absoluteResidual > maximumAbsoluteResidual ||
+-            (absoluteResidual == maximumAbsoluteResidual &&
+-             ((residualDoubled[coordinate] >= 0 && !repairPositive) ||
+-              (residualDoubled[coordinate] < 0 && !repairPositive)))) {
+-          maximumAbsoluteResidual = absoluteResidual;
+-          repairCoordinate = coordinate;
+-          repairPositive = residualDoubled[coordinate] >= 0;
+-        }
+-      }
+-#pragma unroll
+-      for (int coordinate = 0; coordinate < 8; ++coordinate)
+-        if (coordinate == repairCoordinate)
+-          nearestDoubled[coordinate] += repairPositive ? 2 : -2;
+-    }
+-    int distance = 0;
+-    bool nearestLexGreater = false, lexDecided = false;
+-#pragma unroll
+-    for (int coordinate = 0; coordinate < 8; ++coordinate) {
+-      int residual =
+-          projectedDoubled[coordinate] - 4 * nearestDoubled[coordinate];
+-      distance += residual * residual;
+-      if (!lexDecided &&
+-          nearestDoubled[coordinate] != bestNearestDoubled[coordinate]) {
+-        nearestLexGreater =
+-            nearestDoubled[coordinate] > bestNearestDoubled[coordinate];
+-        lexDecided = true;
+-      }
+-    }
+-    if (distance < bestDistance ||
+-        (distance == bestDistance && nearestLexGreater)) {
+-      bestDistance = distance;
+-#pragma unroll
+-      for (int coordinate = 0; coordinate < 8; ++coordinate)
+-        bestNearestDoubled[coordinate] = nearestDoubled[coordinate];
+-    }
+-  }
+-#pragma unroll
+-  for (int coordinate = 0; coordinate < 8; ++coordinate)
+-    projectedDoubled[coordinate] -= 4 * bestNearestDoubled[coordinate];
++E8_THREAD void FromRegisters(e8_parallel::I8 q,int (&p)[8]) {
++  p[0]=q.a;p[1]=q.b;p[2]=q.c;p[3]=q.d;
++  p[4]=q.e;p[5]=q.f;p[6]=q.g;p[7]=q.h;
+ }
+-// Repair the nearest D8 parity directly in doubled residual coordinates.
+-E8_THREAD void RepairResidual(int (&residuals)[8], unsigned parity) {
+-  if (parity == 0)
+-    return;
+-  int maximumAbsoluteResidual = -1;
+-  unsigned repairCoordinate = 0;
+-  bool repairPositive = false;
+-#pragma unroll
+-  for (unsigned coordinate = 0; coordinate < 8; ++coordinate) {
+-    const int residual = residuals[coordinate];
+-    const int absoluteResidual = residual < 0 ? -residual : residual;
+-    if (absoluteResidual > maximumAbsoluteResidual ||
+-        (absoluteResidual == maximumAbsoluteResidual && !repairPositive)) {
+-      maximumAbsoluteResidual = absoluteResidual;
+-      repairCoordinate = coordinate;
+-      repairPositive = residual >= 0;
+-    }
+-  }
+-#pragma unroll
+-  for (unsigned coordinate = 0; coordinate < 8; ++coordinate) {
+-    if (coordinate == repairCoordinate)
+-      residuals[coordinate] += repairPositive ? -8 : 8;
+-  }
++E8_THREAD int Floor8(int x) { return x>=0?x/8:-((-x+7)/8); }
++E8_THREAD void Project(unsigned label,int (&p)[8]) {
++  FromRegisters(e8_parallel::Project(label),p);
+ }
+-E8_THREAD void ShapeResidualBits(int (&doubledCoordinates)[8]) {
+-  int halfCosetResiduals[8];
+-  unsigned integerParity = 0;
+-  unsigned negativeParity = 0;
+-#pragma unroll
+-  for (unsigned coordinate = 0; coordinate < 8; ++coordinate) {
+-    const uint32_t shiftedCoordinate =
+-        static_cast<uint32_t>(doubledCoordinates[coordinate]) + 4u;
+-    const int integerResidual = static_cast<int>(shiftedCoordinate & 7u) - 4;
+-    integerParity ^= (shiftedCoordinate >> 3u) & 1u;
+-    negativeParity ^= static_cast<unsigned>(integerResidual < 0);
+-    doubledCoordinates[coordinate] = integerResidual;
+-    halfCosetResiduals[coordinate] =
+-        integerResidual < 0 ? integerResidual + 4 : integerResidual - 4;
+-  }
+-  const unsigned halfCosetParity = integerParity ^ negativeParity;
+-  RepairResidual(doubledCoordinates, integerParity);
+-  RepairResidual(halfCosetResiduals, halfCosetParity);
+-  int integerDistance = 0;
+-  int halfCosetDistance = 0;
+-#pragma unroll
+-  for (unsigned coordinate = 0; coordinate < 8; ++coordinate) {
+-    integerDistance +=
+-        doubledCoordinates[coordinate] * doubledCoordinates[coordinate];
+-    halfCosetDistance +=
+-        halfCosetResiduals[coordinate] * halfCosetResiduals[coordinate];
+-  }
+-  const bool chooseHalfCoset = halfCosetDistance < integerDistance ||
+-                               (halfCosetDistance == integerDistance &&
+-                                halfCosetResiduals[0] < doubledCoordinates[0]);
+-#pragma unroll
+-  for (unsigned coordinate = 0; coordinate < 8; ++coordinate) {
+-    if (chooseHalfCoset)
+-      doubledCoordinates[coordinate] = halfCosetResiduals[coordinate];
+-  }
++E8_THREAD void RepairResidual(int (&p)[8],unsigned parity) {
++  FromRegisters(e8_parallel::Repair(ToRegisters(p),parity),p);
+ }
++E8_THREAD void ShapeResidualBits(int (&p)[8]) {
++  FromRegisters(e8_parallel::ShapeResidualBits(ToRegisters(p)),p);
++}
++// LegacyNearest and ResidualBits use the same rational E8 nearest-point and
++// lexicographic tie rule. Exhaustive uint16-label comparison is recorded.
++E8_THREAD void Shape(int (&p)[8]) { ShapeResidualBits(p); }
+ E8_THREAD int8_t PhysicalInt8(float physicalValue) {
+   float lowerClamped = physicalValue < -128.0f ? -128.0f : physicalValue;
+   float clampedValue = lowerClamped > 127.0f ? 127.0f : lowerClamped;
+@@ -261,10 +147,14 @@
+     else
+       ShapeResidualBits(projectedDoubled);
+     float scale = scales[block / 32];
+-#pragma unroll
+-    for (int coordinate = 0; coordinate < 8; ++coordinate)
+-      output[block * 8 + coordinate] = PhysicalInt8(
+-          (float(projectedDoubled[coordinate]) * 0.5f) * scale);
++    output[block * 8 + 0] = PhysicalInt8((float(projectedDoubled[0]) * 0.5f) * scale);
++    output[block * 8 + 1] = PhysicalInt8((float(projectedDoubled[1]) * 0.5f) * scale);
++    output[block * 8 + 2] = PhysicalInt8((float(projectedDoubled[2]) * 0.5f) * scale);
++    output[block * 8 + 3] = PhysicalInt8((float(projectedDoubled[3]) * 0.5f) * scale);
++    output[block * 8 + 4] = PhysicalInt8((float(projectedDoubled[4]) * 0.5f) * scale);
++    output[block * 8 + 5] = PhysicalInt8((float(projectedDoubled[5]) * 0.5f) * scale);
++    output[block * 8 + 6] = PhysicalInt8((float(projectedDoubled[6]) * 0.5f) * scale);
++    output[block * 8 + 7] = PhysicalInt8((float(projectedDoubled[7]) * 0.5f) * scale);
+   }
+ }
+ #endif

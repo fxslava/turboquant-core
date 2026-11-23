@@ -1,0 +1,67 @@
+Start testing: Nov 23 15:08 MSK
+----------------------------------------------------------
+1/4 Testing: test_parallel
+1/4 Test: test_parallel
+Command: "/home/dmin/work/checkpoint2_20261123/parallel_decode/managed-cpu-package/test_parallel"
+Directory: /home/dmin/work/checkpoint2_20261123/parallel_decode/managed-cpu-package
+"test_parallel" start time: Nov 23 15:08 MSK
+Output:
+----------------------------------------------------------
+PASS labels=65536 coordinates=524288 bf16_words=12582912 int8_words=12582912 mismatches=0
+<end of output>
+Test time =   0.20 sec
+----------------------------------------------------------
+Test Passed.
+"test_parallel" end time: Nov 23 15:08 MSK
+"test_parallel" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/4 Testing: test_api
+2/4 Test: test_api
+Command: "/home/dmin/work/checkpoint2_20261123/parallel_decode/managed-cpu-package/test_api"
+Directory: /home/dmin/work/checkpoint2_20261123/parallel_decode/managed-cpu-package
+"test_api" start time: Nov 23 15:08 MSK
+Output:
+----------------------------------------------------------
+PASS publicBF16+INT8 API labels65536; Arithmetic and4CompactLayouts; LegacyNearest=ResidualBits; zero mismatches
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"test_api" end time: Nov 23 15:08 MSK
+"test_api" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/4 Testing: reader_fixture_uniform
+3/4 Test: reader_fixture_uniform
+Command: "/home/dmin/work/checkpoint2_20261123/parallel_decode/managed-cpu-package/reader_fixture" "--golden-root" "/mnt/c/Users/Admin/.codex/worktrees/e8-packet-writers/turboquant-core/components/e8_parallel_decode/goldens"
+Directory: /home/dmin/work/checkpoint2_20261123/parallel_decode/managed-cpu-package
+"reader_fixture_uniform" start time: Nov 23 15:08 MSK
+Output:
+----------------------------------------------------------
+PASS E8 encoded-input host fixture: six tiles,352rows,one logical KV task, outerH2/head1/odd physical pages, fixture=uniform-score/varying-V,staticUB=156416,L1=282816
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"reader_fixture_uniform" end time: Nov 23 15:08 MSK
+"reader_fixture_uniform" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/4 Testing: reader_fixture_nonuniform
+4/4 Test: reader_fixture_nonuniform
+Command: "/home/dmin/work/checkpoint2_20261123/parallel_decode/managed-cpu-package/reader_fixture" "--nonuniform" "--golden-root" "/mnt/c/Users/Admin/.codex/worktrees/e8-packet-writers/turboquant-core/components/e8_parallel_decode/goldens"
+Directory: /home/dmin/work/checkpoint2_20261123/parallel_decode/managed-cpu-package
+"reader_fixture_nonuniform" start time: Nov 23 15:08 MSK
+Output:
+----------------------------------------------------------
+PASS E8 encoded-input host fixture: six tiles,352rows,one logical KV task, outerH2/head1/odd physical pages, fixture=nonuniform-QK/constant-V,staticUB=156416,L1=282816
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"reader_fixture_nonuniform" end time: Nov 23 15:08 MSK
+"reader_fixture_nonuniform" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Nov 23 15:08 MSK

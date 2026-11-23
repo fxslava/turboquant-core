@@ -1,0 +1,157 @@
+{
+  "component": {
+    "object_sha256": "1280df9a562449dc0ef379609ada57ac513eb414bc0296010239bbf51940a577",
+    "sections": [
+      {
+        "name": ".ascend.meta.e8_parallel_component_0",
+        "address": 0,
+        "bytes": 48,
+        "alignment": 4,
+        "tlv": [
+          {
+            "tag": 1,
+            "length": 4,
+            "little_endian_value": 3
+          },
+          {
+            "tag": 12,
+            "length": 4,
+            "little_endian_value": 3
+          },
+          {
+            "tag": 7,
+            "length": 4,
+            "little_endian_value": 22592
+          },
+          {
+            "tag": 8,
+            "length": 4,
+            "little_endian_value": 384
+          },
+          {
+            "tag": 9,
+            "length": 4,
+            "little_endian_value": 12
+          },
+          {
+            "tag": 10,
+            "length": 4,
+            "little_endian_value": 0
+          }
+        ]
+      },
+      {
+        "name": ".ubuf.e8_parallel_component_0",
+        "address": 0,
+        "bytes": 14400,
+        "alignment": 32
+      }
+    ]
+  },
+  "reader_aiv": {
+    "object_sha256": "3116f9d91a520c6947f9cb0f30eac429d06a061854f1a6b91111610727c6b980",
+    "sections": [
+      {
+        "name": ".ascend.meta.e8_fused_decode_fp32_0_mix_aiv",
+        "address": 0,
+        "bytes": 56,
+        "alignment": 4,
+        "tlv": [
+          {
+            "tag": 1,
+            "length": 4,
+            "little_endian_value": 4
+          },
+          {
+            "tag": 3,
+            "length": 4,
+            "little_endian_value": 131073
+          },
+          {
+            "tag": 12,
+            "length": 4,
+            "little_endian_value": 4
+          },
+          {
+            "tag": 7,
+            "length": 4,
+            "little_endian_value": 164608
+          },
+          {
+            "tag": 8,
+            "length": 4,
+            "little_endian_value": 728
+          },
+          {
+            "tag": 9,
+            "length": 4,
+            "little_endian_value": 8
+          },
+          {
+            "tag": 10,
+            "length": 4,
+            "little_endian_value": 0
+          }
+        ]
+      },
+      {
+        "name": ".ubuf.e8_fused_decode_fp32_0_mix_aiv",
+        "address": 0,
+        "bytes": 156416,
+        "alignment": 32
+      }
+    ]
+  },
+  "reader_aic": {
+    "object_sha256": "af02a031e8b0455961e5b0c21d02d6a6ca40f0bae2e9de453789b0a8bce6926b",
+    "sections": [
+      {
+        "name": ".ascend.meta.e8_fused_decode_fp32_0_mix_aic",
+        "address": 0,
+        "bytes": 24,
+        "alignment": 4,
+        "tlv": [
+          {
+            "tag": 1,
+            "length": 4,
+            "little_endian_value": 4
+          },
+          {
+            "tag": 3,
+            "length": 4,
+            "little_endian_value": 131073
+          },
+          {
+            "tag": 8,
+            "length": 4,
+            "little_endian_value": 424
+          }
+        ]
+      },
+      {
+        "name": ".ubuf.e8_fused_decode_fp32_0_mix_aic",
+        "address": 0,
+        "bytes": 156416,
+        "alignment": 32
+      },
+      {
+        "name": ".ca.e8_fused_decode_fp32_0_mix_aic",
+        "address": 0,
+        "bytes": 16384,
+        "alignment": 512
+      },
+      {
+        "name": ".cb.e8_fused_decode_fp32_0_mix_aic",
+        "address": 0,
+        "bytes": 65536,
+        "alignment": 512
+      },
+      {
+        "name": ".cc.e8_fused_decode_fp32_0_mix_aic",
+        "address": 0,
+        "bytes": 16384,
+        "alignment": 1024
+      }
+    ]
+  }
+}

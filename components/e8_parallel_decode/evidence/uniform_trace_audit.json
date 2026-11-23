@@ -1,0 +1,1018 @@
+{
+  "scope": "six-tile fused-reader exact mode2 census; source-contract and following-pipe-marker observations",
+  "frames": {
+    "cubecore0": {
+      "core": 0,
+      "subcore": 0,
+      "start": 5403,
+      "end": 335991
+    },
+    "veccore0": {
+      "core": 0,
+      "subcore": 1,
+      "start": 5404,
+      "end": 336195
+    },
+    "veccore1": {
+      "core": 0,
+      "subcore": 2,
+      "start": 5405,
+      "end": 336282
+    }
+  },
+  "census": {
+    "cubecore0": {
+      "sets": {
+        "4": 6,
+        "6": 6,
+        "2": 2,
+        "3": 2,
+        "7": 1
+      },
+      "waits": {
+        "0": 3,
+        "5": 6,
+        "1": 3,
+        "8": 1
+      },
+      "hard_events": [
+        {
+          "route": [
+            "CUBE",
+            "FIXP",
+            0
+          ],
+          "sets": 12,
+          "waits": 12
+        },
+        {
+          "route": [
+            "FIXP",
+            "SCALAR",
+            0
+          ],
+          "sets": 13,
+          "waits": 13
+        },
+        {
+          "route": [
+            "MTE1",
+            "CUBE",
+            0
+          ],
+          "sets": 12,
+          "waits": 12
+        },
+        {
+          "route": [
+            "MTE2",
+            "MTE1",
+            0
+          ],
+          "sets": 1,
+          "waits": 1
+        }
+      ]
+    },
+    "veccore0": {
+      "sets": {
+        "0": 3,
+        "1": 3,
+        "5": 6,
+        "8": 1
+      },
+      "waits": {
+        "4": 6,
+        "6": 6,
+        "2": 2,
+        "3": 2,
+        "7": 1
+      },
+      "hard_events": [
+        {
+          "route": [
+            "MTE2",
+            "SCALAR",
+            0
+          ],
+          "sets": 1,
+          "waits": 1
+        },
+        {
+          "route": [
+            "MTE2",
+            "VEC",
+            0
+          ],
+          "sets": 13,
+          "waits": 13
+        },
+        {
+          "route": [
+            "MTE3",
+            "SCALAR",
+            0
+          ],
+          "sets": 24,
+          "waits": 24
+        },
+        {
+          "route": [
+            "MTE3",
+            "VEC",
+            0
+          ],
+          "sets": 6,
+          "waits": 6
+        },
+        {
+          "route": [
+            "VEC",
+            "MTE3",
+            0
+          ],
+          "sets": 26,
+          "waits": 26
+        },
+        {
+          "route": [
+            "VEC",
+            "SCALAR",
+            7
+          ],
+          "sets": 7,
+          "waits": 7
+        }
+      ]
+    },
+    "veccore1": {
+      "sets": {
+        "0": 3,
+        "1": 3,
+        "5": 6,
+        "8": 1
+      },
+      "waits": {
+        "4": 6,
+        "6": 6,
+        "2": 2,
+        "3": 2,
+        "7": 1
+      },
+      "hard_events": [
+        {
+          "route": [
+            "MTE2",
+            "SCALAR",
+            0
+          ],
+          "sets": 1,
+          "waits": 1
+        },
+        {
+          "route": [
+            "MTE2",
+            "VEC",
+            0
+          ],
+          "sets": 13,
+          "waits": 13
+        },
+        {
+          "route": [
+            "MTE3",
+            "SCALAR",
+            0
+          ],
+          "sets": 24,
+          "waits": 24
+        },
+        {
+          "route": [
+            "MTE3",
+            "VEC",
+            0
+          ],
+          "sets": 6,
+          "waits": 6
+        },
+        {
+          "route": [
+            "VEC",
+            "MTE3",
+            0
+          ],
+          "sets": 26,
+          "waits": 26
+        },
+        {
+          "route": [
+            "VEC",
+            "SCALAR",
+            7
+          ],
+          "sets": 7,
+          "waits": 7
+        }
+      ]
+    }
+  },
+  "inherited_sdk_event7": {
+    "scope": "inherited SDK-reserved VEC/SCALAR event7; exact static words/offsets unchanged",
+    "baseline_sha256": "232dc09b667bd030101f3a813800358326b1de33fdd3046b29f76b9972b31546",
+    "candidate_sha256": "5db2a80e8e0f699592b6b614bad063d1dbfa1b82e555f26829929d5f0875d9b9",
+    "static_entries": [
+      [
+        "fb0",
+        "15e78000",
+        "SET_FLAGI_V.S"
+      ],
+      [
+        "fb4",
+        "40c40403",
+        "WAIT_FLAGI.V.S"
+      ],
+      [
+        "16d0",
+        "15e78000",
+        "SET_FLAGI_V.S"
+      ],
+      [
+        "16d4",
+        "40c40403",
+        "WAIT_FLAGI.V.S"
+      ],
+      [
+        "1a94",
+        "15e78000",
+        "SET_FLAGI_V.S"
+      ],
+      [
+        "1a98",
+        "40c40403",
+        "WAIT_FLAGI.V.S"
+      ],
+      [
+        "2078",
+        "15e78000",
+        "SET_FLAGI_V.S"
+      ],
+      [
+        "207c",
+        "40c40403",
+        "WAIT_FLAGI.V.S"
+      ],
+      [
+        "25e0",
+        "15e78000",
+        "SET_FLAGI_V.S"
+      ],
+      [
+        "25e4",
+        "40c40403",
+        "WAIT_FLAGI.V.S"
+      ]
+    ]
+  },
+  "observations": [
+    {
+      "role": "cubecore0",
+      "channel": 0,
+      "ordinal": 0,
+      "producer": "dual-AIV quorum",
+      "wait_issue": 6998,
+      "required_publication": 59526,
+      "following_pipe_marker_completion": 59885,
+      "marker_route": [
+        "MTE1",
+        "CUBE",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "cubecore0",
+      "channel": 0,
+      "ordinal": 1,
+      "producer": "dual-AIV quorum",
+      "wait_issue": 166323,
+      "required_publication": 162923,
+      "following_pipe_marker_completion": 166674,
+      "marker_route": [
+        "MTE1",
+        "CUBE",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "cubecore0",
+      "channel": 0,
+      "ordinal": 2,
+      "producer": "dual-AIV quorum",
+      "wait_issue": 275175,
+      "required_publication": 271817,
+      "following_pipe_marker_completion": 275526,
+      "marker_route": [
+        "MTE1",
+        "CUBE",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "cubecore0",
+      "channel": 5,
+      "ordinal": 0,
+      "producer": "dual-AIV quorum",
+      "wait_issue": 61003,
+      "required_publication": 111001,
+      "following_pipe_marker_completion": 111312,
+      "marker_route": [
+        "MTE1",
+        "CUBE",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "cubecore0",
+      "channel": 5,
+      "ordinal": 1,
+      "producer": "dual-AIV quorum",
+      "wait_issue": 113932,
+      "required_publication": 164869,
+      "following_pipe_marker_completion": 165180,
+      "marker_route": [
+        "MTE1",
+        "CUBE",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "cubecore0",
+      "channel": 5,
+      "ordinal": 2,
+      "producer": "dual-AIV quorum",
+      "wait_issue": 167792,
+      "required_publication": 219187,
+      "following_pipe_marker_completion": 219498,
+      "marker_route": [
+        "MTE1",
+        "CUBE",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "cubecore0",
+      "channel": 5,
+      "ordinal": 3,
+      "producer": "dual-AIV quorum",
+      "wait_issue": 222118,
+      "required_publication": 273721,
+      "following_pipe_marker_completion": 274032,
+      "marker_route": [
+        "MTE1",
+        "CUBE",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "cubecore0",
+      "channel": 5,
+      "ordinal": 4,
+      "producer": "dual-AIV quorum",
+      "wait_issue": 276644,
+      "required_publication": 328308,
+      "following_pipe_marker_completion": 328619,
+      "marker_route": [
+        "MTE1",
+        "CUBE",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "cubecore0",
+      "channel": 5,
+      "ordinal": 5,
+      "producer": "dual-AIV quorum",
+      "wait_issue": 331236,
+      "required_publication": 332984,
+      "following_pipe_marker_completion": 333295,
+      "marker_route": [
+        "MTE1",
+        "CUBE",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "cubecore0",
+      "channel": 1,
+      "ordinal": 0,
+      "producer": "dual-AIV quorum",
+      "wait_issue": 112463,
+      "required_publication": 109492,
+      "following_pipe_marker_completion": 112814,
+      "marker_route": [
+        "MTE1",
+        "CUBE",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "cubecore0",
+      "channel": 1,
+      "ordinal": 1,
+      "producer": "dual-AIV quorum",
+      "wait_issue": 220649,
+      "required_publication": 217721,
+      "following_pipe_marker_completion": 221000,
+      "marker_route": [
+        "MTE1",
+        "CUBE",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "cubecore0",
+      "channel": 1,
+      "ordinal": 2,
+      "producer": "dual-AIV quorum",
+      "wait_issue": 329767,
+      "required_publication": 326370,
+      "following_pipe_marker_completion": 330118,
+      "marker_route": [
+        "MTE1",
+        "CUBE",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "cubecore0",
+      "channel": 8,
+      "ordinal": 0,
+      "producer": "dual-AIV quorum",
+      "wait_issue": 334438,
+      "required_publication": 335690,
+      "following_pipe_marker_completion": 335699,
+      "marker_route": [
+        "FIXP",
+        "SCALAR",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 4,
+      "ordinal": 0,
+      "producer": "AIC broadcast",
+      "wait_issue": 109493,
+      "required_publication": 61002,
+      "following_pipe_marker_completion": 109494,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 4,
+      "ordinal": 1,
+      "producer": "AIC broadcast",
+      "wait_issue": 161809,
+      "required_publication": 113931,
+      "following_pipe_marker_completion": 161810,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 4,
+      "ordinal": 2,
+      "producer": "AIC broadcast",
+      "wait_issue": 217360,
+      "required_publication": 167791,
+      "following_pipe_marker_completion": 217361,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 4,
+      "ordinal": 3,
+      "producer": "AIC broadcast",
+      "wait_issue": 271818,
+      "required_publication": 222117,
+      "following_pipe_marker_completion": 271819,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 4,
+      "ordinal": 4,
+      "producer": "AIC broadcast",
+      "wait_issue": 326371,
+      "required_publication": 276643,
+      "following_pipe_marker_completion": 326372,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 4,
+      "ordinal": 5,
+      "producer": "AIC broadcast",
+      "wait_issue": 328316,
+      "required_publication": 331235,
+      "following_pipe_marker_completion": 331244,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 6,
+      "ordinal": 0,
+      "producer": "AIC broadcast",
+      "wait_issue": 111002,
+      "required_publication": 112453,
+      "following_pipe_marker_completion": 137322,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 6,
+      "ordinal": 1,
+      "producer": "AIC broadcast",
+      "wait_issue": 163771,
+      "required_publication": 166321,
+      "following_pipe_marker_completion": 191341,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 6,
+      "ordinal": 2,
+      "producer": "AIC broadcast",
+      "wait_issue": 218826,
+      "required_publication": 220639,
+      "following_pipe_marker_completion": 246104,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 6,
+      "ordinal": 3,
+      "producer": "AIC broadcast",
+      "wait_issue": 273722,
+      "required_publication": 275173,
+      "following_pipe_marker_completion": 300523,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 6,
+      "ordinal": 4,
+      "producer": "AIC broadcast",
+      "wait_issue": 328309,
+      "required_publication": 329760,
+      "following_pipe_marker_completion": 331244,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 6,
+      "ordinal": 5,
+      "producer": "AIC broadcast",
+      "wait_issue": 332985,
+      "required_publication": 334436,
+      "following_pipe_marker_completion": 335082,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 2,
+      "ordinal": 0,
+      "producer": "AIC broadcast",
+      "wait_issue": 111013,
+      "required_publication": 112462,
+      "following_pipe_marker_completion": 112471,
+      "marker_route": [
+        "MTE3",
+        "SCALAR",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 2,
+      "ordinal": 1,
+      "producer": "AIC broadcast",
+      "wait_issue": 218837,
+      "required_publication": 220648,
+      "following_pipe_marker_completion": 220657,
+      "marker_route": [
+        "MTE3",
+        "SCALAR",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 3,
+      "ordinal": 0,
+      "producer": "AIC broadcast",
+      "wait_issue": 163782,
+      "required_publication": 166322,
+      "following_pipe_marker_completion": 166331,
+      "marker_route": [
+        "MTE3",
+        "SCALAR",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 3,
+      "ordinal": 1,
+      "producer": "AIC broadcast",
+      "wait_issue": 273733,
+      "required_publication": 275174,
+      "following_pipe_marker_completion": 275183,
+      "marker_route": [
+        "MTE3",
+        "SCALAR",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore0",
+      "channel": 7,
+      "ordinal": 0,
+      "producer": "AIC broadcast",
+      "wait_issue": 332996,
+      "required_publication": 334437,
+      "following_pipe_marker_completion": 335082,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 4,
+      "ordinal": 0,
+      "producer": "AIC broadcast",
+      "wait_issue": 109195,
+      "required_publication": 61002,
+      "following_pipe_marker_completion": 109196,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 4,
+      "ordinal": 1,
+      "producer": "AIC broadcast",
+      "wait_issue": 162924,
+      "required_publication": 113931,
+      "following_pipe_marker_completion": 162925,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 4,
+      "ordinal": 2,
+      "producer": "AIC broadcast",
+      "wait_issue": 217722,
+      "required_publication": 167791,
+      "following_pipe_marker_completion": 217723,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 4,
+      "ordinal": 3,
+      "producer": "AIC broadcast",
+      "wait_issue": 270870,
+      "required_publication": 222117,
+      "following_pipe_marker_completion": 270871,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 4,
+      "ordinal": 4,
+      "producer": "AIC broadcast",
+      "wait_issue": 323971,
+      "required_publication": 276643,
+      "following_pipe_marker_completion": 323972,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 4,
+      "ordinal": 5,
+      "producer": "AIC broadcast",
+      "wait_issue": 325875,
+      "required_publication": 331235,
+      "following_pipe_marker_completion": 331244,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 6,
+      "ordinal": 0,
+      "producer": "AIC broadcast",
+      "wait_issue": 110684,
+      "required_publication": 112453,
+      "following_pipe_marker_completion": 137372,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 6,
+      "ordinal": 1,
+      "producer": "AIC broadcast",
+      "wait_issue": 164870,
+      "required_publication": 166321,
+      "following_pipe_marker_completion": 191597,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 6,
+      "ordinal": 2,
+      "producer": "AIC broadcast",
+      "wait_issue": 219188,
+      "required_publication": 220639,
+      "following_pipe_marker_completion": 245840,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 6,
+      "ordinal": 3,
+      "producer": "AIC broadcast",
+      "wait_issue": 272740,
+      "required_publication": 275173,
+      "following_pipe_marker_completion": 299287,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 6,
+      "ordinal": 4,
+      "producer": "AIC broadcast",
+      "wait_issue": 325868,
+      "required_publication": 329760,
+      "following_pipe_marker_completion": 331244,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 6,
+      "ordinal": 5,
+      "producer": "AIC broadcast",
+      "wait_issue": 332928,
+      "required_publication": 334436,
+      "following_pipe_marker_completion": 335118,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 2,
+      "ordinal": 0,
+      "producer": "AIC broadcast",
+      "wait_issue": 110695,
+      "required_publication": 112462,
+      "following_pipe_marker_completion": 112471,
+      "marker_route": [
+        "MTE3",
+        "SCALAR",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 2,
+      "ordinal": 1,
+      "producer": "AIC broadcast",
+      "wait_issue": 219199,
+      "required_publication": 220648,
+      "following_pipe_marker_completion": 220657,
+      "marker_route": [
+        "MTE3",
+        "SCALAR",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 3,
+      "ordinal": 0,
+      "producer": "AIC broadcast",
+      "wait_issue": 164881,
+      "required_publication": 166322,
+      "following_pipe_marker_completion": 166331,
+      "marker_route": [
+        "MTE3",
+        "SCALAR",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 3,
+      "ordinal": 1,
+      "producer": "AIC broadcast",
+      "wait_issue": 272751,
+      "required_publication": 275174,
+      "following_pipe_marker_completion": 275183,
+      "marker_route": [
+        "MTE3",
+        "SCALAR",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    },
+    {
+      "role": "veccore1",
+      "channel": 7,
+      "ordinal": 0,
+      "producer": "AIC broadcast",
+      "wait_issue": 332939,
+      "required_publication": 334437,
+      "following_pipe_marker_completion": 335118,
+      "marker_route": [
+        "VEC",
+        "MTE3",
+        0
+      ],
+      "scope": "completion lower bound, not an exact transport latency"
+    }
+  ],
+  "violations": [],
+  "cross_waits": 47,
+  "runtime_FP32_MMAD": 12,
+  "static_alias_word_actual_MMAD": [
+    {
+      "tick": 330120,
+      "pc": "0x10d0e3e8",
+      "engine": "CUBE",
+      "word": 4035647517,
+      "id": 303370,
+      "op": "MMAD",
+      "tail": "  dtype:F32F32 XD:0x0 XN:0x0 XM:0x0 XT:0x8000000040100006 id: 303370"
+    }
+  ],
+  "context_publication_ticks": [
+    112453,
+    166321,
+    220639,
+    275173,
+    329760,
+    334436
+  ],
+  "context_intervals": [
+    53868,
+    54318,
+    54534,
+    54587,
+    4676
+  ],
+  "limitations": [
+    "Following marker completions bound release; they are not physical transport service latencies.",
+    "Source/compiled per-pipe contracts and exact data witnesses remain separate mandatory gates.",
+    "One six-tile run is not an exhaustive hardware interleaving proof."
+  ]
+}

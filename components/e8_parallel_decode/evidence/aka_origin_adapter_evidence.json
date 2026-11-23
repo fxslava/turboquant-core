@@ -1,0 +1,232 @@
+{
+  "source_sha256": "b7adae388ca25e7c2c5b8988a925cf991ff53de718e6fe9afd2a637bb673c19f",
+  "adapter_sha256": "fe946eeb22b65e72d3f3cbe717b1420c00249c108f7273d97e446c428ca08290",
+  "analyzer_ast_sha256": "b3531742aeab6b08ff8d17c6578a8c54016b69679709f7954d7316654dcad32a",
+  "scope": "Only8 SHA-bound existing raw Cube objects/views. No diagnostic or checker filtering; no new fatal exception.",
+  "origin_actions": [
+    {
+      "kernel": "e8_fused_decode_fp32",
+      "name": "sa",
+      "original_origin": "address-space pointer",
+      "corrected_origin": "address-space pointer + annotation",
+      "position": "A1",
+      "byte_offset": 262272,
+      "byte_size": null,
+      "action": "concrete layout consumed; original raw-pointer provenance retained"
+    },
+    {
+      "kernel": "e8_fused_decode_fp32",
+      "name": "sb",
+      "original_origin": "address-space pointer",
+      "corrected_origin": "address-space pointer + annotation",
+      "position": "A1",
+      "byte_offset": 0,
+      "byte_size": null,
+      "action": "concrete layout consumed; original raw-pointer provenance retained"
+    },
+    {
+      "kernel": "e8_fused_decode_fp32",
+      "name": "l0a",
+      "original_origin": "address-space pointer",
+      "corrected_origin": "address-space pointer + annotation",
+      "position": "A2",
+      "byte_offset": 0,
+      "byte_size": null,
+      "action": "concrete layout consumed; original raw-pointer provenance retained"
+    },
+    {
+      "kernel": "e8_fused_decode_fp32",
+      "name": "at",
+      "original_origin": "LocalTensor declaration",
+      "corrected_origin": "LocalTensor declaration + concrete annotation + proven raw pointer view",
+      "position": "A2",
+      "byte_offset": 0,
+      "byte_size": null,
+      "action": "concrete layout consumed; original raw-pointer provenance retained"
+    },
+    {
+      "kernel": "e8_fused_decode_fp32",
+      "name": "l0b",
+      "original_origin": "address-space pointer",
+      "corrected_origin": "address-space pointer + annotation",
+      "position": "B2",
+      "byte_offset": 0,
+      "byte_size": null,
+      "action": "concrete layout consumed; original raw-pointer provenance retained"
+    },
+    {
+      "kernel": "e8_fused_decode_fp32",
+      "name": "bt",
+      "original_origin": "LocalTensor declaration",
+      "corrected_origin": "LocalTensor declaration + concrete annotation + proven raw pointer view",
+      "position": "B2",
+      "byte_offset": 0,
+      "byte_size": null,
+      "action": "concrete layout consumed; original raw-pointer provenance retained"
+    },
+    {
+      "kernel": "e8_fused_decode_fp32",
+      "name": "l0c",
+      "original_origin": "address-space pointer",
+      "corrected_origin": "address-space pointer + annotation",
+      "position": "CO1",
+      "byte_offset": 0,
+      "byte_size": null,
+      "action": "concrete layout consumed; original raw-pointer provenance retained"
+    },
+    {
+      "kernel": "e8_fused_decode_fp32",
+      "name": "ct",
+      "original_origin": "LocalTensor declaration",
+      "corrected_origin": "LocalTensor declaration + concrete annotation + proven raw pointer view",
+      "position": "CO1",
+      "byte_offset": 0,
+      "byte_size": null,
+      "action": "concrete layout consumed; original raw-pointer provenance retained"
+    },
+    {
+      "kernel": "launch_e8_fused_decode_fp32",
+      "name": "sa",
+      "original_origin": "address-space pointer",
+      "corrected_origin": "address-space pointer + annotation",
+      "position": "A1",
+      "byte_offset": 262272,
+      "byte_size": null,
+      "action": "concrete layout consumed; original raw-pointer provenance retained"
+    },
+    {
+      "kernel": "launch_e8_fused_decode_fp32",
+      "name": "sb",
+      "original_origin": "address-space pointer",
+      "corrected_origin": "address-space pointer + annotation",
+      "position": "A1",
+      "byte_offset": 0,
+      "byte_size": null,
+      "action": "concrete layout consumed; original raw-pointer provenance retained"
+    },
+    {
+      "kernel": "launch_e8_fused_decode_fp32",
+      "name": "l0a",
+      "original_origin": "address-space pointer",
+      "corrected_origin": "address-space pointer + annotation",
+      "position": "A2",
+      "byte_offset": 0,
+      "byte_size": null,
+      "action": "concrete layout consumed; original raw-pointer provenance retained"
+    },
+    {
+      "kernel": "launch_e8_fused_decode_fp32",
+      "name": "at",
+      "original_origin": "LocalTensor declaration",
+      "corrected_origin": "LocalTensor declaration + concrete annotation + proven raw pointer view",
+      "position": "A2",
+      "byte_offset": 0,
+      "byte_size": null,
+      "action": "concrete layout consumed; original raw-pointer provenance retained"
+    },
+    {
+      "kernel": "launch_e8_fused_decode_fp32",
+      "name": "l0b",
+      "original_origin": "address-space pointer",
+      "corrected_origin": "address-space pointer + annotation",
+      "position": "B2",
+      "byte_offset": 0,
+      "byte_size": null,
+      "action": "concrete layout consumed; original raw-pointer provenance retained"
+    },
+    {
+      "kernel": "launch_e8_fused_decode_fp32",
+      "name": "bt",
+      "original_origin": "LocalTensor declaration",
+      "corrected_origin": "LocalTensor declaration + concrete annotation + proven raw pointer view",
+      "position": "B2",
+      "byte_offset": 0,
+      "byte_size": null,
+      "action": "concrete layout consumed; original raw-pointer provenance retained"
+    },
+    {
+      "kernel": "launch_e8_fused_decode_fp32",
+      "name": "l0c",
+      "original_origin": "address-space pointer",
+      "corrected_origin": "address-space pointer + annotation",
+      "position": "CO1",
+      "byte_offset": 0,
+      "byte_size": null,
+      "action": "concrete layout consumed; original raw-pointer provenance retained"
+    },
+    {
+      "kernel": "launch_e8_fused_decode_fp32",
+      "name": "ct",
+      "original_origin": "LocalTensor declaration",
+      "corrected_origin": "LocalTensor declaration + concrete annotation + proven raw pointer view",
+      "position": "CO1",
+      "byte_offset": 0,
+      "byte_size": null,
+      "action": "concrete layout consumed; original raw-pointer provenance retained"
+    }
+  ],
+  "negative_controls": {
+    "illegal_tpipe": {
+      "required_failure": "AKA1004",
+      "actual_codes": [
+        "AKA1004"
+      ],
+      "source": "#include \"kernel_operator.h\"\n__global__ __aicore__ void bad_tpipe() {\n AscendC::TPipe pipe; AscendC::TBuf<AscendC::TPosition::A1> buf;\n pipe.InitBuffer(buf,1024); auto wrong=buf.Get<float>();\n}"
+    },
+    "overlapping_raw_cube": {
+      "required_failure": "AKA1003",
+      "actual_codes": [
+        "AKA1003",
+        "AKA1004",
+        "AKA1004"
+      ],
+      "source": "// @ascend-layout: name=x pos=A2 offset=0 count=256 dtype=float\n// @ascend-layout: name=y pos=A2 offset=0 count=256 dtype=float\n__global__ __aicore__ void bad_overlap() {\n __ca__ float x[256]; __ca__ float y[256]; x[0]=1; y[0]=2;\n}"
+    }
+  },
+  "independent_i1_source_sha256": "46a433c45f4068ee49abe14620b5c601f3fd3c1bf45e1fc04ee9d999815a044e",
+  "independent_i1_baseline_sha256": "b465639bd93b62eb0b538bad2d5a9d4ea2695a6ae96330802c69ca0656221127",
+  "inherited_sync_normalization": [
+    {
+      "candidate_message": "could not determine the HardEvent route of 'AscendC::SetFlag<Event>(0)'",
+      "independent_baseline": {
+        "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA9001|could not determine the HardEvent route of 'AscendC::SetFlag<EVENT>(eventId)'",
+        "count": 1,
+        "code": "AKA9001",
+        "severity": "WARNING",
+        "file": "src/decode/turboquant_fused_decode.cpp",
+        "line": 7,
+        "message": "could not determine the HardEvent route of 'AscendC::SetFlag<EVENT>(eventId)'"
+      },
+      "normalization": "AKA9001|SetFlag|generic HardEvent template parameter|paired valid event token",
+      "route_alpha_renaming": "EVENT -> Event",
+      "event_binding_proof": "eventId is the same fetched token in both I1 calls;0 is the same in-range token in both candidate calls. Warning concerns unresolved template route, not event-token value.",
+      "note": "Event-token abstraction is explicit semantic normalization, not a claim that literal0 is an alpha-renamed variable."
+    },
+    {
+      "candidate_message": "could not determine the HardEvent route of 'AscendC::WaitFlag<Event>(0)'",
+      "independent_baseline": {
+        "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA9001|could not determine the HardEvent route of 'AscendC::WaitFlag<EVENT>(eventId)'",
+        "count": 1,
+        "code": "AKA9001",
+        "severity": "WARNING",
+        "file": "src/decode/turboquant_fused_decode.cpp",
+        "line": 7,
+        "message": "could not determine the HardEvent route of 'AscendC::WaitFlag<EVENT>(eventId)'"
+      },
+      "normalization": "AKA9001|WaitFlag|generic HardEvent template parameter|paired valid event token",
+      "route_alpha_renaming": "EVENT -> Event",
+      "event_binding_proof": "eventId is the same fetched token in both I1 calls;0 is the same in-range token in both candidate calls. Warning concerns unresolved template route, not event-token value.",
+      "note": "Event-token abstraction is explicit semantic normalization, not a claim that literal0 is an alpha-renamed variable."
+    }
+  ],
+  "gate_summary": {
+    "fatal": 0,
+    "warning": 0,
+    "info": 3,
+    "total": 3,
+    "by_code": {
+      "AKA3002": 2,
+      "AKA3009": 1
+    }
+  }
+}

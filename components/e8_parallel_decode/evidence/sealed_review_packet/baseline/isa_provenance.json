@@ -1,0 +1,12 @@
+{
+  "old_source": "/home/dmin/work/checkpoint2_20261123/slot09/src/e8_fused_decode.cpp",
+  "old_source_sha256": "c1e35172fc244e71dd75b28c20aa04f19c279ec332761880c278ee130cb0e3c4",
+  "aiv_disassembly_original": "/home/dmin/work/checkpoint2_20261123/slot09/aiv.disasm.txt",
+  "aiv_full_sha256": "232dc09b667bd030101f3a813800358326b1de33fdd3046b29f76b9972b31546",
+  "aiv_prefix_characters": 111680,
+  "aiv_prefix_sha256": "26a2a538f28fd5afc8fae3090809b92a6979dabcef58b326cc6d50e140682e98",
+  "baseline_objects": {
+    "/home/dmin/work/checkpoint2_20261123/slot09/build/e8_fused_decode_aic_device_dir/device.o": "af02a031e8b0455961e5b0c21d02d6a6ca40f0bae2e9de453789b0a8bce6926b",
+    "/home/dmin/work/checkpoint2_20261123/slot09/build/e8_fused_decode_aiv_device_dir/device.o": "b7aa2f171a6b82753fe55b45b12f4f8a99c809176b49883aa3852c92a63ae7e0"
+  }
+}

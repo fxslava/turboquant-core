@@ -1,0 +1,354 @@
+
+/home/dmin/work/checkpoint2_20261123/parallel_decode/build-r3/e8_fused_decode_aic_device_dir/device.o:	file format elf64-hiipu
+
+Disassembly of section .text:
+
+0000000000000000 <e8_fused_decode_fp32_0_mix_aic$local>:
+       0:				02004880	MOV		X0, PARA_BASE
+       4:				07c10000	MOVK 		X0, #0, #3
+       8:				08c00000	DC_PRELOADI	[X0], #0
+       c:				08c00040	DC_PRELOADI	[X0], #64
+      10:				073afe60	MOVI 		X29, #65120
+      14:				077b000f	MOVK 		X29, #15, #1
+      18:				029e3880	MOV		X15, SYS_VA_BASE
+      1c:				02224880	MOV		X17, PARA_BASE
+      20:				003bd781	ADD.s64 	X29, X29, X15
+      24:				021f0880	MOV		X15, COREID
+      28:				07207fff	MOVI 		X16, #32767
+      2c:				026202b4	SHRI.u64 	X17, #52
+      30:				00def80a	AND.b64  	X15, X15, X16
+      34:				08231002	ADDI 	X17, X17, #2
+      38:				02e2020e	SHLI.b64 	X17, #14
+      3c:				081ef001	ADDI 	X15, X15, #1
+      40:				003af884	MADD.s64 	X29, X15, X17
+      44:				083dd780	ADDI 	X30, X29, #1920
+      48:				02004880	MOV		X0, PARA_BASE
+      4c:				07c10000	MOVK 		X0, #0, #3
+      50:				1cc20018	LD_IO.b64 		X1, [X0], #24, #0
+      54:				1c800040	LD_IO.b32 		X0, [X0], #64, #0
+      58:				07060006	MOVI 		X3, #6
+      5c:				02090880	MOV		X4, COREID
+      60:				070a7fff	MOVI 		X5, #32767
+      64:				00c8428a	AND.b64  	X4, X4, X5
+      68:				020a4880	MOV		X5, PARA_BASE
+      6c:				024a02b4	SHRI.u64 	X5, #52
+      70:				080a5002	ADDI 	X5, X5, #2
+      74:				02ca020e	SHLI.b64 	X5, #14
+      78:				070c40a0	MOVI 		X6, #16544
+      7c:				074d0004	MOVK 		X6, #4, #1
+      80:				07380006	MOVI 		X28, #6
+      84:				071c0006	MOVI 		X14, #6
+      88:				07280010	MOVI 		X20, #16
+      8c:				072a0400	MOVI 		X21, #1024
+      90:				07790004	MOVK 		X28, #4, #1
+      94:				07241000	MOVI 		X18, #4096
+      98:				07100001	MOVI 		X8, #1
+      9c:				07120000	MOVI 		X9, #0
+      a0:				07140080	MOVI 		X10, #128
+      a4:				07160004	MOVI 		X11, #4
+      a8:				07180000	MOVI 		X12, #0
+      ac:				075d4010	MOVK 		X14, #16400, #1
+      b0:				07690001	MOVK 		X20, #1, #1
+      b4:				076b0006	MOVK 		X21, #6, #1
+      b8:				07300000	MOVI 		X24, #0
+      bc:				07320010	MOVI 		X25, #16
+      c0:				07340000	MOVI 		X26, #0
+      c4:				07b90001	MOVK 		X28, #1, #2
+      c8:				07650006	MOVK 		X18, #6, #1
+      cc:				070e0002	MOVI 		X7, #2
+      d0:				07510001	MOVK 		X8, #1, #1
+      d4:				07932001	MOVK 		X9, #8193, #2
+      d8:				07550004	MOVK 		X10, #4, #1
+      dc:				07570004	MOVK 		X11, #4, #1
+      e0:				07992004	MOVK 		X12, #8196, #2
+      e4:				07dd8000	MOVK 		X14, #32768, #3
+      e8:				071e0001	MOVI 		X15, #1
+      ec:				07a90800	MOVK 		X20, #2048, #2
+      f0:				07ab0040	MOVK 		X21, #64, #2
+      f4:				072c0421	MOVI 		X22, #1057
+      f8:				072e0005	MOVI 		X23, #5
+      fc:				07b10801	MOVK 		X24, #2049, #2
+     100:				07730010	MOVK 		X25, #16, #1
+     104:				07b50810	MOVK 		X26, #2064, #2
+     108:				07f98000	MOVK 		X28, #32768, #3
+     10c:				07a50100	MOVK 		X18, #256, #2
+     110:				07360621	MOVI 		X27, #1569
+     114:				03c1e878	ST_IO.b64 		X0, [X30], #-1928, #0
+     118:				02043880	MOV		X2, CTRL
+     11c:				02c43400	SBITSET0.b64  	X2, X3
+     120:				07060007	MOVI 		X3, #7
+     124:				02c43400	SBITSET0.b64  	X2, X3
+     128:				07060008	MOVI 		X3, #8
+     12c:				02c43400	SBITSET0.b64  	X2, X3
+     130:				02062900	MOV		CTRL, X2
+     134:				02043880	MOV		X2, CTRL
+     138:				07060038	MOVI 		X3, #56
+     13c:				02c43400	SBITSET0.b64  	X2, X3
+     140:				07060000	MOVI 		X3, #0
+     144:				02062900	MOV		CTRL, X2
+     148:				02843880	MOV		X2, SYS_VA_BASE
+     14c:				07470010	MOVK 		X3, #16, #1
+     150:				00062181	ADD.s64 	X3, X2, X3
+     154:				00064284	MADD.s64 	X3, X4, X5
+     158:				07083c00	MOVI 		X4, #15360
+     15c:				00063281	ADD.s64 	X3, X3, X5
+     160:				08863140	SUBI 	X3, X3, #320
+     164:				08063000	ADDI 	X3, X3, #0
+     168:				03483000	ST_IO.b16 		X4, [X3], #0, #0
+     16c:				07080000	MOVI 		X4, #0
+     170:				02063880	MOV		X3, CTRL
+     174:				07c90001	MOVK 		X4, #1, #3
+     178:				00c6320a	AND.b64  	X3, X3, X4
+     17c:				07080008	MOVI 		X4, #8
+     180:				07c91000	MOVK 		X4, #4096, #3
+     184:				00c6320b	OR.b64  	X3, X3, X4
+     188:				07040000	MOVI 		X2, #0
+     18c:				02063900	MOV		CTRL, X3
+     190:				021a2900	MOV		PADDING, X2
+     194:				07060024	MOVI 		X3, #36
+     198:				02b43900	MOV		ST_ATOMIC_CFG, X3
+     19c:				02063880	MOV		X3, CTRL
+     1a0:				07080033	MOVI 		X4, #51
+     1a4:				02c64440	SBITSET1.b64  	X3, X4
+     1a8:				02063900	MOV		CTRL, X3
+     1ac:				02063880	MOV		X3, CTRL
+     1b0:				0708002e	MOVI 		X4, #46
+     1b4:				02c64400	SBITSET0.b64  	X3, X4
+     1b8:				02063900	MOV		CTRL, X3
+     1bc:				07061800	MOVI 		X3, #6144
+     1c0:				07080001	MOVI 		X4, #1
+     1c4:				00021181	ADD.s64 	X1, X1, X3
+     1c8:				07060000	MOVI 		X3, #0
+     1cc:				07c9f000	MOVK 		X4, #61440, #3
+     1d0:				07c7f000	MOVK 		X3, #61440, #3
+     1d4:				02084080	NEG.s64 	X4, X4
+     1d8:				00c6118a	AND.b64  	X3, X1, X3
+     1dc:				00c2120a	AND.b64  	X1, X1, X4
+     1e0:				07080010	MOVI 		X4, #16
+     1e4:				07890020	MOVK 		X4, #32, #2
+     1e8:				07c90400	MOVK 		X4, #1024, #3
+     1ec:				00c6320b	OR.b64  	X3, X3, X4
+     1f0:				07081000	MOVI 		X4, #4096
+     1f4:				07c90010	MOVK 		X4, #16, #3
+     1f8:				07002e40	MOVI 		X0, #11840
+     1fc:				740c1192	MOV_OUT_TO_L1_ALIGN_V2.b32	[X6], [X1], X3, X4
+     200:				07020000	MOVI 		X1, #0
+     204:				07430000	MOVK 		X1, #0, #1
+     208:				07410002	MOVK 		X0, #2, #1
+     20c:				00201001	ADD.s64 	X16, X1, X0
+     210:				07003240	MOVI 		X0, #12864
+     214:				07410002	MOVK 		X0, #2, #1
+     218:				07060000	MOVI 		X3, #0
+     21c:				07080000	MOVI 		X4, #0
+     220:				070a0000	MOVI 		X5, #0
+     224:				074b0000	MOVK 		X5, #0, #1
+     228:				02a70a00	ZEROEXT.u32 	X19, X16
+     22c:				00201001	ADD.s64 	X16, X1, X0
+     230:				029a5a00	ZEROEXT.u32 	X13, X5
+     234:				02bf0a00	ZEROEXT.u32 	X31, X16
+     238:				02a04a00	ZEROEXT.u32 	X16, X4
+     23c:				02a23a00	ZEROEXT.u32 	X17, X3
+     240:				40a21188	SET_FLAG.MTE2.MTE1  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x4>
+     244:				40c21188	WAIT_FLAG.MTE2.MTE1  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x4>
+     248:				41e40c02	WAIT_FLAG_DEV.MTE1 	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     24c:				6cc6a4a0	LOAD_L1_TO_L0A_2DV2.b32 	[X3], [X10], X9, X8, #0
+     250:				6cc8262d	LOAD_L1_TO_L0B_2DV2.b32 	[X4], [X2], X12, X11, #0
+     254:				40a20d08	SET_FLAG.MTE1.M  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     258:				40c20d08	WAIT_FLAG.MTE1.M  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     25c:				f09b1839	MMAD.f322f32	[X13], [X17], [X16], X14
+     260:				40a24908	SET_FLAG.M.F  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x2>
+     264:				40c24908	WAIT_FLAG.M.F  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x2>
+     268:				02c2f900	MOV		LOOP3_PARA, X15
+     26c:				40e02800	BAR.F <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     270:				c126dad0	FIX_L0C_TO_UB.f32 	[X19], [X13], X21, X20
+     274:				40a22808	SET_FLAG.F.S  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     278:				40c22808	WAIT_FLAG.F.S  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     27c:				41f02858	SET_CROSS_CORE.F  	X22 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     280:				07000020	MOVI 		X0, #32
+     284:				41e40c17	WAIT_FLAG_DEV.MTE1 	X23 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     288:				07410001	MOVK 		X0, #1, #1
+     28c:				6cc66c20	LOAD_L1_TO_L0A_2DV2.b32 	[X3], [X6], X24, X8, #0
+     290:				6cc80d65	LOAD_L1_TO_L0B_2DV2.b32 	[X4], [X0], X26, X25, #0
+     294:				40a20d08	SET_FLAG.MTE1.M  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     298:				40c20d08	WAIT_FLAG.MTE1.M  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     29c:				f09b1871	MMAD.f322f32	[X13], [X17], [X16], X28
+     2a0:				40a24908	SET_FLAG.M.F  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x2>
+     2a4:				40c24908	WAIT_FLAG.M.F  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x2>
+     2a8:				02c2f900	MOV		LOOP3_PARA, X15
+     2ac:				40e02800	BAR.F <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     2b0:				c13ed950	FIX_L0C_TO_UB.f32 	[X31], [X13], X18, X20
+     2b4:				40a22808	SET_FLAG.F.S  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     2b8:				40c22808	WAIT_FLAG.F.S  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     2bc:				41f0286c	SET_CROSS_CORE.F  	X27 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     2c0:				1cc1e878	LD_IO.b64 		X0, [X30], #-1928, #0
+     2c4:				02ba7a00	ZEROEXT.u32 	X29, X7
+     2c8:				0041d04e	CMP.GE.u64	X29, X0
+     2cc:				40200030	JUMPCI 		#908 <e8_fused_decode_fp32_0_mix_aic$local+0x38c>
+     2d0:				07000221	MOVI 		X0, #545
+     2d4:				41f02800	SET_CROSS_CORE.F  	X0 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     2d8:				07000040	MOVI 		X0, #64
+     2dc:				41e40c0f	WAIT_FLAG_DEV.MTE1 	X15 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     2e0:				07410002	MOVK 		X0, #2, #1
+     2e4:				6cc6a4a0	LOAD_L1_TO_L0A_2DV2.b32 	[X3], [X10], X9, X8, #0
+     2e8:				6cc8062d	LOAD_L1_TO_L0B_2DV2.b32 	[X4], [X0], X12, X11, #0
+     2ec:				40a20d08	SET_FLAG.MTE1.M  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     2f0:				02ba5a00	ZEROEXT.u32 	X29, X5
+     2f4:				40c20d08	WAIT_FLAG.MTE1.M  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     2f8:				f0bb1839	MMAD.f322f32	[X29], [X17], [X16], X14
+     2fc:				07002e40	MOVI 		X0, #11840
+     300:				40a24908	SET_FLAG.M.F  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x2>
+     304:				07410002	MOVK 		X0, #2, #1
+     308:				40c24908	WAIT_FLAG.M.F  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x2>
+     30c:				00001001	ADD.s64 	X0, X1, X0
+     310:				02c2f900	MOV		LOOP3_PARA, X15
+     314:				02800a00	ZEROEXT.u32 	X0, X0
+     318:				40e02800	BAR.F <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     31c:				c101dad0	FIX_L0C_TO_UB.f32 	[X0], [X29], X21, X20
+     320:				40a22808	SET_FLAG.F.S  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     324:				40c22808	WAIT_FLAG.F.S  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     328:				41f02858	SET_CROSS_CORE.F  	X22 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     32c:				07000060	MOVI 		X0, #96
+     330:				41e40c17	WAIT_FLAG_DEV.MTE1 	X23 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     334:				07410003	MOVK 		X0, #3, #1
+     338:				6cc66c20	LOAD_L1_TO_L0A_2DV2.b32 	[X3], [X6], X24, X8, #0
+     33c:				6cc80d65	LOAD_L1_TO_L0B_2DV2.b32 	[X4], [X0], X26, X25, #0
+     340:				40a20d08	SET_FLAG.MTE1.M  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     344:				40c20d08	WAIT_FLAG.MTE1.M  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     348:				f0bb1871	MMAD.f322f32	[X29], [X17], [X16], X28
+     34c:				07003240	MOVI 		X0, #12864
+     350:				40a24908	SET_FLAG.M.F  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x2>
+     354:				07410002	MOVK 		X0, #2, #1
+     358:				40c24908	WAIT_FLAG.M.F  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0x2>
+     35c:				00001001	ADD.s64 	X0, X1, X0
+     360:				02c2f900	MOV		LOOP3_PARA, X15
+     364:				02800a00	ZEROEXT.u32 	X0, X0
+     368:				40e02800	BAR.F <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     36c:				c101d950	FIX_L0C_TO_UB.f32 	[X0], [X29], X18, X20
+     370:				40a22808	SET_FLAG.F.S  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     374:				40c22808	WAIT_FLAG.F.S  	X2 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     378:				07000321	MOVI 		X0, #801
+     37c:				41f0286c	SET_CROSS_CORE.F  	X27 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     380:				41f02800	SET_CROSS_CORE.F  	X0 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     384:				080e7002	ADDI 	X7, X7, #2
+     388:				4000ffb0	JUMPI 		#584 <e8_fused_decode_fp32_0_mix_aic$local+0x248>
+     38c:				07040001	MOVI 		X2, #1
+     390:				070c0000	MOVI 		X6, #0
+     394:				070e0080	MOVI 		X7, #128
+     398:				07000001	MOVI 		X0, #1
+     39c:				07450001	MOVK 		X2, #1, #1
+     3a0:				078d2001	MOVK 		X6, #8193, #2
+     3a4:				074f0004	MOVK 		X7, #4, #1
+     3a8:				41e40c00	WAIT_FLAG_DEV.MTE1 	X0 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     3ac:				6cc67308	LOAD_L1_TO_L0A_2DV2.b32 	[X3], [X7], X6, X2, #0
+     3b0:				070c0004	MOVI 		X6, #4
+     3b4:				070e0000	MOVI 		X7, #0
+     3b8:				07100040	MOVI 		X8, #64
+     3bc:				074d0004	MOVK 		X6, #4, #1
+     3c0:				078f2004	MOVK 		X7, #8196, #2
+     3c4:				07510002	MOVK 		X8, #2, #1
+     3c8:				6cc88399	LOAD_L1_TO_L0B_2DV2.b32 	[X4], [X8], X7, X6, #0
+     3cc:				070c0000	MOVI 		X6, #0
+     3d0:				070e0006	MOVI 		X7, #6
+     3d4:				074f4010	MOVK 		X7, #16400, #1
+     3d8:				40a20d18	SET_FLAG.MTE1.M  	X6 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     3dc:				028a5a00	ZEROEXT.u32 	X5, X5
+     3e0:				07cf8000	MOVK 		X7, #32768, #3
+     3e4:				40c20d18	WAIT_FLAG.MTE1.M  	X6 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     3e8:				f08b181d	VAG_V310 	A0, S48, S16, S44, S12
+     3ec:				070e2e40	MOVI 		X7, #11840
+     3f0:				40a24918	SET_FLAG.M.F  	X6 <e8_fused_decode_fp32_0_mix_aic$local+0x2>
+     3f4:				074f0002	MOVK 		X7, #2, #1
+     3f8:				07100010	MOVI 		X8, #16
+     3fc:				07120400	MOVI 		X9, #1024
+     400:				40c24918	WAIT_FLAG.M.F  	X6 <e8_fused_decode_fp32_0_mix_aic$local+0x2>
+     404:				000e1381	ADD.s64 	X7, X1, X7
+     408:				07510001	MOVK 		X8, #1, #1
+     40c:				07530006	MOVK 		X9, #6, #1
+     410:				02c20900	MOV		LOOP3_PARA, X0
+     414:				028e7a00	ZEROEXT.u32 	X7, X7
+     418:				07910800	MOVK 		X8, #2048, #2
+     41c:				07930040	MOVK 		X9, #64, #2
+     420:				40e02800	BAR.F <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     424:				c10e54a0	FIX_L0C_TO_UB.f32 	[X7], [X5], X9, X8
+     428:				40a22818	SET_FLAG.F.S  	X6 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     42c:				070e0421	MOVI 		X7, #1057
+     430:				40c22818	WAIT_FLAG.F.S  	X6 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     434:				41f0281c	SET_CROSS_CORE.F  	X7 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     438:				070e0005	MOVI 		X7, #5
+     43c:				41e40c07	WAIT_FLAG_DEV.MTE1 	X7 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     440:				070e0000	MOVI 		X7, #0
+     444:				071240a0	MOVI 		X9, #16544
+     448:				078f0801	MOVK 		X7, #2049, #2
+     44c:				07530004	MOVK 		X9, #4, #1
+     450:				6cc69388	LOAD_L1_TO_L0A_2DV2.b32 	[X3], [X9], X7, X2, #0
+     454:				07040010	MOVI 		X2, #16
+     458:				07060000	MOVI 		X3, #0
+     45c:				070e0060	MOVI 		X7, #96
+     460:				07450010	MOVK 		X2, #16, #1
+     464:				07870810	MOVK 		X3, #2064, #2
+     468:				074f0003	MOVK 		X7, #3, #1
+     46c:				6cc87189	LOAD_L1_TO_L0B_2DV2.b32 	[X4], [X7], X3, X2, #0
+     470:				07040006	MOVI 		X2, #6
+     474:				07450004	MOVK 		X2, #4, #1
+     478:				07850001	MOVK 		X2, #1, #2
+     47c:				40a20d18	SET_FLAG.MTE1.M  	X6 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     480:				07c58000	MOVK 		X2, #32768, #3
+     484:				40c20d18	WAIT_FLAG.MTE1.M  	X6 <e8_fused_decode_fp32_0_mix_aic$local+0x3>
+     488:				f08b1809	MMAD.f322f32	[X5], [X17], [X16], X2
+     48c:				40a24918	SET_FLAG.M.F  	X6 <e8_fused_decode_fp32_0_mix_aic$local+0x2>
+     490:				40c24918	WAIT_FLAG.M.F  	X6 <e8_fused_decode_fp32_0_mix_aic$local+0x2>
+     494:				02c20900	MOV		LOOP3_PARA, X0
+     498:				07003240	MOVI 		X0, #12864
+     49c:				07410002	MOVK 		X0, #2, #1
+     4a0:				00001001	ADD.s64 	X0, X1, X0
+     4a4:				07021000	MOVI 		X1, #4096
+     4a8:				07430006	MOVK 		X1, #6, #1
+     4ac:				02800a00	ZEROEXT.u32 	X0, X0
+     4b0:				07830100	MOVK 		X1, #256, #2
+     4b4:				40e02800	BAR.F <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     4b8:				c10050a0	FIX_L0C_TO_UB.f32 	[X0], [X5], X1, X8
+     4bc:				40a22818	SET_FLAG.F.S  	X6 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     4c0:				07000621	MOVI 		X0, #1569
+     4c4:				40c22818	WAIT_FLAG.F.S  	X6 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     4c8:				41f02800	SET_CROSS_CORE.F  	X0 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     4cc:				07000721	MOVI 		X0, #1825
+     4d0:				41f02800	SET_CROSS_CORE.F  	X0 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     4d4:				07000008	MOVI 		X0, #8
+     4d8:				41e42800	WAIT_FLAG_DEV.F 	X0 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     4dc:				40a22818	SET_FLAG.F.S  	X6 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     4e0:				40c22818	WAIT_FLAG.F.S  	X6 <e8_fused_decode_fp32_0_mix_aic$local+0xa>
+     4e4:				40e01800	BAR.ALL <e8_fused_decode_fp32_0_mix_aic$local+0x6>
+     4e8:				07228000	MOVI 		X17, #32768
+     4ec:				41c00000	DSB 		#0 <e8_fused_decode_fp32_0_mix_aic$local>
+     4f0:				07630010	MOVK 		X17, #16, #1
+     4f4:				40300000	DCI
+     4f8:				1ce11ff0	LD_IO.b64 		X16, [X17], #-16, #0
+     4fc:				021c2880	MOV		X14, STATUS
+     500:				071e0520	MOVI 		X15, #1312
+     504:				00dce78a	AND.b64  	X14, X14, X15
+     508:				071e0000	MOVI 		X15, #0
+     50c:				00e1070b	OR.b64  	X16, X16, X14
+     510:				03e11ff0	ST_IO.b64 		X16, [X17], #-16, #0
+     514:				1ce11fe0	LD_IO.b64 		X16, [X17], #-32, #0
+     518:				001cf71f	CMPN.NE.s64	X14, X15, X14
+     51c:				0021078f	CMPN.EQ.s64	X16, X16, X15
+     520:				00dce80a	AND.b64  	X14, X14, X16
+     524:				0216e900	MOV		CONDITION_FLAG, X14
+     528:				40200002	JUMPCI 		#1328 <e8_fused_decode_fp32_0_mix_aic$local+0x530>
+     52c:				4000000f	JUMPI 		#1384 <e8_fused_decode_fp32_0_mix_aic$local+0x568>
+     530:				07228000	MOVI 		X17, #32768
+     534:				0720feb0	MOVI 		X16, #65200
+     538:				07630010	MOVK 		X17, #16, #1
+     53c:				021c1880	MOV		X14, BLOCKID
+     540:				0761ffff	MOVK 		X16, #65535, #1
+     544:				07a1ffff	MOVK 		X16, #65535, #2
+     548:				03dd1fe8	ST_IO.b64 		X14, [X17], #-24, #0
+     54c:				07e13fff	MOVK 		X16, #16383, #3
+     550:				021c0880	MOV		X14, PC
+     554:				02e00202	SHLI.b64 	X16, #2
+     558:				001ce801	ADD.s64 	X14, X14, X16
+     55c:				07200010	MOVI 		X16, #16
+     560:				001ce801	ADD.s64 	X14, X14, X16
+     564:				03dd1fe0	ST_IO.b64 		X14, [X17], #-32, #0
+     568:				41600000	END
+     56c:				41400000	NOP

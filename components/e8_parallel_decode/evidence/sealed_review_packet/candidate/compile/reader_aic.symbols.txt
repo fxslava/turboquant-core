@@ -1,0 +1,36 @@
+
+Symbol table '.symtab' contains 33 entries:
+   Num:    Value          Size Type    Bind   Vis      Ndx Name
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS auto_gen_e8_fused_decode.cpp
+     2: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT    1 e8_fused_decode_fp32_0_mix_aic$local
+     3: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT    1 
+     4: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT    1 $x.0
+     5: 0000000000000000 0x26300 OBJECT  LOCAL  DEFAULT    4 _ZZ27e8_fused_decode_fp32_originE5arena
+     6: 0000000000000000 16384 OBJECT  LOCAL  DEFAULT    5 _ZZ27e8_fused_decode_fp32_originE3l0a
+     7: 0000000000000000 65536 OBJECT  LOCAL  DEFAULT    6 _ZZ27e8_fused_decode_fp32_originE3l0b
+     8: 0000000000000000 16384 OBJECT  LOCAL  DEFAULT    7 _ZZ27e8_fused_decode_fp32_originE3l0c
+     9: 0000000000000000    16 OBJECT  LOCAL  DEFAULT    3 _ZL36e8_fused_decode_fp32_mix_aic_section
+    10: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT    3 $d.1
+    11: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT    9 $d.2
+    12: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT   10 $d.3
+    13: 0000000000000010     8 OBJECT  LOCAL  DEFAULT    3 .AIV_Kernel_Type_e8_fused_decode_fp32_0_mix_aic
+    14: 0000000000000010     0 NOTYPE  LOCAL  DEFAULT    3 $d.4
+    15: 0000000000000057     0 NOTYPE  LOCAL  DEFAULT   11 $d.5
+    16: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT   12 
+    17: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT   12 $d.6
+    18: 0000000000000000     0 SECTION LOCAL  DEFAULT    1 .text
+    19: 0000000000000000     0 SECTION LOCAL  DEFAULT    3 .ascend.meta.e8_fused_decode_fp32_0_mix_aic
+    20: 0000000000000000     0 SECTION LOCAL  DEFAULT    4 .ubuf.e8_fused_decode_fp32_0_mix_aic
+    21: 0000000000000000     0 SECTION LOCAL  DEFAULT    5 .ca.e8_fused_decode_fp32_0_mix_aic
+    22: 0000000000000000     0 SECTION LOCAL  DEFAULT    6 .cb.e8_fused_decode_fp32_0_mix_aic
+    23: 0000000000000000     0 SECTION LOCAL  DEFAULT    7 .cc.e8_fused_decode_fp32_0_mix_aic
+    24: 0000000000000000     0 SECTION LOCAL  DEFAULT    8 .group
+    25: 0000000000000000     0 SECTION LOCAL  DEFAULT    9 .bl.uninit._ZN7AscendC8Internal10g_deqValueE
+    26: 0000000000000000     0 SECTION LOCAL  DEFAULT   10 __CCE_KernelArgSize
+    27: 0000000000000000     0 SECTION LOCAL  DEFAULT   12 .debug_frame
+    28: 0000000000000000     0 SECTION LOCAL  DEFAULT   14 .llvm_addrsig
+    29: 0000000000000000     0 SECTION LOCAL  DEFAULT   11 .comment
+    30: 0000000000000000  1388 FUNC    GLOBAL DEFAULT    1 e8_fused_decode_fp32_0_mix_aic
+    31: 0000000000000000     2 OBJECT  WEAK   DEFAULT    9 _ZN7AscendC8Internal10g_deqValueE
+    32: 0000000000000000     4 OBJECT  WEAK   DEFAULT   10 e8_fused_decode_fp32_0_mix_aic__

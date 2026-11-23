@@ -1,0 +1,1912 @@
+{
+  "schema_version": "1.0",
+  "tool": {
+    "name": "ascend-kernel-analyzer",
+    "version": "0.1.0",
+    "solver": "z3",
+    "python": "3.10.12",
+    "generated_at": "2026-11-23T10:42:30+00:00"
+  },
+  "source": {
+    "path": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+    "line_count": 62,
+    "had_parse_errors": false,
+    "parse_error_locations": [],
+    "constants": {
+      "EVENT_ID0": 0,
+      "EVENT_ID1": 1,
+      "EVENT_ID2": 2,
+      "EVENT_ID3": 3,
+      "__PCPP__": 1,
+      "__cplusplus": 201703,
+      "__CCE_KT_TEST__": 1,
+      "E8_SIMT_THREAD_COUNT": 128,
+      "SIMD": 0,
+      "SIMT": 1,
+      "Arithmetic": 0,
+      "CompactInt8": 1,
+      "CompactBf16": 2,
+      "AoS": 0,
+      "SoA": 1,
+      "PaddedSoA": 2,
+      "Blocked": 3,
+      "LegacyNearest": 0,
+      "ResidualBits": 1,
+      "SimtThreadCount": 128,
+      "kRows": 16,
+      "kLabels": 512,
+      "kElements": 4096,
+      "kLabelOffset": 0,
+      "kScaleOffset": 1280,
+      "kBf16Offset": 1600,
+      "kInt8Offset": 10048,
+      "kArenaBytes": 14400
+    }
+  },
+  "target": {
+    "name": "ascend950pr",
+    "display_name": "Ascend 950PR (arch35 / DaVinci v3)",
+    "provisional": false,
+    "emit_perf_advisories": false,
+    "notes": "Validated arch35 AIV limits: EVENT_ID0..3 and 256 KiB UB, of which at most 216 KiB is usable for tensors after the 8 KiB compiler reserve and 32 KiB SIMT DataCache floor. Pipeline timing remains uncalibrated, so performance advisories are withheld.",
+    "block_bytes": 32,
+    "ub_safe_ceiling": 163840,
+    "max_event_id": 3,
+    "reserved_event_ids": [],
+    "ub_partition": {
+      "ub_total_bytes": 262144,
+      "compiler_reserved_bytes": 8192,
+      "min_datacache_bytes": 32768,
+      "max_usable_ub_bytes": 221184
+    },
+    "perf_model": {
+      "mte2_bytes_per_cycle": 64,
+      "mte1_bytes_per_cycle": 64,
+      "fixpipe_bytes_per_cycle": 64,
+      "cube_macs_per_cycle": 4096,
+      "cube_read_bytes_per_cycle": 1024,
+      "sync_handoff_cycles": 30
+    },
+    "domains": {
+      "UB": {
+        "capacity_bytes": 262144,
+        "capacity_kib": 256.0,
+        "base_alignment": 32,
+        "size_alignment": 32,
+        "stride_alignment": 32,
+        "description": "Unified Buffer (vector scratchpad)"
+      },
+      "L1": {
+        "capacity_bytes": 524288,
+        "capacity_kib": 512.0,
+        "base_alignment": 32,
+        "size_alignment": 32,
+        "stride_alignment": 32,
+        "description": "L1 Buffer (shared staging)"
+      },
+      "L0A": {
+        "capacity_bytes": 65536,
+        "capacity_kib": 64.0,
+        "base_alignment": 512,
+        "size_alignment": 512,
+        "stride_alignment": 32,
+        "description": "Cube A (left matrix)"
+      },
+      "L0B": {
+        "capacity_bytes": 65536,
+        "capacity_kib": 64.0,
+        "base_alignment": 512,
+        "size_alignment": 512,
+        "stride_alignment": 32,
+        "description": "Cube B (right matrix)"
+      },
+      "L0C": {
+        "capacity_bytes": 131072,
+        "capacity_kib": 128.0,
+        "base_alignment": 1024,
+        "size_alignment": 1024,
+        "stride_alignment": 32,
+        "description": "Cube C (accumulator)"
+      },
+      "BT": {
+        "capacity_bytes": 1024,
+        "capacity_kib": 1.0,
+        "base_alignment": 64,
+        "size_alignment": 64,
+        "stride_alignment": 32,
+        "description": "Bias table"
+      },
+      "FB": {
+        "capacity_bytes": 2048,
+        "capacity_kib": 2.0,
+        "base_alignment": 128,
+        "size_alignment": 128,
+        "stride_alignment": 32,
+        "description": "Fixpipe parameter buffer"
+      }
+    }
+  },
+  "summary": {
+    "fatal": 0,
+    "warning": 0,
+    "info": 0,
+    "total": 0,
+    "by_code": {}
+  },
+  "verdict": "accepted",
+  "diagnostics": [],
+  "kernels": [
+    {
+      "name": "Dequant",
+      "location": {
+        "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+        "line": 7,
+        "column": 12,
+        "end_line": 7,
+        "end_column": 2,
+        "snippet": "#include \"routines/routine_e8_bf16_dequant_simt.hpp\""
+      },
+      "is_kernel_entry": true,
+      "op_count": 1,
+      "inlined": [],
+      "tensors": [],
+      "loops": [],
+      "constants": {
+        "EVENT_ID0": 0,
+        "EVENT_ID1": 1,
+        "EVENT_ID2": 2,
+        "EVENT_ID3": 3,
+        "__PCPP__": 1,
+        "__cplusplus": 201703,
+        "__CCE_KT_TEST__": 1,
+        "E8_SIMT_THREAD_COUNT": 128,
+        "SIMD": 0,
+        "SIMT": 1,
+        "Arithmetic": 0,
+        "CompactInt8": 1,
+        "CompactBf16": 2,
+        "AoS": 0,
+        "SoA": 1,
+        "PaddedSoA": 2,
+        "Blocked": 3,
+        "LegacyNearest": 0,
+        "ResidualBits": 1,
+        "SimtThreadCount": 128,
+        "kRows": 16,
+        "kLabels": 512,
+        "kElements": 4096,
+        "kLabelOffset": 0,
+        "kScaleOffset": 1280,
+        "kBf16Offset": 1600,
+        "kInt8Offset": 10048,
+        "kArenaBytes": 14400
+      },
+      "buffer_sizes": {},
+      "buffer_positions": {},
+      "memory_map": [],
+      "trace": [
+        {
+          "index": 0,
+          "kind": "ApiCall",
+          "label": "asc_vf_call(dim3(Threads), reinterpret_cast</*ubuf*/ uint16_t*>(indices.GetPhyAddr()), reinterpret_cast</*ubuf*/ float*>(scales.GetPhyAddr()), reinterpret_cast</*ubuf*/ bfloat16_t*>(output.GetPhyAddr()), reinterpret_cast</*ubuf*/ uint8_t*>(table.GetPhyAddr()))",
+          "pipe": "PIPE_V",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 7,
+            "column": 3,
+            "end_line": 7,
+            "end_column": 63,
+            "snippet": "#include \"routines/routine_e8_bf16_dequant_simt.hpp\""
+          },
+          "name": "asc_vf_call",
+          "args": [
+            {
+              "index": 0,
+              "text": "dim3(Threads)",
+              "tensor": null,
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "reinterpret_cast</*ubuf*/ uint16_t*>(indices.GetPhyAddr())",
+              "tensor": null,
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "reinterpret_cast</*ubuf*/ float*>(scales.GetPhyAddr())",
+              "tensor": null,
+              "value": null
+            },
+            {
+              "index": 3,
+              "text": "reinterpret_cast</*ubuf*/ bfloat16_t*>(output.GetPhyAddr())",
+              "tensor": null,
+              "value": null
+            },
+            {
+              "index": 4,
+              "text": "reinterpret_cast</*ubuf*/ uint8_t*>(table.GetPhyAddr())",
+              "tensor": null,
+              "value": null
+            }
+          ],
+          "writes": [],
+          "reads": []
+        }
+      ],
+      "synchronisation": {
+        "nodes": [],
+        "edges": []
+      },
+      "performance": {
+        "makespan_cycles": 1,
+        "total_busy_cycles": 1,
+        "total_stall_cycles": 0,
+        "stall_by_route": {},
+        "drain_cycles": 0,
+        "overlap_ratio": 1.0,
+        "active_pipes": 1,
+        "critical_pipe": "PIPE_V",
+        "bottleneck": "COMPUTE_BOUND",
+        "pipes": [
+          {
+            "pipe": "PIPE_V",
+            "op_count": 1,
+            "busy_cycles": 1,
+            "idle_cycles": 0,
+            "stall_cycles": 0,
+            "utilization": 1.0
+          }
+        ],
+        "handoff_cycles": 30
+      },
+      "domain_usage": []
+    },
+    {
+      "name": "Dequant",
+      "location": {
+        "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+        "line": 8,
+        "column": 12,
+        "end_line": 8,
+        "end_column": 2,
+        "snippet": "#include \"routines/routine_e8_int8_dequant_simt.hpp\""
+      },
+      "is_kernel_entry": true,
+      "op_count": 1,
+      "inlined": [],
+      "tensors": [],
+      "loops": [],
+      "constants": {
+        "EVENT_ID0": 0,
+        "EVENT_ID1": 1,
+        "EVENT_ID2": 2,
+        "EVENT_ID3": 3,
+        "__PCPP__": 1,
+        "__cplusplus": 201703,
+        "__CCE_KT_TEST__": 1,
+        "E8_SIMT_THREAD_COUNT": 128,
+        "SIMD": 0,
+        "SIMT": 1,
+        "Arithmetic": 0,
+        "CompactInt8": 1,
+        "CompactBf16": 2,
+        "AoS": 0,
+        "SoA": 1,
+        "PaddedSoA": 2,
+        "Blocked": 3,
+        "LegacyNearest": 0,
+        "ResidualBits": 1,
+        "SimtThreadCount": 128,
+        "kRows": 16,
+        "kLabels": 512,
+        "kElements": 4096,
+        "kLabelOffset": 0,
+        "kScaleOffset": 1280,
+        "kBf16Offset": 1600,
+        "kInt8Offset": 10048,
+        "kArenaBytes": 14400
+      },
+      "buffer_sizes": {},
+      "buffer_positions": {},
+      "memory_map": [],
+      "trace": [
+        {
+          "index": 0,
+          "kind": "ApiCall",
+          "label": "asc_vf_call(dim3(Threads), reinterpret_cast</*ubuf*/ uint16_t*>(indices.GetPhyAddr()), reinterpret_cast</*ubuf*/ float*>(scales.GetPhyAddr()), reinterpret_cast</*ubuf*/ int8_t*>(output.GetPhyAddr()), reinterpret_cast</*ubuf*/ uint8_t*>(table.GetPhyAddr()))",
+          "pipe": "PIPE_V",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 8,
+            "column": 3,
+            "end_line": 8,
+            "end_column": 63,
+            "snippet": "#include \"routines/routine_e8_int8_dequant_simt.hpp\""
+          },
+          "name": "asc_vf_call",
+          "args": [
+            {
+              "index": 0,
+              "text": "dim3(Threads)",
+              "tensor": null,
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "reinterpret_cast</*ubuf*/ uint16_t*>(indices.GetPhyAddr())",
+              "tensor": null,
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "reinterpret_cast</*ubuf*/ float*>(scales.GetPhyAddr())",
+              "tensor": null,
+              "value": null
+            },
+            {
+              "index": 3,
+              "text": "reinterpret_cast</*ubuf*/ int8_t*>(output.GetPhyAddr())",
+              "tensor": null,
+              "value": null
+            },
+            {
+              "index": 4,
+              "text": "reinterpret_cast</*ubuf*/ uint8_t*>(table.GetPhyAddr())",
+              "tensor": null,
+              "value": null
+            }
+          ],
+          "writes": [],
+          "reads": []
+        }
+      ],
+      "synchronisation": {
+        "nodes": [],
+        "edges": []
+      },
+      "performance": {
+        "makespan_cycles": 1,
+        "total_busy_cycles": 1,
+        "total_stall_cycles": 0,
+        "stall_by_route": {},
+        "drain_cycles": 0,
+        "overlap_ratio": 1.0,
+        "active_pipes": 1,
+        "critical_pipe": "PIPE_V",
+        "bottleneck": "COMPUTE_BOUND",
+        "pipes": [
+          {
+            "pipe": "PIPE_V",
+            "op_count": 1,
+            "busy_cycles": 1,
+            "idle_cycles": 0,
+            "stall_cycles": 0,
+            "utilization": 1.0
+          }
+        ],
+        "handoff_cycles": 30
+      },
+      "domain_usage": []
+    },
+    {
+      "name": "e8_parallel_component",
+      "location": {
+        "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+        "line": 16,
+        "column": 34,
+        "end_line": 54,
+        "end_column": 2,
+        "snippet": "extern \"C\" __global__ __aicore__ void e8_parallel_component("
+      },
+      "is_kernel_entry": true,
+      "op_count": 10,
+      "inlined": [],
+      "tensors": [
+        {
+          "name": "labels",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "uint16_t",
+          "elem_size": 2,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "kernel parameter",
+          "reuse_group": null,
+          "first_use": null,
+          "last_use": null,
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 17,
+            "column": 12,
+            "end_line": 17,
+            "end_column": 28,
+            "snippet": "__gm__ uint16_t* labels,__gm__ float* scales,"
+          }
+        },
+        {
+          "name": "scales",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "float",
+          "elem_size": 4,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "kernel parameter",
+          "reuse_group": null,
+          "first_use": null,
+          "last_use": null,
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 17,
+            "column": 36,
+            "end_line": 17,
+            "end_column": 49,
+            "snippet": "__gm__ uint16_t* labels,__gm__ float* scales,"
+          }
+        },
+        {
+          "name": "bf16",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "uint16_t",
+          "elem_size": 2,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "kernel parameter",
+          "reuse_group": null,
+          "first_use": null,
+          "last_use": null,
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 18,
+            "column": 12,
+            "end_line": 18,
+            "end_column": 26,
+            "snippet": "__gm__ uint16_t* bf16,__gm__ int8_t* int8) {"
+          }
+        },
+        {
+          "name": "int8",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "int8_t",
+          "elem_size": 1,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "kernel parameter",
+          "reuse_group": null,
+          "first_use": null,
+          "last_use": null,
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 18,
+            "column": 34,
+            "end_line": 18,
+            "end_column": 46,
+            "snippet": "__gm__ uint16_t* bf16,__gm__ int8_t* int8) {"
+          }
+        },
+        {
+          "name": "inputLabels",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "uint16_t",
+          "elem_size": 2,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "GlobalTensor declaration",
+          "reuse_group": null,
+          "first_use": 1,
+          "last_use": 1,
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 28,
+            "column": 5,
+            "end_line": 28,
+            "end_column": 49,
+            "snippet": "AscendC::GlobalTensor<uint16_t> inputLabels;"
+          }
+        },
+        {
+          "name": "outputBf16",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "bfloat16_t",
+          "elem_size": 2,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "GlobalTensor declaration",
+          "reuse_group": null,
+          "first_use": 7,
+          "last_use": 7,
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 29,
+            "column": 5,
+            "end_line": 29,
+            "end_column": 50,
+            "snippet": "AscendC::GlobalTensor<bfloat16_t> outputBf16;"
+          }
+        },
+        {
+          "name": "inputScales",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "float",
+          "elem_size": 4,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "GlobalTensor declaration",
+          "reuse_group": null,
+          "first_use": 2,
+          "last_use": 2,
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 30,
+            "column": 5,
+            "end_line": 30,
+            "end_column": 46,
+            "snippet": "AscendC::GlobalTensor<float> inputScales;AscendC::GlobalTensor<int8_t> outputInt8;"
+          }
+        },
+        {
+          "name": "outputInt8",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "int8_t",
+          "elem_size": 1,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "GlobalTensor declaration",
+          "reuse_group": null,
+          "first_use": 8,
+          "last_use": 8,
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 30,
+            "column": 46,
+            "end_line": 30,
+            "end_column": 87,
+            "snippet": "AscendC::GlobalTensor<float> inputScales;AscendC::GlobalTensor<int8_t> outputInt8;"
+          }
+        }
+      ],
+      "loops": [],
+      "constants": {
+        "EVENT_ID0": 0,
+        "EVENT_ID1": 1,
+        "EVENT_ID2": 2,
+        "EVENT_ID3": 3,
+        "__PCPP__": 1,
+        "__cplusplus": 201703,
+        "__CCE_KT_TEST__": 1,
+        "E8_SIMT_THREAD_COUNT": 128,
+        "SIMD": 0,
+        "SIMT": 1,
+        "Arithmetic": 0,
+        "CompactInt8": 1,
+        "CompactBf16": 2,
+        "AoS": 0,
+        "SoA": 1,
+        "PaddedSoA": 2,
+        "Blocked": 3,
+        "LegacyNearest": 0,
+        "ResidualBits": 1,
+        "SimtThreadCount": 128,
+        "kRows": 16,
+        "kLabels": 512,
+        "kElements": 4096,
+        "kLabelOffset": 0,
+        "kScaleOffset": 1280,
+        "kBf16Offset": 1600,
+        "kInt8Offset": 10048,
+        "kArenaBytes": 14400
+      },
+      "buffer_sizes": {},
+      "buffer_positions": {},
+      "memory_map": [],
+      "trace": [
+        {
+          "index": 0,
+          "kind": "ApiCall",
+          "label": "DataCopy(localLabels, inputLabels, kLabels)",
+          "pipe": "PIPE_MTE2",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 33,
+            "column": 5,
+            "end_line": 33,
+            "end_column": 55,
+            "snippet": "AscendC::DataCopy(localLabels,inputLabels,kLabels);"
+          },
+          "name": "DataCopy",
+          "args": [
+            {
+              "index": 0,
+              "text": "localLabels",
+              "tensor": null,
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "inputLabels",
+              "tensor": "inputLabels",
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "kLabels",
+              "tensor": null,
+              "value": 512
+            }
+          ],
+          "writes": [],
+          "reads": [
+            "inputLabels"
+          ]
+        },
+        {
+          "index": 1,
+          "kind": "ApiCall",
+          "label": "DataCopy(localScales, inputScales, kRows)",
+          "pipe": "PIPE_MTE2",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 34,
+            "column": 5,
+            "end_line": 34,
+            "end_column": 53,
+            "snippet": "AscendC::DataCopy(localScales,inputScales,kRows);"
+          },
+          "name": "DataCopy",
+          "args": [
+            {
+              "index": 0,
+              "text": "localScales",
+              "tensor": null,
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "inputScales",
+              "tensor": "inputScales",
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "kRows",
+              "tensor": null,
+              "value": 16
+            }
+          ],
+          "writes": [],
+          "reads": [
+            "inputScales"
+          ]
+        },
+        {
+          "index": 2,
+          "kind": "SetFlag",
+          "label": "SetFlag<MTE2_S>(0)",
+          "pipe": "PIPE_MTE2",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 35,
+            "column": 5,
+            "end_line": 35,
+            "end_column": 52,
+            "snippet": "AscendC::SetFlag<AscendC::HardEvent::MTE2_S>(0);"
+          },
+          "flag_kind": "SetFlag",
+          "route": "MTE2_S",
+          "src_pipe": "PIPE_MTE2",
+          "dst_pipe": "PIPE_S",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        },
+        {
+          "index": 3,
+          "kind": "WaitFlag",
+          "label": "WaitFlag<MTE2_S>(0)",
+          "pipe": "PIPE_S",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 36,
+            "column": 5,
+            "end_line": 36,
+            "end_column": 53,
+            "snippet": "AscendC::WaitFlag<AscendC::HardEvent::MTE2_S>(0);"
+          },
+          "flag_kind": "WaitFlag",
+          "route": "MTE2_S",
+          "src_pipe": "PIPE_MTE2",
+          "dst_pipe": "PIPE_S",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        },
+        {
+          "index": 4,
+          "kind": "SetFlag",
+          "label": "SetFlag<V_MTE3>(0)",
+          "pipe": "PIPE_V",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 48,
+            "column": 5,
+            "end_line": 48,
+            "end_column": 52,
+            "snippet": "AscendC::SetFlag<AscendC::HardEvent::V_MTE3>(0);"
+          },
+          "flag_kind": "SetFlag",
+          "route": "V_MTE3",
+          "src_pipe": "PIPE_V",
+          "dst_pipe": "PIPE_MTE3",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        },
+        {
+          "index": 5,
+          "kind": "WaitFlag",
+          "label": "WaitFlag<V_MTE3>(0)",
+          "pipe": "PIPE_MTE3",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 49,
+            "column": 5,
+            "end_line": 49,
+            "end_column": 53,
+            "snippet": "AscendC::WaitFlag<AscendC::HardEvent::V_MTE3>(0);"
+          },
+          "flag_kind": "WaitFlag",
+          "route": "V_MTE3",
+          "src_pipe": "PIPE_V",
+          "dst_pipe": "PIPE_MTE3",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        },
+        {
+          "index": 6,
+          "kind": "ApiCall",
+          "label": "DataCopy(outputBf16, localBf16, kElements)",
+          "pipe": "PIPE_MTE3",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 50,
+            "column": 5,
+            "end_line": 50,
+            "end_column": 54,
+            "snippet": "AscendC::DataCopy(outputBf16,localBf16,kElements);"
+          },
+          "name": "DataCopy",
+          "args": [
+            {
+              "index": 0,
+              "text": "outputBf16",
+              "tensor": "outputBf16",
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "localBf16",
+              "tensor": null,
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "kElements",
+              "tensor": null,
+              "value": 4096
+            }
+          ],
+          "writes": [
+            "outputBf16"
+          ],
+          "reads": []
+        },
+        {
+          "index": 7,
+          "kind": "ApiCall",
+          "label": "DataCopy(outputInt8, localInt8, kElements)",
+          "pipe": "PIPE_MTE3",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 51,
+            "column": 5,
+            "end_line": 51,
+            "end_column": 54,
+            "snippet": "AscendC::DataCopy(outputInt8,localInt8,kElements);"
+          },
+          "name": "DataCopy",
+          "args": [
+            {
+              "index": 0,
+              "text": "outputInt8",
+              "tensor": "outputInt8",
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "localInt8",
+              "tensor": null,
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "kElements",
+              "tensor": null,
+              "value": 4096
+            }
+          ],
+          "writes": [
+            "outputInt8"
+          ],
+          "reads": []
+        },
+        {
+          "index": 8,
+          "kind": "SetFlag",
+          "label": "SetFlag<MTE3_S>(0)",
+          "pipe": "PIPE_MTE3",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 52,
+            "column": 5,
+            "end_line": 52,
+            "end_column": 52,
+            "snippet": "AscendC::SetFlag<AscendC::HardEvent::MTE3_S>(0);"
+          },
+          "flag_kind": "SetFlag",
+          "route": "MTE3_S",
+          "src_pipe": "PIPE_MTE3",
+          "dst_pipe": "PIPE_S",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        },
+        {
+          "index": 9,
+          "kind": "WaitFlag",
+          "label": "WaitFlag<MTE3_S>(0)",
+          "pipe": "PIPE_S",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 53,
+            "column": 5,
+            "end_line": 53,
+            "end_column": 53,
+            "snippet": "AscendC::WaitFlag<AscendC::HardEvent::MTE3_S>(0);"
+          },
+          "flag_kind": "WaitFlag",
+          "route": "MTE3_S",
+          "src_pipe": "PIPE_MTE3",
+          "dst_pipe": "PIPE_S",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        }
+      ],
+      "synchronisation": {
+        "nodes": [
+          {
+            "index": 2,
+            "label": "SetFlag<MTE2_S>(0)",
+            "pipe": "PIPE_MTE2",
+            "line": 35,
+            "kind": "SetFlag",
+            "loop_id": null
+          },
+          {
+            "index": 3,
+            "label": "WaitFlag<MTE2_S>(0)",
+            "pipe": "PIPE_S",
+            "line": 36,
+            "kind": "WaitFlag",
+            "loop_id": null
+          },
+          {
+            "index": 4,
+            "label": "SetFlag<V_MTE3>(0)",
+            "pipe": "PIPE_V",
+            "line": 48,
+            "kind": "SetFlag",
+            "loop_id": null
+          },
+          {
+            "index": 5,
+            "label": "WaitFlag<V_MTE3>(0)",
+            "pipe": "PIPE_MTE3",
+            "line": 49,
+            "kind": "WaitFlag",
+            "loop_id": null
+          },
+          {
+            "index": 8,
+            "label": "SetFlag<MTE3_S>(0)",
+            "pipe": "PIPE_MTE3",
+            "line": 52,
+            "kind": "SetFlag",
+            "loop_id": null
+          },
+          {
+            "index": 9,
+            "label": "WaitFlag<MTE3_S>(0)",
+            "pipe": "PIPE_S",
+            "line": 53,
+            "kind": "WaitFlag",
+            "loop_id": null
+          }
+        ],
+        "edges": [
+          {
+            "from": 2,
+            "to": 3,
+            "tokens": 0,
+            "kind": "sync",
+            "route": "MTE2_S",
+            "event_id": 0,
+            "loop_carried": false
+          },
+          {
+            "from": 3,
+            "to": 9,
+            "tokens": 0,
+            "kind": "program"
+          },
+          {
+            "from": 4,
+            "to": 5,
+            "tokens": 0,
+            "kind": "sync",
+            "route": "V_MTE3",
+            "event_id": 0,
+            "loop_carried": false
+          },
+          {
+            "from": 5,
+            "to": 8,
+            "tokens": 0,
+            "kind": "program"
+          },
+          {
+            "from": 8,
+            "to": 9,
+            "tokens": 0,
+            "kind": "sync",
+            "route": "MTE3_S",
+            "event_id": 0,
+            "loop_carried": false
+          }
+        ],
+        "sync_pairs": [
+          {
+            "channel": {
+              "route": "MTE2_S",
+              "event_id": 0
+            },
+            "set_index": 2,
+            "set_line": 35,
+            "wait_index": 3,
+            "wait_line": 36,
+            "tokens": 0,
+            "loop_carried": false
+          },
+          {
+            "channel": {
+              "route": "V_MTE3",
+              "event_id": 0
+            },
+            "set_index": 4,
+            "set_line": 48,
+            "wait_index": 5,
+            "wait_line": 49,
+            "tokens": 0,
+            "loop_carried": false
+          },
+          {
+            "channel": {
+              "route": "MTE3_S",
+              "event_id": 0
+            },
+            "set_index": 8,
+            "set_line": 52,
+            "wait_index": 9,
+            "wait_line": 53,
+            "tokens": 0,
+            "loop_carried": false
+          }
+        ],
+        "acyclic": true,
+        "topological_order": [
+          2,
+          4,
+          3,
+          5,
+          8,
+          9
+        ],
+        "cycles": [],
+        "pipes": [
+          "PIPE_MTE2",
+          "PIPE_S",
+          "PIPE_V",
+          "PIPE_MTE3"
+        ],
+        "peeled_loops": []
+      },
+      "performance": {
+        "makespan_cycles": 66,
+        "total_busy_cycles": 10,
+        "total_stall_cycles": 95,
+        "stall_by_route": {
+          "MTE2_S": 33,
+          "V_MTE3": 31,
+          "MTE3_S": 31
+        },
+        "drain_cycles": 32,
+        "overlap_ratio": 0.0379,
+        "active_pipes": 4,
+        "critical_pipe": "PIPE_MTE3",
+        "bottleneck": "DRAIN_BOUND",
+        "pipes": [
+          {
+            "pipe": "PIPE_S",
+            "op_count": 2,
+            "busy_cycles": 2,
+            "idle_cycles": 64,
+            "stall_cycles": 64,
+            "utilization": 0.0303
+          },
+          {
+            "pipe": "PIPE_MTE2",
+            "op_count": 3,
+            "busy_cycles": 3,
+            "idle_cycles": 63,
+            "stall_cycles": 0,
+            "utilization": 0.0455
+          },
+          {
+            "pipe": "PIPE_V",
+            "op_count": 1,
+            "busy_cycles": 1,
+            "idle_cycles": 65,
+            "stall_cycles": 0,
+            "utilization": 0.0152
+          },
+          {
+            "pipe": "PIPE_MTE3",
+            "op_count": 4,
+            "busy_cycles": 4,
+            "idle_cycles": 62,
+            "stall_cycles": 31,
+            "utilization": 0.0606
+          }
+        ],
+        "handoff_cycles": 30
+      },
+      "domain_usage": []
+    },
+    {
+      "name": "launch_e8_parallel_component",
+      "location": {
+        "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+        "line": 58,
+        "column": 12,
+        "end_line": 61,
+        "end_column": 2,
+        "snippet": "extern \"C\" void launch_e8_parallel_component(void* stream,uint16_t* labels,"
+      },
+      "is_kernel_entry": true,
+      "op_count": 10,
+      "inlined": [
+        "e8_parallel_component"
+      ],
+      "tensors": [
+        {
+          "name": "labels",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "uint16_t",
+          "elem_size": 2,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "kernel parameter",
+          "reuse_group": null,
+          "first_use": null,
+          "last_use": null,
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 17,
+            "column": 12,
+            "end_line": 17,
+            "end_column": 28,
+            "snippet": "__gm__ uint16_t* labels,__gm__ float* scales,"
+          }
+        },
+        {
+          "name": "scales",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "float",
+          "elem_size": 4,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "kernel parameter",
+          "reuse_group": null,
+          "first_use": null,
+          "last_use": null,
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 17,
+            "column": 36,
+            "end_line": 17,
+            "end_column": 49,
+            "snippet": "__gm__ uint16_t* labels,__gm__ float* scales,"
+          }
+        },
+        {
+          "name": "bf16",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "uint16_t",
+          "elem_size": 2,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "kernel parameter",
+          "reuse_group": null,
+          "first_use": null,
+          "last_use": null,
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 18,
+            "column": 12,
+            "end_line": 18,
+            "end_column": 26,
+            "snippet": "__gm__ uint16_t* bf16,__gm__ int8_t* int8) {"
+          }
+        },
+        {
+          "name": "int8",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "int8_t",
+          "elem_size": 1,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "kernel parameter",
+          "reuse_group": null,
+          "first_use": null,
+          "last_use": null,
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 18,
+            "column": 34,
+            "end_line": 18,
+            "end_column": 46,
+            "snippet": "__gm__ uint16_t* bf16,__gm__ int8_t* int8) {"
+          }
+        },
+        {
+          "name": "inputLabels",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "uint16_t",
+          "elem_size": 2,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "GlobalTensor declaration",
+          "reuse_group": null,
+          "first_use": 1,
+          "last_use": 1,
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 28,
+            "column": 5,
+            "end_line": 28,
+            "end_column": 49,
+            "snippet": "AscendC::GlobalTensor<uint16_t> inputLabels;"
+          }
+        },
+        {
+          "name": "outputBf16",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "bfloat16_t",
+          "elem_size": 2,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "GlobalTensor declaration",
+          "reuse_group": null,
+          "first_use": 7,
+          "last_use": 7,
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 29,
+            "column": 5,
+            "end_line": 29,
+            "end_column": 50,
+            "snippet": "AscendC::GlobalTensor<bfloat16_t> outputBf16;"
+          }
+        },
+        {
+          "name": "inputScales",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "float",
+          "elem_size": 4,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "GlobalTensor declaration",
+          "reuse_group": null,
+          "first_use": 2,
+          "last_use": 2,
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 30,
+            "column": 5,
+            "end_line": 30,
+            "end_column": 46,
+            "snippet": "AscendC::GlobalTensor<float> inputScales;AscendC::GlobalTensor<int8_t> outputInt8;"
+          }
+        },
+        {
+          "name": "outputInt8",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "int8_t",
+          "elem_size": 1,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "GlobalTensor declaration",
+          "reuse_group": null,
+          "first_use": 8,
+          "last_use": 8,
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 30,
+            "column": 46,
+            "end_line": 30,
+            "end_column": 87,
+            "snippet": "AscendC::GlobalTensor<float> inputScales;AscendC::GlobalTensor<int8_t> outputInt8;"
+          }
+        }
+      ],
+      "loops": [],
+      "constants": {
+        "EVENT_ID0": 0,
+        "EVENT_ID1": 1,
+        "EVENT_ID2": 2,
+        "EVENT_ID3": 3,
+        "__PCPP__": 1,
+        "__cplusplus": 201703,
+        "__CCE_KT_TEST__": 1,
+        "E8_SIMT_THREAD_COUNT": 128,
+        "SIMD": 0,
+        "SIMT": 1,
+        "Arithmetic": 0,
+        "CompactInt8": 1,
+        "CompactBf16": 2,
+        "AoS": 0,
+        "SoA": 1,
+        "PaddedSoA": 2,
+        "Blocked": 3,
+        "LegacyNearest": 0,
+        "ResidualBits": 1,
+        "SimtThreadCount": 128,
+        "kRows": 16,
+        "kLabels": 512,
+        "kElements": 4096,
+        "kLabelOffset": 0,
+        "kScaleOffset": 1280,
+        "kBf16Offset": 1600,
+        "kInt8Offset": 10048,
+        "kArenaBytes": 14400
+      },
+      "buffer_sizes": {},
+      "buffer_positions": {},
+      "memory_map": [],
+      "trace": [
+        {
+          "index": 0,
+          "kind": "ApiCall",
+          "label": "DataCopy(localLabels, inputLabels, kLabels)",
+          "pipe": "PIPE_MTE2",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 33,
+            "column": 5,
+            "end_line": 33,
+            "end_column": 55,
+            "snippet": "AscendC::DataCopy(localLabels,inputLabels,kLabels);"
+          },
+          "name": "DataCopy",
+          "args": [
+            {
+              "index": 0,
+              "text": "localLabels",
+              "tensor": null,
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "inputLabels",
+              "tensor": "inputLabels",
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "kLabels",
+              "tensor": null,
+              "value": 512
+            }
+          ],
+          "writes": [],
+          "reads": [
+            "inputLabels"
+          ]
+        },
+        {
+          "index": 1,
+          "kind": "ApiCall",
+          "label": "DataCopy(localScales, inputScales, kRows)",
+          "pipe": "PIPE_MTE2",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 34,
+            "column": 5,
+            "end_line": 34,
+            "end_column": 53,
+            "snippet": "AscendC::DataCopy(localScales,inputScales,kRows);"
+          },
+          "name": "DataCopy",
+          "args": [
+            {
+              "index": 0,
+              "text": "localScales",
+              "tensor": null,
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "inputScales",
+              "tensor": "inputScales",
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "kRows",
+              "tensor": null,
+              "value": 16
+            }
+          ],
+          "writes": [],
+          "reads": [
+            "inputScales"
+          ]
+        },
+        {
+          "index": 2,
+          "kind": "SetFlag",
+          "label": "SetFlag<MTE2_S>(0)",
+          "pipe": "PIPE_MTE2",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 35,
+            "column": 5,
+            "end_line": 35,
+            "end_column": 52,
+            "snippet": "AscendC::SetFlag<AscendC::HardEvent::MTE2_S>(0);"
+          },
+          "flag_kind": "SetFlag",
+          "route": "MTE2_S",
+          "src_pipe": "PIPE_MTE2",
+          "dst_pipe": "PIPE_S",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        },
+        {
+          "index": 3,
+          "kind": "WaitFlag",
+          "label": "WaitFlag<MTE2_S>(0)",
+          "pipe": "PIPE_S",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 36,
+            "column": 5,
+            "end_line": 36,
+            "end_column": 53,
+            "snippet": "AscendC::WaitFlag<AscendC::HardEvent::MTE2_S>(0);"
+          },
+          "flag_kind": "WaitFlag",
+          "route": "MTE2_S",
+          "src_pipe": "PIPE_MTE2",
+          "dst_pipe": "PIPE_S",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        },
+        {
+          "index": 4,
+          "kind": "SetFlag",
+          "label": "SetFlag<V_MTE3>(0)",
+          "pipe": "PIPE_V",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 48,
+            "column": 5,
+            "end_line": 48,
+            "end_column": 52,
+            "snippet": "AscendC::SetFlag<AscendC::HardEvent::V_MTE3>(0);"
+          },
+          "flag_kind": "SetFlag",
+          "route": "V_MTE3",
+          "src_pipe": "PIPE_V",
+          "dst_pipe": "PIPE_MTE3",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        },
+        {
+          "index": 5,
+          "kind": "WaitFlag",
+          "label": "WaitFlag<V_MTE3>(0)",
+          "pipe": "PIPE_MTE3",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 49,
+            "column": 5,
+            "end_line": 49,
+            "end_column": 53,
+            "snippet": "AscendC::WaitFlag<AscendC::HardEvent::V_MTE3>(0);"
+          },
+          "flag_kind": "WaitFlag",
+          "route": "V_MTE3",
+          "src_pipe": "PIPE_V",
+          "dst_pipe": "PIPE_MTE3",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        },
+        {
+          "index": 6,
+          "kind": "ApiCall",
+          "label": "DataCopy(outputBf16, localBf16, kElements)",
+          "pipe": "PIPE_MTE3",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 50,
+            "column": 5,
+            "end_line": 50,
+            "end_column": 54,
+            "snippet": "AscendC::DataCopy(outputBf16,localBf16,kElements);"
+          },
+          "name": "DataCopy",
+          "args": [
+            {
+              "index": 0,
+              "text": "outputBf16",
+              "tensor": "outputBf16",
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "localBf16",
+              "tensor": null,
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "kElements",
+              "tensor": null,
+              "value": 4096
+            }
+          ],
+          "writes": [
+            "outputBf16"
+          ],
+          "reads": []
+        },
+        {
+          "index": 7,
+          "kind": "ApiCall",
+          "label": "DataCopy(outputInt8, localInt8, kElements)",
+          "pipe": "PIPE_MTE3",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 51,
+            "column": 5,
+            "end_line": 51,
+            "end_column": 54,
+            "snippet": "AscendC::DataCopy(outputInt8,localInt8,kElements);"
+          },
+          "name": "DataCopy",
+          "args": [
+            {
+              "index": 0,
+              "text": "outputInt8",
+              "tensor": "outputInt8",
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "localInt8",
+              "tensor": null,
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "kElements",
+              "tensor": null,
+              "value": 4096
+            }
+          ],
+          "writes": [
+            "outputInt8"
+          ],
+          "reads": []
+        },
+        {
+          "index": 8,
+          "kind": "SetFlag",
+          "label": "SetFlag<MTE3_S>(0)",
+          "pipe": "PIPE_MTE3",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 52,
+            "column": 5,
+            "end_line": 52,
+            "end_column": 52,
+            "snippet": "AscendC::SetFlag<AscendC::HardEvent::MTE3_S>(0);"
+          },
+          "flag_kind": "SetFlag",
+          "route": "MTE3_S",
+          "src_pipe": "PIPE_MTE3",
+          "dst_pipe": "PIPE_S",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        },
+        {
+          "index": 9,
+          "kind": "WaitFlag",
+          "label": "WaitFlag<MTE3_S>(0)",
+          "pipe": "PIPE_S",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+            "line": 53,
+            "column": 5,
+            "end_line": 53,
+            "end_column": 53,
+            "snippet": "AscendC::WaitFlag<AscendC::HardEvent::MTE3_S>(0);"
+          },
+          "flag_kind": "WaitFlag",
+          "route": "MTE3_S",
+          "src_pipe": "PIPE_MTE3",
+          "dst_pipe": "PIPE_S",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        }
+      ],
+      "synchronisation": {
+        "nodes": [
+          {
+            "index": 2,
+            "label": "SetFlag<MTE2_S>(0)",
+            "pipe": "PIPE_MTE2",
+            "line": 35,
+            "kind": "SetFlag",
+            "loop_id": null
+          },
+          {
+            "index": 3,
+            "label": "WaitFlag<MTE2_S>(0)",
+            "pipe": "PIPE_S",
+            "line": 36,
+            "kind": "WaitFlag",
+            "loop_id": null
+          },
+          {
+            "index": 4,
+            "label": "SetFlag<V_MTE3>(0)",
+            "pipe": "PIPE_V",
+            "line": 48,
+            "kind": "SetFlag",
+            "loop_id": null
+          },
+          {
+            "index": 5,
+            "label": "WaitFlag<V_MTE3>(0)",
+            "pipe": "PIPE_MTE3",
+            "line": 49,
+            "kind": "WaitFlag",
+            "loop_id": null
+          },
+          {
+            "index": 8,
+            "label": "SetFlag<MTE3_S>(0)",
+            "pipe": "PIPE_MTE3",
+            "line": 52,
+            "kind": "SetFlag",
+            "loop_id": null
+          },
+          {
+            "index": 9,
+            "label": "WaitFlag<MTE3_S>(0)",
+            "pipe": "PIPE_S",
+            "line": 53,
+            "kind": "WaitFlag",
+            "loop_id": null
+          }
+        ],
+        "edges": [
+          {
+            "from": 2,
+            "to": 3,
+            "tokens": 0,
+            "kind": "sync",
+            "route": "MTE2_S",
+            "event_id": 0,
+            "loop_carried": false
+          },
+          {
+            "from": 3,
+            "to": 9,
+            "tokens": 0,
+            "kind": "program"
+          },
+          {
+            "from": 4,
+            "to": 5,
+            "tokens": 0,
+            "kind": "sync",
+            "route": "V_MTE3",
+            "event_id": 0,
+            "loop_carried": false
+          },
+          {
+            "from": 5,
+            "to": 8,
+            "tokens": 0,
+            "kind": "program"
+          },
+          {
+            "from": 8,
+            "to": 9,
+            "tokens": 0,
+            "kind": "sync",
+            "route": "MTE3_S",
+            "event_id": 0,
+            "loop_carried": false
+          }
+        ],
+        "sync_pairs": [
+          {
+            "channel": {
+              "route": "MTE2_S",
+              "event_id": 0
+            },
+            "set_index": 2,
+            "set_line": 35,
+            "wait_index": 3,
+            "wait_line": 36,
+            "tokens": 0,
+            "loop_carried": false
+          },
+          {
+            "channel": {
+              "route": "V_MTE3",
+              "event_id": 0
+            },
+            "set_index": 4,
+            "set_line": 48,
+            "wait_index": 5,
+            "wait_line": 49,
+            "tokens": 0,
+            "loop_carried": false
+          },
+          {
+            "channel": {
+              "route": "MTE3_S",
+              "event_id": 0
+            },
+            "set_index": 8,
+            "set_line": 52,
+            "wait_index": 9,
+            "wait_line": 53,
+            "tokens": 0,
+            "loop_carried": false
+          }
+        ],
+        "acyclic": true,
+        "topological_order": [
+          2,
+          4,
+          3,
+          5,
+          8,
+          9
+        ],
+        "cycles": [],
+        "pipes": [
+          "PIPE_MTE2",
+          "PIPE_S",
+          "PIPE_V",
+          "PIPE_MTE3"
+        ],
+        "peeled_loops": []
+      },
+      "performance": {
+        "makespan_cycles": 66,
+        "total_busy_cycles": 10,
+        "total_stall_cycles": 95,
+        "stall_by_route": {
+          "MTE2_S": 33,
+          "V_MTE3": 31,
+          "MTE3_S": 31
+        },
+        "drain_cycles": 32,
+        "overlap_ratio": 0.0379,
+        "active_pipes": 4,
+        "critical_pipe": "PIPE_MTE3",
+        "bottleneck": "DRAIN_BOUND",
+        "pipes": [
+          {
+            "pipe": "PIPE_S",
+            "op_count": 2,
+            "busy_cycles": 2,
+            "idle_cycles": 64,
+            "stall_cycles": 64,
+            "utilization": 0.0303
+          },
+          {
+            "pipe": "PIPE_MTE2",
+            "op_count": 3,
+            "busy_cycles": 3,
+            "idle_cycles": 63,
+            "stall_cycles": 0,
+            "utilization": 0.0455
+          },
+          {
+            "pipe": "PIPE_V",
+            "op_count": 1,
+            "busy_cycles": 1,
+            "idle_cycles": 65,
+            "stall_cycles": 0,
+            "utilization": 0.0152
+          },
+          {
+            "pipe": "PIPE_MTE3",
+            "op_count": 4,
+            "busy_cycles": 4,
+            "idle_cycles": 62,
+            "stall_cycles": 31,
+            "utilization": 0.0606
+          }
+        ],
+        "handoff_cycles": 30
+      },
+      "domain_usage": []
+    }
+  ]
+}

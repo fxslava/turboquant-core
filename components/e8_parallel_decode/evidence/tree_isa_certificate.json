@@ -1,0 +1,307 @@
+{
+  "component:_ZN12ascend_micro2e89DequantVfILj4096ELNS0_14RepresentationE0ELj128ELNS0_11TableLayoutE0ELNS0_7ShapingE1EEEvPU3AS6tPU3AS6fPU3AS6u6__bf16PU3AS6h_simt_entry": {
+    "argmax_trees": [
+      {
+        "pcs": [
+          "0xa20",
+          "0xa28",
+          "0xa30",
+          "0xa38",
+          "0xa50",
+          "0xa60",
+          "0xa88"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      },
+      {
+        "pcs": [
+          "0xf68",
+          "0xf70",
+          "0xf88",
+          "0xf98",
+          "0xfa0",
+          "0xfd0",
+          "0xff8"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      }
+    ],
+    "branch_pcs": [
+      "0x360",
+      "0x15d0"
+    ],
+    "scope": "direct integer-max producer dependency graph; not a one-cycle claim",
+    "scalar_tensor_loops": false,
+    "coordinate_backedges": false
+  },
+  "component:_ZN12ascend_micro12e8_int8_simt6detail9DequantVfILj4096ELNS0_14RepresentationE0ELj128ELNS0_11TableLayoutE0ELNS0_7ShapingE1EEEvPU3AS6tPU3AS6fPU3AS6aPU3AS6h_simt_entry": {
+    "argmax_trees": [
+      {
+        "pcs": [
+          "0x1cf0",
+          "0x1cf8",
+          "0x1d00",
+          "0x1d08",
+          "0x1d20",
+          "0x1d30",
+          "0x1d58"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      },
+      {
+        "pcs": [
+          "0x2238",
+          "0x2240",
+          "0x2258",
+          "0x2268",
+          "0x2270",
+          "0x22a0",
+          "0x22c8"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      }
+    ],
+    "branch_pcs": [
+      "0x1630",
+      "0x29a0"
+    ],
+    "scope": "direct integer-max producer dependency graph; not a one-cycle claim",
+    "scalar_tensor_loops": false,
+    "coordinate_backedges": false
+  },
+  "reader_aiv:_ZN9e8_decode9PackQueryEPU3AS6fS1__simt_entry": {
+    "argmax_trees": [],
+    "branch_pcs": [],
+    "scope": "direct integer-max producer dependency graph; not a one-cycle claim",
+    "scalar_tensor_loops": false,
+    "coordinate_backedges": false
+  },
+  "reader_aiv:_ZN9e8_decode12DecodePackedILb0EEEvPU3AS6tPU3AS6fS4_PU3AS1u6__bf16j_simt_entry": {
+    "argmax_trees": [
+      {
+        "pcs": [
+          "0x3148",
+          "0x3150",
+          "0x3158",
+          "0x3160",
+          "0x3180",
+          "0x3188",
+          "0x31a0"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      },
+      {
+        "pcs": [
+          "0x3688",
+          "0x3690",
+          "0x3698",
+          "0x36a0",
+          "0x36b0",
+          "0x36c8",
+          "0x36f8"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      },
+      {
+        "pcs": [
+          "0x4450",
+          "0x4458",
+          "0x4460",
+          "0x4468",
+          "0x4488",
+          "0x4490",
+          "0x44b8"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      },
+      {
+        "pcs": [
+          "0x4960",
+          "0x4968",
+          "0x4970",
+          "0x4978",
+          "0x4988",
+          "0x49a0",
+          "0x49d0"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      },
+      {
+        "pcs": [
+          "0x5710",
+          "0x5718",
+          "0x5720",
+          "0x5728",
+          "0x5748",
+          "0x5750",
+          "0x5778"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      },
+      {
+        "pcs": [
+          "0x5c20",
+          "0x5c28",
+          "0x5c30",
+          "0x5c38",
+          "0x5c48",
+          "0x5c60",
+          "0x5c90"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      },
+      {
+        "pcs": [
+          "0x69b8",
+          "0x69c0",
+          "0x69c8",
+          "0x69d0",
+          "0x69e8",
+          "0x69f0",
+          "0x6a20"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      },
+      {
+        "pcs": [
+          "0x6eb8",
+          "0x6ec0",
+          "0x6ec8",
+          "0x6ed0",
+          "0x6ee8",
+          "0x6f00",
+          "0x6f30"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      }
+    ],
+    "branch_pcs": [],
+    "scope": "direct integer-max producer dependency graph; not a one-cycle claim",
+    "scalar_tensor_loops": false,
+    "coordinate_backedges": false
+  },
+  "reader_aiv:_ZN9e8_decode12DecodePackedILb1EEEvPU3AS6tPU3AS6fS4_PU3AS1u6__bf16j_simt_entry": {
+    "argmax_trees": [
+      {
+        "pcs": [
+          "0x7ce0",
+          "0x7ce8",
+          "0x7cf0",
+          "0x7cf8",
+          "0x7d10",
+          "0x7d18",
+          "0x7d40"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      },
+      {
+        "pcs": [
+          "0x8228",
+          "0x8230",
+          "0x8238",
+          "0x8240",
+          "0x8260",
+          "0x8268",
+          "0x8298"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      },
+      {
+        "pcs": [
+          "0x9100",
+          "0x9108",
+          "0x9110",
+          "0x9118",
+          "0x9138",
+          "0x9140",
+          "0x9168"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      },
+      {
+        "pcs": [
+          "0x9548",
+          "0x9618",
+          "0x9620",
+          "0x9628",
+          "0x9638",
+          "0x9650",
+          "0x9680"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      },
+      {
+        "pcs": [
+          "0xa418",
+          "0xa420",
+          "0xa428",
+          "0xa430",
+          "0xa450",
+          "0xa458",
+          "0xa480"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      },
+      {
+        "pcs": [
+          "0xa860",
+          "0xa930",
+          "0xa938",
+          "0xa940",
+          "0xa950",
+          "0xa968",
+          "0xa998"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      },
+      {
+        "pcs": [
+          "0xb740",
+          "0xb748",
+          "0xb750",
+          "0xb758",
+          "0xb770",
+          "0xb778",
+          "0xb7a8"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      },
+      {
+        "pcs": [
+          "0xbc38",
+          "0xbc40",
+          "0xbc48",
+          "0xbc50",
+          "0xbc68",
+          "0xbc70",
+          "0xbca0"
+        ],
+        "max_reduction_depth": 3,
+        "max_operations": 7
+      }
+    ],
+    "branch_pcs": [],
+    "scope": "direct integer-max producer dependency graph; not a one-cycle claim",
+    "scalar_tensor_loops": false,
+    "coordinate_backedges": false
+  }
+}

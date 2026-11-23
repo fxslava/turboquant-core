@@ -1,0 +1,6 @@
+* -text whitespace=cr-at-eol
+*.log whitespace=-blank-at-eol
+evidence/sealed_review_packet/** whitespace=-blank-at-eol,-blank-at-eof
+src/e8_fused_decode.cpp whitespace=-blank-at-eof
+src/reader_runner.cpp whitespace=-blank-at-eof
+goldens/* -diff

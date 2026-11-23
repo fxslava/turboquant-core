@@ -1,0 +1,698 @@
+{
+  "feature_policy": "only verified source scheduling predicates; no heldout timing features",
+  "features": [
+    {
+      "case": "baseline",
+      "H": 0,
+      "S": 0,
+      "A": 0,
+      "HS": 0,
+      "source_sha256": "8a51aeb44307dcff878b4665b561476a38b25d0e44ce0732708c9f4d9f4817f8",
+      "source": "/home/dmin/work/checkpoint1_20261123/architect/src/src/prefill/turboquant_reshape_batch.cpp",
+      "evidence_lines": {
+        "hoist": null,
+        "deferred_stage": null,
+        "owner_credit": null
+      }
+    },
+    {
+      "case": "slot03",
+      "H": 1,
+      "S": 0,
+      "A": 0,
+      "HS": 0,
+      "source_sha256": "bcbdcc866230bc72bf47ba3ec4fd025e5a063cd9333a58ee558f37e2924e89ad",
+      "source": "/home/dmin/work/checkpoint2_20261123/slot03/src/src/prefill/turboquant_reshape_batch.cpp",
+      "evidence_lines": {
+        "hoist": 1129,
+        "deferred_stage": null,
+        "owner_credit": null
+      }
+    },
+    {
+      "case": "slot04",
+      "H": 0,
+      "S": 1,
+      "A": 0,
+      "HS": 0,
+      "source_sha256": "1d6d4598ee3d4c3028a2ca3ad554a82a3aac8a809bf82e22d18aa0a088033399",
+      "source": "/home/dmin/work/checkpoint2_20261123/slot04/src/src/prefill/turboquant_reshape_batch.cpp",
+      "evidence_lines": {
+        "hoist": null,
+        "deferred_stage": 716,
+        "owner_credit": null
+      }
+    },
+    {
+      "case": "slot05",
+      "H": 1,
+      "S": 1,
+      "A": 0,
+      "HS": 1,
+      "source_sha256": "796b5096298a712376dfbbd8306311ffdc58c740ebbe6f7364ed3fe0dae66d2a",
+      "source": "/home/dmin/work/checkpoint2_20261123/slot05/src/src/prefill/turboquant_reshape_batch.cpp",
+      "evidence_lines": {
+        "hoist": 1149,
+        "deferred_stage": 716,
+        "owner_credit": null
+      }
+    },
+    {
+      "case": "slot06",
+      "H": 0,
+      "S": 0,
+      "A": 1,
+      "HS": 0,
+      "source_sha256": "de71e0425801e2531b6eded86e4f58dd720873c3d7c61cb44bcd4fd6a6c50e95",
+      "source": "/home/dmin/work/checkpoint2_20261123/slot06/src/src/prefill/turboquant_reshape_batch.cpp",
+      "evidence_lines": {
+        "hoist": null,
+        "deferred_stage": null,
+        "owner_credit": 709
+      }
+    }
+  ],
+  "additive_ridge": {
+    "form": "b0 + bH*H + bS*S + bA*A",
+    "objective": "sum((y-Xb)^2) + 1*sum(b[k]^2 for k>0); intercept unpenalized",
+    "lambda_policy": "lambda=1 fixed for binary feature units, not tuned on holdouts",
+    "full_fit_coefficients": {
+      "intercept": 64285.6,
+      "H": -68.04999999999997,
+      "S": 474.94999999999993,
+      "A": 133.2
+    },
+    "full_design_rank": 4,
+    "in_sample": [
+      {
+        "case": "baseline",
+        "actual_ticks": 64266,
+        "predicted_ticks": 64285.6,
+        "error_ticks": 19.599999999998545,
+        "abs_error_ticks": 19.599999999998545,
+        "abs_error_percent": 0.030498241683002747
+      },
+      {
+        "case": "slot03",
+        "actual_ticks": 63629,
+        "predicted_ticks": 64217.549999999996,
+        "error_ticks": 588.5499999999956,
+        "abs_error_ticks": 588.5499999999956,
+        "abs_error_percent": 0.9249713181096602
+      },
+      {
+        "case": "slot04",
+        "actual_ticks": 64715,
+        "predicted_ticks": 64760.549999999996,
+        "error_ticks": 45.549999999995634,
+        "abs_error_ticks": 45.549999999995634,
+        "abs_error_percent": 0.07038553658347467
+      },
+      {
+        "case": "slot05",
+        "actual_ticks": 65213,
+        "predicted_ticks": 64692.49999999999,
+        "error_ticks": -520.5000000000073,
+        "abs_error_ticks": 520.5000000000073,
+        "abs_error_percent": 0.7981537423519962
+      },
+      {
+        "case": "slot06",
+        "actual_ticks": 64552,
+        "predicted_ticks": 64418.799999999996,
+        "error_ticks": -133.20000000000437,
+        "abs_error_ticks": 133.20000000000437,
+        "abs_error_percent": 0.20634527202875877
+      }
+    ],
+    "loo": {
+      "rows": [
+        {
+          "case": "baseline",
+          "actual_ticks": 64266,
+          "predicted_ticks": 64298.666666666664,
+          "error_ticks": 32.66666666666424,
+          "abs_error_ticks": 32.66666666666424,
+          "abs_error_percent": 0.050830402805004574,
+          "training_rank": 4,
+          "parameters": 4,
+          "unseen_active_features": [],
+          "coefficients": {
+            "intercept": 64298.666666666664,
+            "H": -74.58333333333333,
+            "S": 468.4166666666667,
+            "A": 126.66666666666667
+          }
+        },
+        {
+          "case": "slot03",
+          "actual_ticks": 63629,
+          "predicted_ticks": 64750.04761904762,
+          "error_ticks": 1121.0476190476184,
+          "abs_error_ticks": 1121.0476190476184,
+          "abs_error_percent": 1.7618501297326978,
+          "training_rank": 4,
+          "parameters": 4,
+          "unseen_active_features": [],
+          "coefficients": {
+            "intercept": 64509.80952380953,
+            "H": 240.2380952380952,
+            "S": 222.71428571428572,
+            "A": 21.0952380952381
+          }
+        },
+        {
+          "case": "slot04",
+          "actual_ticks": 64715,
+          "predicted_ticks": 64801.76190476191,
+          "error_ticks": 86.76190476190823,
+          "abs_error_ticks": 86.76190476190823,
+          "abs_error_percent": 0.13406768873044614,
+          "training_rank": 4,
+          "parameters": 4,
+          "unseen_active_features": [],
+          "coefficients": {
+            "intercept": 64302.95238095238,
+            "H": -87.57142857142857,
+            "S": 498.8095238095238,
+            "A": 124.52380952380952
+          }
+        },
+        {
+          "case": "slot05",
+          "actual_ticks": 65213,
+          "predicted_ticks": 64171.99999999999,
+          "error_ticks": -1041.0000000000073,
+          "abs_error_ticks": 1041.0000000000073,
+          "abs_error_percent": 1.5963074847039813,
+          "training_rank": 4,
+          "parameters": 4,
+          "unseen_active_features": [],
+          "coefficients": {
+            "intercept": 64285.6,
+            "H": -328.3,
+            "S": 214.7,
+            "A": 133.20000000000002
+          }
+        },
+        {
+          "case": "slot06",
+          "actual_ticks": 64552,
+          "predicted_ticks": 64219.0,
+          "error_ticks": -333.0,
+          "abs_error_ticks": 333.0,
+          "abs_error_percent": 0.51586318007188,
+          "training_rank": 3,
+          "parameters": 4,
+          "unseen_active_features": [
+            "A"
+          ],
+          "coefficients": {
+            "intercept": 64219.0,
+            "H": -34.75,
+            "S": 508.25,
+            "A": 0.0
+          }
+        }
+      ],
+      "metrics": {
+        "n": 5,
+        "mae_ticks": 522.8952380952396,
+        "rmse_ticks": 701.414642476385,
+        "mape_percent": 0.811783777208802,
+        "max_abs_error_ticks": 1121.0476190476184
+      }
+    },
+    "leave_two_out_pair_ranking": {
+      "rows": [
+        {
+          "a": "baseline",
+          "b": "slot03",
+          "predicted_a": 64731.45454545454,
+          "predicted_b": 64927.36363636363,
+          "actual_a": 64266,
+          "actual_b": 63629,
+          "tie": false,
+          "concordant": false,
+          "training_rank": 3,
+          "parameters": 4,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "baseline",
+          "b": "slot04",
+          "predicted_a": 64336.545454545456,
+          "predicted_b": 64828.63636363637,
+          "actual_a": 64266,
+          "actual_b": 64715,
+          "tie": false,
+          "concordant": true,
+          "training_rank": 3,
+          "parameters": 4,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "baseline",
+          "b": "slot05",
+          "predicted_a": 64298.666666666664,
+          "predicted_b": 64172.00000000001,
+          "actual_a": 64266,
+          "actual_b": 65213,
+          "tie": false,
+          "concordant": false,
+          "training_rank": 3,
+          "parameters": 4,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "baseline",
+          "b": "slot06",
+          "predicted_a": 64172.0,
+          "predicted_b": 64172.0,
+          "actual_a": 64266,
+          "actual_b": 64552,
+          "tie": true,
+          "concordant": false,
+          "training_rank": 3,
+          "parameters": 4,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "slot03",
+          "b": "slot04",
+          "predicted_a": 64748.45454545455,
+          "predicted_b": 64748.45454545455,
+          "actual_a": 63629,
+          "actual_b": 64715,
+          "tie": true,
+          "concordant": false,
+          "training_rank": 3,
+          "parameters": 4,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "slot03",
+          "b": "slot05",
+          "predicted_a": 64449.75,
+          "predicted_b": 64582.375,
+          "actual_a": 63629,
+          "actual_b": 65213,
+          "tie": false,
+          "concordant": true,
+          "training_rank": 3,
+          "parameters": 4,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "slot03",
+          "b": "slot06",
+          "predicted_a": 64739.5,
+          "predicted_b": 64496.625,
+          "actual_a": 63629,
+          "actual_b": 64552,
+          "tie": false,
+          "concordant": false,
+          "training_rank": 3,
+          "parameters": 4,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "slot04",
+          "b": "slot05",
+          "predicted_a": 64178.25,
+          "predicted_b": 63903.625,
+          "actual_a": 64715,
+          "actual_b": 65213,
+          "tie": false,
+          "concordant": false,
+          "training_rank": 3,
+          "parameters": 4,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "slot04",
+          "b": "slot06",
+          "predicted_a": 64739.50000000001,
+          "predicted_b": 64225.12500000001,
+          "actual_a": 64715,
+          "actual_b": 64552,
+          "tie": false,
+          "concordant": true,
+          "training_rank": 3,
+          "parameters": 4,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "slot05",
+          "b": "slot06",
+          "predicted_a": 64172.00000000001,
+          "predicted_b": 64219.00000000001,
+          "actual_a": 65213,
+          "actual_b": 64552,
+          "tie": false,
+          "concordant": false,
+          "training_rank": 3,
+          "parameters": 4,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        }
+      ],
+      "n": 10,
+      "ties": 2,
+      "concordant": 3
+    },
+    "full_fit_order": [
+      "slot03",
+      "baseline",
+      "slot06",
+      "slot05",
+      "slot04"
+    ]
+  },
+  "interaction_ridge": {
+    "form": "b0 + bH*H + bS*S + bA*A + bHS*H*S",
+    "objective": "sum((y-Xb)^2) + 1*sum(b[k]^2 for k>0); intercept unpenalized",
+    "lambda_policy": "lambda=1 fixed for binary feature units, not tuned on holdouts",
+    "full_fit_coefficients": {
+      "intercept": 64285.6,
+      "H": -154.79999999999995,
+      "S": 388.19999999999993,
+      "A": 133.2,
+      "H*S": 347.0
+    },
+    "full_design_rank": 5,
+    "in_sample": [
+      {
+        "case": "baseline",
+        "actual_ticks": 64266,
+        "predicted_ticks": 64285.6,
+        "error_ticks": 19.599999999998545,
+        "abs_error_ticks": 19.599999999998545,
+        "abs_error_percent": 0.030498241683002747
+      },
+      {
+        "case": "slot03",
+        "actual_ticks": 63629,
+        "predicted_ticks": 64130.799999999996,
+        "error_ticks": 501.79999999999563,
+        "abs_error_ticks": 501.79999999999563,
+        "abs_error_percent": 0.7886341133759694
+      },
+      {
+        "case": "slot04",
+        "actual_ticks": 64715,
+        "predicted_ticks": 64673.799999999996,
+        "error_ticks": -41.200000000004366,
+        "abs_error_ticks": 41.200000000004366,
+        "abs_error_percent": 0.06366375647068588
+      },
+      {
+        "case": "slot05",
+        "actual_ticks": 65213,
+        "predicted_ticks": 64865.99999999999,
+        "error_ticks": -347.0000000000073,
+        "abs_error_ticks": 347.0000000000073,
+        "abs_error_percent": 0.5321024949013345
+      },
+      {
+        "case": "slot06",
+        "actual_ticks": 64552,
+        "predicted_ticks": 64418.799999999996,
+        "error_ticks": -133.20000000000437,
+        "abs_error_ticks": 133.20000000000437,
+        "abs_error_percent": 0.20634527202875877
+      }
+    ],
+    "loo": {
+      "rows": [
+        {
+          "case": "baseline",
+          "actual_ticks": 64266,
+          "predicted_ticks": 64298.666666666664,
+          "error_ticks": 32.66666666666424,
+          "abs_error_ticks": 32.66666666666424,
+          "abs_error_percent": 0.050830402805004574,
+          "training_rank": 4,
+          "parameters": 5,
+          "unseen_active_features": [],
+          "coefficients": {
+            "intercept": 64298.666666666664,
+            "H": -161.33333333333331,
+            "S": 381.6666666666667,
+            "A": 126.66666666666667,
+            "H*S": 347.0
+          }
+        },
+        {
+          "case": "slot03",
+          "actual_ticks": 63629,
+          "predicted_ticks": 64667.206896551725,
+          "error_ticks": 1038.2068965517246,
+          "abs_error_ticks": 1038.2068965517246,
+          "abs_error_percent": 1.6316567862951243,
+          "training_rank": 4,
+          "parameters": 5,
+          "unseen_active_features": [],
+          "coefficients": {
+            "intercept": 64493.24137931035,
+            "H": 173.96551724137927,
+            "S": 197.86206896551724,
+            "A": 29.37931034482759,
+            "H*S": 173.96551724137933
+          }
+        },
+        {
+          "case": "slot04",
+          "actual_ticks": 64715,
+          "predicted_ticks": 64629.75862068966,
+          "error_ticks": -85.24137931034056,
+          "abs_error_ticks": 85.24137931034056,
+          "abs_error_percent": 0.13171811683588128,
+          "training_rank": 4,
+          "parameters": 5,
+          "unseen_active_features": [],
+          "coefficients": {
+            "intercept": 64268.551724137935,
+            "H": -139.17241379310346,
+            "S": 361.2068965517241,
+            "A": 141.72413793103448,
+            "H*S": 361.2068965517241
+          }
+        },
+        {
+          "case": "slot05",
+          "actual_ticks": 65213,
+          "predicted_ticks": 64171.99999999999,
+          "error_ticks": -1041.0000000000073,
+          "abs_error_ticks": 1041.0000000000073,
+          "abs_error_percent": 1.5963074847039813,
+          "training_rank": 4,
+          "parameters": 5,
+          "unseen_active_features": [
+            "H*S"
+          ],
+          "coefficients": {
+            "intercept": 64285.6,
+            "H": -328.3,
+            "S": 214.7,
+            "A": 133.20000000000002,
+            "H*S": 0.0
+          }
+        },
+        {
+          "case": "slot06",
+          "actual_ticks": 64552,
+          "predicted_ticks": 64219.0,
+          "error_ticks": -333.0,
+          "abs_error_ticks": 333.0,
+          "abs_error_percent": 0.51586318007188,
+          "training_rank": 4,
+          "parameters": 5,
+          "unseen_active_features": [
+            "A"
+          ],
+          "coefficients": {
+            "intercept": 64219.0,
+            "H": -121.5,
+            "S": 421.5,
+            "A": 0.0,
+            "H*S": 347.0
+          }
+        }
+      ],
+      "metrics": {
+        "n": 5,
+        "mae_ticks": 506.0229885057473,
+        "rmse_ticks": 675.3927396567747,
+        "mape_percent": 0.7852751941423743,
+        "max_abs_error_ticks": 1041.0000000000073
+      }
+    },
+    "leave_two_out_pair_ranking": {
+      "rows": [
+        {
+          "a": "baseline",
+          "b": "slot03",
+          "predicted_a": 64705.33333333332,
+          "predicted_b": 64848.999999999985,
+          "actual_a": 64266,
+          "actual_b": 63629,
+          "tie": false,
+          "concordant": false,
+          "training_rank": 3,
+          "parameters": 5,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "baseline",
+          "b": "slot04",
+          "predicted_a": 64270.933333333334,
+          "predicted_b": 64631.8,
+          "actual_a": 64266,
+          "actual_b": 64715,
+          "tie": false,
+          "concordant": true,
+          "training_rank": 3,
+          "parameters": 5,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "baseline",
+          "b": "slot05",
+          "predicted_a": 64298.666666666664,
+          "predicted_b": 64172.00000000001,
+          "actual_a": 64266,
+          "actual_b": 65213,
+          "tie": false,
+          "concordant": false,
+          "training_rank": 3,
+          "parameters": 5,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "baseline",
+          "b": "slot06",
+          "predicted_a": 64172.0,
+          "predicted_b": 64172.0,
+          "actual_a": 64266,
+          "actual_b": 64552,
+          "tie": true,
+          "concordant": false,
+          "training_rank": 3,
+          "parameters": 5,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "slot03",
+          "b": "slot04",
+          "predicted_a": 64665.50000000001,
+          "predicted_b": 64665.50000000001,
+          "actual_a": 63629,
+          "actual_b": 64715,
+          "tie": true,
+          "concordant": false,
+          "training_rank": 3,
+          "parameters": 5,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "slot03",
+          "b": "slot05",
+          "predicted_a": 64449.75,
+          "predicted_b": 64582.375,
+          "actual_a": 63629,
+          "actual_b": 65213,
+          "tie": false,
+          "concordant": true,
+          "training_rank": 3,
+          "parameters": 5,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "slot03",
+          "b": "slot06",
+          "predicted_a": 64651.181818181816,
+          "predicted_b": 64474.545454545456,
+          "actual_a": 63629,
+          "actual_b": 64552,
+          "tie": false,
+          "concordant": false,
+          "training_rank": 3,
+          "parameters": 5,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "slot04",
+          "b": "slot05",
+          "predicted_a": 64178.25,
+          "predicted_b": 63903.625,
+          "actual_a": 64715,
+          "actual_b": 65213,
+          "tie": false,
+          "concordant": false,
+          "training_rank": 3,
+          "parameters": 5,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "slot04",
+          "b": "slot06",
+          "predicted_a": 64552.45454545456,
+          "predicted_b": 64178.36363636365,
+          "actual_a": 64715,
+          "actual_b": 64552,
+          "tie": false,
+          "concordant": true,
+          "training_rank": 3,
+          "parameters": 5,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        },
+        {
+          "a": "slot05",
+          "b": "slot06",
+          "predicted_a": 64172.00000000001,
+          "predicted_b": 64219.00000000001,
+          "actual_a": 65213,
+          "actual_b": 64552,
+          "tie": false,
+          "concordant": false,
+          "training_rank": 3,
+          "parameters": 5,
+          "caution": "three training cases; ridge prior necessary; not independently identified"
+        }
+      ],
+      "n": 10,
+      "ties": 2,
+      "concordant": 3
+    },
+    "full_fit_order": [
+      "slot03",
+      "baseline",
+      "slot06",
+      "slot04",
+      "slot05"
+    ]
+  },
+  "mean_baseline_loo": {
+    "n": 5,
+    "mae_ticks": 527.5,
+    "rmse_ticks": 653.7320743240307,
+    "mape_percent": 0.8191524942901284,
+    "max_abs_error_ticks": 1057.5
+  },
+  "saturated_factorial_counterexample": {
+    "coefficients_ticks": {
+      "intercept": 64266,
+      "H": -637,
+      "S": 449,
+      "HS": 1135,
+      "A": 286
+    },
+    "in_sample_error": 0,
+    "parameters": 5,
+    "observations": 5,
+    "loo_training_rank_at_most": 4,
+    "missing_crossover": "HS effect absent from all training rows when slot05 held out",
+    "missing_async": "A effect absent from all training rows when slot06 held out",
+    "validity": "interpolation only; not an approved predictive model"
+  }
+}

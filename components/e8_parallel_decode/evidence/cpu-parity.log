@@ -1,0 +1,1 @@
+PASS labels=65536 coordinates=524288 bf16_words=12582912 int8_words=12582912 mismatches=0

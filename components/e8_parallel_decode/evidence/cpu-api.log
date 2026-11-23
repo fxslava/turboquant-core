@@ -1,0 +1,1 @@
+PASS publicBF16+INT8 API labels65536; Arithmetic and4CompactLayouts; LegacyNearest=ResidualBits; zero mismatches

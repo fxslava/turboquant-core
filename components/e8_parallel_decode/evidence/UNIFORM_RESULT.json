@@ -1,0 +1,72 @@
+{
+  "status": "PASS_BOUNDED_ENCODED_SCATTER_TO_CACHE_BASIS_ATTENTION",
+  "fixture": "uniform",
+  "process_total_ticks": 336288,
+  "process_scope": "two single-token encoded scatter launches plus one six-tile fused reader",
+  "fused_reader_participating_frame_start": 5403,
+  "fused_reader_participating_frame_end": 336282,
+  "fused_reader_participating_frame_ticks": 330879,
+  "valid_context_rows": 352,
+  "attention_tiles": 6,
+  "query_heads": 6,
+  "BF16_attention_words_0ULP": 1536,
+  "BF16_KV_witness_words_exact": 196608,
+  "FP32_QK_witness_words_exact": 2304,
+  "full_cache_afterimage_bytes_exact": 208896,
+  "exterior_guard_bytes": 1536,
+  "inactive_output_bytes": 1024,
+  "read_only_inputs_preserved": true,
+  "cross_waits_checked": 47,
+  "cross_release_observation_violations": 0,
+  "cross_terminal_credits": "zero by exact mode2 per-channel quorum/broadcast counts",
+  "runtime_FP32_MMAD": 12,
+  "static_decoder_alias_verified_as_actual_MMAD": true,
+  "inherited_SDK_event7": "seven balanced pairs perAIV; exactfive static instruction-pairs unchanged fromfrozenISA; notnewmanualID7",
+  "runtime_private_warp_bytes": 36864,
+  "runtime_private_per_thread_bytes": 1152,
+  "runtime_divergence_warp_bytes": 1024,
+  "canonical_mapping": [
+    {
+      "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libpem_davinci.so",
+      "sha256": "1a6420fe8123e88a120f0bbfc76710968e6708599c77d80a7b1097aca06eed33"
+    },
+    {
+      "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libruntime_camodel.so",
+      "sha256": "28375f2d4b877f66f77d537d31aae2fb2bb2d142e5b09d6e8bb49c6f791a8aa3"
+    },
+    {
+      "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libmodel_top.so",
+      "sha256": "9263f79799b8f49a5e05d7e34498eeebcd83f72a65279a503d0a556f5dfa14bf"
+    }
+  ],
+  "nonempty_exception_dumps": [],
+  "context_publication_ticks": [
+    112453,
+    166321,
+    220639,
+    275173,
+    329760,
+    334436
+  ],
+  "context_publication_intervals": [
+    53868,
+    54318,
+    54534,
+    54587,
+    4676
+  ],
+  "late_interior_context_interval_estimate": 54560.5,
+  "limitation": "one six-tile process; no cache-persistence, asymptotic throughput, old-aborted-reader speedup, raw-query/inverse-basis production or physicalNPU claim",
+  "source_address_mapping": {
+    "K_packed_bytes_between_label_lanes": 1024,
+    "V_packed_bytes_between_label_lanes": 256,
+    "GM_BF16_witness_bytes_between_label_lanes": 16
+  },
+  "latency_scope": "Source contains integer/FP32 arithmetic,UBloads/stores,explicitGMwitnessstores andpipewaits. Their spans overlap; gaps alone do not identify arithmetic or memory causation.",
+  "artifacts": {
+    "run-uniform.log": "c4af0611c8e848f53c53546c3dbb708499256be57060d2b37880a9449f080b7d",
+    "run-uniform-exit.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "uniform_trace_audit.json": "6016514069cae01aa28de5da46ecadf2e0cf5523e0ad65bcb725a4ebe9994061",
+    "PRE_SIM_MANIFEST.json": "ca0ed2921075cbf5fafffd5ab0227db210a9b47073e24d9fe356c607c08c8a5e"
+  }
+}

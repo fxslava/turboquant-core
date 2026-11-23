@@ -1,0 +1,70 @@
+{
+  "status": "PASS_BOUNDED_COMPONENT",
+  "model": "CAModel dav_3510/CANN9.2.1",
+  "total_ticks": 14856,
+  "scope": "one16-row D256 component;bothnewpublicBF16/INT8Arithmetic APIs;notfusedattentiontiming",
+  "BF16_0ULP_words": 4096,
+  "INT8_exact_bytes": 4096,
+  "guard_bytes": 512,
+  "inputs_preserved": true,
+  "boundary_scales": [
+    "+/-FP32maxsubnormal",
+    "+/-FP32minnormal",
+    "+/-2^-132",
+    "signedzero",
+    "normalcontrols"
+  ],
+  "runtime_private_warp_bytes": 36864,
+  "runtime_private_perthread_bytes": 1152,
+  "runtime_divergence_warp_bytes": 1024,
+  "nonempty_exception_dumps": [],
+  "canonical_mapping": [
+    {
+      "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libpem_davinci.so",
+      "sha256": "1a6420fe8123e88a120f0bbfc76710968e6708599c77d80a7b1097aca06eed33"
+    },
+    {
+      "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libruntime_camodel.so",
+      "sha256": "28375f2d4b877f66f77d537d31aae2fb2bb2d142e5b09d6e8bb49c6f791a8aa3"
+    },
+    {
+      "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libmodel_top.so",
+      "sha256": "9263f79799b8f49a5e05d7e34498eeebcd83f72a65279a503d0a556f5dfa14bf"
+    }
+  ],
+  "hard_events": [
+    {
+      "file": "core0.veccore0.instr_popped_log.dump",
+      "source": "MTE2",
+      "target": "SCALAR",
+      "id": 0,
+      "sets": 1,
+      "waits": 1
+    },
+    {
+      "file": "core0.veccore0.instr_popped_log.dump",
+      "source": "MTE3",
+      "target": "SCALAR",
+      "id": 0,
+      "sets": 1,
+      "waits": 1
+    },
+    {
+      "file": "core0.veccore0.instr_popped_log.dump",
+      "source": "VEC",
+      "target": "MTE3",
+      "id": 0,
+      "sets": 1,
+      "waits": 1
+    }
+  ],
+  "trace_files": [
+    {
+      "file": "core0.veccore0.instr_popped_log.dump",
+      "bytes": 2190164,
+      "sha256": "63be3b663565a497232da23a337f96d0b31a14c9f2cd341c64f8d7e70425d973"
+    }
+  ],
+  "fused_reader_gate": "pendingseparategrant",
+  "hardware_NPU": false
+}

@@ -1,0 +1,97 @@
+--- baseline/e8_fused_decode.cpp
++++ candidate/e8_fused_decode.cpp
+@@ -3,7 +3,9 @@
+ #if defined(__CCE_AICORE__)
+ #include "kernel_operator.h"
+ #include "tensor_api/tensor.h"
+-#include "frozen/routine_e8_bf16_dequant_simt.hpp"
++#include "simt_api/asc_bf16.h"
++#include "simt_api/asc_simt.h"
++#include "e8_parallel_decode.hpp"
+ 
+ namespace e8_decode {
+ // Analyzer layout contracts, checked against the compiled ELF resource ledger.
+@@ -37,28 +39,37 @@
+     return AscendC::LocalTensor<T>(AscendC::TPosition::VECCALC, bytes, n);
+ }
+ 
++template<bool Value,unsigned Coordinate>
++__simt_callee__ inline void StoreCoordinate(unsigned block,int doubled,float scale,
++    bool live,__ubuf__ float* packed,__gm__ bfloat16_t* witness) {
++    const unsigned row=block/32,channel=(block%32)*8+Coordinate;
++    const bfloat16_t rounded=__float2bfloat16_rn(live?
++        (float(doubled)*0.5f)*scale:0.0f);
++    const unsigned dst=Value?(row/8)*256*8+channel*8+row%8:
++        (channel/8)*32*8+row*8+channel%8;
++    packed[dst]=__bfloat162float(rounded);
++    witness[row*256+channel]=rounded;
++}
++
+ template<bool Value>
+-__simt_callee__ inline void DecodeBlock(unsigned block, __ubuf__ const std::uint16_t* labels,
+-    __ubuf__ const float* scales, __ubuf__ float* packed,
+-    __gm__ bfloat16_t* witness, unsigned live_rows) {
+-    const unsigned row = block / 32;
+-    const bool live = row < live_rows;
+-    const unsigned label = live ? labels[block] : 0;
+-    const float scale = live ? scales[row] : 0.0f;
+-    int doubled[8];
+-    ascend_micro::e8::Project(label, doubled);
+-    ascend_micro::e8::ShapeResidualBits(doubled);
+-#pragma unroll
+-    for (unsigned c = 0; c < 8; ++c) {
+-        const unsigned channel = (block % 32) * 8 + c;
+-        const bfloat16_t rounded = __float2bfloat16_rn(live ?
+-            (float(doubled[c]) * 0.5f) * scale : 0.0f);
+-        const unsigned dst = Value ? (row/8)*256*8+channel*8+row%8 :
+-            (channel/8)*32*8+row*8+channel%8;
+-        packed[dst] = __bfloat162float(rounded);
+-        witness[row * 256 + channel] = rounded;
+-    }
+-}
++__simt_callee__ inline void DecodeBlock(unsigned block,__ubuf__ const std::uint16_t* labels,
++    __ubuf__ const float* scales,__ubuf__ float* packed,
++    __gm__ bfloat16_t* witness,unsigned live_rows) {
++    const unsigned row=block/32;
++    const bool live=row<live_rows;
++    const unsigned label=live?labels[block]:0;
++    const float scale=live?scales[row]:0.0f;
++    const auto q=e8_parallel::Decode(label);
++    StoreCoordinate<Value,0>(block,q.a,scale,live,packed,witness);
++    StoreCoordinate<Value,1>(block,q.b,scale,live,packed,witness);
++    StoreCoordinate<Value,2>(block,q.c,scale,live,packed,witness);
++    StoreCoordinate<Value,3>(block,q.d,scale,live,packed,witness);
++    StoreCoordinate<Value,4>(block,q.e,scale,live,packed,witness);
++    StoreCoordinate<Value,5>(block,q.f,scale,live,packed,witness);
++    StoreCoordinate<Value,6>(block,q.g,scale,live,packed,witness);
++    StoreCoordinate<Value,7>(block,q.h,scale,live,packed,witness);
++}
++
+ template<bool Value>
+ __simt_vf__ __launch_bounds__(256) inline void DecodePacked(
+     __ubuf__ std::uint16_t* labels, __ubuf__ float* scales, __ubuf__ float* packed,
+@@ -68,14 +79,17 @@
+     DecodeBlock<Value>(threadIdx.x + 512, labels, scales, packed, witness, live_rows);
+     DecodeBlock<Value>(threadIdx.x + 768, labels, scales, packed, witness, live_rows);
+ }
++template<unsigned Step>
++__simt_callee__ inline void PackQuerySlice(__ubuf__ float* raw,__ubuf__ float* packed) {
++    const unsigned i=threadIdx.x+Step*256,row=i/256,c=i%256;
++    packed[(c/8)*8*8+row*8+c%8]=raw[i];
++}
+ __simt_vf__ __launch_bounds__(256) inline void PackQuery(
+-    __ubuf__ float* raw, __ubuf__ float* packed) {
+-#pragma unroll
+-    for (unsigned step = 0; step < 8; ++step) {
+-        const unsigned i = threadIdx.x + step*256;
+-        const unsigned row = i/256, c=i%256;
+-        packed[(c/8)*8*8 + row*8 + c%8] = raw[i];
+-    }
++    __ubuf__ float* raw,__ubuf__ float* packed) {
++    PackQuerySlice<0>(raw,packed);PackQuerySlice<1>(raw,packed);
++    PackQuerySlice<2>(raw,packed);PackQuerySlice<3>(raw,packed);
++    PackQuerySlice<4>(raw,packed);PackQuerySlice<5>(raw,packed);
++    PackQuerySlice<6>(raw,packed);PackQuerySlice<7>(raw,packed);
+ }
+ 
+ // All recurrence state remains in registers; three explicit head calls avoid

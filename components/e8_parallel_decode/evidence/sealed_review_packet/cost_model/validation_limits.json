@@ -1,0 +1,31 @@
+{
+  "version": "sha256:d956a138411c24e0bfeb556d1419a5c3d1950b99dd46338729d47fcdde1e0017",
+  "source_validation_sha256": "3dc55c91075e5fbf1f92c8c917fc7fd4f5dafdcca8a92c3756a130d7d8fe4270",
+  "training_scope": "dav_3510 CANN 9.2.1 cold six-strip INT4 reshape; no physical NPU claim",
+  "predictor": {
+    "form": "T_hat(N=6, fixed verified geometry)=mu",
+    "mu_ticks": 64475,
+    "equivalent_beta_ticks_per_strip": 10745.833333333334,
+    "identifiable_parameters": 1,
+    "design_rank": 1,
+    "observations": 5,
+    "intercept_and_per_strip_not_separately_identifiable": true,
+    "ranking": "all 10 pairwise comparisons tied; no optimization ranking capability"
+  },
+  "loo_metrics": {
+    "n": 5,
+    "mae_ticks": 527.5,
+    "rmse_ticks": 653.7320743240307,
+    "mape_percent": 0.8191524942901284,
+    "max_abs_error_ticks": 1057.5
+  },
+  "ranking_correct": 0,
+  "ranking_pairs": 10,
+  "ranking_ties": 10,
+  "decoder_application": "ABSTAIN; E8 decoder is outside fixed INT4 reshape geometry and has no validated cross-workload prediction",
+  "cross_workload": {
+    "status": "not estimable",
+    "valid_raw_decode_or_E8_train_test_pairs": 0,
+    "reason": "missing raw provenance and aligned source/ISA features; extrapolating one six-strip geometry is unsupported"
+  }
+}

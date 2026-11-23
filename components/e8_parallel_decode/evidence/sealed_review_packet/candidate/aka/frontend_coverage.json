@@ -1,0 +1,911 @@
+{
+  "schema": 1,
+  "instrumentation_source_sha256": "4e7ddbf23ba25f5b73e961eef4b0250d8e9232cf3a4fdd2f083c63cc492d0d27",
+  "inventory_source_sha256": "f473c6d9d9ab7dd3b2dcbd901b23cd82de7f81770704a3e7875b47647cd71452",
+  "source_identity": {
+    "e8_fused_decode.cpp": "b7adae388ca25e7c2c5b8988a925cf991ff53de718e6fe9afd2a637bb673c19f",
+    "parallel_component.cpp": "47ff8c5c19bb5f532a7f86484cc9826837511edf7e2a459bcdaa08341d7dc789",
+    "e8_parallel_decode.hpp": "a501bb69f4443ca339bdd20f31b63d5f819d322f969bf16f495ca9551c481777",
+    "e8_decode.hpp": "bc1d65f576d74bb59ec41f46203fe5cc56e0003d7196ef800737ef348fa674be",
+    "e8_packet_layout.hpp": "53c18584ae352e9f00677493450504ec013c5fbe970b9e2549251436ea8f5b71",
+    "routines/routine_e8_bf16_dequant_simt.hpp": "38fd578c1753cd37552553400db30689904a34210410e14eddf2e2c0444319e9",
+    "routines/routine_e8_int8_dequant_simt.hpp": "55b848c85991aad6be28fcee8e01bb0ebcc9f37abf2ceb50d764f920b0732950",
+    "reader_runner.cpp": "3b5d0a7b15ea0ea0bb55e07e152e19db3b876abae0f08410d4a57880c9d1acbf",
+    "component_runner.cpp": "3547e0d9287cd1722a138bb8d5b827be9c6d262e353ce401e98588b8357eff14",
+    "compiled_resources.hpp": "4b80bec441b522a43727623ca22d7cd38bb8989875911ca51c6e126e51bb5f3e",
+    "CMakeLists.txt": "8a9114ef173b9b340c1789f43a71d534d08920eb8aeb3e7af8e8b8e3902cdf55",
+    "cmake/CannToolchain.cmake": "4dfca8257b4cde08945b8bf99ae893c9be389fafb772d126cdbdb68ca30bb12d",
+    "cmake/CannWrapperWarnings.cmake": "8289db4c5145b96cc9496b8ec0689f3d2046f1dedb72c10d40a917d3315cb5a1",
+    "cmake/CannDeviceWrapperTargets.cmake": "0e2176309ec83980550a048b17c9a4dbdaeee6221d1ace45092e5b9eb76edd5c"
+  },
+  "cases": {
+    "A_component": {
+      "ambiguous_functions": [
+        [
+          null,
+          "CompactProject"
+        ],
+        [
+          null,
+          "Dequant"
+        ],
+        [
+          null,
+          "DequantVf"
+        ],
+        [
+          null,
+          "Floor8"
+        ],
+        [
+          null,
+          "FromRegisters"
+        ],
+        [
+          null,
+          "PartialOffset"
+        ],
+        [
+          null,
+          "Project"
+        ],
+        [
+          null,
+          "RepairResidual"
+        ],
+        [
+          null,
+          "Shape"
+        ],
+        [
+          null,
+          "ShapeResidualBits"
+        ],
+        [
+          null,
+          "ToRegisters"
+        ]
+      ],
+      "definitions": [
+        {
+          "owner": null,
+          "name": "Xor8"
+        },
+        {
+          "owner": null,
+          "name": "Sum8"
+        },
+        {
+          "owner": null,
+          "name": "Max2"
+        },
+        {
+          "owner": null,
+          "name": "Max8"
+        },
+        {
+          "owner": null,
+          "name": "RepairKey"
+        },
+        {
+          "owner": null,
+          "name": "Repair"
+        },
+        {
+          "owner": null,
+          "name": "Project"
+        },
+        {
+          "owner": null,
+          "name": "ShapeResidualBits"
+        },
+        {
+          "owner": null,
+          "name": "Decode"
+        },
+        {
+          "owner": null,
+          "name": "PartialOffset"
+        },
+        {
+          "owner": null,
+          "name": "CompactProject"
+        },
+        {
+          "owner": null,
+          "name": "ToRegisters"
+        },
+        {
+          "owner": null,
+          "name": "FromRegisters"
+        },
+        {
+          "owner": null,
+          "name": "Floor8"
+        },
+        {
+          "owner": null,
+          "name": "RepairResidual"
+        },
+        {
+          "owner": null,
+          "name": "Shape"
+        },
+        {
+          "owner": null,
+          "name": "DequantVf"
+        },
+        {
+          "owner": null,
+          "name": "Dequant"
+        },
+        {
+          "owner": null,
+          "name": "PhysicalInt8"
+        },
+        {
+          "owner": null,
+          "name": "e8_parallel_component"
+        },
+        {
+          "owner": null,
+          "name": "launch_e8_parallel_component"
+        }
+      ],
+      "kernels": [
+        {
+          "name": "Dequant",
+          "ops": 1,
+          "inlined": []
+        },
+        {
+          "name": "Dequant",
+          "ops": 1,
+          "inlined": []
+        },
+        {
+          "name": "e8_parallel_component",
+          "ops": 10,
+          "inlined": []
+        },
+        {
+          "name": "launch_e8_parallel_component",
+          "ops": 10,
+          "inlined": [
+            "e8_parallel_component"
+          ]
+        }
+      ],
+      "inline_attempts": {
+        "DequantVf<Elements, R, Threads, Layout, ShapeAlgorithm>|resolved=False": 2,
+        "dim3|resolved=False": 2,
+        "reinterpret_cast|resolved=False": 12,
+        "GetPhyAddr|resolved=False": 8,
+        "KERNEL_TASK_TYPE_DEFAULT|resolved=False": 2,
+        "InitSocState|resolved=False": 2,
+        "static_cast|resolved=False": 2,
+        "LocalTensor|resolved=False": 10,
+        "DataSyncBarrier|resolved=False": 6,
+        "Dequant|resolved=False": 4,
+        "e8_parallel_component(__aka_launch_config(1,nullptr,stream))|resolved=False": 1,
+        "e8_parallel_component|resolved=True": 1,
+        "__aka_launch_config|resolved=False": 1
+      },
+      "source": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/parallel_component.cpp",
+      "raw_codes": []
+    },
+    "A_reader": {
+      "ambiguous_functions": [],
+      "definitions": [
+        {
+          "owner": null,
+          "name": "Round32"
+        },
+        {
+          "owner": null,
+          "name": "PlaneBase"
+        },
+        {
+          "owner": null,
+          "name": "Labels"
+        },
+        {
+          "owner": null,
+          "name": "Scales"
+        },
+        {
+          "owner": null,
+          "name": "Packed"
+        },
+        {
+          "owner": null,
+          "name": "KeyPackedIndex"
+        },
+        {
+          "owner": null,
+          "name": "ValuePackedIndex"
+        },
+        {
+          "owner": null,
+          "name": "Xor8"
+        },
+        {
+          "owner": null,
+          "name": "Sum8"
+        },
+        {
+          "owner": null,
+          "name": "Max2"
+        },
+        {
+          "owner": null,
+          "name": "Max8"
+        },
+        {
+          "owner": null,
+          "name": "RepairKey"
+        },
+        {
+          "owner": null,
+          "name": "Repair"
+        },
+        {
+          "owner": null,
+          "name": "Project"
+        },
+        {
+          "owner": null,
+          "name": "ShapeResidualBits"
+        },
+        {
+          "owner": null,
+          "name": "Decode"
+        },
+        {
+          "owner": null,
+          "name": "Sync"
+        },
+        {
+          "owner": null,
+          "name": "L1"
+        },
+        {
+          "owner": null,
+          "name": "Ub"
+        },
+        {
+          "owner": null,
+          "name": "StoreCoordinate"
+        },
+        {
+          "owner": null,
+          "name": "DecodeBlock"
+        },
+        {
+          "owner": null,
+          "name": "DecodePacked"
+        },
+        {
+          "owner": null,
+          "name": "PackQuerySlice"
+        },
+        {
+          "owner": null,
+          "name": "PackQuery"
+        },
+        {
+          "owner": null,
+          "name": "SoftmaxHead"
+        },
+        {
+          "owner": null,
+          "name": "Softmax"
+        },
+        {
+          "owner": null,
+          "name": "NormalizeHead"
+        },
+        {
+          "owner": null,
+          "name": "Normalize"
+        },
+        {
+          "owner": null,
+          "name": "BindPlane"
+        },
+        {
+          "owner": null,
+          "name": "BindBuffers"
+        },
+        {
+          "owner": null,
+          "name": "PackProbabilities"
+        },
+        {
+          "owner": null,
+          "name": "StagePlane"
+        },
+        {
+          "owner": null,
+          "name": "StageTile"
+        },
+        {
+          "owner": null,
+          "name": "StageQuery"
+        },
+        {
+          "owner": null,
+          "name": "VectorTile"
+        },
+        {
+          "owner": null,
+          "name": "Product"
+        },
+        {
+          "owner": null,
+          "name": "CubeTile"
+        },
+        {
+          "owner": null,
+          "name": "e8_fused_decode_fp32"
+        },
+        {
+          "owner": null,
+          "name": "launch_e8_fused_decode_fp32"
+        }
+      ],
+      "kernels": [
+        {
+          "name": "e8_fused_decode_fp32",
+          "ops": 520,
+          "inlined": [
+            "L1",
+            "Sync",
+            "Sync",
+            "Sync",
+            "Ub",
+            "Sync",
+            "Product",
+            "Sync",
+            "Sync",
+            "Ub",
+            "Sync",
+            "Product",
+            "CubeTile",
+            "Sync",
+            "Sync",
+            "Ub",
+            "Sync",
+            "Product",
+            "Sync",
+            "Sync",
+            "Ub",
+            "Sync",
+            "Product",
+            "CubeTile",
+            "Sync",
+            "Sync",
+            "Ub",
+            "Sync",
+            "Product",
+            "Sync",
+            "Sync",
+            "Ub",
+            "Sync",
+            "Product",
+            "CubeTile",
+            "Sync",
+            "Sync",
+            "Ub",
+            "Sync",
+            "Product",
+            "Sync",
+            "Sync",
+            "Ub",
+            "Sync",
+            "Product",
+            "CubeTile",
+            "Sync",
+            "Ub",
+            "Ub",
+            "Ub",
+            "BindPlane",
+            "Ub",
+            "Ub",
+            "Ub",
+            "BindPlane",
+            "Ub",
+            "Ub",
+            "Ub",
+            "BindPlane",
+            "Ub",
+            "Ub",
+            "Ub",
+            "BindPlane",
+            "Ub",
+            "Ub",
+            "Ub",
+            "Ub",
+            "Ub",
+            "Ub",
+            "Ub",
+            "Ub",
+            "BindBuffers",
+            "Sync",
+            "Sync",
+            "PackQuerySlice",
+            "PackQuerySlice",
+            "PackQuerySlice",
+            "PackQuerySlice",
+            "PackQuerySlice",
+            "PackQuerySlice",
+            "PackQuerySlice",
+            "PackQuerySlice",
+            "PackQuery",
+            "Sync",
+            "L1",
+            "Sync",
+            "StageQuery",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "StageTile",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "StageTile",
+            "Sync",
+            "Sync",
+            "SoftmaxHead",
+            "SoftmaxHead",
+            "SoftmaxHead",
+            "Softmax",
+            "PackProbabilities",
+            "PackProbabilities",
+            "PackProbabilities",
+            "Sync",
+            "L1",
+            "Sync",
+            "Sync",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "StageTile",
+            "VectorTile",
+            "Sync",
+            "Sync",
+            "SoftmaxHead",
+            "SoftmaxHead",
+            "SoftmaxHead",
+            "Softmax",
+            "PackProbabilities",
+            "PackProbabilities",
+            "PackProbabilities",
+            "Sync",
+            "L1",
+            "Sync",
+            "Sync",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "StageTile",
+            "VectorTile",
+            "Sync",
+            "Sync",
+            "SoftmaxHead",
+            "SoftmaxHead",
+            "SoftmaxHead",
+            "Softmax",
+            "PackProbabilities",
+            "PackProbabilities",
+            "PackProbabilities",
+            "Sync",
+            "L1",
+            "Sync",
+            "Sync",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "StageTile",
+            "VectorTile",
+            "Sync",
+            "Sync",
+            "SoftmaxHead",
+            "SoftmaxHead",
+            "SoftmaxHead",
+            "Softmax",
+            "PackProbabilities",
+            "PackProbabilities",
+            "PackProbabilities",
+            "Sync",
+            "L1",
+            "Sync",
+            "Sync",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "StageTile",
+            "VectorTile",
+            "NormalizeHead",
+            "NormalizeHead",
+            "NormalizeHead",
+            "Normalize",
+            "Sync",
+            "Sync"
+          ]
+        },
+        {
+          "name": "launch_e8_fused_decode_fp32",
+          "ops": 520,
+          "inlined": [
+            "L1",
+            "Sync",
+            "Sync",
+            "Sync",
+            "Ub",
+            "Sync",
+            "Product",
+            "Sync",
+            "Sync",
+            "Ub",
+            "Sync",
+            "Product",
+            "CubeTile",
+            "Sync",
+            "Sync",
+            "Ub",
+            "Sync",
+            "Product",
+            "Sync",
+            "Sync",
+            "Ub",
+            "Sync",
+            "Product",
+            "CubeTile",
+            "Sync",
+            "Sync",
+            "Ub",
+            "Sync",
+            "Product",
+            "Sync",
+            "Sync",
+            "Ub",
+            "Sync",
+            "Product",
+            "CubeTile",
+            "Sync",
+            "Sync",
+            "Ub",
+            "Sync",
+            "Product",
+            "Sync",
+            "Sync",
+            "Ub",
+            "Sync",
+            "Product",
+            "CubeTile",
+            "Sync",
+            "Ub",
+            "Ub",
+            "Ub",
+            "BindPlane",
+            "Ub",
+            "Ub",
+            "Ub",
+            "BindPlane",
+            "Ub",
+            "Ub",
+            "Ub",
+            "BindPlane",
+            "Ub",
+            "Ub",
+            "Ub",
+            "BindPlane",
+            "Ub",
+            "Ub",
+            "Ub",
+            "Ub",
+            "Ub",
+            "Ub",
+            "Ub",
+            "Ub",
+            "BindBuffers",
+            "Sync",
+            "Sync",
+            "PackQuerySlice",
+            "PackQuerySlice",
+            "PackQuerySlice",
+            "PackQuerySlice",
+            "PackQuerySlice",
+            "PackQuerySlice",
+            "PackQuerySlice",
+            "PackQuerySlice",
+            "PackQuery",
+            "Sync",
+            "L1",
+            "Sync",
+            "StageQuery",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "StageTile",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "StageTile",
+            "Sync",
+            "Sync",
+            "SoftmaxHead",
+            "SoftmaxHead",
+            "SoftmaxHead",
+            "Softmax",
+            "PackProbabilities",
+            "PackProbabilities",
+            "PackProbabilities",
+            "Sync",
+            "L1",
+            "Sync",
+            "Sync",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "StageTile",
+            "VectorTile",
+            "Sync",
+            "Sync",
+            "SoftmaxHead",
+            "SoftmaxHead",
+            "SoftmaxHead",
+            "Softmax",
+            "PackProbabilities",
+            "PackProbabilities",
+            "PackProbabilities",
+            "Sync",
+            "L1",
+            "Sync",
+            "Sync",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "StageTile",
+            "VectorTile",
+            "Sync",
+            "Sync",
+            "SoftmaxHead",
+            "SoftmaxHead",
+            "SoftmaxHead",
+            "Softmax",
+            "PackProbabilities",
+            "PackProbabilities",
+            "PackProbabilities",
+            "Sync",
+            "L1",
+            "Sync",
+            "Sync",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "StageTile",
+            "VectorTile",
+            "Sync",
+            "Sync",
+            "SoftmaxHead",
+            "SoftmaxHead",
+            "SoftmaxHead",
+            "Softmax",
+            "PackProbabilities",
+            "PackProbabilities",
+            "PackProbabilities",
+            "Sync",
+            "L1",
+            "Sync",
+            "Sync",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "Sync",
+            "Sync",
+            "L1",
+            "L1",
+            "Sync",
+            "StagePlane",
+            "StageTile",
+            "VectorTile",
+            "NormalizeHead",
+            "NormalizeHead",
+            "NormalizeHead",
+            "Normalize",
+            "Sync",
+            "Sync",
+            "e8_fused_decode_fp32"
+          ]
+        }
+      ],
+      "inline_attempts": {
+        "KERNEL_TASK_TYPE_DEFAULT|resolved=False": 2,
+        "InitSocState|resolved=False": 2,
+        "static_cast|resolved=False": 58,
+        "reinterpret_cast|resolved=False": 226,
+        "SetMMRowMajor|resolved=False": 2,
+        "SetHF32Mode|resolved=False": 2,
+        "LocalTensor|resolved=False": 116,
+        "L1|resolved=True": 60,
+        "Sync|resolved=True": 176,
+        "CrossCoreWaitFlag|resolved=False": 44,
+        "make_tensor|resolved=False": 32,
+        "make_mem_ptr|resolved=False": 32,
+        "make_frame_layout|resolved=False": 32,
+        "copy|resolved=False": 32,
+        "make_copy|resolved=False": 32,
+        "MmadParams|resolved=False": 16,
+        "Ub|resolved=True": 56,
+        "Product|resolved=True": 16,
+        "CrossCoreSetFlag|resolved=False": 48,
+        "CubeTile|resolved=True": 8,
+        "BindPlane|resolved=True": 8,
+        "BindBuffers|resolved=True": 2,
+        "GetSubBlockIdx|resolved=False": 2,
+        "PackQuerySlice|resolved=True": 16,
+        "PackQuery|resolved=True": 2,
+        "dim3|resolved=False": 26,
+        "GetPhyAddr|resolved=False": 112,
+        "DataSyncBarrier|resolved=False": 26,
+        "StageQuery|resolved=True": 2,
+        "GetValue|resolved=False": 12,
+        "DecodePacked<(Plane==1)>|resolved=False": 24,
+        "StagePlane|resolved=True": 24,
+        "StageTile|resolved=True": 12,
+        "CreateMask|resolved=False": 54,
+        "UpdateMask|resolved=False": 24,
+        "Reduce|resolved=False": 48,
+        "SoftmaxHead|resolved=True": 24,
+        "Softmax|resolved=True": 8,
+        "PackProbabilities|resolved=True": 24,
+        "VectorTile|resolved=True": 8,
+        "NormalizeHead|resolved=True": 6,
+        "Normalize|resolved=True": 2,
+        "invalid_argument|resolved=False": 1,
+        "e8_fused_decode_fp32(__aka_launch_config(1,nullptr,stream))|resolved=False": 1,
+        "e8_fused_decode_fp32|resolved=True": 1,
+        "__aka_launch_config|resolved=False": 1
+      },
+      "source": "/home/dmin/work/checkpoint2_20261123/parallel_decode/src/e8_fused_decode.cpp",
+      "raw_codes": [
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA1004",
+        "AKA9001",
+        "AKA9001",
+        "AKA3009",
+        "AKA3002",
+        "AKA3002"
+      ]
+    }
+  },
+  "coverage_limitations": [
+    "Component Dequant and DequantVf template calls are unresolved/ambiguous in the current AKA frontend; zero component diagnostics does not prove their bodies.",
+    "Reader DecodePacked<(Plane==1)> calls are unresolved; R8 decoder bodies require independent source and compiled-ISA review.",
+    "A failed inline attempt for a named SDK intrinsic may still have a built-in operation model; inline resolution is not by itself a semantic-coverage claim.",
+    "Applied reader origin/fingerprint handling changes diagnostic interpretation, not opaque-template coverage."
+  ]
+}

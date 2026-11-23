@@ -1,0 +1,15 @@
+{
+  "candidate": "E8_parallel_component_and_fused_reader",
+  "manifest_sha256": "6cd81652cadafa3c1cfddaaf38291fb7df5b0859a92fccc0c7759ee84288f550",
+  "model": "gpt-6.2-sol",
+  "history": "none for every reviewer",
+  "passes": [
+    {"reviewer": "sol_decode_p1", "verdict": "PASS", "artifact": "sol_decode_p1/verdict.md"},
+    {"reviewer": "sol_decode_p2", "verdict": "PASS", "artifact": "sol_decode_p2/verdict.md"},
+    {"reviewer": "sol_decode_p3", "verdict": "PASS", "artifact": "sol_decode_p3/verdict.md"}
+  ],
+  "admission": "authorized serialized CAModel only",
+  "cost_ranking": "ABSTAIN outside calibrated domain",
+  "numerical_evidence": "separate COMPONENT_RESULT.json and UNIFORM_RESULT.json",
+  "physical_NPU": "not tested"
+}

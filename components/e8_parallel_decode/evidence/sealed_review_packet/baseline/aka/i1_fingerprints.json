@@ -1,0 +1,3055 @@
+{
+  "schema_version": 1,
+  "findings": [
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|Abs() argument 1 ('src') must live in UB, but 'query' is in GM (TPosition::GM)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Abs() argument 1 ('src') must live in UB, but 'query' is in GM (TPosition::GM)"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|Reg::Muls() argument 0 ('dst') must live in UB, but 'v' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Reg::Muls() argument 0 ('dst') must live in UB, but 'v' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|Reg::Muls() argument 1 ('src') must live in UB, but 'v' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Reg::Muls() argument 1 ('src') must live in UB, but 'v' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|Reg::Select() argument 0 ('dst') must live in UB, but 'v' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Reg::Select() argument 0 ('dst') must live in UB, but 'v' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|Reg::Select() argument 1 ('mask') must live in UB, but 'even' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Reg::Select() argument 1 ('mask') must live in UB, but 'even' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|Reg::Select() argument 1 ('mask') must live in UB, but 'sum' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Reg::Select() argument 1 ('mask') must live in UB, but 'sum' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|Reg::Select() argument 2 ('src0') must live in UB, but 'diff' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Reg::Select() argument 2 ('src0') must live in UB, but 'diff' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|Reg::Select() argument 2 ('src0') must live in UB, but 'odd' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Reg::Select() argument 2 ('src0') must live in UB, but 'odd' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|Reg::Sub() argument 0 ('dst') must live in UB, but 'd0' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Reg::Sub() argument 0 ('dst') must live in UB, but 'd0' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|Reg::Sub() argument 0 ('dst') must live in UB, but 'd1' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Reg::Sub() argument 0 ('dst') must live in UB, but 'd1' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|Reg::Sub() argument 0 ('dst') must live in UB, but 'diff' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Reg::Sub() argument 0 ('dst') must live in UB, but 'diff' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|Reg::Sub() argument 1 ('src0') must live in UB, but 'even' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Reg::Sub() argument 1 ('src0') must live in UB, but 'even' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|Reg::Sub() argument 1 ('src0') must live in UB, but 'v' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Reg::Sub() argument 1 ('src0') must live in UB, but 'v' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|Reg::Sub() argument 2 ('src1') must live in UB, but 'odd' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Reg::Sub() argument 2 ('src1') must live in UB, but 'odd' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|Reg::Sub() argument 2 ('src1') must live in UB, but 'v' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Reg::Sub() argument 2 ('src1') must live in UB, but 'v' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|TPosition::VECCALC is not a valid Ascend 950PR tensor allocation domain; use VECIN, VECOUT, GM, or TSCM as appropriate",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "TPosition::VECCALC is not a valid Ascend 950PR tensor allocation domain; use VECIN, VECOUT, GM, or TSCM as appropriate"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|acc: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "acc: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|accBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "accBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|arena: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 2,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "arena: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|bankSkewBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "bankSkewBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|blockBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "blockBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|constBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "constBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|contextBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "contextBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|float_buf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "float_buf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|in_buf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "in_buf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|keyL1Buf_: TPosition::B1 is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "keyL1Buf_: TPosition::B1 is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|kvBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "kvBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|lane1: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "lane1: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|lane2: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "lane2: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|mask: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "mask: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|maskBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "maskBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|nzOperandBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "nzOperandBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|operandL0aBuf_: TPosition::A2 is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "operandL0aBuf_: TPosition::A2 is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|operandL0bBuf_: TPosition::B2 is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "operandL0bBuf_: TPosition::B2 is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|outBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "outBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|outUbBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "outUbBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|packed: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "packed: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|panelUbBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "panelUbBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|partialL1Buf_: TPosition::B1 is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "partialL1Buf_: TPosition::B1 is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|probOperandBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "probOperandBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|probabilitySkewBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "probabilitySkewBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|probsL1Buf_: TPosition::A1 is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "probsL1Buf_: TPosition::A1 is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|productL0cBuf_: TPosition::CO1 is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "productL0cBuf_: TPosition::CO1 is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|productUbBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "productUbBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|queryIn: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "queryIn: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|queryInBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "queryInBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|queryL1Buf_: TPosition::A1 is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "queryL1Buf_: TPosition::A1 is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|queryOperand: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "queryOperand: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|queryOperandBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "queryOperandBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|queryWorkBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "queryWorkBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|query_base: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 11,
+      "message": "query_base: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|query_f32: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 11,
+      "message": "query_f32: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|query_resident: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 11,
+      "message": "query_resident: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|reduce: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 2,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "reduce: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|reduceBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "reduceBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|scaleIndex: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "scaleIndex: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|scaleIndexBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "scaleIndexBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|scaleTileBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "scaleTileBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|scoreBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "scoreBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|scratchBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "scratchBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|sign_buf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "sign_buf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|signs: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 11,
+      "message": "signs: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|signs_base: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 11,
+      "message": "signs_base: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|sliceL1Buf_: TPosition::B1 is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "sliceL1Buf_: TPosition::B1 is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|stateBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "stateBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|statsUbBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "statsUbBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|unitScaleL1Buf_: TPosition::B1 is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "unitScaleL1Buf_: TPosition::B1 is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|unitScaleUbBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "unitScaleUbBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|valueL1Buf_: TPosition::B1 is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "valueL1Buf_: TPosition::B1 is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|weightL1Buf_: TPosition::A1 is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "weightL1Buf_: TPosition::A1 is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|workBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "workBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1004|zeroUbBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 14,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "zeroUbBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'addend' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 2,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "tensor 'addend' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'bf16View' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 9,
+      "message": "tensor 'bf16View' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'bins' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 2,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "tensor 'bins' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'cube' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "tensor 'cube' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'dst' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "tensor 'dst' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'dstL0a' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 10,
+      "message": "tensor 'dstL0a' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'dstL0b' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 10,
+      "message": "tensor 'dstL0b' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'halfView' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 2,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "tensor 'halfView' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'intView' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 2,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "tensor 'intView' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'leftL0a' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 10,
+      "message": "tensor 'leftL0a' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'levels' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 9,
+      "message": "tensor 'levels' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'maxOffsets' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "tensor 'maxOffsets' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'nibbles' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 9,
+      "message": "tensor 'nibbles' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'offsets' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 2,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "tensor 'offsets' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'planes' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 9,
+      "message": "tensor 'planes' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'predicate' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "tensor 'predicate' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'product' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 10,
+      "message": "tensor 'product' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'queryL1' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "tensor 'queryL1' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'record' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "tensor 'record' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'rightL0b' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 10,
+      "message": "tensor 'rightL0b' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'runMax' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "tensor 'runMax' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'signBits' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 2,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "tensor 'signBits' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'src' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "tensor 'src' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'srcL1' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 10,
+      "message": "tensor 'srcL1' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'stats' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "tensor 'stats' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'sum' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 2,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "tensor 'sum' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'sumOffsets' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "tensor 'sumOffsets' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'tails' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "tensor 'tails' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'woven' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 9,
+      "message": "tensor 'woven' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA1009|tensor 'zero' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "tensor 'zero' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3001|PipeBarrier(PIPE_ALL) drains every pipeline, serialising MTE2, Vector, MTE3 and Cube at this point and discarding the overlap that double buffering exists to create",
+      "count": 1,
+      "code": "AKA3001",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "PipeBarrier(PIPE_ALL) drains every pipeline, serialising MTE2, Vector, MTE3 and Cube at this point and discarding the overlap that double buffering exists to create"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'acc' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "tensor 'acc' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'arena' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 2,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "tensor 'arena' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'in' has an unresolvable base offset and byte size (offset=src + (static_cast<std::uint32_t>(r) * 256), size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "tensor 'in' has an unresolvable base offset and byte size (offset=src + (static_cast<std::uint32_t>(r) * 256), size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'lane1' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "tensor 'lane1' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'lane2' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "tensor 'lane2' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'mask' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "tensor 'mask' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'out' has an unresolvable base offset and byte size (offset=dst + (static_cast<std::uint32_t>(r) * 256), size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "tensor 'out' has an unresolvable base offset and byte size (offset=dst + (static_cast<std::uint32_t>(r) * 256), size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'packed' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "tensor 'packed' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'queryIn' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "tensor 'queryIn' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'queryOperand' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "tensor 'queryOperand' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'query_base' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 11,
+      "message": "tensor 'query_base' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'query_f32' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 11,
+      "message": "tensor 'query_f32' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'query_resident' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 11,
+      "message": "tensor 'query_resident' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'reduce' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 2,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "tensor 'reduce' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'scaleIndex' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "tensor 'scaleIndex' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'signs' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 11,
+      "message": "tensor 'signs' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3002|tensor 'signs_base' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 11,
+      "message": "tensor 'signs_base' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3010|SetFlag<MTE2_V>(readEvents_[slot]) uses an event id the analyzer cannot resolve (readEvents_[slot]); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "SetFlag<MTE2_V>(readEvents_[slot]) uses an event id the analyzer cannot resolve (readEvents_[slot]); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3010|SetFlag<MTE2_V>(ready) uses an event id the analyzer cannot resolve (ready); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "SetFlag<MTE2_V>(ready) uses an event id the analyzer cannot resolve (ready); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3010|WaitFlag<MTE2_V>(queryReady) uses an event id the analyzer cannot resolve (queryReady); its pairing is unchecked",
+      "count": 2,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "WaitFlag<MTE2_V>(queryReady) uses an event id the analyzer cannot resolve (queryReady); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3010|WaitFlag<MTE2_V>(readEvents_[0]) uses an event id the analyzer cannot resolve (readEvents_[0]); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "WaitFlag<MTE2_V>(readEvents_[0]) uses an event id the analyzer cannot resolve (readEvents_[0]); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3010|WaitFlag<MTE2_V>(readEvents_[slot]) uses an event id the analyzer cannot resolve (readEvents_[slot]); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "WaitFlag<MTE2_V>(readEvents_[slot]) uses an event id the analyzer cannot resolve (readEvents_[slot]); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'accBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantPartialReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'accBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantPartialReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'accBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'accBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'bankSkewBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'bankSkewBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'blockBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantPartialReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'blockBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantPartialReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'constBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantCodec'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Allocator handle 'constBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantCodec'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'constBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantModeCodec'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 9,
+      "message": "Allocator handle 'constBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantModeCodec'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'contextBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'contextBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'float_buf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantQueryBasis'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 11,
+      "message": "Allocator handle 'float_buf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantQueryBasis'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'in_buf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantQueryBasis'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 11,
+      "message": "Allocator handle 'in_buf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantQueryBasis'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'keyL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::B1>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 10,
+      "message": "Allocator handle 'keyL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::B1>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'kvBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'kvBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'maskBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'maskBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'nzOperandBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'nzOperandBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'operandL0aBuf_' of type 'AscendC::TBuf<AscendC::TPosition::A2>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'operandL0aBuf_' of type 'AscendC::TBuf<AscendC::TPosition::A2>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'operandL0aBuf_' of type 'AscendC::TBuf<AscendC::TPosition::A2>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 10,
+      "message": "Allocator handle 'operandL0aBuf_' of type 'AscendC::TBuf<AscendC::TPosition::A2>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'operandL0aBuf_' of type 'AscendC::TBuf<AscendC::TPosition::A2>' declared as class member in 'TurboQuantGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'operandL0aBuf_' of type 'AscendC::TBuf<AscendC::TPosition::A2>' declared as class member in 'TurboQuantGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'operandL0bBuf_' of type 'AscendC::TBuf<AscendC::TPosition::B2>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'operandL0bBuf_' of type 'AscendC::TBuf<AscendC::TPosition::B2>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'operandL0bBuf_' of type 'AscendC::TBuf<AscendC::TPosition::B2>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 10,
+      "message": "Allocator handle 'operandL0bBuf_' of type 'AscendC::TBuf<AscendC::TPosition::B2>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'operandL0bBuf_' of type 'AscendC::TBuf<AscendC::TPosition::B2>' declared as class member in 'TurboQuantGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'operandL0bBuf_' of type 'AscendC::TBuf<AscendC::TPosition::B2>' declared as class member in 'TurboQuantGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'outBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantPartialReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'outBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantPartialReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'outBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'outBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'outUbBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'outUbBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'outUbBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'outUbBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'panelUbBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'panelUbBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'partialL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::B1>' declared as class member in 'TurboQuantGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'partialL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::B1>' declared as class member in 'TurboQuantGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'probOperandBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'probOperandBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'probabilitySkewBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'probabilitySkewBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'probsL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::A1>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 10,
+      "message": "Allocator handle 'probsL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::A1>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'productL0cBuf_' of type 'AscendC::TBuf<AscendC::TPosition::CO1>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'productL0cBuf_' of type 'AscendC::TBuf<AscendC::TPosition::CO1>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'productL0cBuf_' of type 'AscendC::TBuf<AscendC::TPosition::CO1>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 10,
+      "message": "Allocator handle 'productL0cBuf_' of type 'AscendC::TBuf<AscendC::TPosition::CO1>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'productL0cBuf_' of type 'AscendC::TBuf<AscendC::TPosition::CO1>' declared as class member in 'TurboQuantGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'productL0cBuf_' of type 'AscendC::TBuf<AscendC::TPosition::CO1>' declared as class member in 'TurboQuantGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'productUbBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'productUbBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'queryInBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'queryInBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'queryL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::A1>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 10,
+      "message": "Allocator handle 'queryL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::A1>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'queryOperandBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'queryOperandBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'queryWorkBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'queryWorkBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'reduceBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'reduceBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'scaleIndexBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'scaleIndexBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'scaleTileBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'scaleTileBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'scoreBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'scoreBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'scratchBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'scratchBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'sign_buf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantQueryBasis'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 11,
+      "message": "Allocator handle 'sign_buf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantQueryBasis'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'sliceL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::B1>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'sliceL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::B1>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'stateBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantPartialReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'stateBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantPartialReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'stateBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 12,
+      "message": "Allocator handle 'stateBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'statsUbBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'statsUbBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'statsUbBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'statsUbBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'unitScaleL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::B1>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 10,
+      "message": "Allocator handle 'unitScaleL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::B1>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'unitScaleUbBuf_' of type 'AscendC::TBuf<AscendC::TPosition::VECCALC>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 10,
+      "message": "Allocator handle 'unitScaleUbBuf_' of type 'AscendC::TBuf<AscendC::TPosition::VECCALC>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'valueL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::B1>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 10,
+      "message": "Allocator handle 'valueL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::B1>' declared as class member in 'TurboQuantCubeMm'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'weightL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::A1>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'weightL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::A1>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'weightL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::A1>' declared as class member in 'TurboQuantGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'weightL1Buf_' of type 'AscendC::TBuf<AscendC::TPosition::A1>' declared as class member in 'TurboQuantGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'workBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantCodec'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "Allocator handle 'workBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantCodec'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'workBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantModeCodec'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 9,
+      "message": "Allocator handle 'workBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantModeCodec'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA3504|Allocator handle 'zeroUbBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 841,
+      "message": "Allocator handle 'zeroUbBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantBatchedGemmReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA9001|could not determine the HardEvent route of 'AscendC::SetFlag<EVENT>(eventId)'",
+      "count": 1,
+      "code": "AKA9001",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "could not determine the HardEvent route of 'AscendC::SetFlag<EVENT>(eventId)'"
+    },
+    {
+      "fingerprint": "src/decode/turboquant_fused_decode.cpp|AKA9001|could not determine the HardEvent route of 'AscendC::WaitFlag<EVENT>(eventId)'",
+      "count": 1,
+      "code": "AKA9001",
+      "severity": "WARNING",
+      "file": "src/decode/turboquant_fused_decode.cpp",
+      "line": 7,
+      "message": "could not determine the HardEvent route of 'AscendC::WaitFlag<EVENT>(eventId)'"
+    },
+    {
+      "fingerprint": "src/decode/vector/routine_vector_cube_softmax.hpp|AKA1009|tensor 'predicate' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 3,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/vector/routine_vector_cube_softmax.hpp",
+      "line": 259,
+      "message": "tensor 'predicate' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Adds() argument 0 ('dst') must live in UB, but 'candidate' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Adds() argument 0 ('dst') must live in UB, but 'candidate' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Adds() argument 0 ('dst') must live in UB, but 'denominator' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Adds() argument 0 ('dst') must live in UB, but 'denominator' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Adds() argument 1 ('src') must live in UB, but 'candidate' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Adds() argument 1 ('src') must live in UB, but 'candidate' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Adds() argument 1 ('src') must live in UB, but 'denominator' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Adds() argument 1 ('src') must live in UB, but 'denominator' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Cast() argument 0 ('dst') must live in UB, but 'packed' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Cast() argument 0 ('dst') must live in UB, but 'packed' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Cast() argument 1 ('src') must live in UB, but 'first_row' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Cast() argument 1 ('src') must live in UB, but 'first_row' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Cast() argument 1 ('src') must live in UB, but 'second_row' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Cast() argument 1 ('src') must live in UB, but 'second_row' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Compare() argument 1 ('src0') must live in UB, but 'diff' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Compare() argument 1 ('src0') must live in UB, but 'diff' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Compare() argument 2 ('src1') must live in UB, but 'zero' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Compare() argument 2 ('src1') must live in UB, but 'zero' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Duplicate() argument 0 ('dst') must live in UB, but 'broadcast' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Duplicate() argument 0 ('dst') must live in UB, but 'broadcast' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Duplicate() argument 0 ('dst') must live in UB, but 'candidate' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Duplicate() argument 0 ('dst') must live in UB, but 'candidate' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Duplicate() argument 0 ('dst') must live in UB, but 'dead' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Duplicate() argument 0 ('dst') must live in UB, but 'dead' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Duplicate() argument 0 ('dst') must live in UB, but 'denominator' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Duplicate() argument 0 ('dst') must live in UB, but 'denominator' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Duplicate() argument 0 ('dst') must live in UB, but 'numerator' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Duplicate() argument 0 ('dst') must live in UB, but 'numerator' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Duplicate() argument 0 ('dst') must live in UB, but 'sentinel' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Duplicate() argument 0 ('dst') must live in UB, but 'sentinel' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Duplicate() argument 0 ('dst') must live in UB, but 'tile_max' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Duplicate() argument 0 ('dst') must live in UB, but 'tile_max' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Duplicate() argument 0 ('dst') must live in UB, but 'zero' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Duplicate() argument 0 ('dst') must live in UB, but 'zero' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::LoadAlign() argument 1 ('src') must live in UB, but 'q_inv' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::LoadAlign() argument 1 ('src') must live in UB, but 'q_inv' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::LoadAlign() argument 1 ('src') must live in UB, but 'run_max' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::LoadAlign() argument 1 ('src') must live in UB, but 'run_max' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::LoadAlign() argument 1 ('src') must live in UB, but 'run_sum' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::LoadAlign() argument 1 ('src') must live in UB, but 'run_sum' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Max() argument 0 ('dst') must live in UB, but 'next_max' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Max() argument 0 ('dst') must live in UB, but 'next_max' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Max() argument 1 ('src0') must live in UB, but 'm' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Max() argument 1 ('src0') must live in UB, but 'm' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Max() argument 2 ('src1') must live in UB, but 'tile_max' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Max() argument 2 ('src1') must live in UB, but 'tile_max' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Select() argument 0 ('dst') must live in UB, but 'candidate' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Select() argument 0 ('dst') must live in UB, but 'candidate' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Select() argument 0 ('dst') must live in UB, but 'first_row' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Select() argument 0 ('dst') must live in UB, but 'first_row' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Select() argument 0 ('dst') must live in UB, but 'page_id' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Select() argument 0 ('dst') must live in UB, but 'page_id' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Select() argument 0 ('dst') must live in UB, but 'pos' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Select() argument 0 ('dst') must live in UB, but 'pos' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Select() argument 0 ('dst') must live in UB, but 'second_row' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Select() argument 0 ('dst') must live in UB, but 'second_row' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Select() argument 1 ('mask') must live in UB, but 'candidate' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Select() argument 1 ('mask') must live in UB, but 'candidate' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Select() argument 1 ('mask') must live in UB, but 'first_row' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Select() argument 1 ('mask') must live in UB, but 'first_row' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Select() argument 1 ('mask') must live in UB, but 'ramp_row' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Select() argument 1 ('mask') must live in UB, but 'ramp_row' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Select() argument 1 ('mask') must live in UB, but 'second_row' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Select() argument 1 ('mask') must live in UB, but 'second_row' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Select() argument 2 ('src0') must live in UB, but 'dead' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Select() argument 2 ('src0') must live in UB, but 'dead' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Select() argument 2 ('src0') must live in UB, but 'page_id' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Select() argument 2 ('src0') must live in UB, but 'page_id' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Select() argument 2 ('src0') must live in UB, but 'pos' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Select() argument 2 ('src0') must live in UB, but 'pos' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Select() argument 2 ('src0') must live in UB, but 'sentinel' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Select() argument 2 ('src0') must live in UB, but 'sentinel' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Select() argument 2 ('src0') must live in UB, but 'zero' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Select() argument 2 ('src0') must live in UB, but 'zero' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::StoreAlign() argument 0 ('dst') must live in UB, but 'packed' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::StoreAlign() argument 0 ('dst') must live in UB, but 'packed' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::StoreAlign() argument 0 ('dst') must live in UB, but 'run_sum' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::StoreAlign() argument 0 ('dst') must live in UB, but 'run_sum' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Sub() argument 0 ('dst') must live in UB, but 'decay' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Sub() argument 0 ('dst') must live in UB, but 'decay' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Sub() argument 0 ('dst') must live in UB, but 'diff' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Sub() argument 0 ('dst') must live in UB, but 'diff' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Sub() argument 0 ('dst') must live in UB, but 'first_row' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Sub() argument 0 ('dst') must live in UB, but 'first_row' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Sub() argument 0 ('dst') must live in UB, but 'second_row' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Sub() argument 0 ('dst') must live in UB, but 'second_row' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Sub() argument 1 ('src0') must live in UB, but 'first_row' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Sub() argument 1 ('src0') must live in UB, but 'first_row' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Sub() argument 1 ('src0') must live in UB, but 'm' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Sub() argument 1 ('src0') must live in UB, but 'm' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Sub() argument 1 ('src0') must live in UB, but 'second_row' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Sub() argument 1 ('src0') must live in UB, but 'second_row' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Sub() argument 1 ('src0') must live in UB, but 'tile_max' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Sub() argument 1 ('src0') must live in UB, but 'tile_max' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Sub() argument 2 ('src1') must live in UB, but 'm' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Sub() argument 2 ('src1') must live in UB, but 'm' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Sub() argument 2 ('src1') must live in UB, but 'next_max' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Sub() argument 2 ('src1') must live in UB, but 'next_max' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|Reg::Sub() argument 2 ('src1') must live in UB, but 'tile_max' is in REG (TPosition::?)",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "Reg::Sub() argument 2 ('src1') must live in UB, but 'tile_max' is in REG (TPosition::?)"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|TPosition::VECCALC is not a valid Ascend 950PR tensor allocation domain; use VECIN, VECOUT, GM, or TSCM as appropriate",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 339,
+      "message": "TPosition::VECCALC is not a valid Ascend 950PR tensor allocation domain; use VECIN, VECOUT, GM, or TSCM as appropriate"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|acc: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 2,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 169,
+      "message": "acc: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|accBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "accBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|arena: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 5,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 480,
+      "message": "arena: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|bankSkewBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "bankSkewBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|blockBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "blockBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|blocks: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 173,
+      "message": "blocks: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|constBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "constBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|contextBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "contextBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|kvBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "kvBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|lane1: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 2,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1115,
+      "message": "lane1: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|lane2: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 2,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1116,
+      "message": "lane2: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|mask: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 452,
+      "message": "mask: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|maskBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "maskBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|nzHigh: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1030,
+      "message": "nzHigh: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|nzLow: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1029,
+      "message": "nzLow: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|nzOperandBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "nzOperandBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|outBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "outBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|partAcc: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 170,
+      "message": "partAcc: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|partState: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 171,
+      "message": "partState: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|pool: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "pool: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|probOperandBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "probOperandBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|probabilitySkewBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "probabilitySkewBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|queryIn: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 420,
+      "message": "queryIn: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|queryInBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "queryInBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|queryOperand: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 421,
+      "message": "queryOperand: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|queryOperandBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "queryOperandBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|queryWorkBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "queryWorkBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|reduce: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 3,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 549,
+      "message": "reduce: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|reduceBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "reduceBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|scaleIndex: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 983,
+      "message": "scaleIndex: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|scaleIndexBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "scaleIndexBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|scaleTileBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "scaleTileBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|scoreBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "scoreBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|scratchBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "scratchBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|state: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 172,
+      "message": "state: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|stateBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "stateBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|work: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 1,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "work: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1004|workBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain",
+      "count": 53,
+      "code": "AKA1004",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "workBuf_: TPosition::VECCALC is not a valid Ascend 950PR allocation domain"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1009|tensor 'addend' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "tensor 'addend' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1009|tensor 'bins' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "tensor 'bins' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1009|tensor 'dst' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "tensor 'dst' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1009|tensor 'halfView' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "tensor 'halfView' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1009|tensor 'intView' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "tensor 'intView' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1009|tensor 'l1Dst' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 517,
+      "message": "tensor 'l1Dst' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1009|tensor 'offsets' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "tensor 'offsets' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1009|tensor 'predicate' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 2,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 42,
+      "message": "tensor 'predicate' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1009|tensor 'queryL1' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 422,
+      "message": "tensor 'queryL1' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1009|tensor 'record' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1149,
+      "message": "tensor 'record' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1009|tensor 'runMax' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1150,
+      "message": "tensor 'runMax' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1009|tensor 'signBits' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "tensor 'signBits' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1009|tensor 'src' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "tensor 'src' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1009|tensor 'sum' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "tensor 'sum' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA1009|tensor 'tails' has no resolvable memory domain, so its layout cannot be verified",
+      "count": 1,
+      "code": "AKA1009",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1106,
+      "message": "tensor 'tails' has no resolvable memory domain, so its layout cannot be verified"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA2010|'record' is written by Duplicate on PIPE_V and read by DataCopy on PIPE_MTE3 with no SetFlag/WaitFlag pair or global barrier ordering them; the pipelines run concurrently, so the read races the write",
+      "count": 1,
+      "code": "AKA2010",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1168,
+      "message": "'record' is written by Duplicate on PIPE_V and read by DataCopy on PIPE_MTE3 with no SetFlag/WaitFlag pair or global barrier ordering them; the pipelines run concurrently, so the read races the write"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA2010|'tails' is written by Duplicate on PIPE_V and read by DataCopy on PIPE_MTE3 with no SetFlag/WaitFlag pair or global barrier ordering them; the pipelines run concurrently, so the read races the write",
+      "count": 1,
+      "code": "AKA2010",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1132,
+      "message": "'tails' is written by Duplicate on PIPE_V and read by DataCopy on PIPE_MTE3 with no SetFlag/WaitFlag pair or global barrier ordering them; the pipelines run concurrently, so the read races the write"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3001|PipeBarrier(PIPE_ALL) drains every pipeline, serialising MTE2, Vector, MTE3 and Cube at this point and discarding the overlap that double buffering exists to create",
+      "count": 2,
+      "code": "AKA3001",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "PipeBarrier(PIPE_ALL) drains every pipeline, serialising MTE2, Vector, MTE3 and Cube at this point and discarding the overlap that double buffering exists to create"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'acc' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 2,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 169,
+      "message": "tensor 'acc' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'arena' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 5,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 480,
+      "message": "tensor 'arena' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'blocks' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 173,
+      "message": "tensor 'blocks' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'lane1' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 2,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1115,
+      "message": "tensor 'lane1' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'lane2' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 2,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1116,
+      "message": "tensor 'lane2' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'mask' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 452,
+      "message": "tensor 'mask' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'nzHigh' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1030,
+      "message": "tensor 'nzHigh' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'nzLow' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1029,
+      "message": "tensor 'nzLow' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'partAcc' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 170,
+      "message": "tensor 'partAcc' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'partState' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 171,
+      "message": "tensor 'partState' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'pool' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "tensor 'pool' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'queryIn' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 420,
+      "message": "tensor 'queryIn' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'queryOperand' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 421,
+      "message": "tensor 'queryOperand' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'reduce' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 3,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 549,
+      "message": "tensor 'reduce' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'scaleIndex' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 983,
+      "message": "tensor 'scaleIndex' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'state' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 172,
+      "message": "tensor 'state' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3002|tensor 'work' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it",
+      "count": 1,
+      "code": "AKA3002",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "tensor 'work' has an unresolvable base offset and byte size (offset=?, size=?); capacity, alignment and aliasing cannot be verified for it"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3010|SetFlag<MTE2_V>(readEvents_[slot]) uses an event id the analyzer cannot resolve (readEvents_[slot]); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 507,
+      "message": "SetFlag<MTE2_V>(readEvents_[slot]) uses an event id the analyzer cannot resolve (readEvents_[slot]); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3010|SetFlag<MTE2_V>(ready) uses an event id the analyzer cannot resolve (ready); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 402,
+      "message": "SetFlag<MTE2_V>(ready) uses an event id the analyzer cannot resolve (ready); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3010|WaitFlag<MTE2_V>(queryReady) uses an event id the analyzer cannot resolve (queryReady); its pairing is unchecked",
+      "count": 2,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 409,
+      "message": "WaitFlag<MTE2_V>(queryReady) uses an event id the analyzer cannot resolve (queryReady); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3010|WaitFlag<MTE2_V>(readEvents_[0]) uses an event id the analyzer cannot resolve (readEvents_[0]); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 411,
+      "message": "WaitFlag<MTE2_V>(readEvents_[0]) uses an event id the analyzer cannot resolve (readEvents_[0]); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3010|WaitFlag<MTE2_V>(readEvents_[slot]) uses an event id the analyzer cannot resolve (readEvents_[slot]); its pairing is unchecked",
+      "count": 1,
+      "code": "AKA3010",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 518,
+      "message": "WaitFlag<MTE2_V>(readEvents_[slot]) uses an event id the analyzer cannot resolve (readEvents_[slot]); its pairing is unchecked"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'accBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantPartialReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 225,
+      "message": "Allocator handle 'accBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantPartialReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'accBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1184,
+      "message": "Allocator handle 'accBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'bankSkewBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1182,
+      "message": "Allocator handle 'bankSkewBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'blockBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantPartialReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 227,
+      "message": "Allocator handle 'blockBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantPartialReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'constBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantCodec'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "Allocator handle 'constBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantCodec'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'contextBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1194,
+      "message": "Allocator handle 'contextBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'kvBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1180,
+      "message": "Allocator handle 'kvBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'maskBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1200,
+      "message": "Allocator handle 'maskBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'nzOperandBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1183,
+      "message": "Allocator handle 'nzOperandBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'outBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantPartialReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 228,
+      "message": "Allocator handle 'outBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantPartialReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'outBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1199,
+      "message": "Allocator handle 'outBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'probOperandBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1193,
+      "message": "Allocator handle 'probOperandBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'probabilitySkewBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1192,
+      "message": "Allocator handle 'probabilitySkewBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'queryInBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1189,
+      "message": "Allocator handle 'queryInBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'queryOperandBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1190,
+      "message": "Allocator handle 'queryOperandBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'queryWorkBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1185,
+      "message": "Allocator handle 'queryWorkBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'reduceBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1196,
+      "message": "Allocator handle 'reduceBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'scaleIndexBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1197,
+      "message": "Allocator handle 'scaleIndexBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'scaleTileBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1181,
+      "message": "Allocator handle 'scaleTileBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'scoreBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1191,
+      "message": "Allocator handle 'scoreBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'scratchBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1198,
+      "message": "Allocator handle 'scratchBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'stateBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantPartialReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 226,
+      "message": "Allocator handle 'stateBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantPartialReducer'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'stateBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 1195,
+      "message": "Allocator handle 'stateBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantVectorDecodeService'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA3504|Allocator handle 'workBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantCodec'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope.",
+      "count": 1,
+      "code": "AKA3504",
+      "severity": "FATAL",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 39,
+      "message": "Allocator handle 'workBuf_' of type 'AscendC::TBuf<AscendC::QuePosition::VECCALC>' declared as class member in 'TurboQuantCodec'. In CANN 9.x on 950PR, memory allocators must be declared as function-local variables within kernel entry or member function scope."
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA9001|could not determine the HardEvent route of 'AscendC::SetFlag<EVENT>(eventId)'",
+      "count": 1,
+      "code": "AKA9001",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 40,
+      "message": "could not determine the HardEvent route of 'AscendC::SetFlag<EVENT>(eventId)'"
+    },
+    {
+      "fingerprint": "src/decode/vector/turboquant_vector_service.h|AKA9001|could not determine the HardEvent route of 'AscendC::WaitFlag<EVENT>(eventId)'",
+      "count": 1,
+      "code": "AKA9001",
+      "severity": "WARNING",
+      "file": "src/decode/vector/turboquant_vector_service.h",
+      "line": 40,
+      "message": "could not determine the HardEvent route of 'AscendC::WaitFlag<EVENT>(eventId)'"
+    }
+  ],
+  "root": "/home/dmin/work/checkpoint1_20261123_i1/aka-baseline-source",
+  "chip": "ascend950pr",
+  "tool_version": "0.1.0",
+  "counts": {
+    "findings": 338,
+    "occurrences": 1998,
+    "fatal": 240
+  }
+}
