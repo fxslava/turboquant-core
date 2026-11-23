@@ -1,0 +1,50 @@
+{
+  "snapshot_utc": "2026-11-23T08:20:49.403564+00:00",
+  "source_commit": "5231e2c",
+  "source_dir": "/home/dmin/work/checkpoint1_20261123_i1/device-source",
+  "build_dir": "/home/dmin/work/checkpoint1_20261123_i1/device-build",
+  "source_manifest": "/home/dmin/work/checkpoint1_20261123_i1/source.sha256",
+  "source_manifest_sha256": "add2f41af87382d746168f3ff6bd3e9ba4f24b1836fb580d57c85208c1ce94f0",
+  "unified_exec_session": 91942,
+  "camodel_launched": false,
+  "verification_hold": "Coordinator requested CP1 pre-simulation boundary; do not launch until resumed.",
+  "processes": [
+    {
+      "pid": 804913,
+      "ppid": 804912,
+      "comm": "bash",
+      "args": "bash /mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/reports/checkpoint1_20261123_i1/build-exact.sh build"
+    },
+    {
+      "pid": 804915,
+      "ppid": 804913,
+      "comm": "bash",
+      "args": "bash /mnt/c/ascend-micro-harness/scripts/camodel_build_phase_guard.sh compile bash /mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/reports/checkpoint1_20261123_i1/build-exact.sh compile-inside"
+    },
+    {
+      "pid": 804923,
+      "ppid": 804915,
+      "comm": "bash",
+      "args": "bash /mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/reports/checkpoint1_20261123_i1/build-exact.sh compile-inside"
+    },
+    {
+      "pid": 804981,
+      "ppid": 804923,
+      "comm": "cmake",
+      "args": "cmake --build /home/dmin/work/checkpoint1_20261123_i1/device-build --target test_wave_v11_exact_sim -j 2"
+    },
+    {
+      "pid": 806134,
+      "ppid": 805982,
+      "comm": "sh",
+      "args": "/bin/sh -c cd /home/dmin/work/checkpoint1_20261123_i1/device-build/tq_decode_sim_aiv_device-prefix/src/tq_decode_sim_aiv_device-build && /usr/bin/gmake"
+    },
+    {
+      "pid": 806156,
+      "ppid": 806150,
+      "comm": "bisheng",
+      "args": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/bisheng -DASCEND_MICRO_CANN_LAUNCH -DTILING_KEY_VAR=0 -DONE_CORE_DUMP_SIZE=1048576 -D__MIX_CORE_MACRO__=1 -Dauto_gen_turboquant_mm_fused_decode_opt_kv4fp8_bf16_kernel=turboquant_mm_fused_decode_opt_kv4fp8_bf16_0_mix_aiv -Dauto_gen_turboquant_mm_fused_decode_opt_kv4fp8_bf16_lm_kernel=turboquant_mm_fused_decode_opt_kv4fp8_bf16_lm_1_mix_aiv -Dauto_gen_turboquant_mm_fused_decode_opt_raw_query_kv4fp8_bf16_kernel=turboquant_mm_fused_decode_opt_raw_query_kv4fp8_bf16_2_mix_aiv -Dauto_gen_turboquant_mm_fused_decode_opt_raw_query_kv4fp8_bf16_lm_kernel=turboquant_mm_fused_decode_opt_raw_query_kv4fp8_bf16_lm_3_mix_aiv -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/impl/adv_api -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/impl/basic_api -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/impl/c_api -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/impl/basic_api/reg_compute -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/impl/simt_api -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/impl/utils -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/include -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/include/adv_api -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/include/basic_api -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/include/aicpu_api -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/include/c_api -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/include/basic_api/reg_compute -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/include/simt_api -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/include/utils -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/tikcpp/tikcfw -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/tikcpp/tikcfw/interface -I/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/tikcpp/tikcfw/impl -O3 -DNDEBUG --cce-disable-kernel-global-attr-check -D__DAV_C310__ --cce-aicore-arch=dav-c310-vec --cce-aicore-only --cce-auto-sync --cce-mask-opt -mllvm -cce-aicore-stack-size=0x8000 -mllvm -cce-aicore-function-stack-size=0x8000 -mllvm -cce-aicore-record-overflow=true -mllvm -cce-aicore-addr-transform -mllvm -cce-aicore-jump-expand=true -mllvm -cce-aicore-dcci-insert-for-scalar=false -O3 -std=c++17 --cce-aicore-lang -include /home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/../include/version/asc_devkit_version.h -Wall -Wextra -Werror -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/include -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/impl/adv_api -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/impl/basic_api -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/impl/c_api -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/impl/basic_api/reg_compute -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/impl/simt_api -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/impl/utils -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/include -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/include/adv_api -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/include/basic_api -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/include/aicpu_api -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/include/c_api -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/include/basic_api/reg_compute -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/include/simt_api -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/asc/include/utils -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/tikcpp/tikcfw -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/tikcpp/tikcfw/interface -isystem/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/tikcpp/tikcfw/impl -DASCEND_TQ_FUSED_DECODE_GEMM_REDUCE=1 -MD -MT CMakeFiles/device_obj.dir/home/dmin/work/checkpoint1_20261123_i1/device-build/auto_gen/tq_decode_sim/auto_gen_turboquant_fused_decode.cpp.o -MF CMakeFiles/device_obj.dir/home/dmin/work/checkpoint1_20261123_i1/device-build/auto_gen/tq_decode_sim/auto_gen_turboquant_fused_decode.cpp.o.d -o CMakeFiles/device_obj.dir/home/dmin/work/checkpoint1_20261123_i1/device-build/auto_gen/tq_decode_sim/auto_gen_turboquant_fused_decode.cpp.o -c /home/dmin/work/checkpoint1_20261123_i1/device-build/auto_gen/tq_decode_sim/auto_gen_turboquant_fused_decode.cpp"
+    }
+  ],
+  "compiler_snapshot": "    PID    PPID     ELAPSED %CPU   RSS COMMAND\n 806156  806150       02:03  104 804396 bisheng\n"
+}
