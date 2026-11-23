@@ -343,11 +343,16 @@ void check_verify()
     g_fail.check(ok.ok, "a byte-correct telemetry image passes verify()");
     if (!ok.ok) std::printf("    unexpected failure at word %zu: %s\n", ok.word, ok.what);
 
-    // The winning position of token 0's heads is in [201, 204]: the position range override
-    // (the e2e --probe mode's contract) accepts it and rejects the empty range.
-    ok = tel::verify(words, count, w.g, w.lengths.data(), w.table.data(), kFill, 200, 205);
+    // The winning position of token 0's heads is in [201, 204]. Restrict this check to
+    // that token: the split token's records deliberately have winners outside this range.
+    tel::Geometry range_geometry = w.g;
+    range_geometry.tokens = 1;
+    const std::size_t range_count = tel::workspace_floats(range_geometry);
+    ok = tel::verify(words, range_count, range_geometry, w.lengths.data(), w.table.data(),
+                     kFill, 200, 205);
     g_fail.check(ok.ok, "verify() accepts a winner inside the position range override");
-    ok = tel::verify(words, count, w.g, w.lengths.data(), w.table.data(), kFill, 205, 300);
+    ok = tel::verify(words, range_count, range_geometry, w.lengths.data(), w.table.data(),
+                     kFill, 205, 300);
     g_fail.check(!ok.ok, "verify() rejects a winner outside the position range override");
 
     const auto expect_fail = [&](std::size_t word, float value, const char *what) {
