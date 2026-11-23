@@ -24,5 +24,13 @@
     "trace_audit.txt": "3bce27deb31ea887628120f83d9a55ac758573d188deed069087f075ef7e2681",
     "verified_probe_CMakeLists.txt": "a132f8d3bb1e5a09bae2e6badee81b0e2f689fcdff7d40c4907fb5aaf1845772",
     "WAVE1_SCHEDULING.md": "c9daf0f29d11b77c06ef4d38d6f237ec74f90242277cffe4c4ba956b98f2ba48"
+  },
+  "local_include_closure_normalized_lf_sha256": {
+    "src/prefill/turboquant_reshape_batch.cpp": "bcbdcc866230bc72bf47ba3ec4fd025e5a063cd9333a58ee558f37e2924e89ad",
+    "include/turboquant/turboquant_mode.h": "c50c8c02a97b74315ed9358a50567c4ff7a2605f3b34cc7a3fb6c28c781d39a2",
+    "include/turboquant/turboquant_layout.h": "850d5860e664986de486de41265b826f66f8344ac6790f317eea25f5e51af3cd",
+    "include/turboquant/turboquant_wave_protocol.hpp": "6e2ff719bbd1d62a9b7ca556f120cc0313b871506a2bdf02a7a267175030f8b7",
+    "src/scatter/routine_vector_rotate_butterfly.hpp": "582bf2ad9b0c737dfcc7f8d133d04fad62f94cd443890a5948747f18afc8eb85",
+    "src/prefill/routine_stage_page_zn_bf16.hpp": "9c27ba60e689be57b96a58a1120026ad2e15e5c62172cc43d1d4d935c3bde883"
   }
 }
