@@ -4,8 +4,8 @@
   "native_probe": "\\\\wsl.localhost\\Ubuntu-22.04\\home\\dmin\\work\\checkpoint2_20261123\\slot03",
   "files": {
     ".gitattributes": "b498ff8bf52d1b4ea85484a122759c793669552cb80cdbea77bedd5436eb2c99",
-    "ablations/slot04/POST_TRACE_I2.md": "b013c2322a2f2637886c9c50f3cb9fcff5378b17b9f612fe67376d9f89c2d980",
-    "ablations/slot05/POST_TRACE_I2.md": "047da7f701ad710963b596146b26d81d96401eab7427f8d4da5ccf432d662f9a",
+    "ablations/slot04/POST_TRACE_I2.md": "68422bf2c30e72ef68c348eed397ebc36224b62015e50fbb0448bed5adb5ce53",
+    "ablations/slot05/POST_TRACE_I2.md": "3a4bbc3dc792db86db112be51fc131f9f5aa839de4c721c281467ea9920bae03",
     "aka_scalar.json.gz": "bbc95d3213f681cf2eb82b24a4946c4623456f1aa8659cff68e2752b3914322b",
     "build-exit.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
     "build.log": "9e0ff33bee6f316c659b618153ae7415358069b17d1e6b4dd0b8f60c071338df",
@@ -25,7 +25,7 @@
     "review_status.json": "786ebe4e49f3f306812af96ec38a75152af1d277834c844252dca065c0740b5e",
     "run-exit.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
     "run.log": "fbe39d949b328533c578f024253e35ef9f003dadfbbf9b980bec91ab1dcbfdde",
-    "slot06_research_protocol.zip": "984feed3fa3c0140ddec8229b1b2c93522e84ab43bb14c2c5acecee81c24cf1f",
+    "slot06_research_protocol.zip": "8cce3f5b688a2bbfe26780b37327a648b6825b5e345f94239befd5f698d8407f",
     "trace_audit.txt": "3bce27deb31ea887628120f83d9a55ac758573d188deed069087f075ef7e2681",
     "verified_probe_CMakeLists.txt": "a132f8d3bb1e5a09bae2e6badee81b0e2f689fcdff7d40c4907fb5aaf1845772",
     "WAVE1_SCHEDULING.md": "055d5a1de395c60dbcf7bf33f94fed4ba5010a212a2445d9a824e5f1b87022af"
