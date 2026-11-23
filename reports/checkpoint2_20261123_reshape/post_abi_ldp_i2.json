@@ -1,0 +1,78 @@
+{
+  "04": {
+    "register": "X4",
+    "producer": {
+      "tick": 731,
+      "pc": "0x10d10328",
+      "engine": "SCALAR",
+      "id": 80,
+      "mnemonic": "LDP_XI_XJ_XN",
+      "tail": "  dtype:B64, XD:X10=0, XD:X4=0, XN:X2=0x1022c000, IMM:0x10, execTime:0, dcacheHit:0, accessUb:0, accessDdr:0, ",
+      "line": 23
+    },
+    "producer_retired": {
+      "tick": 1473,
+      "pc": "0x10d10328",
+      "engine": "SCALAR",
+      "id": 80,
+      "mnemonic": "LDP_XI_XJ_XN",
+      "tail": "  dtype:B64, XD:X10=0x164bcdc40, XD:X4=0x164be9e40, XN:X2=0x1022c000, IMM:0x10, execTime:0x2e6, dcacheHit:0, accessUb:0, accessDdr:1, ",
+      "line": 29
+    },
+    "miss": [
+      {
+        "tick": 732,
+        "pc": "0x10d10328"
+      }
+    ],
+    "consumer": {
+      "mnemonic": "ST_XD_XN_IMM",
+      "pc": "0x10d10348",
+      "id": 96,
+      "first_attempt": 1375,
+      "last_attempt": 1472,
+      "attempts": 98,
+      "elapsed_ticks": 97,
+      "every_tick": true
+    },
+    "caveat": "Load is nonblocking; CCU store retries while awaiting the same source register. Retirement logs include completion bookkeeping after final store attempt; do not subtract retire timestamp as exact scoreboard release."
+  },
+  "05": {
+    "register": "X2",
+    "producer": {
+      "tick": 1381,
+      "pc": "0x10d10354",
+      "engine": "SCALAR",
+      "id": 103,
+      "mnemonic": "LDP_XI_XJ_XN",
+      "tail": "  dtype:B64, XD:X2=0x1022c000, XD:X21=0, XN:X2=0x1022c000, IMM:0x10, execTime:0, dcacheHit:0, accessUb:0, accessDdr:0, ",
+      "line": 34
+    },
+    "producer_retired": {
+      "tick": 1472,
+      "pc": "0x10d10354",
+      "engine": "SCALAR",
+      "id": 103,
+      "mnemonic": "LDP_XI_XJ_XN",
+      "tail": "  dtype:B64, XD:X2=0x164bcdc40, XD:X21=0x164be9e40, XN:X2=0x1022c000, IMM:0x10, execTime:0x5b, dcacheHit:0, accessUb:0, accessDdr:1, ",
+      "line": 34
+    },
+    "miss": [
+      {
+        "tick": 1382,
+        "pc": "0x10d10354"
+      }
+    ],
+    "consumer": {
+      "mnemonic": "ST_XD_XN_IMM",
+      "pc": "0x10d10358",
+      "id": 104,
+      "first_attempt": 1382,
+      "last_attempt": 1471,
+      "attempts": 90,
+      "elapsed_ticks": 89,
+      "every_tick": true
+    },
+    "caveat": "Load is nonblocking; CCU store retries while awaiting the same source register. Retirement logs include completion bookkeeping after final store attempt; do not subtract retire timestamp as exact scoreboard release."
+  }
+}

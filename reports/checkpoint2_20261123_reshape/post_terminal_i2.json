@@ -1,0 +1,89 @@
+{
+  "baseline": {
+    "cubecore0": {
+      "role_end": 59572,
+      "last_quant": null,
+      "last_output": null,
+      "joins": [
+        {
+          "tick": 56862,
+          "drain": 59281
+        },
+        {
+          "tick": 56863,
+          "drain": 59281
+        }
+      ]
+    },
+    "veccore0": {
+      "role_end": 63727,
+      "last_quant": 62848,
+      "last_output": 63426,
+      "last_ready_drain": 59109
+    },
+    "veccore1": {
+      "role_end": 63962,
+      "last_quant": 63090,
+      "last_output": 63665,
+      "last_ready_drain": 58736
+    }
+  },
+  "slot04": {
+    "cubecore0": {
+      "role_end": 60113,
+      "last_quant": null,
+      "last_output": null,
+      "joins": [
+        {
+          "tick": 57483,
+          "drain": 59820
+        },
+        {
+          "tick": 57484,
+          "drain": 59820
+        }
+      ]
+    },
+    "veccore0": {
+      "role_end": 64321,
+      "last_quant": 63439,
+      "last_output": 64020,
+      "last_ready_drain": 59143
+    },
+    "veccore1": {
+      "role_end": 64358,
+      "last_quant": 63491,
+      "last_output": 64061,
+      "last_ready_drain": 59648
+    }
+  },
+  "slot05": {
+    "cubecore0": {
+      "role_end": 60240,
+      "last_quant": null,
+      "last_output": null,
+      "joins": [
+        {
+          "tick": 57937,
+          "drain": 59947
+        },
+        {
+          "tick": 57938,
+          "drain": 59947
+        }
+      ]
+    },
+    "veccore0": {
+      "role_end": 64839,
+      "last_quant": 63941,
+      "last_output": 64541,
+      "last_ready_drain": 59701
+    },
+    "veccore1": {
+      "role_end": 64317,
+      "last_quant": 63514,
+      "last_output": 64020,
+      "last_ready_drain": 59696
+    }
+  }
+}
