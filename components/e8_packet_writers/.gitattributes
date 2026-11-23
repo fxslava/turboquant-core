@@ -1,0 +1,7 @@
+# Preserve tested snapshots and binary fixtures byte-for-byte, including line endings.
+slot02/src/** -text
+slot07/src/** -text
+slot02/analysis/** -text
+reference/** -text
+fixtures/** -text
+evidence/** -text

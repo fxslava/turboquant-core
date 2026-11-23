@@ -1,0 +1,135 @@
+{
+  "base_commit": "3e57bfaed06ff543a76c34f501704212f6d5bed7",
+  "scope": "Pre-encoded E8 D256 label/FP32-scale packet transport components, not a BF16 quantizer",
+  "slot02_transport": "PASS_CAMODEL_PACKET",
+  "slot07_transport": "PASS_CAMODEL_PACKET",
+  "slot07_performance_gate": "INCOMPLETE_PRE_D1_GAP_CAUSE_UNPROVEN",
+  "byte_identical_native_sources": [
+    {
+      "slot": "slot02",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot02/src/CMakeLists.txt",
+      "packaged": "slot02/src/CMakeLists.txt",
+      "sha256": "d0d8f288974a873bcffbd52b1f161df5d5992ec1d0742c25cd15c2b9c08dddf5"
+    },
+    {
+      "slot": "slot02",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot02/src/camodel_common.hpp",
+      "packaged": "slot02/src/camodel_common.hpp",
+      "sha256": "a9d6ff37cd8d1e4e8fbd183138064683e5fbf4300b437a07231d547d61fe4d1e"
+    },
+    {
+      "slot": "slot02",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot02/src/cmake/CannDeviceWrapperTargets.cmake",
+      "packaged": "slot02/src/cmake/CannDeviceWrapperTargets.cmake",
+      "sha256": "0e2176309ec83980550a048b17c9a4dbdaeee6221d1ace45092e5b9eb76edd5c"
+    },
+    {
+      "slot": "slot02",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot02/src/cmake/CannToolchain.cmake",
+      "packaged": "slot02/src/cmake/CannToolchain.cmake",
+      "sha256": "4dfca8257b4cde08945b8bf99ae893c9be389fafb772d126cdbdb68ca30bb12d"
+    },
+    {
+      "slot": "slot02",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot02/src/cmake/CannWrapperWarnings.cmake",
+      "packaged": "slot02/src/cmake/CannWrapperWarnings.cmake",
+      "sha256": "8289db4c5145b96cc9496b8ec0689f3d2046f1dedb72c10d40a917d3315cb5a1"
+    },
+    {
+      "slot": "slot02",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot02/src/e8_packet_layout.hpp",
+      "packaged": "slot02/src/e8_packet_layout.hpp",
+      "sha256": "53c18584ae352e9f00677493450504ec013c5fbe970b9e2549251436ea8f5b71"
+    },
+    {
+      "slot": "slot02",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot02/src/e8_packet_v1.hpp",
+      "packaged": "slot02/src/e8_packet_v1.hpp",
+      "sha256": "153899189c010fda5db3b6bc88418e22915077ec3fe9980789f46c7f913f0f1c"
+    },
+    {
+      "slot": "slot02",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot02/src/e8_packet_v1_scatter.cpp",
+      "packaged": "slot02/src/e8_packet_v1_scatter.cpp",
+      "sha256": "4c6a0d992306c0f28cd2018fb4c6d8358d18a73520abcda2314de607ad61143e"
+    },
+    {
+      "slot": "slot02",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot02/src/packet_runner.cpp",
+      "packaged": "slot02/src/packet_runner.cpp",
+      "sha256": "17994301efa358272a10a963c006a69315da47b004554d1daa8b0189185e20f6"
+    },
+    {
+      "slot": "slot02",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot02/src/test_e8_packet_v1.cpp",
+      "packaged": "slot02/src/test_e8_packet_v1.cpp",
+      "sha256": "77988b2eed99714a499202372ae854a94d09ff61492b7190b5c2c5824768362f"
+    },
+    {
+      "slot": "slot07",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot07/src/CMakeLists.txt",
+      "packaged": "slot07/src/CMakeLists.txt",
+      "sha256": "18968ca3bb0f7a86b422375e8d0e27918becd86dfaf9ada4cb90b97a5330aa25"
+    },
+    {
+      "slot": "slot07",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot07/src/batch_fixture.hpp",
+      "packaged": "slot07/src/batch_fixture.hpp",
+      "sha256": "80dd0d08831da593a3f33b460f26a28069d9418043737a990f241442410134ac"
+    },
+    {
+      "slot": "slot07",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot07/src/batch_runner.cpp",
+      "packaged": "slot07/src/batch_runner.cpp",
+      "sha256": "b97af438436dd8ebcb4e2b5883283719c906f2cf03fb5aee86fca36ea6e9033f"
+    },
+    {
+      "slot": "slot07",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot07/src/camodel_common.hpp",
+      "packaged": "slot07/src/camodel_common.hpp",
+      "sha256": "a9d6ff37cd8d1e4e8fbd183138064683e5fbf4300b437a07231d547d61fe4d1e"
+    },
+    {
+      "slot": "slot07",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot07/src/cmake/CannDeviceWrapperTargets.cmake",
+      "packaged": "slot07/src/cmake/CannDeviceWrapperTargets.cmake",
+      "sha256": "0e2176309ec83980550a048b17c9a4dbdaeee6221d1ace45092e5b9eb76edd5c"
+    },
+    {
+      "slot": "slot07",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot07/src/cmake/CannToolchain.cmake",
+      "packaged": "slot07/src/cmake/CannToolchain.cmake",
+      "sha256": "4dfca8257b4cde08945b8bf99ae893c9be389fafb772d126cdbdb68ca30bb12d"
+    },
+    {
+      "slot": "slot07",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot07/src/cmake/CannWrapperWarnings.cmake",
+      "packaged": "slot07/src/cmake/CannWrapperWarnings.cmake",
+      "sha256": "8289db4c5145b96cc9496b8ec0689f3d2046f1dedb72c10d40a917d3315cb5a1"
+    },
+    {
+      "slot": "slot07",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot07/src/e8_packet_layout.hpp",
+      "packaged": "slot07/src/e8_packet_layout.hpp",
+      "sha256": "53c18584ae352e9f00677493450504ec013c5fbe970b9e2549251436ea8f5b71"
+    },
+    {
+      "slot": "slot07",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot07/src/e8_packet_v1.hpp",
+      "packaged": "slot07/src/e8_packet_v1.hpp",
+      "sha256": "153899189c010fda5db3b6bc88418e22915077ec3fe9980789f46c7f913f0f1c"
+    },
+    {
+      "slot": "slot07",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot07/src/e8_packet_v1_batch_encoded.cpp",
+      "packaged": "slot07/src/e8_packet_v1_batch_encoded.cpp",
+      "sha256": "aff1d34e3ae279c85dd48f78663bb2b923de3ff5d969acd79789721e35042db9"
+    },
+    {
+      "slot": "slot07",
+      "native": "/home/dmin/work/checkpoint2_20261123/slot07/src/ownership_model.cpp",
+      "packaged": "slot07/src/ownership_model.cpp",
+      "sha256": "3417f42d6789a9f743caca17e4198ade3d2144d533647db0f71c3cb8dec05be1"
+    }
+  ]
+}

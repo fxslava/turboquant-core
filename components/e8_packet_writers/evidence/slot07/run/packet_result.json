@@ -1,0 +1,1 @@
+{"scope":"encoded E8 batch packet transport","strips":6,"ring_depth":4,"rows":96,"planes":2,"packets_per_plane":2,"packet_bytes":4352,"compared_bytes":17408,"byte_mismatches":0,"guards":"PASS","raw_encoder":false}

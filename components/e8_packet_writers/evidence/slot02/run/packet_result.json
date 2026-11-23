@@ -1,0 +1,1 @@
+{"scope":"encoded D256 label+FP32 scale packet transport","camodel_launches":6,"packet_bytes":4352,"planes":2,"rows":[0,31,63],"compared_packet_bytes":52224,"byte_mismatches":0,"guards":"PASS","raw_encoder_tested":false,"fused_attention_tested":false}

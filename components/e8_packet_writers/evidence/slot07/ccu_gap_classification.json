@@ -1,0 +1,140 @@
+{
+  "status": "PERFORMANCE_GATE_INCOMPLETE",
+  "component_transport": "PASS_CAMODEL_PACKET",
+  "observable_classification": "Pre-D1 instruction-delivery gap. No repeated issue attempt or explicit scalar instruction hazard at either target is evidenced.",
+  "exact_cause": "Not established: no instruction-fetch/cache miss or decode-block reason is present in retained logs.",
+  "no_baseline_claim": "This new source lacks a matched compact-grinder control. The gaps cannot be labelled explained inherited baseline stalls.",
+  "isa_dependencies": [
+    {
+      "pc": "0x200",
+      "isa": "ADD.s64 X12, X1, X23",
+      "note": "Sources are existing packet base and constant4096; X12 formerly serves DMA descriptor at0x1fc. ADD has one issue/execute and no recorded general-hazard retry."
+    },
+    {
+      "pc": "0x400",
+      "isa": "MOVI X28, #4512",
+      "note": "Immediate scalar write has no source data operand. X28 earlier names a UB scale source; no target issue retry is recorded. One separate DMA id270 retry occurs at2300..2301 after this delivery gap."
+    }
+  ],
+  "candidate_hypothesis": "Cold instruction fetch at512-byte code boundaries is consistent with0x200/0x400 positions and absent D1 delivery, but is not proved by these traces.",
+  "records": [
+    {
+      "target_id": 141,
+      "previous_scalar_id": 139,
+      "target_events": [
+        {
+          "line": 1319,
+          "tick": 1706,
+          "stage": "D1 Stage",
+          "name": "ADD",
+          "pc": "0x10d0d200",
+          "id": 141
+        },
+        {
+          "line": 1326,
+          "tick": 1707,
+          "stage": "ISSUE INSTR",
+          "name": "ADD",
+          "pc": "0x10d0d200",
+          "id": 141
+        },
+        {
+          "line": 1327,
+          "tick": 1707,
+          "stage": "EXECUTE INSTR",
+          "name": "ADD",
+          "pc": "0x10d0d200",
+          "id": 141
+        }
+      ],
+      "previous_events": [
+        {
+          "line": 1310,
+          "tick": 1182,
+          "stage": "D1 Stage",
+          "name": "MOV_XD_IMM",
+          "pc": "0x10d0d1f8",
+          "id": 139
+        },
+        {
+          "line": 1315,
+          "tick": 1183,
+          "stage": "ISSUE INSTR",
+          "name": "MOV_XD_IMM",
+          "pc": "0x10d0d1f8",
+          "id": 139
+        },
+        {
+          "line": 1316,
+          "tick": 1183,
+          "stage": "EXECUTE INSTR",
+          "name": "MOV_XD_IMM",
+          "pc": "0x10d0d1f8",
+          "id": 139
+        }
+      ],
+      "target_issue_attempts": 1,
+      "target_general_hazard_retries": 0,
+      "ccu_no_events_after_previous_execute_before_target_d1": []
+    },
+    {
+      "target_id": 269,
+      "previous_scalar_id": 268,
+      "target_events": [
+        {
+          "line": 1799,
+          "tick": 2299,
+          "stage": "D1 Stage",
+          "name": "MOV_XD_IMM",
+          "pc": "0x10d0d400",
+          "id": 269
+        },
+        {
+          "line": 1805,
+          "tick": 2300,
+          "stage": "ISSUE INSTR",
+          "name": "MOV_XD_IMM",
+          "pc": "0x10d0d400",
+          "id": 269
+        },
+        {
+          "line": 1806,
+          "tick": 2300,
+          "stage": "EXECUTE INSTR",
+          "name": "MOV_XD_IMM",
+          "pc": "0x10d0d400",
+          "id": 269
+        }
+      ],
+      "previous_events": [
+        {
+          "line": 1789,
+          "tick": 1772,
+          "stage": "D1 Stage",
+          "name": "OR",
+          "pc": "0x10d0d3fc",
+          "id": 268
+        },
+        {
+          "line": 1796,
+          "tick": 1773,
+          "stage": "ISSUE INSTR",
+          "name": "OR",
+          "pc": "0x10d0d3fc",
+          "id": 268
+        },
+        {
+          "line": 1797,
+          "tick": 1773,
+          "stage": "EXECUTE INSTR",
+          "name": "OR",
+          "pc": "0x10d0d3fc",
+          "id": 268
+        }
+      ],
+      "target_issue_attempts": 1,
+      "target_general_hazard_retries": 0,
+      "ccu_no_events_after_previous_execute_before_target_d1": []
+    }
+  ]
+}

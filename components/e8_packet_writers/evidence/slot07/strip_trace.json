@@ -1,0 +1,441 @@
+{
+  "scope": "one sixstrip encoded E8 K/V packet-transport probe, not BF16 quantization",
+  "model_total_ticks": 4576,
+  "strips": [
+    {
+      "strip": 0,
+      "ring_slot": 0,
+      "first_input_popped": 1169,
+      "all_inputs_retired": 1732,
+      "first_output_popped": 1734,
+      "all_outputs_retired": 2325,
+      "output_retire_ticks": [
+        2279,
+        2305,
+        2307,
+        2325
+      ],
+      "input_instructions": [
+        {
+          "pc": "0x10d0d188",
+          "id": 111,
+          "popped": 1169,
+          "retired": 1726
+        },
+        {
+          "pc": "0x10d0d1b0",
+          "id": 121,
+          "popped": 1174,
+          "retired": 1728
+        },
+        {
+          "pc": "0x10d0d1c4",
+          "id": 126,
+          "popped": 1177,
+          "retired": 1730
+        },
+        {
+          "pc": "0x10d0d1d8",
+          "id": 131,
+          "popped": 1180,
+          "retired": 1732
+        }
+      ],
+      "output_instructions": [
+        {
+          "pc": "0x10d0d1fc",
+          "id": 140,
+          "popped": 1734,
+          "retired": 2279
+        },
+        {
+          "pc": "0x10d0d218",
+          "id": 147,
+          "popped": 1735,
+          "retired": 2305
+        },
+        {
+          "pc": "0x10d0d228",
+          "id": 151,
+          "popped": 1736,
+          "retired": 2307
+        },
+        {
+          "pc": "0x10d0d23c",
+          "id": 156,
+          "popped": 1738,
+          "retired": 2325
+        }
+      ],
+      "output_completion_delta": null
+    },
+    {
+      "strip": 1,
+      "ring_slot": 1,
+      "first_input_popped": 1721,
+      "all_inputs_retired": 2291,
+      "first_output_popped": 2293,
+      "all_outputs_retired": 2861,
+      "output_retire_ticks": [
+        2837,
+        2839,
+        2859,
+        2861
+      ],
+      "input_instructions": [
+        {
+          "pc": "0x10d0d260",
+          "id": 165,
+          "popped": 1721,
+          "retired": 2271
+        },
+        {
+          "pc": "0x10d0d278",
+          "id": 171,
+          "popped": 1724,
+          "retired": 2279
+        },
+        {
+          "pc": "0x10d0d290",
+          "id": 177,
+          "popped": 1727,
+          "retired": 2289
+        },
+        {
+          "pc": "0x10d0d2a8",
+          "id": 183,
+          "popped": 1730,
+          "retired": 2291
+        }
+      ],
+      "output_instructions": [
+        {
+          "pc": "0x10d0d2c4",
+          "id": 190,
+          "popped": 2293,
+          "retired": 2837
+        },
+        {
+          "pc": "0x10d0d2dc",
+          "id": 196,
+          "popped": 2294,
+          "retired": 2839
+        },
+        {
+          "pc": "0x10d0d2f4",
+          "id": 202,
+          "popped": 2295,
+          "retired": 2859
+        },
+        {
+          "pc": "0x10d0d304",
+          "id": 206,
+          "popped": 2297,
+          "retired": 2861
+        }
+      ],
+      "output_completion_delta": 536
+    },
+    {
+      "strip": 2,
+      "ring_slot": 2,
+      "first_input_popped": 1747,
+      "all_inputs_retired": 2309,
+      "first_output_popped": 2311,
+      "all_outputs_retired": 2883,
+      "output_retire_ticks": [
+        2863,
+        2865,
+        2881,
+        2883
+      ],
+      "input_instructions": [
+        {
+          "pc": "0x10d0d328",
+          "id": 215,
+          "popped": 1747,
+          "retired": 2293
+        },
+        {
+          "pc": "0x10d0d340",
+          "id": 221,
+          "popped": 1750,
+          "retired": 2295
+        },
+        {
+          "pc": "0x10d0d358",
+          "id": 227,
+          "popped": 1753,
+          "retired": 2307
+        },
+        {
+          "pc": "0x10d0d370",
+          "id": 233,
+          "popped": 1756,
+          "retired": 2309
+        }
+      ],
+      "output_instructions": [
+        {
+          "pc": "0x10d0d38c",
+          "id": 240,
+          "popped": 2311,
+          "retired": 2863
+        },
+        {
+          "pc": "0x10d0d3a0",
+          "id": 245,
+          "popped": 2312,
+          "retired": 2865
+        },
+        {
+          "pc": "0x10d0d3b4",
+          "id": 250,
+          "popped": 2317,
+          "retired": 2881
+        },
+        {
+          "pc": "0x10d0d3c8",
+          "id": 255,
+          "popped": 2319,
+          "retired": 2883
+        }
+      ],
+      "output_completion_delta": 22
+    },
+    {
+      "strip": 3,
+      "ring_slot": 3,
+      "first_input_popped": 1773,
+      "all_inputs_retired": 2872,
+      "first_output_popped": 2874,
+      "all_outputs_retired": 3444,
+      "output_retire_ticks": [
+        3438,
+        3440,
+        3442,
+        3444
+      ],
+      "input_instructions": [
+        {
+          "pc": "0x10d0d3ec",
+          "id": 264,
+          "popped": 1773,
+          "retired": 2321
+        },
+        {
+          "pc": "0x10d0d404",
+          "id": 270,
+          "popped": 2302,
+          "retired": 2855
+        },
+        {
+          "pc": "0x10d0d41c",
+          "id": 276,
+          "popped": 2305,
+          "retired": 2870
+        },
+        {
+          "pc": "0x10d0d434",
+          "id": 282,
+          "popped": 2308,
+          "retired": 2872
+        }
+      ],
+      "output_instructions": [
+        {
+          "pc": "0x10d0d450",
+          "id": 289,
+          "popped": 2874,
+          "retired": 3438
+        },
+        {
+          "pc": "0x10d0d468",
+          "id": 295,
+          "popped": 2875,
+          "retired": 3440
+        },
+        {
+          "pc": "0x10d0d480",
+          "id": 301,
+          "popped": 2876,
+          "retired": 3442
+        },
+        {
+          "pc": "0x10d0d490",
+          "id": 305,
+          "popped": 2878,
+          "retired": 3444
+        }
+      ],
+      "output_completion_delta": 561
+    },
+    {
+      "strip": 4,
+      "ring_slot": 0,
+      "first_input_popped": 2327,
+      "all_inputs_retired": 2892,
+      "first_output_popped": 2894,
+      "all_outputs_retired": 3467,
+      "output_retire_ticks": [
+        3455,
+        3457,
+        3465,
+        3467
+      ],
+      "input_instructions": [
+        {
+          "pc": "0x10d0d4ac",
+          "id": 312,
+          "popped": 2327,
+          "retired": 2885
+        },
+        {
+          "pc": "0x10d0d4c4",
+          "id": 318,
+          "popped": 2328,
+          "retired": 2887
+        },
+        {
+          "pc": "0x10d0d4d4",
+          "id": 322,
+          "popped": 2329,
+          "retired": 2890
+        },
+        {
+          "pc": "0x10d0d4e8",
+          "id": 327,
+          "popped": 2332,
+          "retired": 2892
+        }
+      ],
+      "output_instructions": [
+        {
+          "pc": "0x10d0d508",
+          "id": 335,
+          "popped": 2894,
+          "retired": 3455
+        },
+        {
+          "pc": "0x10d0d520",
+          "id": 341,
+          "popped": 2895,
+          "retired": 3457
+        },
+        {
+          "pc": "0x10d0d534",
+          "id": 346,
+          "popped": 2898,
+          "retired": 3465
+        },
+        {
+          "pc": "0x10d0d548",
+          "id": 351,
+          "popped": 2900,
+          "retired": 3467
+        }
+      ],
+      "output_completion_delta": 23
+    },
+    {
+      "strip": 5,
+      "ring_slot": 1,
+      "first_input_popped": 2863,
+      "all_inputs_retired": 3424,
+      "first_output_popped": 3426,
+      "all_outputs_retired": 3971,
+      "output_retire_ticks": [
+        3931,
+        3933,
+        3969,
+        3971
+      ],
+      "input_instructions": [
+        {
+          "pc": "0x10d0d56c",
+          "id": 360,
+          "popped": 2863,
+          "retired": 3418
+        },
+        {
+          "pc": "0x10d0d580",
+          "id": 365,
+          "popped": 2864,
+          "retired": 3420
+        },
+        {
+          "pc": "0x10d0d594",
+          "id": 370,
+          "popped": 2865,
+          "retired": 3422
+        },
+        {
+          "pc": "0x10d0d5a4",
+          "id": 374,
+          "popped": 2867,
+          "retired": 3424
+        }
+      ],
+      "output_instructions": [
+        {
+          "pc": "0x10d0d5c4",
+          "id": 382,
+          "popped": 3426,
+          "retired": 3931
+        },
+        {
+          "pc": "0x10d0d5dc",
+          "id": 388,
+          "popped": 3427,
+          "retired": 3933
+        },
+        {
+          "pc": "0x10d0d5f4",
+          "id": 394,
+          "popped": 3428,
+          "retired": 3969
+        },
+        {
+          "pc": "0x10d0d604",
+          "id": 398,
+          "popped": 3430,
+          "retired": 3971
+        }
+      ],
+      "output_completion_delta": 504
+    }
+  ],
+  "completion_deltas": [
+    536,
+    22,
+    561,
+    23,
+    504
+  ],
+  "completion_interval_mean": 329.2,
+  "post_fill_intervals": [
+    23,
+    504
+  ],
+  "post_fill_mean": 263.5,
+  "stationary_steady_state_proven": false,
+  "scalar_loads_in_grinder": 0,
+  "scalar_explicit_waits_in_grinder": 0,
+  "scalar_popped_gaps_over16": [
+    {
+      "previous_pc": "0x10d0d1f8",
+      "next_pc": "0x10d0d200",
+      "start": 1183,
+      "end": 1707,
+      "gap": 524
+    },
+    {
+      "previous_pc": "0x10d0d3fc",
+      "next_pc": "0x10d0d400",
+      "start": 1773,
+      "end": 2300,
+      "gap": 527
+    }
+  ],
+  "timing_note": "Popped and retired timestamps are queue observations. Popped-to-retired span may include queueing; it is not an isolated hardware latency. Postfill has only two samples and alternating completion gaps; no stationary throughput claim."
+}

@@ -1,0 +1,72 @@
+{
+  "schema": "frozen_e8_wave1_export_v1",
+  "exported_utc": "2026-11-20T21:14:10.053816+00:00",
+  "phase0_commit": "cf94dd09c4e7721f006a3eb43633a1dda5d9658c",
+  "source_tree_note": "Native slot source snapshots have no .git metadata. cf94dd0 is present in the destination Git repository; slot hashes are authoritative for these frozen headers.",
+  "headers": [
+    {
+      "file": "routine_e8_bf16_dequant_simt.hpp",
+      "sha256": "28f13039c8fec29ef91919a69a8314a60c9cb9aec3f5f3fc75b270f8e524cda2",
+      "source": "/home/dmin/work/agent_06/ascend-micro-harness/routines/routine_e8_bf16_dequant_simt.hpp",
+      "slot": "agent_06"
+    },
+    {
+      "file": "routine_e8_int8_dequant_simt.hpp",
+      "sha256": "e366ddb4b6697ede5a16bcb41c5ab3857f1ee98bcc2ce95f1c5b8efefe9f2d45",
+      "source": "/home/dmin/work/agent_08/ascend-micro-harness/routines/routine_e8_int8_dequant_simt.hpp",
+      "slot": "agent_08"
+    }
+  ],
+  "canonical_generator": {
+    "file": "e8_reference.py",
+    "source": "/home/dmin/work/agent_09/ascend-micro-harness/scripts/e8_reference.py",
+    "sha256": "a5b6c0d0b9d32ed53f285c7dbbbe63dbd8e5464019ebe461bb4d0b9f967ad495",
+    "matches_slots": [
+      "06",
+      "08",
+      "09"
+    ]
+  },
+  "goldens": {
+    "directory": "e8_wave1_goldens",
+    "source": "/home/dmin/work/agent_06/artifacts/fixtures/e8_v1",
+    "also_verified_against": "/home/dmin/work/agent_08/artifacts/fixtures/e8_v1",
+    "manifest_sha256": "efeb8b9c8a540989bd62847a643b818f2500678fe7c205e540e16ea1f723aec7",
+    "payload_files": 23,
+    "payload_bytes": 344768,
+    "numpy": "2.2.6",
+    "seed": 9503510
+  },
+  "selected_configuration": {
+    "Elements": 8192,
+    "Threads": 512,
+    "Backend": "SIMT",
+    "Representation": "Arithmetic",
+    "TableLayout": "AoS",
+    "Shaping": "ResidualBits",
+    "scratch_bytes": 0,
+    "table_bytes": 0
+  },
+  "performance_scope": "Frozen Wave1 standalone E8-only dequant, not full inverse rotation/equalization",
+  "postwarmup": {
+    "bf16": {
+      "ticks": [
+        9736,
+        9815
+      ],
+      "ticks_per_element": 1.19329833984375
+    },
+    "int8": {
+      "ticks": [
+        8011,
+        7857
+      ],
+      "ticks_per_element": 0.968505859375
+    }
+  },
+  "limits": [
+    "Only the explicitly selected configuration carries these timings; defaults differ",
+    "No fresh CAModel or hardware measurement performed during export",
+    "Wave2 fullfinite BF16 quant golden revisions do not modify these Wave1 fixtures"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "slot": "07",
+  "scope": "encoded E8 D256 batch packet transport",
+  "status": "PASS_CAMODEL_PACKET",
+  "strips": 6,
+  "ring_depth": 4,
+  "rows": 96,
+  "packet_bytes": 4352,
+  "packets_per_plane": 2,
+  "strict_build": "PASS",
+  "aka_fatal": 0,
+  "aka_warning": 0,
+  "pre_sim_reviews": 3,
+  "cpu_token_ownership_model": "PASS",
+  "grinder_scalar_data_loads": 0,
+  "grinder_runtime_branches": 0,
+  "grinder_explicit_scalar_waits": 0,
+  "observed_implicit_scalar_gaps": [
+    524,
+    527
+  ],
+  "zero_implicit_scalar_stalls_claimed": false,
+  "ub_bytes": 9216,
+  "camodel_launches": 1,
+  "compared_packet_bytes": 17408,
+  "byte_mismatches": 0,
+  "guards": "PASS",
+  "total_ticks": 4576,
+  "strip_completion_ticks": [
+    2325,
+    2861,
+    2883,
+    3444,
+    3467,
+    3971
+  ],
+  "strip_completion_deltas": [
+    536,
+    22,
+    561,
+    23,
+    504
+  ],
+  "postfill_interval_mean": 263.5,
+  "stationary_steady_state_proven": false,
+  "raw_bf16_encoder": false,
+  "device_lane_released": true,
+  "performance_gate": "INCOMPLETE_PRE_D1_GAP_CAUSE_UNPROVEN",
+  "gap_classification": "PRE_D1_DELIVERY_GAPS_NOT_REPEATED_SCALAR_ISSUE"
+}

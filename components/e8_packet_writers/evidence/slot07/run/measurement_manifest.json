@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/home/dmin/work/checkpoint2_20261123/slot07/build/bin/batch_runner",
+    "/mnt/c/ascend-micro-harness/routines/e8_wave1_goldens"
+  ],
+  "cwd": "/home/dmin/work/checkpoint2_20261123/slot07/run",
+  "timing_model_dir": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib",
+  "expected_pem_sha256": "1a6420fe8123e88a120f0bbfc76710968e6708599c77d80a7b1097aca06eed33",
+  "collection": "ordinary CAModel text dumps; NO callback helper",
+  "cache_evidence": "Consecutive warmup + repeats; hit/refill counters unavailable. Verify persistence separately.",
+  "environment": {
+    "LD_LIBRARY_PATH": "/home/dmin/work/checkpoint2_20261123/slot07/build/lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/devlib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64/stub",
+    "LD_PRELOAD": null,
+    "soc_version": null
+  },
+  "exit_code": 0,
+  "loaded_pem_verified": true
+}

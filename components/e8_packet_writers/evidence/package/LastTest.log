@@ -1,0 +1,67 @@
+Start testing: Nov 23 12:22 MSK
+----------------------------------------------------------
+1/4 Testing: e8_packet_host
+1/4 Test: e8_packet_host
+Command: "/home/dmin/work/checkpoint2_20261123/e8_packet_package_cpu/e8_packet_host" "/mnt/c/Users/Admin/.codex/worktrees/e8-packet-writers/turboquant-core/components/e8_packet_writers/fixtures"
+Directory: /home/dmin/work/checkpoint2_20261123/e8_packet_package_cpu
+"e8_packet_host" start time: Nov 23 12:22 MSK
+Output:
+----------------------------------------------------------
+PASS packet scatter: 64 row placements, all 65536 labels, K/V isolation, scale bits, guards; frozen BF16 comparisons=16384, mismatches=0 (CPU only, not fused attention)
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"e8_packet_host" end time: Nov 23 12:22 MSK
+"e8_packet_host" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/4 Testing: e8_batch_ownership
+2/4 Test: e8_batch_ownership
+Command: "/home/dmin/work/checkpoint2_20261123/e8_packet_package_cpu/e8_batch_ownership" "/mnt/c/Users/Admin/.codex/worktrees/e8-packet-writers/turboquant-core/components/e8_packet_writers/fixtures"
+Directory: /home/dmin/work/checkpoint2_20261123/e8_packet_package_cpu
+"e8_batch_ownership" start time: Nov 23 12:22 MSK
+Output:
+----------------------------------------------------------
+PASS sixstrip ring4 token/ownership model: K/V separate2x4352B packets, wrap afterstrip3, last32rows preserved, zero leaked tokens; CPU only
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"e8_batch_ownership" end time: Nov 23 12:22 MSK
+"e8_batch_ownership" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/4 Testing: e8_packet_device_bytes_leaf_cpu
+3/4 Test: e8_packet_device_bytes_leaf_cpu
+Command: "/home/dmin/work/checkpoint2_20261123/e8_packet_package_cpu/e8_packet_device_bytes_leaf_cpu" "/mnt/c/Users/Admin/.codex/worktrees/e8-packet-writers/turboquant-core/components/e8_packet_writers/evidence/slot02/run" "/mnt/c/Users/Admin/.codex/worktrees/e8-packet-writers/turboquant-core/components/e8_packet_writers/fixtures"
+Directory: /home/dmin/work/checkpoint2_20261123/e8_packet_package_cpu
+"e8_packet_device_bytes_leaf_cpu" start time: Nov 23 12:22 MSK
+Output:
+----------------------------------------------------------
+PASS device packet -> unchanged frozen E8 leaf CPU: BF16_values=1536 mismatches=0 max_BF16_ULP=0 (CPU reconstruction, not attention)
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"e8_packet_device_bytes_leaf_cpu" end time: Nov 23 12:22 MSK
+"e8_packet_device_bytes_leaf_cpu" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/4 Testing: e8_packet_provenance
+4/4 Test: e8_packet_provenance
+Command: "/usr/bin/python3.10" "/mnt/c/Users/Admin/.codex/worktrees/e8-packet-writers/turboquant-core/components/e8_packet_writers/verify_package.py"
+Directory: /home/dmin/work/checkpoint2_20261123/e8_packet_package_cpu
+"e8_packet_provenance" start time: Nov 23 12:22 MSK
+Output:
+----------------------------------------------------------
+PASS 21 native source snapshots, 2 frozen E8 leaves, 23 fixture payloads
+<end of output>
+Test time =   0.30 sec
+----------------------------------------------------------
+Test Passed.
+"e8_packet_provenance" end time: Nov 23 12:22 MSK
+"e8_packet_provenance" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Nov 23 12:22 MSK

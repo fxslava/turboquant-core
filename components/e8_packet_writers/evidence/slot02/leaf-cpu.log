@@ -1,0 +1,1 @@
+PASS device packet -> unchanged frozen E8 leaf CPU: BF16_values=1536 mismatches=0 max_BF16_ULP=0 (CPU reconstruction, not attention)

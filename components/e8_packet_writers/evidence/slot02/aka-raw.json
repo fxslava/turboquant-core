@@ -1,0 +1,1534 @@
+{
+  "schema_version": "1.0",
+  "tool": {
+    "name": "ascend-kernel-analyzer",
+    "version": "0.1.0",
+    "solver": "z3",
+    "python": "3.10.12",
+    "generated_at": "2026-11-23T08:50:56+00:00"
+  },
+  "source": {
+    "path": "src/e8_packet_v1_scatter.cpp",
+    "line_count": 43,
+    "had_parse_errors": false,
+    "parse_error_locations": [],
+    "constants": {
+      "EVENT_ID0": 0,
+      "EVENT_ID1": 1,
+      "EVENT_ID2": 2,
+      "EVENT_ID3": 3,
+      "__PCPP__": 1,
+      "__cplusplus": 201703,
+      "__CCE_KT_TEST__": 1,
+      "kRows": 64,
+      "kChannels": 256,
+      "kLabelsPerRow": 32,
+      "kLabelRowBytes": 64,
+      "kScaleOffset": 4096,
+      "kScaleBytes": 256,
+      "kPacketBytes": 4352,
+      "kUbBytes": 96,
+      "scaleCopy": 1,
+      "noPad": 0
+    }
+  },
+  "target": {
+    "name": "ascend950pr",
+    "display_name": "Ascend 950PR (arch35 / DaVinci v3)",
+    "provisional": false,
+    "emit_perf_advisories": false,
+    "notes": "Validated arch35 AIV limits: EVENT_ID0..3 and 256 KiB UB, of which at most 216 KiB is usable for tensors after the 8 KiB compiler reserve and 32 KiB SIMT DataCache floor. Pipeline timing remains uncalibrated, so performance advisories are withheld.",
+    "block_bytes": 32,
+    "ub_safe_ceiling": 163840,
+    "max_event_id": 3,
+    "reserved_event_ids": [],
+    "ub_partition": {
+      "ub_total_bytes": 262144,
+      "compiler_reserved_bytes": 8192,
+      "min_datacache_bytes": 32768,
+      "max_usable_ub_bytes": 221184
+    },
+    "perf_model": {
+      "mte2_bytes_per_cycle": 64,
+      "mte1_bytes_per_cycle": 64,
+      "fixpipe_bytes_per_cycle": 64,
+      "cube_macs_per_cycle": 4096,
+      "cube_read_bytes_per_cycle": 1024,
+      "sync_handoff_cycles": 30
+    },
+    "domains": {
+      "UB": {
+        "capacity_bytes": 262144,
+        "capacity_kib": 256.0,
+        "base_alignment": 32,
+        "size_alignment": 32,
+        "stride_alignment": 32,
+        "description": "Unified Buffer (vector scratchpad)"
+      },
+      "L1": {
+        "capacity_bytes": 524288,
+        "capacity_kib": 512.0,
+        "base_alignment": 32,
+        "size_alignment": 32,
+        "stride_alignment": 32,
+        "description": "L1 Buffer (shared staging)"
+      },
+      "L0A": {
+        "capacity_bytes": 65536,
+        "capacity_kib": 64.0,
+        "base_alignment": 512,
+        "size_alignment": 512,
+        "stride_alignment": 32,
+        "description": "Cube A (left matrix)"
+      },
+      "L0B": {
+        "capacity_bytes": 65536,
+        "capacity_kib": 64.0,
+        "base_alignment": 512,
+        "size_alignment": 512,
+        "stride_alignment": 32,
+        "description": "Cube B (right matrix)"
+      },
+      "L0C": {
+        "capacity_bytes": 131072,
+        "capacity_kib": 128.0,
+        "base_alignment": 1024,
+        "size_alignment": 1024,
+        "stride_alignment": 32,
+        "description": "Cube C (accumulator)"
+      },
+      "BT": {
+        "capacity_bytes": 1024,
+        "capacity_kib": 1.0,
+        "base_alignment": 64,
+        "size_alignment": 64,
+        "stride_alignment": 32,
+        "description": "Bias table"
+      },
+      "FB": {
+        "capacity_bytes": 2048,
+        "capacity_kib": 2.0,
+        "base_alignment": 128,
+        "size_alignment": 128,
+        "stride_alignment": 32,
+        "description": "Fixpipe parameter buffer"
+      }
+    }
+  },
+  "summary": {
+    "fatal": 0,
+    "warning": 2,
+    "info": 0,
+    "total": 2,
+    "by_code": {
+      "AKA1009": 2
+    }
+  },
+  "verdict": "accepted_with_warnings",
+  "diagnostics": [
+    {
+      "code": "AKA1009",
+      "title": "Undetermined memory domain",
+      "severity": "WARNING",
+      "hardware_domain": "UNKNOWN",
+      "message": "tensor 'labels' has no resolvable memory domain, so its layout cannot be verified",
+      "remediation": "Call labels.SetTPosition(AscendC::TPosition::VECIN) (or the correct position), allocate it from a TBuf with an explicit TPosition, or annotate it with '// @ascend-layout: name=labels pos=VECIN offset=... count=...'.",
+      "location": {
+        "file": "src/e8_packet_v1_scatter.cpp",
+        "line": 22,
+        "column": 47,
+        "end_line": 22,
+        "end_column": 87,
+        "snippet": "const AscendC::LocalTensor<std::uint16_t> labels{AscendC::TPosition::VECIN, 0, 32};"
+      },
+      "related": [],
+      "details": {
+        "tensor": "labels",
+        "origin": "LocalTensor declaration"
+      }
+    },
+    {
+      "code": "AKA1009",
+      "title": "Undetermined memory domain",
+      "severity": "WARNING",
+      "hardware_domain": "UNKNOWN",
+      "message": "tensor 'scale' has no resolvable memory domain, so its layout cannot be verified",
+      "remediation": "Call scale.SetTPosition(AscendC::TPosition::VECIN) (or the correct position), allocate it from a TBuf with an explicit TPosition, or annotate it with '// @ascend-layout: name=scale pos=VECIN offset=... count=...'.",
+      "location": {
+        "file": "src/e8_packet_v1_scatter.cpp",
+        "line": 23,
+        "column": 39,
+        "end_line": 23,
+        "end_column": 78,
+        "snippet": "const AscendC::LocalTensor<float> scale{AscendC::TPosition::VECIN, 64, 8};"
+      },
+      "related": [],
+      "details": {
+        "tensor": "scale",
+        "origin": "LocalTensor declaration"
+      }
+    }
+  ],
+  "kernels": [
+    {
+      "name": "e8_packet_v1_scatter",
+      "location": {
+        "file": "src/e8_packet_v1_scatter.cpp",
+        "line": 5,
+        "column": 34,
+        "end_line": 35,
+        "end_column": 2,
+        "snippet": "extern \"C\" __global__ __aicore__ void e8_packet_v1_scatter("
+      },
+      "is_kernel_entry": true,
+      "op_count": 8,
+      "inlined": [],
+      "tensors": [
+        {
+          "name": "inputLabels",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": null,
+          "elem_size": null,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "kernel parameter",
+          "reuse_group": null,
+          "first_use": null,
+          "last_use": null,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 6,
+            "column": 5,
+            "end_line": 6,
+            "end_column": 24,
+            "snippet": "GM_ADDR inputLabels, GM_ADDR inputScale, GM_ADDR outputPacket, std::uint32_t row) {"
+          }
+        },
+        {
+          "name": "inputScale",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": null,
+          "elem_size": null,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "kernel parameter",
+          "reuse_group": null,
+          "first_use": null,
+          "last_use": null,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 6,
+            "column": 26,
+            "end_line": 6,
+            "end_column": 44,
+            "snippet": "GM_ADDR inputLabels, GM_ADDR inputScale, GM_ADDR outputPacket, std::uint32_t row) {"
+          }
+        },
+        {
+          "name": "outputPacket",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": null,
+          "elem_size": null,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "kernel parameter",
+          "reuse_group": null,
+          "first_use": null,
+          "last_use": null,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 6,
+            "column": 46,
+            "end_line": 6,
+            "end_column": 66,
+            "snippet": "GM_ADDR inputLabels, GM_ADDR inputScale, GM_ADDR outputPacket, std::uint32_t row) {"
+          }
+        },
+        {
+          "name": "labelsIn",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "uint16_t",
+          "elem_size": 2,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "GlobalTensor declaration",
+          "reuse_group": null,
+          "first_use": 1,
+          "last_use": 1,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 14,
+            "column": 5,
+            "end_line": 14,
+            "end_column": 51,
+            "snippet": "AscendC::GlobalTensor<std::uint16_t> labelsIn;"
+          }
+        },
+        {
+          "name": "scaleIn",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "float",
+          "elem_size": 4,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "GlobalTensor declaration",
+          "reuse_group": null,
+          "first_use": 2,
+          "last_use": 2,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 15,
+            "column": 5,
+            "end_line": 15,
+            "end_column": 42,
+            "snippet": "AscendC::GlobalTensor<float> scaleIn;"
+          }
+        },
+        {
+          "name": "labelsOut",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "uint16_t",
+          "elem_size": 2,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "GlobalTensor declaration",
+          "reuse_group": null,
+          "first_use": 5,
+          "last_use": 5,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 16,
+            "column": 5,
+            "end_line": 16,
+            "end_column": 52,
+            "snippet": "AscendC::GlobalTensor<std::uint16_t> labelsOut;"
+          }
+        },
+        {
+          "name": "scalesOut",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "float",
+          "elem_size": 4,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "GlobalTensor declaration",
+          "reuse_group": null,
+          "first_use": 6,
+          "last_use": 6,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 17,
+            "column": 5,
+            "end_line": 17,
+            "end_column": 44,
+            "snippet": "AscendC::GlobalTensor<float> scalesOut;"
+          }
+        },
+        {
+          "name": "labels",
+          "domain": "UNKNOWN",
+          "position": null,
+          "dtype": "uint16_t",
+          "elem_size": 2,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "LocalTensor declaration",
+          "reuse_group": null,
+          "first_use": 1,
+          "last_use": 5,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 22,
+            "column": 47,
+            "end_line": 22,
+            "end_column": 87,
+            "snippet": "const AscendC::LocalTensor<std::uint16_t> labels{AscendC::TPosition::VECIN, 0, 32};"
+          }
+        },
+        {
+          "name": "scale",
+          "domain": "UNKNOWN",
+          "position": null,
+          "dtype": "float",
+          "elem_size": 4,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "LocalTensor declaration",
+          "reuse_group": null,
+          "first_use": 2,
+          "last_use": 6,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 23,
+            "column": 39,
+            "end_line": 23,
+            "end_column": 78,
+            "snippet": "const AscendC::LocalTensor<float> scale{AscendC::TPosition::VECIN, 64, 8};"
+          }
+        }
+      ],
+      "loops": [],
+      "constants": {
+        "EVENT_ID0": 0,
+        "EVENT_ID1": 1,
+        "EVENT_ID2": 2,
+        "EVENT_ID3": 3,
+        "__PCPP__": 1,
+        "__cplusplus": 201703,
+        "__CCE_KT_TEST__": 1,
+        "kRows": 64,
+        "kChannels": 256,
+        "kLabelsPerRow": 32,
+        "kLabelRowBytes": 64,
+        "kScaleOffset": 4096,
+        "kScaleBytes": 256,
+        "kPacketBytes": 4352,
+        "kUbBytes": 96,
+        "scaleCopy": 1,
+        "noPad": 0
+      },
+      "buffer_sizes": {},
+      "buffer_positions": {},
+      "memory_map": [],
+      "trace": [
+        {
+          "index": 0,
+          "kind": "ApiCall",
+          "label": "DataCopy(labels, labelsIn, 32u)",
+          "pipe": "PIPE_MTE2",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 24,
+            "column": 5,
+            "end_line": 24,
+            "end_column": 45,
+            "snippet": "AscendC::DataCopy(labels, labelsIn, 32u);"
+          },
+          "name": "DataCopy",
+          "args": [
+            {
+              "index": 0,
+              "text": "labels",
+              "tensor": "labels",
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "labelsIn",
+              "tensor": "labelsIn",
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "32u",
+              "tensor": null,
+              "value": 32
+            }
+          ],
+          "writes": [
+            "labels"
+          ],
+          "reads": [
+            "labelsIn"
+          ]
+        },
+        {
+          "index": 1,
+          "kind": "ApiCall",
+          "label": "DataCopyPad(scale, scaleIn, scaleCopy, noPad)",
+          "pipe": "PIPE_MTE2",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 27,
+            "column": 5,
+            "end_line": 27,
+            "end_column": 59,
+            "snippet": "AscendC::DataCopyPad(scale, scaleIn, scaleCopy, noPad);"
+          },
+          "name": "DataCopyPad",
+          "args": [
+            {
+              "index": 0,
+              "text": "scale",
+              "tensor": "scale",
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "scaleIn",
+              "tensor": "scaleIn",
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "scaleCopy",
+              "tensor": null,
+              "value": 1
+            },
+            {
+              "index": 3,
+              "text": "noPad",
+              "tensor": null,
+              "value": 0
+            }
+          ],
+          "writes": [
+            "scale"
+          ],
+          "reads": [
+            "scaleIn"
+          ]
+        },
+        {
+          "index": 2,
+          "kind": "SetFlag",
+          "label": "SetFlag<MTE2_MTE3>(0)",
+          "pipe": "PIPE_MTE2",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 28,
+            "column": 5,
+            "end_line": 28,
+            "end_column": 55,
+            "snippet": "AscendC::SetFlag<AscendC::HardEvent::MTE2_MTE3>(0);"
+          },
+          "flag_kind": "SetFlag",
+          "route": "MTE2_MTE3",
+          "src_pipe": "PIPE_MTE2",
+          "dst_pipe": "PIPE_MTE3",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        },
+        {
+          "index": 3,
+          "kind": "WaitFlag",
+          "label": "WaitFlag<MTE2_MTE3>(0)",
+          "pipe": "PIPE_MTE3",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 29,
+            "column": 5,
+            "end_line": 29,
+            "end_column": 56,
+            "snippet": "AscendC::WaitFlag<AscendC::HardEvent::MTE2_MTE3>(0);"
+          },
+          "flag_kind": "WaitFlag",
+          "route": "MTE2_MTE3",
+          "src_pipe": "PIPE_MTE2",
+          "dst_pipe": "PIPE_MTE3",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        },
+        {
+          "index": 4,
+          "kind": "ApiCall",
+          "label": "DataCopy(labelsOut[row * 32u], labels, 32u)",
+          "pipe": "PIPE_MTE3",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 30,
+            "column": 5,
+            "end_line": 30,
+            "end_column": 57,
+            "snippet": "AscendC::DataCopy(labelsOut[row * 32u], labels, 32u);"
+          },
+          "name": "DataCopy",
+          "args": [
+            {
+              "index": 0,
+              "text": "labelsOut[row * 32u]",
+              "tensor": "labelsOut",
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "labels",
+              "tensor": "labels",
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "32u",
+              "tensor": null,
+              "value": 32
+            }
+          ],
+          "writes": [
+            "labelsOut"
+          ],
+          "reads": [
+            "labels"
+          ]
+        },
+        {
+          "index": 5,
+          "kind": "ApiCall",
+          "label": "DataCopyPad(scalesOut[row], scale, scaleCopy)",
+          "pipe": "PIPE_MTE3",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 32,
+            "column": 5,
+            "end_line": 32,
+            "end_column": 59,
+            "snippet": "AscendC::DataCopyPad(scalesOut[row], scale, scaleCopy);"
+          },
+          "name": "DataCopyPad",
+          "args": [
+            {
+              "index": 0,
+              "text": "scalesOut[row]",
+              "tensor": "scalesOut",
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "scale",
+              "tensor": "scale",
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "scaleCopy",
+              "tensor": null,
+              "value": 1
+            }
+          ],
+          "writes": [
+            "scalesOut"
+          ],
+          "reads": [
+            "scale"
+          ]
+        },
+        {
+          "index": 6,
+          "kind": "SetFlag",
+          "label": "SetFlag<MTE3_S>(0)",
+          "pipe": "PIPE_MTE3",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 33,
+            "column": 5,
+            "end_line": 33,
+            "end_column": 52,
+            "snippet": "AscendC::SetFlag<AscendC::HardEvent::MTE3_S>(0);"
+          },
+          "flag_kind": "SetFlag",
+          "route": "MTE3_S",
+          "src_pipe": "PIPE_MTE3",
+          "dst_pipe": "PIPE_S",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        },
+        {
+          "index": 7,
+          "kind": "WaitFlag",
+          "label": "WaitFlag<MTE3_S>(0)",
+          "pipe": "PIPE_S",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 34,
+            "column": 5,
+            "end_line": 34,
+            "end_column": 53,
+            "snippet": "AscendC::WaitFlag<AscendC::HardEvent::MTE3_S>(0);"
+          },
+          "flag_kind": "WaitFlag",
+          "route": "MTE3_S",
+          "src_pipe": "PIPE_MTE3",
+          "dst_pipe": "PIPE_S",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        }
+      ],
+      "synchronisation": {
+        "nodes": [
+          {
+            "index": 2,
+            "label": "SetFlag<MTE2_MTE3>(0)",
+            "pipe": "PIPE_MTE2",
+            "line": 28,
+            "kind": "SetFlag",
+            "loop_id": null
+          },
+          {
+            "index": 3,
+            "label": "WaitFlag<MTE2_MTE3>(0)",
+            "pipe": "PIPE_MTE3",
+            "line": 29,
+            "kind": "WaitFlag",
+            "loop_id": null
+          },
+          {
+            "index": 6,
+            "label": "SetFlag<MTE3_S>(0)",
+            "pipe": "PIPE_MTE3",
+            "line": 33,
+            "kind": "SetFlag",
+            "loop_id": null
+          },
+          {
+            "index": 7,
+            "label": "WaitFlag<MTE3_S>(0)",
+            "pipe": "PIPE_S",
+            "line": 34,
+            "kind": "WaitFlag",
+            "loop_id": null
+          }
+        ],
+        "edges": [
+          {
+            "from": 2,
+            "to": 3,
+            "tokens": 0,
+            "kind": "sync",
+            "route": "MTE2_MTE3",
+            "event_id": 0,
+            "loop_carried": false
+          },
+          {
+            "from": 3,
+            "to": 6,
+            "tokens": 0,
+            "kind": "program"
+          },
+          {
+            "from": 6,
+            "to": 7,
+            "tokens": 0,
+            "kind": "sync",
+            "route": "MTE3_S",
+            "event_id": 0,
+            "loop_carried": false
+          }
+        ],
+        "sync_pairs": [
+          {
+            "channel": {
+              "route": "MTE2_MTE3",
+              "event_id": 0
+            },
+            "set_index": 2,
+            "set_line": 28,
+            "wait_index": 3,
+            "wait_line": 29,
+            "tokens": 0,
+            "loop_carried": false
+          },
+          {
+            "channel": {
+              "route": "MTE3_S",
+              "event_id": 0
+            },
+            "set_index": 6,
+            "set_line": 33,
+            "wait_index": 7,
+            "wait_line": 34,
+            "tokens": 0,
+            "loop_carried": false
+          }
+        ],
+        "acyclic": true,
+        "topological_order": [
+          2,
+          3,
+          6,
+          7
+        ],
+        "cycles": [],
+        "pipes": [
+          "PIPE_MTE2",
+          "PIPE_MTE3",
+          "PIPE_S"
+        ],
+        "peeled_loops": []
+      },
+      "performance": {
+        "makespan_cycles": 68,
+        "total_busy_cycles": 8,
+        "total_stall_cycles": 100,
+        "stall_by_route": {
+          "MTE3_S": 67,
+          "MTE2_MTE3": 33
+        },
+        "drain_cycles": 32,
+        "overlap_ratio": 0.0392,
+        "active_pipes": 3,
+        "critical_pipe": "PIPE_MTE3",
+        "bottleneck": "DRAIN_BOUND",
+        "pipes": [
+          {
+            "pipe": "PIPE_S",
+            "op_count": 1,
+            "busy_cycles": 1,
+            "idle_cycles": 67,
+            "stall_cycles": 67,
+            "utilization": 0.0147
+          },
+          {
+            "pipe": "PIPE_MTE2",
+            "op_count": 3,
+            "busy_cycles": 3,
+            "idle_cycles": 65,
+            "stall_cycles": 0,
+            "utilization": 0.0441
+          },
+          {
+            "pipe": "PIPE_MTE3",
+            "op_count": 4,
+            "busy_cycles": 4,
+            "idle_cycles": 64,
+            "stall_cycles": 33,
+            "utilization": 0.0588
+          }
+        ],
+        "handoff_cycles": 30
+      },
+      "domain_usage": []
+    },
+    {
+      "name": "launch_e8_packet_v1_scatter",
+      "location": {
+        "file": "src/e8_packet_v1_scatter.cpp",
+        "line": 39,
+        "column": 12,
+        "end_line": 42,
+        "end_column": 2,
+        "snippet": "extern \"C\" void launch_e8_packet_v1_scatter(void* stream, std::uint8_t* labels,"
+      },
+      "is_kernel_entry": true,
+      "op_count": 8,
+      "inlined": [
+        "e8_packet_v1_scatter"
+      ],
+      "tensors": [
+        {
+          "name": "inputLabels",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": null,
+          "elem_size": null,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "kernel parameter",
+          "reuse_group": null,
+          "first_use": null,
+          "last_use": null,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 6,
+            "column": 5,
+            "end_line": 6,
+            "end_column": 24,
+            "snippet": "GM_ADDR inputLabels, GM_ADDR inputScale, GM_ADDR outputPacket, std::uint32_t row) {"
+          }
+        },
+        {
+          "name": "inputScale",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": null,
+          "elem_size": null,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "kernel parameter",
+          "reuse_group": null,
+          "first_use": null,
+          "last_use": null,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 6,
+            "column": 26,
+            "end_line": 6,
+            "end_column": 44,
+            "snippet": "GM_ADDR inputLabels, GM_ADDR inputScale, GM_ADDR outputPacket, std::uint32_t row) {"
+          }
+        },
+        {
+          "name": "outputPacket",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": null,
+          "elem_size": null,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "kernel parameter",
+          "reuse_group": null,
+          "first_use": null,
+          "last_use": null,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 6,
+            "column": 46,
+            "end_line": 6,
+            "end_column": 66,
+            "snippet": "GM_ADDR inputLabels, GM_ADDR inputScale, GM_ADDR outputPacket, std::uint32_t row) {"
+          }
+        },
+        {
+          "name": "labelsIn",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "uint16_t",
+          "elem_size": 2,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "GlobalTensor declaration",
+          "reuse_group": null,
+          "first_use": 1,
+          "last_use": 1,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 14,
+            "column": 5,
+            "end_line": 14,
+            "end_column": 51,
+            "snippet": "AscendC::GlobalTensor<std::uint16_t> labelsIn;"
+          }
+        },
+        {
+          "name": "scaleIn",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "float",
+          "elem_size": 4,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "GlobalTensor declaration",
+          "reuse_group": null,
+          "first_use": 2,
+          "last_use": 2,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 15,
+            "column": 5,
+            "end_line": 15,
+            "end_column": 42,
+            "snippet": "AscendC::GlobalTensor<float> scaleIn;"
+          }
+        },
+        {
+          "name": "labelsOut",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "uint16_t",
+          "elem_size": 2,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "GlobalTensor declaration",
+          "reuse_group": null,
+          "first_use": 5,
+          "last_use": 5,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 16,
+            "column": 5,
+            "end_line": 16,
+            "end_column": 52,
+            "snippet": "AscendC::GlobalTensor<std::uint16_t> labelsOut;"
+          }
+        },
+        {
+          "name": "scalesOut",
+          "domain": "GM",
+          "position": "GM",
+          "dtype": "float",
+          "elem_size": 4,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "GlobalTensor declaration",
+          "reuse_group": null,
+          "first_use": 6,
+          "last_use": 6,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 17,
+            "column": 5,
+            "end_line": 17,
+            "end_column": 44,
+            "snippet": "AscendC::GlobalTensor<float> scalesOut;"
+          }
+        },
+        {
+          "name": "labels",
+          "domain": "UNKNOWN",
+          "position": null,
+          "dtype": "uint16_t",
+          "elem_size": 2,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "LocalTensor declaration",
+          "reuse_group": null,
+          "first_use": 1,
+          "last_use": 5,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 22,
+            "column": 47,
+            "end_line": 22,
+            "end_column": 87,
+            "snippet": "const AscendC::LocalTensor<std::uint16_t> labels{AscendC::TPosition::VECIN, 0, 32};"
+          }
+        },
+        {
+          "name": "scale",
+          "domain": "UNKNOWN",
+          "position": null,
+          "dtype": "float",
+          "elem_size": 4,
+          "byte_offset": null,
+          "byte_offset_expr": "?",
+          "byte_size": null,
+          "byte_size_expr": "?",
+          "elem_count": null,
+          "origin": "LocalTensor declaration",
+          "reuse_group": null,
+          "first_use": 2,
+          "last_use": 6,
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 23,
+            "column": 39,
+            "end_line": 23,
+            "end_column": 78,
+            "snippet": "const AscendC::LocalTensor<float> scale{AscendC::TPosition::VECIN, 64, 8};"
+          }
+        }
+      ],
+      "loops": [],
+      "constants": {
+        "EVENT_ID0": 0,
+        "EVENT_ID1": 1,
+        "EVENT_ID2": 2,
+        "EVENT_ID3": 3,
+        "__PCPP__": 1,
+        "__cplusplus": 201703,
+        "__CCE_KT_TEST__": 1,
+        "kRows": 64,
+        "kChannels": 256,
+        "kLabelsPerRow": 32,
+        "kLabelRowBytes": 64,
+        "kScaleOffset": 4096,
+        "kScaleBytes": 256,
+        "kPacketBytes": 4352,
+        "kUbBytes": 96,
+        "scaleCopy": 1,
+        "noPad": 0
+      },
+      "buffer_sizes": {},
+      "buffer_positions": {},
+      "memory_map": [],
+      "trace": [
+        {
+          "index": 0,
+          "kind": "ApiCall",
+          "label": "DataCopy(labels, labelsIn, 32u)",
+          "pipe": "PIPE_MTE2",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 24,
+            "column": 5,
+            "end_line": 24,
+            "end_column": 45,
+            "snippet": "AscendC::DataCopy(labels, labelsIn, 32u);"
+          },
+          "name": "DataCopy",
+          "args": [
+            {
+              "index": 0,
+              "text": "labels",
+              "tensor": "labels",
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "labelsIn",
+              "tensor": "labelsIn",
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "32u",
+              "tensor": null,
+              "value": 32
+            }
+          ],
+          "writes": [
+            "labels"
+          ],
+          "reads": [
+            "labelsIn"
+          ]
+        },
+        {
+          "index": 1,
+          "kind": "ApiCall",
+          "label": "DataCopyPad(scale, scaleIn, scaleCopy, noPad)",
+          "pipe": "PIPE_MTE2",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 27,
+            "column": 5,
+            "end_line": 27,
+            "end_column": 59,
+            "snippet": "AscendC::DataCopyPad(scale, scaleIn, scaleCopy, noPad);"
+          },
+          "name": "DataCopyPad",
+          "args": [
+            {
+              "index": 0,
+              "text": "scale",
+              "tensor": "scale",
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "scaleIn",
+              "tensor": "scaleIn",
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "scaleCopy",
+              "tensor": null,
+              "value": 1
+            },
+            {
+              "index": 3,
+              "text": "noPad",
+              "tensor": null,
+              "value": 0
+            }
+          ],
+          "writes": [
+            "scale"
+          ],
+          "reads": [
+            "scaleIn"
+          ]
+        },
+        {
+          "index": 2,
+          "kind": "SetFlag",
+          "label": "SetFlag<MTE2_MTE3>(0)",
+          "pipe": "PIPE_MTE2",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 28,
+            "column": 5,
+            "end_line": 28,
+            "end_column": 55,
+            "snippet": "AscendC::SetFlag<AscendC::HardEvent::MTE2_MTE3>(0);"
+          },
+          "flag_kind": "SetFlag",
+          "route": "MTE2_MTE3",
+          "src_pipe": "PIPE_MTE2",
+          "dst_pipe": "PIPE_MTE3",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        },
+        {
+          "index": 3,
+          "kind": "WaitFlag",
+          "label": "WaitFlag<MTE2_MTE3>(0)",
+          "pipe": "PIPE_MTE3",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 29,
+            "column": 5,
+            "end_line": 29,
+            "end_column": 56,
+            "snippet": "AscendC::WaitFlag<AscendC::HardEvent::MTE2_MTE3>(0);"
+          },
+          "flag_kind": "WaitFlag",
+          "route": "MTE2_MTE3",
+          "src_pipe": "PIPE_MTE2",
+          "dst_pipe": "PIPE_MTE3",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        },
+        {
+          "index": 4,
+          "kind": "ApiCall",
+          "label": "DataCopy(labelsOut[row * 32u], labels, 32u)",
+          "pipe": "PIPE_MTE3",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 30,
+            "column": 5,
+            "end_line": 30,
+            "end_column": 57,
+            "snippet": "AscendC::DataCopy(labelsOut[row * 32u], labels, 32u);"
+          },
+          "name": "DataCopy",
+          "args": [
+            {
+              "index": 0,
+              "text": "labelsOut[row * 32u]",
+              "tensor": "labelsOut",
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "labels",
+              "tensor": "labels",
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "32u",
+              "tensor": null,
+              "value": 32
+            }
+          ],
+          "writes": [
+            "labelsOut"
+          ],
+          "reads": [
+            "labels"
+          ]
+        },
+        {
+          "index": 5,
+          "kind": "ApiCall",
+          "label": "DataCopyPad(scalesOut[row], scale, scaleCopy)",
+          "pipe": "PIPE_MTE3",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 32,
+            "column": 5,
+            "end_line": 32,
+            "end_column": 59,
+            "snippet": "AscendC::DataCopyPad(scalesOut[row], scale, scaleCopy);"
+          },
+          "name": "DataCopyPad",
+          "args": [
+            {
+              "index": 0,
+              "text": "scalesOut[row]",
+              "tensor": "scalesOut",
+              "value": null
+            },
+            {
+              "index": 1,
+              "text": "scale",
+              "tensor": "scale",
+              "value": null
+            },
+            {
+              "index": 2,
+              "text": "scaleCopy",
+              "tensor": null,
+              "value": 1
+            }
+          ],
+          "writes": [
+            "scalesOut"
+          ],
+          "reads": [
+            "scale"
+          ]
+        },
+        {
+          "index": 6,
+          "kind": "SetFlag",
+          "label": "SetFlag<MTE3_S>(0)",
+          "pipe": "PIPE_MTE3",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 33,
+            "column": 5,
+            "end_line": 33,
+            "end_column": 52,
+            "snippet": "AscendC::SetFlag<AscendC::HardEvent::MTE3_S>(0);"
+          },
+          "flag_kind": "SetFlag",
+          "route": "MTE3_S",
+          "src_pipe": "PIPE_MTE3",
+          "dst_pipe": "PIPE_S",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        },
+        {
+          "index": 7,
+          "kind": "WaitFlag",
+          "label": "WaitFlag<MTE3_S>(0)",
+          "pipe": "PIPE_S",
+          "loop_id": null,
+          "conditional": false,
+          "core_view": "both",
+          "location": {
+            "file": "src/e8_packet_v1_scatter.cpp",
+            "line": 34,
+            "column": 5,
+            "end_line": 34,
+            "end_column": 53,
+            "snippet": "AscendC::WaitFlag<AscendC::HardEvent::MTE3_S>(0);"
+          },
+          "flag_kind": "WaitFlag",
+          "route": "MTE3_S",
+          "src_pipe": "PIPE_MTE3",
+          "dst_pipe": "PIPE_S",
+          "event_id": 0,
+          "event_id_text": "0",
+          "isasi_form": false
+        }
+      ],
+      "synchronisation": {
+        "nodes": [
+          {
+            "index": 2,
+            "label": "SetFlag<MTE2_MTE3>(0)",
+            "pipe": "PIPE_MTE2",
+            "line": 28,
+            "kind": "SetFlag",
+            "loop_id": null
+          },
+          {
+            "index": 3,
+            "label": "WaitFlag<MTE2_MTE3>(0)",
+            "pipe": "PIPE_MTE3",
+            "line": 29,
+            "kind": "WaitFlag",
+            "loop_id": null
+          },
+          {
+            "index": 6,
+            "label": "SetFlag<MTE3_S>(0)",
+            "pipe": "PIPE_MTE3",
+            "line": 33,
+            "kind": "SetFlag",
+            "loop_id": null
+          },
+          {
+            "index": 7,
+            "label": "WaitFlag<MTE3_S>(0)",
+            "pipe": "PIPE_S",
+            "line": 34,
+            "kind": "WaitFlag",
+            "loop_id": null
+          }
+        ],
+        "edges": [
+          {
+            "from": 2,
+            "to": 3,
+            "tokens": 0,
+            "kind": "sync",
+            "route": "MTE2_MTE3",
+            "event_id": 0,
+            "loop_carried": false
+          },
+          {
+            "from": 3,
+            "to": 6,
+            "tokens": 0,
+            "kind": "program"
+          },
+          {
+            "from": 6,
+            "to": 7,
+            "tokens": 0,
+            "kind": "sync",
+            "route": "MTE3_S",
+            "event_id": 0,
+            "loop_carried": false
+          }
+        ],
+        "sync_pairs": [
+          {
+            "channel": {
+              "route": "MTE2_MTE3",
+              "event_id": 0
+            },
+            "set_index": 2,
+            "set_line": 28,
+            "wait_index": 3,
+            "wait_line": 29,
+            "tokens": 0,
+            "loop_carried": false
+          },
+          {
+            "channel": {
+              "route": "MTE3_S",
+              "event_id": 0
+            },
+            "set_index": 6,
+            "set_line": 33,
+            "wait_index": 7,
+            "wait_line": 34,
+            "tokens": 0,
+            "loop_carried": false
+          }
+        ],
+        "acyclic": true,
+        "topological_order": [
+          2,
+          3,
+          6,
+          7
+        ],
+        "cycles": [],
+        "pipes": [
+          "PIPE_MTE2",
+          "PIPE_MTE3",
+          "PIPE_S"
+        ],
+        "peeled_loops": []
+      },
+      "performance": {
+        "makespan_cycles": 68,
+        "total_busy_cycles": 8,
+        "total_stall_cycles": 100,
+        "stall_by_route": {
+          "MTE3_S": 67,
+          "MTE2_MTE3": 33
+        },
+        "drain_cycles": 32,
+        "overlap_ratio": 0.0392,
+        "active_pipes": 3,
+        "critical_pipe": "PIPE_MTE3",
+        "bottleneck": "DRAIN_BOUND",
+        "pipes": [
+          {
+            "pipe": "PIPE_S",
+            "op_count": 1,
+            "busy_cycles": 1,
+            "idle_cycles": 67,
+            "stall_cycles": 67,
+            "utilization": 0.0147
+          },
+          {
+            "pipe": "PIPE_MTE2",
+            "op_count": 3,
+            "busy_cycles": 3,
+            "idle_cycles": 65,
+            "stall_cycles": 0,
+            "utilization": 0.0441
+          },
+          {
+            "pipe": "PIPE_MTE3",
+            "op_count": 4,
+            "busy_cycles": 4,
+            "idle_cycles": 64,
+            "stall_cycles": 33,
+            "utilization": 0.0588
+          }
+        ],
+        "handoff_cycles": 30
+      },
+      "domain_usage": []
+    }
+  ]
+}

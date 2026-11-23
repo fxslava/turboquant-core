@@ -1,0 +1,9 @@
+[ 33%] Building CXX object CMakeFiles/e8_batch_ownership.dir/slot07/src/ownership_model.cpp.o
+[ 33%] Building CXX object CMakeFiles/e8_packet_host.dir/slot02/src/test_e8_packet_v1.cpp.o
+[ 50%] Linking CXX executable e8_batch_ownership
+[ 50%] Built target e8_batch_ownership
+[ 66%] Building CXX object CMakeFiles/e8_packet_device_bytes_leaf_cpu.dir/slot02/analysis/device_leaf.cpp.o
+[ 83%] Linking CXX executable e8_packet_host
+[ 83%] Built target e8_packet_host
+[100%] Linking CXX executable e8_packet_device_bytes_leaf_cpu
+[100%] Built target e8_packet_device_bytes_leaf_cpu

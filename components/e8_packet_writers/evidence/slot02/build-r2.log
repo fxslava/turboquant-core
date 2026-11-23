@@ -1,0 +1,190 @@
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/work/checkpoint2_20261123/slot02/build-r2
+[  2%] Creating directories for 'e8_scatter_precompile'
+[  4%] No download step for 'e8_scatter_precompile'
+[  6%] No update step for 'e8_scatter_precompile'
+[  8%] No patch step for 'e8_scatter_precompile'
+[ 10%] Performing configure step for 'e8_scatter_precompile'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    DYNAMIC_MODE
+    INCLUDE_DIR
+
+
+-- Build files have been written to: /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_precompile-prefix/src/e8_scatter_precompile-build
+[ 13%] Performing build step for 'e8_scatter_precompile'
+[100%] Building CXX object CMakeFiles/precompile_obj.dir/home/dmin/work/checkpoint2_20261123/slot02/src/e8_packet_v1_scatter.cpp.o
+[100%] Built target precompile_obj
+[100%] Built target check_src_template
+[ 15%] No install step for 'e8_scatter_precompile'
+[ 17%] Completed 'e8_scatter_precompile'
+[ 17%] Built target e8_scatter_precompile
+[ 19%] Creating directories for 'e8_scatter_preprocess'
+[ 21%] No download step for 'e8_scatter_preprocess'
+[ 23%] No update step for 'e8_scatter_preprocess'
+[ 26%] No patch step for 'e8_scatter_preprocess'
+[ 28%] Performing configure step for 'e8_scatter_preprocess'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_preprocess-prefix/src/e8_scatter_preprocess-build
+[ 30%] Performing build step for 'e8_scatter_preprocess'
+[ 33%] Building CXX object CMakeFiles/aiv_obj.dir/home/dmin/work/checkpoint2_20261123/slot02/src/e8_packet_v1_scatter.cpp.o
+[ 66%] Building CXX object CMakeFiles/preprocess_obj.dir/home/dmin/work/checkpoint2_20261123/slot02/src/e8_packet_v1_scatter.cpp.o
+[ 66%] Built target preprocess_obj
+[100%] Building CXX object CMakeFiles/aic_obj.dir/home/dmin/work/checkpoint2_20261123/slot02/src/e8_packet_v1_scatter.cpp.o
+[100%] Built target aiv_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_preprocess-prefix/src/e8_scatter_preprocess-build/CMakeFiles/aiv_obj.dir/home/dmin/work/checkpoint2_20261123/slot02/src/e8_packet_v1_scatter.cpp.o -o /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_preprocess-prefix/src/e8_scatter_preprocess-build/CMakeFiles/aiv_obj.dir/home/dmin/work/checkpoint2_20261123/slot02/src/e8_packet_v1_scatter.cpp.o[100%] Built target merge_aiv_obj_text
+[100%] Built target aic_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_preprocess-prefix/src/e8_scatter_preprocess-build/CMakeFiles/aic_obj.dir/home/dmin/work/checkpoint2_20261123/slot02/src/e8_packet_v1_scatter.cpp.o -o /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_preprocess-prefix/src/e8_scatter_preprocess-build/CMakeFiles/aic_obj.dir/home/dmin/work/checkpoint2_20261123/slot02/src/e8_packet_v1_scatter.cpp.o[100%] Built target merge_aic_obj_text
+[100%] Built target _host_cpp
+[ 32%] No install step for 'e8_scatter_preprocess'
+[ 34%] Completed 'e8_scatter_preprocess'
+[ 34%] Built target e8_scatter_preprocess
+[ 39%] Creating directories for 'e8_scatter_aic_device'
+[ 39%] Creating directories for 'e8_scatter_aiv_device'
+[ 41%] No download step for 'e8_scatter_aic_device'
+[ 43%] No download step for 'e8_scatter_aiv_device'
+[ 47%] No update step for 'e8_scatter_aiv_device'
+[ 47%] No update step for 'e8_scatter_aic_device'
+[ 52%] No patch step for 'e8_scatter_aiv_device'
+[ 52%] No patch step for 'e8_scatter_aic_device'
+[ 56%] Performing configure step for 'e8_scatter_aic_device'
+[ 54%] Performing configure step for 'e8_scatter_aiv_device'
+-- The C compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    BUILD_MODE
+
+
+-- Build files have been written to: /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_aic_device-prefix/src/e8_scatter_aic_device-build
+-- Generating done
+-- Build files have been written to: /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_aiv_device-prefix/src/e8_scatter_aiv_device-build
+[ 58%] Performing tq_wrapper_warning_policy step for 'e8_scatter_aic_device'
+[ 60%] Performing tq_wrapper_warning_policy step for 'e8_scatter_aiv_device'
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_aic_device-prefix/src/e8_scatter_aic_device-build
+-- Configuring done
+[ 63%] Performing build step for 'e8_scatter_aic_device'
+-- Generating done
+-- Build files have been written to: /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_aiv_device-prefix/src/e8_scatter_aiv_device-build
+[ 65%] Performing build step for 'e8_scatter_aiv_device'
+[ 67%] No install step for 'e8_scatter_aic_device'
+[100%] Building CXX object CMakeFiles/device_aiv_obj.dir/home/dmin/work/checkpoint2_20261123/slot02/build-r2/auto_gen/e8_scatter/auto_gen_e8_packet_v1_scatter.cpp.o
+[ 69%] Completed 'e8_scatter_aic_device'
+[ 69%] Built target e8_scatter_aic_device
+[ 71%] Creating directories for 'e8_scatter_host'
+[ 73%] No download step for 'e8_scatter_host'
+[ 76%] No update step for 'e8_scatter_host'
+[ 78%] No patch step for 'e8_scatter_host'
+[ 80%] Performing configure step for 'e8_scatter_host'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    ASCEND_PYTHON_EXECUTABLE
+
+
+-- Build files have been written to: /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_host-prefix/src/e8_scatter_host-build
+[ 82%] Performing build step for 'e8_scatter_host'
+[100%] Building CXX object CMakeFiles/host_bisheng_obj.dir/home/dmin/work/checkpoint2_20261123/slot02/src/e8_packet_v1_scatter.cpp.o
+[100%] Built target host_bisheng_obj
+[ 84%] Performing install step for 'e8_scatter_host'
+Consolidate compiler generated dependencies of target host_bisheng_obj
+[100%] Built target host_bisheng_obj
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_host_dir/./objects-Release/host_bisheng_obj/home/dmin/work/checkpoint2_20261123/slot02/src/e8_packet_v1_scatter.cpp.o
+[ 86%] Completed 'e8_scatter_host'
+[ 86%] Built target e8_scatter_host
+[100%] Built target device_aiv_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld  -m aicorelinux -r  -Ttext=0 /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_aiv_device-prefix/src/e8_scatter_aiv_device-build/CMakeFiles/device_aiv_obj.dir/home/dmin/work/checkpoint2_20261123/slot02/build-r2/auto_gen/e8_scatter/auto_gen_e8_packet_v1_scatter.cpp.o -static -o /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_aiv_device_dir/device_aiv.o
+[100%] Built target merge_aiv_device_obj
+[ 89%] No install step for 'e8_scatter_aiv_device'
+[ 91%] Completed 'e8_scatter_aiv_device'
+[ 91%] Built target e8_scatter_aiv_device
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -x -m aicorelinux   -Ttext=0 /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_aiv_device_dir/device_aiv.o -static -o /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_merge_obj_dir/device_aiv.o
+[ 91%] Built target e8_scatter_merge_obj
+[ 93%] Building CXX object CMakeFiles/e8_scatter_host_stub_obj.dir/auto_gen/e8_scatter/host_stub.cpp.o
+[ 93%] Built target e8_scatter_host_stub_obj
+[ 95%] Linking CXX shared library lib/libe8_scatter.so
+/home/dmin/Ascend-9.2.1/cann-9.2.1/bin/ascendc_pack_kernel /home/dmin/work/checkpoint2_20261123/slot02/build-r2/CMakeFiles/e8_scatter_host_stub_obj.dir/auto_gen/e8_scatter/host_stub.cpp.o /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_merge_obj_dir/device_aiv.o 1 /home/dmin/work/checkpoint2_20261123/slot02/build-r2/CMakeFiles/e8_scatter_host_stub_obj.dir/auto_gen/e8_scatter/host_stub.cpp.o
+recompile: /usr/bin/c++ -fPIC -O3 -DNDEBUG -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -s -shared -Wl,-soname,libe8_scatter.so -o lib/libe8_scatter.so CMakeFiles/e8_scatter_host_stub_obj.dir/auto_gen/e8_scatter/host_stub.cpp.o /home/dmin/work/checkpoint2_20261123/slot02/build-r2/e8_scatter_host_dir/objects-Release/host_bisheng_obj/home/dmin/work/checkpoint2_20261123/slot02/src/e8_packet_v1_scatter.cpp.o    -L/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64  -L/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib  -Wl,-rpath,/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib: /home/dmin/Ascend-9.2.1/cann-9.2.1/lib64/libascendc_runtime.a -lascend_dump -lc_sec
+[ 95%] Built target e8_scatter
+[ 97%] Building CXX object CMakeFiles/packet_runner.dir/packet_runner.cpp.o
+[100%] Linking CXX executable bin/packet_runner
+[100%] Built target packet_runner

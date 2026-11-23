@@ -1,0 +1,2 @@
+PASS staged Git blobs: all21 tested native source hashes and23 fixture payload hashes preserved exactly
+PASS staged Git blobs: both frozen E8 leaf header hashes preserved exactly
