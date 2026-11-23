@@ -104,6 +104,7 @@ function(add_turboquant_npu_targets)
   add_npu_runner(test_nz_ingress_canary_npu tests/npu/test_nz_ingress_canary.cpp
       tq_prefill_nz_npu)
   add_npu_runner(test_fused_decode_e2e_npu tests/npu/test_fused_decode_e2e.cpp tq_decode_npu)
+  add_npu_runner(test_wave_v11_exact_npu tests/npu/test_wave_v11_exact.cpp tq_decode_npu)
   add_npu_runner(bench_qwen35_decode tests/npu/bench_qwen35_decode.cpp tq_decode_npu)
 
   # The golden-dump comparison runners on the physical device: the same source and the same
