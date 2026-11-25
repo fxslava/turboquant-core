@@ -100,9 +100,14 @@ add_test(NAME decode_reduce COMMAND test_decode_reduce)
 add_test(NAME qwen35_telemetry COMMAND test_qwen35_telemetry)
 # The oracle comparison reads golden/dumps; run it from the source tree so the
 # default --dump-root resolves.
-add_test(NAME golden_decode_oracle COMMAND test_golden_decode_oracle)
+set(TQ_GOLDEN_DUMP_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/golden/dumps" CACHE PATH
+    "Directory containing the complete CPU golden decode fixtures")
+add_test(NAME golden_decode_oracle COMMAND test_golden_decode_oracle --dump-root "${TQ_GOLDEN_DUMP_ROOT}")
 set_tests_properties(golden_decode_oracle PROPERTIES
                      WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
+
+# Sealed Wave-3 decoder arithmetic and padded UB address mapping, CPU only.
+add_subdirectory(components/e8_parallel_decode)
 
 # ------------------------------------------------------------------ the device legs
 option(TQ_BUILD_KERNELS "Configure the BiSheng device legs (tens of minutes to build)" OFF)
