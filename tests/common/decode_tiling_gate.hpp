@@ -35,7 +35,7 @@
 // CAModel ladder is what checks that.
 
 #pragma once
-#include "../../src/host/turboquant_tiling.h"
+#include "../../src/turboquant/common/turboquant_tiling.h"
 
 #include <cstdint>
 #include <stdexcept>

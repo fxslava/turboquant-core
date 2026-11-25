@@ -80,7 +80,7 @@
 #endif
 
 #if defined(TQ_GOLDEN_KERNEL_DECODE)
-#include "../../include/turboquant/turboquant_fused_decode_opt.hpp"
+#include "../../src/turboquant/common/turboquant_fused_decode_opt.hpp"
 #endif
 
 namespace golden_dump {
@@ -149,7 +149,7 @@ static_assert(camodel::kGuardBytes % 4 == 0, "guard bands are whole words");
 #if defined(TQ_GOLDEN_KERNEL_PREFILL)
 // The scale plane, with the one diagnosed divergence allowed by name: the
 // prefill kernel floors absmax at 1.0 before the exponent extraction
-// (src/prefill/turboquant_reshape_batch.cpp, AscendC::Max(abs_max, abs_max,
+// (src/turboquant/ingress/native/turboquant_reshape_batch.cpp, AscendC::Max(abs_max, abs_max,
 // one, ...)), so an all-zero row stores 2^-6 there, where the PyTorch golden
 // takes its explicit absmax == 0 branch and stores 1.0. The codes are zero on
 // both sides, so the dequantised value is 0 either way -- immaterial, but a

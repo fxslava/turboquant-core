@@ -10,49 +10,49 @@ function(add_turboquant_npu_targets)
   set(RUN_MODE npu)
   set(SRC "${CMAKE_CURRENT_SOURCE_DIR}")
 
-  ascendc_library(tq_prefill_npu SHARED src/prefill/turboquant_reshape_batch.cpp)
-  set_property(SOURCE src/prefill/turboquant_reshape_batch.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/prefill/turboquant_reshape_batch.cpp)
-  ascendc_compile_definitions(tq_prefill_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH)
+  ascendc_library(tq_prefill_npu SHARED src/turboquant/ingress/native/turboquant_reshape_batch.cpp)
+  set_property(SOURCE src/turboquant/ingress/native/turboquant_reshape_batch.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/turboquant/ingress/native/turboquant_reshape_batch.cpp)
+  ascendc_compile_definitions(tq_prefill_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_LEGACY_CANN_LAUNCH=1)
   ascendc_compile_options(tq_prefill_npu PRIVATE
       -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -Wall -Wextra -Werror
-      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH)
+      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_LEGACY_CANN_LAUNCH=1)
 
   # The same writer with the write-time NZ-tiled ingress on; see SimTargets.cmake for why it is
   # its own library rather than an option on the one above.
-  ascendc_library(tq_prefill_nz_npu SHARED src/prefill/turboquant_reshape_batch.cpp)
-  set_property(SOURCE src/prefill/turboquant_reshape_batch.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/prefill/turboquant_reshape_batch.cpp)
-  ascendc_compile_definitions(tq_prefill_nz_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_INGRESS_NZ=1)
+  ascendc_library(tq_prefill_nz_npu SHARED src/turboquant/ingress/native/turboquant_reshape_batch.cpp)
+  set_property(SOURCE src/turboquant/ingress/native/turboquant_reshape_batch.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/turboquant/ingress/native/turboquant_reshape_batch.cpp)
+  ascendc_compile_definitions(tq_prefill_nz_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_LEGACY_CANN_LAUNCH=1 TURBOQUANT_INGRESS_NZ=1)
   ascendc_compile_options(tq_prefill_nz_npu PRIVATE
       -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -Wall -Wextra -Werror
-      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
+      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_LEGACY_CANN_LAUNCH=1 -DTURBOQUANT_INGRESS_NZ=1)
 
-  ascendc_library(tq_scatter_npu SHARED src/scatter/turboquant_reshape_scatter.cpp)
-  set_property(SOURCE src/scatter/turboquant_reshape_scatter.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/scatter/turboquant_reshape_scatter.cpp)
-  ascendc_compile_definitions(tq_scatter_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH)
+  ascendc_library(tq_scatter_npu SHARED src/turboquant/ingress/native/turboquant_reshape_scatter.cpp)
+  set_property(SOURCE src/turboquant/ingress/native/turboquant_reshape_scatter.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp)
+  ascendc_compile_definitions(tq_scatter_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_LEGACY_CANN_LAUNCH=1)
   ascendc_compile_options(tq_scatter_npu PRIVATE
       -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -Wall -Wextra -Werror
-      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH)
+      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_LEGACY_CANN_LAUNCH=1)
 
   # The same scatter writer with the NZ-tiled ingress on; see SimTargets.cmake.
-  ascendc_library(tq_scatter_nz_npu SHARED src/scatter/turboquant_reshape_scatter.cpp)
-  set_property(SOURCE src/scatter/turboquant_reshape_scatter.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/scatter/turboquant_reshape_scatter.cpp)
-  ascendc_compile_definitions(tq_scatter_nz_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_INGRESS_NZ=1)
+  ascendc_library(tq_scatter_nz_npu SHARED src/turboquant/ingress/native/turboquant_reshape_scatter.cpp)
+  set_property(SOURCE src/turboquant/ingress/native/turboquant_reshape_scatter.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp)
+  ascendc_compile_definitions(tq_scatter_nz_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_LEGACY_CANN_LAUNCH=1 TURBOQUANT_INGRESS_NZ=1)
   ascendc_compile_options(tq_scatter_nz_npu PRIVATE
       -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler -Wall -Wextra -Werror
-      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_INGRESS_NZ=1)
+      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_LEGACY_CANN_LAUNCH=1 -DTURBOQUANT_INGRESS_NZ=1)
 
-  ascendc_library(tq_decode_npu SHARED src/decode/turboquant_fused_decode.cpp)
-  set_property(SOURCE src/decode/turboquant_fused_decode.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/decode/turboquant_fused_decode.cpp)
-  ascendc_compile_definitions(tq_decode_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH)
+  ascendc_library(tq_decode_npu SHARED src/turboquant/decode/native/turboquant_fused_decode.cpp)
+  set_property(SOURCE src/turboquant/decode/native/turboquant_fused_decode.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/turboquant/decode/native/turboquant_fused_decode.cpp)
+  ascendc_compile_definitions(tq_decode_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_LEGACY_CANN_LAUNCH=1)
   ascendc_compile_options(tq_decode_npu PRIVATE
       -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS} ${TQ_REDUCE_DEFINES} ${TQ_TELEMETRY_DEFINES}
       -forward-options-to-host-compiler -Wall -Wextra -Werror
-      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH
-      "-I${SRC}/src/decode" "-I${SRC}/src/common" "-I${SRC}/include")
+      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_LEGACY_CANN_LAUNCH=1
+      "-I${SRC}/src/turboquant")
 
   # The runner link must resolve libruntime.so's own NEEDED entries -- libascend_hal.so and
   # the drv/hdc providers (drvHdcSessionConnect, halGetDeviceInfo, drvGetDevNum, ...) -- which

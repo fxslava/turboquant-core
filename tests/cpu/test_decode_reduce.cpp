@@ -2,8 +2,8 @@
 // SPDX-FileCopyrightText: Copyright contributors to the vLLM project
 
 // Host evidence for launch coverage and dense reduction padding, not a device test.
-#include "include/turboquant/turboquant_gemm_reduce.hpp"
-#include "src/host/turboquant_tiling.h"
+#include "src/turboquant/common/turboquant_gemm_reduce.hpp"
+#include "src/turboquant/common/turboquant_tiling.h"
 
 #include <cmath>
 #include <cstdio>

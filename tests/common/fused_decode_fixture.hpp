@@ -30,7 +30,7 @@
 // instance and launched at the other. It changes NO fp32 value here: the device's arithmetic up
 // to the output cast is identical for fp16 and bf16.
 
-#include "../../include/turboquant/turboquant_fused_decode_opt.hpp"
+#include "../../src/turboquant/common/turboquant_fused_decode_opt.hpp"
 #include "turboquant_test_common.hpp"
 #include <algorithm>
 #include <cmath>

@@ -15,7 +15,7 @@
  */
 
 #pragma once
-// Host model of src/scatter/routine_vector_rotate_butterfly.hpp.
+// Host model of src/turboquant/ingress/native/routine_vector_rotate_butterfly.hpp.
 //
 // Three things live here, and the distinction between them is the whole point
 // of the Tier-1 probe that consumes this header:

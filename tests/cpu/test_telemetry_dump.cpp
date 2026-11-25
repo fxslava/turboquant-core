@@ -36,8 +36,8 @@
 //
 //   5. dump(). The human-readable line carries the token, the winner, and the physical page.
 
-#include "../../src/host/turboquant_telemetry.h"
-#include "../../src/host/turboquant_tiling.h"
+#include "../../src/turboquant/common/turboquant_telemetry.h"
+#include "../../src/turboquant/common/turboquant_tiling.h"
 #include "../common/turboquant_test_common.hpp"
 
 #include <cfloat>

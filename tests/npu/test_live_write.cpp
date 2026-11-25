@@ -56,7 +56,7 @@
 #include "../common/turboquant_golden_oracle.hpp"
 #include "../common/turboquant_scatter_oracle.hpp"
 #include "../common/turboquant_nz_ingress.hpp"
-#include "../../include/turboquant/turboquant_wave_protocol.hpp"
+#include "../../src/turboquant/common/turboquant_wave_protocol.hpp"
 
 // This runner is built TWICE for the scatter writer: plain, linking the RFC 3.1 strip
 // read-modify-write build of turboquant_reshape_scatter_aiv, and with TQ_SCATTER_NZ=1, linking

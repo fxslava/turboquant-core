@@ -63,7 +63,7 @@
 #include "../common/device_timer.hpp"
 #include "../common/turboquant_golden_oracle.hpp"
 #include "../common/turboquant_nz_ingress.hpp"
-#include "../../include/turboquant/turboquant_wave_protocol.hpp"
+#include "../../src/turboquant/common/turboquant_wave_protocol.hpp"
 
 #include <algorithm>
 #include <charconv>

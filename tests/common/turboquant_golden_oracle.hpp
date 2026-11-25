@@ -40,7 +40,7 @@
 #define TURBOQUANT_GOLDEN_ORACLE_HPP
 
 #include "turboquant_test_common.hpp"
-#include "../../include/turboquant/turboquant_mode.h"
+#include "../../src/turboquant/common/turboquant_mode.h"
 
 #include <algorithm>
 #include <cmath>
@@ -717,7 +717,7 @@ inline Audit audit_reference(const Reference& ref)
 //
 // THE RECONSTRUCTION RULE, and where it comes from. The decode reads a byte as two SIGNED
 // nibbles (turboquant_dequant4_signed), DeInterleaves them into a low and a high plane, and casts
-// each straight to the Cube operand (ComputeNibbleOperands in src/common/turboquant_codec_mx.h):
+// each straight to the Cube operand (ComputeNibbleOperands in src/turboquant/common/turboquant_codec_mx.h):
 // the writers' convention, which the PyTorch golden shares, so a stored signed nibble n
 // reconstructs as
 //

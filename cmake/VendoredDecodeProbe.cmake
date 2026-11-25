@@ -1,5 +1,5 @@
-# Vendored-decode probe: compile C:\vllm-ascend's op_kernel/turboquant_fused_decode.cpp
-# (the wheel's entry-point adaptation) with the wheel's exact define set, through the
+# Vendored-decode probe: compile C:\vllm-ascend's decode/native/turboquant_fused_decode.cpp
+# (the wheel's entry-point adaptation) with the wheel's device define set, through the
 # harness's own BiSheng pipeline. The result, swapped in for libtq_decode_npu.so on the
 # NPU box, lets test_golden_decode_npu arbitrate:
 #
@@ -14,33 +14,26 @@
 
 option(TQ_VENDORED_DECODE_PROBE "Build the vendored fused-decode probe library" OFF)
 set(TQ_VENDORED_DECODE_SRC
-    "/mnt/c/vllm-ascend/csrc/attention/turboquant/op_kernel/turboquant_fused_decode.cpp"
+    "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/turboquant_fused_decode.cpp"
     CACHE FILEPATH "Vendored fused_decode.cpp to compile into the probe library")
 
 function(add_vendored_decode_probe)
   if(NOT EXISTS "${TQ_VENDORED_DECODE_SRC}")
     message(FATAL_ERROR "TQ_VENDORED_DECODE_PROBE=ON but no source at ${TQ_VENDORED_DECODE_SRC}")
   endif()
-  get_filename_component(_vendored_op_kernel "${TQ_VENDORED_DECODE_SRC}" DIRECTORY)
-  get_filename_component(_vendored_tree "${_vendored_op_kernel}" DIRECTORY)
 
   ascendc_library(tq_decode_vendored_npu SHARED "${TQ_VENDORED_DECODE_SRC}")
   set_property(SOURCE "${TQ_VENDORED_DECODE_SRC}" PROPERTY OBJECT_DEPENDS "${TQ_VENDORED_DECODE_SRC}")
-  # The wheel's define set, verbatim from vllm-ascend's CMakeLists for
-  # vllm_ascend_turboquant: same two definitions as the harness PLUS the NZ ingress
-  # define (inert for this translation unit, carried here so the probe compiles
-  # exactly what the wheel compiles).
+  # Use the wheel's device defines and the toolkit's legacy host launcher ABI.
   ascendc_compile_definitions(tq_decode_vendored_npu PRIVATE
-      ASCEND_MICRO_CANN_LAUNCH ASCEND_TQ_FUSED_DECODE_GEMM_REDUCE=1 TURBOQUANT_INGRESS_NZ=1)
+      ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_LEGACY_CANN_LAUNCH=1 ASCEND_TQ_FUSED_DECODE_GEMM_REDUCE=1 TURBOQUANT_INGRESS_NZ=1)
   ascendc_compile_options(tq_decode_vendored_npu PRIVATE
       -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
       -forward-options-to-host-compiler
       -DASCEND_MICRO_CANN_LAUNCH
+      -DTURBOQUANT_LEGACY_CANN_LAUNCH=1
       -DASCEND_TQ_FUSED_DECODE_GEMM_REDUCE=1
-      -DTURBOQUANT_INGRESS_NZ=1
-      "-I${_vendored_op_kernel}"
-      "-I${_vendored_op_kernel}/common"
-      "-I${_vendored_tree}/include")
+      -DTURBOQUANT_INGRESS_NZ=1)
 
   # Same library name as the harness decode, into a probe directory: swapping
   # probe/lib/libtq_decode_npu.so in for build-npu/lib/libtq_decode_npu.so on the

@@ -2,8 +2,8 @@
 
 #if defined(__CCE_AICORE__)
 #include "kernel_operator.h"
-#include "../../include/turboquant/turboquant_common.h"
-#include "../../src/decode/vector/routine_vector_cube_softmax.hpp"
+#include "../../src/turboquant/common/turboquant_common.h"
+#include "../../src/turboquant/decode/native/vector/routine_vector_cube_softmax.hpp"
 
 extern "C" __global__ __aicore__ void qwen35_tail_canary(GM_ADDR output)
 {

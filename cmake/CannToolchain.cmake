@@ -12,6 +12,12 @@ set(ASCEND_HOME_PATH "/usr/local/Ascend/cann-9.2.0-beta.2"
     CACHE PATH "CANN toolkit root")
 set(ASCEND_CANN_PACKAGE_PATH "${ASCEND_HOME_PATH}")
 set(SOC_VERSION "Ascend950PR_9599" CACHE STRING "Device SoC / CAModel variant")
+string(TOLOWER "${SOC_VERSION}" TQ_SOC_FAMILY)
+if(TQ_SOC_FAMILY STREQUAL "ascend950pr_9599" OR TQ_SOC_FAMILY STREQUAL "dav-3510")
+  set(SOC_VERSION "Ascend950PR_9599")
+  set(TQ_SOC_FAMILY "ascend950pr_9599")
+endif()
+
 
 set(TQ_CANN_SYSTEM_OPTIONS "")
 foreach(path IN ITEMS
@@ -40,7 +46,7 @@ endif()
 
 # The fused decode's attention telemetry probe. ON by default: the kernel records the
 # per-(token, head) argmax context position and its logical page into the Split-K workspace's
-# dead lanes (include/turboquant/turboquant_layout.h), piggybacking the existing buffer, and
+# dead lanes (src/turboquant/common/turboquant_layout.h), piggybacking the existing buffer, and
 # the runners' workspace contract verifies the records instead of requiring a pristine
 # workspace. The define goes to BOTH the kernel legs and the runners so a build never checks
 # for records the kernel was not compiled to write; layout.h carries the same ON default so a

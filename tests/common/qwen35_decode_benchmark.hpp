@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../include/turboquant/turboquant_fused_decode_opt.hpp"
-#include "../../include/turboquant/turboquant_gemm_reduce.hpp"
+#include "../../src/turboquant/common/turboquant_fused_decode_opt.hpp"
+#include "../../src/turboquant/common/turboquant_gemm_reduce.hpp"
 #include "turboquant_golden_oracle.hpp"
 
 #include <algorithm>

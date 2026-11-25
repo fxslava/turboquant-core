@@ -2,7 +2,7 @@
 
 #if defined(__CCE_AICORE__)
 #include "kernel_operator.h"
-#include "../../src/decode/cube/turboquant_gemm_reduce_service.h"
+#include "../../src/turboquant/decode/native/cube/turboquant_gemm_reduce_service.h"
 
 struct CanarySelect {
     __aicore__ inline bool NeedsCombine(uint32_t) const { return true; }

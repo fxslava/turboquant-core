@@ -64,16 +64,18 @@ does not need patching.
 
 ## Layout
 
+`src/turboquant/SOURCE_SYNC.json` pins the files shared byte-for-byte with
+the vLLM Ascend plugin and the standalone telemetry sources. Run
+`scripts/check_turboquant_sync.py --core <turboquant-core path>` from the plugin
+checkout to verify both source inventories.
+
 ```
-include/turboquant/      normative contracts, no kernel toolchain required
-  turboquant_layout.h            RFC 3.1 strip layout + the NZ-tiled cache, address functions
-  turboquant_common.h            kernel-side pipe/event/broadcast helpers
-  turboquant_wave_protocol.hpp   strip boundary, mode-2 channel map, UB/L1/L0 arena algebra
-  turboquant_mode.h              quantisation mode contract and codebooks
-  turboquant_types.h             AscendType
-  turboquant_fused_decode_opt.hpp  decode launch ABI, UB map, flag budget
-  turboquant_gemm_reduce.hpp       Cube GEMM reduction contract
-  turboquant_splitk_contract.hpp   Split-K partial layout
+src/turboquant/
+  common/          Native and E8 ABIs, cache addressing, tiling and constants
+  ingress/native/  Batch and scatter writers
+  decode/native/   Wave-v11 Cube, Vector and Split-K decode
+  decode/e8/       E8 packet reader and parallel SIMT dequantization
+tests/cpu/e8/      E8 layout and frozen arithmetic oracle fixtures
 golden/
   turboquant_golden.py           the PyTorch golden model (a standalone copy of
                                  vllm-ascend's turboquant_v1.py golden path),
@@ -82,44 +84,7 @@ golden/
                                  golden's expected images, per kernel, plus the
                                  real serving-geometry decode cases (randn data,
                                  6496-block cache, sparse-stored)
-src/
-  prefill/turboquant_reshape_batch.cpp     MIX_AIC_1_2 BF16 prefill, mode-2 only
-  prefill/routine_stage_page_zn_bf16.hpp
-  scatter/turboquant_reshape_scatter.cpp   AIV-only single-token / sub-strip RMW writer
-  scatter/routine_vector_rotate_butterfly.hpp
-  decode/turboquant_fused_decode.cpp       three-zone modulo-scheduled fused decode
-  decode/cube/{turboquant_cube_service,turboquant_gemm_reduce_service,turboquant_query_basis}.h
-  decode/vector/{turboquant_vector_service.h,routine_vector_cube_softmax.hpp,
-                 routine_vector_online_softmax.hpp}
-  common/{turboquant_codec_950.h,turboquant_codec_mx.h,routine_turboquant_dequant4.hpp}
-  host/turboquant_tiling.{h,cpp}           the decode's host tiling engine
-tests/
-  common/turboquant_test_common.hpp    failure harness, bit helpers, guarded buffers,
-                                       the RFC 3.1 index maps
-  common/turboquant_golden_oracle.hpp  reference integer quantiser, power-of-two scale
-                                       extractor, FP64 attention reference, and the
-                                       real-decode-case reference (LCG pi_signs,
-                                       dense Pi, fp64 decode over the NZ cache)
-  common/golden_dump_manifest.hpp      the golden dump manifest/tensor reader (sparse
-                                       tensors materialised), shared by every runner
-  common/turboquant_scatter_oracle.hpp the scatter writer's golden cache image
-  common/rotate_butterfly_oracle.hpp   host model of the vector butterfly
-  common/fused_decode_fixture.hpp      the decode's gold model, `expected` in double
-  common/decode_tiling_gate.hpp        the host tiling equivalence gate
-  common/camodel_session.hpp           device session and guarded GM allocations
-  common/device_timer.hpp              device-side launch timing for --perf
-  cpu/test_contract_gates.cpp          UB arena, host tiling, launch guards, mode-2 channels,
-                                       marked-graph token balance, shared recurrence
-  cpu/test_layout_bridge.cpp           NZ writer == decode reader, bijections, co-byte pairings
-  cpu/test_golden_decode_oracle.cpp    the plain-C golden oracle against the PyTorch
-                                       golden over every decode dump case
-  npu/test_live_write.cpp              batch prefill + scatter RMW against the oracle; built
-                                       twice for the scatter: plain (strip RMW) and
-                                       TQ_SCATTER_NZ=1 (the NZ-tiled ingress, --probe for the
-                                       single-tile fast check)
-  npu/test_nz_ingress_canary.cpp       the NZ prefill over one 64-row tile
-  npu/test_fused_decode_e2e.cpp        end-to-end decode against the FP64 reference
-  npu/test_golden_dump.cpp             every kernel against the PyTorch golden dumps
+
 ```
 
 ## The golden-dump comparison (kernel vs the PyTorch golden)
@@ -227,7 +192,7 @@ that.
 
 ## What the extraction changed
 
-**Prefill (`src/prefill/turboquant_reshape_batch.cpp`)**
+**Prefill (`src/turboquant/ingress/native/turboquant_reshape_batch.cpp`)**
 
 * **Mode-2 only.** No `template <bool Mode2>`, no `bool Reuse`, no single-shot fallback entry
   point, no `reuse_mode4_flags` launcher argument. Cross-core synchronisation is the three
@@ -248,7 +213,7 @@ that.
 * The 100+ line essay header, the mode-4 flag-id retrospective, the CAModel trace diagnosis
   narrative and the sparse-sampling probe (`ASCEND_MICRO_SPARSE_SAMPLING`) are removed.
 
-**Scatter (`src/scatter/turboquant_reshape_scatter.cpp`)**
+**Scatter (`src/turboquant/ingress/native/turboquant_reshape_scatter.cpp`)**
 
 * The verified RMW merge (`scatter_merge_token_vf`) and the in-register butterfly
   (`RotateImpl::RegGather`) are retained unchanged.
@@ -256,14 +221,14 @@ that.
   publication block are gone from the kernel, the `__global__` entry and the launcher.
 * Narrative comments and the butterfly ablation table are removed.
 
-**Fused decode (`src/decode/turboquant_fused_decode.cpp`)**
+**Fused decode (`src/turboquant/decode/native/turboquant_fused_decode.cpp`)**
 
 * The audited 3-zone modulo schedule, the Cube GEMM reduction
   (`ASCEND_TQ_FUSED_DECODE_GEMM_REDUCE=1`, on by default) and both the native FP16 and BF16
   instances are retained, along with the raw-query variants.
 * `GM_ADDR` launch-site casts go through `AsGmAddr()` (`static_cast<uint8_t*>`), the one spelling
   that compiles under both the type-checked chevron and the generated `aclrtlaunch_*` stub.
-* Host tiling moved to `src/host/turboquant_tiling.{h,cpp}`: the descriptors and dispatch records
+* Host tiling moved to `src/turboquant/common/turboquant_tiling.{h,cpp}`: the descriptors and dispatch records
   are declared in the header and `build_decode_tiling` is defined in a translation unit, rather
   than being an `inline` function in a device-side header.
 

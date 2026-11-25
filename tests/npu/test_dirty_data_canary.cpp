@@ -48,7 +48,7 @@
 
 #include "../common/camodel_session.hpp"
 #include "../common/fused_decode_fixture.hpp"
-#include "../../src/host/turboquant_tiling.h"
+#include "../../src/turboquant/common/turboquant_tiling.h"
 
 #include <chrono>
 #include <cmath>

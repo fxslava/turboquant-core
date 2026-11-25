@@ -54,7 +54,7 @@ from typing import Final
 import torch
 
 # ---------------------------------------------------------------------------
-# The layout contract. Shared with include/turboquant/turboquant_layout.h.
+# The layout contract. Shared with src/turboquant/common/turboquant_layout.h.
 # ---------------------------------------------------------------------------
 
 TURBOQUANT_GROUP: Final[int] = 32
@@ -98,7 +98,7 @@ _FP32_MAX_BIASED_EXPONENT: Final[int] = 254
 TURBOQUANT_KERNEL_HEAD_SIZE: Final[int] = 256
 TURBOQUANT_KERNEL_KV_HEADS: Final[int] = 4
 
-# The KV4_FP8 mode's codebook gain, from include/turboquant/turboquant_mode.h
+# The KV4_FP8 mode's codebook gain, from src/turboquant/common/turboquant_mode.h
 # (TurboQuantModeTraits<TurboQuantMode::KV4_FP8>::kGain). The fused decode
 # folds it out of its dequantised operands; see decode_reference.
 TURBOQUANT_KV4_FP8_GAIN: Final[float] = 2.9832882881

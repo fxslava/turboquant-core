@@ -65,7 +65,7 @@ target_include_directories(tq_strict INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}")
 # two sides disagreeing about which word is which, so there is exactly one definition of them.
 # turboquant_telemetry.cpp rides the same library: the probe records are the other GM layout the
 # device writes by word offset and the host parses by the same, so they share the one definition.
-add_library(turboquant_host STATIC src/host/turboquant_tiling.cpp src/host/turboquant_telemetry.cpp)
+add_library(turboquant_host STATIC src/turboquant/common/turboquant_tiling.cpp src/turboquant/common/turboquant_telemetry.cpp)
 target_link_libraries(turboquant_host PUBLIC tq_strict)
 
 # ------------------------------------------------------------------ the CPU gates
@@ -107,7 +107,7 @@ set_tests_properties(golden_decode_oracle PROPERTIES
                      WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 
 # Sealed Wave-3 decoder arithmetic and padded UB address mapping, CPU only.
-add_subdirectory(components/e8_parallel_decode)
+add_subdirectory(tests/cpu/e8)
 
 # ------------------------------------------------------------------ the device legs
 option(TQ_BUILD_KERNELS "Configure the BiSheng device legs (tens of minutes to build)" OFF)

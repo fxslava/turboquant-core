@@ -17,7 +17,7 @@
 // The contract gates: everything about these operators that can be decided without a device.
 //
 //   1. UB ARENA BOUNDS of the fused decode. The static_asserts in
-//      include/turboquant/turboquant_fused_decode_opt.hpp fire merely by including it -- every
+//      src/turboquant/common/turboquant_fused_decode_opt.hpp fire merely by including it -- every
 //      allocation 32-byte aligned, the packed and scale ring slots on different banks, and the
 //      Cube GEMM reduction's overlay exactly the length of the attention phase's transient pool.
 //      Compiling this file IS that gate; the numbers are printed so a change is visible in a log.
@@ -54,10 +54,10 @@
 // a toolkit-free translation unit can include the file and audit them, instead of a test keeping
 // its own copy of the numbers that would then agree with nothing.
 
-#include "../../include/turboquant/turboquant_fused_decode_opt.hpp"
-#include "../../include/turboquant/turboquant_wave_protocol.hpp"
-#include "../../src/decode/vector/routine_vector_online_softmax.hpp"
-#include "../../src/prefill/turboquant_reshape_batch.cpp"
+#include "../../src/turboquant/common/turboquant_fused_decode_opt.hpp"
+#include "../../src/turboquant/common/turboquant_wave_protocol.hpp"
+#include "../../src/turboquant/decode/native/vector/routine_vector_online_softmax.hpp"
+#include "../../src/turboquant/ingress/native/turboquant_reshape_batch.cpp"
 #include "../common/decode_tiling_gate.hpp"
 #include "../common/turboquant_test_common.hpp"
 
