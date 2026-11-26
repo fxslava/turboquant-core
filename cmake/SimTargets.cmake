@@ -181,10 +181,9 @@ function(add_turboquant_sim_targets)
         INSTALL_RPATH "$ORIGIN/../lib;${TQ_CYCLE_MODEL_DIR};${ASCEND_HOME_PATH}/lib64")
   endforeach()
 
-  # DIRTY-DATA (D2/D3): the bounded poison canary. `--tail` runs one tile at context 64 and two
-  # tiles at 72/80 with the unmapped pages and the dead tail rows poisoned; `--blocktable` runs a
-  # synthetic >64-page span whose entry 64 is negative / past num_blocks. Both are ctest entries
-  # so the count grows with the gate, and both are 1-2 tile launches.
+  # DIRTY-DATA (D2/D3): `--tail` uses zero live K/V and finite spikes through the page end,
+  # including past align16(context), with exact-zero checks and a one-spike positive control.
+  # Each launch has 1-2 live tiles; --blocktable checks an invalid entry beyond the 64-page cache.
   add_sim_runner(test_dirty_data_canary_sim tests/npu/test_dirty_data_canary.cpp tq_decode_sim)
   add_test(NAME dirty_tail_canary COMMAND test_dirty_data_canary_sim --tail)
   add_test(NAME dirty_blocktable_canary COMMAND test_dirty_data_canary_sim --blocktable)
