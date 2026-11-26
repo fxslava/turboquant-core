@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-26",
+  "core_main_tested_commit": "db33c51d295307d1bb072245ca3ecf25d98ed2a2",
+  "core_main_worktree": "C:\\Users\\Admin\\.codex\\worktrees\\finite-spike-tail\\turboquant-core",
+  "core_product_bytes_unchanged_since": "c50b7582571921ba96ee00001f81ffe27858aaa0",
+  "plugin_main_preserved": "a1df499e0762621c2b9561e2ee66c498a70d0328",
+  "plugin_promotion": "WITHHELD: current upstream main removed V1, verified product requires V1; V2 serving port remains required.",
+  "plugin_cleanup_branch": "codex/product-promotion-20261126",
+  "plugin_cleanup_commit": "57c7e68b3d4d65dc0743b6470b005f38cdea558d",
+  "plugin_archive_blobs_unchanged": {
+    "ablation_results.json": "reports/turboquant_archive_20261126/ablation_results.json",
+    "tools/nb_audit.py": "reports/turboquant_archive_20261126/nb_audit.py",
+    "tmp/turboquant_third_page_diagnostics.patch": "reports/turboquant_archive_20261126/turboquant_third_page_diagnostics.patch"
+  },
+  "swa_sink_unchanged": "ec6771ff099b8d07f23e6bd581e3b23c12f78ab6",
+  "checks": {
+    "main_ctest": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "attention": {
+      "tests": 623,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "sync_and_selection": {
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "cpp_contracts": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "main_source_sync": "PASS against cleaned requested product and unchanged live checkout",
+    "cann_syntax": "30/30 PASS",
+    "analyzer": "16 comparisons PASS; zero new diagnostics",
+    "runner_syntax": "15 variants PASS; merged dirty-tail variant rerun PASS"
+  },
+  "physical_npu_launches": 0,
+  "camodel_launches": 0,
+  "remote_pushes": 0,
+  "receipts": {
+    "main-sync.log": "20981399c3e35c6c7460653f1d605bb0274b5046e755e94c74d0494f65ed4df6",
+    "main-ctest.log": "b204ec02d380d7d9838a7ec0abf901a3348859879da07e86626c8a86381e7f1c",
+    "main-ctest.xml": "fdc7346640665a6810be668cc9fcbeecffaad00cd87921f2828011bd4c883c91",
+    "main-host-config.log": "1e80685ff8f0cc7b982b81466f0040545caceebd05e01ad95c2e4773d229689c",
+    "main-host-build.log": "eee77eb1f85ca70fc628632f25a631f0bf1e8ce1b769f52d32e21b97df8d432c",
+    "live-checkout-sync.log": "db6812f43b26fe445f68de686d605370886f6bb5926c0f986259944bcf51162a",
+    "merged-dirty-runner.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

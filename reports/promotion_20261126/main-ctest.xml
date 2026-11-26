@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="(empty)"
+	tests="10"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname=""
+	time="8"
+	timestamp="2026-11-26T14:35:49"
+	>
+	<testcase name="contract_gates" classname="contract_gates" time="0.00174417" status="run">
+		<system-out>test_contract_gates
+  strip geometry: 16 tokens, 8 chunks, rings 4/2/2
+  host tiling: 13 geometries, dispatch odometer and descriptors, 5 refusals
+  launch guards: 2 admitted, 5 refused
+  mode-2 channels: prefill ids 8/9/10, skew bound 3 &lt;= 15; decode flags 0..9, join 10, reserved from 11
+  marked graph: 7 strip counts audited; 64 strips = 512 bursts, 512 Mmad groups, 258 rendezvous (1 strip = 8/8/6)
+  recurrence: shared phases in order on both entry points
+  probed recurrence: the argmax probe sits between max and exponentiate
+PASS test_contract_gates: UB arena 142336 bytes (transient pool 32768, basis 46432, reducer 3360), host tiling, launch guards, mode-2 channels, marked-graph token balance over 1..64 strips, shared recurrence
+</system-out>
+	</testcase>
+	<testcase name="layout_bridge" classname="layout_bridge" time="0.0153511" status="run">
+		<system-out>geometry: 1 pages x 1 kv heads x 64 tokens x 256 channels
+  check 1: 16384 logical elements, writer == reader
+  check 2: NZ map is a bijection over 16384 nibbles
+  check 3: strip maps bijective; co-byte pairings as contracted
+  check 4: 32758 of 32768 addresses differ; byte groupings are incompatible
+  check 5: scale planes bijective (NZ 512 floats, strip 128 floats)
+geometry: 2 pages x 4 kv heads x 64 tokens x 256 channels
+  check 1: 131072 logical elements, writer == reader
+  check 2: NZ map is a bijection over 131072 nibbles
+  check 3: strip maps bijective; co-byte pairings as contracted
+  check 4: 32758 of 32768 addresses differ; byte groupings are incompatible
+  check 5: scale planes bijective (NZ 1024 floats, strip 1024 floats)
+geometry: 3 pages x 2 kv heads x 128 tokens x 256 channels
+  check 1: 196608 logical elements, writer == reader
+  check 2: NZ map is a bijection over 196608 nibbles
+  check 3: strip maps bijective; co-byte pairings as contracted
+  check 4: 65526 of 65536 addresses differ; byte gr...
+The rest of the test output was removed since it exceeds the threshold of 1024 bytes.
+</system-out>
+	</testcase>
+	<testcase name="telemetry_dump" classname="telemetry_dump" time="0.00380499" status="run">
+		<system-out>test_telemetry_dump
+  record layout: stride 272 floats, lanes max=0 pos=1 page=2 sum=8
+  live splits: 14 contexts match build_decode_tiling's descriptors
+  fold and merge: fused, 8-split and dead-split tokens over 4 heads, ties included, all against the direct argmax
+    rejected at word 257: the winning position is outside the live context
+    rejected at word 258: the record's page disagrees with its position
+    rejected at word 259: a telemetry record's padding lanes are not zero
+    rejected at word 264: a fused record carries a run_sum lane
+    rejected at word 128: workspace written outside the fused telemetry record
+    rejected at word 8979: a partial accumulator lane is not finite
+    rejected at word 9240: a live split's run_sum lane is not positive and finite
+    rejected at word 10865: a dead slot's probe lanes are not the sentinel
+    rejected at word 26111: workspace written outside the fused telemetry record
+  verify: a correct image, the range override, and 9 named corruptions
+  dump: fused w...
+The rest of the test output was removed since it exceeds the threshold of 1024 bytes.
+</system-out>
+	</testcase>
+	<testcase name="qwen35_decode" classname="qwen35_decode" time="0.316762" status="run">
+		<system-out>PASS telemetry: all three-head improvement masks preserve softmax max/sum
+host: batch=1 context=2048 pages=128/1024 relative_l2=2.1977759e-15
+host: batch=2 context=2048 pages=128/1024 relative_l2=2.34472711e-15
+PASS Qwen3.5: 64 physical tile partitions and both 2K page layouts
+</system-out>
+	</testcase>
+	<testcase name="decode_reduce" classname="decode_reduce" time="0.00635934" status="run">
+		<system-out>PASS decode reduction: mixed-batch output coverage; NaN/Inf padding, live rows 1..16, splits 1..8
+</system-out>
+	</testcase>
+	<testcase name="qwen35_telemetry" classname="qwen35_telemetry" time="0.0779282" status="run">
+		<system-out>head=0 old=1.87622953 fixed=1.87622953 golden=1.87622953 last_improved=0,0
+head=1 old=1.86991083 fixed=1.86991083 golden=1.86991083 last_improved=0,0
+head=2 old=1.88220183 fixed=1.88220183 golden=1.88220183 last_improved=0,0
+head=3 old=1.42686568 fixed=1.87527693 golden=1.87527693 last_improved=0,0
+head=4 old=0.751269716 fixed=1.88003577 golden=1.88003577 last_improved=0,1
+head=5 old=1.06498841 fixed=1.87218043 golden=1.87218043 last_improved=0,0
+old_relative_l2=0.317362321 fixed_relative_l2=2.22809739e-15
+</system-out>
+	</testcase>
+	<testcase name="golden_decode_oracle" classname="golden_decode_oracle" time="2.76662" status="run">
+		<system-out>decode oracle /mnt/c/Ascend/turboquant-integration-work/promotion-20261126/golden-dumps/decode_ctx128: context 128, 4 KV heads x 16 = 64 heads, page 128, table width 1
+  pi_signs: bit-exact (256 entries)
+  query_rot: bit-exact (integer fixture, held bit-exact)
+    stage0 (rotated)       worst 0 fp32 ULP (budget 4), worst abs 0.000e+00, worst 0 of row max (budget 1e-05), scale ratio 1.00000000
+    stage1 (model basis)   worst 21 fp32 ULP (budget 4), worst abs 3.730e-14, worst 2.66e-16 of row max (budget 1e-05), scale ratio 1.00000000
+PASS /mnt/c/Ascend/turboquant-integration-work/promotion-20261126/golden-dumps/decode_ctx128: the C++ golden oracle reproduces the PyTorch golden
+decode oracle /mnt/c/Ascend/turboquant-integration-work/promotion-20261126/golden-dumps/decode_ctx200: context 200, 4 KV heads x 16 = 64 heads, page 128, table width 2
+  pi_signs: bit-exact (256 entries)
+  query_rot: bit-exact (integer fixture, held bit-exact)
+    stage0 (rotated)       worst 0 fp32 ULP (budget 4), worst abs 0.000e+00, w...
+The rest of the test output was removed since it exceeds the threshold of 1024 bytes.
+</system-out>
+	</testcase>
+	<testcase name="turboquant_production_host" classname="turboquant_production_host" time="4.7053" status="run">
+		<system-out>mode=lm4 stage=ingress profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS checked_sample_bytes=16384 host_validation_us=432.530
+mode=lm4 stage=dequant profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS checked_sample_bytes=16384 host_validation_us=299.407
+mode=lm4 stage=decode profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS live_tiles=32 rmse=3.2611777e-05 cosine=0.999998912 relative_l2=0.0014781011 max_bf16_ulp=0 host_validation_us=1106.746
+mode=lm3 stage=ingress profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS checked_sample_bytes=12288 host_validation_us=309.823
+mode=lm3 stage=dequant profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS checked_sample_bytes=12288 host_validation_us=323.394
+mode=lm3 stage=decode profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 gro...
+The rest of the test output was removed since it exceeds the threshold of 1024 bytes.
+</system-out>
+	</testcase>
+	<testcase name="e8_decode_cpu_check" classname="e8_decode_cpu_check" time="0.199808" status="run">
+		<system-out>PASS labels=65536 scales=16 coordinate-scale-pairs=8388608 exact ties/BF16RNE/INT8RNE; CPU-only, no device claim
+</system-out>
+	</testcase>
+	<testcase name="e8_layout_check" classname="e8_layout_check" time="0.00231116" status="run">
+		<system-out>PASS K payload mapping 16384/16384 floats across owners; 32 lanes cover16 address-bank residues twice; no bank-stall claim; V unchanged
+</system-out>
+	</testcase>
+</testsuite>

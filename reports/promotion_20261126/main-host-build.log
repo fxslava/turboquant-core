@@ -1,0 +1,34 @@
+[  4%] Building CXX object tests/cpu/e8/CMakeFiles/e8_layout_check.dir/layout_check.cpp.o
+[  8%] Building CXX object tests/cpu/e8/CMakeFiles/e8_decode_cpu_check.dir/decode_cpu_check.cpp.o
+[ 13%] Building CXX object CMakeFiles/turboquant_host.dir/src/turboquant/common/turboquant_tiling.cpp.o
+[ 17%] Building CXX object CMakeFiles/turboquant_host.dir/src/turboquant/common/turboquant_telemetry.cpp.o
+[ 21%] Linking CXX static library libturboquant_host.a
+[ 21%] Built target turboquant_host
+[ 34%] Building CXX object CMakeFiles/test_qwen35_decode.dir/tests/cpu/test_qwen35_decode.cpp.o
+[ 43%] Building CXX object CMakeFiles/test_contract_gates.dir/tests/cpu/test_contract_gates.cpp.o
+[ 34%] Building CXX object CMakeFiles/test_golden_decode_oracle.dir/tests/cpu/test_golden_decode_oracle.cpp.o
+[ 39%] Building CXX object CMakeFiles/test_telemetry_dump.dir/tests/cpu/test_telemetry_dump.cpp.o
+[ 39%] Building CXX object CMakeFiles/test_layout_bridge.dir/tests/cpu/test_layout_bridge.cpp.o
+[ 47%] Building CXX object CMakeFiles/test_decode_reduce.dir/tests/cpu/test_decode_reduce.cpp.o
+[ 52%] Linking CXX executable ../../e8_layout_check
+[ 56%] Linking CXX executable tests/test_layout_bridge
+[ 60%] Linking CXX executable tests/test_decode_reduce
+[ 60%] Built target e8_layout_check
+[ 65%] Building CXX object CMakeFiles/test_qwen35_telemetry.dir/tests/cpu/test_qwen35_telemetry.cpp.o
+[ 65%] Built target test_layout_bridge
+[ 69%] Linking CXX executable ../../e8_decode_cpu_check
+[ 73%] Building CXX object CMakeFiles/test_turboquant_production_host.dir/tests/cpu/test_turboquant_production.cpp.o
+[ 73%] Built target test_decode_reduce
+[ 78%] Linking CXX executable tests/test_telemetry_dump
+[ 82%] Linking CXX executable tests/test_contract_gates
+[ 82%] Built target e8_decode_cpu_check
+[ 82%] Built target test_telemetry_dump
+[ 82%] Built target test_contract_gates
+[ 86%] Linking CXX executable tests/test_qwen35_decode
+[ 86%] Built target test_qwen35_decode
+[ 91%] Linking CXX executable tests/test_qwen35_telemetry
+[ 91%] Built target test_qwen35_telemetry
+[ 95%] Linking CXX executable tests/test_golden_decode_oracle
+[ 95%] Built target test_golden_decode_oracle
+[100%] Linking CXX executable tests/test_turboquant_production_host
+[100%] Built target test_turboquant_production_host
