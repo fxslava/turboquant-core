@@ -1,0 +1,156 @@
+{
+  "analyzer_api_sources": [
+    {
+      "bytes": 10612,
+      "path": "/mnt/c/ascend-kernel-analyzer/ascend_analyzer/analyzer.py",
+      "sha256": "9a684138449caf0b482f5ea3e02ac1f3ef2bf6706a484e4dad4727c0d6cf2d85"
+    },
+    {
+      "bytes": 19871,
+      "path": "/mnt/c/ascend-kernel-analyzer/ascend_analyzer/cli.py",
+      "sha256": "e993cb53ec861a4d873c5a44c14b04ffe6501f130bb00caae1d97e9d91d82e3d"
+    },
+    {
+      "bytes": 4096,
+      "path": "/mnt/c/ascend-kernel-analyzer/ascend_analyzer/report/json_report.py",
+      "sha256": "314c57231be235c23f38a8b71a1439b1e2be3b869ffd66e4e774bc9c065667bb"
+    },
+    {
+      "bytes": 13830,
+      "path": "/mnt/c/ascend-kernel-analyzer/ascend_analyzer/checkers/pipeline.py",
+      "sha256": "c3c5535cc4b6a11caf0f12955bf11746e056d752a4720e7c88fbfed6ccec0fa8"
+    }
+  ],
+  "analyzer_commit": "46f16829ee37b4a31961832595e96b280d7f053e",
+  "authorized_path": "tests/host/turboquant/check_analyzer.py",
+  "blockers": [],
+  "consumer_delta": {
+    "bytes": 23973,
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/analyzer-hygiene/CONSUMER_HYGIENE_DELTA.json",
+    "sha256": "922331ee5fe5dce362c78493cb4f8cb44cb8e63f1395222a3426c8155a08264c"
+  },
+  "consumer_postimage": {
+    "bytes": 8994,
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/analyzer-hygiene/check_analyzer.py",
+    "sha256": "ef7f2333c75f070aa959632e79183d0658c2b18572d5334d31fdd86a87997496"
+  },
+  "consumer_preimage": {
+    "bytes": 8142,
+    "path": "/mnt/c/vllm-ascend/tests/host/turboquant/check_analyzer.py",
+    "sha256": "4b958124f270e1da95ba2b4ddb8ce769e6a29d5643a135ea76a68cfd591c8cf9"
+  },
+  "failure_audit": {
+    "bytes": 8535,
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/AKA_HOST_SCOPE_FAILURE_AUDIT.json",
+    "sha256": "9d8727f6fba3c403059741622edc94e9458480c859dc70088fd0eb5d7e62eb56"
+  },
+  "historical_width_baselines": {
+    "narrow_frozen03": {
+      "bytes": 71390,
+      "path": "/home/dmin/work/checkpoint2_20261123/slot03/src/src/prefill/turboquant_reshape_batch.cpp",
+      "sha256": "bcbdcc866230bc72bf47ba3ec4fd025e5a063cd9333a58ee558f37e2924e89ad"
+    },
+    "wide_strict_b": {
+      "bytes": 60074,
+      "path": "/home/dmin/work/deadlock_20261125/d1-baseline-strict/source/src/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+      "sha256": "f0de459602caca0da6d67bbefe8368f6f44d0b0c32cd04cd01ccb187f7d312c3"
+    }
+  },
+  "old_failed_log": {
+    "bytes": 1726,
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected.log",
+    "sha256": "379c25fc5a4438494b15482f5d7e5a8b5faa2638b855947141b9a17258a2ffb8"
+  },
+  "old_failed_summary": {
+    "bytes": 10840,
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/summary.json",
+    "sha256": "026548865b928831315a8b14ed183d90fefa0eff8ee69abdd695725a8b6cdf96"
+  },
+  "old_failure_inputs_and_fingerprints": {
+    "reshape": {
+      "integrated": {
+        "bytes": 6568715,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/reshape-integrated.json",
+        "sha256": "49c5d4f80396209de6131333239166c7eac7628fd8277e86d5156152bbd7ee5e"
+      },
+      "new": [
+        {
+          "code": "AKA3002",
+          "count": 1,
+          "hardware_domain": "-",
+          "message": "Cannot uniquely match host launch 'turboquant_reshape_and_cache_bf16_wide' to a kernel definition",
+          "severity": "INFO"
+        }
+      ],
+      "resolved_occurrences": 10,
+      "verified": {
+        "bytes": 6424129,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/reshape-verified.json",
+        "sha256": "759416b73dab38d3ceedf5b4ddfb65c0fa5565300804ffddde4fcd07d82293b7"
+      }
+    },
+    "reshape_nz": {
+      "integrated": {
+        "bytes": 7441323,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/reshape_nz-integrated.json",
+        "sha256": "5f0e6aefd3daeb777ec9be0c1a5cb3256e532770a709ec921cced215e3ed6a0e"
+      },
+      "new": [
+        {
+          "code": "AKA3002",
+          "count": 1,
+          "hardware_domain": "-",
+          "message": "Cannot uniquely match host launch 'turboquant_reshape_and_cache_bf16_wide' to a kernel definition",
+          "severity": "INFO"
+        }
+      ],
+      "resolved_occurrences": 0,
+      "verified": {
+        "bytes": 7173171,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/reshape_nz-verified.json",
+        "sha256": "5afec1e55fa2782f8a8620aa9fb056af9f99f65f8617ee7e05a0b56910a26cab"
+      }
+    }
+  },
+  "remaining_release_gate": "Apply the exact reviewed checker postimage and run the separately prepared full analyzer tail.",
+  "review_runtime": {
+    "compiler_invocations": 0,
+    "full_analyzer_invocations": 0,
+    "model_invocations": 0,
+    "product_edits": 0
+  },
+  "reviewed_release_driver": {
+    "bytes": 11740,
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/resume_deployed_aka.py",
+    "sha256": "1f599d96317f696185d57de440cc0095f1acd7de640f1a01a93f8a69ab208109"
+  },
+  "reviewer": "final_analyzer_hygiene_review",
+  "schema": "p6-independent-consumer-hygiene-review-v1",
+  "single_file_patch": {
+    "bytes": 3029,
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/analyzer-hygiene/check_analyzer_source_join.patch",
+    "sha256": "2ee8bfee8f5dcb7762da0397673b3a6b02f330503e60ab436d8ea3acc60e582e"
+  },
+  "verdict": "PASS_CONSUMER_HYGIENE_REVIEW",
+  "verified": {
+    "baseline_and_profile": "The driver retains the independent Frozen03 and Strict B references and four existing device-profile comparisons. The checker changes neither defines nor diagnostic filters nor analyzer flags.",
+    "delta_file_references": 88,
+    "independent_raw_bytes_and_real_new_fingerprint_control": true,
+    "independent_report_binding_controls": {
+      "negative": 9,
+      "positive": 2
+    },
+    "native_delivery": "Only integrated reshape and reshape_nz pass narrow and wide units together, preserving separate NZ wrapper translation units.",
+    "old_raw_reports_replayed": 20,
+    "old_strip_and_nz_failure": "One new AKA3002 INFO each for unmatched wide host launch",
+    "old_zero_new_cases_reconfirmed": 8,
+    "patch_applies_to_exact_postimage_in_temporary_tree": true,
+    "raw_and_fingerprints": "The full joint raw JSON remains byte-for-byte. The existing normalized severity, hardware domain, message and multiplicity gate evaluates the narrow report. The release driver checks the wide companion fingerprints against the standalone report checked against Strict B.",
+    "report_binding": "Path-based identity handles reversed files[] order and rejects missing, extra, wrong, duplicate or incomplete requested units.",
+    "shared_unchanged_in_both_source_roots": {
+      "aka": 1,
+      "cpp_and_headers": 36
+    },
+    "staged_mock_replayed": true
+  }
+}

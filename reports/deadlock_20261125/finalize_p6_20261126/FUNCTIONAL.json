@@ -1,0 +1,58 @@
+[
+  {
+    "audit": {
+      "bytes": 203929,
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/canary/P6_BATCH_TIMING_AUDIT.json",
+      "sha256": "3f30c2255871d617bf3a825f796deb8f4d1d040c16eaa17235e60d1e1fbef330"
+    },
+    "case": "batch-p-frozen03-matched",
+    "parity_guards_and_trace": "PASS",
+    "run": {
+      "bytes": 3331,
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-frozen03-matched/result.json",
+      "sha256": "c301c5e4d7117f810b3beaa57eb6d46ab1538a4f103f15f25133c02f4d9dbcd6"
+    }
+  },
+  {
+    "audit": {
+      "bytes": 15857,
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/canary/batch-p-strip-wide-lloyd_ACTUAL_AUDIT.json",
+      "sha256": "20d4aebc3a76d9ef306e893375aeb31cff232faabc28aa27cea05f97761ddc53"
+    },
+    "case": "batch-p-strip-wide-lloyd",
+    "parity_guards_and_trace": "PASS",
+    "run": {
+      "bytes": 3416,
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/result.json",
+      "sha256": "bdf8c8adbdca9462935d428e7c94f5d6b4ddae6eecc8f32976b6539c62af75e8"
+    }
+  },
+  {
+    "audit": {
+      "bytes": 15930,
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/canary/batch-p-nz-narrow-lloyd_ACTUAL_AUDIT.json",
+      "sha256": "34f2cb1ee3e33b6a6fcbcbee3cd1fef0292bb964a36813fdc97630e8af593255"
+    },
+    "case": "batch-p-nz-narrow-lloyd",
+    "parity_guards_and_trace": "PASS",
+    "run": {
+      "bytes": 3403,
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-nz-narrow-lloyd/result.json",
+      "sha256": "540e7d839ba3cfeaf711df720614b8f5b94dcb4756ca1bc40a70b44054a437f1"
+    }
+  },
+  {
+    "audit": {
+      "bytes": 23377,
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/canary/batch-p-nz-wide-uniform_ACTUAL_AUDIT.json",
+      "sha256": "852610d48928bf2e43b2438e966e269e6b76bad681fa6d306babaf58fb74beee"
+    },
+    "case": "batch-p-nz-wide-uniform",
+    "parity_guards_and_trace": "PASS",
+    "run": {
+      "bytes": 3404,
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-nz-wide-uniform/result.json",
+      "sha256": "e64788ade1c0c99a1b7c6c904be66cfad2e18f2295d4c82f50de03d565e96422"
+    }
+  }
+]

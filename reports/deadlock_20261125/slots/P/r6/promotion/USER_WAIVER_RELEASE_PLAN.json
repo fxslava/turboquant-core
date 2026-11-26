@@ -1,0 +1,104 @@
+{
+  "schema": "p6-user-waiver-release-prep-v1",
+  "status": "PREPARED_PENDING_FOUR_ACTUAL_RECORDS_AND_FRESH_SOL",
+  "adapter": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/promotion/promote_p6_user_waiver.py",
+    "bytes": 7532,
+    "sha256": "d646d591be99c20fcb5074c7b73a5016a0a13ad473dd99d28ee233ec71664ade"
+  },
+  "contract": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/promotion/USER_WAIVER_RELEASE.md",
+    "bytes": 4414,
+    "sha256": "b312e5b31da4772bd21a01eba664f7712e74018282532c58884c355644237814"
+  },
+  "unchanged_exact_byte_ledger": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/promotion/PROMOTION_BYTES.json",
+    "bytes": 25914,
+    "sha256": "08185028c3c4af7ef474f0f739e07ffafb6958d8f0fa091dced3686d8cf7b3e7"
+  },
+  "unchanged_original_adapter": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/promotion/promote_p6.py",
+    "bytes": 14026,
+    "sha256": "01ee0d5048ec1606554cb323745c51c78967f088f39f308e4311055a929910e4"
+  },
+  "compiled": {
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/evidence-final/COMPILED.json",
+    "bytes": 97090,
+    "sha256": "d57fb0c27ebc63b8615583c83426ca1e852d8a45d4a6a48a0a7bd945788e5875"
+  },
+  "candidate_manifest": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/CANDIDATE_SOURCE.sha256",
+    "bytes": 17779,
+    "sha256": "da54b14f843583cdd0c8e262bc799430afeb89b59406e3aeb3e0deecc34a0064"
+  },
+  "original_deferred_patch": [
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r2/VLLM_INTEGRATION.patch",
+      "bytes": 2518,
+      "sha256": "ada007253f1ae085c95f06019057340099d9ba6776dcebb1c513f22caf0c9c25"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r3/VLLM_README.patch",
+      "bytes": 925,
+      "sha256": "fbfb3365ab02f4c14cd6fbf88cebabace2835858b06498c8df95b0e0112f752f"
+    }
+  ],
+  "setup": {
+    "existing": {
+      "path": "/mnt/c/vllm-ascend/setup.py",
+      "bytes": 19864,
+      "sha256": "27032a2cae757dba5b2a473cc26285004f0abc91ab0154c44b3f7f641edae75a"
+    },
+    "status": "NO_CHANGE_NEEDED",
+    "validation": {
+      "path": "/mnt/c/vllm-ascend/tests/host/turboquant/test_build_selection.py",
+      "bytes": 2772,
+      "sha256": "d28559a8f0e14a685efcbbe9e24d23cefaa096bc552e599f534e7baebbdc753d"
+    },
+    "modern_depfiles": [
+      {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r2/modern-asc-probe-v2/CMakeFiles/tq_batch_p_modern.dir/home/dmin/work/deadlock_20261125/slotP/r2/source/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o.d",
+        "bytes": 12833,
+        "sha256": "ca72367738a07455c20c48d1bf885cd08e7a0f1633f975c86edf911a8f524c96"
+      },
+      {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r2/modern-asc-probe-v2/CMakeFiles/tq_batch_p_modern.dir/home/dmin/work/deadlock_20261125/slotP/r2/source/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o.d",
+        "bytes": 3867,
+        "sha256": "30ce692af8d8a0ccca7e4bfbb5f96cb2f4c77c47bc4066f669c2147938f84786"
+      }
+    ]
+  },
+  "offline_checks": [
+    "exact root waiver and modern matched audit with raw cap FAIL",
+    "actual modern result matched functional metadata",
+    "unchanged deployment ledger recreated",
+    "wrong waiver controls rejected",
+    "setup AST and both modern header depfiles"
+  ],
+  "applied": false,
+  "performance_evidence": {
+    "basis": "user_waiver_p6_guarded_modern_20_ticks",
+    "disposition": "USER_WAIVED_MODERN_DELTA",
+    "observed_raw_ticks": 63649,
+    "original_raw_cap": 63629,
+    "delta_ticks": 20,
+    "matched_frozen03_raw_ticks": 63654,
+    "normalization": "NONE",
+    "raw_cap_met": false,
+    "measurement": {
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-frozen03-matched/result.json",
+      "bytes": 3331,
+      "sha256": "c301c5e4d7117f810b3beaa57eb6d46ab1538a4f103f15f25133c02f4d9dbcd6"
+    },
+    "modern_audit": {
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/canary/P6_BATCH_TIMING_AUDIT.json",
+      "bytes": 203929,
+      "sha256": "3f30c2255871d617bf3a825f796deb8f4d1d040c16eaa17235e60d1e1fbef330"
+    },
+    "user_waiver": {
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/USER_WAIVER.json",
+      "bytes": 1471,
+      "sha256": "ca0e507c5a16a7f76788f8a2c654b6416fad89f847b5f997969d24b20e2bafd9"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "functional": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/FUNCTIONAL.json",
+    "bytes": 2354,
+    "sha256": "3b6194e26129b7c400e55a97547a85014c52489706ecd12803fb0cf7b6b79eaf"
+  },
+  "performance": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/PERFORMANCE.json",
+    "bytes": 991,
+    "sha256": "63ccc45790c00364de64404d19e2f22fe5e13a39e00ef0a0c43298e87344837a"
+  },
+  "functional_sha256": "3374f31c4648b47fbb854f9c9eec0e99a77cb9727f88e3cfa676c0c9ef18668a",
+  "performance_sha256": "a63cd763fba3fb83ee5b834935a6809d40b254bc4c6ded99f34a080975cdd174",
+  "adapter": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/promotion/promote_p6_user_waiver.py",
+    "bytes": 7532,
+    "sha256": "d646d591be99c20fcb5074c7b73a5016a0a13ad473dd99d28ee233ec71664ade"
+  },
+  "waiver": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/USER_WAIVER.json",
+    "bytes": 1471,
+    "sha256": "ca0e507c5a16a7f76788f8a2c654b6416fad89f847b5f997969d24b20e2bafd9"
+  },
+  "deployed_bytes_plan": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/promotion/PROMOTION_BYTES.json",
+    "bytes": 25914,
+    "sha256": "08185028c3c4af7ef474f0f739e07ffafb6958d8f0fa091dced3686d8cf7b3e7"
+  },
+  "functional_release_map": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/FUNCTIONAL_RELEASE_MAP.json",
+    "bytes": 2306,
+    "sha256": "262b247b88add7c6144e2afadb34fd2245b16a30fecdda34c58b87d6c8496b63"
+  },
+  "functional_release_sha256": "d688d337d27ae4d08bdfddb9d880fab3f1f78d52889a6723567a24d3ef00cb7b"
+}

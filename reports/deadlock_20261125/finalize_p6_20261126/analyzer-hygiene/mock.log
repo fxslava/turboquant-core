@@ -1,0 +1,5 @@
+{"case": "reshape", "new": 0, "raw": {"total": 0}}
+{"case": "reshape_nz", "new": 0, "raw": {"total": 0}}
+{"case": "reshape_wide", "new": 0, "raw": {"total": 0}}
+{"case": "reshape_wide_nz", "new": 0, "raw": {"total": 0}}
+PASS mocked source order, complete source set, raw preservation, and scoped STRIP/NZ invocations

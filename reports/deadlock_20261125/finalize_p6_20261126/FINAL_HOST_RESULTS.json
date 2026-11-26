@@ -1,0 +1,1460 @@
+{
+  "status": "PASS_P6_POST_PROMOTION_HOST_GATES",
+  "candidate": "P/r6",
+  "prepared": {
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/PREPARED.json",
+    "bytes": 2176,
+    "sha256": "636ded228dc4ed9ad2e7fb07ea9e5f56d9b01d8cd2f6fd0925ec45b63e4b12e6"
+  },
+  "applied": {
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/PROMOTION_APPLIED.json",
+    "bytes": 27225,
+    "sha256": "6c73337efe9229f41f885351a144198392a243cbd0c8ce76a0625858ce396664"
+  },
+  "source_before_and_after": {
+    "metadata": [
+      {
+        "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/SOURCE_SYNC.json",
+        "bytes": 19824,
+        "sha256": "fa3400c1755c343a2a1bc5f164805f05cb487daca22cd3d6c5c1934270aa3753"
+      },
+      {
+        "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/SOURCE_SYNC.json",
+        "bytes": 19824,
+        "sha256": "fa3400c1755c343a2a1bc5f164805f05cb487daca22cd3d6c5c1934270aa3753"
+      }
+    ],
+    "shared": {
+      "common/e8_component.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/e8_component.hpp",
+          "bytes": 216,
+          "sha256": "f57ee6cc867ac998bbd2a70b0d2b8136df9dfa13e1887262805266e78ba2dc45"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/e8_component.hpp",
+          "bytes": 216,
+          "sha256": "f57ee6cc867ac998bbd2a70b0d2b8136df9dfa13e1887262805266e78ba2dc45"
+        }
+      },
+      "common/e8_decode.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/e8_decode.hpp",
+          "bytes": 3344,
+          "sha256": "4cfbecd3da6854c433c3a9caf0aaede572748f74fc60aad3c21519e00e3bb050"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/e8_decode.hpp",
+          "bytes": 3344,
+          "sha256": "4cfbecd3da6854c433c3a9caf0aaede572748f74fc60aad3c21519e00e3bb050"
+        }
+      },
+      "common/e8_packet_layout.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/e8_packet_layout.hpp",
+          "bytes": 488,
+          "sha256": "eec52cf40c4e0f8c559e348f8816847e81be6086d3e0d8e987335caf0c13b24e"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/e8_packet_layout.hpp",
+          "bytes": 488,
+          "sha256": "eec52cf40c4e0f8c559e348f8816847e81be6086d3e0d8e987335caf0c13b24e"
+        }
+      },
+      "common/turboquant_codec_950.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_codec_950.h",
+          "bytes": 13606,
+          "sha256": "499b5718ad89b22827adb73d3d69f299783b3e9954208dc7e854a2301e383993"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_codec_950.h",
+          "bytes": 13606,
+          "sha256": "499b5718ad89b22827adb73d3d69f299783b3e9954208dc7e854a2301e383993"
+        }
+      },
+      "common/turboquant_codec_mx.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_codec_mx.h",
+          "bytes": 22947,
+          "sha256": "85b6dbc54432dd9ee6c725229f3448a7adb17781752258a2039e3c1ef726e62b"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_codec_mx.h",
+          "bytes": 22947,
+          "sha256": "85b6dbc54432dd9ee6c725229f3448a7adb17781752258a2039e3c1ef726e62b"
+        }
+      },
+      "common/turboquant_common.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_common.h",
+          "bytes": 3826,
+          "sha256": "93c3d0a1df371bdc6234629a38285a0ebdfeed8dc1d562b7d101a76fe4428e4a"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_common.h",
+          "bytes": 3826,
+          "sha256": "93c3d0a1df371bdc6234629a38285a0ebdfeed8dc1d562b7d101a76fe4428e4a"
+        }
+      },
+      "common/turboquant_fused_decode_opt.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_fused_decode_opt.hpp",
+          "bytes": 7337,
+          "sha256": "3e168758eca35140ecfce89b9b3da65f8b21d5d03eb9b76e991517dc04d61a3d"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_fused_decode_opt.hpp",
+          "bytes": 7337,
+          "sha256": "3e168758eca35140ecfce89b9b3da65f8b21d5d03eb9b76e991517dc04d61a3d"
+        }
+      },
+      "common/turboquant_gemm_reduce.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_gemm_reduce.hpp",
+          "bytes": 16615,
+          "sha256": "406d06baf0a8ed54ce495e28024bf2ea8ba173110cd0e7c359f2fc8f9ae0d7f9"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_gemm_reduce.hpp",
+          "bytes": 16615,
+          "sha256": "406d06baf0a8ed54ce495e28024bf2ea8ba173110cd0e7c359f2fc8f9ae0d7f9"
+        }
+      },
+      "common/turboquant_launch.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_launch.h",
+          "bytes": 2246,
+          "sha256": "53eea2aec1326fe327767807b28b74776e763e1de78e8686e88d121ef9a46332"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_launch.h",
+          "bytes": 2246,
+          "sha256": "53eea2aec1326fe327767807b28b74776e763e1de78e8686e88d121ef9a46332"
+        }
+      },
+      "common/turboquant_layout.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_layout.h",
+          "bytes": 4873,
+          "sha256": "c0403ad5ffbda5b5fbf59ff6bb01f86c7a176257bdba17c2366a621d2c7f5e02"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_layout.h",
+          "bytes": 4873,
+          "sha256": "c0403ad5ffbda5b5fbf59ff6bb01f86c7a176257bdba17c2366a621d2c7f5e02"
+        }
+      },
+      "common/turboquant_mode.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_mode.h",
+          "bytes": 8865,
+          "sha256": "64e9b5afac0e4b69fc2dcb23d2b809d84a10ed0689a1f6204326ef4cb4421c32"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_mode.h",
+          "bytes": 8865,
+          "sha256": "64e9b5afac0e4b69fc2dcb23d2b809d84a10ed0689a1f6204326ef4cb4421c32"
+        }
+      },
+      "common/turboquant_splitk_contract.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_splitk_contract.hpp",
+          "bytes": 2981,
+          "sha256": "82c3697045e818f43196faeb5aae5867bdd41e9042c50b678ccde0a74acdbb30"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_splitk_contract.hpp",
+          "bytes": 2981,
+          "sha256": "82c3697045e818f43196faeb5aae5867bdd41e9042c50b678ccde0a74acdbb30"
+        }
+      },
+      "common/turboquant_tiling.cpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_tiling.cpp",
+          "bytes": 7692,
+          "sha256": "a2d9c0c5b846fb3bbbb341994177d8be762d5034a06a492de0b04106fbc6f2ce"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_tiling.cpp",
+          "bytes": 7692,
+          "sha256": "a2d9c0c5b846fb3bbbb341994177d8be762d5034a06a492de0b04106fbc6f2ce"
+        }
+      },
+      "common/turboquant_tiling.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_tiling.h",
+          "bytes": 6020,
+          "sha256": "5e538d8d5ed7c2dd576f54562eee44879857e55af2d5c98bba07373294c14837"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_tiling.h",
+          "bytes": 6020,
+          "sha256": "5e538d8d5ed7c2dd576f54562eee44879857e55af2d5c98bba07373294c14837"
+        }
+      },
+      "common/turboquant_types.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_types.h",
+          "bytes": 110,
+          "sha256": "cb2e4abeecec6ffe85711648487e9e668c29b9306a16913820ca6024d66eb597"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_types.h",
+          "bytes": 110,
+          "sha256": "cb2e4abeecec6ffe85711648487e9e668c29b9306a16913820ca6024d66eb597"
+        }
+      },
+      "common/turboquant_wave_protocol.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_wave_protocol.hpp",
+          "bytes": 7865,
+          "sha256": "f91b9f092d8f4b04e54ec1b0031fd94717feb4d6dffac57fb4627b41c22ceaa4"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_wave_protocol.hpp",
+          "bytes": 7865,
+          "sha256": "f91b9f092d8f4b04e54ec1b0031fd94717feb4d6dffac57fb4627b41c22ceaa4"
+        }
+      },
+      "decode/e8/e8_fused_decode.cpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_fused_decode.cpp",
+          "bytes": 22359,
+          "sha256": "1354868b479d3c2972f219a7012718e210c085ffcb38c6310056fcebb7f390ef"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/e8_fused_decode.cpp",
+          "bytes": 22359,
+          "sha256": "1354868b479d3c2972f219a7012718e210c085ffcb38c6310056fcebb7f390ef"
+        }
+      },
+      "decode/e8/e8_parallel_decode.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_parallel_decode.hpp",
+          "bytes": 6236,
+          "sha256": "78ad1016f9abaa38672107dcc971485ecca4985fd02ee8acb1df671fcd0da9d1"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/e8_parallel_decode.hpp",
+          "bytes": 6236,
+          "sha256": "78ad1016f9abaa38672107dcc971485ecca4985fd02ee8acb1df671fcd0da9d1"
+        }
+      },
+      "decode/e8/parallel_component.cpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/parallel_component.cpp",
+          "bytes": 3862,
+          "sha256": "0fd04fcc15b476096eadcd2537b1365356d9bb29c8591c29f9a6db998b3ff017"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/parallel_component.cpp",
+          "bytes": 3862,
+          "sha256": "0fd04fcc15b476096eadcd2537b1365356d9bb29c8591c29f9a6db998b3ff017"
+        }
+      },
+      "decode/e8/routines/routine_e8_bf16_dequant_simt.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/routines/routine_e8_bf16_dequant_simt.hpp",
+          "bytes": 9168,
+          "sha256": "d6d5eb2014b24fe503e78e0824742b5833193737846bf02d61df84e3ae52f313"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/routines/routine_e8_bf16_dequant_simt.hpp",
+          "bytes": 9168,
+          "sha256": "d6d5eb2014b24fe503e78e0824742b5833193737846bf02d61df84e3ae52f313"
+        }
+      },
+      "decode/e8/routines/routine_e8_int8_dequant_simt.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/routines/routine_e8_int8_dequant_simt.hpp",
+          "bytes": 9506,
+          "sha256": "c673a4fd5bf235b29f28d3cf1bbf763d258aa18b99849a27da5dbe59685a704d"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/routines/routine_e8_int8_dequant_simt.hpp",
+          "bytes": 9506,
+          "sha256": "c673a4fd5bf235b29f28d3cf1bbf763d258aa18b99849a27da5dbe59685a704d"
+        }
+      },
+      "decode/native/cube/routine_vector_rotate_butterfly.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/cube/routine_vector_rotate_butterfly.hpp",
+          "bytes": 17081,
+          "sha256": "b9c395ad2a374072560eb66a5f9980833146e2732447607481b77a09b01c3fe2"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/cube/routine_vector_rotate_butterfly.hpp",
+          "bytes": 17081,
+          "sha256": "b9c395ad2a374072560eb66a5f9980833146e2732447607481b77a09b01c3fe2"
+        }
+      },
+      "decode/native/cube/turboquant_cube_service.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/cube/turboquant_cube_service.h",
+          "bytes": 14328,
+          "sha256": "c6738f0e63bc772cfc213db395db78825a3055bdc31ff8a64e6df7c6aa9f9307"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/cube/turboquant_cube_service.h",
+          "bytes": 14328,
+          "sha256": "c6738f0e63bc772cfc213db395db78825a3055bdc31ff8a64e6df7c6aa9f9307"
+        }
+      },
+      "decode/native/cube/turboquant_gemm_reduce_service.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/cube/turboquant_gemm_reduce_service.h",
+          "bytes": 38861,
+          "sha256": "d4003c309b6ec4763ef483a0c47970b921706e99f3f702ba9c189f13467aad5c"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/cube/turboquant_gemm_reduce_service.h",
+          "bytes": 38861,
+          "sha256": "d4003c309b6ec4763ef483a0c47970b921706e99f3f702ba9c189f13467aad5c"
+        }
+      },
+      "decode/native/cube/turboquant_query_basis.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/cube/turboquant_query_basis.h",
+          "bytes": 6551,
+          "sha256": "f1495de2d19e52e072b88bd69a35f991838ceb88763e20d61953aea79acbc8c9"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/cube/turboquant_query_basis.h",
+          "bytes": 6551,
+          "sha256": "f1495de2d19e52e072b88bd69a35f991838ceb88763e20d61953aea79acbc8c9"
+        }
+      },
+      "decode/native/routine/routine_turboquant_dequant4.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/routine/routine_turboquant_dequant4.hpp",
+          "bytes": 3114,
+          "sha256": "f41dd0cdf11d3da1060dbd423746d957f240cbbcfd134e1bb523448c32da9d0e"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/routine/routine_turboquant_dequant4.hpp",
+          "bytes": 3114,
+          "sha256": "f41dd0cdf11d3da1060dbd423746d957f240cbbcfd134e1bb523448c32da9d0e"
+        }
+      },
+      "decode/native/turboquant_fused_decode.cpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/turboquant_fused_decode.cpp",
+          "bytes": 52838,
+          "sha256": "7024e81fa1fca81330dc4e425145efdd2e76b90fe5a83be35fc9683ef8f60e0e"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/turboquant_fused_decode.cpp",
+          "bytes": 52838,
+          "sha256": "7024e81fa1fca81330dc4e425145efdd2e76b90fe5a83be35fc9683ef8f60e0e"
+        }
+      },
+      "decode/native/vector/routine_vector_cube_softmax.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/vector/routine_vector_cube_softmax.hpp",
+          "bytes": 22403,
+          "sha256": "0628ea40897555b2b830f00c26c88e988f8d849bbb7e6bc7ccf2a497c053b573"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/vector/routine_vector_cube_softmax.hpp",
+          "bytes": 22403,
+          "sha256": "0628ea40897555b2b830f00c26c88e988f8d849bbb7e6bc7ccf2a497c053b573"
+        }
+      },
+      "decode/native/vector/routine_vector_online_softmax.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/vector/routine_vector_online_softmax.hpp",
+          "bytes": 7151,
+          "sha256": "49d13afabff882e3718e7c0f7ed9709ea79f0e1c8904ab7e0d4860bb4a8bca6f"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/vector/routine_vector_online_softmax.hpp",
+          "bytes": 7151,
+          "sha256": "49d13afabff882e3718e7c0f7ed9709ea79f0e1c8904ab7e0d4860bb4a8bca6f"
+        }
+      },
+      "decode/native/vector/turboquant_vector_service.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/vector/turboquant_vector_service.h",
+          "bytes": 51730,
+          "sha256": "1dc455966e81fddf27462e8ad8144de1d9e607cb466255f7c927646b74b3606e"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/vector/turboquant_vector_service.h",
+          "bytes": 51730,
+          "sha256": "1dc455966e81fddf27462e8ad8144de1d9e607cb466255f7c927646b74b3606e"
+        }
+      },
+      "ingress/native/routine_reshape_batch_pipeline.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/routine_reshape_batch_pipeline.hpp",
+          "bytes": 59476,
+          "sha256": "d388a2a53e9501c7405d3d3726005cc3673fada1895586afb61ef044df9bd5ba"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/routine_reshape_batch_pipeline.hpp",
+          "bytes": 59476,
+          "sha256": "d388a2a53e9501c7405d3d3726005cc3673fada1895586afb61ef044df9bd5ba"
+        }
+      },
+      "ingress/native/routine_stage_page_zn_bf16.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/routine_stage_page_zn_bf16.hpp",
+          "bytes": 3888,
+          "sha256": "b9ff832b30446a91de963745638ece32e4754499dc6d3cefe3496b9e745ffec7"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/routine_stage_page_zn_bf16.hpp",
+          "bytes": 3888,
+          "sha256": "b9ff832b30446a91de963745638ece32e4754499dc6d3cefe3496b9e745ffec7"
+        }
+      },
+      "ingress/native/routine_vector_rotate_butterfly.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/routine_vector_rotate_butterfly.hpp",
+          "bytes": 17081,
+          "sha256": "b9c395ad2a374072560eb66a5f9980833146e2732447607481b77a09b01c3fe2"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/routine_vector_rotate_butterfly.hpp",
+          "bytes": 17081,
+          "sha256": "b9c395ad2a374072560eb66a5f9980833146e2732447607481b77a09b01c3fe2"
+        }
+      },
+      "ingress/native/turboquant_reshape_batch.cpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+          "bytes": 5722,
+          "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+          "bytes": 5722,
+          "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+        }
+      },
+      "ingress/native/turboquant_reshape_batch_wide.cpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+          "bytes": 1568,
+          "sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+          "bytes": 1568,
+          "sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae"
+        }
+      },
+      "ingress/native/turboquant_reshape_scatter.cpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+          "bytes": 41344,
+          "sha256": "6701601056dfe2e003f58e6a6133258b5a73d2a2cd6c827a1aaa65b92282b63d"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+          "bytes": 41344,
+          "sha256": "6701601056dfe2e003f58e6a6133258b5a73d2a2cd6c827a1aaa65b92282b63d"
+        }
+      },
+      "decode/e8/reader_layout.aka": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/reader_layout.aka",
+          "bytes": 658,
+          "sha256": "d470c1b6d8c0be5de95a00d4f81d887c901cc911f04524d3c18ef973c91fd6d3"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/reader_layout.aka",
+          "bytes": 658,
+          "sha256": "d470c1b6d8c0be5de95a00d4f81d887c901cc911f04524d3c18ef973c91fd6d3"
+        }
+      }
+    },
+    "extra_product_bytes": {
+      "core": {
+        "cmake/SimTargets.cmake": {
+          "path": "/mnt/c/Ascend/turboquant-core/cmake/SimTargets.cmake",
+          "bytes": 14549,
+          "sha256": "d34f6397aab561167e5f19c5ba09bdb1f6dbab460c68866e3561f28cf9330e45"
+        },
+        "cmake/NpuTargets.cmake": {
+          "path": "/mnt/c/Ascend/turboquant-core/cmake/NpuTargets.cmake",
+          "bytes": 8924,
+          "sha256": "e202fbce59f0dd9ea4eb1af68d7e57ce68a436c04d37c42d9eae89d8e5803c7f"
+        },
+        "src/host/turboquant_sim_binary_lifetime.cpp": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/host/turboquant_sim_binary_lifetime.cpp",
+          "bytes": 847,
+          "sha256": "c2bf3c45d3a18437d8b14abef1d0cb504c42c29c85f05489cebd5452146f38c7"
+        },
+        "src/turboquant/ingress/native/routine_reshape_batch_pipeline.hpp": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/routine_reshape_batch_pipeline.hpp",
+          "bytes": 59476,
+          "sha256": "d388a2a53e9501c7405d3d3726005cc3673fada1895586afb61ef044df9bd5ba"
+        },
+        "src/turboquant/ingress/native/turboquant_reshape_batch.cpp": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+          "bytes": 5722,
+          "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+        },
+        "src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+          "bytes": 1568,
+          "sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae"
+        },
+        "src/turboquant/SOURCE_SYNC.json": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/SOURCE_SYNC.json",
+          "bytes": 19824,
+          "sha256": "fa3400c1755c343a2a1bc5f164805f05cb487daca22cd3d6c5c1934270aa3753"
+        }
+      },
+      "plugin": {
+        "CMakeLists.txt": {
+          "path": "/mnt/c/vllm-ascend/CMakeLists.txt",
+          "bytes": 10668,
+          "sha256": "706663b8be3d4efbb9029d354e19a0e8dbacffe7ed87bd04016ac4011bba6f96"
+        },
+        "tests/host/turboquant/check_kernels.py": {
+          "path": "/mnt/c/vllm-ascend/tests/host/turboquant/check_kernels.py",
+          "bytes": 4336,
+          "sha256": "f846a0679afe7a675925481ce981f9359ded93d853e3a8e62326001a74d04425"
+        },
+        "tests/host/turboquant/check_analyzer.py": {
+          "path": "/mnt/c/vllm-ascend/tests/host/turboquant/check_analyzer.py",
+          "bytes": 8142,
+          "sha256": "4b958124f270e1da95ba2b4ddb8ce769e6a29d5643a135ea76a68cfd591c8cf9"
+        },
+        "csrc/attention/turboquant/README.md": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/README.md",
+          "bytes": 27172,
+          "sha256": "f616148f005ae2ffa7e04b094e6e0515121b0a7c33f3c85cd48372033f060c95"
+        },
+        "csrc/attention/turboquant/ingress/native/routine_reshape_batch_pipeline.hpp": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/routine_reshape_batch_pipeline.hpp",
+          "bytes": 59476,
+          "sha256": "d388a2a53e9501c7405d3d3726005cc3673fada1895586afb61ef044df9bd5ba"
+        },
+        "csrc/attention/turboquant/ingress/native/turboquant_reshape_batch.cpp": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+          "bytes": 5722,
+          "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+        },
+        "csrc/attention/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+          "bytes": 1568,
+          "sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae"
+        },
+        "csrc/attention/turboquant/SOURCE_SYNC.json": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/SOURCE_SYNC.json",
+          "bytes": 19824,
+          "sha256": "fa3400c1755c343a2a1bc5f164805f05cb487daca22cd3d6c5c1934270aa3753"
+        }
+      }
+    }
+  },
+  "suites": {
+    "attention": {
+      "receipt": {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/windows/attention.xml",
+        "bytes": 94612,
+        "sha256": "e46341b0f1523bd87921dd7a5b593628d27e814f7316c034a3a59ca2a8cba9fd"
+      },
+      "log_names": [
+        "tests.ut.attention.test_turboquant_e8::test_e8_packet_bytes_and_strided_views",
+        "tests.ut.attention.test_turboquant_e8::test_e8_offset_table_has_full_dma_burst[4]",
+        "tests.ut.attention.test_turboquant_e8::test_e8_offset_table_has_full_dma_burst[6]",
+        "tests.ut.attention.test_turboquant_e8::test_e8_offset_table_has_full_dma_burst[8]",
+        "tests.ut.attention.test_turboquant_e8::test_e8_offset_table_has_full_dma_burst[254]",
+        "tests.ut.attention.test_turboquant_e8::test_e8_offset_table_has_full_dma_burst[256]",
+        "tests.ut.attention.test_turboquant_e8::test_e8_offset_table_refuses_invalid_metadata[ids0-1]",
+        "tests.ut.attention.test_turboquant_e8::test_e8_offset_table_refuses_invalid_metadata[ids1-1]",
+        "tests.ut.attention.test_turboquant_e8::test_e8_offset_table_refuses_invalid_metadata[ids2-3]",
+        "tests.ut.attention.test_turboquant_e8::test_e8_offset_table_refuses_invalid_metadata[ids3-2]",
+        "tests.ut.attention.test_turboquant_e8::test_e8_offset_table_refuses_invalid_metadata[ids4-2]",
+        "tests.ut.attention.test_turboquant_e8::test_e8_refuses_native_nibble_buffers[pack_packets-args0]",
+        "tests.ut.attention.test_turboquant_e8::test_e8_refuses_native_nibble_buffers[unpack_packets-args1]",
+        "tests.ut.attention.test_turboquant_e8::test_e8_schema_call_order_mutation_and_meta_registration",
+        "tests.ut.attention.test_turboquant_e8::test_e8_runtime_wrappers_do_not_allocate_or_copy",
+        "tests.ut.attention.test_turboquant_op_schemas::test_the_bindings_declare_exactly_the_ops_python_calls",
+        "tests.ut.attention.test_turboquant_op_schemas::test_every_op_returns_nothing_and_writes_through_its_arguments[npu_turboquant_build_decode_tiling]",
+        "tests.ut.attention.test_turboquant_op_schemas::test_every_op_returns_nothing_and_writes_through_its_arguments[npu_turboquant_fused_decode]",
+        "tests.ut.attention.test_turboquant_op_schemas::test_every_op_returns_nothing_and_writes_through_its_arguments[npu_turboquant_reshape_and_cache_a8]",
+        "tests.ut.attention.test_turboquant_op_schemas::test_every_op_returns_nothing_and_writes_through_its_arguments[npu_turboquant_reshape_scatter_aiv]",
+        "tests.ut.attention.test_turboquant_op_schemas::test_the_writers_mutate_all_three_cache_planes",
+        "tests.ut.attention.test_turboquant_op_schemas::test_the_fused_decode_mutates_its_output_and_its_scratch",
+        "tests.ut.attention.test_turboquant_op_schemas::test_the_tiling_builder_mutates_only_the_tiling_buffer",
+        "tests.ut.attention.test_turboquant_op_schemas::test_the_tiling_builder_is_called_with_the_schema_in_order",
+        "tests.ut.attention.test_turboquant_op_schemas::test_decode_threshold_defaults_match_production[npu_turboquant_build_decode_tiling]",
+        "tests.ut.attention.test_turboquant_op_schemas::test_decode_threshold_defaults_match_production[npu_turboquant_fused_decode]",
+        "tests.ut.attention.test_turboquant_op_schemas::test_the_fused_decode_takes_an_optional_gate",
+        "tests.ut.attention.test_turboquant_op_schemas::test_every_op_has_an_npu_and_a_meta_registration[npu_turboquant_build_decode_tiling]",
+        "tests.ut.attention.test_turboquant_op_schemas::test_every_op_has_an_npu_and_a_meta_registration[npu_turboquant_fused_decode]",
+        "tests.ut.attention.test_turboquant_op_schemas::test_every_op_has_an_npu_and_a_meta_registration[npu_turboquant_reshape_and_cache_a8]",
+        "tests.ut.attention.test_turboquant_op_schemas::test_every_op_has_an_npu_and_a_meta_registration[npu_turboquant_reshape_scatter_aiv]",
+        "tests.ut.attention.test_turboquant_op_schemas::test_no_impl_is_registered_without_a_schema",
+        "tests.ut.attention.test_turboquant_op_schemas::test_the_python_stub_passes_the_schema_in_order[npu_turboquant_fused_decode]",
+        "tests.ut.attention.test_turboquant_op_schemas::test_the_python_stub_passes_the_schema_in_order[npu_turboquant_reshape_and_cache_a8]",
+        "tests.ut.attention.test_turboquant_op_schemas::test_the_python_stub_passes_the_schema_in_order[npu_turboquant_reshape_scatter_aiv]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g10_the_decode_launch_performs_no_host_sync",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g10_the_decode_launch_allocates_nothing",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g10_the_second_step_rebuilds_no_rotation_constant",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g5_the_op_is_handed_a_device_context_lens",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g5_the_op_is_handed_the_builder_owned_tier1_buffers",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g4_no_scalar_argument_depends_on_the_metadata",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[1-1]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[1-2]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[1-7]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[1-16]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[1-31]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[1-64]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[1-128]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[1-256]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[2-1]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[2-2]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[2-7]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[2-16]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[2-31]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[2-64]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[2-128]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[2-256]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[4-1]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[4-2]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[4-7]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[4-16]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[4-31]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[4-64]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[4-128]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[4-256]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[8-1]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[8-2]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[8-7]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[8-16]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[8-31]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[8-64]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[8-128]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_upper_bound_covers_every_derivable_geometry[8-256]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g6_the_bound_is_monotone_in_the_request_count",
+        "tests.ut.attention.test_turboquant_capture_contract::test_hybrid_tiling_uses_kernel_pages_instead_of_allocator_pages[128]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_hybrid_tiling_uses_kernel_pages_instead_of_allocator_pages[1024]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_hybrid_tiling_uses_kernel_pages_instead_of_allocator_pages[2048]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_the_padded_rows_get_a_zero_context_not_a_one",
+        "tests.ut.attention.test_turboquant_capture_contract::test_the_context_lens_view_is_always_the_same_buffer",
+        "tests.ut.attention.test_turboquant_capture_contract::test_a_step_wider_than_the_builder_was_sized_for_is_refused",
+        "tests.ut.attention.test_turboquant_capture_contract::test_the_tiling_fill_is_one_call_for_every_layer",
+        "tests.ut.attention.test_turboquant_capture_contract::test_the_tiling_fill_is_skipped_when_the_operator_is_absent",
+        "tests.ut.attention.test_turboquant_capture_contract::test_a_non_power_of_two_block_size_is_refused_before_the_fill",
+        "tests.ut.attention.test_turboquant_capture_contract::test_the_builder_publishes_every_field_the_launch_reads",
+        "tests.ut.attention.test_turboquant_capture_contract::test_c1_the_launch_extent_is_the_one_the_host_filled",
+        "tests.ut.attention.test_turboquant_capture_contract::test_c1_the_extent_falls_back_only_when_it_was_not_published",
+        "tests.ut.attention.test_turboquant_capture_contract::test_c2_every_builder_owned_buffer_keeps_one_address",
+        "tests.ut.attention.test_turboquant_capture_contract::test_c3_the_launch_path_never_fills_the_tiling_buffer",
+        "tests.ut.attention.test_turboquant_capture_contract::test_c4_a_multi_token_decode_step_is_refused",
+        "tests.ut.attention.test_turboquant_capture_contract::test_c4_an_ordinary_decode_step_is_not_refused[None]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_c4_an_ordinary_decode_step_is_not_refused[1]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_context_staging_cycles_completed_slots",
+        "tests.ut.attention.test_turboquant_capture_contract::test_c5_the_upload_is_asynchronous_only_out_of_pinned_staging",
+        "tests.ut.attention.test_turboquant_capture_contract::test_c5_the_real_staging_is_pinned_when_the_host_can_pin",
+        "tests.ut.attention.test_turboquant_capture_contract::test_p0_the_validate_env_cannot_reintroduce_a_reference_replay_or_a_dump",
+        "tests.ut.attention.test_turboquant_capture_contract::test_p1_context_lens_must_arrive_on_the_host",
+        "tests.ut.attention.test_turboquant_capture_contract::test_p1_a_cpu_context_lens_still_passes",
+        "tests.ut.attention.test_turboquant_capture_contract::test_p2_the_staging_ring_invariants_are_enforced",
+        "tests.ut.attention.test_turboquant_capture_contract::test_p2_a_clean_ring_passes_and_rotates_one_step_at_a_time",
+        "tests.ut.attention.test_turboquant_capture_contract::test_p3_a_dirty_padded_tail_is_refused_with_its_indices",
+        "tests.ut.attention.test_turboquant_capture_contract::test_p3_the_zero_padding_and_the_documented_fia_dummy_both_pass",
+        "tests.ut.attention.test_turboquant_capture_contract::test_c6_the_launch_reads_no_host_side_metadata_field",
+        "tests.ut.attention.test_turboquant_capture_contract::test_c6_the_poison_is_live",
+        "tests.ut.attention.test_turboquant_capture_contract::test_c6_the_launch_path_uses_no_stream_api",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g11a_a_replay_sees_one_address_one_shape_and_one_scalar_set",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g11a_the_per_step_state_lives_only_in_buffer_contents",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g9a_the_launch_abi_is_frozen",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g9a_the_abi_table_covers_the_schema_exactly",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g8_python_reproduces_none_of_the_tiling_arithmetic",
+        "tests.ut.attention.test_turboquant_capture_contract::test_g8_the_tiling_buffer_is_filled_by_the_operator_alone",
+        "tests.ut.attention.test_turboquant_capture_contract::test_c5_the_turboquant_surface_passes_no_literal_non_blocking",
+        "tests.ut.attention.test_turboquant_capture_contract::test_c5_the_staging_ring_has_a_device_slot_per_host_slot",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[None-none]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[None-decode]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[None-scatter]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[None-decode,scatter]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[None-all]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[scatter-none]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[scatter-decode]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[scatter-scatter]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[scatter-decode,scatter]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[scatter-all]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[decode-none]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[decode-decode]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[decode-scatter]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[decode-decode,scatter]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[decode-all]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[tiling-none]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[tiling-decode]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[tiling-scatter]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[tiling-decode,scatter]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_decode_capture_requires_enabled_and_registered_kernels[tiling-all]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_tiling_uses_the_selected_operator_namespace",
+        "tests.ut.attention.test_turboquant_capture_contract::test_decode_metadata_rejects_incomplete_slot_extents[1-2]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_decode_metadata_rejects_incomplete_slot_extents[2-3]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_decode_metadata_rejects_incomplete_slot_extents[2--1]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_capture_ingress_and_decode_reuse_prepared_padded_buffers",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_capture_rejects_uncapturable_forward_before_launch[ChunkedPrefill-True-True-True]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_capture_rejects_uncapturable_forward_before_launch[DecodeOnly-False-True-True]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_capture_rejects_uncapturable_forward_before_launch[DecodeOnly-True-False-True]",
+        "tests.ut.attention.test_turboquant_capture_contract::test_full_capture_rejects_uncapturable_forward_before_launch[DecodeOnly-True-True-False]",
+        "tests.ut.attention.test_turboquant_host_graph::test_aligned_96_token_prefill_plans_once_for_all_layers_and_rebuilds_next_batch",
+        "tests.ut.attention.test_turboquant_host_graph::test_fragmented_prefill_preserves_wave_order_duplicate_slots_and_poison",
+        "tests.ut.attention.test_turboquant_host_graph::test_default_stages_skip_strip_planning",
+        "tests.ut.attention.test_turboquant_host_graph::test_prefill_slots_do_not_satisfy_the_decode_capture_guard",
+        "tests.ut.attention.test_turboquant_host_graph::test_prepared_prefill_traces_as_one_graph",
+        "tests.ut.attention.test_turboquant_host_graph::test_standalone_adapter_plans_eagerly_and_needs_preparation_for_a_full_graph",
+        "tests.ut.attention.test_turboquant_host_graph::test_fixed_decode_traces_once_and_uses_refreshed_padded_metadata",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_stage_switched_on_means_no_kernel[npu_turboquant_rotate]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_stage_switched_on_means_no_kernel[npu_turboquant_quantize_pack]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_stage_switched_on_means_no_kernel[npu_turboquant_unpack_dequant]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_stage_switched_on_means_no_kernel[npu_turboquant_reshape_and_cache_a8]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_stage_switched_on_means_no_kernel[npu_turboquant_reshape_scatter_aiv]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_stage_switched_on_means_no_kernel[npu_turboquant_gather_pages]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_stage_switched_on_means_no_kernel[npu_turboquant_fused_decode]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_stage_on_and_registered_means_kernel[npu_turboquant_rotate]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_stage_on_and_registered_means_kernel[npu_turboquant_quantize_pack]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_stage_on_and_registered_means_kernel[npu_turboquant_unpack_dequant]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_stage_on_and_registered_means_kernel[npu_turboquant_reshape_and_cache_a8]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_stage_on_and_registered_means_kernel[npu_turboquant_reshape_scatter_aiv]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_stage_on_and_registered_means_kernel[npu_turboquant_gather_pages]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_stage_on_and_registered_means_kernel[npu_turboquant_fused_decode]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_stage_on_but_unregistered_falls_back[npu_turboquant_rotate]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_stage_on_but_unregistered_falls_back[npu_turboquant_quantize_pack]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_stage_on_but_unregistered_falls_back[npu_turboquant_unpack_dequant]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_stage_on_but_unregistered_falls_back[npu_turboquant_reshape_and_cache_a8]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_stage_on_but_unregistered_falls_back[npu_turboquant_reshape_scatter_aiv]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_stage_on_but_unregistered_falls_back[npu_turboquant_gather_pages]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_stage_on_but_unregistered_falls_back[npu_turboquant_fused_decode]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_a_missing_namespace_falls_back",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_dispatch_trace_reports_cpu_tensor_layout",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_dispatch_trace_reports_custom_operator",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_dispatch_observer_can_be_injected_without_enabling_logging",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_disabled_dispatch_observer_does_not_inspect_tensors",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_rotate_reference_runs_when_the_stage_is_off",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_rotate_dispatches_both_directions_to_the_kernel",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_quantize_pack_reference_runs_when_the_stage_is_off",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_quantize_pack_dispatches_to_the_kernel",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_unpack_dequant_dispatches_to_the_kernel",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_both_reference_writers_land_the_codec_bytes",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_decode_writer_skips_padding_slots",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_a_strip_layout_refuses_a_block_size_it_cannot_hold",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_prefill_entry_point_takes_the_batch_writer_abi",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_decode_entry_point_takes_the_scatter_writer_abi",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_a_conforming_step_is_one_unpadded_run",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_an_empty_step_plans_nothing",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_a_220_token_prompt_is_whole_strips_plus_a_padded_tail",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[1]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[2]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[3]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[4]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[5]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[6]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[7]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[8]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[9]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[10]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[11]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[12]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[13]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[14]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[15]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[16]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[17]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[18]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[19]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[20]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[21]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[22]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[23]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[24]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[25]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[26]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[27]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[28]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[29]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[30]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[31]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_token_count_is_refused_and_every_token_is_dispatched_once[32]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_one_run_spans_a_page_boundary_when_every_strip_is_aligned",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_a_request_boundary_inside_a_strip_is_padded_not_scattered",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_a_continuation_that_does_not_start_on_a_strip_scatters_its_head",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_two_tokens_of_one_strip_never_share_a_wave",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_padding_slots_all_share_one_wave",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_pad_is_refused_when_it_would_land_on_a_token_of_this_step",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_pad_is_refused_when_it_would_cross_into_the_next_page",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_split_lands_what_one_unsplit_call_would_have[1-0]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_split_lands_what_one_unsplit_call_would_have[1-20]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_split_lands_what_one_unsplit_call_would_have[12-0]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_split_lands_what_one_unsplit_call_would_have[12-20]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_split_lands_what_one_unsplit_call_would_have[16-0]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_split_lands_what_one_unsplit_call_would_have[16-20]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_split_lands_what_one_unsplit_call_would_have[17-0]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_split_lands_what_one_unsplit_call_would_have[17-20]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_split_lands_what_one_unsplit_call_would_have[31-0]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_split_lands_what_one_unsplit_call_would_have[31-20]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_split_lands_what_one_unsplit_call_would_have[32-0]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_split_lands_what_one_unsplit_call_would_have[32-20]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_split_lands_what_one_unsplit_call_would_have[64-0]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_split_lands_what_one_unsplit_call_would_have[64-20]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_split_lands_what_one_unsplit_call_would_have[220-0]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_split_lands_what_one_unsplit_call_would_have[220-20]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_only_slots_touched_beyond_the_step_are_the_planned_pad",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_a_conforming_step_still_reaches_the_batch_writer_in_one_launch",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_a_head_misaligned_step_reaches_both_writers",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_scatter_waves_fall_back_to_reference_without_the_scatter_kernel",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_gather_round_trips_through_the_reference_path",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_gather_dispatches_to_the_kernel",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_fused_decode_returns_none_without_a_kernel",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_fused_decode_launches_and_returns_its_output",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_fused_decode_passes_the_schema_the_binding_declares[0]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_fused_decode_passes_the_schema_the_binding_declares[192]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_fused_decode_passes_the_schema_the_binding_declares[4096]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_p4_gather_refuses_a_negative_page",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_p4_gather_refuses_a_page_past_the_cache",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_p4_gather_accepts_the_last_valid_page",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_p4_an_empty_block_table_is_not_range_checked",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_p5_write_slots_refuses_a_slot_past_the_cache",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_p5_write_slots_accepts_the_last_slot_and_filters_negatives",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_p6_a_non_bf16_query_is_refused_before_the_launch",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_p6_a_non_bf16_output_is_refused_before_the_launch",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_p6_an_aliased_query_and_output_are_refused",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_p6_an_undersized_scale_plane_is_refused",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_p6_a_clean_launch_passes_and_the_reference_fallback_keeps_any_dtype",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_phase_comes_from_the_token_count[8-seq_lens_list0-prefill]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_phase_comes_from_the_token_count[4-seq_lens_list1-prefill]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_phase_comes_from_the_token_count[2-seq_lens_list2-decode]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_phase_comes_from_the_token_count[1-seq_lens_list3-decode]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_absent_or_none_seq_lens_list_reads_as_prefill[metadata0]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_absent_or_none_seq_lens_list_reads_as_prefill[metadata1]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_reshape_and_cache_routes_by_phase[8-seq_lens_list0-prefill]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_reshape_and_cache_routes_by_phase[2-seq_lens_list1-decode]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_reshape_and_cache_routes_by_phase[2-None-prefill]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_tokens_writes_nothing",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_a_phantom_namespace_is_not_mistaken_for_a_registration",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_a_real_operator_is_reported_as_registered",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_no_stage_switched_on_does_not_touch_the_extension",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_a_stage_switched_on_attempts_the_import_once",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_missing_operators_are_reported_with_the_stages_that_wanted_them",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_a_fully_registered_namespace_is_quiet",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_every_reported_operator_is_one_the_bindings_declare",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_a_reference_run_is_not_constrained_by_the_kernels[stages0]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_a_reference_run_is_not_constrained_by_the_kernels[stages1]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_a_reference_run_is_not_constrained_by_the_kernels[stages2]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_every_kernel_pins_the_head_size[reshape_and_cache]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_every_kernel_pins_the_head_size[scatter]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_every_kernel_pins_the_head_size[decode]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_both_writers_need_exactly_four_kv_heads[1-reshape_and_cache]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_both_writers_need_exactly_four_kv_heads[1-scatter]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_both_writers_need_exactly_four_kv_heads[2-reshape_and_cache]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_both_writers_need_exactly_four_kv_heads[2-scatter]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_both_writers_need_exactly_four_kv_heads[8-reshape_and_cache]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_both_writers_need_exactly_four_kv_heads[8-scatter]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_decode_tolerates_fewer_kv_heads_than_the_writers_need[1]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_decode_tolerates_fewer_kv_heads_than_the_writers_need[2]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_decode_tolerates_fewer_kv_heads_than_the_writers_need[3]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_decode_tolerates_fewer_kv_heads_than_the_writers_need[4]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_decode_refuses_the_kv_head_count_a_gqa_model_brings[5]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_decode_refuses_the_kv_head_count_a_gqa_model_brings[8]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_decode_refuses_the_kv_head_count_a_gqa_model_brings[16]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_decode_needs_a_whole_gqa_group",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_fp16_is_refused_rather_than_dispatched[reshape_and_cache]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_fp16_is_refused_rather_than_dispatched[scatter]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_fp16_is_refused_rather_than_dispatched[decode]",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_refusal_names_the_stage_that_cannot_run_the_model",
+        "tests.ut.attention.test_turboquant_dispatch_seam::test_the_rotation_operand_is_the_bf16_blob_the_cube_stages",
+        "tests.ut.attention.test_turboquant_strip_cache::test_strip_write_matches_the_kernel_nibble_formula[16]",
+        "tests.ut.attention.test_turboquant_strip_cache::test_strip_write_matches_the_kernel_nibble_formula[32]",
+        "tests.ut.attention.test_turboquant_strip_cache::test_strip_write_matches_the_kernel_nibble_formula[64]",
+        "tests.ut.attention.test_turboquant_strip_cache::test_the_strip_reader_inverts_the_strip_writer[16]",
+        "tests.ut.attention.test_turboquant_strip_cache::test_the_strip_reader_inverts_the_strip_writer[32]",
+        "tests.ut.attention.test_turboquant_strip_cache::test_the_strip_reader_inverts_the_strip_writer[64]",
+        "tests.ut.attention.test_turboquant_strip_cache::test_a_per_token_write_preserves_the_rest_of_the_strip[16]",
+        "tests.ut.attention.test_turboquant_strip_cache::test_a_per_token_write_preserves_the_rest_of_the_strip[64]",
+        "tests.ut.attention.test_turboquant_strip_cache::test_padding_slots_touch_nothing",
+        "tests.ut.attention.test_turboquant_strip_cache::test_token_major_is_untouched_by_all_this",
+        "tests.ut.attention.test_turboquant_strip_cache::test_the_reference_gather_reads_a_kernel_written_cache[16]",
+        "tests.ut.attention.test_turboquant_strip_cache::test_the_reference_gather_reads_a_kernel_written_cache[64]",
+        "tests.ut.attention.test_turboquant_strip_cache::test_stages_scatter_writes_through_the_kernel_and_reads_back_golden",
+        "tests.ut.attention.test_turboquant_codec::test_rotation_operands_are_cached_on_the_codec_instance",
+        "tests.ut.attention.test_turboquant_codec::test_quantize_is_bit_identical_to_the_frexp_spelling[exact_halves]",
+        "tests.ut.attention.test_turboquant_codec::test_quantize_is_bit_identical_to_the_frexp_spelling[mixed_magnitudes]",
+        "tests.ut.attention.test_turboquant_codec::test_quantize_is_bit_identical_to_the_frexp_spelling[one_zero_row_among_others]",
+        "tests.ut.attention.test_turboquant_codec::test_quantize_is_bit_identical_to_the_frexp_spelling[powers_of_two]",
+        "tests.ut.attention.test_turboquant_codec::test_quantize_is_bit_identical_to_the_frexp_spelling[randn]",
+        "tests.ut.attention.test_turboquant_codec::test_quantize_is_bit_identical_to_the_frexp_spelling[smallest_normal]",
+        "tests.ut.attention.test_turboquant_codec::test_quantize_is_bit_identical_to_the_frexp_spelling[zero_rows]",
+        "tests.ut.attention.test_turboquant_codec::test_quantize_calls_neither_frexp_nor_ldexp",
+        "tests.ut.attention.test_turboquant_codec::test_quantize_survives_a_rotation_that_overflows_fp32",
+        "tests.ut.attention.test_turboquant_codec::test_quantize_of_a_denormal_row_saturates_instead_of_underflowing",
+        "tests.ut.attention.test_turboquant_codec::test_exp2_fp32_is_exact[-126]",
+        "tests.ut.attention.test_turboquant_codec::test_exp2_fp32_is_exact[-64]",
+        "tests.ut.attention.test_turboquant_codec::test_exp2_fp32_is_exact[-1]",
+        "tests.ut.attention.test_turboquant_codec::test_exp2_fp32_is_exact[0]",
+        "tests.ut.attention.test_turboquant_codec::test_exp2_fp32_is_exact[1]",
+        "tests.ut.attention.test_turboquant_codec::test_exp2_fp32_is_exact[23]",
+        "tests.ut.attention.test_turboquant_codec::test_exp2_fp32_is_exact[64]",
+        "tests.ut.attention.test_turboquant_codec::test_exp2_fp32_is_exact[127]",
+        "tests.ut.attention.test_turboquant_codec::test_exp2_fp32_clamps_to_the_normal_range",
+        "tests.ut.attention.test_turboquant_codec::test_round_trip_reconstructs_the_activation",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_preserves_all_leading_scale_dimensions[key-32]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_preserves_all_leading_scale_dimensions[key-64]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_preserves_all_leading_scale_dimensions[key-128]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_preserves_all_leading_scale_dimensions[key-256]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_preserves_all_leading_scale_dimensions[key-512]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_preserves_all_leading_scale_dimensions[butterfly-32]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_preserves_all_leading_scale_dimensions[butterfly-64]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_preserves_all_leading_scale_dimensions[butterfly-128]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_preserves_all_leading_scale_dimensions[butterfly-256]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_preserves_all_leading_scale_dimensions[butterfly-512]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_preserves_all_leading_scale_dimensions[value-32]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_preserves_all_leading_scale_dimensions[value-64]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_preserves_all_leading_scale_dimensions[value-128]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_preserves_all_leading_scale_dimensions[value-256]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_preserves_all_leading_scale_dimensions[value-512]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_keeps_the_production_256_channel_fp32_reduction_order[key]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_keeps_the_production_256_channel_fp32_reduction_order[butterfly]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_keeps_the_production_256_channel_fp32_reduction_order[value]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_refuses_invalid_reduction_widths[0]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_refuses_invalid_reduction_widths[3]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_refuses_invalid_reduction_widths[63]",
+        "tests.ut.attention.test_turboquant_codec::test_lloyd_max_refuses_invalid_reduction_widths[192]",
+        "tests.ut.attention.test_turboquant_codec::test_codec_helpers_select_the_active_writer_codebook[key-0]",
+        "tests.ut.attention.test_turboquant_codec::test_codec_helpers_select_the_active_writer_codebook[key-1]",
+        "tests.ut.attention.test_turboquant_codec::test_codec_helpers_select_the_active_writer_codebook[value-0]",
+        "tests.ut.attention.test_turboquant_codec::test_codec_helpers_select_the_active_writer_codebook[value-1]",
+        "tests.ut.attention.test_turboquant_codec::test_rotation_matches_its_matrix_and_is_independent_of_ingestion_batch[32]",
+        "tests.ut.attention.test_turboquant_codec::test_rotation_matches_its_matrix_and_is_independent_of_ingestion_batch[64]",
+        "tests.ut.attention.test_turboquant_codec::test_rotation_matches_its_matrix_and_is_independent_of_ingestion_batch[128]",
+        "tests.ut.attention.test_turboquant_codec::test_rotation_matches_its_matrix_and_is_independent_of_ingestion_batch[256]",
+        "tests.ut.attention.test_turboquant_codec::test_rotation_matches_its_matrix_and_is_independent_of_ingestion_batch[512]",
+        "tests.ut.attention.test_turboquant_codec::test_backend_name_is_the_enum_member_it_registers_as",
+        "tests.ut.attention.test_turboquant_completion_probe::test_report_preserves_invisible_text_and_exact_ids",
+        "tests.ut.attention.test_turboquant_completion_probe::test_report_extracts_ids_from_logprobs_without_retokenizing",
+        "tests.ut.attention.test_turboquant_completion_probe::test_report_does_not_invent_ids_from_decoded_strings",
+        "tests.ut.attention.test_turboquant_completion_probe::test_boundary_prompts_have_exact_lengths_and_a_shared_question",
+        "tests.ut.attention.test_turboquant_completion_probe::test_prompt_file_is_sent_unchanged_and_response_is_saved",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_reference_writers_keep_the_configured_layout",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_an_engaged_writer_owns_the_cache_layout[reshape_and_cache-npu_turboquant_reshape_and_cache_a8-nz_tiled]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_an_engaged_writer_owns_the_cache_layout[scatter-npu_turboquant_reshape_scatter_aiv-nz_tiled]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_the_nz_layout_survives_both_writers_staged",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_the_decode_stage_alone_does_not_change_the_layout",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_an_unregistered_writer_leaves_the_reference_layout",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_the_reference_writer_now_does_the_channel_major_rmw",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_an_engaged_writer_never_reaches_the_refusal[reshape_and_cache-npu_turboquant_reshape_and_cache_a8-reshape_and_cache_prefill-nz_tiled]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_an_engaged_writer_never_reaches_the_refusal[scatter-npu_turboquant_reshape_scatter_aiv-reshape_scatter_decode-nz_tiled]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_the_reference_gather_reads_a_strip_cache_back",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_the_strip_reader_round_trips_to_the_activations",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_the_strip_reader_is_not_the_identity",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_the_stage_env_selects_exactly_those_ops[none-expected0]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_the_stage_env_selects_exactly_those_ops[-expected1]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_the_stage_env_selects_exactly_those_ops[reshape_and_cache-expected2]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_the_stage_env_selects_exactly_those_ops[scatter-expected3]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_the_stage_env_selects_exactly_those_ops[decode-expected4]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_the_stage_env_selects_exactly_those_ops[reshape_and_cache,scatter-expected5]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_the_stage_env_selects_exactly_those_ops[all-expected6]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_an_unknown_stage_name_is_refused",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_stages_none_runs_the_whole_path_golden",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[reported-scale-plus-one-ulp]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[reported-scale-minus-one-ulp]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[large-finite-poison-stays-exact]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[scale-exponent-boundary]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[two-ulps-rejected]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[snapshot-stays-exact]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[key-byte-stays-exact]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[value-byte-stays-exact]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[identical-nan-canary]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[nan-payload-stays-exact]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[poison-overwritten]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[live-scale-underfilled]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[zero-canary-overwritten]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[zero-sign-stays-exact]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[overflow-not-rounding]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[negative-scale-not-rounding]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_cache_comparison_limits_rounding_to_live_scales[sign-flip-no-integer-overflow]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_recycled_batch_prefill_fixture_preserves_poison_and_reserves_decode_slots[1-128]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_recycled_batch_prefill_fixture_preserves_poison_and_reserves_decode_slots[1-256]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_recycled_batch_prefill_fixture_preserves_poison_and_reserves_decode_slots[1-1024]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_recycled_batch_prefill_fixture_preserves_poison_and_reserves_decode_slots[8-128]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_recycled_batch_prefill_fixture_preserves_poison_and_reserves_decode_slots[8-256]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_recycled_batch_prefill_fixture_preserves_poison_and_reserves_decode_slots[8-1024]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_recycled_batch_prefill_fixture_preserves_poison_and_reserves_decode_slots[31-128]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_recycled_batch_prefill_fixture_preserves_poison_and_reserves_decode_slots[31-256]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_recycled_batch_prefill_fixture_preserves_poison_and_reserves_decode_slots[31-1024]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_recycled_batch_prefill_fixture_preserves_poison_and_reserves_decode_slots[127-128]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_recycled_batch_prefill_fixture_preserves_poison_and_reserves_decode_slots[127-256]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_recycled_batch_prefill_fixture_preserves_poison_and_reserves_decode_slots[127-1024]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_poison_mask_rejects_neutralization_before_live_scale_tolerance[nan-to-zero]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_poison_mask_rejects_neutralization_before_live_scale_tolerance[nan-to-small-positive]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_poison_mask_rejects_neutralization_before_live_scale_tolerance[nan-to-finite]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_poison_mask_rejects_neutralization_before_live_scale_tolerance[nan-payload-mutated]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_poison_mask_rejects_neutralization_before_live_scale_tolerance[positive-poison-one-ulp]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_reported_scale_index_60254_is_a_batch_owned_value_scale",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_finite_spike_fixture_is_query_aligned_and_zero_live_is_exact[0]",
+        "tests.ut.attention.test_turboquant_kernel_cache_layout::test_finite_spike_fixture_is_query_aligned_and_zero_live_is_exact[1]",
+        "tests.ut.attention.test_turboquant_layout::test_page_is_two_packed_planes_and_the_scales",
+        "tests.ut.attention.test_turboquant_layout::test_packed_bytes_rejects_a_head_that_is_not_whole_groups[0]",
+        "tests.ut.attention.test_turboquant_layout::test_packed_bytes_rejects_a_head_that_is_not_whole_groups[-32]",
+        "tests.ut.attention.test_turboquant_layout::test_packed_bytes_rejects_a_head_that_is_not_whole_groups[48]",
+        "tests.ut.attention.test_turboquant_layout::test_packed_bytes_rejects_a_head_that_is_not_whole_groups[33]",
+        "tests.ut.attention.test_turboquant_layout::test_scale_cache_shape_is_plane_major",
+        "tests.ut.attention.test_turboquant_layout::test_carve_splits_the_page_budget_without_overlap",
+        "tests.ut.attention.test_turboquant_layout::test_carve_leaves_a_padded_tail_untouched",
+        "tests.ut.attention.test_turboquant_layout::test_carve_rejects_an_allocation_it_cannot_serve",
+        "tests.ut.attention.test_turboquant_layout::test_plane_views_write_through_to_the_carved_bytes",
+        "tests.ut.attention.test_turboquant_layout::test_plane_views_follow_the_kernel_block_size",
+        "tests.ut.attention.test_turboquant_layout::test_plane_views_reject_a_mismatched_carve",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_nz_constants_match_the_layout_header[kCubeTileRows-64]",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_nz_constants_match_the_layout_header[kOperandC0-32]",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_nz_constants_match_the_layout_header[kFp32PerBlock-8]",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_scale_slot_floats_matches_the_common_header",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_packed_byte_is_a_permutation_of_the_plane[64-1]",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_packed_byte_is_a_permutation_of_the_plane[64-2]",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_packed_byte_is_a_permutation_of_the_plane[64-4]",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_packed_byte_is_a_permutation_of_the_plane[128-1]",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_packed_byte_is_a_permutation_of_the_plane[128-2]",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_packed_byte_is_a_permutation_of_the_plane[128-4]",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_channel_nibble_is_the_woven_pairing",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_scale_index_packs_both_lanes_into_one_slot_record",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_repack_puts_every_code_where_the_decode_reads_it[64]",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_repack_puts_every_code_where_the_decode_reads_it[128]",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_repack_at_the_production_geometry",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_value_transposition_is_undone_not_carried_through",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_scale_records_match_the_decode_index",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_a_tile_of_scales_is_one_contiguous_burst",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_block_sizes_the_writers_take_but_the_decode_cannot[16]",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_block_sizes_the_writers_take_but_the_decode_cannot[32]",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_non_power_of_two_pages_are_refused[192]",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_non_power_of_two_pages_are_refused[320]",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_head_size_must_divide_into_whole_column_groups",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_mismatched_planes_are_refused",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_scale_plane_shape_is_checked",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_repack_bridges_the_adapter_strip_writer",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_packed_bytes_survive_a_round_trip_through_codes",
+        "tests.ut.attention.test_turboquant_nz_ingress::test_repack_output_satisfies_the_fused_decode_binding",
+        "tests.ut.attention.test_turboquant_nz_cache::test_the_reference_nz_write_matches_the_scalar_oracle",
+        "tests.ut.attention.test_turboquant_nz_cache::test_the_reference_nz_write_matches_the_whole_cache_conversion",
+        "tests.ut.attention.test_turboquant_nz_cache::test_the_reference_nz_gather_round_trips",
+        "tests.ut.attention.test_turboquant_nz_cache::test_repeated_decode_writes_accumulate_without_a_read_modify_write",
+        "tests.ut.attention.test_turboquant_nz_cache::test_the_scatter_kernel_writes_the_nz_cache_it_is_staged_for",
+        "tests.ut.attention.test_turboquant_nz_cache::test_the_nz_writer_refuses_a_page_that_is_not_whole_tiles",
+        "tests.ut.attention.test_turboquant_profile::test_profile_environment_gate[None-False]",
+        "tests.ut.attention.test_turboquant_profile::test_profile_environment_gate[0-False]",
+        "tests.ut.attention.test_turboquant_profile::test_profile_environment_gate[-False]",
+        "tests.ut.attention.test_turboquant_profile::test_profile_environment_gate[1-True]",
+        "tests.ut.attention.test_turboquant_profile::test_profile_environment_gate[true-True]",
+        "tests.ut.attention.test_turboquant_profile::test_profile_environment_gate[ ON -True]",
+        "tests.ut.attention.test_turboquant_profile::test_profile_environment_gate[yes-True]",
+        "tests.ut.attention.test_turboquant_profile::test_profile_environment_gate[2-False]",
+        "tests.ut.attention.test_turboquant_profile::test_measurement_preserves_result_and_steps_inside_context",
+        "tests.ut.attention.test_turboquant_profile::test_disabled_telemetry_does_not_construct_backend",
+        "tests.ut.attention.test_turboquant_profile::test_capture_never_opens_profiler_or_repeats_inference[False]",
+        "tests.ut.attention.test_turboquant_profile::test_capture_never_opens_profiler_or_repeats_inference[True]",
+        "tests.ut.attention.test_turboquant_profile::test_profiler_failures_disable_measurement_without_repeating_inference[factory]",
+        "tests.ut.attention.test_turboquant_profile::test_profiler_failures_disable_measurement_without_repeating_inference[capture]",
+        "tests.ut.attention.test_turboquant_profile::test_profiler_failures_disable_measurement_without_repeating_inference[open]",
+        "tests.ut.attention.test_turboquant_profile::test_profiler_failures_disable_measurement_without_repeating_inference[enter]",
+        "tests.ut.attention.test_turboquant_profile::test_profiler_failures_disable_measurement_without_repeating_inference[step]",
+        "tests.ut.attention.test_turboquant_profile::test_profiler_failures_disable_measurement_without_repeating_inference[exit]",
+        "tests.ut.attention.test_turboquant_profile::test_inference_exception_is_preserved_even_if_profiler_suppresses_or_raises[False-False]",
+        "tests.ut.attention.test_turboquant_profile::test_inference_exception_is_preserved_even_if_profiler_suppresses_or_raises[False-True]",
+        "tests.ut.attention.test_turboquant_profile::test_inference_exception_is_preserved_even_if_profiler_suppresses_or_raises[True-False]",
+        "tests.ut.attention.test_turboquant_profile::test_inference_exception_is_preserved_even_if_profiler_suppresses_or_raises[True-True]",
+        "tests.ut.attention.test_turboquant_profile::test_backend_factory_is_cached_per_device_and_extensible",
+        "tests.ut.attention.test_turboquant_profile::test_default_backend_selection",
+        "tests.ut.attention.test_turboquant_profile::test_backend_configures_only_its_supported_activities[cpu]",
+        "tests.ut.attention.test_turboquant_profile::test_backend_configures_only_its_supported_activities[npu]",
+        "tests.ut.attention.test_turboquant_profile::test_unavailable_npu_profiler_leaves_inference_running[profiler]",
+        "tests.ut.attention.test_turboquant_profile::test_unavailable_npu_profiler_leaves_inference_running[ProfilerActivity]",
+        "tests.ut.attention.test_turboquant_profile::test_unavailable_npu_profiler_leaves_inference_running[tensorboard_trace_handler]",
+        "tests.ut.attention.test_turboquant_profile::test_unavailable_npu_profiler_leaves_inference_running[profile]",
+        "tests.ut.attention.test_turboquant_profile::test_unavailable_npu_profiler_leaves_inference_running[NPU]",
+        "tests.ut.attention.test_turboquant_profile::test_npu_capture_query_uses_device_stream",
+        "tests.ut.attention.test_turboquant_profile::test_attention_only_delegates_eligible_forwards_to_telemetry[False-False-0]",
+        "tests.ut.attention.test_turboquant_profile::test_attention_only_delegates_eligible_forwards_to_telemetry[True-True-0]",
+        "tests.ut.attention.test_turboquant_profile::test_attention_only_delegates_eligible_forwards_to_telemetry[True-False-1]",
+        "tests.ut.attention.test_turboquant_profile::test_debug_dump_paths_remain_absent",
+        "tests.ut.attention.test_turboquant_profile::test_public_profile_imports_remain_compatible",
+        "tests.ut.attention.test_turboquant_profile::test_cpu_profiler_exports_a_readable_trace_without_npu",
+        "tests.ut.attention.test_turboquant_host_staging::test_context_staging_never_overwrites_an_inflight_source[False]",
+        "tests.ut.attention.test_turboquant_host_staging::test_context_staging_never_overwrites_an_inflight_source[True]",
+        "tests.ut.attention.test_turboquant_host_staging::test_mixed_query_layout_reuses_one_upload_across_layers[cumulative_lengths0]",
+        "tests.ut.attention.test_turboquant_host_staging::test_mixed_query_layout_reuses_one_upload_across_layers[cumulative_lengths1]",
+        "tests.ut.attention.test_turboquant_host_staging::test_mixed_query_layout_reuses_one_upload_across_layers[cumulative_lengths2]",
+        "tests.ut.attention.test_turboquant_host_staging::test_mixed_query_layout_refreshes_reused_metadata",
+        "tests.ut.attention.test_turboquant_host_staging::test_mixed_forward_preserves_query_order_and_causal_mask",
+        "tests.ut.attention.test_turboquant_host_staging::test_decode_metadata_refreshes_at_the_third_physical_page",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_recurrent_writes_and_attention_zeroing_preserve_other_groups[896]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_recurrent_writes_and_attention_zeroing_preserve_other_groups[1024]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_recurrent_writes_and_attention_zeroing_preserve_other_groups[2048]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_private_allocation_fits_the_advertised_memory_budget[896-False-False]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_private_allocation_fits_the_advertised_memory_budget[896-False-True]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_private_allocation_fits_the_advertised_memory_budget[896-True-False]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_private_allocation_fits_the_advertised_memory_budget[896-True-True]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_private_allocation_fits_the_advertised_memory_budget[1024-False-False]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_private_allocation_fits_the_advertised_memory_budget[1024-False-True]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_private_allocation_fits_the_advertised_memory_budget[1024-True-False]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_private_allocation_fits_the_advertised_memory_budget[1024-True-True]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_private_allocation_fits_the_advertised_memory_budget[2048-False-False]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_private_allocation_fits_the_advertised_memory_budget[2048-False-True]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_private_allocation_fits_the_advertised_memory_budget[2048-True-False]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_private_allocation_fits_the_advertised_memory_budget[2048-True-True]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_explicit_memory_budget_also_covers_private_layers[896]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_explicit_memory_budget_also_covers_private_layers[1024]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_explicit_memory_budget_also_covers_private_layers[2048]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_dense_hybrid_retains_shared_pool_capacity[896]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_dense_hybrid_retains_shared_pool_capacity[1024]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_dense_hybrid_retains_shared_pool_capacity[2048]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_private_pages_expand_and_write_across_the_third_page[896]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_private_pages_expand_and_write_across_the_third_page[1024]",
+        "tests.ut.attention.test_turboquant_hybrid_ownership::test_private_pages_expand_and_write_across_the_third_page[2048]",
+        "tests.ut.attention.test_turboquant_block_moves::test_block_moves_preserve_the_physical_scale_records[copy-token_major]",
+        "tests.ut.attention.test_turboquant_block_moves::test_block_moves_preserve_the_physical_scale_records[copy-channel_major]",
+        "tests.ut.attention.test_turboquant_block_moves::test_block_moves_preserve_the_physical_scale_records[copy-nz_tiled]",
+        "tests.ut.attention.test_turboquant_block_moves::test_block_moves_preserve_the_physical_scale_records[swap-token_major]",
+        "tests.ut.attention.test_turboquant_block_moves::test_block_moves_preserve_the_physical_scale_records[swap-channel_major]",
+        "tests.ut.attention.test_turboquant_block_moves::test_block_moves_preserve_the_physical_scale_records[swap-nz_tiled]",
+        "tests.ut.attention.test_turboquant_block_moves::test_impl_block_views_zero_only_the_selected_scale_page[token_major]",
+        "tests.ut.attention.test_turboquant_block_moves::test_impl_block_views_zero_only_the_selected_scale_page[channel_major]",
+        "tests.ut.attention.test_turboquant_block_moves::test_impl_block_views_zero_only_the_selected_scale_page[nz_tiled]",
+        "tests.ut.attention.test_turboquant_block_moves::test_nz_scale_views_refuse_records_without_the_required_padding",
+        "tests.ut.attention.test_turboquant_block_moves::test_dummy_metadata_invalidates_previous_request_slots_before_upload[False]",
+        "tests.ut.attention.test_turboquant_block_moves::test_dummy_metadata_invalidates_previous_request_slots_before_upload[True]",
+        "tests.ut.attention.test_turboquant_block_moves::test_slot_validation_accepts_only_live_request_rows",
+        "tests.ut.attention.test_turboquant_block_moves::test_slot_validation_ignores_a_trailing_fia_padding_request",
+        "tests.ut.attention.test_turboquant_block_moves::test_slot_validation_refreshes_when_the_same_buffer_is_reused",
+        "tests.ut.attention.test_turboquant_block_moves::test_slot_validation_rejects_skipped_or_misaddressed_live_tokens[-1]",
+        "tests.ut.attention.test_turboquant_block_moves::test_slot_validation_rejects_skipped_or_misaddressed_live_tokens[0]",
+        "tests.ut.attention.test_turboquant_block_moves::test_slot_validation_rejects_skipped_or_misaddressed_live_tokens[1153]",
+        "tests.ut.attention.test_turboquant_block_moves::test_slot_validation_runs_before_context_and_tiling_uploads",
+        "tests.ut.attention.test_turboquant_block_moves::test_slot_validation_refuses_incomplete_or_inconsistent_metadata[lengths-live query lengths]",
+        "tests.ut.attention.test_turboquant_block_moves::test_slot_validation_refuses_incomplete_or_inconsistent_metadata[slots-shorter than the current batch]",
+        "tests.ut.attention.test_turboquant_block_moves::test_slot_validation_refuses_incomplete_or_inconsistent_metadata[context-query_len=2, context_len=1]",
+        "tests.ut.attention.test_turboquant_block_moves::test_slot_validation_refuses_incomplete_or_inconsistent_metadata[row_capacity-exceeds its block-table row]",
+        "tests.ut.attention.test_turboquant_block_moves::test_slot_validation_refuses_incomplete_or_inconsistent_metadata[unmapped-unmapped live block-table entry]",
+        "tests.ut.attention.test_turboquant_block_moves::test_slot_validation_refuses_two_live_requests_writing_the_same_slot",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_vectorized_gqa_reference_matches_independent_head_loop[1]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_vectorized_gqa_reference_matches_independent_head_loop[17]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_vectorized_gqa_reference_matches_independent_head_loop[65]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_launch_repoisons_scratch_and_shares_builder_threshold[0]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_launch_repoisons_scratch_and_shares_builder_threshold[192]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_launch_repoisons_scratch_and_shares_builder_threshold[4096]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_tiling_and_adapter_launch_use_the_same_split_geometry[1-1]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_tiling_and_adapter_launch_use_the_same_split_geometry[1-2]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_tiling_and_adapter_launch_use_the_same_split_geometry[1-3]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_tiling_and_adapter_launch_use_the_same_split_geometry[1-9]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_tiling_and_adapter_launch_use_the_same_split_geometry[2-1]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_tiling_and_adapter_launch_use_the_same_split_geometry[2-2]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_tiling_and_adapter_launch_use_the_same_split_geometry[2-3]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_tiling_and_adapter_launch_use_the_same_split_geometry[2-9]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_tiling_and_adapter_launch_use_the_same_split_geometry[3-1]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_tiling_and_adapter_launch_use_the_same_split_geometry[3-2]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_tiling_and_adapter_launch_use_the_same_split_geometry[3-3]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_tiling_and_adapter_launch_use_the_same_split_geometry[3-9]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_tiling_and_adapter_launch_use_the_same_split_geometry[8-1]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_tiling_and_adapter_launch_use_the_same_split_geometry[8-2]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_tiling_and_adapter_launch_use_the_same_split_geometry[8-3]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_tiling_and_adapter_launch_use_the_same_split_geometry[8-9]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_require_ops_uses_the_current_registry[False]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_require_ops_uses_the_current_registry[True]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_backend_references_are_current_exports",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_live_adapter_calls_match_current_python_signatures",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_third_physical_page_matches_expanded_kernel_gather[2047]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_third_physical_page_matches_expanded_kernel_gather[2048]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_third_physical_page_matches_expanded_kernel_gather[2049]",
+        "tests.ut.attention.test_turboquant_live_write_contract::test_third_physical_page_matches_expanded_kernel_gather[2177]"
+      ],
+      "count": 606
+    },
+    "sync_and_build_selection": {
+      "receipt": {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/windows/sync.xml",
+        "bytes": 2028,
+        "sha256": "4784e75955e0ca3ce2de1790fc14376d9009dad2aecfe9bde9d3cd6a037a82ac"
+      },
+      "log_names": [
+        "tests.host.turboquant.test_source_sync::test_exact_shared_bytes_and_local_adapter",
+        "tests.host.turboquant.test_source_sync::test_same_tokens_different_line_endings",
+        "tests.host.turboquant.test_source_sync::test_same_drift_on_both_sides",
+        "tests.host.turboquant.test_source_sync::test_missing_and_untracked_sources",
+        "tests.host.turboquant.test_source_sync::test_pinned_comment_is_detected",
+        "tests.host.turboquant.test_source_sync::test_digit_separators_and_raw_strings",
+        "tests.host.turboquant.test_source_sync::test_pinned_shared_source_cannot_escape_categories",
+        "tests.host.turboquant.test_build_selection::test_canonical_soc[aScEnD950pR_9599-Ascend950PR_9599]",
+        "tests.host.turboquant.test_build_selection::test_canonical_soc[DAV-3510-Ascend950PR_9599]",
+        "tests.host.turboquant.test_build_selection::test_canonical_soc[ ASCEND950 -ascend950]",
+        "tests.host.turboquant.test_build_selection::test_canonical_soc[ASCEND910B2-ascend910b2]",
+        "tests.host.turboquant.test_build_selection::test_canonical_soc[910C-ascend910_9392]",
+        "tests.host.turboquant.test_build_selection::test_canonical_soc[310P-ascend310p1]",
+        "tests.host.turboquant.test_build_selection::test_editable_outputs_include_only_cmake_installed_targets"
+      ],
+      "count": 14
+    },
+    "plugin_contract_cpp": {
+      "receipt": {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/plugin-asserts/pytest.xml",
+        "bytes": 1213,
+        "sha256": "5cd0f7f579535ae91343f74f5e1332f63e02e87d2d6d266fa8c7d5163aceb33d"
+      },
+      "log_names": [
+        "tests.ut.ops.test_turboquant_contract_gates::test_turboquant_contract_gate[test_contract_gates]",
+        "tests.ut.ops.test_turboquant_contract_gates::test_turboquant_contract_gate[test_layout_bridge]",
+        "tests.ut.ops.test_turboquant_contract_gates::test_turboquant_contract_gate[test_cache_addresses]",
+        "tests.ut.ops.test_turboquant_contract_gates::test_turboquant_contract_gate[test_decode_reduce]",
+        "tests.ut.ops.test_turboquant_contract_gates::test_turboquant_contract_gate[e8_decode_cpu_check]",
+        "tests.ut.ops.test_turboquant_contract_gates::test_turboquant_contract_gate[e8_layout_check]",
+        "tests.ut.ops.test_turboquant_contract_gates::test_turboquant_contract_gate[test_launch_abi]"
+      ],
+      "count": 7
+    },
+    "core_ctest": {
+      "receipt": {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/core/ctest.xml",
+        "bytes": 6620,
+        "sha256": "ed71c20c6525de1ad944ef708ee34af314a92c7202f45e44e6dce053d8a173c7"
+      },
+      "log_names": [
+        "contract_gates::contract_gates",
+        "layout_bridge::layout_bridge",
+        "telemetry_dump::telemetry_dump",
+        "qwen35_decode::qwen35_decode",
+        "decode_reduce::decode_reduce",
+        "qwen35_telemetry::qwen35_telemetry",
+        "golden_decode_oracle::golden_decode_oracle",
+        "e8_decode_cpu_check::e8_decode_cpu_check",
+        "e8_layout_check::e8_layout_check"
+      ],
+      "count": 9
+    }
+  },
+  "core_build_commands": {
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/core/build/compile_commands.json",
+    "bytes": 5003,
+    "sha256": "7a274175e127f12436f6b6bcb3f275a7d2fff8e411b45ac4ef313c2359b69737"
+  },
+  "core_source_dependencies": [
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/e8_decode.hpp",
+      "bytes": 3344,
+      "sha256": "4cfbecd3da6854c433c3a9caf0aaede572748f74fc60aad3c21519e00e3bb050"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/e8_packet_layout.hpp",
+      "bytes": 488,
+      "sha256": "eec52cf40c4e0f8c559e348f8816847e81be6086d3e0d8e987335caf0c13b24e"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_fused_decode_opt.hpp",
+      "bytes": 7337,
+      "sha256": "3e168758eca35140ecfce89b9b3da65f8b21d5d03eb9b76e991517dc04d61a3d"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_gemm_reduce.hpp",
+      "bytes": 16615,
+      "sha256": "406d06baf0a8ed54ce495e28024bf2ea8ba173110cd0e7c359f2fc8f9ae0d7f9"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_layout.h",
+      "bytes": 4873,
+      "sha256": "c0403ad5ffbda5b5fbf59ff6bb01f86c7a176257bdba17c2366a621d2c7f5e02"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_mode.h",
+      "bytes": 8865,
+      "sha256": "64e9b5afac0e4b69fc2dcb23d2b809d84a10ed0689a1f6204326ef4cb4421c32"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_telemetry.cpp",
+      "bytes": 10501,
+      "sha256": "410d9b682c623cd61a84c7285b4d8c4b8195f9e9422945e4b5c9dadd37fa94c8"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_telemetry.h",
+      "bytes": 2963,
+      "sha256": "11877fd32d0147580b06fc2f5f4b55f0baf0e371a92431f136320c416c7868ec"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_tiling.cpp",
+      "bytes": 7692,
+      "sha256": "a2d9c0c5b846fb3bbbb341994177d8be762d5034a06a492de0b04106fbc6f2ce"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_tiling.h",
+      "bytes": 6020,
+      "sha256": "5e538d8d5ed7c2dd576f54562eee44879857e55af2d5c98bba07373294c14837"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_types.h",
+      "bytes": 110,
+      "sha256": "cb2e4abeecec6ffe85711648487e9e668c29b9306a16913820ca6024d66eb597"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_wave_protocol.hpp",
+      "bytes": 7865,
+      "sha256": "f91b9f092d8f4b04e54ec1b0031fd94717feb4d6dffac57fb4627b41c22ceaa4"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_parallel_decode.hpp",
+      "bytes": 6236,
+      "sha256": "78ad1016f9abaa38672107dcc971485ecca4985fd02ee8acb1df671fcd0da9d1"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/routines/routine_e8_bf16_dequant_simt.hpp",
+      "bytes": 9168,
+      "sha256": "d6d5eb2014b24fe503e78e0824742b5833193737846bf02d61df84e3ae52f313"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/routines/routine_e8_int8_dequant_simt.hpp",
+      "bytes": 9506,
+      "sha256": "c673a4fd5bf235b29f28d3cf1bbf763d258aa18b99849a27da5dbe59685a704d"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/vector/routine_vector_online_softmax.hpp",
+      "bytes": 7151,
+      "sha256": "49d13afabff882e3718e7c0f7ed9709ea79f0e1c8904ab7e0d4860bb4a8bca6f"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/routine_reshape_batch_pipeline.hpp",
+      "bytes": 59476,
+      "sha256": "d388a2a53e9501c7405d3d3726005cc3673fada1895586afb61ef044df9bd5ba"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+      "bytes": 5722,
+      "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/tests/common/decode_tiling_gate.hpp",
+      "bytes": 15103,
+      "sha256": "f52d919a33edcc18c506eea9d12bb82ce27ef84d182895e5b7322b2ee7c01c2b"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/tests/common/golden_dump_manifest.hpp",
+      "bytes": 8426,
+      "sha256": "3739f78ecbe46046aea220edc09466f283cfe61d0669a906b1255831156c8e04"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/tests/common/qwen35_decode_benchmark.hpp",
+      "bytes": 8897,
+      "sha256": "62f95eb1b5af671f3c4b36d39208ab2ba7ffbafc971888637778182d9a52d5eb"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/tests/common/turboquant_golden_oracle.hpp",
+      "bytes": 51793,
+      "sha256": "c712801131e1cd3a42756fc3ce638e5b8d1f1eef079849830aa6a441e0dfc9de"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/tests/common/turboquant_test_common.hpp",
+      "bytes": 13426,
+      "sha256": "7ea94552f006267431e201e3b4e64143614a1440cf531b7b5e07ebf365e823a1"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/tests/cpu/e8/decode_cpu_check.cpp",
+      "bytes": 1787,
+      "sha256": "e3348936cb93b5d7f8d8d49605b6d7a2284821c8c7186822fbc214c7fbf5d054"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/tests/cpu/e8/frozen/routine_e8_bf16_dequant_simt.hpp",
+      "bytes": 12628,
+      "sha256": "28f13039c8fec29ef91919a69a8314a60c9cb9aec3f5f3fc75b270f8e524cda2"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/tests/cpu/e8/frozen/routine_e8_int8_dequant_simt.hpp",
+      "bytes": 13096,
+      "sha256": "e366ddb4b6697ede5a16bcb41c5ab3857f1ee98bcc2ce95f1c5b8efefe9f2d45"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/tests/cpu/e8/layout_check.cpp",
+      "bytes": 1391,
+      "sha256": "298a84d1e757beb7dac6f15fb537a850cc4c774ffc757eb4e8a39253fc90f867"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/tests/cpu/test_contract_gates.cpp",
+      "bytes": 22830,
+      "sha256": "227fece2eab6bfd39703b22bf056440a1c55da85553f256fd3f9b704e5ac9a2d"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/tests/cpu/test_decode_reduce.cpp",
+      "bytes": 7383,
+      "sha256": "1714c366f697c01f61e1ea9d16fbba0fe5f92535cdba3021c03ef26d0c021e4b"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/tests/cpu/test_golden_decode_oracle.cpp",
+      "bytes": 16942,
+      "sha256": "8b956cc0bdec89f13a0ff21d7d89342a2a2a1c2dcf8966202b7e6a8868b631bc"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/tests/cpu/test_layout_bridge.cpp",
+      "bytes": 18302,
+      "sha256": "dcd6e7ae53c93acd708f03f0dbb94ccabd284457308384a836cf82721c7431e3"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/tests/cpu/test_qwen35_decode.cpp",
+      "bytes": 4762,
+      "sha256": "4d730bfacd421ca0d424d07196f9f1d490496685186185ca065c5db5d83eec3e"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/tests/cpu/test_qwen35_telemetry.cpp",
+      "bytes": 4051,
+      "sha256": "d214a4138d17933f39956859d89405fc55bbdaaf4f5e752640defed205fef590"
+    },
+    {
+      "path": "/mnt/c/Ascend/turboquant-core/tests/cpu/test_telemetry_dump.cpp",
+      "bytes": 22763,
+      "sha256": "801256f0c18f06310a3f6fbbda2a9c549b2fdb5b277faa260e9be7dec897c9e5"
+    }
+  ],
+  "real_torch": {
+    "result": {
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/torch/tests/RESULT.json",
+      "bytes": 12411,
+      "sha256": "392f3f3cf7c080499ed929eb8c9da73d87a39678861cfd73306b6d0fd4506692"
+    },
+    "library": {
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/torch/build/host_bindings_only.so",
+      "bytes": 1258248,
+      "sha256": "e883ccd23a3c729413c496cb143c9276cb48285965448bcfa6c5799c2da31639"
+    },
+    "log": {
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/torch/host.log",
+      "bytes": 23919,
+      "sha256": "daa58209f8092b4d6a9f8d50da789e18ccafb05a2ab6a2484053ab0fa7343497"
+    },
+    "image": {
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/torch/image.txt",
+      "bytes": 175,
+      "sha256": "9f5477090c59f31de592e0cb3594fd3179ad26e14c988bbfcff507c6cdd2c98e"
+    },
+    "compile_depfiles": [
+      {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/torch/build/device_traps.d",
+        "bytes": 921,
+        "sha256": "01d85a0c2ef1d689b58eaa3cd7b42a58b2b45cfb0380935bb1594679e4bd7ded"
+      },
+      {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/torch/build/torch_bindings.d",
+        "bytes": 287,
+        "sha256": "3c70593959d72290415cd881901fa01c948a1e88438f9b2ad58230865098e38a"
+      },
+      {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/torch/build/torch_decode.d",
+        "bytes": 1348,
+        "sha256": "3cb7bce59a6e4d1ddd90d12d7e0fd68a89a04d5d25e78cb1b669432e28565168"
+      },
+      {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/torch/build/torch_ingress.d",
+        "bytes": 1094,
+        "sha256": "7c1fe9155c613795ccdc73032c7808f65593b94d4271df2309d4af7147ae0a8b"
+      },
+      {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/torch/build/turboquant_tiling.d",
+        "bytes": 192,
+        "sha256": "286d3c09ed9cb8116f2f9d92917206b679197d1033c4790623fab1b4df2f2ffb"
+      }
+    ]
+  },
+  "existing_CPU_only_scope": "Existing G host recipes and exact test node sets; no device build, full vLLM plugin build or model."
+}

@@ -1,0 +1,10 @@
+{
+  "core": {
+    "commit": "043bcc43aa2e5d6ffa1d97930e0a31145731322f",
+    "signed_off": true
+  },
+  "vllm": {
+    "commit": "7ee3e928078fc7e5d6e1b191b3ee5b953c8e7fd8",
+    "signed_off": true
+  }
+}

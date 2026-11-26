@@ -1,0 +1,25 @@
+{
+  "basis": "user_waiver_p6_guarded_modern_20_ticks",
+  "disposition": "USER_WAIVED_MODERN_DELTA",
+  "observed_raw_ticks": 63649,
+  "original_raw_cap": 63629,
+  "delta_ticks": 20,
+  "matched_frozen03_raw_ticks": 63654,
+  "normalization": "NONE",
+  "raw_cap_met": false,
+  "measurement": {
+    "bytes": 3331,
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-frozen03-matched/result.json",
+    "sha256": "c301c5e4d7117f810b3beaa57eb6d46ab1538a4f103f15f25133c02f4d9dbcd6"
+  },
+  "modern_audit": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/canary/P6_BATCH_TIMING_AUDIT.json",
+    "bytes": 203929,
+    "sha256": "3f30c2255871d617bf3a825f796deb8f4d1d040c16eaa17235e60d1e1fbef330"
+  },
+  "user_waiver": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/USER_WAIVER.json",
+    "bytes": 1471,
+    "sha256": "ca0e507c5a16a7f76788f8a2c654b6416fad89f847b5f997969d24b20e2bafd9"
+  }
+}

@@ -1,0 +1,472 @@
+{
+  "case": "batch-p-strip-wide-lloyd",
+  "device_seconds": 106.129087223,
+  "evidence": [
+    {
+      "bytes": 4441,
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/run.log",
+      "sha256": "2829b96be6e76a3a1e297f99dd8fce4cb543d40cb8af8b4de25d1a6cfb100918"
+    },
+    {
+      "bytes": 3083,
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/admission.json",
+      "sha256": "4df4609e6f2186fcc43af5cbf101a0e132210ab020d670aeb334edda88287efe"
+    },
+    {
+      "bytes": 762,
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/mapping-attestations.json",
+      "sha256": "2541cc020691af89218fa1bca8733c4982d67c1adb0c16b57b15bc0b139b9bf8"
+    },
+    {
+      "bytes": 4855,
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/loaded_model_libraries.json",
+      "sha256": "219cc8ab63ab539811533c6e9ff22277afc1b735bf3f21eebea77c681845b815"
+    },
+    {
+      "bytes": 31159,
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/file-state-final.json",
+      "sha256": "ae42b56f43ccb273c1298d72ddcb7a5040b9e66d8c5caf89655a8d71e43d55be"
+    }
+  ],
+  "exception_count": 0,
+  "exception_files": 32,
+  "geometry": {
+    "block": 16,
+    "grid": 1,
+    "heads": 4,
+    "num_blocks": 4,
+    "nz": 0,
+    "quant_mode": 1,
+    "share": 16,
+    "strips": 1,
+    "tiles": 1,
+    "tokens": 16,
+    "wide": 1
+  },
+  "global_collectives": 0,
+  "guarded_fixture": {
+    "bytes": 12684,
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r1/canary/batch_supplement.cpp",
+    "sha256": "6a746b21c847ef8d6ac08895f501df9cfda71057db2c4d1805d43ebcf9105013"
+  },
+  "mode2_and_local_drain": {
+    "0": {
+      "logical_strips": 1,
+      "matching_source_pipe_releases": 16,
+      "roles": [
+        {
+          "local_pairs": 67,
+          "popped_counts": {
+            "ADD": 75,
+            "ADD_IMM": 10,
+            "AND": 5,
+            "CMP": 5,
+            "CMPN": 2,
+            "DCI": 1,
+            "DC_PRELOAD_XN_IMM": 2,
+            "DIV": 1,
+            "END": 1,
+            "FIX_L0C_TO_DST": 8,
+            "JUMP": 1,
+            "JUMPC": 6,
+            "LDP_XI_XJ_XN": 2,
+            "LD_XD_XN_IMM": 96,
+            "LOAD_2Dv2": 66,
+            "MADD": 2,
+            "MMAD": 512,
+            "MOVK": 124,
+            "MOV_OUT_TO_L1_MULTI_ND2NZ": 24,
+            "MOV_SPR_XN": 47,
+            "MOV_XD_IMM": 296,
+            "MOV_XD_SPR": 21,
+            "MOV_XD_XN": 102,
+            "MUL": 3,
+            "MUL_IMM": 1,
+            "OR": 2,
+            "SBITSET": 13,
+            "SET_CROSS_CORE": 5,
+            "SET_FLAG": 67,
+            "SHL": 8,
+            "SHR": 3,
+            "ST_XD_XN_IMM": 37,
+            "SUB_IMM": 2,
+            "WAIT_FLAG": 67,
+            "WAIT_FLAG_DEV": 6,
+            "ZEROEXT": 5
+          },
+          "popped_trace": {
+            "bytes": 243331,
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/core0.cubecore0.instr_popped_log.dump",
+            "sha256": "5de2609411ed7e9d33329261b1fbd98a9413760b4883f4554c6a79b66011db10"
+          }
+        },
+        {
+          "local_pairs": 23,
+          "popped_counts": {
+            "ADD": 127,
+            "ADD_IMM": 77,
+            "AND": 37,
+            "CMP": 80,
+            "CMPN": 2,
+            "CONV": 4,
+            "DCCI": 1,
+            "DCI": 1,
+            "DC_PRELOAD_XN_IMM": 2,
+            "DIV": 3,
+            "END": 1,
+            "END_LABEL": 1,
+            "INSERT_XD_XN": 263,
+            "JUMP": 16,
+            "JUMPC": 81,
+            "LDP_XI_XJ_XN": 8,
+            "LD_XD_XN": 61,
+            "LD_XD_XN_IMM": 47,
+            "MADD": 6,
+            "MAX": 1,
+            "MOVEMASK": 2,
+            "MOVK": 457,
+            "MOV_SPR_XN": 7,
+            "MOV_SRC_TO_DST_ALIGNv2": 8,
+            "MOV_XD_IMM": 593,
+            "MOV_XD_SPR": 126,
+            "MOV_XD_XN": 9,
+            "MUL": 9,
+            "NEG": 5,
+            "NOP": 190,
+            "OR": 10,
+            "PUSH_PB": 112,
+            "RV_PLT": 5167,
+            "RV_POR": 8,
+            "RV_PSET": 23,
+            "RV_SEND": 475,
+            "RV_SMEM_BAR": 102,
+            "RV_SMOVI": 161,
+            "RV_SMOVK": 16,
+            "RV_VABS_FP": 12,
+            "RV_VADD": 4260,
+            "RV_VADDS": 3862,
+            "RV_VAND": 4,
+            "RV_VBR": 14,
+            "RV_VCI": 4,
+            "RV_VCMPS_EQ": 12,
+            "RV_VCMPS_GE": 4,
+            "RV_VCMPS_LT": 8,
+            "RV_VCMP_LT": 8,
+            "RV_VCVT_F2F": 256,
+            "RV_VCVT_F2I": 128,
+            "RV_VCVT_I2F": 256,
+            "RV_VDIV": 8,
+            "RV_VDUPS": 27,
+            "RV_VGATHER2": 2,
+            "RV_VLD": 9382,
+            "RV_VLDI": 2,
+            "RV_VLOOPv2": 145,
+            "RV_VMADD": 4,
+            "RV_VMOV": 16,
+            "RV_VMUL": 528,
+            "RV_VMULA": 24,
+            "RV_VMULS": 1072,
+            "RV_VOR": 8,
+            "RV_VSEL": 28,
+            "RV_VSELR": 192,
+            "RV_VSHLI": 4,
+            "RV_VSHRI": 3846,
+            "RV_VSQRT": 4,
+            "RV_VST": 9291,
+            "RV_VSUB": 4,
+            "RV_VXOR": 12,
+            "SBITSET": 5,
+            "SET_CROSS_CORE": 6,
+            "SET_FLAG": 23,
+            "SHL": 132,
+            "SHR": 4,
+            "SIGNEXT": 1,
+            "STP_XI_XJ_XN": 1,
+            "ST_XD_XN_IMM": 35,
+            "SUB": 1,
+            "SUB_IMM": 10,
+            "VF": 95,
+            "WAIT_FLAG": 23,
+            "WAIT_FLAG_DEV": 5,
+            "ZEROEXT": 4
+          },
+          "popped_trace": {
+            "bytes": 5958006,
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/core0.veccore0.instr_popped_log.dump",
+            "sha256": "bc79759abc772b12ded6e678fae16755f789ada96fc38ba7f5e5174be3034ba9"
+          }
+        },
+        {
+          "local_pairs": 23,
+          "popped_counts": {
+            "ADD": 130,
+            "ADD_IMM": 77,
+            "AND": 37,
+            "CMP": 80,
+            "CMPN": 2,
+            "CONV": 4,
+            "DCCI": 1,
+            "DCI": 1,
+            "DC_PRELOAD_XN_IMM": 2,
+            "DIV": 3,
+            "END": 1,
+            "END_LABEL": 1,
+            "INSERT_XD_XN": 263,
+            "JUMP": 16,
+            "JUMPC": 81,
+            "LDP_XI_XJ_XN": 9,
+            "LD_XD_XN": 61,
+            "LD_XD_XN_IMM": 46,
+            "MADD": 6,
+            "MAX": 1,
+            "MOVEMASK": 2,
+            "MOVK": 456,
+            "MOV_SPR_XN": 7,
+            "MOV_SRC_TO_DST_ALIGNv2": 8,
+            "MOV_XD_IMM": 593,
+            "MOV_XD_SPR": 126,
+            "MOV_XD_XN": 10,
+            "MUL": 9,
+            "MUL_IMM": 2,
+            "NEG": 5,
+            "NOP": 190,
+            "OR": 10,
+            "PUSH_PB": 112,
+            "RV_PLT": 5167,
+            "RV_POR": 8,
+            "RV_PSET": 23,
+            "RV_SEND": 475,
+            "RV_SMEM_BAR": 102,
+            "RV_SMOVI": 161,
+            "RV_SMOVK": 16,
+            "RV_VABS_FP": 12,
+            "RV_VADD": 4260,
+            "RV_VADDS": 3862,
+            "RV_VAND": 4,
+            "RV_VBR": 14,
+            "RV_VCI": 4,
+            "RV_VCMPS_EQ": 12,
+            "RV_VCMPS_GE": 4,
+            "RV_VCMPS_LT": 8,
+            "RV_VCMP_LT": 8,
+            "RV_VCVT_F2F": 256,
+            "RV_VCVT_F2I": 128,
+            "RV_VCVT_I2F": 256,
+            "RV_VDIV": 8,
+            "RV_VDUPS": 27,
+            "RV_VGATHER2": 2,
+            "RV_VLD": 9382,
+            "RV_VLDI": 2,
+            "RV_VLOOPv2": 145,
+            "RV_VMADD": 4,
+            "RV_VMOV": 16,
+            "RV_VMUL": 528,
+            "RV_VMULA": 24,
+            "RV_VMULS": 1072,
+            "RV_VOR": 8,
+            "RV_VSEL": 28,
+            "RV_VSELR": 192,
+            "RV_VSHLI": 4,
+            "RV_VSHRI": 3846,
+            "RV_VSQRT": 4,
+            "RV_VST": 9291,
+            "RV_VSUB": 4,
+            "RV_VXOR": 12,
+            "SBITSET": 4,
+            "SET_CROSS_CORE": 6,
+            "SET_FLAG": 23,
+            "SHL": 131,
+            "SHR": 4,
+            "SIGNEXT": 1,
+            "STP_XI_XJ_XN": 2,
+            "ST_XD_XN_IMM": 28,
+            "SUB": 1,
+            "SUB_IMM": 12,
+            "VF": 95,
+            "WAIT_FLAG": 23,
+            "WAIT_FLAG_DEV": 5,
+            "ZEROEXT": 4
+          },
+          "popped_trace": {
+            "bytes": 5957813,
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/core0.veccore1.instr_popped_log.dump",
+            "sha256": "5bff17ffa365529623ea8e9913f195431abbd8eddc5854cb9328737f4e2176a4"
+          }
+        }
+      ]
+    }
+  },
+  "model_log_seconds": 109.663,
+  "natural_exit": 0,
+  "owned_and_unowned_matches": true,
+  "parity_guards_and_trace": "PASS",
+  "physical_cache_byte_parity": {
+    "key": {
+      "actual": {
+        "bytes": 32768,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/key.actual.bin",
+        "sha256": "8aaa63ec07f3c7e562feca5a144d92453a75cd705193a8a6da4086143a819fb9"
+      },
+      "golden": {
+        "bytes": 32768,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/key.gold.bin",
+        "sha256": "8aaa63ec07f3c7e562feca5a144d92453a75cd705193a8a6da4086143a819fb9"
+      }
+    },
+    "scale": {
+      "actual": {
+        "bytes": 2048,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/scale.actual.bin",
+        "sha256": "ceb6c097498c1501e8511718cc40bec624663e08ce2def1a030162b5ff591dae"
+      },
+      "golden": {
+        "bytes": 2048,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/scale.gold.bin",
+        "sha256": "ceb6c097498c1501e8511718cc40bec624663e08ce2def1a030162b5ff591dae"
+      }
+    },
+    "value": {
+      "actual": {
+        "bytes": 32768,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/value.actual.bin",
+        "sha256": "c57c406b308c4722365c5ba67df13970359a225e045436ed2bad466eb264d7f9"
+      },
+      "golden": {
+        "bytes": 32768,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/value.gold.bin",
+        "sha256": "c57c406b308c4722365c5ba67df13970359a225e045436ed2bad466eb264d7f9"
+      }
+    }
+  },
+  "raw_ticks": 31276,
+  "rendezvous_tool": {
+    "bytes": 5710,
+    "path": "/home/dmin/work/deadlock_20261125/d1-baseline-strict/audit_run_rendezvous.py",
+    "sha256": "9db6a0eb8483e3a303612e5418a4acd3f8afef354a8215f7784cbd8dfaa4a8c1"
+  },
+  "role_capsule_bindings": {
+    "0": {
+      "AIC": {
+        "executed_binary_records_equal": 1630,
+        "first_pc": 282120192,
+        "initial_matching_words": 8,
+        "instr_trace": {
+          "bytes": 243757,
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/core0.cubecore0.instr_log.dump",
+          "sha256": "2f38debe27241ae8250e0669555687908c71254a11171dde8937eda9086548b4"
+        },
+        "payload_base": 282120192,
+        "symbol": "turboquant_reshape_and_cache_bf16_wide_0_mix_aic",
+        "synthetic_end_labels": 0,
+        "terminal": [
+          0,
+          0,
+          245,
+          24768,
+          0,
+          1,
+          0
+        ]
+      },
+      "AIV0": {
+        "executed_binary_records_equal": 41827,
+        "first_pc": 282133200,
+        "initial_matching_words": 8,
+        "instr_trace": {
+          "bytes": 5949433,
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/core0.veccore0.instr_log.dump",
+          "sha256": "989f886a90eacef21e547af311ea91d6229b88452ca8aad518048ec2b78d2ee2"
+        },
+        "payload_base": 282120192,
+        "symbol": "turboquant_reshape_and_cache_bf16_wide_0_mix_aiv",
+        "synthetic_end_labels": 1,
+        "terminal": [
+          0,
+          1,
+          246,
+          31247,
+          0,
+          1,
+          0
+        ]
+      },
+      "AIV1": {
+        "executed_binary_records_equal": 41827,
+        "first_pc": 282133200,
+        "initial_matching_words": 8,
+        "instr_trace": {
+          "bytes": 5949308,
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/core0.veccore1.instr_log.dump",
+          "sha256": "d890f95a0e767bae789cae1a7067f98da0c56b9d3dc7c5dacdd930a91be4077e"
+        },
+        "payload_base": 282120192,
+        "symbol": "turboquant_reshape_and_cache_bf16_wide_0_mix_aiv",
+        "synthetic_end_labels": 1,
+        "terminal": [
+          0,
+          2,
+          247,
+          30969,
+          0,
+          1,
+          0
+        ]
+      }
+    }
+  },
+  "run": {
+    "bytes": 3416,
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd/result.json",
+    "sha256": "bdf8c8adbdca9462935d428e7c94f5d6b4ddae6eecc8f32976b6539c62af75e8"
+  },
+  "runtime_mapped_images": {
+    "libascendcl.so": {
+      "bytes": 268168,
+      "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/lib64/libascendcl.so",
+      "sha256": "dc0b5d9848f74c8f88286b025f988ae6858e2a8998a70fd2f49bc5d43e8047d8"
+    },
+    "libmodel_top.so": {
+      "bytes": 653328,
+      "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libmodel_top.so",
+      "sha256": "9263f79799b8f49a5e05d7e34498eeebcd83f72a65279a503d0a556f5dfa14bf"
+    },
+    "libnpu_drv.so": {
+      "bytes": 59248,
+      "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libnpu_drv.so",
+      "sha256": "f6418da10f7afa4b9382344aa8e2a837eb528c53b937e30d921025cd5533a6ed"
+    },
+    "libpem_davinci.so": {
+      "bytes": 30433248,
+      "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libpem_davinci.so",
+      "sha256": "1a6420fe8123e88a120f0bbfc76710968e6708599c77d80a7b1097aca06eed33"
+    },
+    "libruntime_camodel.so": {
+      "bytes": 15528416,
+      "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libruntime_camodel.so",
+      "sha256": "28375f2d4b877f66f77d537d31aae2fb2bb2d142e5b09d6e8bb49c6f791a8aa3"
+    },
+    "libtq_prefill_sim.so": {
+      "bytes": 374104,
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/build-verified/lib/libtq_prefill_sim.so",
+      "sha256": "f207b71b9cc6064b96df329f4f272238f5b0295166e8172c2e21f0e90f6f18e3"
+    },
+    "libtq_prefill_wide_sim.so": {
+      "bytes": 374160,
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/build-verified/lib/libtq_prefill_wide_sim.so",
+      "sha256": "c0ab9a6523489124ac2b10421115487da42a5330d4cac3c0b36390f5fe7b4b09"
+    },
+    "tq_p_r11_strip_wide": {
+      "bytes": 63064,
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/host/tq_p_r11_strip_wide",
+      "sha256": "643fc5c5458ebeb4b5358493e15a374fbec93c981993c8ec6f50ebfbef64879d"
+    }
+  },
+  "schema": "p6-functional-supplement-actual-audit-v1",
+  "scope": "Fixed functional probe, raw footer reported unadjusted with no timing cap.",
+  "selected_module_payload": {
+    "bytes": 171152,
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/build-verified/tq_prefill_wide_sim_merge_obj_dir/device.o",
+    "sha256": "49b9584dd78ad17e3ea434dea976224d0e9ff54e87d00d03e8ffb55aab0df20d"
+  },
+  "trace_stream_scope": "Mode-2 and local pipe counts use full popped traces. The execution-only trace omits issue-only events."
+}

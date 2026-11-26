@@ -1,0 +1,150 @@
+{
+  "status": "ADMITTED_REMAINING_P6_CASES_UNDER_USER_WAIVER",
+  "waiver": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/USER_WAIVER.json",
+    "bytes": 1471,
+    "sha256": "ca0e507c5a16a7f76788f8a2c654b6416fad89f847b5f997969d24b20e2bafd9"
+  },
+  "source_manifest_sha256": "da54b14f843583cdd0c8e262bc799430afeb89b59406e3aeb3e0deecc34a0064",
+  "compiled_index_sha256": "d57fb0c27ebc63b8615583c83426ca1e852d8a45d4a6a48a0a7bd945788e5875",
+  "watchdog_seconds": 900,
+  "maximum_tiles": 6,
+  "probes": [
+    {
+      "index": 1,
+      "case": "batch-p-strip-wide-lloyd",
+      "tiles": 1,
+      "geometry": {
+        "block": 16,
+        "grid": 1,
+        "heads": 4,
+        "num_blocks": 4,
+        "nz": 0,
+        "quant_mode": 1,
+        "share": 16,
+        "strips": 1,
+        "tiles": 1,
+        "tokens": 16,
+        "wide": 1
+      },
+      "argv": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-22.04",
+        "-u",
+        "dmin",
+        "--",
+        "python3",
+        "-B",
+        "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/infra/r11-batch-p-r6-pair/run_probe.py",
+        "--receipt",
+        "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/receipts/batch-p-strip-wide-lloyd/admission.json",
+        "--receipt-sha256",
+        "4df4609e6f2186fcc43af5cbf101a0e132210ab020d670aeb334edda88287efe",
+        "--run-dir",
+        "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd",
+        "batch-p-strip-wide-lloyd"
+      ],
+      "run_dir": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd",
+      "receipt": {
+        "bytes": 3083,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/receipts/batch-p-strip-wide-lloyd/admission.json",
+        "sha256": "4df4609e6f2186fcc43af5cbf101a0e132210ab020d670aeb334edda88287efe"
+      },
+      "performance_gate": {
+        "scope": "parity/safety; no samegeometryfrozentiming"
+      }
+    },
+    {
+      "index": 2,
+      "case": "batch-p-nz-narrow-lloyd",
+      "tiles": 4,
+      "geometry": {
+        "block": 64,
+        "grid": 1,
+        "heads": 4,
+        "num_blocks": 4,
+        "nz": 1,
+        "quant_mode": 1,
+        "share": 64,
+        "strips": 4,
+        "tiles": 4,
+        "tokens": 64,
+        "wide": 0
+      },
+      "argv": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-22.04",
+        "-u",
+        "dmin",
+        "--",
+        "python3",
+        "-B",
+        "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/infra/r11-batch-p-r6-pair/run_probe.py",
+        "--receipt",
+        "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/receipts/batch-p-nz-narrow-lloyd/admission.json",
+        "--receipt-sha256",
+        "efc5583137ad8698eba5e1ec0a6ffeb59118d25c20732a3f495914ba2e6b472c",
+        "--run-dir",
+        "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-nz-narrow-lloyd",
+        "batch-p-nz-narrow-lloyd"
+      ],
+      "run_dir": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-nz-narrow-lloyd",
+      "receipt": {
+        "bytes": 3086,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/receipts/batch-p-nz-narrow-lloyd/admission.json",
+        "sha256": "efc5583137ad8698eba5e1ec0a6ffeb59118d25c20732a3f495914ba2e6b472c"
+      },
+      "performance_gate": {
+        "scope": "parity/safety; no samegeometryfrozentiming"
+      }
+    },
+    {
+      "index": 3,
+      "case": "batch-p-nz-wide-uniform",
+      "tiles": 4,
+      "geometry": {
+        "block": 128,
+        "grid": 2,
+        "heads": 4,
+        "num_blocks": 4,
+        "nz": 1,
+        "quant_mode": 0,
+        "share": 32,
+        "strips": 4,
+        "tiles": 4,
+        "tokens": 64,
+        "wide": 1
+      },
+      "argv": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-22.04",
+        "-u",
+        "dmin",
+        "--",
+        "python3",
+        "-B",
+        "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/infra/r11-batch-p-r6-pair/run_probe.py",
+        "--receipt",
+        "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/receipts/batch-p-nz-wide-uniform/admission.json",
+        "--receipt-sha256",
+        "713b7a2140c154ce9f5eada521d22a475d2d62c692782b423e5c24b37490c296",
+        "--run-dir",
+        "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-nz-wide-uniform",
+        "batch-p-nz-wide-uniform"
+      ],
+      "run_dir": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-nz-wide-uniform",
+      "receipt": {
+        "bytes": 3103,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/receipts/batch-p-nz-wide-uniform/admission.json",
+        "sha256": "713b7a2140c154ce9f5eada521d22a475d2d62c692782b423e5c24b37490c296"
+      },
+      "performance_gate": {
+        "scope": "parity/safety; no samegeometryfrozentiming"
+      }
+    }
+  ],
+  "promotion": "requires actual functional audit and fresh final Sol6.2 release review"
+}

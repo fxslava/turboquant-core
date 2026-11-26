@@ -1,0 +1,103 @@
+{
+  "status": "PASS_FINAL_P6_USER_WAIVED_ACCEPTANCE",
+  "candidate": "P/r6",
+  "waiver": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/USER_WAIVER.json",
+    "bytes": 1471,
+    "sha256": "ca0e507c5a16a7f76788f8a2c654b6416fad89f847b5f997969d24b20e2bafd9"
+  },
+  "winning_release": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/WINNING_RELEASE.json",
+    "bytes": 5198,
+    "sha256": "fd73376256c6e418c88d9a2d7b06fae2d2a80e3a984db5e64a35df76153f49c2"
+  },
+  "fresh_release_review": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/FINAL_SOL62_RELEASE_REVIEW.json",
+    "bytes": 51316,
+    "sha256": "455ad824466fb10c4f8083bc7253509cab0faa166e45b3f80f3ee949c9d9d6f0"
+  },
+  "original_application": {
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/PROMOTION_APPLIED.json",
+    "bytes": 27225,
+    "sha256": "6c73337efe9229f41f885351a144198392a243cbd0c8ce76a0625858ce396664"
+  },
+  "retained_cpp_torch_core_host": {
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/FINAL_HOST_RESULTS.json",
+    "bytes": 114167,
+    "sha256": "28fe079c8703066de0e567f75bb05ad4114776a720b7dae7d7004c8c6cc941bd"
+  },
+  "consumer_delta": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/analyzer-hygiene/CONSUMER_HYGIENE_DELTA.json",
+    "bytes": 23973,
+    "sha256": "922331ee5fe5dce362c78493cb4f8cb44cb8e63f1395222a3426c8155a08264c"
+  },
+  "consumer_independent_review": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/analyzer-hygiene/FINAL_SOL62_CONSUMER_HYGIENE_REVIEW.json",
+    "bytes": 7242,
+    "sha256": "bef593024be73f46f9fefd74986c6d4106755b751b31d9eb4e3f419113fa8936"
+  },
+  "after_fix_attention": {
+    "counts": {
+      "tests": 606,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "receipt": {
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/after-consumer-fix/windows/attention.xml",
+      "bytes": 94612,
+      "sha256": "ae580ac310f9330b9b707b23ff31d484775f31f055cca33b288c4f5034cc4d44"
+    }
+  },
+  "after_fix_sync_build": {
+    "counts": {
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "receipt": {
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/after-consumer-fix/windows/sync.xml",
+      "bytes": 2028,
+      "sha256": "2d59699138c1849be596c8a336f62704688bdc0ab2a1bb4453299ddcfc6c3a60"
+    }
+  },
+  "after_fix_cpp_contract": {
+    "counts": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "receipt": {
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/after-consumer-fix/plugin-asserts/pytest.xml",
+      "bytes": 1213,
+      "sha256": "07d7a027fd8c03615a70f4af29dd5e01909c8c2c402433dd180c60008b87be9d"
+    }
+  },
+  "core_ctest": {
+    "counts": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "receipt": {
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/core/ctest.xml",
+      "bytes": 6620,
+      "sha256": "ed71c20c6525de1ad944ef708ee34af314a92c7202f45e44e6dce053d8a173c7"
+    }
+  },
+  "deployed_syntax_analyzer": {
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-resume-r1/DEPLOYED_AKA_SYNTAX.json",
+    "bytes": 88824,
+    "sha256": "2f5acf94770f4197164e846ec96c45defefde79957857be70f597986a7cea023"
+  },
+  "shared_cpp_files": 36,
+  "shared_aka_files": 1,
+  "syntax_torch_tus": 5,
+  "syntax_cann_role_checks": 30,
+  "new_analyzer_diagnostics": 0,
+  "P7": "ISOLATED_NOT_PROMOTED",
+  "hardware": "Physical NPU/full device plugin link not executed; supported host/standalone ABI and CAModel scope only."
+}

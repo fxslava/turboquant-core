@@ -1,0 +1,1690 @@
+{
+  "schema": "p6-aka-tail-freeze-v1",
+  "applied": {
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/PROMOTION_APPLIED.json",
+    "bytes": 27225,
+    "sha256": "6c73337efe9229f41f885351a144198392a243cbd0c8ce76a0625858ce396664"
+  },
+  "completed_host": {
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/FINAL_HOST_RESULTS.json",
+    "bytes": 114167,
+    "sha256": "28fe079c8703066de0e567f75bb05ad4114776a720b7dae7d7004c8c6cc941bd"
+  },
+  "snapshot_with_archived_consumer_preimage": {
+    "metadata": [
+      {
+        "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/SOURCE_SYNC.json",
+        "bytes": 19824,
+        "sha256": "fa3400c1755c343a2a1bc5f164805f05cb487daca22cd3d6c5c1934270aa3753"
+      },
+      {
+        "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/SOURCE_SYNC.json",
+        "bytes": 19824,
+        "sha256": "fa3400c1755c343a2a1bc5f164805f05cb487daca22cd3d6c5c1934270aa3753"
+      }
+    ],
+    "shared": {
+      "common/e8_component.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/e8_component.hpp",
+          "bytes": 216,
+          "sha256": "f57ee6cc867ac998bbd2a70b0d2b8136df9dfa13e1887262805266e78ba2dc45"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/e8_component.hpp",
+          "bytes": 216,
+          "sha256": "f57ee6cc867ac998bbd2a70b0d2b8136df9dfa13e1887262805266e78ba2dc45"
+        }
+      },
+      "common/e8_decode.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/e8_decode.hpp",
+          "bytes": 3344,
+          "sha256": "4cfbecd3da6854c433c3a9caf0aaede572748f74fc60aad3c21519e00e3bb050"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/e8_decode.hpp",
+          "bytes": 3344,
+          "sha256": "4cfbecd3da6854c433c3a9caf0aaede572748f74fc60aad3c21519e00e3bb050"
+        }
+      },
+      "common/e8_packet_layout.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/e8_packet_layout.hpp",
+          "bytes": 488,
+          "sha256": "eec52cf40c4e0f8c559e348f8816847e81be6086d3e0d8e987335caf0c13b24e"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/e8_packet_layout.hpp",
+          "bytes": 488,
+          "sha256": "eec52cf40c4e0f8c559e348f8816847e81be6086d3e0d8e987335caf0c13b24e"
+        }
+      },
+      "common/turboquant_codec_950.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_codec_950.h",
+          "bytes": 13606,
+          "sha256": "499b5718ad89b22827adb73d3d69f299783b3e9954208dc7e854a2301e383993"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_codec_950.h",
+          "bytes": 13606,
+          "sha256": "499b5718ad89b22827adb73d3d69f299783b3e9954208dc7e854a2301e383993"
+        }
+      },
+      "common/turboquant_codec_mx.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_codec_mx.h",
+          "bytes": 22947,
+          "sha256": "85b6dbc54432dd9ee6c725229f3448a7adb17781752258a2039e3c1ef726e62b"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_codec_mx.h",
+          "bytes": 22947,
+          "sha256": "85b6dbc54432dd9ee6c725229f3448a7adb17781752258a2039e3c1ef726e62b"
+        }
+      },
+      "common/turboquant_common.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_common.h",
+          "bytes": 3826,
+          "sha256": "93c3d0a1df371bdc6234629a38285a0ebdfeed8dc1d562b7d101a76fe4428e4a"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_common.h",
+          "bytes": 3826,
+          "sha256": "93c3d0a1df371bdc6234629a38285a0ebdfeed8dc1d562b7d101a76fe4428e4a"
+        }
+      },
+      "common/turboquant_fused_decode_opt.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_fused_decode_opt.hpp",
+          "bytes": 7337,
+          "sha256": "3e168758eca35140ecfce89b9b3da65f8b21d5d03eb9b76e991517dc04d61a3d"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_fused_decode_opt.hpp",
+          "bytes": 7337,
+          "sha256": "3e168758eca35140ecfce89b9b3da65f8b21d5d03eb9b76e991517dc04d61a3d"
+        }
+      },
+      "common/turboquant_gemm_reduce.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_gemm_reduce.hpp",
+          "bytes": 16615,
+          "sha256": "406d06baf0a8ed54ce495e28024bf2ea8ba173110cd0e7c359f2fc8f9ae0d7f9"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_gemm_reduce.hpp",
+          "bytes": 16615,
+          "sha256": "406d06baf0a8ed54ce495e28024bf2ea8ba173110cd0e7c359f2fc8f9ae0d7f9"
+        }
+      },
+      "common/turboquant_launch.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_launch.h",
+          "bytes": 2246,
+          "sha256": "53eea2aec1326fe327767807b28b74776e763e1de78e8686e88d121ef9a46332"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_launch.h",
+          "bytes": 2246,
+          "sha256": "53eea2aec1326fe327767807b28b74776e763e1de78e8686e88d121ef9a46332"
+        }
+      },
+      "common/turboquant_layout.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_layout.h",
+          "bytes": 4873,
+          "sha256": "c0403ad5ffbda5b5fbf59ff6bb01f86c7a176257bdba17c2366a621d2c7f5e02"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_layout.h",
+          "bytes": 4873,
+          "sha256": "c0403ad5ffbda5b5fbf59ff6bb01f86c7a176257bdba17c2366a621d2c7f5e02"
+        }
+      },
+      "common/turboquant_mode.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_mode.h",
+          "bytes": 8865,
+          "sha256": "64e9b5afac0e4b69fc2dcb23d2b809d84a10ed0689a1f6204326ef4cb4421c32"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_mode.h",
+          "bytes": 8865,
+          "sha256": "64e9b5afac0e4b69fc2dcb23d2b809d84a10ed0689a1f6204326ef4cb4421c32"
+        }
+      },
+      "common/turboquant_splitk_contract.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_splitk_contract.hpp",
+          "bytes": 2981,
+          "sha256": "82c3697045e818f43196faeb5aae5867bdd41e9042c50b678ccde0a74acdbb30"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_splitk_contract.hpp",
+          "bytes": 2981,
+          "sha256": "82c3697045e818f43196faeb5aae5867bdd41e9042c50b678ccde0a74acdbb30"
+        }
+      },
+      "common/turboquant_tiling.cpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_tiling.cpp",
+          "bytes": 7692,
+          "sha256": "a2d9c0c5b846fb3bbbb341994177d8be762d5034a06a492de0b04106fbc6f2ce"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_tiling.cpp",
+          "bytes": 7692,
+          "sha256": "a2d9c0c5b846fb3bbbb341994177d8be762d5034a06a492de0b04106fbc6f2ce"
+        }
+      },
+      "common/turboquant_tiling.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_tiling.h",
+          "bytes": 6020,
+          "sha256": "5e538d8d5ed7c2dd576f54562eee44879857e55af2d5c98bba07373294c14837"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_tiling.h",
+          "bytes": 6020,
+          "sha256": "5e538d8d5ed7c2dd576f54562eee44879857e55af2d5c98bba07373294c14837"
+        }
+      },
+      "common/turboquant_types.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_types.h",
+          "bytes": 110,
+          "sha256": "cb2e4abeecec6ffe85711648487e9e668c29b9306a16913820ca6024d66eb597"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_types.h",
+          "bytes": 110,
+          "sha256": "cb2e4abeecec6ffe85711648487e9e668c29b9306a16913820ca6024d66eb597"
+        }
+      },
+      "common/turboquant_wave_protocol.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/common/turboquant_wave_protocol.hpp",
+          "bytes": 7865,
+          "sha256": "f91b9f092d8f4b04e54ec1b0031fd94717feb4d6dffac57fb4627b41c22ceaa4"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_wave_protocol.hpp",
+          "bytes": 7865,
+          "sha256": "f91b9f092d8f4b04e54ec1b0031fd94717feb4d6dffac57fb4627b41c22ceaa4"
+        }
+      },
+      "decode/e8/e8_fused_decode.cpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_fused_decode.cpp",
+          "bytes": 22359,
+          "sha256": "1354868b479d3c2972f219a7012718e210c085ffcb38c6310056fcebb7f390ef"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/e8_fused_decode.cpp",
+          "bytes": 22359,
+          "sha256": "1354868b479d3c2972f219a7012718e210c085ffcb38c6310056fcebb7f390ef"
+        }
+      },
+      "decode/e8/e8_parallel_decode.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_parallel_decode.hpp",
+          "bytes": 6236,
+          "sha256": "78ad1016f9abaa38672107dcc971485ecca4985fd02ee8acb1df671fcd0da9d1"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/e8_parallel_decode.hpp",
+          "bytes": 6236,
+          "sha256": "78ad1016f9abaa38672107dcc971485ecca4985fd02ee8acb1df671fcd0da9d1"
+        }
+      },
+      "decode/e8/parallel_component.cpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/parallel_component.cpp",
+          "bytes": 3862,
+          "sha256": "0fd04fcc15b476096eadcd2537b1365356d9bb29c8591c29f9a6db998b3ff017"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/parallel_component.cpp",
+          "bytes": 3862,
+          "sha256": "0fd04fcc15b476096eadcd2537b1365356d9bb29c8591c29f9a6db998b3ff017"
+        }
+      },
+      "decode/e8/routines/routine_e8_bf16_dequant_simt.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/routines/routine_e8_bf16_dequant_simt.hpp",
+          "bytes": 9168,
+          "sha256": "d6d5eb2014b24fe503e78e0824742b5833193737846bf02d61df84e3ae52f313"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/routines/routine_e8_bf16_dequant_simt.hpp",
+          "bytes": 9168,
+          "sha256": "d6d5eb2014b24fe503e78e0824742b5833193737846bf02d61df84e3ae52f313"
+        }
+      },
+      "decode/e8/routines/routine_e8_int8_dequant_simt.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/routines/routine_e8_int8_dequant_simt.hpp",
+          "bytes": 9506,
+          "sha256": "c673a4fd5bf235b29f28d3cf1bbf763d258aa18b99849a27da5dbe59685a704d"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/routines/routine_e8_int8_dequant_simt.hpp",
+          "bytes": 9506,
+          "sha256": "c673a4fd5bf235b29f28d3cf1bbf763d258aa18b99849a27da5dbe59685a704d"
+        }
+      },
+      "decode/native/cube/routine_vector_rotate_butterfly.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/cube/routine_vector_rotate_butterfly.hpp",
+          "bytes": 17081,
+          "sha256": "b9c395ad2a374072560eb66a5f9980833146e2732447607481b77a09b01c3fe2"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/cube/routine_vector_rotate_butterfly.hpp",
+          "bytes": 17081,
+          "sha256": "b9c395ad2a374072560eb66a5f9980833146e2732447607481b77a09b01c3fe2"
+        }
+      },
+      "decode/native/cube/turboquant_cube_service.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/cube/turboquant_cube_service.h",
+          "bytes": 14328,
+          "sha256": "c6738f0e63bc772cfc213db395db78825a3055bdc31ff8a64e6df7c6aa9f9307"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/cube/turboquant_cube_service.h",
+          "bytes": 14328,
+          "sha256": "c6738f0e63bc772cfc213db395db78825a3055bdc31ff8a64e6df7c6aa9f9307"
+        }
+      },
+      "decode/native/cube/turboquant_gemm_reduce_service.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/cube/turboquant_gemm_reduce_service.h",
+          "bytes": 38861,
+          "sha256": "d4003c309b6ec4763ef483a0c47970b921706e99f3f702ba9c189f13467aad5c"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/cube/turboquant_gemm_reduce_service.h",
+          "bytes": 38861,
+          "sha256": "d4003c309b6ec4763ef483a0c47970b921706e99f3f702ba9c189f13467aad5c"
+        }
+      },
+      "decode/native/cube/turboquant_query_basis.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/cube/turboquant_query_basis.h",
+          "bytes": 6551,
+          "sha256": "f1495de2d19e52e072b88bd69a35f991838ceb88763e20d61953aea79acbc8c9"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/cube/turboquant_query_basis.h",
+          "bytes": 6551,
+          "sha256": "f1495de2d19e52e072b88bd69a35f991838ceb88763e20d61953aea79acbc8c9"
+        }
+      },
+      "decode/native/routine/routine_turboquant_dequant4.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/routine/routine_turboquant_dequant4.hpp",
+          "bytes": 3114,
+          "sha256": "f41dd0cdf11d3da1060dbd423746d957f240cbbcfd134e1bb523448c32da9d0e"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/routine/routine_turboquant_dequant4.hpp",
+          "bytes": 3114,
+          "sha256": "f41dd0cdf11d3da1060dbd423746d957f240cbbcfd134e1bb523448c32da9d0e"
+        }
+      },
+      "decode/native/turboquant_fused_decode.cpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/turboquant_fused_decode.cpp",
+          "bytes": 52838,
+          "sha256": "7024e81fa1fca81330dc4e425145efdd2e76b90fe5a83be35fc9683ef8f60e0e"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/turboquant_fused_decode.cpp",
+          "bytes": 52838,
+          "sha256": "7024e81fa1fca81330dc4e425145efdd2e76b90fe5a83be35fc9683ef8f60e0e"
+        }
+      },
+      "decode/native/vector/routine_vector_cube_softmax.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/vector/routine_vector_cube_softmax.hpp",
+          "bytes": 22403,
+          "sha256": "0628ea40897555b2b830f00c26c88e988f8d849bbb7e6bc7ccf2a497c053b573"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/vector/routine_vector_cube_softmax.hpp",
+          "bytes": 22403,
+          "sha256": "0628ea40897555b2b830f00c26c88e988f8d849bbb7e6bc7ccf2a497c053b573"
+        }
+      },
+      "decode/native/vector/routine_vector_online_softmax.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/vector/routine_vector_online_softmax.hpp",
+          "bytes": 7151,
+          "sha256": "49d13afabff882e3718e7c0f7ed9709ea79f0e1c8904ab7e0d4860bb4a8bca6f"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/vector/routine_vector_online_softmax.hpp",
+          "bytes": 7151,
+          "sha256": "49d13afabff882e3718e7c0f7ed9709ea79f0e1c8904ab7e0d4860bb4a8bca6f"
+        }
+      },
+      "decode/native/vector/turboquant_vector_service.h": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/vector/turboquant_vector_service.h",
+          "bytes": 51730,
+          "sha256": "1dc455966e81fddf27462e8ad8144de1d9e607cb466255f7c927646b74b3606e"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/vector/turboquant_vector_service.h",
+          "bytes": 51730,
+          "sha256": "1dc455966e81fddf27462e8ad8144de1d9e607cb466255f7c927646b74b3606e"
+        }
+      },
+      "ingress/native/routine_reshape_batch_pipeline.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/routine_reshape_batch_pipeline.hpp",
+          "bytes": 59476,
+          "sha256": "d388a2a53e9501c7405d3d3726005cc3673fada1895586afb61ef044df9bd5ba"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/routine_reshape_batch_pipeline.hpp",
+          "bytes": 59476,
+          "sha256": "d388a2a53e9501c7405d3d3726005cc3673fada1895586afb61ef044df9bd5ba"
+        }
+      },
+      "ingress/native/routine_stage_page_zn_bf16.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/routine_stage_page_zn_bf16.hpp",
+          "bytes": 3888,
+          "sha256": "b9ff832b30446a91de963745638ece32e4754499dc6d3cefe3496b9e745ffec7"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/routine_stage_page_zn_bf16.hpp",
+          "bytes": 3888,
+          "sha256": "b9ff832b30446a91de963745638ece32e4754499dc6d3cefe3496b9e745ffec7"
+        }
+      },
+      "ingress/native/routine_vector_rotate_butterfly.hpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/routine_vector_rotate_butterfly.hpp",
+          "bytes": 17081,
+          "sha256": "b9c395ad2a374072560eb66a5f9980833146e2732447607481b77a09b01c3fe2"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/routine_vector_rotate_butterfly.hpp",
+          "bytes": 17081,
+          "sha256": "b9c395ad2a374072560eb66a5f9980833146e2732447607481b77a09b01c3fe2"
+        }
+      },
+      "ingress/native/turboquant_reshape_batch.cpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+          "bytes": 5722,
+          "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+          "bytes": 5722,
+          "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+        }
+      },
+      "ingress/native/turboquant_reshape_batch_wide.cpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+          "bytes": 1568,
+          "sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+          "bytes": 1568,
+          "sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae"
+        }
+      },
+      "ingress/native/turboquant_reshape_scatter.cpp": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+          "bytes": 41344,
+          "sha256": "6701601056dfe2e003f58e6a6133258b5a73d2a2cd6c827a1aaa65b92282b63d"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+          "bytes": 41344,
+          "sha256": "6701601056dfe2e003f58e6a6133258b5a73d2a2cd6c827a1aaa65b92282b63d"
+        }
+      },
+      "decode/e8/reader_layout.aka": {
+        "core": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/reader_layout.aka",
+          "bytes": 658,
+          "sha256": "d470c1b6d8c0be5de95a00d4f81d887c901cc911f04524d3c18ef973c91fd6d3"
+        },
+        "plugin": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/reader_layout.aka",
+          "bytes": 658,
+          "sha256": "d470c1b6d8c0be5de95a00d4f81d887c901cc911f04524d3c18ef973c91fd6d3"
+        }
+      }
+    },
+    "extra_product_bytes": {
+      "core": {
+        "cmake/SimTargets.cmake": {
+          "path": "/mnt/c/Ascend/turboquant-core/cmake/SimTargets.cmake",
+          "bytes": 14549,
+          "sha256": "d34f6397aab561167e5f19c5ba09bdb1f6dbab460c68866e3561f28cf9330e45"
+        },
+        "cmake/NpuTargets.cmake": {
+          "path": "/mnt/c/Ascend/turboquant-core/cmake/NpuTargets.cmake",
+          "bytes": 8924,
+          "sha256": "e202fbce59f0dd9ea4eb1af68d7e57ce68a436c04d37c42d9eae89d8e5803c7f"
+        },
+        "src/host/turboquant_sim_binary_lifetime.cpp": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/host/turboquant_sim_binary_lifetime.cpp",
+          "bytes": 847,
+          "sha256": "c2bf3c45d3a18437d8b14abef1d0cb504c42c29c85f05489cebd5452146f38c7"
+        },
+        "src/turboquant/ingress/native/routine_reshape_batch_pipeline.hpp": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/routine_reshape_batch_pipeline.hpp",
+          "bytes": 59476,
+          "sha256": "d388a2a53e9501c7405d3d3726005cc3673fada1895586afb61ef044df9bd5ba"
+        },
+        "src/turboquant/ingress/native/turboquant_reshape_batch.cpp": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+          "bytes": 5722,
+          "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+        },
+        "src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+          "bytes": 1568,
+          "sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae"
+        },
+        "src/turboquant/SOURCE_SYNC.json": {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/SOURCE_SYNC.json",
+          "bytes": 19824,
+          "sha256": "fa3400c1755c343a2a1bc5f164805f05cb487daca22cd3d6c5c1934270aa3753"
+        }
+      },
+      "plugin": {
+        "CMakeLists.txt": {
+          "path": "/mnt/c/vllm-ascend/CMakeLists.txt",
+          "bytes": 10668,
+          "sha256": "706663b8be3d4efbb9029d354e19a0e8dbacffe7ed87bd04016ac4011bba6f96"
+        },
+        "tests/host/turboquant/check_kernels.py": {
+          "path": "/mnt/c/vllm-ascend/tests/host/turboquant/check_kernels.py",
+          "bytes": 4336,
+          "sha256": "f846a0679afe7a675925481ce981f9359ded93d853e3a8e62326001a74d04425"
+        },
+        "tests/host/turboquant/check_analyzer.py": {
+          "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/CHECK_ANALYZER_PREIMAGE.py",
+          "bytes": 8142,
+          "sha256": "4b958124f270e1da95ba2b4ddb8ce769e6a29d5643a135ea76a68cfd591c8cf9"
+        },
+        "csrc/attention/turboquant/README.md": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/README.md",
+          "bytes": 27172,
+          "sha256": "f616148f005ae2ffa7e04b094e6e0515121b0a7c33f3c85cd48372033f060c95"
+        },
+        "csrc/attention/turboquant/ingress/native/routine_reshape_batch_pipeline.hpp": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/routine_reshape_batch_pipeline.hpp",
+          "bytes": 59476,
+          "sha256": "d388a2a53e9501c7405d3d3726005cc3673fada1895586afb61ef044df9bd5ba"
+        },
+        "csrc/attention/turboquant/ingress/native/turboquant_reshape_batch.cpp": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+          "bytes": 5722,
+          "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+        },
+        "csrc/attention/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+          "bytes": 1568,
+          "sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae"
+        },
+        "csrc/attention/turboquant/SOURCE_SYNC.json": {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/SOURCE_SYNC.json",
+          "bytes": 19824,
+          "sha256": "fa3400c1755c343a2a1bc5f164805f05cb487daca22cd3d6c5c1934270aa3753"
+        }
+      }
+    }
+  },
+  "unchanged_syntax": {
+    "plugin-nz": {
+      "count": 12,
+      "syntax": {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/plugin-nz/syntax.json",
+        "bytes": 1002600,
+        "sha256": "020da6d873974cad96909ff6b2d314a7133b2605d53f5de59f186687c1b90a49"
+      },
+      "driver_log": {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/plugin-nz.log",
+        "bytes": 1292,
+        "sha256": "5526f75a866d303cb7661829c1fcf3aaa62a45fd1ff20a0a9087cc9a064bea14"
+      },
+      "compiler_logs": [
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/plugin-nz/turboquant_reshape_batch-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/plugin-nz/turboquant_reshape_batch-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/plugin-nz/turboquant_reshape_batch_wide-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/plugin-nz/turboquant_reshape_batch_wide-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/plugin-nz/turboquant_reshape_scatter-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/plugin-nz/turboquant_reshape_scatter-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/plugin-nz/turboquant_fused_decode-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/plugin-nz/turboquant_fused_decode-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/plugin-nz/asc_e8_reader-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/plugin-nz/asc_e8_reader-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/plugin-nz/asc_e8_component-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/plugin-nz/asc_e8_component-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "checked_source_files": [
+        {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+          "bytes": 5722,
+          "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+        },
+        {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+          "bytes": 5722,
+          "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+        },
+        {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+          "bytes": 1568,
+          "sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae"
+        },
+        {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+          "bytes": 1568,
+          "sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae"
+        },
+        {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+          "bytes": 41344,
+          "sha256": "6701601056dfe2e003f58e6a6133258b5a73d2a2cd6c827a1aaa65b92282b63d"
+        },
+        {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+          "bytes": 41344,
+          "sha256": "6701601056dfe2e003f58e6a6133258b5a73d2a2cd6c827a1aaa65b92282b63d"
+        },
+        {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/turboquant_fused_decode.cpp",
+          "bytes": 52838,
+          "sha256": "7024e81fa1fca81330dc4e425145efdd2e76b90fe5a83be35fc9683ef8f60e0e"
+        },
+        {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/turboquant_fused_decode.cpp",
+          "bytes": 52838,
+          "sha256": "7024e81fa1fca81330dc4e425145efdd2e76b90fe5a83be35fc9683ef8f60e0e"
+        },
+        {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/bindings/asc_e8_reader.cpp",
+          "bytes": 539,
+          "sha256": "f291d4246c50b943dd54ecc8b6bf134473a69ba121ac72eb9055411d589f54d9"
+        },
+        {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/bindings/asc_e8_reader.cpp",
+          "bytes": 539,
+          "sha256": "f291d4246c50b943dd54ecc8b6bf134473a69ba121ac72eb9055411d589f54d9"
+        },
+        {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/bindings/asc_e8_component.cpp",
+          "bytes": 453,
+          "sha256": "98d868ab5885c71f82573553e444adb704673ff6dd96b353e6471bb541b4396c"
+        },
+        {
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/bindings/asc_e8_component.cpp",
+          "bytes": 453,
+          "sha256": "98d868ab5885c71f82573553e444adb704673ff6dd96b353e6471bb541b4396c"
+        }
+      ]
+    },
+    "core-nz": {
+      "count": 12,
+      "syntax": {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-nz/syntax.json",
+        "bytes": 1002820,
+        "sha256": "39c401aa8ffc53d4ba5dfd5bd6064a1a339e11ab286d52fc2091429054f400ff"
+      },
+      "driver_log": {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-nz.log",
+        "bytes": 1172,
+        "sha256": "534e337c83d955f2e5edcdf7e1c1fa92bf8d1da79edcc44ecccd3027422c3307"
+      },
+      "compiler_logs": [
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-nz/turboquant_reshape_batch-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-nz/turboquant_reshape_batch-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-nz/turboquant_reshape_batch_wide-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-nz/turboquant_reshape_batch_wide-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-nz/turboquant_reshape_scatter-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-nz/turboquant_reshape_scatter-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-nz/turboquant_fused_decode-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-nz/turboquant_fused_decode-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-nz/e8_fused_decode-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-nz/e8_fused_decode-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-nz/parallel_component-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-nz/parallel_component-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "checked_source_files": [
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+          "bytes": 5722,
+          "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+          "bytes": 5722,
+          "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+          "bytes": 1568,
+          "sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+          "bytes": 1568,
+          "sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+          "bytes": 41344,
+          "sha256": "6701601056dfe2e003f58e6a6133258b5a73d2a2cd6c827a1aaa65b92282b63d"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+          "bytes": 41344,
+          "sha256": "6701601056dfe2e003f58e6a6133258b5a73d2a2cd6c827a1aaa65b92282b63d"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/turboquant_fused_decode.cpp",
+          "bytes": 52838,
+          "sha256": "7024e81fa1fca81330dc4e425145efdd2e76b90fe5a83be35fc9683ef8f60e0e"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/turboquant_fused_decode.cpp",
+          "bytes": 52838,
+          "sha256": "7024e81fa1fca81330dc4e425145efdd2e76b90fe5a83be35fc9683ef8f60e0e"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_fused_decode.cpp",
+          "bytes": 22359,
+          "sha256": "1354868b479d3c2972f219a7012718e210c085ffcb38c6310056fcebb7f390ef"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_fused_decode.cpp",
+          "bytes": 22359,
+          "sha256": "1354868b479d3c2972f219a7012718e210c085ffcb38c6310056fcebb7f390ef"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/parallel_component.cpp",
+          "bytes": 3862,
+          "sha256": "0fd04fcc15b476096eadcd2537b1365356d9bb29c8591c29f9a6db998b3ff017"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/parallel_component.cpp",
+          "bytes": 3862,
+          "sha256": "0fd04fcc15b476096eadcd2537b1365356d9bb29c8591c29f9a6db998b3ff017"
+        }
+      ]
+    },
+    "core-strip": {
+      "count": 6,
+      "syntax": {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-strip/syntax.json",
+        "bytes": 501218,
+        "sha256": "c702844e203f5d857018cd03fe77e1d3685ad5b0713c62794a59b8fd8b2022d7"
+      },
+      "driver_log": {
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-strip.log",
+        "bytes": 620,
+        "sha256": "e9fcee42df28ef7265abe9cacf4447a038864a1c6642925193ff380f81c89c87"
+      },
+      "compiler_logs": [
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-strip/turboquant_reshape_batch-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-strip/turboquant_reshape_batch-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-strip/turboquant_reshape_batch_wide-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-strip/turboquant_reshape_batch_wide-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-strip/turboquant_reshape_scatter-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/core-strip/turboquant_reshape_scatter-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "checked_source_files": [
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+          "bytes": 5722,
+          "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+          "bytes": 5722,
+          "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+          "bytes": 1568,
+          "sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+          "bytes": 1568,
+          "sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+          "bytes": 41344,
+          "sha256": "6701601056dfe2e003f58e6a6133258b5a73d2a2cd6c827a1aaa65b92282b63d"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+          "bytes": 41344,
+          "sha256": "6701601056dfe2e003f58e6a6133258b5a73d2a2cd6c827a1aaa65b92282b63d"
+        }
+      ]
+    }
+  },
+  "unchanged_analyzer": {
+    "summary": {
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/summary.json",
+      "bytes": 10840,
+      "sha256": "026548865b928831315a8b14ed183d90fefa0eff8ee69abdd695725a8b6cdf96"
+    },
+    "log": {
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected.log",
+      "bytes": 1726,
+      "sha256": "379c25fc5a4438494b15482f5d7e5a8b5faa2638b855947141b9a17258a2ffb8"
+    },
+    "cases": {
+      "decode": {
+        "zero_new": true,
+        "raw": [
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/decode-verified.json",
+            "bytes": 16899693,
+            "sha256": "bae079798c6f9a54dd691c9ce24952e4891aa01c5f09389b05888597a933e697"
+          },
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/decode-integrated.json",
+            "bytes": 15246235,
+            "sha256": "52ce877d1bab3e56e46b063ffba5cd3c20fce3ab46ec15d7503e2aa87d58f2bc"
+          }
+        ],
+        "resolved_quoted_include_closure": [
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/decode/turboquant_fused_decode.cpp",
+            "bytes": 56334,
+            "sha256": "955d73a5f6ee157bf11bcff2d05863343aa06ee1cf0b04da053ec92cbf8e915d"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/include/turboquant/turboquant_fused_decode_opt.hpp",
+            "bytes": 14048,
+            "sha256": "7f9cf9bcb71ed81bf2c84d6abac27ad7b240de734808af5fb1b4cb90d8127685"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/host/turboquant_tiling.h",
+            "bytes": 13156,
+            "sha256": "84f0191fdfbf058abc3db961f43f3928f39b6e3905bc58daef37d30664241e8b"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/include/turboquant/turboquant_types.h",
+            "bytes": 745,
+            "sha256": "f6592568b467b0db895e1c8ab5041544008da8ed280775b368e9afe1eaf05e2f"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/include/turboquant/turboquant_layout.h",
+            "bytes": 14145,
+            "sha256": "850d5860e664986de486de41265b826f66f8344ac6790f317eea25f5e51af3cd"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/include/turboquant/turboquant_mode.h",
+            "bytes": 14014,
+            "sha256": "c50c8c02a97b74315ed9358a50567c4ff7a2605f3b34cc7a3fb6c28c781d39a2"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/common/turboquant_codec_mx.h",
+            "bytes": 30007,
+            "sha256": "200e493dba5da92e3b439b26bf0b6bc6395a03285f21600f4714b882b24206e4"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/common/routine_turboquant_dequant4.hpp",
+            "bytes": 5439,
+            "sha256": "0eb43ddb51bc814412c48b36d6b38cf33e9550560135f5ab18267f6c46357abf"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/common/turboquant_codec_950.h",
+            "bytes": 16339,
+            "sha256": "ab2fa03ce61b7f6b0869f50dc858dbd842df0b17967f3e34670b57ce79aef391"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/include/turboquant/turboquant_common.h",
+            "bytes": 5469,
+            "sha256": "46a433c45f4068ee49abe14620b5c601f3fd3c1bf45e1fc04ee9d999815a044e"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/decode/cube/turboquant_cube_service.h",
+            "bytes": 17348,
+            "sha256": "abbea0967d94d45ff15214a696ecd2e364c3b44d510109de77ca0cd9d5c44820"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/decode/cube/turboquant_query_basis.h",
+            "bytes": 6769,
+            "sha256": "e81df4ea0591ce06e6be4d75cbd2d90cb126157aca26231f4ba25548034e2ba7"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/decode/vector/turboquant_vector_service.h",
+            "bytes": 76765,
+            "sha256": "69768195f747dbd785561986397e3164b75019fcb59fcc0bb88401ae4a0e1e88"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/decode/vector/routine_vector_cube_softmax.hpp",
+            "bytes": 30014,
+            "sha256": "728e0cfc6314c808c07aa9e74308557ef6cb8aaabeff5c05338926aadabd9baf"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/decode/vector/routine_vector_online_softmax.hpp",
+            "bytes": 13457,
+            "sha256": "3a511b65794a5224f48d845c93f10b46d424387512bda735ed492d6217385ccb"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/decode/cube/routine_vector_rotate_butterfly.hpp",
+            "bytes": 32007,
+            "sha256": "3be976ce358f07e37dec790a9fdf8d8c41ea605173e693ee9fc139a10e241518"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/decode/cube/turboquant_gemm_reduce_service.h",
+            "bytes": 73589,
+            "sha256": "287553cbc09afa7c61b6f6ab3bcf719456d72e8e0f14484caf186ba6ddfe0079"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/include/turboquant/turboquant_gemm_reduce.hpp",
+            "bytes": 44740,
+            "sha256": "b319da769df5a805c77e77d28d92a8b1dda75ae6af2ee97ad689db40dd628eb9"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/turboquant_fused_decode.cpp",
+            "bytes": 52838,
+            "sha256": "7024e81fa1fca81330dc4e425145efdd2e76b90fe5a83be35fc9683ef8f60e0e"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_fused_decode_opt.hpp",
+            "bytes": 7337,
+            "sha256": "3e168758eca35140ecfce89b9b3da65f8b21d5d03eb9b76e991517dc04d61a3d"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_tiling.h",
+            "bytes": 6020,
+            "sha256": "5e538d8d5ed7c2dd576f54562eee44879857e55af2d5c98bba07373294c14837"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_types.h",
+            "bytes": 110,
+            "sha256": "cb2e4abeecec6ffe85711648487e9e668c29b9306a16913820ca6024d66eb597"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_layout.h",
+            "bytes": 4873,
+            "sha256": "c0403ad5ffbda5b5fbf59ff6bb01f86c7a176257bdba17c2366a621d2c7f5e02"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_mode.h",
+            "bytes": 8865,
+            "sha256": "64e9b5afac0e4b69fc2dcb23d2b809d84a10ed0689a1f6204326ef4cb4421c32"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_codec_mx.h",
+            "bytes": 22947,
+            "sha256": "85b6dbc54432dd9ee6c725229f3448a7adb17781752258a2039e3c1ef726e62b"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/routine/routine_turboquant_dequant4.hpp",
+            "bytes": 3114,
+            "sha256": "f41dd0cdf11d3da1060dbd423746d957f240cbbcfd134e1bb523448c32da9d0e"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_codec_950.h",
+            "bytes": 13606,
+            "sha256": "499b5718ad89b22827adb73d3d69f299783b3e9954208dc7e854a2301e383993"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_common.h",
+            "bytes": 3826,
+            "sha256": "93c3d0a1df371bdc6234629a38285a0ebdfeed8dc1d562b7d101a76fe4428e4a"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/cube/turboquant_cube_service.h",
+            "bytes": 14328,
+            "sha256": "c6738f0e63bc772cfc213db395db78825a3055bdc31ff8a64e6df7c6aa9f9307"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/cube/turboquant_query_basis.h",
+            "bytes": 6551,
+            "sha256": "f1495de2d19e52e072b88bd69a35f991838ceb88763e20d61953aea79acbc8c9"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/vector/turboquant_vector_service.h",
+            "bytes": 51730,
+            "sha256": "1dc455966e81fddf27462e8ad8144de1d9e607cb466255f7c927646b74b3606e"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/vector/routine_vector_cube_softmax.hpp",
+            "bytes": 22403,
+            "sha256": "0628ea40897555b2b830f00c26c88e988f8d849bbb7e6bc7ccf2a497c053b573"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/vector/routine_vector_online_softmax.hpp",
+            "bytes": 7151,
+            "sha256": "49d13afabff882e3718e7c0f7ed9709ea79f0e1c8904ab7e0d4860bb4a8bca6f"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/cube/routine_vector_rotate_butterfly.hpp",
+            "bytes": 17081,
+            "sha256": "b9c395ad2a374072560eb66a5f9980833146e2732447607481b77a09b01c3fe2"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/cube/turboquant_gemm_reduce_service.h",
+            "bytes": 38861,
+            "sha256": "d4003c309b6ec4763ef483a0c47970b921706e99f3f702ba9c189f13467aad5c"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_gemm_reduce.hpp",
+            "bytes": 16615,
+            "sha256": "406d06baf0a8ed54ce495e28024bf2ea8ba173110cd0e7c359f2fc8f9ae0d7f9"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_launch.h",
+            "bytes": 2246,
+            "sha256": "53eea2aec1326fe327767807b28b74776e763e1de78e8686e88d121ef9a46332"
+          }
+        ]
+      },
+      "vector": {
+        "zero_new": true,
+        "raw": [
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/vector-verified.json",
+            "bytes": 4351233,
+            "sha256": "51ac73b5e8b9d024ef47b269f3bea0716418ac2d2b66c86aa5b1c611df03ad81"
+          },
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/vector-integrated.json",
+            "bytes": 4241958,
+            "sha256": "85d7bbd95a734f7d0bc5ee4e5a48eb2ee719f373ba493e1a756a8711914a12e1"
+          }
+        ],
+        "resolved_quoted_include_closure": [
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/decode/vector/turboquant_vector_service.h",
+            "bytes": 76765,
+            "sha256": "69768195f747dbd785561986397e3164b75019fcb59fcc0bb88401ae4a0e1e88"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/common/turboquant_codec_950.h",
+            "bytes": 16339,
+            "sha256": "ab2fa03ce61b7f6b0869f50dc858dbd842df0b17967f3e34670b57ce79aef391"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/include/turboquant/turboquant_common.h",
+            "bytes": 5469,
+            "sha256": "46a433c45f4068ee49abe14620b5c601f3fd3c1bf45e1fc04ee9d999815a044e"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/include/turboquant/turboquant_layout.h",
+            "bytes": 14145,
+            "sha256": "850d5860e664986de486de41265b826f66f8344ac6790f317eea25f5e51af3cd"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/include/turboquant/turboquant_mode.h",
+            "bytes": 14014,
+            "sha256": "c50c8c02a97b74315ed9358a50567c4ff7a2605f3b34cc7a3fb6c28c781d39a2"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/decode/vector/routine_vector_cube_softmax.hpp",
+            "bytes": 30014,
+            "sha256": "728e0cfc6314c808c07aa9e74308557ef6cb8aaabeff5c05338926aadabd9baf"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/decode/vector/routine_vector_online_softmax.hpp",
+            "bytes": 13457,
+            "sha256": "3a511b65794a5224f48d845c93f10b46d424387512bda735ed492d6217385ccb"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/include/turboquant/turboquant_fused_decode_opt.hpp",
+            "bytes": 14048,
+            "sha256": "7f9cf9bcb71ed81bf2c84d6abac27ad7b240de734808af5fb1b4cb90d8127685"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/host/turboquant_tiling.h",
+            "bytes": 13156,
+            "sha256": "84f0191fdfbf058abc3db961f43f3928f39b6e3905bc58daef37d30664241e8b"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/include/turboquant/turboquant_types.h",
+            "bytes": 745,
+            "sha256": "f6592568b467b0db895e1c8ab5041544008da8ed280775b368e9afe1eaf05e2f"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/vector/turboquant_vector_service.h",
+            "bytes": 51730,
+            "sha256": "1dc455966e81fddf27462e8ad8144de1d9e607cb466255f7c927646b74b3606e"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_codec_950.h",
+            "bytes": 13606,
+            "sha256": "499b5718ad89b22827adb73d3d69f299783b3e9954208dc7e854a2301e383993"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_common.h",
+            "bytes": 3826,
+            "sha256": "93c3d0a1df371bdc6234629a38285a0ebdfeed8dc1d562b7d101a76fe4428e4a"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_layout.h",
+            "bytes": 4873,
+            "sha256": "c0403ad5ffbda5b5fbf59ff6bb01f86c7a176257bdba17c2366a621d2c7f5e02"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_mode.h",
+            "bytes": 8865,
+            "sha256": "64e9b5afac0e4b69fc2dcb23d2b809d84a10ed0689a1f6204326ef4cb4421c32"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/vector/routine_vector_cube_softmax.hpp",
+            "bytes": 22403,
+            "sha256": "0628ea40897555b2b830f00c26c88e988f8d849bbb7e6bc7ccf2a497c053b573"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/vector/routine_vector_online_softmax.hpp",
+            "bytes": 7151,
+            "sha256": "49d13afabff882e3718e7c0f7ed9709ea79f0e1c8904ab7e0d4860bb4a8bca6f"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_fused_decode_opt.hpp",
+            "bytes": 7337,
+            "sha256": "3e168758eca35140ecfce89b9b3da65f8b21d5d03eb9b76e991517dc04d61a3d"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_tiling.h",
+            "bytes": 6020,
+            "sha256": "5e538d8d5ed7c2dd576f54562eee44879857e55af2d5c98bba07373294c14837"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_types.h",
+            "bytes": 110,
+            "sha256": "cb2e4abeecec6ffe85711648487e9e668c29b9306a16913820ca6024d66eb597"
+          }
+        ]
+      },
+      "softmax": {
+        "zero_new": true,
+        "raw": [
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/softmax-verified.json",
+            "bytes": 932560,
+            "sha256": "f6c7b6710a7e8f522cfc30ed2b84886da03b1ab520aad931fb01966195b6a133"
+          },
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/softmax-integrated.json",
+            "bytes": 912124,
+            "sha256": "9e6cbdb697f75157fe197f20e94f95dc1c963e91ddd2e8714b3c6c6c3bb168e7"
+          }
+        ],
+        "resolved_quoted_include_closure": [
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/decode/vector/routine_vector_cube_softmax.hpp",
+            "bytes": 30014,
+            "sha256": "728e0cfc6314c808c07aa9e74308557ef6cb8aaabeff5c05338926aadabd9baf"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/decode/vector/routine_vector_online_softmax.hpp",
+            "bytes": 13457,
+            "sha256": "3a511b65794a5224f48d845c93f10b46d424387512bda735ed492d6217385ccb"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/vector/routine_vector_cube_softmax.hpp",
+            "bytes": 22403,
+            "sha256": "0628ea40897555b2b830f00c26c88e988f8d849bbb7e6bc7ccf2a497c053b573"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/native/vector/routine_vector_online_softmax.hpp",
+            "bytes": 7151,
+            "sha256": "49d13afabff882e3718e7c0f7ed9709ea79f0e1c8904ab7e0d4860bb4a8bca6f"
+          }
+        ]
+      },
+      "scatter": {
+        "zero_new": true,
+        "raw": [
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/scatter-verified.json",
+            "bytes": 7067724,
+            "sha256": "97c13b2e96116fd7330c0b6f344655e259583e6d6b4b1e5cd9ee32aa4be5b9ea"
+          },
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/scatter-integrated.json",
+            "bytes": 7029573,
+            "sha256": "4e1e230f30e5bd52b1af2587e22b9d89ffcb31397e863718bd8288a158b9a76a"
+          }
+        ],
+        "resolved_quoted_include_closure": [
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/scatter/turboquant_reshape_scatter.cpp",
+            "bytes": 64218,
+            "sha256": "e00991d4f8b94b373ce3e571bb05f9d557a3c1573fb5deeb5ac7733b94d27dda"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/include/turboquant/turboquant_layout.h",
+            "bytes": 14145,
+            "sha256": "850d5860e664986de486de41265b826f66f8344ac6790f317eea25f5e51af3cd"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/include/turboquant/turboquant_mode.h",
+            "bytes": 14014,
+            "sha256": "c50c8c02a97b74315ed9358a50567c4ff7a2605f3b34cc7a3fb6c28c781d39a2"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/scatter/routine_vector_rotate_butterfly.hpp",
+            "bytes": 31855,
+            "sha256": "582bf2ad9b0c737dfcc7f8d133d04fad62f94cd443890a5948747f18afc8eb85"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+            "bytes": 41344,
+            "sha256": "6701601056dfe2e003f58e6a6133258b5a73d2a2cd6c827a1aaa65b92282b63d"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_layout.h",
+            "bytes": 4873,
+            "sha256": "c0403ad5ffbda5b5fbf59ff6bb01f86c7a176257bdba17c2366a621d2c7f5e02"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_mode.h",
+            "bytes": 8865,
+            "sha256": "64e9b5afac0e4b69fc2dcb23d2b809d84a10ed0689a1f6204326ef4cb4421c32"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/routine_vector_rotate_butterfly.hpp",
+            "bytes": 17081,
+            "sha256": "b9c395ad2a374072560eb66a5f9980833146e2732447607481b77a09b01c3fe2"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_launch.h",
+            "bytes": 2246,
+            "sha256": "53eea2aec1326fe327767807b28b74776e763e1de78e8686e88d121ef9a46332"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_types.h",
+            "bytes": 110,
+            "sha256": "cb2e4abeecec6ffe85711648487e9e668c29b9306a16913820ca6024d66eb597"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_fused_decode_opt.hpp",
+            "bytes": 7337,
+            "sha256": "3e168758eca35140ecfce89b9b3da65f8b21d5d03eb9b76e991517dc04d61a3d"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_tiling.h",
+            "bytes": 6020,
+            "sha256": "5e538d8d5ed7c2dd576f54562eee44879857e55af2d5c98bba07373294c14837"
+          }
+        ]
+      },
+      "scatter_nz": {
+        "zero_new": true,
+        "raw": [
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/scatter_nz-verified.json",
+            "bytes": 6196618,
+            "sha256": "79891fa2669dd85b548fc028fb16aa3e119c7350d8871ae59309d135ab3ed7ec"
+          },
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/scatter_nz-integrated.json",
+            "bytes": 6206099,
+            "sha256": "70a3fbcafe73eb4c85af76820cd37792fef5ad7e3e27f23ff0edc9a22acc7e24"
+          }
+        ],
+        "resolved_quoted_include_closure": [
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/scatter-nz-verified.cpp",
+            "bytes": 159,
+            "sha256": "b48de10100bc5afa4e235e0c4b7b76acfef690045735cd8021830759d103b4fe"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/scatter/turboquant_reshape_scatter.cpp",
+            "bytes": 64218,
+            "sha256": "e00991d4f8b94b373ce3e571bb05f9d557a3c1573fb5deeb5ac7733b94d27dda"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/include/turboquant/turboquant_layout.h",
+            "bytes": 14145,
+            "sha256": "850d5860e664986de486de41265b826f66f8344ac6790f317eea25f5e51af3cd"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/include/turboquant/turboquant_mode.h",
+            "bytes": 14014,
+            "sha256": "c50c8c02a97b74315ed9358a50567c4ff7a2605f3b34cc7a3fb6c28c781d39a2"
+          },
+          {
+            "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/scatter/routine_vector_rotate_butterfly.hpp",
+            "bytes": 31855,
+            "sha256": "582bf2ad9b0c737dfcc7f8d133d04fad62f94cd443890a5948747f18afc8eb85"
+          },
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/scatter-nz-integrated.cpp",
+            "bytes": 134,
+            "sha256": "e679e75a387a8d6c5f8ee5e9f2f432220e920bf30c549dbe5c32665cbbaf05ad"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+            "bytes": 41344,
+            "sha256": "6701601056dfe2e003f58e6a6133258b5a73d2a2cd6c827a1aaa65b92282b63d"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_layout.h",
+            "bytes": 4873,
+            "sha256": "c0403ad5ffbda5b5fbf59ff6bb01f86c7a176257bdba17c2366a621d2c7f5e02"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_mode.h",
+            "bytes": 8865,
+            "sha256": "64e9b5afac0e4b69fc2dcb23d2b809d84a10ed0689a1f6204326ef4cb4421c32"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/routine_vector_rotate_butterfly.hpp",
+            "bytes": 17081,
+            "sha256": "b9c395ad2a374072560eb66a5f9980833146e2732447607481b77a09b01c3fe2"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_launch.h",
+            "bytes": 2246,
+            "sha256": "53eea2aec1326fe327767807b28b74776e763e1de78e8686e88d121ef9a46332"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_types.h",
+            "bytes": 110,
+            "sha256": "cb2e4abeecec6ffe85711648487e9e668c29b9306a16913820ca6024d66eb597"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_fused_decode_opt.hpp",
+            "bytes": 7337,
+            "sha256": "3e168758eca35140ecfce89b9b3da65f8b21d5d03eb9b76e991517dc04d61a3d"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/turboquant_tiling.h",
+            "bytes": 6020,
+            "sha256": "5e538d8d5ed7c2dd576f54562eee44879857e55af2d5c98bba07373294c14837"
+          }
+        ]
+      },
+      "e8_component": {
+        "zero_new": true,
+        "raw": [
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/e8_component-verified.json",
+            "bytes": 103359,
+            "sha256": "a037136efc5c98dbaf61e80cbd8f1b90548d236ae1fe7f88736a5b108fde2656"
+          },
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/e8_component-integrated.json",
+            "bytes": 99680,
+            "sha256": "278d2cf2f8ca09a724f314bb6c7e57881e3fefc4c71a775ef5fd9451c444f5f3"
+          }
+        ],
+        "resolved_quoted_include_closure": [
+          {
+            "path": "/mnt/c/ascend-micro-harness/reports/checkpoint2_20261123/wave3/w3_e8_dec/review_packet_v5/candidate/source/parallel_component.cpp",
+            "bytes": 3416,
+            "sha256": "47ff8c5c19bb5f532a7f86484cc9826837511edf7e2a459bcdaa08341d7dc789"
+          },
+          {
+            "path": "/mnt/c/ascend-micro-harness/reports/checkpoint2_20261123/wave3/w3_e8_dec/review_packet_v5/candidate/source/routines/routine_e8_bf16_dequant_simt.hpp",
+            "bytes": 8985,
+            "sha256": "38fd578c1753cd37552553400db30689904a34210410e14eddf2e2c0444319e9"
+          },
+          {
+            "path": "/mnt/c/ascend-micro-harness/reports/checkpoint2_20261123/wave3/w3_e8_dec/review_packet_v5/candidate/source/e8_parallel_decode.hpp",
+            "bytes": 5666,
+            "sha256": "f0a5b191b50d8d02a8d7a327a53ede5a3c869252b30b916f814d0497be37a2f4"
+          },
+          {
+            "path": "/mnt/c/ascend-micro-harness/reports/checkpoint2_20261123/wave3/w3_e8_dec/review_packet_v5/candidate/source/routines/routine_e8_int8_dequant_simt.hpp",
+            "bytes": 9404,
+            "sha256": "55b848c85991aad6be28fcee8e01bb0ebcc9f37abf2ceb50d764f920b0732950"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/parallel_component.cpp",
+            "bytes": 3862,
+            "sha256": "0fd04fcc15b476096eadcd2537b1365356d9bb29c8591c29f9a6db998b3ff017"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/e8_component.hpp",
+            "bytes": 216,
+            "sha256": "f57ee6cc867ac998bbd2a70b0d2b8136df9dfa13e1887262805266e78ba2dc45"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/routines/routine_e8_bf16_dequant_simt.hpp",
+            "bytes": 9168,
+            "sha256": "d6d5eb2014b24fe503e78e0824742b5833193737846bf02d61df84e3ae52f313"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/e8_parallel_decode.hpp",
+            "bytes": 6236,
+            "sha256": "78ad1016f9abaa38672107dcc971485ecca4985fd02ee8acb1df671fcd0da9d1"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/routines/routine_e8_int8_dequant_simt.hpp",
+            "bytes": 9506,
+            "sha256": "c673a4fd5bf235b29f28d3cf1bbf763d258aa18b99849a27da5dbe59685a704d"
+          }
+        ]
+      },
+      "e8_reader": {
+        "zero_new": true,
+        "raw": [
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/e8_reader-verified.json",
+            "bytes": 2434551,
+            "sha256": "e3c0ca5baa404e7c63b104bd52640c3af658b8bf89ded681e2ec8373fccae1da"
+          },
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/e8_reader-integrated.json",
+            "bytes": 2510247,
+            "sha256": "3b92f72bf7691567d6c9903da908768150f74479c940f0e7374a15cea4bdb6da"
+          }
+        ],
+        "resolved_quoted_include_closure": [
+          {
+            "path": "/mnt/c/ascend-micro-harness/reports/checkpoint2_20261123/wave3/w3_e8_dec/review_packet_v5/candidate/source/e8_fused_decode.cpp",
+            "bytes": 21745,
+            "sha256": "e5fdf887471664c8930079fb891303094b91486adc8334b050a5648a3b407a38"
+          },
+          {
+            "path": "/mnt/c/ascend-micro-harness/reports/checkpoint2_20261123/wave3/w3_e8_dec/review_packet_v5/candidate/source/e8_decode.hpp",
+            "bytes": 3438,
+            "sha256": "5e890555adcb5e64a962519bbfd749bfbeb3ee5208a044060887f3f2df95c1ac"
+          },
+          {
+            "path": "/mnt/c/ascend-micro-harness/reports/checkpoint2_20261123/wave3/w3_e8_dec/review_packet_v5/candidate/source/e8_parallel_decode.hpp",
+            "bytes": 5666,
+            "sha256": "f0a5b191b50d8d02a8d7a327a53ede5a3c869252b30b916f814d0497be37a2f4"
+          },
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/reader-layout-integrated.cpp",
+            "bytes": 777,
+            "sha256": "fb9d13ddb745ed76cb7c449f4904b7ed5ee9ea1cd45b9ea1a3b98260b3a34942"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/e8_fused_decode.cpp",
+            "bytes": 22359,
+            "sha256": "1354868b479d3c2972f219a7012718e210c085ffcb38c6310056fcebb7f390ef"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/e8_decode.hpp",
+            "bytes": 3344,
+            "sha256": "4cfbecd3da6854c433c3a9caf0aaede572748f74fc60aad3c21519e00e3bb050"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/e8_packet_layout.hpp",
+            "bytes": 488,
+            "sha256": "eec52cf40c4e0f8c559e348f8816847e81be6086d3e0d8e987335caf0c13b24e"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/e8_parallel_decode.hpp",
+            "bytes": 6236,
+            "sha256": "78ad1016f9abaa38672107dcc971485ecca4985fd02ee8acb1df671fcd0da9d1"
+          }
+        ]
+      },
+      "e8_reader_unannotated": {
+        "zero_new": true,
+        "raw": [
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/e8_reader_unannotated-verified.json",
+            "bytes": 2015581,
+            "sha256": "42759a3ad0fc06f3f06c9f44066743b2aedf14a8204070e4345521aa12085570"
+          },
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/e8_reader_unannotated-integrated.json",
+            "bytes": 1910605,
+            "sha256": "9ee4d814b1fde09571c34ad1f8bc87afe56cffbb599856988a7734e0e1afc51a"
+          }
+        ],
+        "resolved_quoted_include_closure": [
+          {
+            "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/reader-layout-verified-raw.cpp",
+            "bytes": 21268,
+            "sha256": "e2177b5f80779b0db98e6fcc8c5651e6692978f01ab862363fe92d835197ddf2"
+          },
+          {
+            "path": "/mnt/c/ascend-micro-harness/reports/checkpoint2_20261123/wave3/w3_e8_dec/review_packet_v5/candidate/source/e8_decode.hpp",
+            "bytes": 3438,
+            "sha256": "5e890555adcb5e64a962519bbfd749bfbeb3ee5208a044060887f3f2df95c1ac"
+          },
+          {
+            "path": "/mnt/c/ascend-micro-harness/reports/checkpoint2_20261123/wave3/w3_e8_dec/review_packet_v5/candidate/source/e8_parallel_decode.hpp",
+            "bytes": 5666,
+            "sha256": "f0a5b191b50d8d02a8d7a327a53ede5a3c869252b30b916f814d0497be37a2f4"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/e8_fused_decode.cpp",
+            "bytes": 22359,
+            "sha256": "1354868b479d3c2972f219a7012718e210c085ffcb38c6310056fcebb7f390ef"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/e8_decode.hpp",
+            "bytes": 3344,
+            "sha256": "4cfbecd3da6854c433c3a9caf0aaede572748f74fc60aad3c21519e00e3bb050"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/common/e8_packet_layout.hpp",
+            "bytes": 488,
+            "sha256": "eec52cf40c4e0f8c559e348f8816847e81be6086d3e0d8e987335caf0c13b24e"
+          },
+          {
+            "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/decode/e8/e8_parallel_decode.hpp",
+            "bytes": 6236,
+            "sha256": "78ad1016f9abaa38672107dcc971485ecca4985fd02ee8acb1df671fcd0da9d1"
+          }
+        ]
+      }
+    },
+    "retained_narrow_failures": {
+      "reshape": [
+        {
+          "code": "AKA3002",
+          "severity": "INFO",
+          "hardware_domain": "-",
+          "message": "Cannot uniquely match host launch 'turboquant_reshape_and_cache_bf16_wide' to a kernel definition",
+          "count": 1
+        }
+      ],
+      "reshape_nz": [
+        {
+          "code": "AKA3002",
+          "severity": "INFO",
+          "hardware_domain": "-",
+          "message": "Cannot uniquely match host launch 'turboquant_reshape_and_cache_bf16_wide' to a kernel definition",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "failed_overall_analyzer_audit": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/AKA_HOST_SCOPE_FAILURE_AUDIT.json",
+    "bytes": 8535,
+    "sha256": "9d8727f6fba3c403059741622edc94e9458480c859dc70088fd0eb5d7e62eb56"
+  },
+  "baseline_pins": [
+    {
+      "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/bisheng_compiler/bin/bisheng",
+      "bytes": 151096896,
+      "sha256": "000dc2dcf1ae52ad08f700cc432322a16ad2103971e07d922f7d1a6207be0649"
+    },
+    {
+      "path": "/mnt/c/ascend-micro-harness/scripts/camodel_build_phase_guard.sh",
+      "bytes": 1241,
+      "sha256": "5dd7e379409a0b502020cf6609810e449d1fc127494bfb2bd8da50202695437a"
+    },
+    {
+      "path": "/home/dmin/work/checkpoint2_20261123/slot03/src/src/prefill/turboquant_reshape_batch.cpp",
+      "bytes": 71390,
+      "sha256": "bcbdcc866230bc72bf47ba3ec4fd025e5a063cd9333a58ee558f37e2924e89ad"
+    },
+    {
+      "path": "/home/dmin/work/deadlock_20261125/d1-baseline-strict/source/src/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+      "bytes": 60074,
+      "sha256": "f0de459602caca0da6d67bbefe8368f6f44d0b0c32cd04cd01ccb187f7d312c3"
+    },
+    {
+      "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/decode/turboquant_fused_decode.cpp",
+      "bytes": 56334,
+      "sha256": "955d73a5f6ee157bf11bcff2d05863343aa06ee1cf0b04da053ec92cbf8e915d"
+    },
+    {
+      "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/decode/vector/turboquant_vector_service.h",
+      "bytes": 76765,
+      "sha256": "69768195f747dbd785561986397e3164b75019fcb59fcc0bb88401ae4a0e1e88"
+    },
+    {
+      "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/decode/vector/routine_vector_cube_softmax.hpp",
+      "bytes": 30014,
+      "sha256": "728e0cfc6314c808c07aa9e74308557ef6cb8aaabeff5c05338926aadabd9baf"
+    },
+    {
+      "path": "/mnt/c/Users/Admin/.codex/worktrees/wave-v11-integration/turboquant-core/src/scatter/turboquant_reshape_scatter.cpp",
+      "bytes": 64218,
+      "sha256": "e00991d4f8b94b373ce3e571bb05f9d557a3c1573fb5deeb5ac7733b94d27dda"
+    },
+    {
+      "path": "/mnt/c/ascend-micro-harness/reports/checkpoint2_20261123/wave3/w3_e8_dec/review_packet_v5/candidate/source/parallel_component.cpp",
+      "bytes": 3416,
+      "sha256": "47ff8c5c19bb5f532a7f86484cc9826837511edf7e2a459bcdaa08341d7dc789"
+    },
+    {
+      "path": "/mnt/c/ascend-micro-harness/reports/checkpoint2_20261123/wave3/w3_e8_dec/review_packet_v5/candidate/source/e8_fused_decode.cpp",
+      "bytes": 21745,
+      "sha256": "e5fdf887471664c8930079fb891303094b91486adc8334b050a5648a3b407a38"
+    }
+  ],
+  "analyzer_commit": "46f16829ee37b4a31961832595e96b280d7f053e"
+}

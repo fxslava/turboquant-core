@@ -1,0 +1,243 @@
+{
+  "after_each_completed_owned_run": [
+    "Rebind sealed receipt, runner, both loaded DSOs, backend image inodes/file stamps and READY/DONE simultaneous mapping attestations, actual result/geometry/log and final artifact file-state ledger.",
+    "Verify natural integer-zero exit, exactly one guarded marker, actual total tiles and device time inside the inherited 900-second watchdog. Report raw footer ticks verbatim.",
+    "Recheck full retained key.actual/gold.bin, value.actual/gold.bin and scale.actual/gold.bin byte equality including unowned physical bytes. Match fixture source and exact console verdict for read-only input and guard checks.",
+    "Require zero-byte exception set for all 32 groups, exact active AIC/AIV0/AIV1 triplets, natural role terminals and no global collective. Bind initial kernel PC/words to selected DSO's key-zero AIC/AIV role symbols; private loaded module presence alone does not select it.",
+    "Check the selected frame's mode-2 panel-ready, panel-free including two primes, and page drain. Check the matching source-pipe waits and local hard-event debt at role completion.",
+    "Seal per-case observed functional/trace result at full exact input hashes. Run the next case only under root's serialized authority."
+  ],
+  "candidate": "P/r6",
+  "cases": [
+    {
+      "argv": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-22.04",
+        "-u",
+        "dmin",
+        "--",
+        "python3",
+        "-B",
+        "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/infra/r11-batch-p-r6-pair/run_probe.py",
+        "--receipt",
+        "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/receipts/batch-p-strip-wide-lloyd/admission.json",
+        "--receipt-sha256",
+        "4df4609e6f2186fcc43af5cbf101a0e132210ab020d670aeb334edda88287efe",
+        "--run-dir",
+        "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd",
+        "batch-p-strip-wide-lloyd"
+      ],
+      "case": "batch-p-strip-wide-lloyd",
+      "geometry": {
+        "block": 16,
+        "grid": 1,
+        "heads": 4,
+        "num_blocks": 4,
+        "nz": 0,
+        "quant_mode": 1,
+        "share": 16,
+        "strips": 1,
+        "tiles": 1,
+        "tokens": 16,
+        "wide": 1
+      },
+      "index": 1,
+      "performance_gate": {
+        "scope": "parity/safety; no samegeometryfrozentiming"
+      },
+      "receipt": {
+        "bytes": 3083,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/receipts/batch-p-strip-wide-lloyd/admission.json",
+        "sha256": "4df4609e6f2186fcc43af5cbf101a0e132210ab020d670aeb334edda88287efe"
+      },
+      "run_dir": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-strip-wide-lloyd",
+      "tiles": 1
+    },
+    {
+      "argv": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-22.04",
+        "-u",
+        "dmin",
+        "--",
+        "python3",
+        "-B",
+        "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/infra/r11-batch-p-r6-pair/run_probe.py",
+        "--receipt",
+        "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/receipts/batch-p-nz-narrow-lloyd/admission.json",
+        "--receipt-sha256",
+        "efc5583137ad8698eba5e1ec0a6ffeb59118d25c20732a3f495914ba2e6b472c",
+        "--run-dir",
+        "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-nz-narrow-lloyd",
+        "batch-p-nz-narrow-lloyd"
+      ],
+      "case": "batch-p-nz-narrow-lloyd",
+      "geometry": {
+        "block": 64,
+        "grid": 1,
+        "heads": 4,
+        "num_blocks": 4,
+        "nz": 1,
+        "quant_mode": 1,
+        "share": 64,
+        "strips": 4,
+        "tiles": 4,
+        "tokens": 64,
+        "wide": 0
+      },
+      "index": 2,
+      "performance_gate": {
+        "scope": "parity/safety; no samegeometryfrozentiming"
+      },
+      "receipt": {
+        "bytes": 3086,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/receipts/batch-p-nz-narrow-lloyd/admission.json",
+        "sha256": "efc5583137ad8698eba5e1ec0a6ffeb59118d25c20732a3f495914ba2e6b472c"
+      },
+      "run_dir": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-nz-narrow-lloyd",
+      "tiles": 4
+    },
+    {
+      "argv": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-22.04",
+        "-u",
+        "dmin",
+        "--",
+        "python3",
+        "-B",
+        "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/infra/r11-batch-p-r6-pair/run_probe.py",
+        "--receipt",
+        "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/receipts/batch-p-nz-wide-uniform/admission.json",
+        "--receipt-sha256",
+        "713b7a2140c154ce9f5eada521d22a475d2d62c692782b423e5c24b37490c296",
+        "--run-dir",
+        "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-nz-wide-uniform",
+        "batch-p-nz-wide-uniform"
+      ],
+      "case": "batch-p-nz-wide-uniform",
+      "geometry": {
+        "block": 128,
+        "grid": 2,
+        "heads": 4,
+        "num_blocks": 4,
+        "nz": 1,
+        "quant_mode": 0,
+        "share": 32,
+        "strips": 4,
+        "tiles": 4,
+        "tokens": 64,
+        "wide": 1
+      },
+      "index": 3,
+      "performance_gate": {
+        "scope": "parity/safety; no samegeometryfrozentiming"
+      },
+      "receipt": {
+        "bytes": 3103,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/receipts/batch-p-nz-wide-uniform/admission.json",
+        "sha256": "713b7a2140c154ce9f5eada521d22a475d2d62c692782b423e5c24b37490c296"
+      },
+      "run_dir": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-nz-wide-uniform",
+      "tiles": 4
+    }
+  ],
+  "compiled": {
+    "bytes": 97090,
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/evidence-final/COMPILED.json",
+    "sha256": "d57fb0c27ebc63b8615583c83426ca1e852d8a45d4a6a48a0a7bd945788e5875"
+  },
+  "model_plan": {
+    "bytes": 6906,
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/MODEL_PLAN_P_R6.json",
+    "sha256": "d16f2b04ca31203e749c215414028ce282e55cb81dacaaac1bcdc8d3e4fc28ac"
+  },
+  "original_case_packet": {
+    "bytes": 54198,
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/canary/PAIRED_CANARY_PACKET.json",
+    "sha256": "30c8f6035820cba4d45096826f0c36e03ccc0b308fce713eaa6a3269ceda1c0b"
+  },
+  "runtime_jobs_started_by_verifier": 0,
+  "schema": "p6-waiver-resumed-three-supplemental-model-evidence-plan-v1",
+  "source": {
+    "bytes": 17779,
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/CANDIDATE_SOURCE.sha256",
+    "sha256": "da54b14f843583cdd0c8e262bc799430afeb89b59406e3aeb3e0deecc34a0064"
+  },
+  "source_inventory": {
+    "cpp_comment_free_by_existing_lexer": 36,
+    "inventory": {
+      "bytes": 19824,
+      "path": "/home/dmin/work/deadlock_20261125/slotP/r6/source/src/turboquant/SOURCE_SYNC.json",
+      "sha256": "fa3400c1755c343a2a1bc5f164805f05cb487daca22cd3d6c5c1934270aa3753"
+    },
+    "unchanged_shared_aka": 1
+  },
+  "timing_scope": {
+    "accepted_basis_raw": 63649,
+    "archived_raw_cap": 63629,
+    "body_tick_delta": 0,
+    "historic_candidate_observed_raw": 63637,
+    "historic_reference_reproduction_observed_raw": 63630,
+    "histories_remain_failed": true,
+    "matched_modern_frozen03_raw": 63654,
+    "normalization": "NONE",
+    "supplemental_raw_cap": null,
+    "user_direction": "Proceed using the modern matched comparison. User explicitly waived 20 raw ticks beyond the historical cap for the primary modern harness."
+  },
+  "unchanged_runtime_10": [
+    {
+      "bytes": 19189,
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/infra/r11-batch-p-r6-pair/run_probe.py",
+      "sha256": "52d8db28c7ffb7fe3073337f4d649533795cee6a25a72c5ae6fb83e820f07bfe"
+    },
+    {
+      "bytes": 5104,
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/infra/r11-batch-p-r6-pair/phase_lock.py",
+      "sha256": "4bbcfc8dfe07f05d4c053a58345a6ba152dbb08f031e9b4783aeb371be32394c"
+    },
+    {
+      "bytes": 5587,
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/infra/r11-batch-p-r6-pair/watchdog.py",
+      "sha256": "04c76160c62cb52f32b3aff66470036be1de7def943cfbfbfedafba5f0fc2cba"
+    },
+    {
+      "bytes": 3495,
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/infra/r11-batch-p-r6-pair/evidence.py",
+      "sha256": "8a64c6ee0f21038f3682b7bdc729af2cb5426a498c99f645b9b120e93eb00873"
+    },
+    {
+      "bytes": 1290,
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/infra/r11-batch-p-r6-pair/oracle.py",
+      "sha256": "2c39936d92dd9557d02358cebc08b1b47988dcd24584e7c9e9d72752bdc743e8"
+    },
+    {
+      "bytes": 4243,
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/infra/r11-batch-p-r6-pair/process_owner.py",
+      "sha256": "214dc22b3d0e11b3deb3b8050e1f3cde33cc29a318f8584e6d8238afa339cccc"
+    },
+    {
+      "bytes": 780,
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/infra/r11-batch-p-r6-pair/probe_ipc.py",
+      "sha256": "980ed0ba60f5aa8bbb824189f8b052168f79f38a6927a7a5fc0874b1d6d8278d"
+    },
+    {
+      "bytes": 2913,
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/infra/r11-batch-p-r6-pair/host_link_recipe.py",
+      "sha256": "982e84a1bfd23cfbcaf539bda66d1e62e8ac784b44c0fb6ba4a6ac11f64cc7bb"
+    },
+    {
+      "bytes": 2900,
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/infra/r11-batch-p-r6-pair/source_provenance.py",
+      "sha256": "7c81897cb395e34853cedb763d4d0a1c7ce5ca667da5d2eecdb014b9f0977359"
+    },
+    {
+      "bytes": 17551,
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/infra/r11-batch-p-r6-pair/r8_provenance.py",
+      "sha256": "07bd259c48119f4ce8ce155811695582fa89c5ab656a272c0c59f16c5f91bb4d"
+    }
+  ]
+}

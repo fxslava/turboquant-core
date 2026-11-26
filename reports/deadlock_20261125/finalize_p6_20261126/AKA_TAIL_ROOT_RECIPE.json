@@ -1,0 +1,84 @@
+{
+  "schema": "p6-aka-tail-root-recipe-v1",
+  "status": "PREPARED_ONLY_waiting_fresh_consumer_review_and_root_application",
+  "runner": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/resume_deployed_aka.py",
+    "bytes": 11740,
+    "sha256": "1f599d96317f696185d57de440cc0095f1acd7de640f1a01a93f8a69ab208109"
+  },
+  "freeze": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/AKA_TAIL_FROZEN_INPUTS.json",
+    "bytes": 82112,
+    "sha256": "dad2bdcb23a0b639d3e15bd2dd41d6328c49ff4ed4e04e5ccbc2a7a802d5df82"
+  },
+  "consumer_hygiene_delta": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/analyzer-hygiene/CONSUMER_HYGIENE_DELTA.json",
+    "bytes": 23973,
+    "sha256": "922331ee5fe5dce362c78493cb4f8cb44cb8e63f1395222a3426c8155a08264c"
+  },
+  "proposed_checker": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/analyzer-hygiene/check_analyzer.py",
+    "bytes": 8994,
+    "sha256": "ef7f2333c75f070aa959632e79183d0658c2b18572d5334d31fdd86a87997496"
+  },
+  "prior_overall_gate_failure": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/AKA_HOST_SCOPE_FAILURE_AUDIT.json",
+    "bytes": 8535,
+    "sha256": "9d8727f6fba3c403059741622edc94e9458480c859dc70088fd0eb5d7e62eb56"
+  },
+  "pre_consumer_fix_host_receipt": {
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/final-host/FINAL_HOST_RESULTS.json",
+    "bytes": 114167,
+    "sha256": "28fe079c8703066de0e567f75bb05ad4114776a720b7dae7d7004c8c6cc941bd"
+  },
+  "syntax_retained": {
+    "plugin-nz": 12,
+    "core-nz": 12,
+    "core-strip": 6
+  },
+  "unaffected_rebound_and_replayed_existing_raw_counter": [
+    "decode",
+    "vector",
+    "softmax",
+    "scatter",
+    "scatter_nz",
+    "e8_component",
+    "e8_reader",
+    "e8_reader_unannotated"
+  ],
+  "tail_fresh_affected": [
+    "reshape",
+    "reshape_nz",
+    "reshape_wide",
+    "reshape_wide_nz"
+  ],
+  "tail_independent_device_reference_pairs": [
+    "narrow-strip",
+    "narrow-nz",
+    "wide-strip",
+    "wide-nz"
+  ],
+  "no_compile_or_model": true,
+  "root_run_argv": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu-22.04",
+    "-u",
+    "dmin",
+    "--",
+    "python3",
+    "-B",
+    "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/resume_deployed_aka.py",
+    "run",
+    "--freeze",
+    "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/finalize_p6_20261126/AKA_TAIL_FROZEN_INPUTS.json",
+    "--freeze-sha256",
+    "dad2bdcb23a0b639d3e15bd2dd41d6328c49ff4ed4e04e5ccbc2a7a802d5df82",
+    "--consumer-sha256",
+    "ef7f2333c75f070aa959632e79183d0658c2b18572d5334d31fdd86a87997496",
+    "--output",
+    "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-resume-r1"
+  ],
+  "result_path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-resume-r1/DEPLOYED_AKA_SYNTAX.json",
+  "release_behavior": "Consumer must be applied only after fresh review. Original syntax receipts and failed analyzer output stay sealed. Actual fresh paired results remain required before any zero-new claim."
+}

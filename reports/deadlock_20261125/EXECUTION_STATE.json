@@ -1,0 +1,1155 @@
+{
+  "status": "COMPLETE_P6_USER_WAIVED_RELEASE",
+  "core_baseline_checkpoint": "9822714d7ebeebc9d2b2a9907fc1aea3d90d1fe1",
+  "vllm_baseline_checkpoint": "964190003f9e29e590b957cc7ef84e9c099cbf36",
+  "sync": {
+    "shared_cpp": 36,
+    "metadata": 1,
+    "byte_identical": true,
+    "production_checker": "PASS"
+  },
+  "agents": {
+    "audit_d1": "final synchronized G host/syntax/ABI gates running",
+    "batch_restore_audit": "isolated source-only P neutral packet preparation",
+    "g_comment_export_review": "FINAL PASS style/token-only equivalent export"
+  },
+  "candidate_kernel_edits": "native G canonical + exact mirror; batch P isolated source-only",
+  "builds_started": true,
+  "model_runs_started": true,
+  "vllm_kernel_mutations": true,
+  "model_watchdog_seconds": 900,
+  "maximum_tiles": 6,
+  "baseline_host_tests": {
+    "attention_passed": 606,
+    "sync_build_passed": 14
+  },
+  "incident_artifact_identity": "Remote-only feat/tq-cube-clean d20c0ac04; original ELF/dumps unavailable locally",
+  "historical_controls_recovered": {
+    "decode": "/home/dmin/work/checkpoint1_20261123_i1/device-build/tests/test_wave_v11_exact_sim",
+    "batch": "/home/dmin/work/checkpoint2_20261123/slot03/build/bin/baseline"
+  },
+  "prohibited_inference": "relative PC alone does not identify a source instruction",
+  "audit_d1_interim": "B HOLD/NOT_CONFIRMED: audited collective arrivals are symmetric; original incident ELF not yet bound",
+  "audit_d2_interim": "historical9.2.1 Fill-to-DMA ISA recovered; causal ordering defect still under audit",
+  "slot_c": "conditional HOLD: neither suspect confirmed",
+  "audit_d1_task": "authorized current-core baseline decode/scatter compile + local PC mapping + bounded reproduction",
+  "local_pc_scope": "current ELF only; cannot bind unavailable remote relative PC",
+  "slot_b": "unchanged baseline + symmetry/reproduction until defect confirmed",
+  "baseline_build": {
+    "source_commit": "9822714d7ebeebc9d2b2a9907fc1aea3d90d1fe1",
+    "slot": "/home/dmin/work/deadlock_20261125/d1-baseline",
+    "log": "/home/dmin/work/deadlock_20261125/d1-baseline/build.log",
+    "targets": [
+      "tq_deadlock_decode_ragged",
+      "tq_deadlock_scatter_strips",
+      "tq_scatter_nz_sim"
+    ]
+  },
+  "slot_a_scope": "lab-gated zero-GM experiment, not confirmed causal fix",
+  "slot_b_scope": "unchanged baseline reproduction + symmetry verification",
+  "build_compatibility": "shared precise maybe_unused annotation for inherited device-only parameter warning; final strict Werror required",
+  "strict_draft_policy": "any target-wide warning demotion draft is unadmitted",
+  "audit_d2": "NOT_CONFIRMED; experimental zero-GM candidate only",
+  "baseline_compile_progress": "strict AIC preprocess passed; AIV compilations CPU-bound",
+  "baseline_compatibility_text_sha256": "c0a6cf47631477cd233858aa21a747bc9939c2e043fef1d22a84cbf4b7f3b10a",
+  "baseline_compatibility_text_equivalence": "strict precise annotation == unannotated demotion draft at AIC preprocess stage only",
+  "initial_aka_delta": {
+    "decode_new": 0,
+    "scatter_new": 0,
+    "coverage": "explicit device-macro closure pending"
+  },
+  "infra": {
+    "status": "complete host checks",
+    "sealed_files_verified": 10,
+    "strict_runner_syntax_passed": 4,
+    "supervisor_host_tests_passed": 3,
+    "historical_artifact_hashes_verified_by_worker": 8,
+    "manifest_sha256": "4ad3eab2b7270f13a179c154945e8bd40dbab3d6981685c3d420f92ff05da62c"
+  },
+  "operational_gate": "PASS freshSol6.2R8;247hashes,11commands,independentrealblockedcollector900scaledcleanup+locks+30host9scatter",
+  "operational_v1_packet_sha256": "5de224bb7c723278eb8b01241fbefbc680abc4cfcaa5c2feb01d3f4be83c6622",
+  "no_model_until": [
+    "operational supervisor PASS",
+    "compiled source/ISA review passes1,2,3"
+  ],
+  "slot_a_revision": "r2; prior r1 compile retired, source preserved",
+  "slot_a_source_packet_sha256": "7254318980026ce383c6201e83fce3e847bbb58a838b4f08be7c97f53a23e0d0",
+  "slot_a_aka_new": 0,
+  "incident_pc_scope": "Current preprocess AIC entry-relative mapping differs by entry; remote PC not bindable",
+  "oracle_requirement": "independently exact0BF16ULP for admission; <=2ULP reference supplemental only",
+  "kernel_review_p1": "PASS final136compiledpacket b5d448de; exactS1 bypass andpairedR3input identity; operational/runtimepending",
+  "exact_runner_r2": "strict host object compiled; raw-grid14-exact and qhead1 changed-path shapes supplied, no execution yet",
+  "device_compile": "baseline AIV still CPU-bound; no device errors reported; compile duration is not model watchdog duration",
+  "slot_a_build_recovery": "session/process vanished after author handoff; r1 cancellation ruled out by immediate PID check; exact exit cause unrecorded; immutable173files reverified and strict build resumed",
+  "live_model_ownership": "root-owned session until natural completion/watchdog; no handoff across agent finalization",
+  "baseline_host_cpp": {
+    "passed": 9,
+    "failed": 0,
+    "ctest_seconds": 4.9
+  },
+  "baseline_final_aic_sha256": "87d41bb03c12d7909d07f454d73974f67e5e2cc437f43ba11ffb7bf557281e2a",
+  "baseline_final_aic_historical_match": true,
+  "baseline_build_phase": "decode+scatter+batch complete; r3 host/control receipts and neutral packet being sealed",
+  "slot_a_build_directory": "/home/dmin/work/deadlock_20261125/slotA/r2/build-owned-root",
+  "slot_a_build_retry_reason": "CANN legacy generated merge relinks .o in place; previous build directory restart feeds ET_EXEC to lld; fresh build required",
+  "final_aic_pc_map": {
+    "artifact_sha256": "87d41bb03c12d7909d07f454d73974f67e5e2cc437f43ba11ffb7bf557281e2a",
+    "debug_companion": "text and normalized rela.text identical",
+    "pre_rotated_entry_plus_2270": "Fixpipe barrier",
+    "raw_query_entry_plus_2270": "scalar stack store, final ELF word0x14c94",
+    "scope": "local final AIC role object, merged loaded image pending; cannot bind remote unavailable ELF"
+  },
+  "operational_r2_manifest_sha256": "ded82f58462cf0ea108d2705b494a40079212021d5d7ab3e703bc79d9064794a",
+  "operational_r2_review_packet_sha256": "a2874237ea6df14eff4e4a1e35d0c818ec10d0661eb5f8df05a28b667557dc35",
+  "source_host_r2_packet": {
+    "path": "/home/dmin/work/deadlock_20261125/slotA/r2/review-source-host-r2/manifest.json",
+    "sha256": "e5588a3c28ac83564909fb54012cc245227a02ab2220e4eab04b40cf373a3b8b",
+    "files_root_verified": 66
+  },
+  "exact_golden": {
+    "raw_words": 4608,
+    "qhead1_words": 768,
+    "independent_fraction_enumeration": true,
+    "device_checked": false
+  },
+  "slot_a_recovery_recipe_sha256": "c99af45ba42ea52ae8ec35ac36f09d59fcddded9860ce6f693277f8aabd12300",
+  "generated_wrapper_policy": "inherited per-generated-TU exception; authored-source stages strict; exact warning locations/flags being captured for review",
+  "batch_control_current_source": {
+    "status": "strict compile complete, timing pending",
+    "build": "/home/dmin/work/deadlock_20261125/d1-baseline-strict/batch-build",
+    "log": "/home/dmin/work/deadlock_20261125/d1-baseline-strict/batch-build.log",
+    "targets": [
+      "tq_prefill_sim",
+      "turboquant_host"
+    ],
+    "fixture": "six-strip block16 strip layout; historical63629 only valid same-fixture comparator",
+    "historical_binary_match": false,
+    "evidence": "slots/B/evidence/BATCH_ARTIFACT_SHA256.json"
+  },
+  "slot_a_compile_owner": "root current chat; do not finalize while active",
+  "slot_a_root_tool_session": 47955,
+  "slot_a_completion_receipt": "slots/A/ROOT_BUILD_RECEIPT.json",
+  "slot_a_build_source": "unchanged sealed r2 device snapshot; fresh directory via verified recovery recipe",
+  "baseline_decode_historical_match": {
+    "aic": true,
+    "aiv": true,
+    "merged_payload": true,
+    "host_dso_sha256": "08f22caaaae4140d5a045ecd138ca0f694ce9794e05f227e7584c3962e857112"
+  },
+  "baseline_scatter": "strict strip and NZ builds complete; current local entries shorter than0x2270",
+  "baseline_host_supplement_verified": 21,
+  "baseline_case_receipts_verified": 9,
+  "slot_a_build_phase": "PASS exit0 completed12:19:14UTC; final sealing and host-only corrected fixture relinks underway",
+  "operational_r31_packet": {
+    "path": "review_packets/supervisor-r31/PACKET.json",
+    "sha256": "5e2a3f5e1f05fb21d86510b3d905819010178d1c8098805deacde87d4ae224d4",
+    "verified_manifest_entries": 155
+  },
+  "operational_r31_tests": {
+    "sealed": 155,
+    "installed": 12,
+    "watchdog_host": 13,
+    "scatter": 9,
+    "exact_golden_images": 5,
+    "B_recipe_chains": 8,
+    "A_templates": 4,
+    "real_cleanup_counterexamples": 3
+  },
+  "kernel_review_p2": "PASS final136compiledpacket b5d448de; fourpairedfixtures, labworkspacecontract, operational+runtimepending",
+  "abi_static_ledger": {
+    "path": "abi/EVIDENCE.json",
+    "sha256": "523f5da79c64d28c1c325c498efe55c93ab102f05fd845ff62a4f3a1d8865752",
+    "root_verified_records": 228
+  },
+  "abi_current_host_probe": {
+    "status": "PASS_CURRENT_HOST_ONLY_TORCH_ABI",
+    "seal": "abi/host-only/SEAL.json",
+    "seal_sha256": "bd3c5c3d42c070ccf45ec5789841a0d3f5d01f8f0f3c3e03fab96a6f6caef195",
+    "root_verified_local_files": 21,
+    "root_verified_retained_files": 13,
+    "current_production_tus_strict": 4,
+    "abi_assert_tu_strict": 1,
+    "schemas": 6,
+    "meta_positives": 6,
+    "fake_positives": 6,
+    "E8_negative_metadata": 24,
+    "cpu_tiling_positive_full_words": 3,
+    "cpu_tiling_negative": 6,
+    "device_traps_called": 0
+  },
+  "slot_a_root_build_status": "PASS",
+  "slot_a_final_compiled_packet": {
+    "path": "/home/dmin/work/deadlock_20261125/slotA/r2/review-compiled-r4/manifest.json",
+    "sha256": "b5d448de0429f0dabdaa7cce863a8be02f247070d03017e157936bb164aaf21a",
+    "root_verified": 136
+  },
+  "slot_a_host_relink": "R4 host-only relink and4paired identities PASS per author; finalpacket pending",
+  "device_builds_active": false,
+  "pending_before_promotion": [
+    "exact nativebatch Frozen03 source-to-refactor mapping, not timing-only",
+    "threefinalcompiledkernelreviews",
+    "operationalPASS",
+    "boundedruntimeparitytickgates",
+    "freshwinningreview",
+    "servingworkspacecontract if A accepted",
+    "exacttwo-reposync+finalhostgates"
+  ],
+  "kernel_review_p3": "PASS final136compiledpacket b5d448de; kernel-only serializedprobeadmission",
+  "operational_r5_packet": {
+    "path": "review_packets/supervisor-r5/PACKET.json",
+    "sha256": "20d5f3735f71a6bda15975df38f049a550120065de694daf883377c6db38d763",
+    "manifest_sha256": "6151fde266c7b515e9e46cc2b2acad7a3275c9e6069cb39d1f6e8f8219a77c50",
+    "root_verified": 205
+  },
+  "all_three_kernel_reviews": "PASS sameimmutableA136; operationalgate+deviceparity/timingremainpending",
+  "frozen03_provenance": {
+    "seal_sha256": "0f8b815713e8c02c9775f98a15983750b9d8d136c5dc6d9bd2dc0c4ce998a896",
+    "ledger_sha256": "16170fa17d10dfc53e92a3df2b0812ce046b6b9b366a53ede751f5a9069d20ae",
+    "root_verified_seal_files": 5,
+    "root_verified_absolute_sources_artifacts": 52,
+    "worker_verified_frozen_records": 961,
+    "worker_verified_source_records": 143,
+    "mutants_excluded": 11,
+    "current_object_is_historical": false,
+    "timing_pending": true
+  },
+  "additional_host_inventory": "D1 auditing actual606collection againstworker/quantization/platform/contract/cacheaddresses/semanticgoldens; runonlymissinghostcases",
+  "additional_host_results": {
+    "cpp_passed": 7,
+    "extra_py_passed": 88,
+    "extra_py_failed": 2,
+    "failure": "hybrid_alloc missing AscendTurboQuantAttentionSpec.num_planes; classificationpending",
+    "production_edits": false
+  },
+  "additional_host_failure_classification": "real Pythonintegrationregression: documented specshadowedbyolderduplicateclass andduplicateregistry",
+  "python_integration_fix": {
+    "file": "C:/vllm-ascend/vllm_ascend/core/kv_cache_interface.py",
+    "status": "COMMITTED",
+    "tests_unchanged": true,
+    "extra_pinned_CPU_passed": 96,
+    "attention_passed": 606,
+    "sync_build_passed": 14,
+    "kernel_edits": false,
+    "review": "PASS freshSol6.2R2 independent96+179,59hashes+ruff",
+    "packet": "review_packets/python-kv-cache-spec-r2/MANIFEST.json",
+    "packet_sha256": "298ffcba828085d529c1c35b45f682d5368e49eed5b4ac65fe4e162c7d1ade99",
+    "root_verified": 59,
+    "all_disjoint_pytest_passed": 905,
+    "style": "PASS ruff0.14.0check+formatcheck andgitdiffcheck, twofilesonly, sealedhashunchanged",
+    "commit": "e19e9ecbe",
+    "production_sha256": "bd55513b7565398f5576b691a1ad62bb805364f28315b1c5eae0efd787b99c55",
+    "tests_sha256": "f67e30c8ab24482a8c69a8904952293f5e18b97a7b3bd3b592513f7fadd0986f"
+  },
+  "generic_cross_file_host": {
+    "passed": 179,
+    "failed": 0,
+    "initial_isolated_failure": "SFA case requirednormalmodule Ascendconfigsetup; originalisolatedfailure retained"
+  },
+  "operational_r6_packet": {
+    "path": "review_packets/supervisor-r6/PACKET.json",
+    "sha256": "eed47f375f00ed090c8c5f778f49efb4b114eeb6f477d8f7512d27513d8b6245",
+    "manifest_sha256": "127bc215568261e420b6ad77511ccede6150df19562fb56b29c8e4699d45ce15",
+    "root_verified": 219
+  },
+  "remaining_CPU_tiling_tests": "3CPUinstancesfromNPUguardedfile usingregisteredrealCPUop bridge underdevice traps;4hardwareinstancesgated",
+  "host_inventory": {
+    "classified_files": 74,
+    "disjoint_pytest_nodes_passed": 905,
+    "breakdown": {
+      "guarded_attention": 606,
+      "sync_build": 14,
+      "host_cpp_pytest_gates": 7,
+      "dedicated_extra": 96,
+      "generic_and_full_SFA": 179,
+      "actual_CPU_tiling_bridge": 3
+    },
+    "core_cpp_ctest_passed": 9,
+    "hardware_tiling_instances_gated": 4,
+    "CPU_bridge_device_traps": 0,
+    "semantic_goldens_fresh_CLI": "PASS 57nativeblobs,8388608E8coord-scale and16384addresses",
+    "seal_sha256": "4407e1a8687e581291bd69eb191af569b0de59b15d1358d3b46d9532e3ce9c04",
+    "report": "host_inventory/REPORT.md",
+    "r2_seal": "d4e1c22e080f0c3f187ec1c2ee28eab279d13ae7b2744aa22cb451f155298374"
+  },
+  "operational_r7_packet": {
+    "path": "review_packets/supervisor-r7/PACKET.json",
+    "sha256": "e3a25fff82a6e1269b5c76ce739b88e27ffb1eac4f435b7f639af06604962c08",
+    "manifest_sha256": "ba587265cf9b9d883534e431d1b37805663ea3129cb080a83948c31a62e91b53",
+    "root_verified": 233
+  },
+  "model_plan": {
+    "path": "MODEL_PLAN_R8.json",
+    "sha256": "ebac1a0522c885e7d45327bb8468afe6a6e95b444a84a6b1038095dafaaeacf8",
+    "launches": 11,
+    "status": "PENDINGoperreview, noexecution"
+  },
+  "operational_r8_packet": {
+    "path": "review_packets/supervisor-r8/PACKET.json",
+    "sha256": "de97b6c220b8b5dd4f590a2807f7c8715b442f9ef4625f150e48da88f0b7e2f3",
+    "manifest_sha256": "2b4597d308b718a86d7317e0cea8efadd3b2e6597e47f9ffd34b89cc91ac338e",
+    "root_verified": 247
+  },
+  "model_admission": "PASS kernelreviews1+2+3 andoperationalR8 exactplan",
+  "active_model": null,
+  "completed_probes": [
+    {
+      "index": 0,
+      "slot": "B",
+      "case": "exact208",
+      "exit_code": 0,
+      "status": "numerical_pass_trace_pending",
+      "raw_ticks": [
+        34700
+      ],
+      "trace_audit": "PASS D1 zeroULP1536words/8inputs+allguards/32emptyexceptions/7mappings/zeroeventbalance",
+      "device_seconds": 135.667545497,
+      "audit_sha256": "7f897a209d4a42b194dc7a3f08bca506b96248fd1e6a762898e02ae95aa007d0"
+    },
+    {
+      "index": 1,
+      "slot": "A",
+      "case": "exact208",
+      "exit_code": 0,
+      "status": "numerical_pass_trace_pending",
+      "raw_ticks": [
+        33967
+      ],
+      "device_seconds": 126.860468608,
+      "trace_audit": "PASS D1 zeroULP1536words/8inputs+allguards/32emptyexceptions/7mappings/zeroeventbalance",
+      "audit_sha256": "7f897a209d4a42b194dc7a3f08bca506b96248fd1e6a762898e02ae95aa007d0"
+    },
+    {
+      "index": 2,
+      "slot": "B",
+      "case": "ragged-2x2-h3",
+      "exit_code": 0,
+      "status": "numerical_pass_trace_pending",
+      "raw_ticks": [
+        53771
+      ],
+      "device_seconds": 212.815217262,
+      "exact_BF16": true,
+      "trace_audit": "D1active"
+    },
+    {
+      "index": 3,
+      "slot": "A",
+      "case": "ragged-2x2-h3",
+      "exit_code": 0,
+      "status": "numerical_pass_trace_pending",
+      "raw_ticks": [
+        53652
+      ],
+      "exact_BF16": true,
+      "trace_audit": "pendingD1",
+      "device_seconds": 208.396638629
+    },
+    {
+      "index": 4,
+      "slot": "B",
+      "case": "ragged-4x3-h1",
+      "exit_code": 1,
+      "status": "probe_failed",
+      "raw_ticks": [
+        53005
+      ],
+      "device_seconds": 225.655644514,
+      "failure": "first BF16 0x3FC4 vs0x4041 125ULP; all36rolesretired; fullguardsnotreached",
+      "expected_output_words": 1024,
+      "golden_sha256": "e2e682c7711f155e702d28d5417db1e7b8f484bd7a5d116f42e29cd45642bb34"
+    },
+    {
+      "index": 5,
+      "slot": "A",
+      "case": "ragged-4x3-h1",
+      "exit_code": 1,
+      "status": "probe_failed",
+      "raw_ticks": [
+        53272
+      ],
+      "failure": "numericfailure; zeroGMcandidate noteligibleforpromotion",
+      "trace_audit": "pendingD1",
+      "device_seconds": 245.582099012
+    },
+    {
+      "index": 6,
+      "slot": "B",
+      "case": "raw-3x4-mix14",
+      "exit_code": 1,
+      "status": "probe_failed",
+      "raw_ticks": [
+        51437
+      ],
+      "failure": "rawquery FP32scratch oracle mismatch; all4608BF16 outputs+inactiveoutputpassed beforehand, nofullfinalguards; fixture staleinverse beingverified",
+      "device_seconds": 267.36900335
+    },
+    {
+      "index": 7,
+      "slot": "A",
+      "case": "raw-3x4-mix14",
+      "exit_code": 1,
+      "status": "probe_failed",
+      "raw_ticks": [
+        49797
+      ],
+      "device_seconds": 224.849674796,
+      "failure": "stale rawinverse fixture check;4608BF16outputcomparisons0ULP, notadmittedperf/fullguards"
+    },
+    {
+      "index": 8,
+      "slot": "B",
+      "case": "scatter-1",
+      "exit_code": 0,
+      "status": "numerical_pass_trace_pending",
+      "raw_ticks": [
+        5758
+      ],
+      "trace_audit": "pending",
+      "device_seconds": 14.762421781
+    },
+    {
+      "index": 9,
+      "slot": "B",
+      "case": "scatter-6",
+      "exit_code": 0,
+      "status": "numerical_pass_trace_pending",
+      "raw_ticks": [
+        16384
+      ],
+      "trace_audit": "pending",
+      "device_seconds": 41.850157425
+    },
+    {
+      "index": 10,
+      "slot": "B",
+      "case": "batch-6",
+      "exit_code": 0,
+      "status": "numerical_pass_trace_pending",
+      "raw_ticks": [
+        64459
+      ],
+      "frozen_cap": 63629,
+      "performance_gate": "HOLD +830 rawticks; D1matchedfixture/source audit active",
+      "device_seconds": 206.517000618
+    }
+  ],
+  "serving_contract_plan": {
+    "path": "slots/A/SERVING_INTEGRATION_PLAN.md",
+    "sha256": "cbde5c0c8e6d4efeb445aefa82799d536c20f015787df7a04c0e3015146501d0",
+    "approach": "right-alignlogicalworkspaceview againstfixedphysicalzerosuffix; host-onlyproposal noimplementation",
+    "status": "candidateallgatespending"
+  },
+  "candidate_A_gate": "REJECT parityfailure4x3H1, rawticks267abovefailedB; remainingplan diagnosticcharacterization only",
+  "candidate_G": {
+    "author": "numeric_audit_1",
+    "base": "strictB originalFill",
+    "status": "ROOTbuildPASS exit0, finalsealedpacket+reviews pending",
+    "fix": "architecture3510 forceordinaryNZ GEMM forattentionMMAD; M1autogemvcontiguousreadswrong512strideNZ",
+    "scope": "sharedQK/PV helpers, noproto/workspacechange",
+    "recipe_sha256": "592832452a126aa0591736d4dae0f21c851cc9c3f847eff4eed6a341e27abb90",
+    "tool_session": 8003,
+    "build": "/home/dmin/work/deadlock_20261125/slotG/r1/build",
+    "compile_watchdog": "none;900onlyCAModel",
+    "source_packet": "slots/G/evidence/NEUTRAL_SOURCE_PACKET.json",
+    "source_packet_sha256": "7ca571712856c5b6b3df6dc6a0c97d8bbbc87cdbaf45009eae0c00d6a79fa0e3",
+    "source_root_verified_records": 119,
+    "review1": "FINALPASS",
+    "review2": "FINALPASS",
+    "AIC_supplement": "slots/G/evidence/NEUTRAL_AIC_SUPPLEMENT.json",
+    "AIC_supplement_sha256": "22e0a8129932a0a22bc1f0dd39fdcf6bcfcdb555b33e53279d036045dda4d2af",
+    "AIC_root_verified": 16,
+    "tool_session_completed": 8003,
+    "device_build_sha256": "011f40b5f074a957e445a46138676cbfbb14c019ec77f2e394a336d110ecef14",
+    "embedded_payload_sha256": "1b8332ea4706fafa05b83cb2daf34fbb6469addbd5517b74ec086ac6eef77c86",
+    "host_bindings_sha256": "84f90c3a7a18c50085ce5743af81758c73c6cb4fdb8bc76faaf5f8ed216d4e45",
+    "host_bindings_root_records": 66,
+    "raw_pair_closure_sha256": "80605e7087a3a96c3b41980b5a1ee499fed21fc403bdc91b09c01f11d113fcf1",
+    "raw_pair_root_records": 19,
+    "review3": "FINALPASS",
+    "model_admission": "PASS all3compiled+rawfixtureactualbinding",
+    "runtime_gate": "PASS all4 exactgolden/fullguards/tokenbalance/maps0exceptions/zerohang, nativefrozencapPASS",
+    "winning_review": "freshg_winning_reviewactive; all4runtimeauditsbound",
+    "comment_free_export": "slots/G/comment-free-export/PROMOTION_EXPORT.json",
+    "comment_free_export_sha256": "94fbdf0bf044613c66d7d7244c22d3667496bf1bdef6c633c9b404947cbd2d20",
+    "comment_free_export_review": "freshg_comment_export_reviewactive",
+    "canonical_sync": "twoheaders mirrored butonecomment stylegateheld, pendingtoken-equivalentexport"
+  },
+  "remaining_original_plan": [
+    8,
+    9,
+    10
+  ],
+  "corrected_raw_fixture": {
+    "packet": "review_packets/raw-basis-r9/PACKET.json",
+    "packet_sha256": "6164676a84ebb40ee0419b3921ad0a9fe4764d9642f52bfd79e7ecf5e1965a79",
+    "root_verified_records": 72,
+    "review": "PASS B andGactualR9bindings, allsource/build/embeddedlink/argv/goldens",
+    "B_receipt_sha256": "0d3f16887d70d39a5b7ad2ed03eb0629a70a8727b2d79d16fe6d733498f0e150",
+    "CPU_proof_sha256": "bf8c65790e901e20115db777cdfed6599ac0a51a3fbd0b6908990aaa728cf982",
+    "CPU_proof_root_records": 28,
+    "G_host_link": "pendingcompiledGDSO"
+  },
+  "additional_probes": [
+    {
+      "slot": "B",
+      "case": "raw-grid14-canonical",
+      "revision": "r9",
+      "exit_code": 0,
+      "status": "numerical_pass_trace_pending",
+      "raw_ticks": [
+        51454
+      ],
+      "device_seconds": 216.473320463,
+      "BF16_exact": true,
+      "full_query_witness": "passedR9finalize"
+    }
+  ],
+  "G_probes": [
+    {
+      "index": 0,
+      "case": "ragged-4x3-h1",
+      "status": "AUDITEDPASS",
+      "exit_code": 0,
+      "raw_ticks": [
+        51925
+      ],
+      "expected_BF16_words": 1024,
+      "exact_BF16": true,
+      "device_seconds": 174.065974436
+    },
+    {
+      "index": 1,
+      "case": "exact208",
+      "status": "AUDITEDPASS",
+      "exit_code": 0,
+      "raw_ticks": [
+        33514
+      ],
+      "frozen_cap": 34701,
+      "exact_BF16": true,
+      "performance_gate": "PASS",
+      "device_seconds": 97.803089052
+    },
+    {
+      "index": 2,
+      "case": "ragged-2x2-h3",
+      "status": "AUDITEDPASS",
+      "exit_code": 0,
+      "raw_ticks": [
+        53242
+      ],
+      "matched_B_ticks": 53771,
+      "exact_BF16": true,
+      "device_seconds": 194.711699512
+    },
+    {
+      "index": 3,
+      "case": "raw-grid14-canonical",
+      "status": "AUDITEDPASS",
+      "exit_code": 0,
+      "raw_ticks": [
+        50827
+      ],
+      "matched_B_ticks": 51454,
+      "device_seconds": 253.213421496,
+      "exact_BF16": true,
+      "full_FP32_query": true
+    }
+  ],
+  "batch_replay": {
+    "bindings": "d1/ingress/FROZEN03_REPLAY_BINDINGS.json",
+    "sha256": "76f484658822eff991d006b32a9e56a5f92b73d4906b31811ec1be93a70dc473",
+    "root_verified_refs": 29,
+    "review": "PASS freshreviewbothboundcommands",
+    "host_relink": "PASS queued25875completed",
+    "reference_receipt": "5bc4f4b40ed6bdf6466db7b564428a7927e4c13707e8cf21f5c3e8dea673e5d5",
+    "status": "COMPLETED both audited parity PASS; current performance FAIL"
+  },
+  "batch_controlled_probes": [
+    {
+      "slot": "Frozen03-exact-archive",
+      "status": "AUDITEDPASS_NUMERICAL_RAW_CAP_FAIL",
+      "exit_code": 0,
+      "raw_ticks": [
+        63654
+      ],
+      "historical_ticks": 63629,
+      "note": "exactfrozenimage underguardedmodernfixture +25 raw; no normalization/waiver",
+      "device_seconds": 199.639769025
+    },
+    {
+      "slot": "current-B-repeat",
+      "status": "AUDITEDPASS_NUMERICAL_PERF_FAIL",
+      "exit_code": 0,
+      "raw_ticks": [
+        64460
+      ],
+      "device_seconds": 210.925659121,
+      "matched_frozen_raw": 63654,
+      "matched_inner_gap": 806
+    }
+  ],
+  "batch_restoration_candidate": {
+    "name": "P",
+    "author": "batch_restore_audit",
+    "status": "P/r2 rejectedtiming; P/r3SIM-onlymodulepartitionauthorizedsourceonly",
+    "scope": "literalFrozen03U32safe-domain +sameprofileexistingU64batchfallback",
+    "forbidden": "Wave2/3mutants, scatterfallback, changedmath/pipelineoptimizations",
+    "replay_evidence": "exactarchive/current roletrace timings deterministic; innergap806",
+    "source_packet_sha256": "2f1fd26c8b4184c88f2bc093c99e607eec0bd3c17654882b1f4c85adaa8fc32a",
+    "source_refs_verified": 39,
+    "reviewer_pass1": "p_kernel_review_1 FINALREJECT",
+    "host_dispatch_cpu": "18 actualcompiledSTRIP dispatcher cases PASS + independentBcontrol; NZpending",
+    "compiled_manifest_sha256": "ad7da39959635b27a081817ab9165895c5aade97a39a8760acafcb1712d0cf46",
+    "build_recipe_exit": 1,
+    "build_recipe_exit_reason": "postcapture grep expectedwide0, actualwide1; CMakealltargetsPASS; read-onlycollector corrected separately exit0",
+    "blocker": "bothlayout wideactual1 orphanMIXtype/ratio noteswide0; awaitingSDKproof/sourcelevelr2",
+    "r2_inventory": "36sharedCpp+1aka, original34checkpointunchanged",
+    "r2_device_runs": 0,
+    "r2_source_seal_sha256": "1a4b1278b5ae9b5737b749c77b94651665519f54c2eb610ad32ad0f5148d71b7",
+    "r2_source_packet_sha256": "7b77bd43b45552f84eb19bef71030b5819af57d7afb18c11e62f18d854582005",
+    "r2_source_packet_refs_verified": 50,
+    "r2_review1": "FINALPASS source+compiled p_r2_kernel_review_1",
+    "fixture_author": "audit_d1 resealing R11samebytes producer+registration forr2",
+    "r2_early_strip": {
+      "manifest_sha256": "d1a091baccf8dbcde790654744dc19b387a4c969f40800abfe6593dab8e44a10",
+      "root_refs_verified": 38,
+      "actual_cpu_cases": 18,
+      "stubbed_launches": 11,
+      "device_calls": 0
+    },
+    "r2_review2": "FINALPASS freshp_r2_kernel_review_2",
+    "r2_canary_source_packet": {
+      "sha256": "3ded136e3deb69bc0ef884f7a3a8f538dadd15ab8bef4f834d73e541bb35c950",
+      "root_verified_refs": 46,
+      "tiles": [
+        6,
+        1,
+        4,
+        4
+      ]
+    },
+    "r2_compiled_packet": {
+      "sha256": "77cdf3e3fa1f861afe357ad47cf1a990ec1939e258156657bdd90b0d79009b90",
+      "direct_refs": 12,
+      "compiled_child_refs": 66,
+      "modern_child_refs": 15,
+      "modern_argv_corrected_refs": 4
+    },
+    "r2_review3": "FINALPASS source+compiled+actualrunneradmission p_r2_kernel_review_3"
+  },
+  "native_promotion": {
+    "status": "reviewed token-equivalent comment-free export copied core then mirror",
+    "cube_sha256": "c6738f0e63bc772cfc213db395db78825a3055bdc31ff8a64e6df7c6aa9f9307",
+    "common_sha256": "3e168758eca35140ecfce89b9b3da65f8b21d5d03eb9b76e991517dc04d61a3d",
+    "runtime_source": "original immutable G; export comment-only proven by fresh review",
+    "final_host_gate": {
+      "status": "PASS",
+      "receipt_sha256": "91c93383da3287234f2a2a3be8a6fd78d64526eb174e40af9cf1cb8f9edad529",
+      "root_verified_refs": 57,
+      "pytest": 620,
+      "vllm_cpp": 7,
+      "core_ctest": 9,
+      "strict_syntax_tus": 5,
+      "real_torch_schema": 6,
+      "device_traps": 0,
+      "receipt": "native_final_host/FINAL_HOST_RESULTS.json"
+    },
+    "commits": {
+      "core": "d6c63d8",
+      "vllm": "9a0c30f8f"
+    }
+  },
+  "intermediate_report": "INTERMEDIATE_RESULTS.md",
+  "active_build": null,
+  "preflight_r2": {
+    "status": "PASS exit0",
+    "session_id": 60014,
+    "manifest_sha256": "8f1e7f31946304bc788cdc05fc6460090f5c53282a1a7741e621dbd878b4ea41",
+    "scope": "actualbothlayoutgeneratedper-groupmetadata/symbols+hostkey; notyetfinalELF"
+  },
+  "active_aux_build": null,
+  "modern_probe_v1": {
+    "exit": 1,
+    "phase": "configure",
+    "cause": "isolatedrecipe omitted consumer ASCEND_CANN_PACKAGE_PATH",
+    "source_changes": false,
+    "original_log_sha256": "2292dee9ff83c4ea3ea61f6129b2de45d38b6752ecdf5f0e00f146f961f76213"
+  },
+  "E8_device_scope": {
+    "receipt": "abi/E8_DEVICE_SCOPE.json",
+    "sha256": "a68181fe4f9be400cc6a03a6dc9acb68f3ae986319f6d0516d9e4864626ab5ff",
+    "strict_current_syntax_checks": 8,
+    "archived_role_source_provenance": "verified supported BF16/INT8 reachableinstances",
+    "current_generated_role_ELF": "notrebuilt/reexecuted",
+    "external_plane_bytes": 4352,
+    "internal_stride_bytes": 1056,
+    "encoder": "held",
+    "root_verified_refs": 75
+  },
+  "r2_final_compilation": {
+    "main_exit": 0,
+    "collector_exit": 0,
+    "compiled_manifest_sha256": "44eadc5348d649cc9ce2836f94999ba58b00c9736240dfefa766a3af57412101",
+    "modern_script_exit": 1,
+    "modern_cmake_compile_and_link": "PASS",
+    "modern_postcapture_error": "CMake ASC doesnotemitcompile_commands.json; captureactualflags/build/link separately",
+    "kernel_sources_changed": false,
+    "model_admission": "pending3compiledreviews"
+  },
+  "canary_preparation_r2": {
+    "status": "finalhostlinks+dryadmitPASS",
+    "tool_packet_sha256": "9203a2168ae510f7f57c05d6016808e96e19e329b171bebfccf59ba73a92b3b0",
+    "tool_root_refs": 96,
+    "CPU_closure_sha256": "6f9eeafb8d017d1371a9f260b17fb18f54721b47dad4c14935adb0afd976ef50",
+    "CPU_root_refs": 1110,
+    "review_index_sha256": "612f996fcfbeb83f54526060595858b2cc6e069a7b391d18dc40b4a7faa76560",
+    "review_index_root_refs": 9,
+    "dry_sha256": "0d0684dd536cebbc81ccba30dac309ae51dbe7bdd4d9ce51dc96850e55e7eb93",
+    "dry_root_refs": 18,
+    "output": "/home/dmin/work/deadlock_20261125/slotP/r2/canary-r11-r2-closure",
+    "model_launches": 0
+  },
+  "P_r2_model_plan": {
+    "sha256": "c1a169bef24ff7395ea917bf4e618a81759a3881b92e430192b15a248084de0b",
+    "path": "MODEL_PLAN_P_R2.json",
+    "status": "STOPPED_PERFORMANCE_FAIL_AFTER_PRIMARY; other3notlaunched",
+    "tiles": [
+      6,
+      1,
+      4,
+      4
+    ]
+  },
+  "P_r2_runtime_result": {
+    "raw_ticks": 65266,
+    "device_seconds_approx": 211.84,
+    "exit": 0,
+    "numerical": "PASS exact49152K+49152Vbytes/768FP32scales/65536untouched/1024guards",
+    "trace": "PASS549hardevents+76sourcepipe,noexceptions",
+    "performance": "FAIL historical63629+1637; matched63654+1612",
+    "audit_sha256": "4465e6d94612a43cd4f62ba66aa8d23b4ddc7cd26e0f81ae7c44ef4a1b4e6dbc",
+    "audit_root_refs": 66,
+    "landmarks_sha256": "d81cbbe56daa7dc1b355009ae397949dd774e370ab98448ab5f0e319ba405fbf",
+    "landmarks_root_refs": 7,
+    "placement": "narrowentireVectorimage56104Bbyteequal; AIVentry+0x10b00 actualrelocation; causenotyetisolated"
+  },
+  "P_r3": {
+    "scope": "onlySimTargets packaging+necessaryheaderdependency; P2allkernelC++/NPUCMake/modernpatch unchanged",
+    "author": "batch_restore_audit",
+    "build_started": false,
+    "model_started": false,
+    "plan": "two normalascendc_libraryDSOsperlayout preservingoldmainnarrowname +privatewide, standardtargetlink",
+    "gate": "newcompiledartifacts require3freshreviews thenboundedmodelstrictraw63629",
+    "status": "WITHDRAWN_SOURCE_LIFECYCLE_REJECT_noCAModel",
+    "first_build_session": 71185,
+    "first_build_abort": "exactrootownedPGID1086573 SIGTERM; no live members; redundantprivategoals riskbeforeunsafeinplacererun",
+    "disjoint_recipe_started": false,
+    "partial_device": "entirestripnarrowELFexactFrozen03 SHA8c9397f123dd34457ce6c54b281c2b0d1da3ad7c55cb4c873f8fc2147e19092e",
+    "source_review": "p_r3_kernel_review_1FINALREJECT",
+    "blockers": [
+      "generatedGNU_UNIQUEcleanupguardinterposition",
+      "unusedcompanionregistersatloadbutnogeneratedteardownuntiltypeddispatch"
+    ]
+  },
+  "P_r4": {
+    "status": "sourceprofilercallbackunmaphold/reject; no model",
+    "author": "batch_restore_audit",
+    "scope": "ordinarysymbolversionmap +exacttypedregistrationwrap+minimalperDSORAIIunloadcleanup; ordinaryBUILD_RPATHbothpairs; P2kernel/NPU/moderninputsunchanged",
+    "tests_required": "actualgeneratedwrapper+SDKregistrationfakeACLbackend;unused/narrow/wide/both/reload/fail/nodoubleunregister andunmapping; no perdispatchalloc/D2H",
+    "build_started": false,
+    "model_started": false,
+    "source_packet_sha256": "684451923bef4b22dc2c0ded313d89d0444816a3828f9f1c32419d1757fc56f3",
+    "source_refs_verified": 46,
+    "source_review": "p_r4_kernel_review_1 FINALREJECT unmapprofilercontract",
+    "scope_issue": "SDKprofcallbackcachedandmayfireafterunregister; cannotarbitraryunmap",
+    "build_result": {
+      "root_session": 43466,
+      "script_exit": 1,
+      "compile_link": "PASS all4DSOs+turboquant_host",
+      "postcapture_error": "wronglib/libturboquant_host.a; actualbuild/libturboquant_host.a",
+      "no_rebuild": "readonlycorrectedledgerpending"
+    }
+  },
+  "P_r5": {
+    "status": "authorizedSIMprocess-lifetimeNODELETEpolicy +samebinaryRAII/locality",
+    "author": "batch_restore_audit",
+    "kernel_changes": 0,
+    "requirements": "ordinary-znodelete on4SIMDSOs; actualretainedcallbacksafterdlclose; no reregisteronguardedreopen; handlecleanupatprocess_exit; no unmappingclaim",
+    "build_plan": "readonlycopiedP4packedhostobjects->freshnormalhostonlyrelinkifprovensource/flagsidentity; elsefreshfullbuild",
+    "reviews": "3newfreshrequired",
+    "source_manifest_sha256": "a7ffb1558c871136f12ee3ab8873b66cb44fe1b51c80e036e955797ce11ab0ad",
+    "root_verified_sources": 166,
+    "source_packet_sha256": "83c682fba9f4f1ed5fbeb6c9cdd6d4bd875308102c19f06a161db5b111c4a868",
+    "lean_relink_status": "ROOT58332EXIT0 normalhostrelinkwithcopiedverifiedobjects; noBishengrecompile",
+    "relink_manifest_sha256": "ddad788769d69635e91f320c784a48d215f3b3b83cc3195cde91342f14215a3f",
+    "source_packet_root_refs": 31,
+    "reviewer1": "p_r5_kernel_review_1 FINALPASS",
+    "source_profile": "SIMprocess-lifetimeNODELETE; oldP4sourcehelper+allkernel/NPUinputsbyteidentical",
+    "relink_root_refs": 180,
+    "compiled_manifest_sha256": "7c6f2007bd81ec446c004e9f28bcee8775b12e721f283936ac06af676a41c74c",
+    "compiled_root_refs": 148,
+    "neutral_compiled_packet_sha256": "68ce199ff894a7a1687a9a5b78a956f73f16ded4d38280f245847f0ab9cca92e",
+    "compiled_packet_root_refs": 22,
+    "lifecycle_receipt_sha256": "fdb942b86a9736c3bdf903c8a4e01e5364bacdf4b7b5fd8f3f166983983dc646",
+    "lifecycle_root_refs": 134,
+    "lifecycle_cases_pass": 22,
+    "typed_dispatch_cases_pass": 36,
+    "reviewer2": "p_r5_kernel_review_2 FINALPASS",
+    "reviewer3": "p_r5_kernel_review_3 FINALPASS compiled+CPU+runtimeadmission;actualstartupfailed",
+    "host_startup": {
+      "child_exit": -11,
+      "device_seconds": null,
+      "ticks": [],
+      "READY_markers": 0,
+      "device_launches_observed": 0,
+      "retained_core_sha256": "33625d79cd378d5e5b04933a15ef3112740e62302457af94e4ef7f80f2a2a608",
+      "witness_sha256": "aa598ff71e51b1d757fd87eb19e93cb562ce042206333614fed417293101e911",
+      "cause": "privateSDKctorqueriesruntimeSoCstdstringbeforebackendinit; missingDT_NEEDEDorder",
+      "scope": "notdevicehang; no numerics/perfresult"
+    }
+  },
+  "P_r5_canaries": {
+    "tool_packet_sha256": "912abfc1e6ffd0011363f7be2f8d1222fe2b797064bad9bc0283802d8767809d",
+    "tool_root_refs": 42,
+    "host_index_sha256": "d1da5ab5b23a59c86f3f5ae07496e451a95170470fb537996ec5bab3ac1ce597",
+    "index_root_refs": 9,
+    "dry_sha256": "ef6a607a566a10e32dae6d48c56bf20f88d825ae3a15c11ddbf7d30b673bc4da",
+    "output": "/home/dmin/work/deadlock_20261125/slotP/r5/canary-r11-r5-pair",
+    "model_runs": 0,
+    "dry_root_refs": 18
+  },
+  "P_r5_model_plan": {
+    "path": "MODEL_PLAN_P_R5.json",
+    "sha256": "f784e2b2d61b83deebfed4c58fd8a7cae6671bd8dcf5d33be91cf9f944870dc0",
+    "status": "STOPPED_HOST_STARTUP_SIGSEGV_beforedevicehandshake;other3withheld",
+    "tiles": [
+      6,
+      1,
+      4,
+      4
+    ],
+    "primary_raw_cap": 63629,
+    "matched_F03": 63654
+  },
+  "P_r6": {
+    "status": "COMPILED_3FRESH_PASS_PRIMARY_PARITY_PASS_PERF_HOLD",
+    "author": "batch_restore_audit",
+    "scope": "bothmoduletypes authenticatedconstructorACL/backend/profiler DT_NEEDED scopednoasneeded DAG; kernels/helper/NPU/modernunchanged; NODELETEretained",
+    "CPU": "fakeSONAMEproviders+readyctornegativeoldgraph; no realsim/HALinCPU",
+    "build": "normalfreshhost-onlyrelinkcopiedverifiedobjects; noBishengredo;3newfreshreviewsbeforekernel",
+    "verified_source_files": 166,
+    "source_manifest_sha256": "da54b14f843583cdd0c8e262bc799430afeb89b59406e3aeb3e0deecc34a0064",
+    "source_packet_sha256": "270ec2a7ee178ef253db0d2d83cab5b1fddfa33eaddef5e3717a8e426eb55bfb",
+    "source_refs_verified": 21,
+    "provider_preflight_sha256": "741dd3568c416a9a7964c0cbfed741f7231a3edf11718572e163e004aa99924a",
+    "provider_preflight_refs": 33,
+    "relink_sha256": "4c2a8378ad19142f938eb05f178fd2fd5aa1bc0f68884b9663ae9da55316d0a7",
+    "relink_refs": 183,
+    "compiled_sha256": "d57fb0c27ebc63b8615583c83426ca1e852d8a45d4a6a48a0a7bd945788e5875",
+    "compiled_refs": 148,
+    "CPU_lifecycle_sha256": "fbcc7c030efdaac3a6783f70af908b429d355abdeff6f2be81715525d66eb68e",
+    "CPU_refs": 150,
+    "neutral_compiled_sha256": "a728d0d631d3a912e5846bddabb2353f666dac0be9ddd6fba27c86351fc871a5",
+    "neutral_refs": 46,
+    "review1": "p_r6_kernel_review_1 FINALPASS",
+    "review2": "p_r6_kernel_review_2 FINALPASS",
+    "review3": "p_r6_kernel_review_3 FINALPASS"
+  },
+  "debug_tools": {
+    "gdb": "installedWSL12.1,8newpackages0upgraded0removed",
+    "runtime_SDK_changed": false,
+    "usage": "core-only,debuginfodoff; no replayusedforcause"
+  },
+  "P_r6_startup_only": {
+    "status": "PASSrootactualSDK",
+    "root_exit": 0,
+    "receipt": "/home/dmin/work/deadlock_20261125/slotP/r6/startup-only-r1/RESULT.json",
+    "source_timed_receipt_sha256": "24cdc7d2274d017930054423621023f13226d0dccdc50c2dacbb43f245911231",
+    "target": "GDBfirstinstructionmainSTOPthenkill,nokernel",
+    "guard": "existingmodelphase+exclusivelane+ProcessOwner900",
+    "entry_count": 0,
+    "result_sha256": "01d4a34710065605ff4fbf863dac8f72b4c07ffdb42396c5a26d0d8dbcde9e40",
+    "seal_sha256": "8490d6871a489e52aac7850c3bb37d79bef8c92abe0fc743165477684ca28020",
+    "real_backend_confirmation": "bothmodules ACLfrontlibascendcl,6downstreamshimpointersCAModel,profCAModelno-op;distinctbinaryhandles,reaped"
+  },
+  "P_r6_canaries": {
+    "paired_packet_sha256": "30c8f6035820cba4d45096826f0c36e03ccc0b308fce713eaa6a3269ceda1c0b",
+    "packet_root_refs": 78,
+    "host_index_sha256": "08898a94d9120aec567a2f7a65b8915e734cb26cfdd6c77faf0123c25d70ef57",
+    "host_index_refs": 9,
+    "dry_sha256": "e3c44d4e411f1d0554fa4dae95c61b07ee703e43827f7932ebec0ffac2234998",
+    "dry_status": "PASS",
+    "timed_receipt_sha256": "24cdc7d2274d017930054423621023f13226d0dccdc50c2dacbb43f245911231"
+  },
+  "P_r6_model_plan": {
+    "path": "MODEL_PLAN_P_R6.json",
+    "sha256": "d16f2b04ca31203e749c215414028ce282e55cb81dacaaac1bcdc8d3e4fc28ac",
+    "status": "PRIMARY_NUMERIC_TRACE_PASS_RAW_CAP_HOLD63649;other3NOTRUN",
+    "tiles": [
+      6,
+      1,
+      4,
+      4
+    ],
+    "watchdog": 900,
+    "rawcap": 63629,
+    "normalization": "NONE"
+  },
+  "P_r6_primary": {
+    "root_session": 84243,
+    "exit": 0,
+    "device_seconds": 191.53,
+    "raw_ticks": 63649,
+    "historical_cap": 63629,
+    "matched_F03_raw": 63654,
+    "normalization": "NONE",
+    "raw_cap": "FAIL+20",
+    "numerics": "exactK/V/scales/untouched/readOnly/guardsPASS",
+    "trace": "all12rolefilesbyteequalF03afterconstant-5ticks,identicalspans,allEND/excempty",
+    "hardevents": 549,
+    "source_releases": 76,
+    "audit_sha256": "3f30c2255871d617bf3a825f796deb8f4d1d040c16eaa17235e60d1e1fbef330",
+    "role_frames": {
+      "AIC": [
+        235,
+        59078
+      ],
+      "AIV0": [
+        236,
+        63626
+      ],
+      "AIV1": [
+        237,
+        63432
+      ]
+    },
+    "outer_residual": 23,
+    "kernel_cost_vs_matched_F03": "0",
+    "rolePC": "exactF03loadedbase+entries+229VFdispatchPCs/AIV"
+  },
+  "P_r6_historical": {
+    "status": "P6_REJECT_RAW_BOTH_AND_ARCH_EXCEPTION_FINAL",
+    "purpose": "originalunmodifiedharnessrawcomparison, no normalization",
+    "required_before_actual_run": "freshP6opreview/rootadmission",
+    "control_raw_required": 63629,
+    "candidate_cap": 63629,
+    "probes_tiles": 6,
+    "watchdog_seconds": 900,
+    "runtime": "mustpreserveR12ProcessOwner/phase/lane/900cleanupbytes",
+    "packet_sha256": "904763b419610def5fda9dac4cbceac2323a2f37358ab763a543cd7e70c0e7ec",
+    "reviewer": "p6_historical_op_review",
+    "root_verified_preparation_refs": 20,
+    "root_verified_staged_refs": 88,
+    "preliminary_blocker": "runneracceptance must enforce reference exact63629 and dependent candidate <=63629 separatelyfrommeasurementcollection; no reference/candidate actualruns",
+    "review_receipt_sha256": "11933a8ed313998f8a54d02b9cd431a4d0b92eb3f57ca043dae7a60cbf45e892",
+    "root_review_refs": 19,
+    "admission": "NONE",
+    "r13_packet_sha256": "9637d716d03f3f790b825f4241b7fbf91fd43ff46c57fc4d7ad86d82b680459a",
+    "r13_root_refs": 24,
+    "r13_stage_root_refs": 89,
+    "r13_CPU_acceptance_pass": 24,
+    "r13_fresh_reviewer": "p6_r13_op_review",
+    "r13_blocker": "single done++++ substring not sufficient as structured final trace record",
+    "r13_review_sha256": "770c732694e6bbe9ef34edde13620ef0969e2ea537f92bcbda10be56446f701a",
+    "r14_packet_sha256": "8558855b455c67823beae8fb85c17dedcd9fef80de3ec209cf0ab5564c3c3547",
+    "r14_stage_sha256": "cc9cd0ef6686944b75a44b1e43873f84bac17e8a683b00cd8a197769a775fffa",
+    "r14_root_refs": 24,
+    "r14_stage_root_refs": 89,
+    "r14_CPU_controls_pass": 47,
+    "r14_reviewer": "p6_r14_op_review",
+    "r14_review_sha256": "05f358f24a8bfeb57e8d91a20dc0234e67b9f2054e49b346d01fe761d049359e",
+    "r14_review_root_refs": 3,
+    "latest_defects": "complete live identity fields and coherent inode/map/file stamps; full instruction grammar/chronology; reject earlier truncated terminal and missing footer LF",
+    "r15_packet_sha256": "f720058efc53ef8ed9b8a1c871396432d755df48742b8d12259ff5cc1e6c1211",
+    "r15_stage_sha256": "23f9adba786008635323417ea6b844fd72760b4d5fe19039f33ca6cccb9f3de1",
+    "r15_root_refs": 24,
+    "r15_stage_root_refs": 89,
+    "r15_CPU_controls_pass": 79,
+    "r15_reviewer": "p6_r15_op_review",
+    "r15_review_sha256": "fb7101d327e8e2698f4a2f48c4666032f6166b8d4790c0149066aaff60730bfd",
+    "r15_review_root_refs": 3,
+    "architectural_change": "collection-only owned runner returns COLLECTED_UNREVIEWED; actual full artifact audit gates each root admission; fresh independent actual pair review before supplemental3canaries; no generic acceptance parser",
+    "r16_packet_sha256": "75f9c2c30134c39db2286124ab163d20c3b5a11e3ed8d4273104b8d808c54a7b",
+    "r16_stage_sha256": "e52cd972b5673fea30024aa66d6c6745fc9fe289eb413ea2d4dbb5198d04cc6b",
+    "r16_packet_root_refs": 22,
+    "r16_stage_root_refs": 88,
+    "r16_index_runbook_sha256": "6248524380d75975e55b2e3b3522c3782be79c2e9ce01770cb01c1590e6f49c1",
+    "r16_index_root_refs": 16,
+    "r16_reviewer": "p6_r16_collection_review",
+    "r16_review_sha256": "f2e7d5e542fc905af0d956a00930b940e942bd9ce1d044619d9d461bd879bc4f",
+    "reference_admission_sha256": "5fd5d75c853e3faa150f4df6f066ace7d20d0875a108c736817df8eb913b71c3",
+    "candidate_admission": "NONE",
+    "reference_collection_sha256": "8219a91e95524dbbbee41595556dd9628543e0ef93b2e992921991bafb4f1b0a",
+    "reference_child_exit": 0,
+    "reference_root_exit": 0,
+    "reference_drained": true,
+    "reference_elapsed_seconds": 199.540072257,
+    "reference_raw_ticks": 63630,
+    "archived_reference_raw_ticks": 63629,
+    "reference_normalization": "NONE",
+    "reference_root_verified_refs": 428,
+    "reference_actual_reviewer": "p6_r16_reference_actual_review",
+    "reference_review_sha256": "3d3c3831b754a4fdc1640870c266a6d1b08664e54c050ae968c62caefc8d8cae",
+    "reference_archive_verdict": "FAIL",
+    "reference_comparator_verdict": "PASS",
+    "method_amendment_sha256": "047635bafd192df65b5f7799ac26cf641b72ed02b7e75052d7e9a92837509296",
+    "root_reference_eligibility_sha256": "c3ef745f1aa8eb94d8744d717be23f22f309dcbba3faa67e554082cec5f81bf5",
+    "candidate_admission_sha256": "583e08fcbdcf01df7ded9bd149669f482f847f691c3af2d2638896c8700925c9",
+    "candidate_absolute_raw_max": 63629,
+    "candidate_paired_raw_max": 63630,
+    "candidate_collection_sha256": "67fe8e85dc87d4bb3eece715a639690d7c8293f31d90bf0f78f5d5118d63b639",
+    "candidate_collection_root_refs": 429,
+    "candidate_root_exit": 0,
+    "candidate_child_exit": 0,
+    "candidate_elapsed_seconds": 193.635039309,
+    "candidate_drained": true,
+    "candidate_raw_ticks": 63637,
+    "candidate_absolute_gate": "FAIL+8",
+    "candidate_paired_gate": "FAIL+7",
+    "candidate_index_sha256": "621611e9f7a40ca632ea816922507063091befae3e8c7b2d2dbeebd2a3c56340",
+    "candidate_index_root_refs": 217,
+    "pair_reviewer": "p6_r16_actual_pair_review",
+    "remaining3_status": "HELD_UNRUN",
+    "promotion_status": "HELD_NO_APPLY",
+    "pair_receipt_sha256": "da0e27d5f531102b2ae4ceb6c478e3fcc10bc6a065413c58f91b30dbcb03999e",
+    "pair_proof_sha256": "d86454218ab2b35b1395c6ed1a7947867a9727a039605b93163734e93768b19a",
+    "pair_receipt_root_refs": 7,
+    "pair_proof_root_refs": 148
+  },
+  "active_root_jobs": [],
+  "P_r6_promotion_preparation": {
+    "status": "HOLD_NO_APPLY",
+    "plan_sha256": "d0204f38f0edca19a6c84d275271a5ccfe828d37b20ec0f01d04a2ccae0b5619",
+    "root_refs": 22,
+    "core_paths": 7,
+    "plugin_paths": 8,
+    "shared_cpp_comments": "NONE",
+    "supplement": "deployed analyzer commands being prepared",
+    "deployed_aka_syntax_supplement_sha256": "94994f5b9d3ce2d5001af556c29fbc632f77a6aa54bec6c73292f6e04a4150b2",
+    "supplement_root_refs": 23,
+    "supplement_syntax_roles": 30,
+    "supplement_aka_cases": 12,
+    "r16_bridge_sha256": "af44f6353a45aeb464762a13ff10e2ea541c5c0372736a311655b0c067419985",
+    "bridge_root_refs": 7
+  },
+  "P_r7": {
+    "status": "ISOLATED_NOT_PROMOTED_SESSION_FINALIZED_P6",
+    "source_cpp_changes": 0,
+    "compiler_runs": 0,
+    "model_runs": 0,
+    "link_manifest_sha256": "4ecb638312d0c99028a6455fbb4e9bb4a5a94e0e4bdfa3bab4576267d0c58619",
+    "root_verified_input_refs": 27,
+    "link_result": "/home/dmin/work/deadlock_20261125/slotP/r7-link-probe/r1/LINK_RESULT.json",
+    "link_result_sha256": "983b55b8355edca3c6c3c5bdfc549af5b91ac0704b86186080986174cd95e3b6",
+    "root_verified_output_refs": 2,
+    "purpose": "normal4-ET_REL singleimage roleinterleave withsupportedVForderflag; noSDKgeneratedsource/ELFpostpatch",
+    "worker": "audit_d1",
+    "source_manifest_sha256": "ffb9f7ad8f2f9946413176b05530fb285bb4fac6efb81f5ce285b58fadcd0785",
+    "source_files_verified_each_tree": 167,
+    "only_changed_old_file": "cmake/SimTargets.cmake",
+    "new_file": "cmake/LinkSimPrefillMix.py.in",
+    "placement_proof_sha256": "871720c2ad9340aa5017c607cb8a29a8bdacd112ea882b0a01ce2350b8d29c40",
+    "placement_proof_root_refs": 11,
+    "narrow_VF_call_sites_preserved": 393,
+    "no_custom_linker_script": true,
+    "author": "batch_restore_audit",
+    "recipe_author": "audit_d1",
+    "retained_inputs_sha256": "628620dc9195740172aa76d08395cdf4bd60f49cb376ab8b38096b58682dd49b",
+    "retained_inputs_root_refs": 60,
+    "readiness_sha256": "de369294db1f6ac5e406befeb850787112177eb16cdd4868f7d18b829a2ec60b",
+    "readiness_root_refs": 9,
+    "actual_build_exit": 0,
+    "actual_build_seconds": 6.900713,
+    "actual_build_receipt_sha256": "ecaa44c53ad91e831591f4db6e7bae67ea0f031a41eb45311a614362e06b024a",
+    "receipt_rebind_required": "prefinal stub references use mutablefinalizerpath; preserveoriginal, D1newpostcaptureledgerfromimmutableP2preimage+currentfinalstub no rebuild",
+    "CPU_lifecycle": 16,
+    "CPU_boundary_cases": 36,
+    "CPU_receipt_sha256": "42b528f0582b10c2c0f4008c132324af9abad76e77bc9edae48f3042a25343cd",
+    "actual_model_runs": 0,
+    "actual_SDK_startups": 0,
+    "compiled_packet_sha256": "2f3018f79f1a2b1aa73452bb7f0cbeee10a3906904825bf1c379409a48df67a3",
+    "compiled_packet_root_refs": 9,
+    "postcapture_sha256": "703d96f9ca315f9c15f3a06eecf5b24590d6701e4ee4357d278cc46fcb483634",
+    "postcapture_root_refs": 89,
+    "neutral_source_host_sha256": "ea4f7774eeda926159d3078200006bbc87bbff630514ea77bf323d1da7dde88f",
+    "neutral_source_host_root_refs": 41,
+    "link_adapter_CPU_sha256": "7f0d650a55ccd68a4660f590fa0e5b240b3419985250ce000b2db218f9559c10",
+    "link_adapter_CPU_root_refs": 12,
+    "CPU_receipt_root_refs": 38,
+    "review1": "p7_compiled_review_1 FINALPASS",
+    "review2": "p7_compiled_review_2 FINALPASS",
+    "review3": "p7_compiled_review_3 FINALPASS",
+    "R17_packet_sha256": "da9e76459bb1fe8213cf72eeb0e23faced8ad970b8a43a613bb7107225a018b8",
+    "R17_packet_root_refs": 17,
+    "R17_reviewer": "p7_r17_collection_review finishingreceiptbeforepause",
+    "guarded_binding_author": "batch_restore_audit preparingsealedhandoffbeforepause",
+    "review3_saved_sha256": "cca6e96975822d45e9abaed6e409b7f2649d707c59e925e62004e85060ca4b0d",
+    "R17_review_sha256": "c32ab5069f9d8338ca0346ce306a463287a7c7bb87547b62621c1d24ee4196a5",
+    "R17_review_root_refs": 2,
+    "guarded_binding_plan_sha256": "1d0a9b5ec0b4144d5112ec3baaf95ccb942a9f70b19f885b3ef6d94f1d1733b0",
+    "guarded_binding_plan_root_refs": 48,
+    "guarded_binding_status": "PREPARED_UNBOUND_NO_ADMISSION",
+    "actual_runtime_admissions": 0
+  },
+  "pause_requested": false,
+  "pause_requested_at_utc": "2026-11-25T20:12:50.157665+00:00",
+  "pause_scope": "User: pause after agents complete. Finish existing three handoffs only; no new builds, SDK startup, CAModel, admissions, or promotion.",
+  "paused_at_utc": "2026-11-25T20:17:47.001338+00:00",
+  "user_resume_required": false,
+  "current_agents_all_completed": true,
+  "canonical_tracked_trees_clean": true,
+  "canonical_sync_at_pause": "PASS34CPPplus1AKA",
+  "P7_finalization": "ISOLATED_NOT_PROMOTED",
+  "P6_finalization": {
+    "waiver_sha256": "ca0e507c5a16a7f76788f8a2c654b6416fad89f847b5f997969d24b20e2bafd9",
+    "model_admission_sha256": "558f79dace44afae8f29e3f7b183efa59642125352064dee3dacaa591a21f3d7",
+    "release_adapter_plan_sha256": "cdf3f2c1808cddc37d2ecb9e67775e3921aa5b80869e2425f68e8a3b7b20673c",
+    "modern_ticks": 63649,
+    "matched_frozen_ticks": 63654,
+    "historical_cap": 63629,
+    "raw_cap_met": false,
+    "disposition": "USER_WAIVED_MODERN_DELTA",
+    "normalization": "NONE",
+    "strip_wide_lloyd": {
+      "ticks": 31276,
+      "numerical": "PASS",
+      "audit_sha256": "20d4aebc3a76d9ef306e893375aeb31cff232faabc28aa27cea05f97761ddc53"
+    },
+    "nz_narrow_lloyd": {
+      "ticks": 147436,
+      "status": "PASS"
+    },
+    "nz_wide_uniform": {
+      "ticks": 56379,
+      "status": "PASS"
+    },
+    "fresh_reviewer": "p6_final_release_review",
+    "status": "PROMOTED_AND_FINAL_GATES_PASS",
+    "fresh_review_sha256": "455ad824466fb10c4f8083bc7253509cab0faa166e45b3f80f3ee949c9d9d6f0",
+    "application_sha256": "6c73337efe9229f41f885351a144198392a243cbd0c8ce76a0625858ce396664",
+    "host_results_sha256": "28fe079c8703066de0e567f75bb05ad4114776a720b7dae7d7004c8c6cc941bd",
+    "analyzer_syntax_results_sha256": "2f5acf94770f4197164e846ec96c45defefde79957857be70f597986a7cea023",
+    "final_acceptance_sha256": "6eee644751af0d3fdada285a92cb5482773481c5bb3b9c1624c447b08c10cf42",
+    "attention_passed": 606,
+    "sync_build_passed": 14,
+    "cpp_contract_passed": 7,
+    "core_ctest_passed": 9,
+    "torch_syntax_tus": 5,
+    "cann_syntax_checks": 30,
+    "new_analyzer_diagnostics": 0,
+    "consumer_review_sha256": "bef593024be73f46f9fefd74986c6d4106755b751b31d9eb4e3f419113fa8936",
+    "setup_py": "unchanged_verified"
+  },
+  "finalized_at_utc": "2026-11-26T07:42:37.895969+00:00",
+  "product_commits": {
+    "core": {
+      "commit": "043bcc43aa2e5d6ffa1d97930e0a31145731322f",
+      "signed_off": true
+    },
+    "vllm": {
+      "commit": "7ee3e928078fc7e5d6e1b191b3ee5b953c8e7fd8",
+      "signed_off": true
+    }
+  }
+}

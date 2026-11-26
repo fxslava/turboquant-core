@@ -1,0 +1,29 @@
+{
+  "schema": "p6-user-waiver-v1",
+  "status": "EXPLICIT_USER_AUTHORIZATION",
+  "candidate": "P/r6",
+  "source_manifest_sha256": "da54b14f843583cdd0c8e262bc799430afeb89b59406e3aeb3e0deecc34a0064",
+  "compiled_index_sha256": "d57fb0c27ebc63b8615583c83426ca1e852d8a45d4a6a48a0a7bd945788e5875",
+  "measurement": {
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/canary-r11-r6-pair/runs/batch-p-frozen03-matched/result.json",
+    "bytes": 3331,
+    "sha256": "c301c5e4d7117f810b3beaa57eb6d46ab1538a4f103f15f25133c02f4d9dbcd6"
+  },
+  "modern_audit": {
+    "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/canary/P6_BATCH_TIMING_AUDIT.json",
+    "bytes": 203929,
+    "sha256": "3f30c2255871d617bf3a825f796deb8f4d1d040c16eaa17235e60d1e1fbef330"
+  },
+  "original_cap": 63629,
+  "observed_raw_ticks": 63649,
+  "matched_frozen03_raw_ticks": 63654,
+  "waived_delta_ticks": 20,
+  "normalization": "NONE",
+  "raw_cap_met": false,
+  "disposition": "USER_WAIVED_MODERN_DELTA",
+  "user_request": "Waive the 20-tick modern-harness wrapper delta (63,649 vs 63,654 matched Frozen03, zero new body ticks, identical 229 VF PCs and 549 HardEvents) and finalize the current session now. Promote P6 and sync both repos; run remaining 3 P6 cases or promote directly after fresh Sol 6.2 sign-off.",
+  "client_date": "2026-11-26",
+  "recorded_at_utc": "2026-11-26T06:46:51.761426+00:00",
+  "historical_failures_preserved": true,
+  "P7": "ISOLATED_NOT_PROMOTED"
+}

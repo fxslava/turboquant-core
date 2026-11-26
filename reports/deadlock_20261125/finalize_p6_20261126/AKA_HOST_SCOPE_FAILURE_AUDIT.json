@@ -1,0 +1,196 @@
+{
+  "analyzer_mechanism": {
+    "cross_source_analysis": {
+      "bytes": 10612,
+      "path": "/mnt/c/ascend-kernel-analyzer/ascend_analyzer/analyzer.py",
+      "sha256": "9a684138449caf0b482f5ea3e02ac1f3ef2bf6706a484e4dad4727c0d6cf2d85"
+    },
+    "lines": {
+      "analyzer": "211-238",
+      "cli": "397-414",
+      "pipeline": "53-65"
+    },
+    "multi_source_cli": {
+      "bytes": 19871,
+      "path": "/mnt/c/ascend-kernel-analyzer/ascend_analyzer/cli.py",
+      "sha256": "e993cb53ec861a4d873c5a44c14b04ffe6501f130bb00caae1d97e9d91d82e3d"
+    },
+    "pipeline_single_file": {
+      "bytes": 13830,
+      "path": "/mnt/c/ascend-kernel-analyzer/ascend_analyzer/checkers/pipeline.py",
+      "sha256": "c3c5535cc4b6a11caf0f12955bf11746e056d752a4720e7c88fbfed6ccec0fa8"
+    }
+  },
+  "cause": "The installed consumer invoked the analyzer with the narrow translation unit alone. The default profile includes the host wrapper's typed launch to the separately compiled wide TU. AST lookup lacks the matching wide definition in that call. Native analyze_paths explicitly resolves the cross-source launch against the actual supplied units.",
+  "comparison_contract": [
+    "Keep the original one-file failed reports and existing eight unaffected zero-new artifacts. The analyzer emits files[] for multi-source JSON, identify exact returned source paths and require both full kernel ASTs and parse success.",
+    "Use the analyzer's unfiltered joint report for each deployed role, uploading both physical sources as distinct input paths rather than combining them with textual includes in one TU.",
+    "Compare raw narrow diagnostics to independently verified Frozen03 and raw wide diagnostics to independently verified Strict B using the existing fingerprint multiset and only its established embedded source-line normalization. Baseline TU names collide if bundled together, so parse each historical reference singly.",
+    "Keep existing device-macro independent batch comparisons to verify device profile graph coverage. Any new diagnostic remaining after actual cross-source lookup is a failed gate."
+  ],
+  "consumer": {
+    "bytes": 8142,
+    "path": "/mnt/c/vllm-ascend/tests/host/turboquant/check_analyzer.py",
+    "sha256": "4b958124f270e1da95ba2b4ddb8ce769e6a29d5643a135ea76a68cfd591c8cf9"
+  },
+  "exact_scratch_joint_invocations": {
+    "nz": {
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "ascend_analyzer.cli",
+        "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/reshape-nz-integrated.cpp",
+        "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/reshape_wide-nz-integrated.cpp",
+        "--chip",
+        "ascend950pr",
+        "--solver",
+        "interval",
+        "--all-functions",
+        "--ignore-inline-pragmas",
+        "--format",
+        "json",
+        "-o",
+        "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-resume/nz-joint.json"
+      ],
+      "cwd": "/mnt/c/ascend-kernel-analyzer",
+      "inputs": [
+        {
+          "bytes": 132,
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/reshape-nz-integrated.cpp",
+          "sha256": "ed398a8bd170e12914e7e5ba0bfc7ba84549e246c73f548800e457c850c9a8c8"
+        },
+        {
+          "bytes": 137,
+          "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/reshape_wide-nz-integrated.cpp",
+          "sha256": "ddd93bb54a8bfd41a16958c9daeaea93f971284bfe87f34e890c118e6746e930"
+        }
+      ]
+    },
+    "strip": {
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "ascend_analyzer.cli",
+        "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+        "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+        "--chip",
+        "ascend950pr",
+        "--solver",
+        "interval",
+        "--all-functions",
+        "--ignore-inline-pragmas",
+        "--format",
+        "json",
+        "-o",
+        "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-resume/strip-joint.json"
+      ],
+      "cwd": "/mnt/c/ascend-kernel-analyzer",
+      "inputs": [
+        {
+          "bytes": 5722,
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+          "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+        },
+        {
+          "bytes": 1568,
+          "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+          "sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae"
+        }
+      ]
+    }
+  },
+  "execution": "read-only evidence; analyzer/compiler/model launches zero",
+  "failed_log": {
+    "bytes": 1726,
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected.log",
+    "sha256": "379c25fc5a4438494b15482f5d7e5a8b5faa2638b855947141b9a17258a2ffb8"
+  },
+  "failed_summary": {
+    "bytes": 10840,
+    "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/summary.json",
+    "sha256": "026548865b928831315a8b14ed183d90fefa0eff8ee69abdd695725a8b6cdf96"
+  },
+  "original_batch_diagnostics": {
+    "reshape": {
+      "integrated": {
+        "bytes": 6568715,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/reshape-integrated.json",
+        "sha256": "49c5d4f80396209de6131333239166c7eac7628fd8277e86d5156152bbd7ee5e"
+      },
+      "new": [
+        {
+          "code": "AKA3002",
+          "count": 1,
+          "hardware_domain": "-",
+          "message": "Cannot uniquely match host launch 'turboquant_reshape_and_cache_bf16_wide' to a kernel definition",
+          "severity": "INFO"
+        }
+      ],
+      "resolved_occurrences": 10,
+      "verified": {
+        "bytes": 6424129,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/reshape-verified.json",
+        "sha256": "759416b73dab38d3ceedf5b4ddfb65c0fa5565300804ffddde4fcd07d82293b7"
+      }
+    },
+    "reshape_nz": {
+      "integrated": {
+        "bytes": 7441323,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/reshape_nz-integrated.json",
+        "sha256": "5f0e6aefd3daeb777ec9be0c1a5cb3256e532770a709ec921cced215e3ed6a0e"
+      },
+      "new": [
+        {
+          "code": "AKA3002",
+          "count": 1,
+          "hardware_domain": "-",
+          "message": "Cannot uniquely match host launch 'turboquant_reshape_and_cache_bf16_wide' to a kernel definition",
+          "severity": "INFO"
+        }
+      ],
+      "resolved_occurrences": 0,
+      "verified": {
+        "bytes": 7173171,
+        "path": "/home/dmin/work/deadlock_20261125/slotP/r6/promotion-final-r1/deployed-aka-syntax/frozen-and-unaffected/reshape_nz-verified.json",
+        "sha256": "5afec1e55fa2782f8a8620aa9fb056af9f99f65f8617ee7e05a0b56910a26cab"
+      }
+    }
+  },
+  "schema": "p6-deployed-aka-hybrid-input-failure-audit-v1",
+  "source_proof": {
+    "deployed_cmake": {
+      "bytes": 10668,
+      "path": "/mnt/c/vllm-ascend/CMakeLists.txt",
+      "sha256": "706663b8be3d4efbb9029d354e19a0e8dbacffe7ed87bd04016ac4011bba6f96"
+    },
+    "narrow_and_wide": [
+      {
+        "bytes": 5722,
+        "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+        "sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a"
+      },
+      {
+        "bytes": 1568,
+        "path": "/mnt/c/vllm-ascend/csrc/attention/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+        "sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae"
+      }
+    ],
+    "retained_modern_link": {
+      "bytes": 7518,
+      "path": "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r2/MODERN_COMPILED.json",
+      "sha256": "c84cbcfb381d04a9a436b6c2dcea9eede6e755c992f2a43ae6da5915ec50cf91"
+    }
+  },
+  "unaffected_zero_new": [
+    "decode",
+    "vector",
+    "softmax",
+    "scatter",
+    "scatter_nz",
+    "e8_component",
+    "e8_reader",
+    "e8_reader_unannotated"
+  ]
+}

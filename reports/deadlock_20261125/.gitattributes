@@ -1,0 +1,2 @@
+# Evidence is hash-sealed; preserve its original bytes across checkouts.
+* -text -whitespace
