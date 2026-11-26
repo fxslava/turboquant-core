@@ -10,7 +10,9 @@ function(add_turboquant_npu_targets)
   set(RUN_MODE npu)
   set(SRC "${CMAKE_CURRENT_SOURCE_DIR}")
 
-  ascendc_library(tq_prefill_npu SHARED src/turboquant/ingress/native/turboquant_reshape_batch.cpp)
+  ascendc_library(tq_prefill_npu SHARED
+      src/turboquant/ingress/native/turboquant_reshape_batch.cpp
+      src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp)
   set_property(SOURCE src/turboquant/ingress/native/turboquant_reshape_batch.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/turboquant/ingress/native/turboquant_reshape_batch.cpp)
   ascendc_compile_definitions(tq_prefill_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_LEGACY_CANN_LAUNCH=1)
   ascendc_compile_options(tq_prefill_npu PRIVATE
@@ -20,7 +22,9 @@ function(add_turboquant_npu_targets)
 
   # The same writer with the write-time NZ-tiled ingress on; see SimTargets.cmake for why it is
   # its own library rather than an option on the one above.
-  ascendc_library(tq_prefill_nz_npu SHARED src/turboquant/ingress/native/turboquant_reshape_batch.cpp)
+  ascendc_library(tq_prefill_nz_npu SHARED
+      src/turboquant/ingress/native/turboquant_reshape_batch.cpp
+      src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp)
   set_property(SOURCE src/turboquant/ingress/native/turboquant_reshape_batch.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/turboquant/ingress/native/turboquant_reshape_batch.cpp)
   ascendc_compile_definitions(tq_prefill_nz_npu PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_LEGACY_CANN_LAUNCH=1 TURBOQUANT_INGRESS_NZ=1)
   ascendc_compile_options(tq_prefill_nz_npu PRIVATE

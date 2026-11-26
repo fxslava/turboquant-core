@@ -26,25 +26,61 @@ function(add_turboquant_sim_targets)
       "ASCEND_HOME_PATH=${ASCEND_HOME_PATH}")
 
 # ---------------------------------------------------------------- the kernels
-  ascendc_library(tq_prefill_sim SHARED src/turboquant/ingress/native/turboquant_reshape_batch.cpp)
-  set_property(SOURCE src/turboquant/ingress/native/turboquant_reshape_batch.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/turboquant/ingress/native/turboquant_reshape_batch.cpp)
-  ascendc_compile_definitions(tq_prefill_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_LEGACY_CANN_LAUNCH=1)
-  ascendc_compile_options(tq_prefill_sim PRIVATE
-      -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
-      -forward-options-to-host-compiler -Wall -Wextra -Werror
-      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_LEGACY_CANN_LAUNCH=1)
+  function(add_sim_prefill_pair narrow wide)
+    ascendc_library(${wide} SHARED src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp)
+    ascendc_library(${narrow} SHARED src/turboquant/ingress/native/turboquant_reshape_batch.cpp)
+    set(entry turboquant_reshape_and_cache_bf16)
+    set(${narrow}_exports "launch_${entry}; aclrtlaunch_${entry};")
+    set(${wide}_exports "aclrtlaunch_${entry}_wide;")
+    set(layout_options)
+    foreach(definition IN LISTS ARGN)
+      list(APPEND layout_options "-D${definition}")
+    endforeach()
+    foreach(kernel IN ITEMS ${narrow} ${wide})
+      ascendc_compile_definitions(${kernel} PRIVATE
+          ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_LEGACY_CANN_LAUNCH=1 ${ARGN})
+      ascendc_compile_options(${kernel} PRIVATE
+          -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
+          -forward-options-to-host-compiler -Wall -Wextra -Werror
+          ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_LEGACY_CANN_LAUNCH=1
+          ${layout_options})
+      target_sources(${kernel} PRIVATE src/host/turboquant_sim_binary_lifetime.cpp)
+      target_compile_options(${kernel} PRIVATE -Wall -Wextra -Werror)
+      set(export_map "${CMAKE_CURRENT_BINARY_DIR}/${kernel}.exports.map")
+      file(GENERATE OUTPUT "${export_map}"
+          CONTENT "{ global: ${${kernel}_exports} local: *; };\n")
+      set_property(TARGET ${kernel} APPEND PROPERTY LINK_DEPENDS "${export_map}")
+      # The generated registration constructor uses these SDK providers before main.
+      target_link_libraries(${kernel} PRIVATE
+          "-Wl,--push-state,--no-as-needed"
+          "${ASCEND_HOME_PATH}/lib64/libascendcl.so"
+          "${SIM_LIB_DIR}/libruntime_camodel.so"
+          "${ASCEND_HOME_PATH}/lib64/libprofapi.so"
+          "-Wl,--pop-state")
+      # CANN's profiler can retain callbacks after dlclose. Retain each simulator module
+      # until process exit so the callbacks and both binary owners share that lifetime.
+      target_link_options(${kernel} PRIVATE
+          "LINKER:--version-script=${export_map}" "LINKER:--wrap=RegisterAscendBinary"
+          "LINKER:-z,nodelete")
+      # The SDK replays its link without shell expansion.
+      set_target_properties(${kernel} PROPERTIES
+          BUILD_RPATH_USE_ORIGIN FALSE BUILD_RPATH "${CMAKE_BINARY_DIR}/lib")
+    endforeach()
 
-  # The same writer with the write-time NZ-tiled ingress on. Its own library, not an option on
-  # the one above: the two layouts are two operators behind one entry point, and the strip gate
-  # (test_live_write) has to keep running against the strip writer in the same configure. Both
-  # export the same symbol, so each is linked by its own runner and never by both.
-  ascendc_library(tq_prefill_nz_sim SHARED src/turboquant/ingress/native/turboquant_reshape_batch.cpp)
+    # CANN supplies its own launch adapter to each host build. The public dispatcher also
+    # calls the wide entry, so its host build needs the adapter from the companion library.
+    ExternalProject_Add_StepDependencies(${narrow}_host configure ${wide}_preprocess)
+    set_property(TARGET ${narrow}_interface APPEND PROPERTY HOST_COMPILE_OPTIONS
+        "SHELL:-include ${CMAKE_BINARY_DIR}/include/${wide}/aclrtlaunch_triple_chevrons_func.h")
+    # Link the companion without inheriting its SDK runner link interface.
+    target_link_libraries(${narrow} PRIVATE "$<TARGET_LINKER_FILE:${wide}>")
+    add_dependencies(${narrow} ${wide})
+  endfunction()
+
   set_property(SOURCE src/turboquant/ingress/native/turboquant_reshape_batch.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/turboquant/ingress/native/turboquant_reshape_batch.cpp)
-  ascendc_compile_definitions(tq_prefill_nz_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_LEGACY_CANN_LAUNCH=1 TURBOQUANT_INGRESS_NZ=1)
-  ascendc_compile_options(tq_prefill_nz_sim PRIVATE
-      -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
-      -forward-options-to-host-compiler -Wall -Wextra -Werror
-      ${TQ_CANN_SYSTEM_OPTIONS} -DASCEND_MICRO_CANN_LAUNCH -DTURBOQUANT_LEGACY_CANN_LAUNCH=1 -DTURBOQUANT_INGRESS_NZ=1)
+  add_sim_prefill_pair(tq_prefill_sim tq_prefill_wide_sim)
+  # STRIP and NZ have the same public symbol and each runner links only its own layout.
+  add_sim_prefill_pair(tq_prefill_nz_sim tq_prefill_nz_wide_sim TURBOQUANT_INGRESS_NZ=1)
 
   ascendc_library(tq_scatter_sim SHARED src/turboquant/ingress/native/turboquant_reshape_scatter.cpp)
   set_property(SOURCE src/turboquant/ingress/native/turboquant_reshape_scatter.cpp PROPERTY OBJECT_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp)
@@ -79,7 +115,8 @@ function(add_turboquant_sim_targets)
   # The CAModel libraries depend on further simulator DSOs; -rpath-link lets the link resolve
   # those indirect dependencies, and the install RPATH lets the runner find them at run time.
   tq_scope_cann_wrapper_warnings(
-      tq_prefill_sim tq_prefill_nz_sim tq_scatter_sim tq_scatter_nz_sim tq_decode_sim)
+      tq_prefill_sim tq_prefill_wide_sim tq_prefill_nz_sim tq_prefill_nz_wide_sim
+      tq_scatter_sim tq_scatter_nz_sim tq_decode_sim)
 
   function(add_sim_runner name source)
     add_executable(${name} EXCLUDE_FROM_ALL "${source}")
