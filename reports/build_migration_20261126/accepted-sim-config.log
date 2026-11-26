@@ -1,0 +1,17 @@
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Compiler cache: none found
+-- Golden fixtures need preparation: build tq_generate_goldens with a CPU-torch Python, or set TQ_GOLDEN_DUMP_ROOT to a complete fixture directory. See tests/README.md.
+-- System processor: x86_64
+-- CMAKE_ASC_COMPILER: /usr/local/Ascend/cann-9.2.1/bin/bisheng
+-- ASCEND_CANN_PACKAGE_LINUX_PATH: /usr/local/Ascend/cann-9.2.1/x86_64-linux
+-- CMAKE_ASC_LLD_LINKER: /usr/local/Ascend/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld
+-- ASC Simulator enabled: /usr/local/Ascend/cann-9.2.1/tools/simulator/dav_3510/lib
+-- TurboQuant target guide: cmake --build /workspace/build/build-sim --target tq_help
+-- Configuring done (0.9s)
+-- Generating done (0.2s)
+-- Build files have been written to: /workspace/build/build-sim

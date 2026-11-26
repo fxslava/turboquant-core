@@ -1,0 +1,71 @@
+[  2%] Building ASC object cmake/device/CMakeFiles/tq_e8_dequant.dir/__/__/src/host/asc_e8_component.cpp.o
+[  5%] Building ASC object cmake/device/CMakeFiles/tq_decode_npu.dir/__/__/src/turboquant/decode/native/turboquant_fused_decode.cpp.o
+[  7%] Building ASC object cmake/device/CMakeFiles/tq_e8_reader.dir/__/__/src/host/asc_e8_reader.cpp.o
+[ 10%] Building CXX object CMakeFiles/turboquant_host.dir/src/turboquant/common/turboquant_tiling.cpp.o
+[ 12%] Building CXX object CMakeFiles/turboquant_host.dir/src/turboquant/common/turboquant_telemetry.cpp.o
+[ 15%] Linking CXX static library lib/libturboquant_host.a
+[ 15%] Built target turboquant_host
+[ 17%] Building ASC object cmake/device/CMakeFiles/tq_scatter_nz_npu.dir/__/__/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o
+[ 20%] Linking ASC shared library ../../lib/libtq_e8_dequant.so
+[ 20%] Built target tq_e8_dequant
+[ 23%] Building ASC object cmake/device/CMakeFiles/tq_scatter_npu.dir/__/__/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o
+[ 25%] Linking ASC shared library ../../lib/libtq_scatter_nz_npu.so
+[ 25%] Built target tq_scatter_nz_npu
+[ 28%] Building ASC object cmake/device/CMakeFiles/tq_prefill_npu.dir/__/__/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o
+[ 30%] Linking ASC shared library ../../lib/libtq_scatter_npu.so
+[ 30%] Built target tq_scatter_npu
+[ 33%] Building CXX object cmake/device/CMakeFiles/test_live_write_nz_npu.dir/__/__/tests/npu/test_live_write.cpp.o
+[ 35%] Linking CXX executable ../../bin/test_live_write_nz_npu
+[ 35%] Built target test_live_write_nz_npu
+[ 38%] Building ASC object cmake/device/CMakeFiles/tq_prefill_nz_npu.dir/__/__/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o
+[ 41%] Linking ASC shared library ../../lib/libtq_e8_reader.so
+[ 41%] Built target tq_e8_reader
+[ 43%] Building ASC object cmake/device/CMakeFiles/tq_prefill_nz_npu.dir/__/__/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o
+[ 46%] Building ASC object cmake/device/CMakeFiles/tq_prefill_npu.dir/__/__/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o
+[ 48%] Building CXX object cmake/device/CMakeFiles/test_golden_scatter_npu.dir/__/__/tests/npu/test_golden_dump.cpp.o
+[ 51%] Linking ASC shared library ../../lib/libtq_prefill_nz_npu.so
+[ 51%] Built target tq_prefill_nz_npu
+[ 53%] Building CXX object cmake/device/CMakeFiles/test_nz_ingress_canary_npu.dir/__/__/tests/npu/test_nz_ingress_canary.cpp.o
+[ 56%] Linking CXX executable ../../bin/test_golden_scatter_npu
+[ 56%] Built target test_golden_scatter_npu
+[ 58%] Building CXX object cmake/device/CMakeFiles/test_golden_prefill_nz_npu.dir/__/__/tests/npu/test_golden_dump.cpp.o
+[ 61%] Linking CXX executable ../../bin/test_nz_ingress_canary_npu
+[ 61%] Built target test_nz_ingress_canary_npu
+[ 64%] Linking CXX executable ../../bin/test_golden_prefill_nz_npu
+[ 64%] Built target test_golden_prefill_nz_npu
+[ 66%] Linking ASC shared library ../../lib/libtq_prefill_npu.so
+[ 66%] Built target tq_prefill_npu
+[ 71%] Building CXX object cmake/device/CMakeFiles/test_live_write_npu.dir/__/__/tests/npu/test_live_write.cpp.o
+[ 71%] Building CXX object cmake/device/CMakeFiles/test_golden_prefill_strip_npu.dir/__/__/tests/npu/test_golden_dump.cpp.o
+[ 74%] Linking CXX executable ../../bin/test_golden_prefill_strip_npu
+[ 74%] Built target test_golden_prefill_strip_npu
+[ 76%] Linking CXX executable ../../bin/test_live_write_npu
+[ 76%] Built target test_live_write_npu
+[ 79%] Linking ASC shared library ../../lib/libtq_decode_npu.so
+[ 79%] Built target tq_decode_npu
+[ 84%] Building CXX object cmake/device/CMakeFiles/test_dirty_data_canary_npu.dir/__/__/tests/npu/test_dirty_data_canary.cpp.o
+[ 84%] Building CXX object cmake/device/CMakeFiles/test_golden_decode_npu.dir/__/__/tests/npu/test_golden_dump.cpp.o
+[ 89%] Building CXX object cmake/device/CMakeFiles/test_turboquant_production_npu.dir/__/__/benchmarks/benchmark_turboquant_production.cpp.o
+[ 89%] Building CXX object cmake/device/CMakeFiles/test_fused_decode_e2e_npu.dir/__/__/tests/npu/test_fused_decode_e2e.cpp.o
+[ 92%] Linking CXX executable ../../bin/test_dirty_data_canary_npu
+[ 92%] Built target test_dirty_data_canary_npu
+[ 94%] Linking CXX executable ../../bin/test_golden_decode_npu
+[ 97%] Linking CXX executable ../../bin/test_fused_decode_e2e_npu
+[ 97%] Built target test_golden_decode_npu
+[ 97%] Built target test_fused_decode_e2e_npu
+[100%] Linking CXX executable ../../bin/test_turboquant_production_npu
+[100%] Built target test_turboquant_production_npu
+[100%] Built target tq_npu_tests
+[ 20%] Built target turboquant_host
+[ 33%] Built target tq_e8_dequant
+[ 46%] Built target tq_e8_reader
+[ 60%] Built target tq_decode_npu
+[ 73%] Built target tq_scatter_nz_npu
+[ 80%] Building CXX object cmake/device/CMakeFiles/bench_qwen35_decode.dir/__/__/tests/npu/bench_qwen35_decode.cpp.o
+[ 86%] Building CXX object cmake/device/CMakeFiles/bench_turboquant_production_npu.dir/__/__/benchmarks/benchmark_turboquant_production.cpp.o
+[ 93%] Linking CXX executable ../../bin/bench_qwen35_decode
+[ 93%] Built target bench_qwen35_decode
+[100%] Linking CXX executable ../../bin/bench_turboquant_production_npu
+[100%] Built target bench_turboquant_production_npu
+[100%] Built target tq_npu_benchmarks
+[100%] Built target tq_benchmarks

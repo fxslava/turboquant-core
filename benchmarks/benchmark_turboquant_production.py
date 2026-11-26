@@ -73,7 +73,23 @@ def cli_parser():
 
 
 def executable(build, backend):
-    return str((build / "tests" / EXECUTABLES[backend]).resolve())
+    name = EXECUTABLES[backend]
+    directories = ("bin", "benchmarks", "tests") if backend == "npu" else ("bin", "tests")
+    for directory in directories:
+        candidate = (build / directory / name).resolve()
+        if candidate.is_file():
+            return str(candidate)
+    target = {
+        "host": "tq_host_tests",
+        "npu": "tq_benchmarks",
+        "npu-test": "tq_npu_tests",
+    }[backend]
+    raise FileNotFoundError(
+        f"{name} is missing in {build}. Build it with: "
+        f"cmake --build {build} --target {target}. "
+        "NPU targets require -DTQ_BUILD_KERNELS=ON -DRUN_MODE=npu. "
+        "Set -DTQ_BUILD_E8_KERNELS=ON to include E8 device rows."
+    )
 
 
 def command_options(args):

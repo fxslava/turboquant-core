@@ -1,0 +1,25 @@
+-- Compiler cache: none found
+-- TurboQuant target guide: cmake --build /workspace/build/build-host --target tq_help
+-- Configuring done (0.5s)
+-- Generating done (0.1s)
+-- Build files have been written to: /workspace/build/build-host
+TurboQuant build targets
+RUN_MODE=sim
+SOC_VERSION=Ascend950PR_9599
+ASCEND_SOC_VERSION=Ascend950PR_9599
+TQ_BUILD_KERNELS=OFF
+TQ_BUILD_E8_KERNELS=OFF
+  tq_host_tests        Build all CPU C++ tests (bin/)
+  tq_check_host        Build and run host-labeled CTests
+  tq_generate_goldens  Generate fixtures using Python3_EXECUTABLE with CPU torch
+  tq_tests             Build all tests configured in this build directory
+  tq_kernels           Build configured device libraries (lib/)
+  tq_sim_kernels    Build selected-runtime device libraries (when enabled)
+  tq_sim_tests      Build selected-runtime correctness runners (when enabled)
+  tq_benchmarks        Build device benchmarks when TQ_BUILD_KERNELS=ON
+Device targets are off. Configure -DTQ_BUILD_KERNELS=ON -DRUN_MODE=npu for hardware, or -DRUN_MODE=sim for CAModel.
+Device CTest registration: OFF
+E8 device libraries: OFF
+Golden fixture root: /workspace/build/build-host/golden-dumps
+Guides: docs/BUILD.md, tests/README.md and benchmarks/README.md
+Built target tq_help

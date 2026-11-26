@@ -22,18 +22,9 @@ function(add_vendored_decode_probe)
     message(FATAL_ERROR "TQ_VENDORED_DECODE_PROBE=ON but no source at ${TQ_VENDORED_DECODE_SRC}")
   endif()
 
-  ascendc_library(tq_decode_vendored_npu SHARED "${TQ_VENDORED_DECODE_SRC}")
-  set_property(SOURCE "${TQ_VENDORED_DECODE_SRC}" PROPERTY OBJECT_DEPENDS "${TQ_VENDORED_DECODE_SRC}")
-  # Use the wheel's device defines and the toolkit's legacy host launcher ABI.
-  ascendc_compile_definitions(tq_decode_vendored_npu PRIVATE
-      ASCEND_MICRO_CANN_LAUNCH TURBOQUANT_LEGACY_CANN_LAUNCH=1 ASCEND_TQ_FUSED_DECODE_GEMM_REDUCE=1 TURBOQUANT_INGRESS_NZ=1)
-  ascendc_compile_options(tq_decode_vendored_npu PRIVATE
-      -std=c++17 -Wall -Wextra -Werror ${TQ_CANN_SYSTEM_OPTIONS}
-      -forward-options-to-host-compiler
-      -DASCEND_MICRO_CANN_LAUNCH
-      -DTURBOQUANT_LEGACY_CANN_LAUNCH=1
-      -DASCEND_TQ_FUSED_DECODE_GEMM_REDUCE=1
-      -DTURBOQUANT_INGRESS_NZ=1)
+  tq_add_ascend_kernel(TARGET tq_decode_vendored_npu RUN_MODE npu
+      SOURCES "${TQ_VENDORED_DECODE_SRC}"
+      DEFS ASCEND_TQ_FUSED_DECODE_GEMM_REDUCE=1 TURBOQUANT_INGRESS_NZ=1)
 
   # Same library name as the harness decode, into a probe directory: swapping
   # probe/lib/libtq_decode_npu.so in for build-npu/lib/libtq_decode_npu.so on the

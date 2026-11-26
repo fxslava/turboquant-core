@@ -1,0 +1,582 @@
+[
+  {
+    "path": "/home/dmin/tqwork/turboquant-core/build/docker_inner.sh",
+    "before": "acf50471c7c4c6d311fc1cdccbf476a699b1f36ce9642d589f593fb59ebc0699",
+    "after": "4451f123c79f887a5359eeb71d2949a4e641f3824ca4534be9b38e7b78689231"
+  },
+  {
+    "path": "/home/dmin/tqwork/turboquant-core/build/wsl_docker.sh",
+    "before": "0fc25f4e9284c76385c236e104f470fd336761176b3d0db33e5f36f569af9f49",
+    "after": "9997ae5a18d23ed594d33aa43cac75181be5e73cccdf0285cba6314738fdc76b"
+  },
+  {
+    "path": "/home/dmin/work/agent_01/wave2/scripts/build_cpu_round1.sh",
+    "before": "b6d9c0fecd763eecb0a45e09dd03010f73de95b8a16234f5c5d20bb1dcf0b10e",
+    "after": "f482e8c898d766721e847d219ff528d8ca0094dfe29638ec5348ecfd5fcca3c5"
+  },
+  {
+    "path": "/home/dmin/work/agent_01/wave2/scripts/build_cpu_round2.sh",
+    "before": "ce46d76d1a1b435679698583639b4ac8bead30391fdb6556d8b902cef41ffbc3",
+    "after": "b8b93cf3911b3b8c0e5ba04e933ecb2e2bc285290dd2ea41740740a2c1407976"
+  },
+  {
+    "path": "/home/dmin/work/agent_01/wave2/scripts/build_device_round1.sh",
+    "before": "01943b376974dfb33fe2031e0ae39f15affb8e20cb6731f38233218cb97d2c18",
+    "after": "043e649dde9164ea01b91c04306070e43da3eb81e692327ba916d0744b2c53db"
+  },
+  {
+    "path": "/home/dmin/work/agent_01/wave2/scripts/build_device_round2.sh",
+    "before": "c6d814dcd84e3f5cf8bf25d366edbb24a0e28a58daab5d301440eab974160936",
+    "after": "9d6e30ea312384be117f3d8d2cc6e9821b07983d26a4ad6a9cbb368deb3ce71b"
+  },
+  {
+    "path": "/home/dmin/work/agent_01/wave2/scripts/extract_round2_isa.py",
+    "before": "e4e3e7859282515d92fb4268f454c1a274296badf72a19133f69c0a9164a49e7",
+    "after": "bbafca3d6879486cd18fcba597826030c05a26b3d55d10ae858c7814727b872e"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/ascend-micro-harness/scripts/e8_agent02_build.sh",
+    "before": "e87117a8707817b7854e7296f7f0c87da1a757a9d97d6c065faacf04aaa34c86",
+    "after": "300c752da2b94d68ce6c11e77d43e097cc55e7ffb1f06b121c39821f2a2cb704"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/ascend-micro-harness/scripts/e8_agent02_compile.sh",
+    "before": "e0158a610e149a6d358856f2ab4e079fb3efcf718523ef52a26102bfc2540e1a",
+    "after": "c85ae768d1c5f7262077404c0c69c4bcba75e94b380a57818353fb5433390996"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/ascend-micro-harness/scripts/e8_agent02_round2_build.sh",
+    "before": "b8f4a3b12ecd6c9037ec5ce402dd7b4170a60b0b812dd31c39025b9bce5df647",
+    "after": "5e1717eb448c05757296bf470390f9da45b428dbd74655126946aea3dd627c6c"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/ascend-micro-harness/scripts/e8_agent02_round2_compile.sh",
+    "before": "9a1fe03c7903e46a61f2a7e25ddb8a7723f5cbf152ee05432b56757d33f60421",
+    "after": "afc9dd1194ca9258735a2add695929c1ee3700b893c4a33d13e31cdb1b572f42"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/ascend-micro-harness/scripts/e8_agent02_round2_run.sh",
+    "before": "129c584edd94a62d5d5b057e033569648735f74a982dfac417f7c833fb6b5473",
+    "after": "3b8f0f7e7040545a67247e8900d6cff1eb0f19fdf5df008d79103152f0cedd70"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/ascend-micro-harness/scripts/e8_agent02_run.sh",
+    "before": "2aa20520be952f47f67d67306bca37858550fa68ff919dd2f7042df990d09365",
+    "after": "aba280d174ddaac29d16c1aa6418db0749005fa71cb9ded1138b5f4fb55ab17a"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/ascend-micro-harness/scripts/e8_agent02_run_round2_plain.sh",
+    "before": "d0b1db07152f6fef079692939e43d0e1270932ae9079196b6029e8b7e387d3df",
+    "after": "ada20666657f6fc27ed912f0349f282dda5b2a989e18bb5ff19c9e036c9d2900"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/wave2/scripts/build_cpu_round1.sh",
+    "before": "d5eb677a8e89a534fa0d63ec8f298cc48671cfe93edb1747112cb40194f7b1ce",
+    "after": "da87ad733edc24ce55d91e4be74b222e37283898faa4e08e1b25faae24492ab5"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/wave2/scripts/build_cpu_round2.sh",
+    "before": "44e026f435f663d3b965c45d76cd98b4cbf59ce2ffc5396837deae9aaae6c659",
+    "after": "162501686f7d1eb5233e03110e102bdf14e99933432f05c33b5cfbc1f5c616d7"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/wave2/scripts/build_cpu_round3.sh",
+    "before": "172819b7cfd3ee9ab6433be1e0b4a99b7941c8b3b5972c57ede4f50f29424bba",
+    "after": "4dc461cd3fb959c4db5bb9bb13440d52234f8feb0fa0da43f407a3003ababacd"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/wave2/scripts/build_device_round1.sh",
+    "before": "e7665050cd1819023b7a9270211ad7e8628abc579c2950247a984af869c0040f",
+    "after": "c2083debe3267c6005c5f104275c96e7246cdd2fee8f7b6e6c7a583886fd9da6"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/wave2/scripts/build_device_round2.sh",
+    "before": "13c60064026523f0d6ea7fbaf6366972ef08c9de3b2d377a5727512f47be3925",
+    "after": "5f912f6317cf6603e5ea6c73cca76c7df85814dd661a8e27cfe021ea43e7455d"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/wave2/scripts/build_device_round3.sh",
+    "before": "819737dd16ab8869115374b43399844f24567071820e644f9fb502ee6d6de831",
+    "after": "d7444f8778f099a9f19e9f11398a24d0d8492faf98677fb6761dbb2b6091ff31"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/wave2/scripts/extract_round1_isa.sh",
+    "before": "e894ccd147d2b054e6bd84bca0ed40d4ee06d8e039ba20a9c6c1d005bd6535f4",
+    "after": "8bd67ee7a7a1170df1c43618b75028282f8a8309d2d2148d38f35d13e0107f52"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/wave2/scripts/extract_round2_isa.sh",
+    "before": "f2db92d4eacf7d217708611c6e44e51518e9f68880c808d137d3b1f2e4dd5e01",
+    "after": "487ddf93e000d3c9f0cf94fbb26ca1cb04e9fc83995653fa9dc4943f50335049"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/wave2/scripts/extract_round3_isa.sh",
+    "before": "bdfddd1814181e6c1954d74f26ed5c146da99c7f7c12098e6aa15a133a8fcf8a",
+    "after": "30b90443bbbf0429a3e32e1d3373d39cb8b6b4d9887101bf29a64cd5c5df63fc"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/wave2/scripts/proposed_camodel_canonical_head0.sh",
+    "before": "09c1f938897c34d08642603082cfd8eb36ea456eba4657acc6361b4f150c149b",
+    "after": "ba9835a59bc412dcd04b531b6b0985618396b74b5f8d99ceea4850cac6ee62ce"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/wave2/scripts/proposed_camodel_canonical_middle16.sh",
+    "before": "88cecfa8c43fa97fc9e8534aa2cf58140a253c46019ea19f15981da146af8f21",
+    "after": "58e4944378b23e07e0dcb57a3f25ef9433a77571b9dc1d9ba3dde8a3054be8c7"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/wave2/scripts/proposed_camodel_canonical_tail31.sh",
+    "before": "ccb433c34707339c5ae16f270c4bb25c8f5e0daaff055d77ef930b2a5a3dad4e",
+    "after": "f721e954448006de51567e6427d0638a0b1699087681e8abafd6b433e3d03e8b"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/wave2/scripts/proposed_camodel_principal_row0.sh",
+    "before": "9bee9505b1add7f8de8e217e6241e3c618adb8ecc144218e59ad2eb677406283",
+    "after": "e58eacc51f8406e52ef4772a17e4d286c060e92f694256375ad45283a5bafc1e"
+  },
+  {
+    "path": "/home/dmin/work/agent_02/wave2/scripts/proposed_camodel_zero_row0.sh",
+    "before": "ce521d5788a6a6caedaec48c97df6156cf8c4e1273738fe5a4e51f2f26560b85",
+    "after": "a90e8c4daf3d3c75512649a8318bc58fdb5450d28f018fb0a91732879cb1f4b6"
+  },
+  {
+    "path": "/home/dmin/work/agent_03/ascend-micro-harness/scripts/e8_int8_quant_audit.py",
+    "before": "296d9e79a58be49cc3eae7f666ddd7a893f83777370e26343784047bd394171f",
+    "after": "576821f06590c35f4caa3231049d84c2f932fda8a053fde91bcb5cc8f8386c3e"
+  },
+  {
+    "path": "/home/dmin/work/agent_03/wave2/scripts/build_cpu_round1.sh",
+    "before": "1d74b7c5f14677f4dfeaf03ea07502b82bd91e98f98e49222c53c96badf47fc3",
+    "after": "ac9d709728058cfe0043bf34a17d0ba34860353bd7ef8386bf315fb607af3b99"
+  },
+  {
+    "path": "/home/dmin/work/agent_03/wave2/scripts/build_device_round1.sh",
+    "before": "a3a6d83424a7bac0960a600d401f26d39ba6ac70385da62685a083afe210a144",
+    "after": "29cecbd683baad9cd890967b999d7772aa69a64b84d58542352c7fd4d56a3de6"
+  },
+  {
+    "path": "/home/dmin/work/agent_03/wave2/scripts/proposed_camodel_full_triplet.sh",
+    "before": "a32a4f8083fd3f1b8b25320c3a2d9f98c9c7c359327d9df8ebe4e56431972789",
+    "after": "20a9be5f9096d6f9306a15ac820f130f15bde83a523faa9e6cae91088ddbc351"
+  },
+  {
+    "path": "/home/dmin/work/agent_03/wave2/scripts/proposed_camodel_middle16.sh",
+    "before": "30e4a4776e444542a94e987343632d9bb4c09925e1c9f3bb11797b01e2f01f7b",
+    "after": "bebc84f26cfc6e7d57209bcf29f6d19ae28bd0ef010494f78de6ccbbac4cf5a0"
+  },
+  {
+    "path": "/home/dmin/work/agent_03/wave2/scripts/proposed_camodel_scale_edges_v1.sh",
+    "before": "3eddc0afa7e9ee99d7a51ec5e83dc489c8eafc3eb365c6701e3b0912f8fe3f1c",
+    "after": "efe2f8b80f1c18e8f62536080ddfea52a8f7a23e892575ea8d56cc4f3bff7ddf"
+  },
+  {
+    "path": "/home/dmin/work/agent_03/wave2/scripts/proposed_camodel_smoke_row0.sh",
+    "before": "2aab8c4b72020f74d8b0780de3c2ed09b1c6f0b9e1e6a0c143ae8704f799e5a9",
+    "after": "b903f4ac77ffcd84231e10faf1896a5d3d5d60a57fa1bcebb49caf0ffa5aab71"
+  },
+  {
+    "path": "/home/dmin/work/agent_03/wave2/scripts/proposed_camodel_tail31.sh",
+    "before": "2126492fa7ae984d318a82aa6c1852df068aaa8b83503d6bf3edebae6db2b772",
+    "after": "620bff43819eb5a1ef46c7e6a910d205c7bedae229483139dd4990d6898549fb"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/ascend-micro-harness/scripts/e8_agent04_build.sh",
+    "before": "540aef06d66409aea8ffea3c46052012634658eec2bc631fe14bdc6189573321",
+    "after": "643ae8cdf9b0eb904abaa66bf78db85142a467012f6470d2fb3c2a4ba49b4d2e"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/ascend-micro-harness/scripts/e8_agent04_compile.sh",
+    "before": "f4bece451757cf0ad3b42ae5a637023d0ee18797cde6e4808d8c657caab19aaf",
+    "after": "cd8b34323e170ce92b64a6c65e6186a15ffc2d39be345b776299012d912f7546"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/ascend-micro-harness/scripts/e8_agent04_round2_build.sh",
+    "before": "136f7693134ef34b45258a244242004ff990ab25f464bad205615c453d3a584d",
+    "after": "660c47af6fe8c94e5b68bc60119eb8f1a1109348216f7b18dd71623ccc9e185f"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/ascend-micro-harness/scripts/e8_agent04_round2_compile.sh",
+    "before": "aaa751d39ef3b334a4050748ee1794e749945a26bc9bb6606a6011a94798ebd1",
+    "after": "8e79030682f514e1640baf9db8070baa1e89705d02da468fc1250c7028430ba9"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/ascend-micro-harness/scripts/e8_agent04_round2_run.sh",
+    "before": "122a7e9716bc38bb344097dbae17891862e259a4d11a9ea3fbc3a7b2a12488ed",
+    "after": "5895102c16abd7f43f2173965a3a2f2f75ad820dbcffa0696b9c7d7e7a7e4184"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/ascend-micro-harness/scripts/e8_agent04_run.sh",
+    "before": "f917c77390a0cdd19b965efffc8b3a2c5563358aedcb7e648767bb2b413794dc",
+    "after": "9656a6d7c6c14133d49820279e02e5576a74fb81bd2879d21077a471034f8b7b"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/ascend-micro-harness/scripts/e8_agent04_run_round2_plain.sh",
+    "before": "afa251feac75fdfd5f3884ccd119dba83c2991a8f9e0f064b696ac841d94e70e",
+    "after": "022171c42c8bbf1ed2b1f8c493ce3ca1fcab482131e3b1b8648868c34971c6c3"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/wave2/scripts/build_cpu_round1.sh",
+    "before": "d36b675e20d62ac63a9cea8c4d57a186fb880e91b976fad4230276c8b17e4fcf",
+    "after": "d538818c5e050fec96711443f53eca8b13aeb3a1fc94e6a7bacb556baef2f85d"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/wave2/scripts/build_device_round1.sh",
+    "before": "c2f66562c47cb7e48e5e0fdb975e78d3c72319d49b3ab8a32a300f9b62d3fb5c",
+    "after": "03a31e90d7408cab1596a6859c377d22f6b45b187981e11afc131ddebd98e285"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/wave2/scripts/extract_round1_isa.sh",
+    "before": "61eea68eda903dfa174e1a276be3276465df08392d979eb15cc71d59d9b4cca2",
+    "after": "069c993852c43cceeab07bd4b4706f1aa47ac681a8e60db7e71e4c9362f91e53"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/wave2/scripts/proposed_camodel_full_triplet.sh",
+    "before": "2e5fc7d4dfe487a85779bbcf2e5263658e312dec5a36742cf2f9ed2351ed00bc",
+    "after": "105dbd26393d9c5187122400cb2ee4d22ad29b8f9757548582526f66644a3c5e"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/wave2/scripts/proposed_camodel_middle16.sh",
+    "before": "6371ec6a8e42e2ee164e63a3db7a2a49959e8c998b4dce1ff769779f28d6edca",
+    "after": "01eef1f2dbb422139929612a6aeb3265bb52577c501b8a874bb1210420876b17"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/wave2/scripts/proposed_camodel_scale_edges_v1.sh",
+    "before": "a57e950699d3ad23967cc0f410eaad59d91e1d39cf696247e4767b0fc7ee2d60",
+    "after": "f85bc9e19749f7f61ba380ad2cc483786b237f987c59e8e69b586f9e5f69f70c"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/wave2/scripts/proposed_camodel_smoke_row0.sh",
+    "before": "bc3547468304ef5dd98b181a260cfbf1c6a9acdccf2bb70a8303ecc4829bfbe6",
+    "after": "ccf236c18e635ca277d826ce2a11c07a8755869167825d9ae2786444d3c6e155"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/wave2/scripts/proposed_camodel_tail31.sh",
+    "before": "ffc5f1e1862acc01739416ed2da6b9214e166535bf4d3ed79c5ca2c6f0ad13ee",
+    "after": "248ee3318c355bc6998fe89d8cd0cce194c6094e395174a4a3bb05440288b192"
+  },
+  {
+    "path": "/home/dmin/work/agent_05/ascend-micro-harness/scripts/e8_agent05_run_round3_libcache.sh",
+    "before": "e29e45ef62c7615d83ded377164633dc06e429970b4b207a1392fc42d323b25e",
+    "after": "a392e654ae0b0151e6ef8879b0eb41b5c28ce0211fb39da2d353c027fefc3ffd"
+  },
+  {
+    "path": "/home/dmin/work/agent_05/ascend-micro-harness/scripts/e8_agent05_run_round3_plain.sh",
+    "before": "dbeb87af30b9a6c55685a3ff73b8abd463a4cc5cda8a64739dd241c2810af883",
+    "after": "fc2f5b899f7b0c90736b53c55459c45305889927a8a3b975d84d12dcb65fced1"
+  },
+  {
+    "path": "/home/dmin/work/agent_05/ascend-micro-harness/scripts/e8_agent05_run_round3_tail6_plain.sh",
+    "before": "e7a16f458e21996b31c057dc69459068cd404b9793cd73c2823c4ba439a6886f",
+    "after": "82ee370645097b45187c0a0908d0b87869fa0105643888f579e27c892de47aff"
+  },
+  {
+    "path": "/home/dmin/work/agent_06/ascend-micro-harness/scripts/e8_agent06_build_repeat24.sh",
+    "before": "d36b33ee39204de440c39d0070291ef270b4dfaf378b1822e182f8c014324922",
+    "after": "a1b44b6e314e50498f713b63d3e5f0cdc22a99bdc71f10ea0dfba6ddb4ca3f21"
+  },
+  {
+    "path": "/home/dmin/work/agent_06/ascend-micro-harness/scripts/e8_agent06_compile.sh",
+    "before": "0c3895f58ae9c29100a60a5f6d0a4a4a656cb627bccd08cb735689c00bc93bdf",
+    "after": "9d52aec5a2e2ade3b94341165a171cb4b07b45ca86f5ca888d36ae12d381b597"
+  },
+  {
+    "path": "/home/dmin/work/agent_06/ascend-micro-harness/scripts/e8_agent06_compile_layout.sh",
+    "before": "3722eaec8ec138caf24f451a2bb04bae1a0d298bf7e385a12014fb3437730c31",
+    "after": "71c3b22d82af59277064bc3414b9f804a92fcb786695883562471e1af16f05cf"
+  },
+  {
+    "path": "/home/dmin/work/agent_06/ascend-micro-harness/scripts/e8_agent06_compile_residual.sh",
+    "before": "212eed7b5d90b7aff0b3a020892758eed554430f5a6a4afdb54518e62a95d79e",
+    "after": "6eb2188543ca49b1cbc4ec9a65da96a744b47a3618dc4bc19f58e38ecf9020d1"
+  },
+  {
+    "path": "/home/dmin/work/agent_06/ascend-micro-harness/scripts/e8_agent06_compile_threads.sh",
+    "before": "2b6bedfe740d03324ee54f6fe868e56be3d592df1f329355a90d2f4979cafa50",
+    "after": "814cc0e2a56e298660d7e5d00b9d25f8a17a0ad21e8b0624442a83f9b046e54c"
+  },
+  {
+    "path": "/home/dmin/work/agent_06/ascend-micro-harness/scripts/e8_agent06_debug_pc.sh",
+    "before": "a5f3174f00e75bce1bf887f7a54df93f07a4e1e89c626de6893da78e1bfb9c0f",
+    "after": "85821412ab4a49443b7ad5b3e0a0d660144e980436781d68d06299b8ec36cc28"
+  },
+  {
+    "path": "/home/dmin/work/agent_06/ascend-micro-harness/scripts/e8_agent06_extract_layout.sh",
+    "before": "91b76d1fb4717f480c546d72de0181b7a4b8507c3c06e9b05a06fc26a05d8eae",
+    "after": "514668213640abe1ac9aab9ab41569f6a3e712387f973115be3718c25ca9555a"
+  },
+  {
+    "path": "/home/dmin/work/agent_06/ascend-micro-harness/scripts/e8_agent06_extract_residual.sh",
+    "before": "334f3e0baeaed4c09897cb0e60d22cb201dab425fb055ad2769b673a02535555",
+    "after": "bd48f46be809715a4b96025468a45884e9dd4083157ab98947dff0093ded9124"
+  },
+  {
+    "path": "/home/dmin/work/agent_06/ascend-micro-harness/scripts/e8_agent06_extract_threads.sh",
+    "before": "abe52fb690e05a17c182f72f8e1a323d3f639855aa5d67c6c896dc6812b06509",
+    "after": "cd82005c0b256e1f42b576e5bdb38267e602d801651c765f8f02f85599adc203"
+  },
+  {
+    "path": "/home/dmin/work/agent_06/ascend-micro-harness/scripts/e8_agent06_run.sh",
+    "before": "85a0c8485c75cded3ad4f90d1886596a190f801c671f251b0629cf2d2332539f",
+    "after": "832a104938d3083161bc51bbd2f6eaebccc4363205ee4bd70685dabf55e4236b"
+  },
+  {
+    "path": "/home/dmin/work/agent_06/ascend-micro-harness/scripts/e8_agent06_run_layout_sweep.sh",
+    "before": "b79c4a8993b85336439a07b08ab0766cd8f071bcb69457b3f3e97af9bd410d0f",
+    "after": "09c5c02d4d48a26b5e2919c66340423be460d53ece0429e7c26a2b7cd1b20000"
+  },
+  {
+    "path": "/home/dmin/work/agent_06/ascend-micro-harness/scripts/e8_agent06_run_repeat24.sh",
+    "before": "32cc82bfdcf2dd02f70085457d68809d1b3cd8a8fc10079c182628a3454ff26e",
+    "after": "a48acc91537108696d467e2070b739e7331e81ca536740aa98a6aaefb00b3285"
+  },
+  {
+    "path": "/home/dmin/work/agent_06/ascend-micro-harness/scripts/e8_agent06_run_repeat24_libcache.sh",
+    "before": "4906e15fba12e77e0088df7ed8531e8c2d851d5ef01621f393493e05bcff88c4",
+    "after": "0ac927f54a104baa3b532ef2a0b2d607248fbce96a1e97fa5262dcd4b6b6420d"
+  },
+  {
+    "path": "/home/dmin/work/agent_06/ascend-micro-harness/scripts/e8_agent06_run_residual_sweep.sh",
+    "before": "8bd8cf0bfad666fa3f6b6fffbf13b21f29fc9eb7d1acadc01fe38c2df0052cc7",
+    "after": "34acb024339278fa57278e59b3d8968ea487fe3260924a180bc7239ebc2b45fe"
+  },
+  {
+    "path": "/home/dmin/work/agent_06/ascend-micro-harness/scripts/e8_agent06_run_round3_plain.sh",
+    "before": "18bb534b3721443eea664a489fe6cd72423855ac9cfb75bbef2925ca1e572cd4",
+    "after": "fd27b425221c483b2077238e343084a13f2556cef0db81d2d1470443423ae67c"
+  },
+  {
+    "path": "/home/dmin/work/agent_06/ascend-micro-harness/scripts/e8_agent06_run_threads512.sh",
+    "before": "f001cffa6aa99539c39025504025e7f72a37171c000ac7ae716507ab2aa78bbe",
+    "after": "880c3c06b5f6534e4cf12e7de74187527bbf8f27c4061f5c0c0aa5c94805a889"
+  },
+  {
+    "path": "/home/dmin/work/agent_07/ascend-micro-harness/scripts/e8_agent07_run_round3_libcache.sh",
+    "before": "a5b39ea6210f6f6571bea1a264a750d42ebb0927dcde3e592ffc3b00167577a6",
+    "after": "b9cdb49ed81dc1af81a8d26f07358903ad4665a50ca72a62898400c4c8da48f4"
+  },
+  {
+    "path": "/home/dmin/work/agent_07/ascend-micro-harness/scripts/e8_agent07_run_round3_plain.sh",
+    "before": "e03eb73edf0b6e85c0f6045ebe4dd5f4a59dd570a04f53b5b36748dc892068be",
+    "after": "000adc5d8f90ac89c68319dfd4b91f801ecbd89746f0b0ecb034eb6eeaa72c15"
+  },
+  {
+    "path": "/home/dmin/work/agent_07/ascend-micro-harness/scripts/e8_agent07_run_round3_tail6_plain.sh",
+    "before": "c134d272c959116f951cdd5a85013cc90bfa233277f07af961fcd5f351657635",
+    "after": "546d499d7e6553d6eebfdb22064e807b31d64e7433ac12ce98c55eeb3e9b7348"
+  },
+  {
+    "path": "/home/dmin/work/agent_07/wave2/scripts/build_round1.sh",
+    "before": "cf0042ff77a6dc658340bef754eb10c3d004337bf34a474d0c6018f50f1f3f1c",
+    "after": "a67947bdad75819955995b3abccb7ff1176c25df70081ec7b74892a479165d16"
+  },
+  {
+    "path": "/home/dmin/work/agent_07/wave2/scripts/build_round2.sh",
+    "before": "425a504e2b530034aaa2a17ed40b24d98bf8dc9867a3a1dc81b9d32c7d9855bf",
+    "after": "deb5b1c5a17ea8a3548281ac913abb0a302c1b92337cf6b64691c3281502eb5f"
+  },
+  {
+    "path": "/home/dmin/work/agent_07/wave2/scripts/build_round3.sh",
+    "before": "347e55520702edbb547cb1ef43925c372b43a5fec57e6b40d1805d8181b1f613",
+    "after": "8803d07ebad6ccfdf97c2d0b773dc9e199cbc7eb091f22951a6d807cbf88bf94"
+  },
+  {
+    "path": "/home/dmin/work/agent_07/wave2/scripts/extract_round2_audit.sh",
+    "before": "b61d5cf008368eaa3f5931678bec10d2edf562e3f50d06a044e21c3b06cc5d05",
+    "after": "887ffdbe1165e0097fa1e55d9868b8e502a07818fc77dfedd353c61047418792"
+  },
+  {
+    "path": "/home/dmin/work/agent_07/wave2/scripts/extract_round3_audit.sh",
+    "before": "2341e2c680b6a6dbcf4b5570a2df806c194f5252a9f10e39cd76c9f6b0d92cbc",
+    "after": "d7f2b3f67de80ccc8b75ac4ae135629ccc9967299e40fe6fdc15f794fd42bb09"
+  },
+  {
+    "path": "/home/dmin/work/agent_07/wave2/scripts/proposed_round2_canary.sh",
+    "before": "a6f233542214f0ba76393f0784331bdb41e5acf1d1174533c6719c82abfd2919",
+    "after": "38956c771c994c4ff4e59a2e3274af100092890a303d41b844da6927bf7bfd5e"
+  },
+  {
+    "path": "/home/dmin/work/agent_07/wave2/scripts/proposed_round3_broader.sh",
+    "before": "7863631da98c5c9eb5ee0d489e668b3b52fa0757b467d3fa8e6948b7a4d2a10d",
+    "after": "065d5d121a94b2e5e908c4851087ca77faf8d4fce8730c384eb9d8d4a6ca40ee"
+  },
+  {
+    "path": "/home/dmin/work/agent_07/wave2/scripts/proposed_round3_canary.sh",
+    "before": "81dadde7940bd85a3d8c3e42e50c35c82518a6bdaa7ed4403da8b5f95b07faba",
+    "after": "f67445df921eecf99b97a8ebc887e8837d2e21cfdaf7677df2c185c6724f8896"
+  },
+  {
+    "path": "/home/dmin/work/agent_07/wave2/scripts/proposed_round3_full_only.sh",
+    "before": "a3374e4d5195e1b671464aea40c25a4d3d2523bf0247054a59f393f1aaecb193",
+    "after": "8e038945921c1ee93f64e15b3ef5f237a142500a3612a1dac4f862499f251ed5"
+  },
+  {
+    "path": "/home/dmin/work/agent_08/ascend-micro-harness/scripts/e8_agent08_compile.sh",
+    "before": "994ee261d6f367aa3a8a9fc482a2647bec719522710570bde210e385660ae174",
+    "after": "8bf51b9a94bdf9980638b8818628da6d40283f5a2d0a92a82a544ac473bd76da"
+  },
+  {
+    "path": "/home/dmin/work/agent_08/ascend-micro-harness/scripts/e8_agent08_compile_residual.sh",
+    "before": "79e759036f9131553cfcc76a7b66f628089f9eb6103feda14b16d56a07a396ca",
+    "after": "9ac567cd1c3bf737433ab1d3bce0807b9c4920109ba034a1affaf981acc7c7a1"
+  },
+  {
+    "path": "/home/dmin/work/agent_08/ascend-micro-harness/scripts/e8_agent08_extract_residual.sh",
+    "before": "bc11d489fe3d26929db00751834a2acc7626874b4fbc45e8712c2b9ff887d230",
+    "after": "b383d1614ed0ec3edb4d7839ffc83158c61aec1610447012ef309d2e04991019"
+  },
+  {
+    "path": "/home/dmin/work/agent_08/ascend-micro-harness/scripts/e8_agent08_run.sh",
+    "before": "ae31af8364c4802012580cc488ee2b20360913cf6560b996acfceef8bba5f663",
+    "after": "5733449cee20bea39ff37edeb673d5164f87cedb907dba8a463b817d38721911"
+  },
+  {
+    "path": "/home/dmin/work/agent_08/ascend-micro-harness/scripts/e8_agent08_run_residual_sweep.sh",
+    "before": "5a3753ac12f3bb1a9bf1e1b9c5997a685f9c0a2e79b13f81551f20d14762922f",
+    "after": "70b765bafbb918afa235cdbaac1b858b2ccf21653da044119c47331e92a848a7"
+  },
+  {
+    "path": "/home/dmin/work/agent_08/ascend-micro-harness/scripts/e8_agent08_run_round3_libcache.sh",
+    "before": "182685f1dc2f3e6a2f620b6a09385beee449c7957743cdd4e1ed4c3e2b0432cb",
+    "after": "267d8730345a95482997b6443c63bf368eb5d513d7efdffaaba49b13b765be99"
+  },
+  {
+    "path": "/home/dmin/work/agent_08/ascend-micro-harness/scripts/e8_agent08_run_round3_plain.sh",
+    "before": "901b8aa7bb337d19f3d69aa5ac0c939bd018b1f6ac1e4c57fae9e3e615bb598d",
+    "after": "0b670d2f7b656025372fd895eae897c5bb45becbe3d145a5b9f3c7177009fe3e"
+  },
+  {
+    "path": "/home/dmin/work/agent_08/wave2/scripts/build_round1_cpu_first.sh",
+    "before": "33c17b4cda7159c312c07046e0a00d1738bc8e7989e824b091bfacd81c2a85b5",
+    "after": "08f53fc1dbade5cad3daff23c1d121d666094f2e2b5b491a7f3076402aa10f25"
+  },
+  {
+    "path": "/home/dmin/work/agent_08/wave2/scripts/proposed_round1_canary.sh",
+    "before": "b185c91edd3229995aebf963cfc292589e00a7b470e5eba377f459328f14d502",
+    "after": "ca465909f7021f9b5a74e6168ba89c8c4c13cb881afc1d740efbdbb9bbbef760"
+  },
+  {
+    "path": "/home/dmin/work/agent_09/ascend-micro-harness/scripts/e8_agent09_compile.sh",
+    "before": "4c0be1c216c4a60e761c1f7022cf129d0b29947ff0555f014e37ea377c24abe2",
+    "after": "54738af42ff7a825c5820f3af852043aed8fc6bf4c323bc622d52d45633c13a5"
+  },
+  {
+    "path": "/home/dmin/work/agent_09/ascend-micro-harness/scripts/e8_agent09_round2_compile.sh",
+    "before": "75ac26db62f2d2c21bcdb88859510c0b6e8be0db25c6c53c046bfefe527efd39",
+    "after": "5b3c66516cbfb046633acb2656ba25c38b3bc755862fca9e33e8f6e879de0950"
+  },
+  {
+    "path": "/home/dmin/work/agent_09/ascend-micro-harness/scripts/e8_agent09_round2_run.sh",
+    "before": "429518452d3172745d2c1f249be9fc87936df116409fa53bb84ceefe85ec9682",
+    "after": "698f63be1aece814c18c0851cee24f6c77dfcd77d56a997c7e9a7a08e44b5e26"
+  },
+  {
+    "path": "/home/dmin/work/agent_09/ascend-micro-harness/scripts/e8_agent09_run.sh",
+    "before": "b75cc217143b40a9eceef8894d2b85d2470e39d24836a54ff97e94acafe5761e",
+    "after": "b36b88e01b333ebb2b4294dabe75c90ca18ae3e326f9443858d0ca4f3a4d2ff0"
+  },
+  {
+    "path": "/home/dmin/work/e8_coordinator/scripts/run_agent04_final_r3.sh",
+    "before": "aeeee97edaed0b5d0d58f91609d4bd510b950a3799dc49f1f15a0efb87617c83",
+    "after": "7baefa0bf4074999dbea4570a786abe269e663a8e15872c23ca62c83e2abdfb6"
+  },
+  {
+    "path": "/home/dmin/work/e8_coordinator/scripts/run_agent09_final_r3_smoke.sh",
+    "before": "65398f07178edf76a8fe41c0edc0d4268a4c3e0975afadac95251235913cff1c",
+    "after": "1fd3c98b476707d72916dade45557094d122678d75c8981e03c98f10344c5da2"
+  },
+  {
+    "path": "/home/dmin/work/e8_coordinator/scripts/run_agent09_final_r3_variant.sh",
+    "before": "862e5e4b64d8f0d5c1ebd87b48f6291c10e3bf62bf0493915059dd57cad25a8c",
+    "after": "8b445fc1f755ad6cb6f359ac68b0fca2a0b6783700951ca2060163c8b47ebf66"
+  },
+  {
+    "path": "/home/dmin/work/e8_coordinator/scripts/run_agent09_lm4_measurement.sh",
+    "before": "6f73a2ee583f9cb17ec3a2d620f0f4de3f07a90709b106a3fa3ea3d083529f12",
+    "after": "1d738167b7a281fc130a9bafa29d391dd47deef3c6eeb03375633e8a48fe343e"
+  },
+  {
+    "path": "/home/dmin/work/e8_coordinator/scripts/run_agent09_lm4_smoke.sh",
+    "before": "a86590e5d4c9bce91c16aebf8353fbaf8b594792717e97e67354f29b75290c92",
+    "after": "dc74b7bd3b5a0224d1649a5aa3a7571d7ec21d4d94fda2760becb705f242c415"
+  },
+  {
+    "path": "/home/dmin/work/e8_infra/scripts/compile_smoke.sh",
+    "before": "711c2b36f98a11e37dc1730f5194b2fd9e14ebfeaa4bf29e19bdf2cef5ec6e0c",
+    "after": "b7a34386b32205899e1d7dda1f7a6ba194a4bbaef9962e2d0815c971bff81590"
+  },
+  {
+    "path": "/home/dmin/work/e8_infra/scripts/run_smoke.sh",
+    "before": "f25066b6b5aeb63cf60789ed28923e4ba81f4b08d947b79eeb26049dd60562c0",
+    "after": "8c8185296ad2c9db62524094e500f5c230b694f46e79fdbd93e816020ad05851"
+  },
+  {
+    "path": "/home/dmin/work/e8_coordinator/specs/mission_governance.json",
+    "before": "0c2176e16855643ddaff8807b7d90ac703f5e734aa31e665528d7a0988bd1569",
+    "after": "30e22687870bba3826e954c3abb981d5258984452f80d64b713115fd6af4cfb3"
+  },
+  {
+    "path": "/home/dmin/work/agent_09/round3_lm4/scripts/run_review_only.sh",
+    "before": "a12898f15d17cdf9931876ea45548aed069e03c2d02d29ed74e137e93b1794bf",
+    "after": "801c67a100c1250b57e4d097b2ae2eb254c84e80f5959ec12d770df2f8e8a06f"
+  },
+  {
+    "path": "/home/dmin/work/agent_09/round3_lm4/scripts/compile.sh",
+    "before": "70302f0f8c7b9ed8d5625e8aab559ae11553d9a54446129108a480dec4a10fc6",
+    "after": "bccbdf3d2fdb0e7e8ddc1101d31b8f9599baff88f74976bb33d6bca08fa0a777"
+  },
+  {
+    "path": "/home/dmin/work/agent_09/round3_basis/measurement_runner/compile_host_only.sh",
+    "before": "75060cc8c409ea3617514e74d17ffa8cb20d1690129e987e82377378b30a09c2",
+    "after": "06122b262bd0473420004bf2cf9d23474ff2c4b1609a687c33e6e7211be692a2"
+  },
+  {
+    "path": "/home/dmin/work/agent_09/round3_basis/scripts/run_review_only.sh",
+    "before": "374ea058dc3c93afd33fe8b1488feeb5628f66e7e18f4d4d34ec0b731c980e65",
+    "after": "f8eb9a4bcaccb975bf53d0fa90dbd86dda7bc29c388548179d14705bdc9e7082"
+  },
+  {
+    "path": "/home/dmin/work/agent_09/round3_basis/scripts/compile.sh",
+    "before": "162d8e1ee7b7e7b02bfa1a352e90eeb7a0faa3c2e6b84b793a82f6b88a129d2a",
+    "after": "70c410e17fc37819a313f589299b62a4c1d1dfaa87a25bc41b78071995405d10"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/round3_lut/audit_elf.py",
+    "before": "df58ad321846f429003992ae014c1a8efc38b4f260e15c9d71c3037acf681dd2",
+    "after": "5737bb164008c31615d0e8cb492e7fef5368a2014830859f67fd6d2d69cdcfd6"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/round3_lut/compile_debug.sh",
+    "before": "56014139629ab972149d97c9d209e5875fb230ebce5877100e0cd8648d47d516",
+    "after": "44768a62cd8b2bfcea17b8813c5430582fc6f16cb795b1adb1122733127c3563"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/round3_lut/run_proposal.sh",
+    "before": "927f31e4e60333334b26b59f5a439fa77bb80c07b37642833fd3340804a2c733",
+    "after": "8a5457de45ff8ae9c0dd0bae16c959b758035513293e254820dbd1cb2e8ae104"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/round3_lut/compile.sh",
+    "before": "5188dd3f1ddb5935d8294725f0519065dcb36c398d5bdbf958ae3ce979bf9d09",
+    "after": "290694065f4816887fecabf8b6e61e57bacadeb2076a40ebe7fee42f594f0766"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/round3_lut/freeze_package.py",
+    "before": "877c0dfc975a269bb548148982a3a7ba05144f8a5c426ad6e00360096df39f2f",
+    "after": "9502d27b14cd476783992f6b1f453fda4b129b057e403abeb09a02b985c7d6c2"
+  },
+  {
+    "path": "/home/dmin/work/agent_04/round3_lut/build.sh",
+    "before": "c7f04284f09b3d57363106fded269fc282aecc2517d986d545142155e136a61c",
+    "after": "6ac4fab9811279fefed97b96838cc1827636eb740f5897477b630903866a9721"
+  },
+  {
+    "path": "/home/dmin/work/e8_coordinator/specs/mission_governance.md",
+    "before": "5aa649276cb897aa20491be8bd549a74bbbce73f2936f816c5a89eedbb838b2c",
+    "after": "97bed416601bbdeec838e3e90e35f3ec514f83fd769af5bd6f05ca1be11025c8"
+  },
+  {
+    "path": "/home/dmin/work/e8_coordinator/specs/common.md",
+    "before": "1e569acc8fb61f0e29b6ffd25f50fcc7f53d01b8e958490ac542e5c9018b3287",
+    "after": "a070fdefde3e1c7267470a6038e402be102cf389fbe7df5bd6179b977ddab45c"
+  }
+]

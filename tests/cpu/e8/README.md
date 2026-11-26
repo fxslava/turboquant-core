@@ -18,7 +18,9 @@ bytes 0..4095 and 64 FP32 scales in bytes 4096..4351. The effective rate is
 two bits per coordinate, not a two-bit scalar label alphabet. The 1056-byte
 K stride exists only inside UB; GM packets retain their external ABI.
 
-The regular core CTest run includes both exhaustive decoder parity and UB
-layout tests. `TQ_BUILD_E8_KERNELS=OFF` is the default. A deployment checkout
-can explicitly enable it to configure `tq_e8_kernels`; it was not enabled here.
-No encoder, raw-query composition or new device performance result is claimed.
+The core host CTest suite includes exhaustive decoder parity and UB layout
+tests. `TQ_BUILD_E8_KERNELS` defaults to the value of `TQ_BUILD_KERNELS` in a
+fresh configure, so host-only builds keep it off and a full device build
+includes the sealed E8 libraries. It can be overridden independently.
+`tq_e8_kernels` builds the reader and dequantizer without enabling a raw encoder.
+See [the build guide](../../README.md) and [the performance guide](../../../benchmarks/README.md).

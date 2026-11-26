@@ -1,0 +1,35 @@
+writing golden dumps to /workspace/build/build-host/golden-dumps
+    key: nibble levels covered 16/16, clamped codes 315, zero rows 4, distinct scale exponents 5
+    value: nibble levels covered 16/16, clamped codes 309, zero rows 4, distinct scale exponents 5
+  prefill: 128 tokens, 8 strips, 18 blocks, page 2s+1
+    key: nibble levels covered 16/16, clamped codes 18, zero rows 4, distinct scale exponents 4
+    value: nibble levels covered 16/16, clamped codes 9, zero rows 4, distinct scale exponents 4
+    key: nibble levels covered 16/16, clamped codes 3, zero rows 4, distinct scale exponents 5
+    value: nibble levels covered 16/16, clamped codes 7, zero rows 4, distinct scale exponents 4
+  scatter: page 3, steps 6+4 tokens, RMW on the odd lanes
+    key: nibble levels covered 16/16, clamped codes 304, zero rows 4, distinct scale exponents 5
+    value: nibble levels covered 16/16, clamped codes 348, zero rows 4, distinct scale exponents 5
+  decode_ctx128: context 128, 1 page(s), tail 64 rows, physical_pages 4
+    key: nibble levels covered 16/16, clamped codes 498, zero rows 4, distinct scale exponents 5
+    value: nibble levels covered 16/16, clamped codes 508, zero rows 4, distinct scale exponents 5
+  decode_ctx200: context 200, 2 page(s), tail 8 rows, physical_pages 6
+    key: nibble levels covered 16/16, clamped codes 634, zero rows 4, distinct scale exponents 5
+    value: nibble levels covered 16/16, clamped codes 631, zero rows 4, distinct scale exponents 5
+  decode_serving_ctx272: context 272, 3 page(s), tail 16 rows, physical_pages 8
+    key: nibble levels covered 16/16, clamped codes 783, zero rows 4, distinct scale exponents 5
+    value: nibble levels covered 16/16, clamped codes 809, zero rows 4, distinct scale exponents 5
+  decode_serving_ctx316: context 316, 3 page(s), tail 60 rows, physical_pages 8
+    key: nibble levels covered 16/16, clamped codes 37, zero rows 0, distinct scale exponents 2
+    value: nibble levels covered 16/16, clamped codes 36, zero rows 0, distinct scale exponents 2
+  decode_real_ctx64: context 64, 1 page(s), tail 64 rows, 6496 blocks (sparse), table [1, 512]
+    key: nibble levels covered 16/16, clamped codes 57, zero rows 0, distinct scale exponents 2
+    value: nibble levels covered 16/16, clamped codes 66, zero rows 0, distinct scale exponents 2
+  decode_real_ctx128: context 128, 1 page(s), tail 64 rows, 6496 blocks (sparse), table [1, 512]
+    key: nibble levels covered 16/16, clamped codes 116, zero rows 0, distinct scale exponents 2
+    value: nibble levels covered 16/16, clamped codes 86, zero rows 0, distinct scale exponents 2
+  decode_real_ctx200: context 200, 2 page(s), tail 8 rows, 6496 blocks (sparse), table [1, 512]
+    key: nibble levels covered 16/16, clamped codes 595, zero rows 0, distinct scale exponents 2
+    value: nibble levels covered 16/16, clamped codes 612, zero rows 0, distinct scale exponents 2
+  decode_real_ctx1055: context 1055, 9 page(s), tail 31 rows, 6496 blocks (sparse), table [1, 512]
+done
+Built target tq_generate_goldens

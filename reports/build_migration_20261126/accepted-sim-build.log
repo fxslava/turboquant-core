@@ -1,0 +1,98 @@
+[  2%] Building ASC object cmake/device/CMakeFiles/tq_prefill_sim.dir/__/__/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o
+[  4%] Building CXX object CMakeFiles/turboquant_host.dir/src/turboquant/common/turboquant_tiling.cpp.o
+[  8%] Building ASC object cmake/device/CMakeFiles/tq_scatter_sim.dir/__/__/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o
+[  8%] Building ASC object cmake/device/CMakeFiles/tq_scatter_nz_sim.dir/__/__/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o
+[ 10%] Building ASC object cmake/device/CMakeFiles/tq_decode_sim.dir/__/__/src/turboquant/decode/native/turboquant_fused_decode.cpp.o
+[ 12%] Building ASC object cmake/device/CMakeFiles/tq_prefill_nz_sim.dir/__/__/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o
+[ 16%] Building ASC object cmake/device/CMakeFiles/tq_e8_dequant.dir/__/__/src/host/asc_e8_component.cpp.o
+[ 16%] Building ASC object cmake/device/CMakeFiles/tq_e8_reader.dir/__/__/src/host/asc_e8_reader.cpp.o
+[ 18%] Building CXX object CMakeFiles/turboquant_host.dir/src/turboquant/common/turboquant_telemetry.cpp.o
+[ 20%] Linking CXX static library lib/libturboquant_host.a
+[ 20%] Built target turboquant_host
+[ 22%] Building ASC object cmake/device/CMakeFiles/tq_prefill_nz_sim.dir/__/__/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o
+[ 24%] Linking ASC shared library ../../lib/libtq_e8_dequant.so
+[ 26%] Linking ASC shared library ../../lib/libtq_scatter_sim.so
+[ 26%] Built target tq_e8_dequant
+[ 28%] Building ASC object cmake/device/CMakeFiles/tq_qwen35_reduce_canary_sim.dir/__/__/src/host/asc_qwen35_reduce.cpp.o
+[ 28%] Built target tq_scatter_sim
+[ 30%] Building ASC object cmake/device/CMakeFiles/tq_qwen35_tail_canary_sim.dir/__/__/src/host/asc_qwen35_tail.cpp.o
+[ 32%] Linking ASC shared library ../../lib/libtq_scatter_nz_sim.so
+[ 32%] Built target tq_scatter_nz_sim
+[ 34%] Building ASC object cmake/device/CMakeFiles/tq_prefill_sim.dir/__/__/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o
+[ 36%] Linking ASC shared library ../../lib/libtq_qwen35_tail_canary_sim.so
+[ 36%] Built target tq_qwen35_tail_canary_sim
+[ 38%] Building CXX object cmake/device/CMakeFiles/test_golden_scatter_sim.dir/__/__/tests/npu/test_golden_dump.cpp.o
+[ 40%] Linking ASC shared library ../../lib/libtq_qwen35_reduce_canary_sim.so
+[ 42%] Linking CXX executable ../../bin/test_golden_scatter_sim
+[ 42%] Built target tq_qwen35_reduce_canary_sim
+[ 44%] Building CXX object cmake/device/CMakeFiles/test_live_write_nz_sim.dir/__/__/tests/npu/test_live_write.cpp.o
+[ 44%] Built target test_golden_scatter_sim
+[ 46%] Building CXX object cmake/device/CMakeFiles/test_qwen35_reduce_canary_sim.dir/__/__/tests/npu/test_qwen35_reduce_canary.cpp.o
+[ 48%] Linking CXX executable ../../bin/test_qwen35_reduce_canary_sim
+[ 48%] Built target test_qwen35_reduce_canary_sim
+[ 51%] Building CXX object cmake/device/CMakeFiles/test_qwen35_tail_canary_sim.dir/__/__/tests/npu/test_qwen35_tail_canary.cpp.o
+[ 53%] Linking CXX executable ../../bin/test_live_write_nz_sim
+[ 55%] Linking CXX executable ../../bin/test_qwen35_tail_canary_sim
+[ 55%] Built target test_live_write_nz_sim
+[ 55%] Built target test_qwen35_tail_canary_sim
+[ 57%] Linking ASC shared library ../../lib/libtq_e8_reader.so
+[ 57%] Built target tq_e8_reader
+[ 59%] Linking ASC shared library ../../lib/libtq_prefill_sim.so
+[ 59%] Built target tq_prefill_sim
+[ 63%] Building CXX object cmake/device/CMakeFiles/test_golden_prefill_strip_sim.dir/__/__/tests/npu/test_golden_dump.cpp.o
+[ 63%] Building CXX object cmake/device/CMakeFiles/test_live_write_sim.dir/__/__/tests/npu/test_live_write.cpp.o
+[ 65%] Linking CXX executable ../../bin/test_golden_prefill_strip_sim
+[ 65%] Built target test_golden_prefill_strip_sim
+[ 67%] Linking CXX executable ../../bin/test_live_write_sim
+[ 67%] Built target test_live_write_sim
+[ 69%] Linking ASC shared library ../../lib/libtq_prefill_nz_sim.so
+[ 69%] Built target tq_prefill_nz_sim
+[ 71%] Building CXX object cmake/device/CMakeFiles/test_golden_prefill_nz_sim.dir/__/__/tests/npu/test_golden_dump.cpp.o
+[ 73%] Building CXX object cmake/device/CMakeFiles/test_nz_ingress_canary_sim.dir/__/__/tests/npu/test_nz_ingress_canary.cpp.o
+[ 75%] Linking CXX executable ../../bin/test_nz_ingress_canary_sim
+[ 77%] Linking CXX executable ../../bin/test_golden_prefill_nz_sim
+[ 77%] Built target test_golden_prefill_nz_sim
+[ 77%] Built target test_nz_ingress_canary_sim
+[ 79%] Linking ASC shared library ../../lib/libtq_decode_sim.so
+[ 79%] Built target tq_decode_sim
+[ 81%] Building CXX object cmake/device/CMakeFiles/test_fused_decode_e2e_sim.dir/__/__/tests/npu/test_fused_decode_e2e.cpp.o
+[ 83%] Building CXX object cmake/device/CMakeFiles/bench_qwen35_decode_sim.dir/__/__/tests/npu/bench_qwen35_decode.cpp.o
+[ 87%] Building CXX object cmake/device/CMakeFiles/test_turboquant_production_sim.dir/__/__/benchmarks/benchmark_turboquant_production.cpp.o
+[ 87%] Building CXX object cmake/device/CMakeFiles/test_dirty_data_canary_sim.dir/__/__/tests/npu/test_dirty_data_canary.cpp.o
+[ 89%] Building CXX object cmake/device/CMakeFiles/test_golden_decode_sim.dir/__/__/tests/npu/test_golden_dump.cpp.o
+[ 91%] Linking CXX executable ../../bin/test_dirty_data_canary_sim
+[ 93%] Linking CXX executable ../../bin/bench_qwen35_decode_sim
+[ 93%] Built target test_dirty_data_canary_sim
+[ 95%] Linking CXX executable ../../bin/test_golden_decode_sim
+[ 97%] Linking CXX executable ../../bin/test_fused_decode_e2e_sim
+[ 97%] Built target bench_qwen35_decode_sim
+[ 97%] Built target test_golden_decode_sim
+[ 97%] Built target test_fused_decode_e2e_sim
+[ 97%] Built target tq_golden_sim
+[100%] Linking CXX executable ../../bin/test_turboquant_production_sim
+[100%] Built target test_turboquant_production_sim
+[100%] Built target tq_sim_tests
+-- Compiler cache: none found
+-- Golden fixtures need preparation: build tq_generate_goldens with a CPU-torch Python, or set TQ_GOLDEN_DUMP_ROOT to a complete fixture directory. See tests/README.md.
+-- ASC Simulator enabled: /usr/local/Ascend/cann-9.2.1/tools/simulator/dav_3510/lib
+-- TurboQuant target guide: cmake --build /workspace/build/build-sim --target tq_help
+-- Configuring done (0.6s)
+-- Generating done (0.1s)
+-- Build files have been written to: /workspace/build/build-sim
+[ 20%] Built target turboquant_host
+[ 33%] Built target tq_scatter_nz_sim
+[ 46%] Building ASC object cmake/device/CMakeFiles/tq_e8_reader.dir/__/__/src/host/asc_e8_reader.cpp.o
+[ 46%] Building ASC object cmake/device/CMakeFiles/tq_e8_dequant.dir/__/__/src/host/asc_e8_component.cpp.o
+[ 60%] Built target tq_decode_sim
+[ 66%] Building CXX object cmake/device/CMakeFiles/bench_qwen35_decode_sim.dir/__/__/tests/npu/bench_qwen35_decode.cpp.o
+[ 73%] Linking CXX executable ../../bin/bench_qwen35_decode_sim
+[ 73%] Built target bench_qwen35_decode_sim
+[ 80%] Linking ASC shared library ../../lib/libtq_e8_dequant.so
+[ 80%] Built target tq_e8_dequant
+[ 86%] Linking ASC shared library ../../lib/libtq_e8_reader.so
+[ 86%] Built target tq_e8_reader
+[ 93%] Building CXX object cmake/device/CMakeFiles/bench_turboquant_production_sim.dir/__/__/benchmarks/benchmark_turboquant_production.cpp.o
+[100%] Linking CXX executable ../../bin/bench_turboquant_production_sim
+[100%] Built target bench_turboquant_production_sim
+[100%] Built target tq_sim_benchmarks
+[100%] Built target tq_benchmarks

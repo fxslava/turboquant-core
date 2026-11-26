@@ -1,310 +1,98 @@
-# turboquant-core
+# TurboQuant core
 
-Standalone repository for the audited TurboQuant production kernels, their runtime integration
-layout, and the dedicated unit / hardware test fixtures.
+Standalone Ascend950PR / dav-3510 kernels, host contracts, correctness tests
+and performance harnesses. Shared product sources live under `src/turboquant`
+and are mirrored into vLLM Ascend through `SOURCE_SYNC.json`.
 
-Everything here is extracted **exclusively** from
-`ascend-micro-harness/kernels/ops/turboquant/vllm_integration_layer`. No source is taken from
-`vllm-ascend/csrc`, from the harness root (`include/`, `tests/`, `routines/`), or from the
-`baseline/` and `fused_decode/` prototype trees.
+- [Container and CMake build guide](docs/BUILD.md): release image, clean environment,
+  host/sim/NPU builds and exact binary paths.
+- [Build and test guide](tests/README.md): CPU fixtures, CMake target groups,
+  host tests, physical NPU tests and bounded CAModel checks.
+- [Performance guide](benchmarks/README.md): the production LM4/E8 benchmark,
+  Qwen3.5 decode sweep, staged PyTorch comparison, profiling and metrics.
+- [E8 packet/decoder contract](tests/cpu/e8/README.md): sealed layout and
+  independent CPU oracle provenance.
 
-Target: Ascend 950PR / arch35 / dav-3510, CANN 9.2.1, `__NPU_ARCH__ == 3510`.
+## Quick CPU validation
 
-## Build and test
-
-```bash
-cmake -B build -DRUN_MODE=sim
-cmake --build build -j16
-```
-
-```bash
-./build/tests/test_contract_gates
-```
+Use Linux or WSL with CMake 3.16+, a C++17 compiler and Python with CPU torch.
+No CANN installation or NPU is needed for this path.
 
 ```bash
-./build/tests/test_layout_bridge
+cmake -S . -B build-host -DCMAKE_BUILD_TYPE=Release \
+  -DTQ_BUILD_KERNELS=OFF -DTQ_BUILD_E8_KERNELS=OFF
+cmake --build build-host --target tq_generate_goldens
+cmake --build build-host --target tq_check_host -j8
 ```
 
-`ctest --test-dir build` runs both. They are toolkit-free — the layout contract, the host tiling
-and the kernels' host-visible geometry and nothing else — so a clean configure plus build plus
-`ctest` is about five seconds with any C++17 compiler, and needs no device.
+Fixtures are generated under `build-host/golden-dumps`; override
+`TQ_GOLDEN_DUMP_ROOT` to reuse a complete fixture set. Select a torch-enabled
+interpreter with `-DPython3_EXECUTABLE=/absolute/path/to/python`. Without torch,
+build `tq_host_tests` and run `ctest --test-dir build-host -L host -LE golden`
+for the nine tests that do not consume generated dumps.
 
-The device legs are **off by default**, behind `TQ_BUILD_KERNELS`, because one `ascendc_library`
-expands into nested ExternalProjects and compiles the whole translation unit five to seven times,
-every one of them `BUILD_ALWAYS`. The option is load-bearing and not a convenience:
-`ascendc_library` does **not** honour `EXCLUDE_FROM_ALL`, so a configure that merely declared the
-kernels put the entire BiSheng build back into the default target.
+## Quick physical benchmark build
+
+On an Ascend950PR server with the matching driver and CANN 9.2.1:
 
 ```bash
-cmake -B build -DRUN_MODE=sim -DTQ_BUILD_KERNELS=ON && cmake --build build --target tq_sim_kernels -j16
+unset ASCEND_TOOLKIT_LATEST_HOME TOOLCHAIN_HOME CMAKE_PREFIX_PATH SOC_VERSION
+source /usr/local/Ascend/cann-9.2.1/set_env.sh
+cmake -S . -B build-npu -DRUN_MODE=npu -DSOC_VERSION=Ascend950PR_9599 \
+  -DASCEND_HOME_PATH=/usr/local/Ascend/cann-9.2.1 \
+  -DTQ_BUILD_KERNELS=ON -DTQ_BUILD_E8_KERNELS=ON
+cmake --build build-npu --target tq_help
+cmake --build build-npu --target tq_benchmarks test_turboquant_production_npu -j6
+./build-npu/bin/test_turboquant_production_npu --device 0 \
+  --mode lm4 --stage decode --profile qwen35-gqa6 --block-size 128
+./build-npu/bin/bench_turboquant_production_npu --device 0 \
+  --mode lm4 --stage decode --profile qwen35-gqa6 --block-size 128 \
+  --warmup 20 --iterations 100
 ```
+
+There are two benchmark executables: `bench_turboquant_production_npu` for
+profile-selected native ingress/dequant/decode measurements, and
+`bench_qwen35_decode` for the fixed Qwen-shaped decode/Split-K sweep. New
+builds place both in `<build>/bin`; old server archives retain their
+original `<build>/tests/bench_*` paths. The Python benchmark wrapper accepts
+both layouts.
+
+## Build organization
+
+`tq_host_tests` builds CPU tests. `tq_tests` additionally builds the selected
+runtime's correctness runners. `tq_kernels` builds configured device libraries,
+and `tq_benchmarks` builds device benchmarks. `tq_help` prints the available
+groups and active configuration. Device compilation is explicitly enabled by
+`TQ_BUILD_KERNELS`; E8 follows that option in a fresh cache and can be disabled
+independently. Device CTest registration is a separate opt-in through
+`TQ_REGISTER_DEVICE_TESTS=ON`. Building a group never launches device tests.
+
+Kernel registration uses the CANN 9.2.1 ASC language interface. Host sources
+use strict warnings; device SDK warnings remain warnings. CPU tests and E8
+device targets are declared in separate CMake modules. Use separate
+host/sim/NPU build directories. See the build guide for the SDK architecture
+flag and clean container commands.
+
+## Product scope and verification
+
+Native LM4 supports the current scatter/decoder contracts. The sealed E8
+dequantizer and fused reader consume CPU-prepared packets. Raw device E8
+encoding remains gated; native LM3 and native E8 Split-K are unsupported.
+The performance guide lists shape limits and what each timing includes.
+
+The latest promotion audit records CPU, syntax and analyzer checks in
+[`reports/promotion_20261126`](reports/promotion_20261126/REPORT.md). These
+checks do not constitute physical NPU performance measurements. Historical
+CAModel and candidate receipts remain under `reports/`; they are verification
+evidence and are not compiled as product inputs.
+
+Check mirrored sources from the vLLM Ascend checkout with:
 
 ```bash
-cmake -B build-npu -DRUN_MODE=npu -DTQ_BUILD_KERNELS=ON && cmake --build build-npu --target tq_npu_kernels -j16
+python scripts/check_turboquant_sync.py --core /absolute/path/to/turboquant-core
 ```
 
-`RUN_MODE=sim` compiles the three operators for CAModel and links the runners against
-`libnpu_drv_camodel.so` / `libmodel_top.so`; `RUN_MODE=npu` compiles them with BiSheng for the
-physical dav-3510 target and links `ascendcl`. Both legs compile the identical kernel sources
-with the identical definitions, deliberately: CAModel evidence is only about the device binary if
-they do. Every one of our own translation units is built with `-std=c++17 -Wall -Wextra -Werror`;
-CANN's own headers are reclassified as system headers so they cannot spend that budget.
-
-If the CANN toolkit is absent, configure still succeeds and says the device leg was skipped.
-
-The complete CPU oracle gate also needs generated serving and real-input fixtures; the
-tracked `golden/dumps` directory contains only the original synthetic subset. With CPU
-PyTorch installed, generate a complete set outside that tracked directory and select it
-when configuring:
-
-```bash
-python golden/generate_dumps.py /tmp/turboquant-goldens
-cmake -S . -B build -DTQ_BUILD_KERNELS=OFF -DTQ_BUILD_E8_KERNELS=OFF \
-  -DTQ_GOLDEN_DUMP_ROOT=/tmp/turboquant-goldens
-cmake --build build -j8
-ctest --test-dir build --output-on-failure
-```
-
-The fused decode tail regression uses queries of +1, zero live K/V, and finite +1 nibbles
-with K/V scales 10/100 throughout the unwritten page tail, including past `align16(context_len)`.
-Every output channel must equal zero exactly. Contexts 17, 80 and 81 cover aligned/unaligned
-16-row bounds, one/two live tiles and an empty Split-K worker. A positive control admits one
-spike and must return ~100.
-Run it in the CAModel environment after configuring the simulator leg:
-
-```bash
-cmake --build build --target test_dirty_data_canary_sim -j16
-ctest --test-dir build -R '^dirty_tail_canary$' --output-on-failure
-```
-
-The Tensor API sources use the current `asc::te` interface. Select the installed release
-explicitly with `-DASCEND_HOME_PATH=/path/to/cann-9.2.1` when configuring either device leg;
-the older 9.2.0-beta.2 headers do not provide this interface.
-
-CANN 9.2+ device builds require CMake 3.19 or newer for generated-wrapper warning
-isolation. The SDK's wrapper targets keep `-Wall -Wextra -Werror` and add only
-`-Wno-error=unused-parameter`; first-party preprocessing, `tq_strict`, the host tiling
-library and test runners retain the strict flags without that exception. The SDK itself
-does not need patching.
-
-## Layout
-
-`src/turboquant/SOURCE_SYNC.json` pins the files shared byte-for-byte with
-the vLLM Ascend plugin and the standalone telemetry sources. Run
-`scripts/check_turboquant_sync.py --core <turboquant-core path>` from the plugin
-checkout to verify both source inventories.
-
-```
-src/turboquant/
-  common/          Native and E8 ABIs, cache addressing, tiling and constants
-  ingress/native/  Batch and scatter writers
-  decode/native/   Wave-v11 Cube, Vector and Split-K decode
-  decode/e8/       E8 packet reader and parallel SIMT dequantization
-tests/cpu/e8/      E8 layout and frozen arithmetic oracle fixtures
-golden/
-  turboquant_golden.py           the PyTorch golden model (a standalone copy of
-                                 vllm-ascend's turboquant_v1.py golden path),
-                                 plus the fp64 decode reference
-  generate_dumps.py              writes golden/dumps/: synthetic fixtures and the
-                                 golden's expected images, per kernel, plus the
-                                 real serving-geometry decode cases (randn data,
-                                 6496-block cache, sparse-stored)
-
-```
-
-## The golden-dump comparison (kernel vs the PyTorch golden)
-
-`golden/` holds a standalone copy of the PyTorch golden model from vllm-ascend's
-`turboquant_v1.py` (no vLLM or torch_npu dependency) and a generator that
-turns it into binary dumps: synthetic BF16-exact integer fixtures, the operands
-the kernels read (LCG `pi_signs`, BF16 codec tables, `h16`) and the golden's
-expected cache images and decode outputs — plus the **real serving decode
-cases** of the vllm-ascend unit test (`decode_real_ctx{64,128,200,1055}`:
-group_heads 6, randn bf16 data, the production softmax scale, a 6496-block
-cache with a 512-wide block table, the planes stored sparsely as a fill word
-plus the live pages). `tests/npu/test_golden_dump.cpp` builds four CAModel
-runners — one per kernel, the prefill twice (strip and NZ builds) — that
-upload the dumps, launch, and compare. The ingestion writers are compared
-**bit for bit**; the decode is compared against the golden's fp64 attention
-with a bf16 ULP budget (`--ulp-budget`, default 8), the one place a tolerance
-is honest. `tests/cpu/test_golden_decode_oracle.cpp` is the mirror gate on the
-host side: it holds the plain-C golden oracle
-(`tests/common/turboquant_golden_oracle.hpp`) to the same PyTorch golden over
-every decode case — LCG `pi_signs` bit-exact, the dense-Pi `query_rot`
-bit-exact on the integer fixtures and within a row-relative budget on the
-random ones, and both output stages at fp32-ULP budget against the dump's fp64
-reference.
-
-```bash
-python golden/generate_dumps.py            # completes golden/dumps/ (needs CPU torch)
-./build/tests/test_golden_prefill_strip_sim --dump-root golden/dumps
-./build/tests/test_golden_prefill_nz_sim   --dump-root golden/dumps
-./build/tests/test_golden_scatter_sim      --dump-root golden/dumps
-./build/tests/test_golden_decode_sim       --dump-root golden/dumps
-```
-
-**What it established on CAModel, at the current revision:**
-
-* **The scatter writer is bit-identical to the PyTorch golden**, both steps of
-  a read-modify-write ladder, poisoned unowned lanes included.
-* **The prefill writer is bit-identical in both packed planes**, in both
-  layouts (the strip build and the `TURBOQUANT_INGRESS_NZ` build), including
-  the in-page strip offsets of `block_size = 128` pages — the geometry
-  `DRY_RUN_COMPATIBILITY.md` §7.1 flagged as untested. The scale plane matches
-  except on all-zero rows, where the kernel floors absmax at 1.0 and stores
-  2^-6 while the golden branches on `absmax == 0` and stores 1.0; the codes
-  are zero on both sides, so the dequantised value is 0 either way. The runner
-  counts and names exactly those rows and fails on any other scale byte.
-* **The fused decode is NOT compatible with the golden's cache convention.**
-  Its raw-query rotation prologue reproduces the golden's rotated query bit
-  for bit, but the decode dequantises a cache row as
-  `(code + 0.5) * scale / kGain` (the KV4_FP8 centroid grid of
-  `turboquant_mode.h`, kGain = 2.9832882881) where the writers — and the
-  PyTorch golden — store `code * scale` with `scale = 2^(e-2) / sqrt(D)`.
-  Against the fp64 golden its stage-0 output is therefore wrong by a
-  systematic, channel-varying amount (worst ~34k bf16 ULP); against the same
-  reference evaluated under the kernel's own convention it agrees to within
-  the fp8 operand rounding of the Cube pipeline. And its `kUnrotated` output
-  stage emits `Pi^T` of the accumulator with **no `1/sqrt(D)` fold**, 16x the
-  model-basis context the dry run expects. Both are named, with numbers, in
-  the runner's output; the runner fails the decode until the kernel and the
-  contract are reconciled.
-
-## Measuring the kernels (`--perf`)
-
-Both device runners take `--perf [N]`. It does not replace the gate: every correctness, canary
-and unchanged-input check of a configuration runs first and in full, and only then is that same
-launch re-issued `N` times (default 20, max 512) and timed.
-
-```bash
-./build/tests/test_fused_decode_e2e_sim --camodel-smoke --perf 50
-```
-
-```bash
-./build/tests/test_live_write_sim --op both --perf
-```
-
-```bash
-./build-npu/tests/test_live_write_npu --op prefill --slices 64 --strips-per-block 8 --perf 100
-```
-
-**A sample is device time.** Two `ACL_EVENT_TIME_LINE` events are recorded on the stream either
-side of one launch, so the interval is timestamped by the device as it retires each marker: the
-kernel's own residency plus the stream's dispatch of it, with no host round trip inside it. The
-timed batch is issued back to back and synchronised once at the end -- stream order already
-serialises the launches, and not returning to the host between them is what makes the samples a
-steady state instead of a row of cold starts. Warm-up launches (3) are discarded first; the
-first launch of one of these operators pays for its binary registration and runs several times
-the steady one. Reported per configuration: median, min, mean, max, the sample count, and the
-operator's own rate columns (tokens/s for a writer, query vectors/s for the decode, plus the
-GB/s of KV traffic the launch moves).
-
-**Re-launching is sound because all three operators are pure in their arguments.** Both writers
-recompute the identical cache bytes -- the value plane's read-modify-write splices the same
-owned nibbles into a strip whose unowned nibbles it already preserved once -- and the decode
-rewrites its output and its Split-K workspace from inputs it only reads. The checks have also
-already run, so a perf re-launch is neither observed by one nor able to invalidate one.
-
-**If the driver will not give timeline events** (a CAModel build that does not implement them),
-the batch is timed on the host clock instead and every line says `host-clocked`. That number
-includes the launch path and is not comparable with a device-clocked one; the flag is carried
-through the struct rather than inferred so the two can never be quoted as the same measurement.
-
-**It is a timing and nothing more.** A median wall interval says a change moved the number; it
-does not establish MTE2/Cube overlap, per-pipe occupancy or bank behaviour, and in particular it
-is **not** the trace audit the seamless chunk pipeline still needs (see below). Use `msprof` for
-that.
-
-## What the extraction changed
-
-**Prefill (`src/turboquant/ingress/native/turboquant_reshape_batch.cpp`)**
-
-* **Mode-2 only.** No `template <bool Mode2>`, no `bool Reuse`, no single-shot fallback entry
-  point, no `reuse_mode4_flags` launcher argument. Cross-core synchronisation is the three
-  mode-2 channels `kSync2PanelReady = 8`, `kSync2PanelFree = 9`, `kSync2PageDrained = 10`, each
-  behind its `HardEvent::x_S` drain, single-sourced in `turboquant_wave_protocol.hpp`.
-* **Seamless chunk pipeline.** The outer strip loop is gone. A block owns `tokensPerCore` tokens
-  = `strips = tokensPerCore / 16` strips and runs them as one chunk stream of
-  `total_chunks = strips * kChunks` columns. Column *j* stages chunk *j* and multiplies chunk
-  *j − kIngressLookahead*, and **both indices cross strip boundaries**: the prologue ingress of
-  strip *s + 1* is issued inside the Mmads of strip *s*, so MTE2 does not drain at the end of a
-  16-token strip. The last strip is peeled (`StageNext` / `QuantNext` template argument) so no
-  steady-state step carries a runtime predicate. The ring periods all divide `kChunks`
-  (static_asserted), so a strip boundary never shifts which slot a chunk owns.
-* **In-page strip offsets.** One scalar `slotMapping` read per strip gives
-  `block_idx = slot0 / block_size` and `strip_bytes = ((slot0 % block_size) / 16) * kPackedBytes`;
-  `StoreChunk` writes
-  `(block_idx * num_kv_heads + kChunkHead<Chunk>) * head_bytes + strip_bytes`.
-* The 100+ line essay header, the mode-4 flag-id retrospective, the CAModel trace diagnosis
-  narrative and the sparse-sampling probe (`ASCEND_MICRO_SPARSE_SAMPLING`) are removed.
-
-**Scatter (`src/turboquant/ingress/native/turboquant_reshape_scatter.cpp`)**
-
-* The verified RMW merge (`scatter_merge_token_vf`) and the in-register butterfly
-  (`RotateImpl::RegGather`) are retained unchanged.
-* The synthetic `launchProbe` buffer is removed: the parameter, its UB arena slot and its
-  publication block are gone from the kernel, the `__global__` entry and the launcher.
-* Narrative comments and the butterfly ablation table are removed.
-
-**Fused decode (`src/turboquant/decode/native/turboquant_fused_decode.cpp`)**
-
-* The audited 3-zone modulo schedule, the Cube GEMM reduction
-  (`ASCEND_TQ_FUSED_DECODE_GEMM_REDUCE=1`, on by default) and both the native FP16 and BF16
-  instances are retained, along with the raw-query variants.
-* `GM_ADDR` launch-site casts go through `AsGmAddr()` (`static_cast<uint8_t*>`), the one spelling
-  that compiles under both the type-checked chevron and the generated `aclrtlaunch_*` stub.
-* Host tiling moved to `src/turboquant/common/turboquant_tiling.{h,cpp}`: the descriptors and dispatch records
-  are declared in the header and `build_decode_tiling` is defined in a translation unit, rather
-  than being an `inline` function in a device-side header.
-
-## What is verified, and what is not
-
-**Verified here, on this host, with no device:**
-
-* `test_layout_bridge` — the NZ ingress address function and an independently re-derived decode
-  reader name the same byte and the same nibble for every logical element, over four geometries;
-  both the NZ and the strip maps are bijections onto their allocations; the co-byte pairings of
-  the two contracts are structurally incompatible; both scale planes are bijections.
-* `test_contract_gates` — the fused decode's UB arena `static_assert`s; the host tiling's
-  dispatch odometer and descriptors against the arithmetic they replace over thirteen geometries
-  plus five refusals; seven launch-guard admissions and refusals; the mode-2 channel map; the
-  shared online-softmax phase order; and a **marked-graph token-balance audit of the seamless
-  chunk pipeline** over 1, 2, 3, 4, 8, 17 and 64 strips — every ring stays inside its depth,
-  every primed token reaches a terminal sink, and a 64-strip share costs exactly 64× the chunk
-  work of a 1-strip share with **no extra prologue, drain or rendezvous per strip**, which is the
-  seamless property stated as a count.
-
-**Partly verified — compiled, never executed:**
-
-* The **prefill** and **scatter** kernels build through BiSheng for CAModel
-  (`RUN_MODE=sim`): `libtq_prefill_sim.so` and `libtq_scatter_sim.so` link. That exercises
-  `-Wall -Werror` on the device legs and every `static_assert` in their device translation units
-  — the UB and L1 arena bounds, the bank-skew strides, the ring-period divisibility and the
-  mode-2 id budget of the refactored pipeline. It says nothing about what the kernels do when run.
-* The **fused decode**'s `precompile` and `aic` legs compiled, so BiSheng accepts the source and
-  its template instantiations for the AIC role. The build was stopped before `libtq_decode_sim.so`
-  linked, so the AIV leg and the final link are unconfirmed; expect roughly 40 minutes for it.
-
-**Not verified at all. Do not read these as done:**
-
-* **The seamless chunk pipeline has no CAModel evidence.** Per
-  `REFINEMENT_OF_COMBAT_KERNELS.md`, the baseline a pipeline refactor needs is: capacity-one
-  token/queue model → compile-time UB checks → isolated logical-page head/middle/tail canaries on
-  CAModel → depth and wrap tests → trace audit and census. The first two are done — the
-  capacity-one model as `test_contract_gates`' token-balance audit, the compile-time UB checks as
-  the prefill's and scatter's device `static_assert`s — and **the last three are not started**.
-  The token-balance audit is a counting argument, **not** a deadlock proof and **not** a liveness
-  or overlap claim: source order and balanced events do not establish overlap, which needs a
-  trace with intersecting MTE2/Cube intervals.
-* **No NPU is attached to this host**, so neither device runner has been executed. A bit-exact
-  PASS from either would still say nothing about whether a cross-core announcement overtook the
-  pipeline work it reports — both earlier revisions of the batch writer passed numerically while
-  their traces showed a wait retiring before its set. Audit the trace.
-* **`--perf` has never produced a number.** The timing path compiles and links -- all four ACL
-  calls it uses (`aclrtCreateEventWithFlag`, `aclrtRecordEvent`, `aclrtEventElapsedTime`,
-  `aclrtDestroyEvent`) are exported by the `libascendcl` both runners already link -- but no
-  device or simulator has executed it here, so whether CAModel implements timeline events at all
-  is unknown and the host-clock fallback is likewise untried. Treat the first measured run as
-  bring-up, not as data.
-* `tests/npu/*` are compiled only as a syntax check here (`g++ -fsyntax-only` against the ACL
-  headers). They have never been linked against the kernel libraries.
+`src/turboquant` holds the canonical packet ABI, native ingress/decode kernels
+and E8 reader. `tests/common` contains host fixtures/oracles, `tests/cpu`
+contains toolkit-free gates, `tests/npu` contains device runners and canaries,
+and `benchmarks` contains the native and staged performance harnesses.

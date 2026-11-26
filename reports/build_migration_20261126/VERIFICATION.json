@@ -1,0 +1,349 @@
+{
+  "image": "quay.io/ascend/vllm-ascend:v0.30.0-a5",
+  "image_id": "sha256:4f78ac408902e0f63baf2294da86bfde62211788492cffb8f54026d9238214bc",
+  "cann": "/usr/local/Ascend/cann-9.2.1",
+  "configurations": [
+    {
+      "configuration": "host",
+      "directory": "/home/dmin/tq-release-final2-20261126/build-host",
+      "exit_code": 0,
+      "catalog": {
+        "READY": 78,
+        "UNSUPPORTED": 138
+      },
+      "e8_enabled": false,
+      "kernel_flags": [],
+      "binaries": [
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-host/bin/e8_decode_cpu_check",
+          "bytes": 21304,
+          "sha256": "9817ab71aa168a547bc72482d4708382ec1c2cff4a60a2059fa462c2fc86d7b1"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-host/bin/e8_layout_check",
+          "bytes": 17032,
+          "sha256": "c5175d3f9e104edfefbb7814efecc810a8777a01649c51e20d06109e4db3992f"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-host/bin/test_contract_gates",
+          "bytes": 34824,
+          "sha256": "b14e374faad5a19d040d0574da0d51874db78057f35ad07e4c47f5c159254b42"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-host/bin/test_decode_reduce",
+          "bytes": 25544,
+          "sha256": "91e98fb4d72923ddd906ee2c4733e007b47d3e64ff8ff36dd13edc7a7d1186be"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-host/bin/test_golden_decode_oracle",
+          "bytes": 96736,
+          "sha256": "f08a42f234fd82929cb7450ece892f96e7df5fa1cc273d205f7914c47548f766"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-host/bin/test_layout_bridge",
+          "bytes": 21728,
+          "sha256": "0e204718d18949dcc6d66167e6001b78e84998ce4e6aa3358b6868ede0fd7aa9"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-host/bin/test_qwen35_decode",
+          "bytes": 39744,
+          "sha256": "d2f5d80c221bf1f1fac606fe632de628ae202c8f10a9be3eeb9b421126ad0b8e"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-host/bin/test_qwen35_telemetry",
+          "bytes": 35008,
+          "sha256": "595a36bf0dac62139c12594f443074a5902921ddc02fca725b5d09f8f0e67c75"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-host/bin/test_telemetry_dump",
+          "bytes": 40464,
+          "sha256": "80788a410c5fa90536878db55cad079a7322504febfcc83461fd19bbab863ca6"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-host/bin/test_turboquant_production_host",
+          "bytes": 56384,
+          "sha256": "bd27b648e1f632bcf2f93c330fa750162e29d50c87df964599ab3f8fc3d96881"
+        }
+      ]
+    },
+    {
+      "configuration": "sim",
+      "directory": "/home/dmin/tq-release-final2-20261126/build-sim",
+      "exit_code": 0,
+      "catalog": {
+        "READY": 78,
+        "UNSUPPORTED": 138
+      },
+      "e8_enabled": true,
+      "kernel_flags": [
+        {
+          "target": "tq_decode_sim",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        },
+        {
+          "target": "tq_e8_dequant",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -fno-fast-math -ffp-contract=off -Xaicore-end -Xhost-start -Wall -Wextra -Werror -fno-fast-math -ffp-contract=off -Xhost-end"
+        },
+        {
+          "target": "tq_e8_reader",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -fno-fast-math -ffp-contract=off -Xaicore-end -Xhost-start -Wall -Wextra -Werror -fno-fast-math -ffp-contract=off -Xhost-end"
+        },
+        {
+          "target": "tq_prefill_nz_sim",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        },
+        {
+          "target": "tq_prefill_sim",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        },
+        {
+          "target": "tq_qwen35_reduce_canary_sim",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        },
+        {
+          "target": "tq_qwen35_tail_canary_sim",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        },
+        {
+          "target": "tq_scatter_nz_sim",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        },
+        {
+          "target": "tq_scatter_sim",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        }
+      ],
+      "binaries": [
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-sim/bin/bench_qwen35_decode_sim",
+          "bytes": 58664,
+          "sha256": "a08f0c00eb3a0e4695add9c9c2056c3fb1a56fb1648e14354a2ef1a64506424b"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-sim/bin/bench_turboquant_production_sim",
+          "bytes": 117008,
+          "sha256": "5128e931e63c29377d6fc123fbc9154e276f46dab4fc3df213dba436c7175a8d"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-sim/bin/test_dirty_data_canary_sim",
+          "bytes": 57400,
+          "sha256": "ce6496d644979ecb62af611741fe2d9cd4628f2fc87b3242318b1f1f4e544845"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-sim/bin/test_fused_decode_e2e_sim",
+          "bytes": 111872,
+          "sha256": "0895ab05cae7114e700f8e1cf2cc39c47841d0c2936455fa7cb8f839a4d369a3"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-sim/bin/test_golden_decode_sim",
+          "bytes": 114528,
+          "sha256": "7b05cd2978f5223e93a96e4214f243e980d32d93d3e0a9802bc64a12bbe92d8e"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-sim/bin/test_golden_prefill_nz_sim",
+          "bytes": 92664,
+          "sha256": "c3b5730078c4a9f0d7ffa17069576639b5523c2093d075754850e864a5ae6e47"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-sim/bin/test_golden_prefill_strip_sim",
+          "bytes": 92664,
+          "sha256": "62b168e30fddc95d5e78a564b627d4e95a77475be26e89e29b908147054a3231"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-sim/bin/test_golden_scatter_sim",
+          "bytes": 93200,
+          "sha256": "bb81ded0aee67bccd86ae545b5d0b3f7eb8462a0c908fff62991eaf3b1d88472"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-sim/bin/test_live_write_nz_sim",
+          "bytes": 71736,
+          "sha256": "708dca26f502e5178fb24bd32c50a9ea1aa447a1dfd3302ad08f6eb8a5f021d5"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-sim/bin/test_live_write_sim",
+          "bytes": 114816,
+          "sha256": "1ed4cadde3c08ca9996f254227ade133c06bc9cd6d7d874f3f2840203d1f9ced"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-sim/bin/test_nz_ingress_canary_sim",
+          "bytes": 70344,
+          "sha256": "bbc610b40c682bd76fea5f2e068a9d48970509a37d0888242bc72e5b7c7dba4b"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-sim/bin/test_qwen35_reduce_canary_sim",
+          "bytes": 27144,
+          "sha256": "8dddfeea45dbcadb90cec2ead24cef4a5f583862afa57d1cea03f3ca60497211"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-sim/bin/test_qwen35_tail_canary_sim",
+          "bytes": 17800,
+          "sha256": "091192c3c535e38146ab875de7ed6d8a8d47a4988bcaf70c28cb535c1d53e12d"
+        },
+        {
+          "path": "/home/dmin/tq-release-final2-20261126/build-sim/bin/test_turboquant_production_sim",
+          "bytes": 117008,
+          "sha256": "0132f082eee2c39aff21530265747fcb6b1432246cd23b7b7deed326bfdf53a4"
+        }
+      ]
+    },
+    {
+      "configuration": "npu",
+      "directory": "/home/dmin/tq-release-npu-20261126/build-npu",
+      "exit_code": 0,
+      "catalog": {
+        "READY": 78,
+        "UNSUPPORTED": 138
+      },
+      "e8_enabled": true,
+      "kernel_flags": [
+        {
+          "target": "tq_decode_npu",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        },
+        {
+          "target": "tq_e8_dequant",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -fno-fast-math -ffp-contract=off -Xaicore-end -Xhost-start -Wall -Wextra -Werror -fno-fast-math -ffp-contract=off -Xhost-end"
+        },
+        {
+          "target": "tq_e8_reader",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -fno-fast-math -ffp-contract=off -Xaicore-end -Xhost-start -Wall -Wextra -Werror -fno-fast-math -ffp-contract=off -Xhost-end"
+        },
+        {
+          "target": "tq_prefill_npu",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        },
+        {
+          "target": "tq_prefill_nz_npu",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        },
+        {
+          "target": "tq_scatter_npu",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        },
+        {
+          "target": "tq_scatter_nz_npu",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        }
+      ],
+      "binaries": [
+        {
+          "path": "/home/dmin/tq-release-npu-20261126/build-npu/bin/bench_qwen35_decode",
+          "bytes": 62608,
+          "sha256": "36cacd09b2a3447dbdf55ec8813bc715374dfa69157ace4671b6c7718cf13f20"
+        },
+        {
+          "path": "/home/dmin/tq-release-npu-20261126/build-npu/bin/bench_turboquant_production_npu",
+          "bytes": 117024,
+          "sha256": "077c44e9b17b220a89352b2230d6f9c89b087947c35fa3f354c3af15f000bc3a"
+        },
+        {
+          "path": "/home/dmin/tq-release-npu-20261126/build-npu/bin/test_dirty_data_canary_npu",
+          "bytes": 57400,
+          "sha256": "5015b99220f7016176860554de818ef51b3c79dee0baa3a8835ea55ebfcabcd3"
+        },
+        {
+          "path": "/home/dmin/tq-release-npu-20261126/build-npu/bin/test_fused_decode_e2e_npu",
+          "bytes": 111872,
+          "sha256": "51c5509938ef4fbe683e9886588e75be39dd54aef0e701eff9a03f77740f5913"
+        },
+        {
+          "path": "/home/dmin/tq-release-npu-20261126/build-npu/bin/test_golden_decode_npu",
+          "bytes": 114528,
+          "sha256": "00ba7dfe48037a69ff957b6d42ff331213a79ba52de0def6d4912ac857bdbb32"
+        },
+        {
+          "path": "/home/dmin/tq-release-npu-20261126/build-npu/bin/test_golden_prefill_nz_npu",
+          "bytes": 92664,
+          "sha256": "0e785c10fa2b62f0685a199c92f82aba958f6ce7a8c3659b12837e2890ebaf80"
+        },
+        {
+          "path": "/home/dmin/tq-release-npu-20261126/build-npu/bin/test_golden_prefill_strip_npu",
+          "bytes": 92664,
+          "sha256": "e92c1a32ce2c2216ed22c713ff42a2c39957b0a79c573ba50b524e1abdfe400b"
+        },
+        {
+          "path": "/home/dmin/tq-release-npu-20261126/build-npu/bin/test_golden_scatter_npu",
+          "bytes": 93200,
+          "sha256": "b7478a16626f42537dd8adbfa5814816df734966ee6266f480cac4d761f034cb"
+        },
+        {
+          "path": "/home/dmin/tq-release-npu-20261126/build-npu/bin/test_live_write_npu",
+          "bytes": 114816,
+          "sha256": "4ce29825516022749a23412b175d85493ea687ca49fd22911c6111757fc3cd21"
+        },
+        {
+          "path": "/home/dmin/tq-release-npu-20261126/build-npu/bin/test_live_write_nz_npu",
+          "bytes": 71736,
+          "sha256": "fa8a59a3307c4634cd7fae24e02843f1d61a134d2e47c84673b35896ca6ba648"
+        },
+        {
+          "path": "/home/dmin/tq-release-npu-20261126/build-npu/bin/test_nz_ingress_canary_npu",
+          "bytes": 70344,
+          "sha256": "17605db17f3672288e03868359c5fff5471211b04c8b3bc495f26ce7125b9523"
+        },
+        {
+          "path": "/home/dmin/tq-release-npu-20261126/build-npu/bin/test_turboquant_production_npu",
+          "bytes": 117024,
+          "sha256": "e861e5a7c142f483eb1c2ba8a439727182201517cdd6de2cffbf62ac5053f6a7"
+        }
+      ]
+    },
+    {
+      "configuration": "npu-noe8",
+      "directory": "/home/dmin/tq-release-noe8-20261126/build-noe8",
+      "exit_code": 0,
+      "catalog": {
+        "READY": 42,
+        "UNSUPPORTED": 174
+      },
+      "e8_enabled": false,
+      "kernel_flags": [
+        {
+          "target": "tq_decode_npu",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        },
+        {
+          "target": "tq_prefill_npu",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        },
+        {
+          "target": "tq_prefill_nz_npu",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        },
+        {
+          "target": "tq_scatter_npu",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        },
+        {
+          "target": "tq_scatter_nz_npu",
+          "flags": " --npu-arch=dav-3510 -O3 -DNDEBUG -fPIC -Xaicore-start -std=c++17 -Wall -Wextra -Xaicore-end -Xhost-start -Wall -Wextra -Werror -Xhost-end"
+        }
+      ],
+      "binaries": [
+        {
+          "path": "/home/dmin/tq-release-noe8-20261126/build-noe8/bin/bench_qwen35_decode",
+          "bytes": 62608,
+          "sha256": "36cacd09b2a3447dbdf55ec8813bc715374dfa69157ace4671b6c7718cf13f20"
+        },
+        {
+          "path": "/home/dmin/tq-release-noe8-20261126/build-noe8/bin/bench_turboquant_production_npu",
+          "bytes": 79448,
+          "sha256": "0277c3578988b88be12e980e9639774acbfe4c551e15f113aaccfe05e7279bd5"
+        },
+        {
+          "path": "/home/dmin/tq-release-noe8-20261126/build-noe8/bin/test_turboquant_production_npu",
+          "bytes": 79448,
+          "sha256": "76042b64034b09f690992f9e46e3aac47587327dc9a765fa1e46264829325739"
+        }
+      ]
+    }
+  ],
+  "host_ctests_passed": 10,
+  "launcher_unit_tests_passed": 5,
+  "metrics_unit_tests_passed": 3,
+  "physical_npu_execution": false,
+  "camodel_execution": false,
+  "generated_architecture_flag": "--npu-arch=dav-3510",
+  "legacy_exact_flag_gate": "SDK interface changed; legacy spelling is not emitted",
+  "migration_files": 116
+}

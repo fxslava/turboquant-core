@@ -1,0 +1,41 @@
+# Keep the SDK's ASC language setup (which adds runtime link libraries) out of
+# the parent directory so toolkit-free host targets remain independent.
+if(NOT TQ_SOC_FAMILY STREQUAL "ascend950pr_9599")
+  message(FATAL_ERROR "This product targets SOC_VERSION=Ascend950PR_9599 (dav-3510)")
+endif()
+set(CMAKE_ASC_ARCHITECTURES "dav-3510" CACHE STRING "ASC architecture derived from SOC_VERSION" FORCE)
+set(CMAKE_ASC_RUN_MODE "${RUN_MODE}" CACHE STRING "ASC runtime derived from RUN_MODE" FORCE)
+set(ENV{ASCEND_HOME_PATH} "${ASCEND_HOME_PATH}")
+# The image also ships a legacy ascendc.cmake that selects dav-c310 for 950.
+# Use its supported ASC-language registration API, which derives compiler ISA
+# flags from CMAKE_ASC_ARCHITECTURES without manual --cce or __DAV overrides.
+set(tq_host_debug_flags "${CMAKE_CXX_FLAGS_DEBUG}")
+set(tq_host_release_flags "${CMAKE_CXX_FLAGS_RELEASE}")
+include("${TQ_ASCENDC_CMAKE_DIR}/asc-config.cmake")
+enable_language(ASC)
+# SDK framework setup clears these CXX flags; retain the caller's host policy.
+set(CMAKE_CXX_FLAGS_DEBUG "${tq_host_debug_flags}")
+set(CMAKE_CXX_FLAGS_RELEASE "${tq_host_release_flags}")
+# The SDK does not define this language property; honor target SYSTEM includes.
+set(CMAKE_INCLUDE_SYSTEM_FLAG_ASC "-isystem ")
+set(TQ_SIM_LIB_DIR "")
+if(RUN_MODE STREQUAL "sim")
+  set(TQ_SIM_LIB_DIR "${ASCEND_HOME_PATH}/tools/simulator/dav_3510/lib")
+endif()
+include("${PROJECT_SOURCE_DIR}/cmake/AscendKernelHelpers.cmake")
+if(TQ_BUILD_E8_KERNELS)
+  include("${PROJECT_SOURCE_DIR}/cmake/E8Targets.cmake")
+endif()
+if(TQ_BUILD_KERNELS)
+  if(RUN_MODE STREQUAL "sim")
+    include("${PROJECT_SOURCE_DIR}/cmake/SimTargets.cmake")
+    add_turboquant_sim_targets()
+  else()
+    include("${PROJECT_SOURCE_DIR}/cmake/NpuTargets.cmake")
+    add_turboquant_npu_targets()
+  endif()
+endif()
+if(TQ_VENDORED_DECODE_PROBE)
+  include("${PROJECT_SOURCE_DIR}/cmake/VendoredDecodeProbe.cmake")
+  add_vendored_decode_probe()
+endif()

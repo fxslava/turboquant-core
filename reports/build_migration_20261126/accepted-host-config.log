@@ -1,0 +1,12 @@
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Compiler cache: none found
+-- Golden fixtures need preparation: build tq_generate_goldens with a CPU-torch Python, or set TQ_GOLDEN_DUMP_ROOT to a complete fixture directory. See tests/README.md.
+-- TurboQuant target guide: cmake --build /workspace/build/build-host --target tq_help
+-- Configuring done (1.0s)
+-- Generating done (0.1s)
+-- Build files have been written to: /workspace/build/build-host

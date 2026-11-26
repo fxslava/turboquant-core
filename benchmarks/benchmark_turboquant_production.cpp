@@ -1,7 +1,9 @@
 #include "tests/common/turboquant_production.hpp"
 #include "tests/common/camodel_session.hpp"
 #include "tests/common/turboquant_scatter_oracle.hpp"
+#ifdef TQ_HAS_E8_KERNELS
 #include "src/turboquant/common/e8_component.hpp"
+#endif
 #include "src/turboquant/common/turboquant_launch.h"
 
 #include <acl/acl.h>
@@ -257,6 +259,7 @@ void lm4_decode(const Session& session, const Filters& f, const Plan& plan)
     verify_all({&key, &value, &scales, &lengths, &table, &lut, &q, &db, &work, &output});
 }
 
+#ifdef TQ_HAS_E8_KERNELS
 constexpr unsigned kE8QueryFloats = e8_decode::kPaddedHeads * kDim;
 constexpr unsigned kE8OutputElements = e8_decode::kHeads * kDim;
 
@@ -449,6 +452,8 @@ void e8_dequant(const Session& session, const Filters& f, const Plan& plan)
     verify_all({&data, &bf16, &int8});
 }
 
+#endif // TQ_HAS_E8_KERNELS
+
 void lm4_ingress(const Session& session, const Filters& f, const Plan& plan)
 {
     const auto heads = plan.p.kv_heads;
@@ -552,7 +557,10 @@ int main(int argc, char** argv) try
     unsigned executed = 0;
     f.visit([&](const Plan& plan, Mode mode, std::string_view stage) {
         print_case(plan, mode, stage);
-        const auto reason = plan.device_limit(mode, stage);
+        auto reason = plan.device_limit(mode, stage);
+#ifndef TQ_HAS_E8_KERNELS
+        if (mode == Mode::e8) reason = "E8 kernels disabled at build time";
+#endif
         if (reason) {
             std::printf(" status=UNSUPPORTED reason=%s\n", reason);
             return;
@@ -562,10 +570,14 @@ int main(int argc, char** argv) try
             return;
         }
         if (!session) session = std::make_unique<Session>(f.device);
-        if (stage == "dequant") e8_dequant(*session, f, plan);
-        else if (stage == "ingress") lm4_ingress(*session, f, plan);
-        else if (mode == Mode::e8) e8_decode_case(*session, f, plan);
-        else lm4_decode(*session, f, plan);
+        if (stage == "ingress") lm4_ingress(*session, f, plan);
+        else if (mode == Mode::lm4) lm4_decode(*session, f, plan);
+#ifdef TQ_HAS_E8_KERNELS
+        else if (stage == "dequant") e8_dequant(*session, f, plan);
+        else e8_decode_case(*session, f, plan);
+#else
+        else throw std::logic_error("unavailable codec reached device dispatch");
+#endif
         ++executed;
         std::printf(" status=%s guards=PASS\n", f.verify ? "PASS" : "MEASURED");
         std::fflush(stdout);
