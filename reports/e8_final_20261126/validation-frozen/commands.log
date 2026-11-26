@@ -1,0 +1,13 @@
+core_tree=f8ba371e056f8eceea590eac8d335c0592cf5ff3
+core_snapshot=/mnt/c/Ascend/turboquant-integration-work/e8-core-frozen-snapshot
+plugin_commit=9d4f1d3b33726adef41473ff12fcfdc6b6b0afea
+plugin_tree=ae7438ad07e80245597f166420959ff5edfdd1a4
+plugin_snapshot=/mnt/c/Ascend/turboquant-integration-work/e8-plugin-9d4f1d3b-snapshot
+host_build=/tmp/tq-e8-final-frozen-host.KOphnztT
+compile_guard=bash /mnt/c/ascend-micro-harness/scripts/camodel_build_phase_guard.sh compile flock --shared /home/dmin/ascend-sync-schedule-ablation/queue/checkpoint1-exclusive.lock
+python3 -B /mnt/c/Ascend/turboquant-integration-work/e8-plugin-9d4f1d3b-snapshot/scripts/check_turboquant_sync.py --core /mnt/c/Ascend/turboquant-integration-work/e8-core-frozen-snapshot 
+cmake -S /mnt/c/Ascend/turboquant-integration-work/e8-core-frozen-snapshot -B /tmp/tq-e8-final-frozen-host.KOphnztT -DTQ_BUILD_KERNELS=OFF -DTQ_BUILD_E8_KERNELS=OFF -DASCEND_HOME_PATH=/nonexistent-tq-toolkit-free -DTQ_GOLDEN_DUMP_ROOT=/tmp/tq_dq 
+cmake --build /tmp/tq-e8-final-frozen-host.KOphnztT -j6 
+ctest --test-dir /tmp/tq-e8-final-frozen-host.KOphnztT --output-on-failure 
+/tmp/tq-e8-final-frozen-host.KOphnztT/tests/test_turboquant_production_host 
+/tmp/tq-e8-final-frozen-host.KOphnztT/tests/test_turboquant_production_host --list 

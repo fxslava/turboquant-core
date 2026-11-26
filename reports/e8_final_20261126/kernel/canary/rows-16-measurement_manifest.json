@@ -1,0 +1,14 @@
+{
+  "rows": 16,
+  "command": [
+    "/home/dmin/work/tq-e8-final-canary-v11/bin/encoder_canary",
+    "/mnt/c/ascend-micro-harness/reports/checkpoint2_20261123/wave3/w3_e8_enc/review_packet_v4/candidate/source/fixture",
+    "16"
+  ],
+  "cwd": "/home/dmin/work/tq-e8-final-canary-v11/run/rows-16",
+  "expected_pem_sha256": "1a6420fe8123e88a120f0bbfc76710968e6708599c77d80a7b1097aca06eed33",
+  "exit_code": 139,
+  "runner_pid": 3,
+  "mapping_scope": "Completed samples of the pinned runner process; no descendant mapping coverage.",
+  "loaded_pem_verified": true
+}

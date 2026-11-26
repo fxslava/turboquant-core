@@ -1,0 +1,459 @@
+.......FFFFFFF                                                           [100%]
+=================================== FAILURES ===================================
+____________ test_canonical_soc[aScEnD950pR_9599-Ascend950PR_9599] _____________
+
+supplied = 'aScEnD950pR_9599', canonical = 'Ascend950PR_9599'
+
+    @pytest.mark.parametrize(
+        ("supplied", "canonical"),
+        [
+            ("aScEnD950pR_9599", "Ascend950PR_9599"),
+            ("DAV-3510", "Ascend950PR_9599"),
+            (" ASCEND950 ", "ascend950"),
+            ("ASCEND910B2", "ascend910b2"),
+            ("910C", "ascend910_9392"),
+            ("310P", "ascend310p1"),
+        ],
+    )
+    def test_canonical_soc(supplied, canonical):
+>       assert setup_helpers()["normalize_soc_version"](supplied) == canonical
+
+tests/host/turboquant/test_build_selection.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/host/turboquant/test_build_selection.py:23: in setup_helpers
+    exec(compile(ast.Module(body=nodes, type_ignores=[]), "setup.py", "exec"), namespace)
+setup.py:221: in <module>
+    class cmake_build_ext(build_ext):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    class cmake_build_ext(build_ext):
+        # A dict of extension directories that have been configured.
+        did_config: dict[str, bool] = {}
+    
+        def initialize_options(self):
+            super().initialize_options()
+            self._native_outputs: list[str] = []
+            self._native_output_mapping: dict[str, str] = {}
+    
+        #
+        # Determine number of compilation jobs
+        #
+        def compute_num_jobs(self):
+            # `num_jobs` is either the value of the MAX_JOBS environment variable
+            # (if defined) or the number of CPUs available.
+            num_jobs = envs.MAX_JOBS
+            if num_jobs is not None:
+                num_jobs = int(num_jobs)
+                logger.info("Using MAX_JOBS=%d as the number of jobs.", num_jobs)
+            else:
+                try:
+                    # os.sched_getaffinity() isn't universally available, so fall
+                    #  back to os.cpu_count() if we get an error here.
+                    num_jobs = len(os.sched_getaffinity(0))
+                except AttributeError:
+                    num_jobs = os.cpu_count()
+            num_jobs = max(1, num_jobs)
+    
+            return num_jobs
+    
+        #
+        # Perform cmake configuration for a single extension.
+        #
+>       def configure(self, ext: CMakeExtension) -> None:
+E       NameError: name 'CMakeExtension' is not defined
+
+setup.py:254: NameError
+________________ test_canonical_soc[DAV-3510-Ascend950PR_9599] _________________
+
+supplied = 'DAV-3510', canonical = 'Ascend950PR_9599'
+
+    @pytest.mark.parametrize(
+        ("supplied", "canonical"),
+        [
+            ("aScEnD950pR_9599", "Ascend950PR_9599"),
+            ("DAV-3510", "Ascend950PR_9599"),
+            (" ASCEND950 ", "ascend950"),
+            ("ASCEND910B2", "ascend910b2"),
+            ("910C", "ascend910_9392"),
+            ("310P", "ascend310p1"),
+        ],
+    )
+    def test_canonical_soc(supplied, canonical):
+>       assert setup_helpers()["normalize_soc_version"](supplied) == canonical
+
+tests/host/turboquant/test_build_selection.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/host/turboquant/test_build_selection.py:23: in setup_helpers
+    exec(compile(ast.Module(body=nodes, type_ignores=[]), "setup.py", "exec"), namespace)
+setup.py:221: in <module>
+    class cmake_build_ext(build_ext):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    class cmake_build_ext(build_ext):
+        # A dict of extension directories that have been configured.
+        did_config: dict[str, bool] = {}
+    
+        def initialize_options(self):
+            super().initialize_options()
+            self._native_outputs: list[str] = []
+            self._native_output_mapping: dict[str, str] = {}
+    
+        #
+        # Determine number of compilation jobs
+        #
+        def compute_num_jobs(self):
+            # `num_jobs` is either the value of the MAX_JOBS environment variable
+            # (if defined) or the number of CPUs available.
+            num_jobs = envs.MAX_JOBS
+            if num_jobs is not None:
+                num_jobs = int(num_jobs)
+                logger.info("Using MAX_JOBS=%d as the number of jobs.", num_jobs)
+            else:
+                try:
+                    # os.sched_getaffinity() isn't universally available, so fall
+                    #  back to os.cpu_count() if we get an error here.
+                    num_jobs = len(os.sched_getaffinity(0))
+                except AttributeError:
+                    num_jobs = os.cpu_count()
+            num_jobs = max(1, num_jobs)
+    
+            return num_jobs
+    
+        #
+        # Perform cmake configuration for a single extension.
+        #
+>       def configure(self, ext: CMakeExtension) -> None:
+E       NameError: name 'CMakeExtension' is not defined
+
+setup.py:254: NameError
+__________________ test_canonical_soc[ ASCEND950 -ascend950] ___________________
+
+supplied = ' ASCEND950 ', canonical = 'ascend950'
+
+    @pytest.mark.parametrize(
+        ("supplied", "canonical"),
+        [
+            ("aScEnD950pR_9599", "Ascend950PR_9599"),
+            ("DAV-3510", "Ascend950PR_9599"),
+            (" ASCEND950 ", "ascend950"),
+            ("ASCEND910B2", "ascend910b2"),
+            ("910C", "ascend910_9392"),
+            ("310P", "ascend310p1"),
+        ],
+    )
+    def test_canonical_soc(supplied, canonical):
+>       assert setup_helpers()["normalize_soc_version"](supplied) == canonical
+
+tests/host/turboquant/test_build_selection.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/host/turboquant/test_build_selection.py:23: in setup_helpers
+    exec(compile(ast.Module(body=nodes, type_ignores=[]), "setup.py", "exec"), namespace)
+setup.py:221: in <module>
+    class cmake_build_ext(build_ext):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    class cmake_build_ext(build_ext):
+        # A dict of extension directories that have been configured.
+        did_config: dict[str, bool] = {}
+    
+        def initialize_options(self):
+            super().initialize_options()
+            self._native_outputs: list[str] = []
+            self._native_output_mapping: dict[str, str] = {}
+    
+        #
+        # Determine number of compilation jobs
+        #
+        def compute_num_jobs(self):
+            # `num_jobs` is either the value of the MAX_JOBS environment variable
+            # (if defined) or the number of CPUs available.
+            num_jobs = envs.MAX_JOBS
+            if num_jobs is not None:
+                num_jobs = int(num_jobs)
+                logger.info("Using MAX_JOBS=%d as the number of jobs.", num_jobs)
+            else:
+                try:
+                    # os.sched_getaffinity() isn't universally available, so fall
+                    #  back to os.cpu_count() if we get an error here.
+                    num_jobs = len(os.sched_getaffinity(0))
+                except AttributeError:
+                    num_jobs = os.cpu_count()
+            num_jobs = max(1, num_jobs)
+    
+            return num_jobs
+    
+        #
+        # Perform cmake configuration for a single extension.
+        #
+>       def configure(self, ext: CMakeExtension) -> None:
+E       NameError: name 'CMakeExtension' is not defined
+
+setup.py:254: NameError
+_________________ test_canonical_soc[ASCEND910B2-ascend910b2] __________________
+
+supplied = 'ASCEND910B2', canonical = 'ascend910b2'
+
+    @pytest.mark.parametrize(
+        ("supplied", "canonical"),
+        [
+            ("aScEnD950pR_9599", "Ascend950PR_9599"),
+            ("DAV-3510", "Ascend950PR_9599"),
+            (" ASCEND950 ", "ascend950"),
+            ("ASCEND910B2", "ascend910b2"),
+            ("910C", "ascend910_9392"),
+            ("310P", "ascend310p1"),
+        ],
+    )
+    def test_canonical_soc(supplied, canonical):
+>       assert setup_helpers()["normalize_soc_version"](supplied) == canonical
+
+tests/host/turboquant/test_build_selection.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/host/turboquant/test_build_selection.py:23: in setup_helpers
+    exec(compile(ast.Module(body=nodes, type_ignores=[]), "setup.py", "exec"), namespace)
+setup.py:221: in <module>
+    class cmake_build_ext(build_ext):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    class cmake_build_ext(build_ext):
+        # A dict of extension directories that have been configured.
+        did_config: dict[str, bool] = {}
+    
+        def initialize_options(self):
+            super().initialize_options()
+            self._native_outputs: list[str] = []
+            self._native_output_mapping: dict[str, str] = {}
+    
+        #
+        # Determine number of compilation jobs
+        #
+        def compute_num_jobs(self):
+            # `num_jobs` is either the value of the MAX_JOBS environment variable
+            # (if defined) or the number of CPUs available.
+            num_jobs = envs.MAX_JOBS
+            if num_jobs is not None:
+                num_jobs = int(num_jobs)
+                logger.info("Using MAX_JOBS=%d as the number of jobs.", num_jobs)
+            else:
+                try:
+                    # os.sched_getaffinity() isn't universally available, so fall
+                    #  back to os.cpu_count() if we get an error here.
+                    num_jobs = len(os.sched_getaffinity(0))
+                except AttributeError:
+                    num_jobs = os.cpu_count()
+            num_jobs = max(1, num_jobs)
+    
+            return num_jobs
+    
+        #
+        # Perform cmake configuration for a single extension.
+        #
+>       def configure(self, ext: CMakeExtension) -> None:
+E       NameError: name 'CMakeExtension' is not defined
+
+setup.py:254: NameError
+___________________ test_canonical_soc[910C-ascend910_9392] ____________________
+
+supplied = '910C', canonical = 'ascend910_9392'
+
+    @pytest.mark.parametrize(
+        ("supplied", "canonical"),
+        [
+            ("aScEnD950pR_9599", "Ascend950PR_9599"),
+            ("DAV-3510", "Ascend950PR_9599"),
+            (" ASCEND950 ", "ascend950"),
+            ("ASCEND910B2", "ascend910b2"),
+            ("910C", "ascend910_9392"),
+            ("310P", "ascend310p1"),
+        ],
+    )
+    def test_canonical_soc(supplied, canonical):
+>       assert setup_helpers()["normalize_soc_version"](supplied) == canonical
+
+tests/host/turboquant/test_build_selection.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/host/turboquant/test_build_selection.py:23: in setup_helpers
+    exec(compile(ast.Module(body=nodes, type_ignores=[]), "setup.py", "exec"), namespace)
+setup.py:221: in <module>
+    class cmake_build_ext(build_ext):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    class cmake_build_ext(build_ext):
+        # A dict of extension directories that have been configured.
+        did_config: dict[str, bool] = {}
+    
+        def initialize_options(self):
+            super().initialize_options()
+            self._native_outputs: list[str] = []
+            self._native_output_mapping: dict[str, str] = {}
+    
+        #
+        # Determine number of compilation jobs
+        #
+        def compute_num_jobs(self):
+            # `num_jobs` is either the value of the MAX_JOBS environment variable
+            # (if defined) or the number of CPUs available.
+            num_jobs = envs.MAX_JOBS
+            if num_jobs is not None:
+                num_jobs = int(num_jobs)
+                logger.info("Using MAX_JOBS=%d as the number of jobs.", num_jobs)
+            else:
+                try:
+                    # os.sched_getaffinity() isn't universally available, so fall
+                    #  back to os.cpu_count() if we get an error here.
+                    num_jobs = len(os.sched_getaffinity(0))
+                except AttributeError:
+                    num_jobs = os.cpu_count()
+            num_jobs = max(1, num_jobs)
+    
+            return num_jobs
+    
+        #
+        # Perform cmake configuration for a single extension.
+        #
+>       def configure(self, ext: CMakeExtension) -> None:
+E       NameError: name 'CMakeExtension' is not defined
+
+setup.py:254: NameError
+_____________________ test_canonical_soc[310P-ascend310p1] _____________________
+
+supplied = '310P', canonical = 'ascend310p1'
+
+    @pytest.mark.parametrize(
+        ("supplied", "canonical"),
+        [
+            ("aScEnD950pR_9599", "Ascend950PR_9599"),
+            ("DAV-3510", "Ascend950PR_9599"),
+            (" ASCEND950 ", "ascend950"),
+            ("ASCEND910B2", "ascend910b2"),
+            ("910C", "ascend910_9392"),
+            ("310P", "ascend310p1"),
+        ],
+    )
+    def test_canonical_soc(supplied, canonical):
+>       assert setup_helpers()["normalize_soc_version"](supplied) == canonical
+
+tests/host/turboquant/test_build_selection.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/host/turboquant/test_build_selection.py:23: in setup_helpers
+    exec(compile(ast.Module(body=nodes, type_ignores=[]), "setup.py", "exec"), namespace)
+setup.py:221: in <module>
+    class cmake_build_ext(build_ext):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    class cmake_build_ext(build_ext):
+        # A dict of extension directories that have been configured.
+        did_config: dict[str, bool] = {}
+    
+        def initialize_options(self):
+            super().initialize_options()
+            self._native_outputs: list[str] = []
+            self._native_output_mapping: dict[str, str] = {}
+    
+        #
+        # Determine number of compilation jobs
+        #
+        def compute_num_jobs(self):
+            # `num_jobs` is either the value of the MAX_JOBS environment variable
+            # (if defined) or the number of CPUs available.
+            num_jobs = envs.MAX_JOBS
+            if num_jobs is not None:
+                num_jobs = int(num_jobs)
+                logger.info("Using MAX_JOBS=%d as the number of jobs.", num_jobs)
+            else:
+                try:
+                    # os.sched_getaffinity() isn't universally available, so fall
+                    #  back to os.cpu_count() if we get an error here.
+                    num_jobs = len(os.sched_getaffinity(0))
+                except AttributeError:
+                    num_jobs = os.cpu_count()
+            num_jobs = max(1, num_jobs)
+    
+            return num_jobs
+    
+        #
+        # Perform cmake configuration for a single extension.
+        #
+>       def configure(self, ext: CMakeExtension) -> None:
+E       NameError: name 'CMakeExtension' is not defined
+
+setup.py:254: NameError
+__________ test_editable_outputs_include_only_cmake_installed_targets __________
+
+tmp_path = PosixPath('/tmp/pytest-of-dmin/pytest-12/test_editable_outputs_include_0')
+
+    def test_editable_outputs_include_only_cmake_installed_targets(tmp_path):
+        expected = ("vllm_ascend_C.so", "libvllm_ascend_turboquant.so", "libvllm_ascend_turboquant_e8.so")
+        build_temp = tmp_path / "cmake-build"
+        build_temp.mkdir()
+        (build_temp / "unselected.so").touch()
+        build_lib = tmp_path / "build-lib"
+        package = tmp_path / "vllm_ascend"
+        installs = []
+    
+        def install(command, cwd):
+            assert command[:4] == ["cmake", "--install", ".", "--prefix"]
+            assert command[5:] == ["--component", "vllm_ascend_native"]
+            prefix = Path(command[4])
+            installs.append(prefix)
+            manifest = Path(cwd) / "install_manifest_vllm_ascend_native.txt"
+            manifest.write_text("\n".join(str(prefix / target) for target in expected), encoding="utf-8")
+    
+>       helpers = setup_helpers(
+            subprocess=SimpleNamespace(check_call=install), envs=SimpleNamespace(COMPILE_CUSTOM_KERNELS=True)
+        )
+
+tests/host/turboquant/test_build_selection.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/host/turboquant/test_build_selection.py:23: in setup_helpers
+    exec(compile(ast.Module(body=nodes, type_ignores=[]), "setup.py", "exec"), namespace)
+setup.py:221: in <module>
+    class cmake_build_ext(build_ext):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    class cmake_build_ext(build_ext):
+        # A dict of extension directories that have been configured.
+        did_config: dict[str, bool] = {}
+    
+        def initialize_options(self):
+            super().initialize_options()
+            self._native_outputs: list[str] = []
+            self._native_output_mapping: dict[str, str] = {}
+    
+        #
+        # Determine number of compilation jobs
+        #
+        def compute_num_jobs(self):
+            # `num_jobs` is either the value of the MAX_JOBS environment variable
+            # (if defined) or the number of CPUs available.
+            num_jobs = envs.MAX_JOBS
+            if num_jobs is not None:
+                num_jobs = int(num_jobs)
+                logger.info("Using MAX_JOBS=%d as the number of jobs.", num_jobs)
+            else:
+                try:
+                    # os.sched_getaffinity() isn't universally available, so fall
+                    #  back to os.cpu_count() if we get an error here.
+                    num_jobs = len(os.sched_getaffinity(0))
+                except AttributeError:
+                    num_jobs = os.cpu_count()
+            num_jobs = max(1, num_jobs)
+    
+            return num_jobs
+    
+        #
+        # Perform cmake configuration for a single extension.
+        #
+>       def configure(self, ext: CMakeExtension) -> None:
+E       NameError: name 'CMakeExtension' is not defined
+
+setup.py:254: NameError
+=========================== short test summary info ============================
+FAILED tests/host/turboquant/test_build_selection.py::test_canonical_soc[aScEnD950pR_9599-Ascend950PR_9599]
+FAILED tests/host/turboquant/test_build_selection.py::test_canonical_soc[DAV-3510-Ascend950PR_9599]
+FAILED tests/host/turboquant/test_build_selection.py::test_canonical_soc[ ASCEND950 -ascend950]
+FAILED tests/host/turboquant/test_build_selection.py::test_canonical_soc[ASCEND910B2-ascend910b2]
+FAILED tests/host/turboquant/test_build_selection.py::test_canonical_soc[910C-ascend910_9392]
+FAILED tests/host/turboquant/test_build_selection.py::test_canonical_soc[310P-ascend310p1]
+FAILED tests/host/turboquant/test_build_selection.py::test_editable_outputs_include_only_cmake_installed_targets
+7 failed, 7 passed in 0.83s

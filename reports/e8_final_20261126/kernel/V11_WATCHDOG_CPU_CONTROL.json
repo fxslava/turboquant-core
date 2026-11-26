@@ -1,0 +1,161 @@
+{
+  "host_namespace_refused": true,
+  "normal": {
+    "status": "PASS",
+    "exit_code": 0,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 0.196
+  },
+  "resistant-leader": {
+    "status": "PASS",
+    "exit_code": 124,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 1.446
+  },
+  "zero-exit-leader": {
+    "status": "PASS",
+    "exit_code": 124,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 1.461
+  },
+  "non-utf8-comm": {
+    "status": "PASS",
+    "exit_code": 124,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 1.456
+  },
+  "slow-work": {
+    "status": "PASS",
+    "exit_code": 124,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 0.458
+  },
+  "cleanup-failure": {
+    "status": "PASS",
+    "exit_code": 124,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 1.449
+  },
+  "full-pipe": {
+    "status": "PASS",
+    "exit_code": 124,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 0.448
+  },
+  "sigint-owner": {
+    "status": "PASS",
+    "exit_code": 130,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 0.465
+  },
+  "sigint-group": {
+    "status": "PASS",
+    "exit_code": 130,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 0.488
+  },
+  "term-owner": {
+    "status": "PASS",
+    "exit_code": 143,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 0.466
+  },
+  "term-group": {
+    "status": "PASS",
+    "exit_code": 143,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 0.514
+  },
+  "term-then-hup": {
+    "status": "PASS",
+    "exit_code": 143,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 0.488
+  },
+  "repeated-term": {
+    "status": "PASS",
+    "exit_code": 143,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 0.5
+  },
+  "term-grace-owner": {
+    "status": "PASS",
+    "exit_code": 124,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 1.251
+  },
+  "term-grace-group": {
+    "status": "PASS",
+    "exit_code": 124,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 1.264
+  },
+  "pending-signal-resume": {
+    "status": "PASS",
+    "exit_code": 129,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 0.478
+  },
+  "pending-across-deadline": {
+    "status": "PASS",
+    "exit_code": 143,
+    "case_namespace_empty": true,
+    "all_three_active_locks_held_with_live_descendant": true,
+    "launch_pid_became_supervisor": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 1.031
+  },
+  "mapping-identity": {
+    "status": "PASS",
+    "exact_mapped_inode_and_sha": true,
+    "same_bytes_replacement_inode_rejected": true
+  }
+}

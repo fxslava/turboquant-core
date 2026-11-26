@@ -1,0 +1,20 @@
+can not use command: npu-smi info
+E1126 08:41:36.078000 1 site-packages/torch/_subclasses/fake_tensor.py:2827] failed while attempting to run meta for turboquant_ops.npu_turboquant_reshape_and_cache_a8.default
+E1126 08:41:36.078000 1 site-packages/torch/_subclasses/fake_tensor.py:2827] Traceback (most recent call last):
+E1126 08:41:36.078000 1 site-packages/torch/_subclasses/fake_tensor.py:2827]   File "/usr/local/python3.12.13/lib/python3.12/site-packages/torch/_subclasses/fake_tensor.py", line 2823, in _dispatch_impl
+E1126 08:41:36.078000 1 site-packages/torch/_subclasses/fake_tensor.py:2827]     r = func(*args, **kwargs)
+E1126 08:41:36.078000 1 site-packages/torch/_subclasses/fake_tensor.py:2827]         ^^^^^^^^^^^^^^^^^^^^^
+E1126 08:41:36.078000 1 site-packages/torch/_subclasses/fake_tensor.py:2827]   File "/usr/local/python3.12.13/lib/python3.12/site-packages/torch/_ops.py", line 819, in __call__
+E1126 08:41:36.078000 1 site-packages/torch/_subclasses/fake_tensor.py:2827]     return self._op(*args, **kwargs)
+E1126 08:41:36.078000 1 site-packages/torch/_subclasses/fake_tensor.py:2827]            ^^^^^^^^^^^^^^^^^^^^^^^^^
+E1126 08:41:36.078000 1 site-packages/torch/_subclasses/fake_tensor.py:2827] RuntimeError: npu_turboquant_reshape_and_cache_a8: device E8 encoding is gated by the r3/revision2 canary. Supply packed 4352-byte E8 K/V planes.
+E1126 08:41:36.084000 1 site-packages/torch/_subclasses/fake_tensor.py:2827] failed while attempting to run meta for turboquant_ops.npu_turboquant_reshape_scatter_aiv.default
+E1126 08:41:36.084000 1 site-packages/torch/_subclasses/fake_tensor.py:2827] Traceback (most recent call last):
+E1126 08:41:36.084000 1 site-packages/torch/_subclasses/fake_tensor.py:2827]   File "/usr/local/python3.12.13/lib/python3.12/site-packages/torch/_subclasses/fake_tensor.py", line 2823, in _dispatch_impl
+E1126 08:41:36.084000 1 site-packages/torch/_subclasses/fake_tensor.py:2827]     r = func(*args, **kwargs)
+E1126 08:41:36.084000 1 site-packages/torch/_subclasses/fake_tensor.py:2827]         ^^^^^^^^^^^^^^^^^^^^^
+E1126 08:41:36.084000 1 site-packages/torch/_subclasses/fake_tensor.py:2827]   File "/usr/local/python3.12.13/lib/python3.12/site-packages/torch/_ops.py", line 819, in __call__
+E1126 08:41:36.084000 1 site-packages/torch/_subclasses/fake_tensor.py:2827]     return self._op(*args, **kwargs)
+E1126 08:41:36.084000 1 site-packages/torch/_subclasses/fake_tensor.py:2827]            ^^^^^^^^^^^^^^^^^^^^^^^^^
+E1126 08:41:36.084000 1 site-packages/torch/_subclasses/fake_tensor.py:2827] RuntimeError: npu_turboquant_reshape_scatter_aiv: device E8 encoding is gated by the r3/revision2 canary. Supply packed 4352-byte E8 K/V planes.
+{"torch": "2.10.0+cpu", "syntax_translation_units": 5, "packet_meta_fake_fullgraph": "PASS", "device_launches": 0}

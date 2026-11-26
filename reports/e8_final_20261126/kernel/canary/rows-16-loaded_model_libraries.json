@@ -1,0 +1,20 @@
+[
+  {
+    "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libpem_davinci.so",
+    "sha256": "1a6420fe8123e88a120f0bbfc76710968e6708599c77d80a7b1097aca06eed33",
+    "mapping_inode_verified": true,
+    "pem_path_verified": true
+  },
+  {
+    "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libruntime_camodel.so",
+    "sha256": "28375f2d4b877f66f77d537d31aae2fb2bb2d142e5b09d6e8bb49c6f791a8aa3",
+    "mapping_inode_verified": true,
+    "pem_path_verified": true
+  },
+  {
+    "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libmodel_top.so",
+    "sha256": "9263f79799b8f49a5e05d7e34498eeebcd83f72a65279a503d0a556f5dfa14bf",
+    "mapping_inode_verified": true,
+    "pem_path_verified": true
+  }
+]

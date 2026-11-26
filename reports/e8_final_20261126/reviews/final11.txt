@@ -1,0 +1,17 @@
+PASS for serialized CAModel admission of slot08-e8-r3-revision2 v11, CANN 9.2.1 dav-3510 Ascend950PR_9599.
+Packet SHA-256 99866169988a2800ce1bb2722dd97be9763aa19e2536c9443d688141e97976a8.
+Launch receipt SHA-256 da5382fa2f5909fbe8140d66639ecc010a73cedb2e1fcf9100e5cc843d137d61.
+Independently checked 127 sealed members and source provenance. Device SO SHA-256 1e66ef76e195d82e3335ff263bbab2786244da5211285fb422c337f565351af8.
+Exact receipt argv. Run the 16-row case first (2 launches), then the 32-row case (4 launches). Each checks 4352-byte packets, exact labels and FP32 scales, untouched bytes, GM and context guards.
+All five lock-file identities matched. The lane, CAModel phase and compatibility locks remain held by the exec launch owner through namespace retirement and ECHILD.
+Native timer encloses digest preflight and case processes. Verified private namespace init receives PIDFD TERM relay at 900 s and PIDFD SIGKILL at the absolute 915 s cutoff. Earlier cancellation may shorten retirement.
+The first-observed stop status is immutable. Pending standard signals after SIGCONT may be observed in either order. Isolated controls passed for exception retirement, direct and group cancellation, timeout-first status and resumed cancellation retaining the original cutoff.
+The bundled 200 ms slow-work readiness check timed out locally. Independent CPU controls used 0.9–2.2 s budgets and reproduced lock retention, TERM delivery and resistant-descendant cleanup. Mapped PEM verification also rejected a same-byte inode replacement.
+Compiled scalar order retains MTE2-to-scalar, A-to-B V-to-scalar, V-to-MTE3, and MTE3-to-scalar waits, plus DSB and the generated retirement epilogue.
+Four warps grind fixed row/query counts. Per-coordinate work is lane-parallel with eight-lane shuffles. Lane 0 owns queue mutation and labels. Sole A writers fence GM before block convergence and B publication reads.
+All three decoded VF roots are byte-identical across split/merged objects, have no calls and converge at their final block barrier. Extents 8516/2242/8442 match non-NOP words. Historical row-major PC/word evidence crosses the nominal byte cutoff.
+Maximum frame 48 bytes per lane, maximum named register R126 at 128 threads, divergence gate 2560 bytes per warp. Static UB arena is 17728 bytes, with runtime backing checked independently before launch.
+Independent AKA baselines match on both 351x and 950PR with zero fatal and zero new warnings. Source and split ISA cover the frontend's template/lane and fence limits.
+The fixed six-strip INT4 model abstains on E8 ranking. CAModel probe results supply numerical parity and executable timing evidence.
+Hypothesis 1. Stage the four lane-0 priority heaps in disjoint UB slices to reduce Phase A GM traffic. Compare heap loads/stores and Phase A ticks with exact label parity.
+Hypothesis 2. Check whether regrouping independent shuffle operands lowers Phase A register pressure. Compare frame traffic, VF extent and Phase A ticks with unchanged scoring and ties.

@@ -1,0 +1,5 @@
+-- Compiler cache: /usr/bin/ccache
+-- Device leg: NOT CONFIGURED. Re-run with -DTQ_BUILD_KERNELS=ON to compile the three operators for sim; only the CPU gates are built otherwise.
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /tmp/tq-production-host

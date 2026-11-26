@@ -1,0 +1,10 @@
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Device leg: NOT CONFIGURED. Re-run with -DTQ_BUILD_KERNELS=ON to compile the three operators for sim; only the CPU gates are built otherwise.
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/work/e8_final_20261126/host

@@ -1,0 +1,9 @@
+# Workdir: C:/vllm-ascend
+$env:TORCH_DEVICE_BACKEND_AUTOLOAD='0'
+$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'
+$env:PYTHONDONTWRITEBYTECODE='1'
+$env:OMP_NUM_THREADS='2'
+$env:MKL_NUM_THREADS='2'
+$py='C:/Users/Admin/AppData/Local/Python/pythoncore-3.14-64/python.exe'
+& $py tests/ut/attention/run_turboquant_device_free.py -q --junitxml="$env:Temp/tq-e8-device-free-live-rows.xml" | Tee-Object -FilePath "$env:Temp/tq-e8-device-free-live-rows.log"
+& $py tests/ut/attention/run_turboquant_device_free.py -q -k e8 --junitxml="$env:Temp/tq-e8-e8-targeted-live-rows.xml" | Tee-Object -FilePath "$env:Temp/tq-e8-e8-targeted-live-rows.log"

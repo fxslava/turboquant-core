@@ -1,0 +1,11 @@
+{
+  "core_index": "C:\\Ascend\\turboquant-integration-work\\e8-core-20261126-frozen.index",
+  "core_base_head": "29274d52c6e1d1d1b70e0a0ccc3a9ca70d006001",
+  "core_branch": "codex/verified-wave-champions",
+  "plugin_commit": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+  "plugin_branch": "codex/e8-prepared-integration-20261126",
+  "core_tree": "f8ba371e056f8eceea590eac8d335c0592cf5ff3",
+  "core_snapshot": "C:\\Ascend\\turboquant-integration-work\\e8-core-frozen-snapshot",
+  "plugin_snapshot": "C:/Ascend/turboquant-integration-work/e8-plugin-9d4f1d3b-snapshot",
+  "plugin_base_head": "7ee3e928078fc7e5d6e1b191b3ee5b953c8e7fd8"
+}

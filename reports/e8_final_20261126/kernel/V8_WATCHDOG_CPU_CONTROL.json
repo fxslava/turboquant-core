@@ -1,0 +1,56 @@
+{
+  "host_namespace_refused": true,
+  "normal": {
+    "status": "PASS",
+    "exit_code": 0,
+    "case_namespace_empty": true,
+    "both_locks_held_with_live_descendant": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 0.204
+  },
+  "resistant-leader": {
+    "status": "PASS",
+    "exit_code": 124,
+    "case_namespace_empty": true,
+    "both_locks_held_with_live_descendant": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 1.447
+  },
+  "zero-exit-leader": {
+    "status": "PASS",
+    "exit_code": 124,
+    "case_namespace_empty": true,
+    "both_locks_held_with_live_descendant": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 1.472
+  },
+  "non-utf8-comm": {
+    "status": "PASS",
+    "exit_code": 124,
+    "case_namespace_empty": true,
+    "both_locks_held_with_live_descendant": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 1.464
+  },
+  "slow-work": {
+    "status": "PASS",
+    "exit_code": 124,
+    "case_namespace_empty": true,
+    "both_locks_held_with_live_descendant": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 0.437
+  },
+  "cleanup-failure": {
+    "status": "PASS",
+    "exit_code": 124,
+    "case_namespace_empty": true,
+    "both_locks_held_with_live_descendant": true,
+    "outer_bystander_unsignaled": true,
+    "elapsed_seconds": 1.459
+  },
+  "mapping-identity": {
+    "status": "PASS",
+    "exact_mapped_inode_and_sha": true,
+    "same_bytes_replacement_inode_rejected": true
+  }
+}

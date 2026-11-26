@@ -1,0 +1,60 @@
+{
+  "technique": "AST-loaded production cache spec and v1 selector with pinned upstream dataclasses",
+  "source_sha256": {
+    "tq-e8-upstream-kv-cache.py": "7ffeba6cd2c50ea083afdd361dd1bc1f706a426ac1360604230676582bf353ef",
+    "kv_cache_interface.py": "0a4437ef2252a64c1bed060ea4bbe5d2382926207da9a4e1ad2d1757bf3fa71c",
+    "model_runner_v1.py": "442c0f1847357bac1a486366e4530242f79f2cae832de2092273c9cd8c788015"
+  },
+  "cases": [
+    {
+      "block_size": 64,
+      "kv_heads": 1,
+      "plane_bytes": 4352,
+      "page_bytes": 8704,
+      "hybrid_padded_page_bytes": 65536
+    },
+    {
+      "block_size": 64,
+      "kv_heads": 4,
+      "plane_bytes": 17408,
+      "page_bytes": 34816,
+      "hybrid_padded_page_bytes": 262144
+    },
+    {
+      "block_size": 64,
+      "kv_heads": 8,
+      "plane_bytes": 34816,
+      "page_bytes": 69632,
+      "hybrid_padded_page_bytes": 524288
+    },
+    {
+      "block_size": 128,
+      "kv_heads": 1,
+      "plane_bytes": 8704,
+      "page_bytes": 17408,
+      "hybrid_padded_page_bytes": 131072
+    },
+    {
+      "block_size": 128,
+      "kv_heads": 4,
+      "plane_bytes": 34816,
+      "page_bytes": 69632,
+      "hybrid_padded_page_bytes": 524288
+    },
+    {
+      "block_size": 128,
+      "kv_heads": 8,
+      "plane_bytes": 69632,
+      "page_bytes": 139264,
+      "hybrid_padded_page_bytes": 1048576
+    }
+  ],
+  "device_launches": 0,
+  "pinned_upstream_provenance": {
+    "commit": "ced6857afa0ea7b2e3f0846a62e1394e90f15607",
+    "path": "vllm/v1/kv_cache_interface.py",
+    "git_blob_sha256": "1cf202f1a44d5bc5c3832b70b41507687ecceea3784e67a4f003bc0210d6eecb",
+    "retained_source_line_endings": "CRLF",
+    "retained_source_equals_git_blob_after_CRLF_to_LF": true
+  }
+}

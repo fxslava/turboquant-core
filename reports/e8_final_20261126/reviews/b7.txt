@@ -1,0 +1,18 @@
+Pass B, fresh independent Ascend review, slot08-e8-r3-revision2 canary v7
+REJECT for serialized CAModel admission.
+Packet f8e88349f43687c240f283ca99ccf35baa7cfcbd5f6f5304edddcf180f7cfbf4 and launch receipt 79bf6358fee08d4c58ebbdd5e2af41b246ad56f744142559faef51b2e52c2ad0.
+Verified 127 sealed members, exact argv and 900/15 parameters, and four live lock device/inode pairs.
+Frozen runner 5ea6f8110de4f0b03d247e9a25c429cf196d3c037581ec7d4e52167d4f6584e8 and encoder library 1e66ef76e195d82e3335ff263bbab2786244da5211285fb422c337f565351af8.
+Scoped runner uses separately serialized 16-row/2-launch and 32-row/4-launch cases, six 16-row tiles total. Each K/V packet compares exact label/scale words, untouched bytes across 4352 bytes, GM guards, and context guards after each launch.
+Scalar ISA preserves MTE2/S, V/S, V/MTE3 and MTE3/S pairs, the two VF dispatches, explicit DSBs and final BAR/DSB/cache retirement. These are serial costs.
+Four 32-lane warps do four rows each and 32 fixed query iterations. Source per-coordinate work and split ISA butterfly shuffles support eight-lane parallel candidate arithmetic and exact-score reduction. Lane zero serializes heap and dedup metadata.
+Independent split ISA shows zero SIMT calls, 48/0/48-byte frames and R126 peak. Byte-linked roots have 8516/2242/8442 encoded words, with physical spans accounted for by NOPs. Divergence admission checks 2560 bytes per warp separately from the 17728-byte static UB arena.
+Two VF roots fence prior GM writes before their block barrier. The scoring VF loads published contexts and reaches its block barrier. MTE3 drain retires output ownership. No L1/L0 staging occurs in this AIV-only kernel.
+Both AKA profiles have zero fatal and zero new warning fingerprints against independent baselines. The frontend report does not establish deep SIMT legality or runtime backing.
+Private user/PID/mount scope verified at UID 1000 and PID 1. Ordinary exit or PID 1 failure retires the scope before the waiting unshare wrapper and both enclosing locks complete.
+Blocker 1. The timer depends on synchronous spawn, reap and census. With a live TERM-handling child and a 0.55 s census delay, a 0.18/0.20 s CPU control returned 124 at 0.783 s versus the 0.38 s cutoff. The child received no usable grace. A cleanup exception after expiry can also replace 124 with status 1.
+Blocker 2. The backend sampler opens /proc maps by numeric PID without binding the runner generation and can abandon an in-flight inode/hash sample at teardown.
+The bundled CPU control independently failed its deadline-pause assertion on the first replay. No CAModel, build or physical NPU run occurred.
+Cost model d956a138 is a rank-one fit for fixed six-strip INT4 reshape. E8 timing and rankings are outside its validated scope.
+Mutation hypothesis. Parallelize the lane-zero shortlist duplicate scan across a converged warp and fold matches before the single writer updates the list. Compare Phase A duplicate-loop ticks and exact shortlist/packet results on identical fixtures.
+Detailed blockers sent to /root/kernel_worker.

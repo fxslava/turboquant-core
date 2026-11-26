@@ -1,0 +1,24 @@
+Consolidate compiler generated dependencies of target e8_decode_cpu_check
+Consolidate compiler generated dependencies of target turboquant_host
+Consolidate compiler generated dependencies of target e8_layout_check
+[ 13%] Built target turboquant_host
+[ 21%] Built target e8_layout_check
+[ 30%] Built target e8_decode_cpu_check
+Consolidate compiler generated dependencies of target test_contract_gates
+Consolidate compiler generated dependencies of target test_layout_bridge
+Consolidate compiler generated dependencies of target test_golden_decode_oracle
+Consolidate compiler generated dependencies of target test_telemetry_dump
+[ 39%] Built target test_layout_bridge
+[ 47%] Built target test_golden_decode_oracle
+[ 56%] Built target test_telemetry_dump
+[ 65%] Built target test_contract_gates
+Consolidate compiler generated dependencies of target test_qwen35_decode
+Consolidate compiler generated dependencies of target test_decode_reduce
+Consolidate compiler generated dependencies of target test_qwen35_telemetry
+Consolidate compiler generated dependencies of target test_turboquant_production_host
+[ 73%] Built target test_qwen35_decode
+[ 82%] Built target test_decode_reduce
+[ 91%] Built target test_qwen35_telemetry
+[ 95%] Building CXX object CMakeFiles/test_turboquant_production_host.dir/tests/cpu/test_turboquant_production.cpp.o
+[100%] Linking CXX executable tests/test_turboquant_production_host
+[100%] Built target test_turboquant_production_host

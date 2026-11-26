@@ -1,0 +1,19 @@
+Review B11 · Fresh independent pass B
+Verdict = PASS for the sealed serialized CAModel canaries only.
+Packet SHA-256 = 99866169988a2800ce1bb2722dd97be9763aa19e2536c9443d688141e97976a8
+Launch receipt SHA-256 = da5382fa2f5909fbe8140d66639ecc010a73cedb2e1fcf9100e5cc843d137d61
+Encoder shared object SHA-256 = 1e66ef76e195d82e3335ff263bbab2786244da5211285fb422c337f565351af8
+Runner SHA-256 = 5ea6f8110de4f0b03d247e9a25c429cf196d3c037581ec7d4e52167d4f6584e8
+Supervisor SHA-256 = 168579ca28fb29dfeb1eff505528a8fef9b9f0664d16ac690eb7c67fc992a768
+Verified all 128 sealed members, receipt argv and all five lock identities. The guard releases the admission and compile gates before exec. The lane, CAModel phase and compatibility locks remain held through namespace retirement and ECHILD.
+Watchdog = The first latch publication fixes status. The cancellation handlers mask one another and the deadline owner uses compare-exchange. A later catchable signal preserves an established timeout status and its absolute cutoff. Pending standard signals follow delivery observation order.
+Retirement = The native timer encloses silent digest verification, backend observation, runner and remaining descendants. Verified PID-1 handshake precedes admission. Repeated TERM stays inside the namespace. The owner uses the init PIDFD at the original cutoff or an earlier cancellation cutoff.
+CPU controls = Replayed watchdog and shortlist controls. Exact exec PID, namespace teardown, detached/adopted descendants, saturated stdout, ordinary/repeated/pending signals, timeout grace, backend inode replacement rejection and all three active locks passed.
+Backend = Canonical dav_3510 PEM path, matching mapped device/inode and exact SHA-256 are required for success. Coverage is completed mapping samples of the pinned runner.
+Canary = 16 rows/2 launches then 32 rows/4 launches, each case capped at 900s plus 15s. Exact 4352-byte K/V packets include written labels/scales, untouched bytes, normalized context, valid shortlist publication and GM/context canaries.
+Scalar issue = Both merged entries implement MTE2→scalar + DSB, Phase A→V/scalar, then Phase B→DSB/V/MTE3 and MTE3→scalar retirement. Compiler IO dependency and tail BAR.ALL/DSB remain in the path.
+SIMT and fences = Uniform 128-thread strip with four warp owners. TID-based eight-coordinate butterflies/prefix scans and lane-parallel child-costs coexist with lane-zero queue mutation. Phase A CG publication drains through MEMBAR/BAR and Phase B reads through CG. Phase B also ends at BAR.
+Resources = Byte-identical split/merged VF roots. Extents 8516/2242/8442 words exclude explicit NOPs in this ELF. Historical row-major trace executes beyond the nominal linear cutoff. Explicit private closure is 48/0/48 B per lane with zero CALLs. Divergence admission is 2560 B per warp. Merged UB arenas are disjoint 17728 B ranges.
+AKA = Both independent baseline profiles and candidate have zero fatals and zero new warnings. The frontend results cover parsed IR. SIMT collectives, CG publication and UB bounds were checked against scoped source/API and compiled evidence.
+Cost model = Abstains for E8. Fixed six-strip INT4 geometry LOO MAE 527.5 ticks with all ten pairwise rankings tied.
+Blockers = None. Device parity, measured performance and physical NPU behavior remain unverified in this review.

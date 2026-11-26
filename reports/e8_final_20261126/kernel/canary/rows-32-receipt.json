@@ -1,0 +1,165 @@
+{
+  "rows": 32,
+  "packet_sha256": "99866169988a2800ce1bb2722dd97be9763aa19e2536c9443d688141e97976a8",
+  "launch_receipt_sha256": "da5382fa2f5909fbe8140d66639ecc010a73cedb2e1fcf9100e5cc843d137d61",
+  "outcome": "watchdog_timeout",
+  "exit": {
+    "rows": 32,
+    "exit_code": 124,
+    "started_utc": "2026-11-26T10:32:06.3193930Z",
+    "finished_utc": "2026-11-26T10:48:03.5896289Z",
+    "outer_wall_seconds": 957.2702359,
+    "windows_stopwatch_seconds": 957.2599871,
+    "post_retirement_wsl_clocks": {
+      "realtime": 1795690084.65003,
+      "monotonic": 1167887.127274004,
+      "monotonic_raw": 1209542.7344395,
+      "boottime": 1167887.127282718
+    },
+    "wsl_monotonic_delta": 904.426109937951,
+    "wsl_monotonic_raw_delta": 957.4603777998127,
+    "wsl_realtime_delta": 958.4758794307709
+  },
+  "launch": {
+    "rows": 32,
+    "started_utc": "2026-11-26T10:32:06.3193930Z",
+    "packet_sha256": "99866169988a2800ce1bb2722dd97be9763aa19e2536c9443d688141e97976a8",
+    "launch_receipt_sha256": "da5382fa2f5909fbe8140d66639ecc010a73cedb2e1fcf9100e5cc843d137d61",
+    "argv": [
+      "/usr/bin/env",
+      "-i",
+      "HOME=/home/dmin",
+      "PATH=/usr/bin:/bin",
+      "LANG=C",
+      "LC_ALL=C",
+      "/bin/bash",
+      "--noprofile",
+      "--norc",
+      "/mnt/c/ascend-micro-harness/scripts/camodel_build_phase_guard.sh",
+      "camodel",
+      "exec",
+      "/usr/bin/flock",
+      "--no-fork",
+      "--exclusive",
+      "/home/dmin/ascend-sync-schedule-ablation/queue/checkpoint1-exclusive.lock",
+      "/bin/bash",
+      "--noprofile",
+      "--norc",
+      "/mnt/c/Ascend/turboquant-integration-work/e8-r3r2-canary-20261126-v11/run_canary.sh",
+      "32",
+      "99866169988a2800ce1bb2722dd97be9763aa19e2536c9443d688141e97976a8"
+    ],
+    "pre_launch_wsl_clocks": {
+      "realtime": 1795689126.1741505,
+      "monotonic": 1166982.701164066,
+      "monotonic_raw": 1208585.2740617,
+      "boottime": 1166982.701168916
+    }
+  },
+  "expected_component_launches": 4,
+  "started_component_launches": [
+    "START layout=channel-major row0=0"
+  ],
+  "completed_component_comparisons": [],
+  "label_mismatches": null,
+  "scale_mismatches": null,
+  "completed_guard_checks": [],
+  "all_packet_and_workspace_guards_passed": null,
+  "runtime_resource_guard_witness": "SIMT privateWarp=36864 divergenceWarp=2560 compiledFrame=48 compiledDivergence=2560",
+  "runner_reported_failure": [],
+  "completed_model_ticks": null,
+  "reported_ticks_at_model_exit": [
+    298486
+  ],
+  "backend": {
+    "compiled_soc_target": "Ascend950PR_9599",
+    "architecture": "dav-3510",
+    "driver_stub_soc_strings": [
+      "Ascend950PR_9589"
+    ],
+    "sdk_simulator_alias": "/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib",
+    "sdk_simulator_alias_resolved": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib",
+    "serial_mode_observed": true,
+    "pinned_pem_observed": true,
+    "sampled_mappings": [
+      {
+        "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libpem_davinci.so",
+        "sha256": "1a6420fe8123e88a120f0bbfc76710968e6708599c77d80a7b1097aca06eed33",
+        "mapping_inode_verified": true,
+        "pem_path_verified": true
+      },
+      {
+        "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libruntime_camodel.so",
+        "sha256": "28375f2d4b877f66f77d537d31aae2fb2bb2d142e5b09d6e8bb49c6f791a8aa3",
+        "mapping_inode_verified": true,
+        "pem_path_verified": true
+      },
+      {
+        "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libmodel_top.so",
+        "sha256": "9263f79799b8f49a5e05d7e34498eeebcd83f72a65279a503d0a556f5dfa14bf",
+        "mapping_inode_verified": true,
+        "pem_path_verified": true
+      }
+    ]
+  },
+  "serialized_retirement": {
+    "observed_model_namespaces": [
+      "pid:[4026532229]"
+    ],
+    "remaining_case_pids": [],
+    "locks": {
+      "checkpoint1-exclusive.lock": {
+        "device": 2096,
+        "inode": 150351,
+        "available_after_case": true
+      },
+      "phase-camodel.lock": {
+        "device": 2096,
+        "inode": 150347,
+        "available_after_case": true
+      },
+      "bisheng-vs-camodel.lock": {
+        "inode": 2769600,
+        "device": 2096,
+        "available_after_case": true
+      }
+    }
+  },
+  "native_run_dir": "/home/dmin/work/tq-e8-final-canary-v11/run/rows-32",
+  "raw_trace_evidence": {
+    "core0.veccore0.instr_log.dump": {
+      "path": "/home/dmin/work/tq-e8-final-canary-v11/run/rows-32/core0.veccore0.instr_log.dump",
+      "bytes": 22227775,
+      "sha256": "eaad3add4dd350d7eb898a233ee67b2a6dd0b89c82491bcd2386d528d04699b8",
+      "last_complete_tick": 298474
+    },
+    "core0.veccore0.instr_popped_log.dump": {
+      "path": "/home/dmin/work/tq-e8-final-canary-v11/run/rows-32/core0.veccore0.instr_popped_log.dump",
+      "bytes": 17558146,
+      "sha256": "e8d24d99dccff6dbbfc94a361fb9ccc01eec0c850c4c0653e7bfe8fbeb61d26e",
+      "last_complete_tick": 298467
+    }
+  },
+  "run_evidence": {
+    "measurement_manifest.json": {
+      "path": "/mnt/c/Ascend/turboquant-core/reports/e8_final_20261126/kernel/canary/rows-32-measurement_manifest.json",
+      "bytes": 561,
+      "sha256": "d6a233b7eb7595567d686a0c3ae3693e659f3cd6ba4edc0afc2b09ff379dd514"
+    },
+    "loaded_model_libraries.json": {
+      "path": "/mnt/c/Ascend/turboquant-core/reports/e8_final_20261126/kernel/canary/rows-32-loaded_model_libraries.json",
+      "bytes": 788,
+      "sha256": "0f459e966ea4cb1687c49af8b0eaa699f72c944c114b2995b93cb5393c79d1ec"
+    },
+    "stdout": {
+      "path": "/mnt/c/Ascend/turboquant-core/reports/e8_final_20261126/kernel/canary/rows-32-stdout.log",
+      "bytes": 4328,
+      "sha256": "215908a8554e65997e3e9884dd88c130a1eaa0e812c8754ac872fc826d7b23c9"
+    },
+    "progress": {
+      "path": "/mnt/c/Ascend/turboquant-core/reports/e8_final_20261126/kernel/canary/rows-32-progress.jsonl",
+      "bytes": 16223,
+      "sha256": "32a861fa90c6cb8e873fb2deb011cdaf27388ccb0724d4d503a20d477b66c013"
+    }
+  }
+}

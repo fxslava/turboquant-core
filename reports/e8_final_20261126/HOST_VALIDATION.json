@@ -1,0 +1,346 @@
+{
+  "scope": "Frozen-source host gates and exact source synchronization; concurrent worktree edits excluded. No NPU execution or performance claim.",
+  "base_heads": {
+    "core": "29274d52c6e1d1d1b70e0a0ccc3a9ca70d006001",
+    "plugin": "7ee3e928078fc7e5d6e1b191b3ee5b953c8e7fd8"
+  },
+  "frozen_git_refs": {
+    "core": "f8ba371e056f8eceea590eac8d335c0592cf5ff3",
+    "plugin": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea"
+  },
+  "attention": {
+    "path": "C:\\Ascend\\turboquant-core\\reports\\e8_final_20261126\\attention-final.xml",
+    "sha256": "3b854f87e2a0213bad2b79d8fb5a17ef06b49162dc2b59a84fdb1c86bc79c36e",
+    "passed": 623,
+    "failures": 0,
+    "skipped": 0
+  },
+  "baseline_attention_cases_retained": 606,
+  "env_configuration_ast_unchanged": true,
+  "sync_and_build_selection": {
+    "path": "C:\\Ascend\\turboquant-core\\reports\\e8_final_20261126\\host14-final.xml",
+    "sha256": "286f36c825e6ce38b17cec1c3bba3140697b03f0541f12d156450cadba8aa64a",
+    "passed": 14,
+    "failures": 0,
+    "skipped": 0
+  },
+  "cpp_contracts": {
+    "path": "C:\\Ascend\\turboquant-core\\reports\\e8_final_20261126\\contracts.xml",
+    "sha256": "e1f9032f414b3cdf13c5c06973f391fd3ff17c6d60426cb58baf3582bb7a3706",
+    "passed": 7,
+    "failures": 0,
+    "skipped": 0
+  },
+  "source_inventory": {
+    "path": "C:\\Ascend\\turboquant-integration-work\\e8-core-frozen-snapshot\\src\\turboquant\\SOURCE_SYNC.json",
+    "sha256": "4f34bfb87f4695073a365bbc24373ca1461b51af8ef8db24045ba9242748c9ae"
+  },
+  "shared_cpp": 36,
+  "shared_sidecars": 1,
+  "sync_diagnostics": [],
+  "frozen_source_verification": {
+    "source_counts": {
+      "core": 39,
+      "plugin": 43
+    },
+    "byte_identical_manifests": true
+  },
+  "tracked_changes": [
+    {
+      "repository": "core",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-core-frozen-snapshot\\CMakeLists.txt",
+      "sha256": "08283dc98fdbf730690b64c7e0436a52d15d53bf4cd830cd44758e033e1dcc2c",
+      "git_object_sha256": "08283dc98fdbf730690b64c7e0436a52d15d53bf4cd830cd44758e033e1dcc2c",
+      "git_ref": "f8ba371e056f8eceea590eac8d335c0592cf5ff3",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "core",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-core-frozen-snapshot\\benchmarks\\README.md",
+      "sha256": "414da4c1d08b4ab301f7e55f92b2219f0d8f343ecaf52fe191169ac3f5799964",
+      "git_object_sha256": "414da4c1d08b4ab301f7e55f92b2219f0d8f343ecaf52fe191169ac3f5799964",
+      "git_ref": "f8ba371e056f8eceea590eac8d335c0592cf5ff3",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "core",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-core-frozen-snapshot\\benchmarks\\benchmark_turboquant_production.cpp",
+      "sha256": "35bbad74d3e164f07440c737519aaf5d29e5f249a82f85a1a58c164be0d75608",
+      "git_object_sha256": "35bbad74d3e164f07440c737519aaf5d29e5f249a82f85a1a58c164be0d75608",
+      "git_ref": "f8ba371e056f8eceea590eac8d335c0592cf5ff3",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "core",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-core-frozen-snapshot\\benchmarks\\benchmark_turboquant_production.py",
+      "sha256": "3763a1aebcbdc8183b0c2bc645fc7ed9896a2a55d8c596fbd227b2eb96c244d5",
+      "git_object_sha256": "3763a1aebcbdc8183b0c2bc645fc7ed9896a2a55d8c596fbd227b2eb96c244d5",
+      "git_ref": "f8ba371e056f8eceea590eac8d335c0592cf5ff3",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "core",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-core-frozen-snapshot\\cmake\\NpuTargets.cmake",
+      "sha256": "521acdffe50e6ff174f7e406c96edebaa5511e359f664f3c3de8eafba9838345",
+      "git_object_sha256": "521acdffe50e6ff174f7e406c96edebaa5511e359f664f3c3de8eafba9838345",
+      "git_ref": "f8ba371e056f8eceea590eac8d335c0592cf5ff3",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "core",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-core-frozen-snapshot\\src\\turboquant\\SOURCE_SYNC.json",
+      "sha256": "4f34bfb87f4695073a365bbc24373ca1461b51af8ef8db24045ba9242748c9ae",
+      "git_object_sha256": "4f34bfb87f4695073a365bbc24373ca1461b51af8ef8db24045ba9242748c9ae",
+      "git_ref": "f8ba371e056f8eceea590eac8d335c0592cf5ff3",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "core",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-core-frozen-snapshot\\src\\turboquant\\ingress\\native\\routine_reshape_batch_pipeline.hpp",
+      "sha256": "ab3f3f1ed26c87a8d84cf6b4896d1527d6a1495225433b3fa008400c0dea7153",
+      "git_object_sha256": "ab3f3f1ed26c87a8d84cf6b4896d1527d6a1495225433b3fa008400c0dea7153",
+      "git_ref": "f8ba371e056f8eceea590eac8d335c0592cf5ff3",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "core",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-core-frozen-snapshot\\src\\turboquant\\ingress\\native\\turboquant_reshape_scatter.cpp",
+      "sha256": "dc6c03bb1cf4226c80bcb53328653bf387dfe7f60f6e4ebee944ffb0bb9b1a4f",
+      "git_object_sha256": "dc6c03bb1cf4226c80bcb53328653bf387dfe7f60f6e4ebee944ffb0bb9b1a4f",
+      "git_ref": "f8ba371e056f8eceea590eac8d335c0592cf5ff3",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "core",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-core-frozen-snapshot\\tests\\common\\turboquant_production.hpp",
+      "sha256": "35dc388fc0a1af22cc66410d455028481632f329aa85117f6c26fac9bfe5dfcc",
+      "git_object_sha256": "35dc388fc0a1af22cc66410d455028481632f329aa85117f6c26fac9bfe5dfcc",
+      "git_ref": "f8ba371e056f8eceea590eac8d335c0592cf5ff3",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "core",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-core-frozen-snapshot\\tests\\cpu\\test_turboquant_benchmark_metrics.py",
+      "sha256": "2a34ae5f5556814ca90995137d07e3594afff18d05160a6693be30a58021cad9",
+      "git_object_sha256": "2a34ae5f5556814ca90995137d07e3594afff18d05160a6693be30a58021cad9",
+      "git_ref": "f8ba371e056f8eceea590eac8d335c0592cf5ff3",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "core",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-core-frozen-snapshot\\tests\\cpu\\test_turboquant_production.cpp",
+      "sha256": "85b197861b173501361b4a664130bfb6d2388fd653c79b3106a2cf83bd0582a5",
+      "git_object_sha256": "85b197861b173501361b4a664130bfb6d2388fd653c79b3106a2cf83bd0582a5",
+      "git_ref": "f8ba371e056f8eceea590eac8d335c0592cf5ff3",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\benchmarks\\scripts\\benchmark_turboquant_production.py",
+      "sha256": "8d43d1cddae5013b0d5dc00e2a5ef0b472bd20c97536c1a41df68edaabf93d3d",
+      "git_object_sha256": "eddf31f842c5a41bc781d86303faa47fdeb8e3d79aecff4107b5c67e2d2557b8",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\csrc\\attention\\turboquant\\SOURCE_SYNC.json",
+      "sha256": "4f34bfb87f4695073a365bbc24373ca1461b51af8ef8db24045ba9242748c9ae",
+      "git_object_sha256": "4f34bfb87f4695073a365bbc24373ca1461b51af8ef8db24045ba9242748c9ae",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\csrc\\attention\\turboquant\\bindings\\torch_bindings.cpp",
+      "sha256": "437f89c4481a7236b6e515385b9775690453b668e0dc8e352b234ef8aa4fcb80",
+      "git_object_sha256": "437f89c4481a7236b6e515385b9775690453b668e0dc8e352b234ef8aa4fcb80",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\csrc\\attention\\turboquant\\bindings\\torch_bindings_internal.h",
+      "sha256": "c5bea11220519d9ae1106ae65cd31426cb746f570cd9bbf1df672b183c79098d",
+      "git_object_sha256": "c5bea11220519d9ae1106ae65cd31426cb746f570cd9bbf1df672b183c79098d",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\csrc\\attention\\turboquant\\bindings\\torch_decode.cpp",
+      "sha256": "6ae1a4a03a08ce698fbac562785d723c050a66eedd6f07a387621a0ff236e885",
+      "git_object_sha256": "6ae1a4a03a08ce698fbac562785d723c050a66eedd6f07a387621a0ff236e885",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\csrc\\attention\\turboquant\\bindings\\torch_ingress.cpp",
+      "sha256": "12643a46f4b0f9ed678c1cf7021dfffa6f7d7ad58c898f408a3f938920d2b565",
+      "git_object_sha256": "12643a46f4b0f9ed678c1cf7021dfffa6f7d7ad58c898f408a3f938920d2b565",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\csrc\\attention\\turboquant\\ingress\\native\\routine_reshape_batch_pipeline.hpp",
+      "sha256": "ab3f3f1ed26c87a8d84cf6b4896d1527d6a1495225433b3fa008400c0dea7153",
+      "git_object_sha256": "ab3f3f1ed26c87a8d84cf6b4896d1527d6a1495225433b3fa008400c0dea7153",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\csrc\\attention\\turboquant\\ingress\\native\\turboquant_reshape_scatter.cpp",
+      "sha256": "dc6c03bb1cf4226c80bcb53328653bf387dfe7f60f6e4ebee944ffb0bb9b1a4f",
+      "git_object_sha256": "dc6c03bb1cf4226c80bcb53328653bf387dfe7f60f6e4ebee944ffb0bb9b1a4f",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": false
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\tests\\host\\turboquant\\check_bindings.py",
+      "sha256": "ddf7162ea841c6fca50d0692724e2ceeb56c80eecef4639a8119a4b4a7e9b6df",
+      "git_object_sha256": "475d1f4486f6b4d1c0a3ab5ef6f7af8643781f575e28a8379b0804b1e4691b16",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\tests\\host\\turboquant\\test_build_selection.py",
+      "sha256": "2d82f84d33076bb31a12e1f2598c4cbd6d3ba90eee48ab2213a26c9cbdd44a28",
+      "git_object_sha256": "5dbd5986daf73f43c675b28ff759c0d3410d6c35ee154e726b4f9699c2e73d23",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\tests\\ut\\attention\\stub_vllm.py",
+      "sha256": "b46720cc830cc63a678c0c4d63cac7d77630a7e6a9b7a92b093b2f9c50c3b149",
+      "git_object_sha256": "82045a2c4e90288340a8ffe472bc754709ae8f7ea4671222189b2e8dda4c5faa",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\tests\\ut\\attention\\test_turboquant_e8.py",
+      "sha256": "be64d63215a9ac716f66356740d6fbb66ae43ef1195d7cfd45480070903ed9c5",
+      "git_object_sha256": "41a7593ebb83dd3ec4a4e15d4bc5e10f651964856db05ab6b8091a483d14e59b",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\tests\\ut\\attention\\test_turboquant_hybrid_ownership.py",
+      "sha256": "2a8949ab13fecda3894942a192bae2303b859bda5c7a4398732ab43fd835ee71",
+      "git_object_sha256": "dc217c95501588978023a75eaac4bdb4dfa162855586336a0f9e5f1b7001d476",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\vllm_ascend\\attention\\turboquant_config.py",
+      "sha256": "d00a2fa781bea563e54db34fd6c3bcd7dd1d1bdede59d43bfa08b22a57e54b72",
+      "git_object_sha256": "65e12213b5b5ba9c7d854fe563afc7e05e58e309ec2e7baa8a016a5c51ce1ae4",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\vllm_ascend\\attention\\turboquant_e8.py",
+      "sha256": "6575d350fbcb9a118153430996dc1485e7d21c5955678b4f89bda65a7b1f84fe",
+      "git_object_sha256": "b34fc7a82e7cf7f17fb9c9dea7c223d3c49ede1b7ebd4058e828669b0ed02f67",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\vllm_ascend\\attention\\turboquant_layout.py",
+      "sha256": "70f886a85e4466078a5fcea7beb10c99d4af4558d87157a53e5aad78d356cba8",
+      "git_object_sha256": "91e86ad0de4e32847a4e4c55edb224ffce0cd354efd87c092d51b74521fafdf8",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\vllm_ascend\\attention\\turboquant_metadata.py",
+      "sha256": "d65e19e78699d97a6ca1037bb96efc81d4fc43c6ed08d673191aa3c9910d49f2",
+      "git_object_sha256": "5e1dfb422f623403c0dac99d3db4e617ae2cd3254207e13755900fb49298dee7",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\vllm_ascend\\attention\\turboquant_ops.py",
+      "sha256": "3c38f06821f8fa1bb188266b86ab42040156a7de716e09c4ac8852cdaeb0e635",
+      "git_object_sha256": "b738b637c2a9af9335baf49171ff329aa3cc8678c8de1de1ab95cf76767271cb",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\vllm_ascend\\attention\\turboquant_reference_cache.py",
+      "sha256": "86ca1cb04f6b1fd8a5f8be6aa3041be1ab69dfdf6706594ab982da53652fc9f6",
+      "git_object_sha256": "7cd1caef3865e27f0f15d2e07165b244004bde721319c17390a32ebec145012c",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\vllm_ascend\\attention\\turboquant_v1.py",
+      "sha256": "fb868d8aa9f9178e8125d3dd831a4020294b5a7694abb971d7604ef494eb5b33",
+      "git_object_sha256": "33735bd74a1ad7d0a1588d68c4a6901d01b885252b1a924dc798dbe8a9affe8e",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\vllm_ascend\\attention\\utils.py",
+      "sha256": "8d54b7c08fa0b2306663006ff22f6bb2a2581de872b1d45395b5408198a2754b",
+      "git_object_sha256": "6818f36f7328bca3cfd676a0c96cc31d1e902d9994c7da767547902780dce296",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\vllm_ascend\\core\\kv_cache_interface.py",
+      "sha256": "0a4437ef2252a64c1bed060ea4bbe5d2382926207da9a4e1ad2d1757bf3fa71c",
+      "git_object_sha256": "663e9f62189fe5e213a0d9207be32ad280e80af816956e3150a19a6039851da2",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\vllm_ascend\\envs.py",
+      "sha256": "3c0c77720205a1aa89b99d11f64833fb0c9b8e6882354b7eed50bb28758e6ba0",
+      "git_object_sha256": "dc3c2b9cd91dbd21d95f8741dd5d61acdeb02c33d76c59249dfb1f34f20ac249",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\vllm_ascend\\platform.py",
+      "sha256": "5173f19aa087ddf3dcc5b3f87d17abd9f52c17c92bdc4741e94a7d8c55b6cd81",
+      "git_object_sha256": "89f5df7777c7cd79566f9cf1424041dfcfe7799c7859036203d5e57d6803934a",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\vllm_ascend\\worker\\model_runner_v1.py",
+      "sha256": "442c0f1847357bac1a486366e4530242f79f2cae832de2092273c9cd8c788015",
+      "git_object_sha256": "29490f16c925ec15ec2b8565b0d6905ac6d9f4d445b875b4310a8d040fe1f40a",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    },
+    {
+      "repository": "plugin",
+      "path": "C:\\Ascend\\turboquant-integration-work\\e8-plugin-9d4f1d3b-snapshot\\vllm_ascend\\worker\\utils.py",
+      "sha256": "d26db4c2cd8dde1461c0e55fb35a98f6acc6e87673bfec65a9d38a42909ad323",
+      "git_object_sha256": "fd4dc6044cf0e1187460abc505cbd2d55a0cbfe29c423ba4aee94033b4caaa78",
+      "git_ref": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+      "line_ending_only_delta": true
+    }
+  ]
+}

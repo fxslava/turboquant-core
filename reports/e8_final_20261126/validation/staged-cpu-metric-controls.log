@@ -1,0 +1,8 @@
+test_non_finite_value_fails (__main__.ReferenceMetricsTest.test_non_finite_value_fails) ... ok
+test_only_one_zero_vector_fails (__main__.ReferenceMetricsTest.test_only_one_zero_vector_fails) ... ok
+test_two_zero_vectors_are_exact (__main__.ReferenceMetricsTest.test_two_zero_vectors_are_exact) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.011s
+
+OK

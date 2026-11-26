@@ -1,0 +1,20 @@
+review: fresh Sol 6.2 B5, pass 2
+candidate: slot08-e8-r3-revision2 frozen device, serialized v5 16 rows/2 launches and 32 rows/4 launches
+packet_sha256: ead8d6a5ab2735ef435bf57f981359c75f224a0eba4e147f7637c549f95294f6
+launch_sha256: 39d887f8e7c39b60b2b0fa746d6df46cf4777c6c1de1f6264d11a1a87fdfc1da
+encoder_sha256: 8bba9874f58287087d1ed9225dbaaf4764173426eb134e5ec8305f5efe2a4351
+runner_sha256: 5ea6f8110de4f0b03d247e9a25c429cf196d3c037581ec7d4e52167d4f6584e8
+identity: 126 members, watchdog supplement, launch argv and four lock device/inode pairs independently matched
+verdict: REJECT
+blocker: The 900s deadline stops being enforced once the runner exits. A CPU control with a zero-exit leader and a TERM-resistant detached child overran its .55s budget, required the child's SIGKILL, and returned case success at .959s. canary_watchdog.py:137–160.
+watchdog: PIDFD signaling, subreaper and single grace worked for a live resistant leader and a late detached child. Scratch phase and lane locks both held through reaping. Mapping samples runner PID paths and hashes only.
+scalar: Both layouts stage MTE2 before Phase A, wait V→S before B, then drain V→MTE3 and MTE3→S. Compiled tail adds BAR.ALL, DSB and cache maintenance. Scoreboard dependencies and GM heap remain cycle costs.
+SIMT: Four warps each own four rows × 32 query waves. Four 8-lane replicas execute independent coordinate work and shuffle reductions. Lane-0 heap metadata remains serial; all issued threads reach the terminal barriers.
+resources: Split, merged and shared-object SIMT bytes agree. Three roots 35144/8968/34856 bytes; max actual call chain 48 B/thread, max positive stack end 46 B, no calls, highest register R126, DVG metadata 2560. Observed extent reconciliation reproduced for all roots; old trace verifies row-major fetch past nominal cutoff only.
+ownership: 17728 B aligned static UB, disjoint input/labels/scales; 512 private GM contexts per launch. Phase A MEMBAR and all-thread barrier publish before B. Balanced local event pairs, with no inter-launch credit overlap.
+packet: 4352 B per layout, disjoint 1024 B labels and 64 B scales per launch; exact oracle words, cumulative untouched bytes, read-only GM and context guard checks. Shortlist acceptance 1–129 verified in CPU control.
+AKA: Zero fatal and zero new warnings against both independently captured profiles. Frontend coverage is limited; audited the deep SIMT operations and static arena in source and exact linked bytes.
+cost_model: d956a138411c, rank-one fixed-six INT4 fit; LOO MAE 527.5 ticks, abstain on E8 ranking.
+mutation_1: Compare a smaller priority queue or register-resident front against baseline using Phase A GM-dependent wait time, spill count and exact shortlist parity.
+mutation_2: Move same-input RMS preparation to a SIMD stage and compare avoided Phase A exact-FP32 issue time against additional dispatch and UB/fence cost.
+worker_delivery: /root/kernel_worker received the failure and CPU-control evidence. No CAModel, project build, bisheng or NPU run.

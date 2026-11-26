@@ -1,0 +1,42 @@
+{
+  "device_encoder_promoted": false,
+  "reason": "Both admitted probes exceeded the configured budget without completed numerical comparisons.",
+  "watchdog_clock": "CLOCK_MONOTONIC",
+  "configured_seconds": 900,
+  "termination_grace_seconds": 15,
+  "strict_host_wall_900_seconds_met": false,
+  "cases": [
+    {
+      "rows": 16,
+      "receipt": "reports/e8_final_20261126/kernel/canary/rows-16-receipt.json",
+      "sha256": "ce06072f61a41ff140c56e6908f20782dbb0466d95ac54ce9a0091daaab90335",
+      "status": 124,
+      "host_wall_seconds": 956.8876502,
+      "partial_model_ticks": [
+        306432
+      ],
+      "completed_comparisons": 0,
+      "label_mismatches": null,
+      "scale_mismatches": null,
+      "guard_result": null,
+      "namespace_empty": true,
+      "all_runtime_locks_released": true
+    },
+    {
+      "rows": 32,
+      "receipt": "reports/e8_final_20261126/kernel/canary/rows-32-receipt.json",
+      "sha256": "d80a774d92024a96114a9ea3f972667ea60952c4430d0740432cc75a98a4e097",
+      "status": 124,
+      "host_wall_seconds": 957.2702359,
+      "partial_model_ticks": [
+        298486
+      ],
+      "completed_comparisons": 0,
+      "label_mismatches": null,
+      "scale_mismatches": null,
+      "guard_result": null,
+      "namespace_empty": true,
+      "all_runtime_locks_released": true
+    }
+  ]
+}

@@ -1,0 +1,1419 @@
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Compiler cache: /usr/bin/ccache
+CMake Warning at cmake/NpuTargets.cmake:85 (message):
+  No Ascend driver lib dir found under /usr/local/Ascend/driver; NPU runner
+  links may fail on libruntime.so's indirect driver dependencies.
+Call Stack (most recent call first):
+  CMakeLists.txt:132 (add_turboquant_npu_targets)
+
+
+-- Device leg: physical Ascend950PR_9599, target tq_npu_kernels.
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921
+[  0%] Creating directories for 'tq_scatter_npu_precompile'
+[  0%] Creating directories for 'tq_prefill_nz_npu_precompile'
+[  0%] Building CXX object CMakeFiles/turboquant_host.dir/src/turboquant/common/turboquant_tiling.cpp.o
+[  1%] Creating directories for 'tq_decode_npu_precompile'
+[  1%] Creating directories for 'tq_prefill_npu_precompile'
+[  1%] Creating directories for 'tq_scatter_nz_npu_precompile'
+[  1%] Building CXX object CMakeFiles/turboquant_host.dir/src/turboquant/common/turboquant_telemetry.cpp.o
+[  2%] Linking CXX static library libturboquant_host.a
+[  2%] No download step for 'tq_prefill_nz_npu_precompile'
+[  2%] No download step for 'tq_scatter_npu_precompile'
+[  2%] No download step for 'tq_decode_npu_precompile'
+[  2%] No download step for 'tq_prefill_npu_precompile'
+[  2%] No download step for 'tq_scatter_nz_npu_precompile'
+[  2%] Built target turboquant_host
+[  2%] No update step for 'tq_prefill_nz_npu_precompile'
+[  2%] No update step for 'tq_scatter_npu_precompile'
+[  2%] No update step for 'tq_prefill_npu_precompile'
+[  2%] No update step for 'tq_decode_npu_precompile'
+[  3%] No update step for 'tq_scatter_nz_npu_precompile'
+[  3%] Creating directories for 'tq_e8_dequant_precompile'
+[  3%] No patch step for 'tq_prefill_nz_npu_precompile'
+[  4%] No patch step for 'tq_scatter_npu_precompile'
+[  5%] No patch step for 'tq_prefill_npu_precompile'
+[  5%] No patch step for 'tq_decode_npu_precompile'
+[  5%] No patch step for 'tq_scatter_nz_npu_precompile'
+[  5%] Performing configure step for 'tq_prefill_nz_npu_precompile'
+[  6%] Performing configure step for 'tq_scatter_npu_precompile'
+[  7%] Performing configure step for 'tq_prefill_npu_precompile'
+[  7%] Performing configure step for 'tq_decode_npu_precompile'
+[  7%] Performing configure step for 'tq_scatter_nz_npu_precompile'
+[  8%] No download step for 'tq_e8_dequant_precompile'
+[  8%] No update step for 'tq_e8_dequant_precompile'
+[  9%] No patch step for 'tq_e8_dequant_precompile'
+[  9%] Performing configure step for 'tq_e8_dequant_precompile'
+-- The C compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting C compiler ABI info - done
+-- Detecting CXX compiler ABI info
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    DYNAMIC_MODE
+    INCLUDE_DIR
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_scatter_npu_precompile-prefix/src/tq_scatter_npu_precompile-build
+[  9%] Performing build step for 'tq_scatter_npu_precompile'
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    DYNAMIC_MODE
+    INCLUDE_DIR
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_precompile-prefix/src/tq_scatter_nz_npu_precompile-build
+[100%] Building CXX object CMakeFiles/precompile_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compiler ABI info - done
+[  9%] Performing build step for 'tq_scatter_nz_npu_precompile'
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    DYNAMIC_MODE
+    INCLUDE_DIR
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_decode_npu_precompile-prefix/src/tq_decode_npu_precompile-build
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    DYNAMIC_MODE
+    INCLUDE_DIR
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_precompile-prefix/src/tq_prefill_nz_npu_precompile-build
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    DYNAMIC_MODE
+    INCLUDE_DIR
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_prefill_npu_precompile-prefix/src/tq_prefill_npu_precompile-build
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    DYNAMIC_MODE
+    INCLUDE_DIR
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_precompile-prefix/src/tq_e8_dequant_precompile-build
+[ 10%] Performing build step for 'tq_decode_npu_precompile'
+[100%] Building CXX object CMakeFiles/precompile_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o
+[ 10%] Performing build step for 'tq_prefill_nz_npu_precompile'
+[ 10%] Performing build step for 'tq_prefill_npu_precompile'
+[ 10%] Performing build step for 'tq_e8_dequant_precompile'
+[100%] Building CXX object CMakeFiles/precompile_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/turboquant_fused_decode.cpp.o
+[100%] Building CXX object CMakeFiles/precompile_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/parallel_component.cpp.o
+[ 50%] Building CXX object CMakeFiles/precompile_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o
+[ 50%] Building CXX object CMakeFiles/precompile_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o
+[100%] Built target precompile_obj
+[100%] Built target precompile_obj
+[100%] Built target precompile_obj
+[100%] Built target precompile_obj
+[100%] Building CXX object CMakeFiles/precompile_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o
+[100%] Building CXX object CMakeFiles/precompile_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o
+[100%] Built target check_src_template
+[100%] Built target check_src_template
+[ 11%] No install step for 'tq_scatter_nz_npu_precompile'
+[ 11%] No install step for 'tq_scatter_npu_precompile'
+[100%] Built target check_src_template
+[ 13%] Completed 'tq_scatter_nz_npu_precompile'
+[ 13%] Completed 'tq_scatter_npu_precompile'
+[ 13%] No install step for 'tq_e8_dequant_precompile'
+[ 13%] Built target tq_scatter_nz_npu_precompile
+[ 13%] Completed 'tq_e8_dequant_precompile'
+[ 13%] Built target tq_scatter_npu_precompile
+[100%] Built target check_src_template
+[ 13%] Creating directories for 'tq_e8_reader_precompile'
+[ 13%] No install step for 'tq_decode_npu_precompile'
+[ 14%] Creating directories for 'tq_scatter_npu_preprocess'
+[ 14%] Built target tq_e8_dequant_precompile
+[ 14%] Completed 'tq_decode_npu_precompile'
+[ 14%] Creating directories for 'tq_scatter_nz_npu_preprocess'
+[ 14%] Built target tq_decode_npu_precompile
+[ 14%] No download step for 'tq_scatter_npu_preprocess'
+[ 14%] No download step for 'tq_e8_reader_precompile'
+[ 14%] Creating directories for 'tq_e8_dequant_preprocess'
+[ 14%] No update step for 'tq_scatter_npu_preprocess'
+[ 14%] No update step for 'tq_e8_reader_precompile'
+[ 15%] No download step for 'tq_scatter_nz_npu_preprocess'
+[ 15%] No patch step for 'tq_scatter_npu_preprocess'
+[ 15%] No patch step for 'tq_e8_reader_precompile'
+[ 16%] No update step for 'tq_scatter_nz_npu_preprocess'
+[ 16%] Performing configure step for 'tq_scatter_npu_preprocess'
+[ 16%] No patch step for 'tq_scatter_nz_npu_preprocess'
+[ 16%] No download step for 'tq_e8_dequant_preprocess'
+[ 16%] Performing configure step for 'tq_e8_reader_precompile'
+[ 16%] Performing configure step for 'tq_scatter_nz_npu_preprocess'
+[ 16%] No update step for 'tq_e8_dequant_preprocess'
+[ 17%] No patch step for 'tq_e8_dequant_preprocess'
+[ 18%] Performing configure step for 'tq_e8_dequant_preprocess'
+-- The C compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+[100%] Built target precompile_obj
+[100%] Built target precompile_obj
+[100%] Built target check_src_template
+[100%] Built target check_src_template
+[ 18%] No install step for 'tq_prefill_npu_precompile'
+[ 19%] No install step for 'tq_prefill_nz_npu_precompile'
+[ 19%] Completed 'tq_prefill_npu_precompile'
+[ 20%] Completed 'tq_prefill_nz_npu_precompile'
+[ 20%] Built target tq_prefill_npu_precompile
+[ 20%] Built target tq_prefill_nz_npu_precompile
+[ 20%] Creating directories for 'tq_decode_npu_preprocess'
+[ 21%] Creating directories for 'tq_prefill_npu_preprocess'
+[ 21%] No download step for 'tq_decode_npu_preprocess'
+[ 21%] No download step for 'tq_prefill_npu_preprocess'
+[ 21%] No update step for 'tq_decode_npu_preprocess'
+-- The CXX compiler identification is GNU 11.4.0
+[ 21%] No update step for 'tq_prefill_npu_preprocess'
+[ 21%] No patch step for 'tq_decode_npu_preprocess'
+[ 21%] No patch step for 'tq_prefill_npu_preprocess'
+[ 21%] Performing configure step for 'tq_decode_npu_preprocess'
+-- The CXX compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+[ 22%] Performing configure step for 'tq_prefill_npu_preprocess'
+-- The CXX compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- The CXX compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Detecting CXX compiler ABI info - done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_scatter_npu_preprocess-prefix/src/tq_scatter_npu_preprocess-build
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Configuring done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    DYNAMIC_MODE
+    INCLUDE_DIR
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_precompile-prefix/src/tq_e8_reader_precompile-build
+[ 23%] Performing build step for 'tq_scatter_npu_preprocess'
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_preprocess-prefix/src/tq_e8_dequant_preprocess-build
+[ 25%] Performing build step for 'tq_e8_reader_precompile'
+[ 25%] Performing build step for 'tq_e8_dequant_preprocess'
+[ 33%] Building CXX object CMakeFiles/preprocess_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o
+[100%] Building CXX object CMakeFiles/precompile_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_fused_decode.cpp.o
+[ 33%] Building CXX object CMakeFiles/preprocess_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/parallel_component.cpp.o
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_preprocess-prefix/src/tq_scatter_nz_npu_preprocess-build
+[ 25%] Performing build step for 'tq_scatter_nz_npu_preprocess'
+[ 33%] Building CXX object CMakeFiles/preprocess_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info
+[ 33%] Built target preprocess_obj
+[ 66%] Building CXX object CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o
+[ 33%] Built target preprocess_obj
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compiler ABI info - done
+[ 66%] Building CXX object CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/parallel_component.cpp.o
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_prefill_npu_preprocess-prefix/src/tq_prefill_npu_preprocess-build
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_decode_npu_preprocess-prefix/src/tq_decode_npu_preprocess-build
+[ 25%] Performing build step for 'tq_prefill_npu_preprocess'
+[ 25%] Performing build step for 'tq_decode_npu_preprocess'
+[ 33%] Built target preprocess_obj
+[100%] Built target precompile_obj
+[ 16%] Building CXX object CMakeFiles/preprocess_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o
+[ 33%] Building CXX object CMakeFiles/preprocess_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/turboquant_fused_decode.cpp.o
+[ 66%] Building CXX object CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o
+[100%] Built target check_src_template
+[ 26%] No install step for 'tq_e8_reader_precompile'
+[ 26%] Completed 'tq_e8_reader_precompile'
+[ 26%] Built target tq_e8_reader_precompile
+[ 33%] Building CXX object CMakeFiles/preprocess_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o
+[ 33%] Built target preprocess_obj
+[ 66%] Building CXX object CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/turboquant_fused_decode.cpp.o
+[ 26%] Creating directories for 'tq_prefill_nz_npu_preprocess'
+[ 27%] No download step for 'tq_prefill_nz_npu_preprocess'
+[ 28%] No update step for 'tq_prefill_nz_npu_preprocess'
+[ 28%] No patch step for 'tq_prefill_nz_npu_preprocess'
+[ 28%] Performing configure step for 'tq_prefill_nz_npu_preprocess'
+[ 33%] Built target preprocess_obj
+[ 50%] Building CXX object CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_preprocess-prefix/src/tq_prefill_nz_npu_preprocess-build
+[ 28%] Performing build step for 'tq_prefill_nz_npu_preprocess'
+[ 16%] Building CXX object CMakeFiles/preprocess_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o
+[ 33%] Building CXX object CMakeFiles/preprocess_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o
+[ 33%] Built target preprocess_obj
+[ 50%] Building CXX object CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o
+[ 66%] Built target aiv_obj
+[100%] Building CXX object CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/parallel_component.cpp.o
+[ 66%] Built target aiv_obj
+[100%] Building CXX object CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o
+[ 66%] Built target aiv_obj
+[100%] Building CXX object CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o
+[100%] Built target aic_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_preprocess-prefix/src/tq_e8_dequant_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/parallel_component.cpp.o -o /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_preprocess-prefix/src/tq_e8_dequant_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/parallel_component.cpp.o[100%] Built target merge_aiv_obj_text
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_preprocess-prefix/src/tq_e8_dequant_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/parallel_component.cpp.o -o /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_preprocess-prefix/src/tq_e8_dequant_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/parallel_component.cpp.o[100%] Built target merge_aic_obj_text
+[100%] Built target _host_cpp
+[ 28%] No install step for 'tq_e8_dequant_preprocess'
+[ 28%] Completed 'tq_e8_dequant_preprocess'
+[ 28%] Built target tq_e8_dequant_preprocess
+[ 66%] Building CXX object CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o
+[100%] Built target aic_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tq_scatter_npu_preprocess-prefix/src/tq_scatter_npu_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o -o /home/dmin/tq-production-npu-921/tq_scatter_npu_preprocess-prefix/src/tq_scatter_npu_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o[100%] Built target merge_aiv_obj_text
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tq_scatter_npu_preprocess-prefix/src/tq_scatter_npu_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o -o /home/dmin/tq-production-npu-921/tq_scatter_npu_preprocess-prefix/src/tq_scatter_npu_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o[100%] Built target merge_aic_obj_text
+[100%] Built target aic_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_preprocess-prefix/src/tq_scatter_nz_npu_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o -o /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_preprocess-prefix/src/tq_scatter_nz_npu_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o[100%] Built target merge_aiv_obj_text
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_preprocess-prefix/src/tq_scatter_nz_npu_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o -o /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_preprocess-prefix/src/tq_scatter_nz_npu_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o[100%] Built target merge_aic_obj_text
+[100%] Built target _host_cpp
+[ 28%] No install step for 'tq_scatter_npu_preprocess'
+[ 28%] Completed 'tq_scatter_npu_preprocess'
+[ 28%] Built target tq_scatter_npu_preprocess
+[100%] Built target _host_cpp
+[ 28%] Creating directories for 'tq_e8_reader_preprocess'
+[ 28%] No install step for 'tq_scatter_nz_npu_preprocess'
+[ 28%] Completed 'tq_scatter_nz_npu_preprocess'
+[ 28%] Built target tq_scatter_nz_npu_preprocess
+[ 28%] No download step for 'tq_e8_reader_preprocess'
+[ 66%] Building CXX object CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o
+[ 29%] No update step for 'tq_e8_reader_preprocess'
+[ 29%] No patch step for 'tq_e8_reader_preprocess'
+[ 29%] Performing configure step for 'tq_e8_reader_preprocess'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_preprocess-prefix/src/tq_e8_reader_preprocess-build
+[ 29%] Performing build step for 'tq_e8_reader_preprocess'
+[ 33%] Building CXX object CMakeFiles/preprocess_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_fused_decode.cpp.o
+[ 33%] Built target preprocess_obj
+[ 66%] Building CXX object CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_fused_decode.cpp.o
+[ 66%] Built target aiv_obj
+[100%] Building CXX object CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_fused_decode.cpp.o
+[100%] Building CXX object CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/turboquant_fused_decode.cpp.o
+[100%] Built target aic_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_preprocess-prefix/src/tq_e8_reader_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_fused_decode.cpp.o -o /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_preprocess-prefix/src/tq_e8_reader_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_fused_decode.cpp.o[100%] Built target merge_aiv_obj_text
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_preprocess-prefix/src/tq_e8_reader_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_fused_decode.cpp.o -o /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_preprocess-prefix/src/tq_e8_reader_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_fused_decode.cpp.o[100%] Built target merge_aic_obj_text
+[100%] Built target _host_cpp
+[ 30%] No install step for 'tq_e8_reader_preprocess'
+[ 31%] Completed 'tq_e8_reader_preprocess'
+[ 31%] Built target tq_e8_reader_preprocess
+[ 83%] Building CXX object CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o
+[ 66%] Built target aiv_obj
+[ 83%] Building CXX object CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o
+[100%] Building CXX object CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o
+[100%] Built target aic_obj
+[100%] Building CXX object CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o
+[100%] Built target aiv_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tq_decode_npu_preprocess-prefix/src/tq_decode_npu_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/turboquant_fused_decode.cpp.o -o /home/dmin/tq-production-npu-921/tq_decode_npu_preprocess-prefix/src/tq_decode_npu_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/turboquant_fused_decode.cpp.o[100%] Built target merge_aic_obj_text
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_preprocess-prefix/src/tq_prefill_nz_npu_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o -o /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_preprocess-prefix/src/tq_prefill_nz_npu_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_preprocess-prefix/src/tq_prefill_nz_npu_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o -o /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_preprocess-prefix/src/tq_prefill_nz_npu_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o[100%] Built target merge_aiv_obj_text
+[ 31%] Creating directories for 'tq_scatter_npu_aiv_device'
+[ 31%] No download step for 'tq_scatter_npu_aiv_device'
+[ 31%] No update step for 'tq_scatter_npu_aiv_device'
+[ 31%] No patch step for 'tq_scatter_npu_aiv_device'
+[ 31%] Performing configure step for 'tq_scatter_npu_aiv_device'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_scatter_npu_aiv_device-prefix/src/tq_scatter_npu_aiv_device-build
+[ 32%] Performing tq_wrapper_warning_policy step for 'tq_scatter_npu_aiv_device'
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_scatter_npu_aiv_device-prefix/src/tq_scatter_npu_aiv_device-build
+[ 32%] Performing build step for 'tq_scatter_npu_aiv_device'
+[100%] Building CXX object CMakeFiles/device_aiv_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_scatter_npu/auto_gen_turboquant_reshape_scatter.cpp.o
+[ 33%] Creating directories for 'tq_scatter_npu_aic_device'
+[ 33%] No download step for 'tq_scatter_npu_aic_device'
+[ 33%] No update step for 'tq_scatter_npu_aic_device'
+[ 33%] No patch step for 'tq_scatter_npu_aic_device'
+[ 34%] Performing configure step for 'tq_scatter_npu_aic_device'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    BUILD_MODE
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_scatter_npu_aic_device-prefix/src/tq_scatter_npu_aic_device-build
+[ 34%] Performing tq_wrapper_warning_policy step for 'tq_scatter_npu_aic_device'
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_scatter_npu_aic_device-prefix/src/tq_scatter_npu_aic_device-build
+[ 34%] Performing build step for 'tq_scatter_npu_aic_device'
+[ 34%] No install step for 'tq_scatter_npu_aic_device'
+[ 34%] Completed 'tq_scatter_npu_aic_device'
+[ 34%] Built target tq_scatter_npu_aic_device
+[ 34%] Creating directories for 'tq_scatter_npu_host'
+[ 34%] No download step for 'tq_scatter_npu_host'
+[ 34%] No update step for 'tq_scatter_npu_host'
+[ 35%] No patch step for 'tq_scatter_npu_host'
+[ 36%] Performing configure step for 'tq_scatter_npu_host'
+-- The C compiler identification is GNU 11.4.0
+/home/dmin/tq-production-npu-921/auto_gen/tq_scatter_npu/auto_gen_turboquant_reshape_scatter.cpp:22:584: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) bfloat16_t* key, __attribute__((cce_global)) bfloat16_t* value, __attribute__((cce_global)) std::int8_t* keyCache, __attribute__((cce_global)) std::int8_t* valueCache, __attribute__((cce_global)) float* scaleCache, __attribute__((cce_global)) std::int32_t* slotMapping, __attribute__((cce_global)) float* piSigns, __attribute__((cce_global)) std::int32_t* cuSeqlens, uint32_t numRequests, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t numBlocks, uint32_t itemBegin, uint32_t itemCount, float invSqrtLen, uint32_t quantMode, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
+1 warning generated.
+[100%] Built target device_aiv_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld  -m aicorelinux -r  -Ttext=0 /home/dmin/tq-production-npu-921/tq_scatter_npu_aiv_device-prefix/src/tq_scatter_npu_aiv_device-build/CMakeFiles/device_aiv_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_scatter_npu/auto_gen_turboquant_reshape_scatter.cpp.o -static -o /home/dmin/tq-production-npu-921/tq_scatter_npu_aiv_device_dir/device_aiv.o
+[100%] Built target merge_aiv_device_obj
+[ 38%] No install step for 'tq_scatter_npu_aiv_device'
+[ 39%] Completed 'tq_scatter_npu_aiv_device'
+[ 39%] Built target tq_scatter_npu_aiv_device
+[ 40%] Creating directories for 'tq_scatter_nz_npu_aiv_device'
+[ 40%] No download step for 'tq_scatter_nz_npu_aiv_device'
+[ 40%] No update step for 'tq_scatter_nz_npu_aiv_device'
+[ 40%] No patch step for 'tq_scatter_nz_npu_aiv_device'
+[ 41%] Performing configure step for 'tq_scatter_nz_npu_aiv_device'
+-- The CXX compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    ASCEND_PYTHON_EXECUTABLE
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_scatter_npu_host-prefix/src/tq_scatter_npu_host-build
+[ 41%] Performing build step for 'tq_scatter_npu_host'
+[100%] Building CXX object CMakeFiles/host_bisheng_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_aiv_device-prefix/src/tq_scatter_nz_npu_aiv_device-build
+[ 41%] Performing tq_wrapper_warning_policy step for 'tq_scatter_nz_npu_aiv_device'
+[100%] Built target host_bisheng_obj
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_aiv_device-prefix/src/tq_scatter_nz_npu_aiv_device-build
+[ 41%] Performing install step for 'tq_scatter_npu_host'
+[ 41%] Performing build step for 'tq_scatter_nz_npu_aiv_device'
+Consolidate compiler generated dependencies of target host_bisheng_obj
+[100%] Built target host_bisheng_obj
+[100%] Building CXX object CMakeFiles/device_aiv_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_scatter_nz_npu/auto_gen_turboquant_reshape_scatter.cpp.o
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/dmin/tq-production-npu-921/tq_scatter_npu_host_dir/./objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o
+[ 41%] Completed 'tq_scatter_npu_host'
+[ 41%] Built target tq_scatter_npu_host
+[ 41%] Creating directories for 'tq_scatter_nz_npu_aic_device'
+[ 42%] No download step for 'tq_scatter_nz_npu_aic_device'
+[ 42%] No update step for 'tq_scatter_nz_npu_aic_device'
+[ 42%] No patch step for 'tq_scatter_nz_npu_aic_device'
+[ 42%] Performing configure step for 'tq_scatter_nz_npu_aic_device'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    BUILD_MODE
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_aic_device-prefix/src/tq_scatter_nz_npu_aic_device-build
+[ 43%] Performing tq_wrapper_warning_policy step for 'tq_scatter_nz_npu_aic_device'
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_aic_device-prefix/src/tq_scatter_nz_npu_aic_device-build
+[ 43%] Performing build step for 'tq_scatter_nz_npu_aic_device'
+[ 43%] No install step for 'tq_scatter_nz_npu_aic_device'
+[ 44%] Completed 'tq_scatter_nz_npu_aic_device'
+[ 44%] Built target tq_scatter_nz_npu_aic_device
+[ 44%] Creating directories for 'tq_scatter_nz_npu_host'
+[ 44%] No download step for 'tq_scatter_nz_npu_host'
+[ 45%] No update step for 'tq_scatter_nz_npu_host'
+[ 45%] No patch step for 'tq_scatter_nz_npu_host'
+[ 45%] Performing configure step for 'tq_scatter_nz_npu_host'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    ASCEND_PYTHON_EXECUTABLE
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_host-prefix/src/tq_scatter_nz_npu_host-build
+[ 45%] Performing build step for 'tq_scatter_nz_npu_host'
+[100%] Building CXX object CMakeFiles/host_bisheng_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o
+/home/dmin/tq-production-npu-921/auto_gen/tq_scatter_nz_npu/auto_gen_turboquant_reshape_scatter.cpp:22:584: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) bfloat16_t* key, __attribute__((cce_global)) bfloat16_t* value, __attribute__((cce_global)) std::int8_t* keyCache, __attribute__((cce_global)) std::int8_t* valueCache, __attribute__((cce_global)) float* scaleCache, __attribute__((cce_global)) std::int32_t* slotMapping, __attribute__((cce_global)) float* piSigns, __attribute__((cce_global)) std::int32_t* cuSeqlens, uint32_t numRequests, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t numBlocks, uint32_t itemBegin, uint32_t itemCount, float invSqrtLen, uint32_t quantMode, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
+1 warning generated.
+[100%] Built target device_aiv_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld  -m aicorelinux -r  -Ttext=0 /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_aiv_device-prefix/src/tq_scatter_nz_npu_aiv_device-build/CMakeFiles/device_aiv_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_scatter_nz_npu/auto_gen_turboquant_reshape_scatter.cpp.o -static -o /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_aiv_device_dir/device_aiv.o
+[100%] Built target host_bisheng_obj
+[100%] Built target merge_aiv_device_obj
+[ 46%] Performing install step for 'tq_scatter_nz_npu_host'
+[ 46%] No install step for 'tq_scatter_nz_npu_aiv_device'
+[ 46%] Completed 'tq_scatter_nz_npu_aiv_device'
+Consolidate compiler generated dependencies of target host_bisheng_obj
+[100%] Built target host_bisheng_obj
+[ 46%] Built target tq_scatter_nz_npu_aiv_device
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_host_dir/./objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o
+[ 46%] Creating directories for 'tq_e8_dequant_aiv_device'
+[ 47%] Completed 'tq_scatter_nz_npu_host'
+[ 47%] Built target tq_scatter_nz_npu_host
+[ 47%] Creating directories for 'tq_e8_dequant_aic_device'
+[ 47%] No download step for 'tq_e8_dequant_aiv_device'
+[ 48%] No update step for 'tq_e8_dequant_aiv_device'
+[ 48%] No patch step for 'tq_e8_dequant_aiv_device'
+[ 48%] No download step for 'tq_e8_dequant_aic_device'
+[ 48%] Performing configure step for 'tq_e8_dequant_aiv_device'
+[ 48%] No update step for 'tq_e8_dequant_aic_device'
+[ 50%] No patch step for 'tq_e8_dequant_aic_device'
+[ 51%] Performing configure step for 'tq_e8_dequant_aic_device'
+-- The C compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_aiv_device-prefix/src/tq_e8_dequant_aiv_device-build
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+[ 51%] Performing tq_wrapper_warning_policy step for 'tq_e8_dequant_aiv_device'
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    BUILD_MODE
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_aic_device-prefix/src/tq_e8_dequant_aic_device-build
+-- Configuring done
+[ 51%] Performing tq_wrapper_warning_policy step for 'tq_e8_dequant_aic_device'
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_aiv_device-prefix/src/tq_e8_dequant_aiv_device-build
+[ 52%] Performing build step for 'tq_e8_dequant_aiv_device'
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_aic_device-prefix/src/tq_e8_dequant_aic_device-build
+[ 52%] Performing build step for 'tq_e8_dequant_aic_device'
+[100%] Building CXX object CMakeFiles/device_aiv_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_e8_dequant/auto_gen_parallel_component.cpp.o
+[ 52%] No install step for 'tq_e8_dequant_aic_device'
+[ 52%] Completed 'tq_e8_dequant_aic_device'
+[ 52%] Built target tq_e8_dequant_aic_device
+[ 52%] Creating directories for 'tq_e8_dequant_host'
+[ 53%] No download step for 'tq_e8_dequant_host'
+[ 53%] No update step for 'tq_e8_dequant_host'
+[ 54%] No patch step for 'tq_e8_dequant_host'
+[ 54%] Performing configure step for 'tq_e8_dequant_host'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    ASCEND_PYTHON_EXECUTABLE
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_host-prefix/src/tq_e8_dequant_host-build
+[ 54%] Performing build step for 'tq_e8_dequant_host'
+[100%] Building CXX object CMakeFiles/host_bisheng_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/parallel_component.cpp.o
+[100%] Built target host_bisheng_obj
+[ 54%] Performing install step for 'tq_e8_dequant_host'
+Consolidate compiler generated dependencies of target host_bisheng_obj
+[100%] Built target host_bisheng_obj
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_host_dir/./objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/parallel_component.cpp.o
+[ 54%] Completed 'tq_e8_dequant_host'
+[ 54%] Built target tq_e8_dequant_host
+[ 54%] Creating directories for 'tq_e8_reader_aiv_device'
+[ 54%] No download step for 'tq_e8_reader_aiv_device'
+[ 54%] No update step for 'tq_e8_reader_aiv_device'
+[ 55%] No patch step for 'tq_e8_reader_aiv_device'
+[ 56%] Performing configure step for 'tq_e8_reader_aiv_device'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+/home/dmin/tq-production-npu-921/auto_gen/tq_e8_dequant/auto_gen_parallel_component.cpp:22:184: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) uint16_t* labels, __attribute__((cce_global)) float* scales, __attribute__((cce_global)) uint16_t* bf16, __attribute__((cce_global)) int8_t* int8, GM_ADDR overflow_status) {
+                                                                                                                                                                                       ^
+1 warning generated.
+[100%] Built target device_aiv_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld  -m aicorelinux -r  -Ttext=0 /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_aiv_device-prefix/src/tq_e8_dequant_aiv_device-build/CMakeFiles/device_aiv_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_e8_dequant/auto_gen_parallel_component.cpp.o -static -o /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_aiv_device_dir/device_aiv.o
+[100%] Built target merge_aiv_device_obj
+[ 57%] No install step for 'tq_e8_dequant_aiv_device'
+[ 57%] Completed 'tq_e8_dequant_aiv_device'
+-- Detecting CXX compiler ABI info - done
+[ 57%] Built target tq_e8_dequant_aiv_device
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_aiv_device-prefix/src/tq_e8_reader_aiv_device-build
+[ 57%] Creating directories for 'tq_e8_reader_aic_device'
+[ 57%] Performing tq_wrapper_warning_policy step for 'tq_e8_reader_aiv_device'
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_aiv_device-prefix/src/tq_e8_reader_aiv_device-build
+[ 57%] Performing build step for 'tq_e8_reader_aiv_device'
+[ 57%] No download step for 'tq_e8_reader_aic_device'
+[100%] Building CXX object CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_e8_reader/auto_gen_e8_fused_decode.cpp.o
+[ 58%] No update step for 'tq_e8_reader_aic_device'
+[ 58%] No patch step for 'tq_e8_reader_aic_device'
+[ 58%] Performing configure step for 'tq_e8_reader_aic_device'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_aic_device-prefix/src/tq_e8_reader_aic_device-build
+[ 58%] Performing tq_wrapper_warning_policy step for 'tq_e8_reader_aic_device'
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_aic_device-prefix/src/tq_e8_reader_aic_device-build
+[ 58%] Performing build step for 'tq_e8_reader_aic_device'
+[ 58%] Creating directories for 'tq_e8_reader_host'
+[100%] Building CXX object CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_e8_reader/auto_gen_e8_fused_decode.cpp.o
+[ 58%] No download step for 'tq_e8_reader_host'
+[ 58%] No update step for 'tq_e8_reader_host'
+[ 58%] No patch step for 'tq_e8_reader_host'
+[ 58%] Performing configure step for 'tq_e8_reader_host'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    ASCEND_PYTHON_EXECUTABLE
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_host-prefix/src/tq_e8_reader_host-build
+[ 59%] Performing build step for 'tq_e8_reader_host'
+[100%] Building CXX object CMakeFiles/host_bisheng_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_fused_decode.cpp.o
+[100%] Built target host_bisheng_obj
+[ 60%] Performing install step for 'tq_e8_reader_host'
+[100%] Built target aic_obj
+Consolidate compiler generated dependencies of target host_bisheng_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_preprocess-prefix/src/tq_prefill_nz_npu_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o -o /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_preprocess-prefix/src/tq_prefill_nz_npu_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o[100%] Built target host_bisheng_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_preprocess-prefix/src/tq_prefill_nz_npu_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o -o /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_preprocess-prefix/src/tq_prefill_nz_npu_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.oInstall the project...
+[100%] Built target merge_aic_obj_text
+-- Install configuration: "Release"
+-- Installing: /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_host_dir/./objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_fused_decode.cpp.o
+[ 60%] Completed 'tq_e8_reader_host'
+[ 60%] Built target tq_e8_reader_host
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -x -m aicorelinux   -Ttext=0 /home/dmin/tq-production-npu-921/tq_scatter_npu_aiv_device_dir/device_aiv.o -static -o /home/dmin/tq-production-npu-921/tq_scatter_npu_merge_obj_dir/device_aiv.o
+[ 60%] Built target tq_scatter_npu_merge_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -x -m aicorelinux   -Ttext=0 /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_aiv_device_dir/device_aiv.o -static -o /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_merge_obj_dir/device_aiv.o
+[ 60%] Built target tq_scatter_nz_npu_merge_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -x -m aicorelinux   -Ttext=0 /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_aiv_device_dir/device_aiv.o -static -o /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_merge_obj_dir/device_aiv.o
+[ 60%] Built target tq_e8_dequant_merge_obj
+[ 60%] Building CXX object CMakeFiles/tq_scatter_npu_host_stub_obj.dir/auto_gen/tq_scatter_npu/host_stub.cpp.o
+[ 60%] Built target tq_scatter_npu_host_stub_obj
+[ 60%] Building CXX object CMakeFiles/tq_scatter_nz_npu_host_stub_obj.dir/auto_gen/tq_scatter_nz_npu/host_stub.cpp.o
+[ 60%] Built target tq_scatter_nz_npu_host_stub_obj
+[ 60%] Building CXX object tests/cpu/e8/CMakeFiles/tq_e8_dequant_host_stub_obj.dir/__/__/__/auto_gen/tq_e8_dequant/host_stub.cpp.o
+[ 60%] Built target tq_e8_dequant_host_stub_obj
+[ 60%] Linking CXX shared library lib/libtq_scatter_npu.so
+/home/dmin/Ascend-9.2.1/cann-9.2.1/bin/ascendc_pack_kernel /home/dmin/tq-production-npu-921/CMakeFiles/tq_scatter_npu_host_stub_obj.dir/auto_gen/tq_scatter_npu/host_stub.cpp.o /home/dmin/tq-production-npu-921/tq_scatter_npu_merge_obj_dir/device_aiv.o 1 /home/dmin/tq-production-npu-921/CMakeFiles/tq_scatter_npu_host_stub_obj.dir/auto_gen/tq_scatter_npu/host_stub.cpp.o
+[100%] Built target _host_cpp
+[ 60%] No install step for 'tq_prefill_nz_npu_preprocess'
+[ 61%] Completed 'tq_prefill_nz_npu_preprocess'
+recompile: /usr/bin/c++ -fPIC -O3 -DNDEBUG -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -s -shared -Wl,-soname,libtq_scatter_npu.so -o lib/libtq_scatter_npu.so CMakeFiles/tq_scatter_npu_host_stub_obj.dir/auto_gen/tq_scatter_npu/host_stub.cpp.o /home/dmin/tq-production-npu-921/tq_scatter_npu_host_dir/objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o    -L/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64  -L/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib  -Wl,-rpath,"\$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib:" /home/dmin/Ascend-9.2.1/cann-9.2.1/lib64/libascendc_runtime.a -lascend_dump -lc_sec
+[ 61%] Built target tq_prefill_nz_npu_preprocess
+[ 61%] Linking CXX shared library lib/libtq_scatter_nz_npu.so
+/home/dmin/Ascend-9.2.1/cann-9.2.1/bin/ascendc_pack_kernel /home/dmin/tq-production-npu-921/CMakeFiles/tq_scatter_nz_npu_host_stub_obj.dir/auto_gen/tq_scatter_nz_npu/host_stub.cpp.o /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_merge_obj_dir/device_aiv.o 1 /home/dmin/tq-production-npu-921/CMakeFiles/tq_scatter_nz_npu_host_stub_obj.dir/auto_gen/tq_scatter_nz_npu/host_stub.cpp.o
+[ 61%] Built target tq_scatter_npu
+[ 63%] Linking CXX shared library ../../../lib/libtq_e8_dequant.so
+/home/dmin/Ascend-9.2.1/cann-9.2.1/bin/ascendc_pack_kernel /home/dmin/tq-production-npu-921/tests/cpu/e8/CMakeFiles/tq_e8_dequant_host_stub_obj.dir/__/__/__/auto_gen/tq_e8_dequant/host_stub.cpp.o /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_merge_obj_dir/device_aiv.o 1 /home/dmin/tq-production-npu-921/tests/cpu/e8/CMakeFiles/tq_e8_dequant_host_stub_obj.dir/__/__/__/auto_gen/tq_e8_dequant/host_stub.cpp.o
+recompile: /usr/bin/c++ -fPIC -O3 -DNDEBUG -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -s -shared -Wl,-soname,libtq_scatter_nz_npu.so -o lib/libtq_scatter_nz_npu.so CMakeFiles/tq_scatter_nz_npu_host_stub_obj.dir/auto_gen/tq_scatter_nz_npu/host_stub.cpp.o /home/dmin/tq-production-npu-921/tq_scatter_nz_npu_host_dir/objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_scatter.cpp.o    -L/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64  -L/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib  -Wl,-rpath,"\$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib:" /home/dmin/Ascend-9.2.1/cann-9.2.1/lib64/libascendc_runtime.a -lascend_dump -lc_sec
+[ 63%] Built target tq_scatter_nz_npu
+recompile: /usr/bin/c++ -fPIC -O3 -DNDEBUG -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -s -shared -Wl,-soname,libtq_e8_dequant.so -o ../../../lib/libtq_e8_dequant.so CMakeFiles/tq_e8_dequant_host_stub_obj.dir/__/__/__/auto_gen/tq_e8_dequant/host_stub.cpp.o /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_dequant_host_dir/objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/parallel_component.cpp.o    -L/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64  -L/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib  -Wl,-rpath,"\$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib:" /home/dmin/Ascend-9.2.1/cann-9.2.1/lib64/libascendc_runtime.a -lascend_dump -lc_sec
+[ 64%] Building CXX object CMakeFiles/test_golden_scatter_npu.dir/tests/npu/test_golden_dump.cpp.o
+[ 64%] Built target tq_e8_dequant
+[ 64%] Creating directories for 'tq_prefill_nz_npu_aiv_device'
+[ 64%] No download step for 'tq_prefill_nz_npu_aiv_device'
+[ 64%] No update step for 'tq_prefill_nz_npu_aiv_device'
+[ 65%] No patch step for 'tq_prefill_nz_npu_aiv_device'
+[ 66%] Performing configure step for 'tq_prefill_nz_npu_aiv_device'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_aiv_device-prefix/src/tq_prefill_nz_npu_aiv_device-build
+[ 66%] Performing tq_wrapper_warning_policy step for 'tq_prefill_nz_npu_aiv_device'
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_aiv_device-prefix/src/tq_prefill_nz_npu_aiv_device-build
+[ 66%] Performing build step for 'tq_prefill_nz_npu_aiv_device'
+[ 50%] Building CXX object CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_nz_npu/auto_gen_turboquant_reshape_batch.cpp.o
+[ 66%] Linking CXX executable tests/test_golden_scatter_npu
+[ 66%] Built target test_golden_scatter_npu
+[ 66%] Creating directories for 'tq_prefill_nz_npu_aic_device'
+[ 66%] No download step for 'tq_prefill_nz_npu_aic_device'
+[ 66%] No update step for 'tq_prefill_nz_npu_aic_device'
+[ 66%] No patch step for 'tq_prefill_nz_npu_aic_device'
+[ 66%] Performing configure step for 'tq_prefill_nz_npu_aic_device'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_aic_device-prefix/src/tq_prefill_nz_npu_aic_device-build
+/home/dmin/tq-production-npu-921/auto_gen/tq_e8_reader/auto_gen_e8_fused_decode.cpp:22:459: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) uint8_t* gm_keys, __attribute__((cce_global)) uint8_t* gm_values, __attribute__((cce_global)) uint8_t* gm_offsets, __attribute__((cce_global)) uint8_t* gm_query, __attribute__((cce_global)) uint8_t* gm_output, __attribute__((cce_global)) uint8_t* gm_key_witness, __attribute__((cce_global)) uint8_t* gm_value_witness, __attribute__((cce_global)) uint8_t* gm_score_witness, uint32_t tiles, uint32_t last_rows, float scale, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^
+1 warning generated.
+[ 67%] Performing tq_wrapper_warning_policy step for 'tq_prefill_nz_npu_aic_device'
+[100%] Built target device_obj
+-- Configuring done
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld  -m aicorelinux -r  -Ttext=0 /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_aiv_device-prefix/src/tq_e8_reader_aiv_device-build/CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_e8_reader/auto_gen_e8_fused_decode.cpp.o -static -o /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_aiv_device_dir/device.o
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_aic_device-prefix/src/tq_prefill_nz_npu_aic_device-build
+[ 67%] Performing build step for 'tq_prefill_nz_npu_aic_device'
+[100%] Built target merge_device_obj
+/home/dmin/tq-production-npu-921/auto_gen/tq_e8_reader/auto_gen_e8_fused_decode.cpp:22:459: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) uint8_t* gm_keys, __attribute__((cce_global)) uint8_t* gm_values, __attribute__((cce_global)) uint8_t* gm_offsets, __attribute__((cce_global)) uint8_t* gm_query, __attribute__((cce_global)) uint8_t* gm_output, __attribute__((cce_global)) uint8_t* gm_key_witness, __attribute__((cce_global)) uint8_t* gm_value_witness, __attribute__((cce_global)) uint8_t* gm_score_witness, uint32_t tiles, uint32_t last_rows, float scale, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^
+1 warning generated.
+[ 67%] No install step for 'tq_e8_reader_aiv_device'
+[100%] Built target device_obj
+[ 50%] Building CXX object CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_nz_npu/auto_gen_turboquant_reshape_batch.cpp.o
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld  -m aicorelinux -r  -Ttext=0 /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_aic_device-prefix/src/tq_e8_reader_aic_device-build/CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_e8_reader/auto_gen_e8_fused_decode.cpp.o -static -o /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_aic_device_dir/device.o
+[ 67%] Completed 'tq_e8_reader_aiv_device'
+[100%] Built target merge_device_obj
+[ 68%] No install step for 'tq_e8_reader_aic_device'
+[ 68%] Built target tq_e8_reader_aiv_device
+[100%] Building CXX object CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_nz_npu/auto_gen_turboquant_reshape_batch_wide.cpp.o
+[ 69%] Completed 'tq_e8_reader_aic_device'
+[ 69%] Built target tq_e8_reader_aic_device
+[ 69%] Creating directories for 'tq_prefill_nz_npu_host'
+[ 69%] No download step for 'tq_prefill_nz_npu_host'
+[ 69%] No update step for 'tq_prefill_nz_npu_host'
+[ 69%] No patch step for 'tq_prefill_nz_npu_host'
+[ 69%] Performing configure step for 'tq_prefill_nz_npu_host'
+-- The C compiler identification is GNU 11.4.0
+[100%] Built target aic_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tq_prefill_npu_preprocess-prefix/src/tq_prefill_npu_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o -o /home/dmin/tq-production-npu-921/tq_prefill_npu_preprocess-prefix/src/tq_prefill_npu_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tq_prefill_npu_preprocess-prefix/src/tq_prefill_npu_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o -o /home/dmin/tq-production-npu-921/tq_prefill_npu_preprocess-prefix/src/tq_prefill_npu_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o[100%] Built target merge_aiv_obj_text
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tq_prefill_npu_preprocess-prefix/src/tq_prefill_npu_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o -o /home/dmin/tq-production-npu-921/tq_prefill_npu_preprocess-prefix/src/tq_prefill_npu_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tq_prefill_npu_preprocess-prefix/src/tq_prefill_npu_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o -o /home/dmin/tq-production-npu-921/tq_prefill_npu_preprocess-prefix/src/tq_prefill_npu_preprocess-build/CMakeFiles/aic_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o[100%] Built target merge_aic_obj_text
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    ASCEND_PYTHON_EXECUTABLE
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_host-prefix/src/tq_prefill_nz_npu_host-build
+[ 69%] Performing build step for 'tq_prefill_nz_npu_host'
+[100%] Built target _host_cpp
+[ 69%] No install step for 'tq_prefill_npu_preprocess'
+[ 50%] Building CXX object CMakeFiles/host_bisheng_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o
+[ 69%] Completed 'tq_prefill_npu_preprocess'
+[ 69%] Built target tq_prefill_npu_preprocess
+[100%] Building CXX object CMakeFiles/host_bisheng_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o
+[ 69%] Building CXX object CMakeFiles/test_live_write_nz_npu.dir/tests/npu/test_live_write.cpp.o
+[100%] Built target host_bisheng_obj
+[ 70%] Performing install step for 'tq_prefill_nz_npu_host'
+Consolidate compiler generated dependencies of target host_bisheng_obj
+[100%] Built target host_bisheng_obj
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_host_dir/./objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o
+-- Installing: /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_host_dir/./objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o
+[ 71%] Completed 'tq_prefill_nz_npu_host'
+[ 71%] Built target tq_prefill_nz_npu_host
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -x -m aicorelinux   -Ttext=0 /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_aic_device_dir/device.o /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_aiv_device_dir/device.o -static -o /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_merge_obj_dir/device.o
+[ 71%] Built target tq_e8_reader_merge_obj
+[100%] Building CXX object CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_nz_npu/auto_gen_turboquant_reshape_batch_wide.cpp.o
+[ 72%] Linking CXX executable tests/test_live_write_nz_npu
+[ 72%] Built target test_live_write_nz_npu
+[ 72%] Creating directories for 'tq_prefill_npu_aiv_device'
+[ 72%] No download step for 'tq_prefill_npu_aiv_device'
+[ 73%] No update step for 'tq_prefill_npu_aiv_device'
+[ 73%] No patch step for 'tq_prefill_npu_aiv_device'
+[ 73%] Performing configure step for 'tq_prefill_npu_aiv_device'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_prefill_npu_aiv_device-prefix/src/tq_prefill_npu_aiv_device-build
+[ 73%] Performing tq_wrapper_warning_policy step for 'tq_prefill_npu_aiv_device'
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_prefill_npu_aiv_device-prefix/src/tq_prefill_npu_aiv_device-build
+[ 73%] Performing build step for 'tq_prefill_npu_aiv_device'
+[ 50%] Building CXX object CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_npu/auto_gen_turboquant_reshape_batch.cpp.o
+/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_npu/auto_gen_turboquant_reshape_batch.cpp:22:563: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) bfloat16_t* key, __attribute__((cce_global)) bfloat16_t* value, __attribute__((cce_global)) std::int8_t* keyCache, __attribute__((cce_global)) std::int8_t* valueCache, __attribute__((cce_global)) float* scaleCache, __attribute__((cce_global)) std::int32_t* slotMapping, __attribute__((cce_global)) float* piSigns, __attribute__((cce_global)) std::int32_t* tables, uint32_t numTokens, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t numBlocks, uint32_t tokensPerCore, float invSqrtLen, uint32_t quantMode, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^
+1 warning generated.
+[100%] Building CXX object CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_npu/auto_gen_turboquant_reshape_batch_wide.cpp.o
+/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_nz_npu/auto_gen_turboquant_reshape_batch.cpp:22:563: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) bfloat16_t* key, __attribute__((cce_global)) bfloat16_t* value, __attribute__((cce_global)) std::int8_t* keyCache, __attribute__((cce_global)) std::int8_t* valueCache, __attribute__((cce_global)) float* scaleCache, __attribute__((cce_global)) std::int32_t* slotMapping, __attribute__((cce_global)) float* piSigns, __attribute__((cce_global)) std::int32_t* tables, uint32_t numTokens, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t numBlocks, uint32_t tokensPerCore, float invSqrtLen, uint32_t quantMode, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^
+1 warning generated.
+[ 73%] Creating directories for 'tq_prefill_npu_aic_device'
+[ 73%] No download step for 'tq_prefill_npu_aic_device'
+[ 73%] No update step for 'tq_prefill_npu_aic_device'
+[ 75%] No patch step for 'tq_prefill_npu_aic_device'
+[ 76%] Performing configure step for 'tq_prefill_npu_aic_device'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_prefill_npu_aic_device-prefix/src/tq_prefill_npu_aic_device-build
+[ 76%] Performing tq_wrapper_warning_policy step for 'tq_prefill_npu_aic_device'
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_prefill_npu_aic_device-prefix/src/tq_prefill_npu_aic_device-build
+[ 76%] Performing build step for 'tq_prefill_npu_aic_device'
+[ 50%] Building CXX object CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_npu/auto_gen_turboquant_reshape_batch.cpp.o
+/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_nz_npu/auto_gen_turboquant_reshape_batch_wide.cpp:22:563: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) bfloat16_t* key, __attribute__((cce_global)) bfloat16_t* value, __attribute__((cce_global)) std::int8_t* keyCache, __attribute__((cce_global)) std::int8_t* valueCache, __attribute__((cce_global)) float* scaleCache, __attribute__((cce_global)) std::int32_t* slotMapping, __attribute__((cce_global)) float* piSigns, __attribute__((cce_global)) std::int32_t* tables, uint32_t numTokens, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t numBlocks, uint32_t tokensPerCore, float invSqrtLen, uint32_t quantMode, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^
+1 warning generated.
+[100%] Built target device_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld  -m aicorelinux -r  -Ttext=0 /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_aiv_device-prefix/src/tq_prefill_nz_npu_aiv_device-build/CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_nz_npu/auto_gen_turboquant_reshape_batch.cpp.o /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_aiv_device-prefix/src/tq_prefill_nz_npu_aiv_device-build/CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_nz_npu/auto_gen_turboquant_reshape_batch_wide.cpp.o -static -o /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_aiv_device_dir/device.o
+[100%] Built target merge_device_obj
+[ 76%] No install step for 'tq_prefill_nz_npu_aiv_device'
+[ 76%] Completed 'tq_prefill_nz_npu_aiv_device'
+[ 76%] Built target tq_prefill_nz_npu_aiv_device
+[ 76%] Creating directories for 'tq_prefill_npu_host'
+[ 76%] No download step for 'tq_prefill_npu_host'
+[ 76%] No update step for 'tq_prefill_npu_host'
+[ 77%] No patch step for 'tq_prefill_npu_host'
+[ 78%] Performing configure step for 'tq_prefill_npu_host'
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    ASCEND_PYTHON_EXECUTABLE
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_prefill_npu_host-prefix/src/tq_prefill_npu_host-build
+[ 78%] Performing build step for 'tq_prefill_npu_host'
+[ 50%] Building CXX object CMakeFiles/host_bisheng_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o
+[100%] Building CXX object CMakeFiles/host_bisheng_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o
+[100%] Built target host_bisheng_obj
+[ 78%] Performing install step for 'tq_prefill_npu_host'
+Consolidate compiler generated dependencies of target host_bisheng_obj
+[100%] Built target host_bisheng_obj
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/dmin/tq-production-npu-921/tq_prefill_npu_host_dir/./objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o
+-- Installing: /home/dmin/tq-production-npu-921/tq_prefill_npu_host_dir/./objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o
+[ 78%] Completed 'tq_prefill_npu_host'
+[ 78%] Built target tq_prefill_npu_host
+[ 79%] Building CXX object tests/cpu/e8/CMakeFiles/tq_e8_reader_host_stub_obj.dir/__/__/__/auto_gen/tq_e8_reader/host_stub.cpp.o
+[ 79%] Built target tq_e8_reader_host_stub_obj
+[100%] Building CXX object CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_npu/auto_gen_turboquant_reshape_batch_wide.cpp.o
+/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_npu/auto_gen_turboquant_reshape_batch_wide.cpp:22:563: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) bfloat16_t* key, __attribute__((cce_global)) bfloat16_t* value, __attribute__((cce_global)) std::int8_t* keyCache, __attribute__((cce_global)) std::int8_t* valueCache, __attribute__((cce_global)) float* scaleCache, __attribute__((cce_global)) std::int32_t* slotMapping, __attribute__((cce_global)) float* piSigns, __attribute__((cce_global)) std::int32_t* tables, uint32_t numTokens, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t numBlocks, uint32_t tokensPerCore, float invSqrtLen, uint32_t quantMode, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^
+1 warning generated.
+[100%] Built target device_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld  -m aicorelinux -r  -Ttext=0 /home/dmin/tq-production-npu-921/tq_prefill_npu_aiv_device-prefix/src/tq_prefill_npu_aiv_device-build/CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_npu/auto_gen_turboquant_reshape_batch.cpp.o /home/dmin/tq-production-npu-921/tq_prefill_npu_aiv_device-prefix/src/tq_prefill_npu_aiv_device-build/CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_npu/auto_gen_turboquant_reshape_batch_wide.cpp.o -static -o /home/dmin/tq-production-npu-921/tq_prefill_npu_aiv_device_dir/device.o
+[100%] Built target merge_device_obj
+[ 80%] No install step for 'tq_prefill_npu_aiv_device'
+[ 81%] Completed 'tq_prefill_npu_aiv_device'
+[ 81%] Built target tq_prefill_npu_aiv_device
+[ 81%] Linking CXX shared library ../../../lib/libtq_e8_reader.so
+/home/dmin/Ascend-9.2.1/cann-9.2.1/bin/ascendc_pack_kernel /home/dmin/tq-production-npu-921/tests/cpu/e8/CMakeFiles/tq_e8_reader_host_stub_obj.dir/__/__/__/auto_gen/tq_e8_reader/host_stub.cpp.o /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_merge_obj_dir/device.o 0 /home/dmin/tq-production-npu-921/tests/cpu/e8/CMakeFiles/tq_e8_reader_host_stub_obj.dir/__/__/__/auto_gen/tq_e8_reader/host_stub.cpp.o
+recompile: /usr/bin/c++ -fPIC -O3 -DNDEBUG -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -s -shared -Wl,-soname,libtq_e8_reader.so -o ../../../lib/libtq_e8_reader.so CMakeFiles/tq_e8_reader_host_stub_obj.dir/__/__/__/auto_gen/tq_e8_reader/host_stub.cpp.o /home/dmin/tq-production-npu-921/tests/cpu/e8/tq_e8_reader_host_dir/objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/decode/e8/e8_fused_decode.cpp.o    -L/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64  -L/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib  -Wl,-rpath,"\$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib:" /home/dmin/Ascend-9.2.1/cann-9.2.1/lib64/libascendc_runtime.a -lascend_dump -lc_sec
+[ 81%] Built target tq_e8_reader
+/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_nz_npu/auto_gen_turboquant_reshape_batch.cpp:22:563: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) bfloat16_t* key, __attribute__((cce_global)) bfloat16_t* value, __attribute__((cce_global)) std::int8_t* keyCache, __attribute__((cce_global)) std::int8_t* valueCache, __attribute__((cce_global)) float* scaleCache, __attribute__((cce_global)) std::int32_t* slotMapping, __attribute__((cce_global)) float* piSigns, __attribute__((cce_global)) std::int32_t* tables, uint32_t numTokens, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t numBlocks, uint32_t tokensPerCore, float invSqrtLen, uint32_t quantMode, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^
+1 warning generated.
+/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_nz_npu/auto_gen_turboquant_reshape_batch_wide.cpp:22:563: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) bfloat16_t* key, __attribute__((cce_global)) bfloat16_t* value, __attribute__((cce_global)) std::int8_t* keyCache, __attribute__((cce_global)) std::int8_t* valueCache, __attribute__((cce_global)) float* scaleCache, __attribute__((cce_global)) std::int32_t* slotMapping, __attribute__((cce_global)) float* piSigns, __attribute__((cce_global)) std::int32_t* tables, uint32_t numTokens, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t numBlocks, uint32_t tokensPerCore, float invSqrtLen, uint32_t quantMode, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^
+1 warning generated.
+[100%] Built target device_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld  -m aicorelinux -r  -Ttext=0 /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_aic_device-prefix/src/tq_prefill_nz_npu_aic_device-build/CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_nz_npu/auto_gen_turboquant_reshape_batch.cpp.o /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_aic_device-prefix/src/tq_prefill_nz_npu_aic_device-build/CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_nz_npu/auto_gen_turboquant_reshape_batch_wide.cpp.o -static -o /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_aic_device_dir/device.o
+[100%] Built target merge_device_obj
+[ 82%] No install step for 'tq_prefill_nz_npu_aic_device'
+[ 83%] Completed 'tq_prefill_nz_npu_aic_device'
+[ 83%] Built target tq_prefill_nz_npu_aic_device
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -x -m aicorelinux   -Ttext=0 /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_aic_device_dir/device.o /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_aiv_device_dir/device.o -static -o /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_merge_obj_dir/device.o
+[ 83%] Built target tq_prefill_nz_npu_merge_obj
+[ 84%] Building CXX object CMakeFiles/tq_prefill_nz_npu_host_stub_obj.dir/auto_gen/tq_prefill_nz_npu/host_stub.cpp.o
+[ 84%] Built target tq_prefill_nz_npu_host_stub_obj
+[ 84%] Linking CXX shared library lib/libtq_prefill_nz_npu.so
+/home/dmin/Ascend-9.2.1/cann-9.2.1/bin/ascendc_pack_kernel /home/dmin/tq-production-npu-921/CMakeFiles/tq_prefill_nz_npu_host_stub_obj.dir/auto_gen/tq_prefill_nz_npu/host_stub.cpp.o /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_merge_obj_dir/device.o 0 /home/dmin/tq-production-npu-921/CMakeFiles/tq_prefill_nz_npu_host_stub_obj.dir/auto_gen/tq_prefill_nz_npu/host_stub.cpp.o
+recompile: /usr/bin/c++ -fPIC -O3 -DNDEBUG -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -s -shared -Wl,-soname,libtq_prefill_nz_npu.so -o lib/libtq_prefill_nz_npu.so CMakeFiles/tq_prefill_nz_npu_host_stub_obj.dir/auto_gen/tq_prefill_nz_npu/host_stub.cpp.o /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_host_dir/objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o /home/dmin/tq-production-npu-921/tq_prefill_nz_npu_host_dir/objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o    -L/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64  -L/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib  -Wl,-rpath,"\$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib:" /home/dmin/Ascend-9.2.1/cann-9.2.1/lib64/libascendc_runtime.a -lascend_dump -lc_sec
+[ 84%] Built target tq_prefill_nz_npu
+[ 85%] Building CXX object CMakeFiles/test_golden_prefill_nz_npu.dir/tests/npu/test_golden_dump.cpp.o
+[ 85%] Building CXX object CMakeFiles/test_nz_ingress_canary_npu.dir/tests/npu/test_nz_ingress_canary.cpp.o
+[ 85%] Linking CXX executable tests/test_nz_ingress_canary_npu
+[ 85%] Linking CXX executable tests/test_golden_prefill_nz_npu
+[ 85%] Built target test_nz_ingress_canary_npu
+[ 85%] Built target test_golden_prefill_nz_npu
+/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_npu/auto_gen_turboquant_reshape_batch.cpp:22:563: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) bfloat16_t* key, __attribute__((cce_global)) bfloat16_t* value, __attribute__((cce_global)) std::int8_t* keyCache, __attribute__((cce_global)) std::int8_t* valueCache, __attribute__((cce_global)) float* scaleCache, __attribute__((cce_global)) std::int32_t* slotMapping, __attribute__((cce_global)) float* piSigns, __attribute__((cce_global)) std::int32_t* tables, uint32_t numTokens, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t numBlocks, uint32_t tokensPerCore, float invSqrtLen, uint32_t quantMode, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^
+1 warning generated.
+/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_npu/auto_gen_turboquant_reshape_batch_wide.cpp:22:563: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) bfloat16_t* key, __attribute__((cce_global)) bfloat16_t* value, __attribute__((cce_global)) std::int8_t* keyCache, __attribute__((cce_global)) std::int8_t* valueCache, __attribute__((cce_global)) float* scaleCache, __attribute__((cce_global)) std::int32_t* slotMapping, __attribute__((cce_global)) float* piSigns, __attribute__((cce_global)) std::int32_t* tables, uint32_t numTokens, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t numBlocks, uint32_t tokensPerCore, float invSqrtLen, uint32_t quantMode, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^
+1 warning generated.
+[100%] Built target device_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld  -m aicorelinux -r  -Ttext=0 /home/dmin/tq-production-npu-921/tq_prefill_npu_aic_device-prefix/src/tq_prefill_npu_aic_device-build/CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_npu/auto_gen_turboquant_reshape_batch.cpp.o /home/dmin/tq-production-npu-921/tq_prefill_npu_aic_device-prefix/src/tq_prefill_npu_aic_device-build/CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_prefill_npu/auto_gen_turboquant_reshape_batch_wide.cpp.o -static -o /home/dmin/tq-production-npu-921/tq_prefill_npu_aic_device_dir/device.o
+[100%] Built target merge_device_obj
+[ 85%] No install step for 'tq_prefill_npu_aic_device'
+[ 85%] Completed 'tq_prefill_npu_aic_device'
+[ 85%] Built target tq_prefill_npu_aic_device
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -x -m aicorelinux   -Ttext=0 /home/dmin/tq-production-npu-921/tq_prefill_npu_aic_device_dir/device.o /home/dmin/tq-production-npu-921/tq_prefill_npu_aiv_device_dir/device.o -static -o /home/dmin/tq-production-npu-921/tq_prefill_npu_merge_obj_dir/device.o
+[ 85%] Built target tq_prefill_npu_merge_obj
+[ 85%] Building CXX object CMakeFiles/tq_prefill_npu_host_stub_obj.dir/auto_gen/tq_prefill_npu/host_stub.cpp.o
+[ 85%] Built target tq_prefill_npu_host_stub_obj
+[ 85%] Linking CXX shared library lib/libtq_prefill_npu.so
+/home/dmin/Ascend-9.2.1/cann-9.2.1/bin/ascendc_pack_kernel /home/dmin/tq-production-npu-921/CMakeFiles/tq_prefill_npu_host_stub_obj.dir/auto_gen/tq_prefill_npu/host_stub.cpp.o /home/dmin/tq-production-npu-921/tq_prefill_npu_merge_obj_dir/device.o 0 /home/dmin/tq-production-npu-921/CMakeFiles/tq_prefill_npu_host_stub_obj.dir/auto_gen/tq_prefill_npu/host_stub.cpp.o
+recompile: /usr/bin/c++ -fPIC -O3 -DNDEBUG -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -s -shared -Wl,-soname,libtq_prefill_npu.so -o lib/libtq_prefill_npu.so CMakeFiles/tq_prefill_npu_host_stub_obj.dir/auto_gen/tq_prefill_npu/host_stub.cpp.o /home/dmin/tq-production-npu-921/tq_prefill_npu_host_dir/objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch.cpp.o /home/dmin/tq-production-npu-921/tq_prefill_npu_host_dir/objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp.o    -L/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64  -L/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib  -Wl,-rpath,"\$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib:" /home/dmin/Ascend-9.2.1/cann-9.2.1/lib64/libascendc_runtime.a -lascend_dump -lc_sec
+[ 85%] Built target tq_prefill_npu
+[ 85%] Building CXX object CMakeFiles/test_golden_prefill_strip_npu.dir/tests/npu/test_golden_dump.cpp.o
+[ 85%] Building CXX object CMakeFiles/test_live_write_npu.dir/tests/npu/test_live_write.cpp.o
+[ 85%] Linking CXX executable tests/test_golden_prefill_strip_npu
+[ 85%] Built target test_golden_prefill_strip_npu
+[ 85%] Linking CXX executable tests/test_live_write_npu
+[ 85%] Built target test_live_write_npu
+[100%] Built target aiv_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -m aicorelinux -Ttext=0 /home/dmin/tq-production-npu-921/tq_decode_npu_preprocess-prefix/src/tq_decode_npu_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/turboquant_fused_decode.cpp.o -o /home/dmin/tq-production-npu-921/tq_decode_npu_preprocess-prefix/src/tq_decode_npu_preprocess-build/CMakeFiles/aiv_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/turboquant_fused_decode.cpp.o[100%] Built target merge_aiv_obj_text
+[WARNING]: Multiple kernel functions are detected. It is recommended to define only one kernel function per file.
+[100%] Built target _host_cpp
+[ 86%] No install step for 'tq_decode_npu_preprocess'
+[ 88%] Completed 'tq_decode_npu_preprocess'
+[ 88%] Built target tq_decode_npu_preprocess
+[ 88%] Creating directories for 'tq_decode_npu_aiv_device'
+[ 88%] Creating directories for 'tq_decode_npu_aic_device'
+[ 89%] Creating directories for 'tq_decode_npu_host'
+[ 89%] No download step for 'tq_decode_npu_aic_device'
+[ 89%] No download step for 'tq_decode_npu_host'
+[ 90%] No download step for 'tq_decode_npu_aiv_device'
+[ 91%] No update step for 'tq_decode_npu_aic_device'
+[ 91%] No update step for 'tq_decode_npu_host'
+[ 91%] No update step for 'tq_decode_npu_aiv_device'
+[ 91%] No patch step for 'tq_decode_npu_aic_device'
+[ 91%] No patch step for 'tq_decode_npu_host'
+[ 92%] No patch step for 'tq_decode_npu_aiv_device'
+[ 92%] Performing configure step for 'tq_decode_npu_aic_device'
+[ 92%] Performing configure step for 'tq_decode_npu_host'
+[ 92%] Performing configure step for 'tq_decode_npu_aiv_device'
+-- The C compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Detecting C compiler ABI info - done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    ASCEND_PYTHON_EXECUTABLE
+
+
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_decode_npu_host-prefix/src/tq_decode_npu_host-build
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+[ 93%] Performing build step for 'tq_decode_npu_host'
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_decode_npu_aic_device-prefix/src/tq_decode_npu_aic_device-build
+[100%] Building CXX object CMakeFiles/host_bisheng_obj.dir/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/turboquant_fused_decode.cpp.o
+[ 93%] Performing tq_wrapper_warning_policy step for 'tq_decode_npu_aic_device'
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_decode_npu_aic_device-prefix/src/tq_decode_npu_aic_device-build
+[ 94%] Performing build step for 'tq_decode_npu_aic_device'
+[100%] Building CXX object CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_decode_npu/auto_gen_turboquant_fused_decode.cpp.o
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_decode_npu_aiv_device-prefix/src/tq_decode_npu_aiv_device-build
+[ 94%] Performing tq_wrapper_warning_policy step for 'tq_decode_npu_aiv_device'
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dmin/tq-production-npu-921/tq_decode_npu_aiv_device-prefix/src/tq_decode_npu_aiv_device-build
+[ 94%] Performing build step for 'tq_decode_npu_aiv_device'
+[100%] Building CXX object CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_decode_npu/auto_gen_turboquant_fused_decode.cpp.o
+[100%] Built target host_bisheng_obj
+[ 94%] Performing install step for 'tq_decode_npu_host'
+Consolidate compiler generated dependencies of target host_bisheng_obj
+[100%] Built target host_bisheng_obj
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/dmin/tq-production-npu-921/tq_decode_npu_host_dir/./objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/turboquant_fused_decode.cpp.o
+[ 94%] Completed 'tq_decode_npu_host'
+[ 94%] Built target tq_decode_npu_host
+/home/dmin/tq-production-npu-921/auto_gen/tq_decode_npu/auto_gen_turboquant_fused_decode.cpp:28:789: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) uint8_t* queryRot, __attribute__((cce_global)) uint8_t* keyCache, __attribute__((cce_global)) uint8_t* valueCache, __attribute__((cce_global)) uint8_t* scaleCache, __attribute__((cce_global)) uint8_t* blockTables, __attribute__((cce_global)) uint8_t* contextLens, __attribute__((cce_global)) uint8_t* modeTables, __attribute__((cce_global)) uint8_t* workspace, __attribute__((cce_global)) uint8_t* output, __attribute__((cce_global)) uint8_t* tiling, uint32_t numTokens, uint32_t numHeads, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t maxBlocksPerSeq, uint32_t numSplits, uint32_t headsPerTask, uint32_t tasksPerBlock, uint32_t reduceTasksPerBlock, uint32_t fusedContextLimit, float scale, float invSqrtLen, uint32_t numBlocks, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ^
+/home/dmin/tq-production-npu-921/auto_gen/tq_decode_npu/auto_gen_turboquant_fused_decode.cpp:67:789: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) uint8_t* queryRot, __attribute__((cce_global)) uint8_t* keyCache, __attribute__((cce_global)) uint8_t* valueCache, __attribute__((cce_global)) uint8_t* scaleCache, __attribute__((cce_global)) uint8_t* blockTables, __attribute__((cce_global)) uint8_t* contextLens, __attribute__((cce_global)) uint8_t* modeTables, __attribute__((cce_global)) uint8_t* workspace, __attribute__((cce_global)) uint8_t* output, __attribute__((cce_global)) uint8_t* tiling, uint32_t numTokens, uint32_t numHeads, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t maxBlocksPerSeq, uint32_t numSplits, uint32_t headsPerTask, uint32_t tasksPerBlock, uint32_t reduceTasksPerBlock, uint32_t fusedContextLimit, float scale, float invSqrtLen, uint32_t numBlocks, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ^
+/home/dmin/tq-production-npu-921/auto_gen/tq_decode_npu/auto_gen_turboquant_fused_decode.cpp:106:1103: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) uint8_t* query, __attribute__((cce_global)) uint8_t* piSigns, __attribute__((cce_global)) uint8_t* rotTables, __attribute__((cce_global)) uint8_t* h16, __attribute__((cce_global)) uint8_t* gate, __attribute__((cce_global)) uint8_t* queryRot, __attribute__((cce_global)) uint8_t* keyCache, __attribute__((cce_global)) uint8_t* valueCache, __attribute__((cce_global)) uint8_t* scaleCache, __attribute__((cce_global)) uint8_t* blockTables, __attribute__((cce_global)) uint8_t* contextLens, __attribute__((cce_global)) uint8_t* modeTables, __attribute__((cce_global)) uint8_t* workspace, __attribute__((cce_global)) uint8_t* output, __attribute__((cce_global)) uint8_t* tiling, uint32_t numTokens, uint32_t numHeads, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t maxBlocksPerSeq, uint32_t numSplits, uint32_t headsPerTask, uint32_t tasksPerBlock, uint32_t reduceTasksPerBlock, uint32_t prologueVectorsPerBlock, uint32_t prologueCubeChunkVectors, uint32_t outputStage, uint32_t fusedContextLimit, float scale, float invSqrtLen, uint32_t numBlocks, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^
+/home/dmin/tq-production-npu-921/auto_gen/tq_decode_npu/auto_gen_turboquant_fused_decode.cpp:145:1103: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) uint8_t* query, __attribute__((cce_global)) uint8_t* piSigns, __attribute__((cce_global)) uint8_t* rotTables, __attribute__((cce_global)) uint8_t* h16, __attribute__((cce_global)) uint8_t* gate, __attribute__((cce_global)) uint8_t* queryRot, __attribute__((cce_global)) uint8_t* keyCache, __attribute__((cce_global)) uint8_t* valueCache, __attribute__((cce_global)) uint8_t* scaleCache, __attribute__((cce_global)) uint8_t* blockTables, __attribute__((cce_global)) uint8_t* contextLens, __attribute__((cce_global)) uint8_t* modeTables, __attribute__((cce_global)) uint8_t* workspace, __attribute__((cce_global)) uint8_t* output, __attribute__((cce_global)) uint8_t* tiling, uint32_t numTokens, uint32_t numHeads, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t maxBlocksPerSeq, uint32_t numSplits, uint32_t headsPerTask, uint32_t tasksPerBlock, uint32_t reduceTasksPerBlock, uint32_t prologueVectorsPerBlock, uint32_t prologueCubeChunkVectors, uint32_t outputStage, uint32_t fusedContextLimit, float scale, float invSqrtLen, uint32_t numBlocks, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^
+4 warnings generated.
+[100%] Built target device_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld  -m aicorelinux -r  -Ttext=0 /home/dmin/tq-production-npu-921/tq_decode_npu_aic_device-prefix/src/tq_decode_npu_aic_device-build/CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_decode_npu/auto_gen_turboquant_fused_decode.cpp.o -static -o /home/dmin/tq-production-npu-921/tq_decode_npu_aic_device_dir/device.o
+[100%] Built target merge_device_obj
+[ 95%] No install step for 'tq_decode_npu_aic_device'
+[ 95%] Completed 'tq_decode_npu_aic_device'
+[ 95%] Built target tq_decode_npu_aic_device
+/home/dmin/tq-production-npu-921/auto_gen/tq_decode_npu/auto_gen_turboquant_fused_decode.cpp:28:789: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) uint8_t* queryRot, __attribute__((cce_global)) uint8_t* keyCache, __attribute__((cce_global)) uint8_t* valueCache, __attribute__((cce_global)) uint8_t* scaleCache, __attribute__((cce_global)) uint8_t* blockTables, __attribute__((cce_global)) uint8_t* contextLens, __attribute__((cce_global)) uint8_t* modeTables, __attribute__((cce_global)) uint8_t* workspace, __attribute__((cce_global)) uint8_t* output, __attribute__((cce_global)) uint8_t* tiling, uint32_t numTokens, uint32_t numHeads, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t maxBlocksPerSeq, uint32_t numSplits, uint32_t headsPerTask, uint32_t tasksPerBlock, uint32_t reduceTasksPerBlock, uint32_t fusedContextLimit, float scale, float invSqrtLen, uint32_t numBlocks, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ^
+/home/dmin/tq-production-npu-921/auto_gen/tq_decode_npu/auto_gen_turboquant_fused_decode.cpp:67:789: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) uint8_t* queryRot, __attribute__((cce_global)) uint8_t* keyCache, __attribute__((cce_global)) uint8_t* valueCache, __attribute__((cce_global)) uint8_t* scaleCache, __attribute__((cce_global)) uint8_t* blockTables, __attribute__((cce_global)) uint8_t* contextLens, __attribute__((cce_global)) uint8_t* modeTables, __attribute__((cce_global)) uint8_t* workspace, __attribute__((cce_global)) uint8_t* output, __attribute__((cce_global)) uint8_t* tiling, uint32_t numTokens, uint32_t numHeads, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t maxBlocksPerSeq, uint32_t numSplits, uint32_t headsPerTask, uint32_t tasksPerBlock, uint32_t reduceTasksPerBlock, uint32_t fusedContextLimit, float scale, float invSqrtLen, uint32_t numBlocks, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ^
+/home/dmin/tq-production-npu-921/auto_gen/tq_decode_npu/auto_gen_turboquant_fused_decode.cpp:106:1103: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) uint8_t* query, __attribute__((cce_global)) uint8_t* piSigns, __attribute__((cce_global)) uint8_t* rotTables, __attribute__((cce_global)) uint8_t* h16, __attribute__((cce_global)) uint8_t* gate, __attribute__((cce_global)) uint8_t* queryRot, __attribute__((cce_global)) uint8_t* keyCache, __attribute__((cce_global)) uint8_t* valueCache, __attribute__((cce_global)) uint8_t* scaleCache, __attribute__((cce_global)) uint8_t* blockTables, __attribute__((cce_global)) uint8_t* contextLens, __attribute__((cce_global)) uint8_t* modeTables, __attribute__((cce_global)) uint8_t* workspace, __attribute__((cce_global)) uint8_t* output, __attribute__((cce_global)) uint8_t* tiling, uint32_t numTokens, uint32_t numHeads, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t maxBlocksPerSeq, uint32_t numSplits, uint32_t headsPerTask, uint32_t tasksPerBlock, uint32_t reduceTasksPerBlock, uint32_t prologueVectorsPerBlock, uint32_t prologueCubeChunkVectors, uint32_t outputStage, uint32_t fusedContextLimit, float scale, float invSqrtLen, uint32_t numBlocks, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^
+/home/dmin/tq-production-npu-921/auto_gen/tq_decode_npu/auto_gen_turboquant_fused_decode.cpp:145:1103: warning: unused parameter 'overflow_status' [-Wunused-parameter]
+__attribute__((cce_global)) uint8_t* query, __attribute__((cce_global)) uint8_t* piSigns, __attribute__((cce_global)) uint8_t* rotTables, __attribute__((cce_global)) uint8_t* h16, __attribute__((cce_global)) uint8_t* gate, __attribute__((cce_global)) uint8_t* queryRot, __attribute__((cce_global)) uint8_t* keyCache, __attribute__((cce_global)) uint8_t* valueCache, __attribute__((cce_global)) uint8_t* scaleCache, __attribute__((cce_global)) uint8_t* blockTables, __attribute__((cce_global)) uint8_t* contextLens, __attribute__((cce_global)) uint8_t* modeTables, __attribute__((cce_global)) uint8_t* workspace, __attribute__((cce_global)) uint8_t* output, __attribute__((cce_global)) uint8_t* tiling, uint32_t numTokens, uint32_t numHeads, uint32_t numKvHeads, uint32_t headSize, uint32_t blockSize, uint32_t maxBlocksPerSeq, uint32_t numSplits, uint32_t headsPerTask, uint32_t tasksPerBlock, uint32_t reduceTasksPerBlock, uint32_t prologueVectorsPerBlock, uint32_t prologueCubeChunkVectors, uint32_t outputStage, uint32_t fusedContextLimit, float scale, float invSqrtLen, uint32_t numBlocks, GM_ADDR overflow_status) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^
+4 warnings generated.
+[100%] Built target device_obj
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld  -m aicorelinux -r  -Ttext=0 /home/dmin/tq-production-npu-921/tq_decode_npu_aiv_device-prefix/src/tq_decode_npu_aiv_device-build/CMakeFiles/device_obj.dir/home/dmin/tq-production-npu-921/auto_gen/tq_decode_npu/auto_gen_turboquant_fused_decode.cpp.o -static -o /home/dmin/tq-production-npu-921/tq_decode_npu_aiv_device_dir/device.o
+[100%] Built target merge_device_obj
+[ 95%] No install step for 'tq_decode_npu_aiv_device'
+[ 95%] Completed 'tq_decode_npu_aiv_device'
+[ 95%] Built target tq_decode_npu_aiv_device
+/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/ccec_compiler/bin/ld.lld -x -m aicorelinux   -Ttext=0 /home/dmin/tq-production-npu-921/tq_decode_npu_aic_device_dir/device.o /home/dmin/tq-production-npu-921/tq_decode_npu_aiv_device_dir/device.o -static -o /home/dmin/tq-production-npu-921/tq_decode_npu_merge_obj_dir/device.o
+[ 95%] Built target tq_decode_npu_merge_obj
+[ 96%] Building CXX object CMakeFiles/tq_decode_npu_host_stub_obj.dir/auto_gen/tq_decode_npu/host_stub.cpp.o
+[ 96%] Built target tq_decode_npu_host_stub_obj
+[ 96%] Linking CXX shared library lib/libtq_decode_npu.so
+/home/dmin/Ascend-9.2.1/cann-9.2.1/bin/ascendc_pack_kernel /home/dmin/tq-production-npu-921/CMakeFiles/tq_decode_npu_host_stub_obj.dir/auto_gen/tq_decode_npu/host_stub.cpp.o /home/dmin/tq-production-npu-921/tq_decode_npu_merge_obj_dir/device.o 0 /home/dmin/tq-production-npu-921/CMakeFiles/tq_decode_npu_host_stub_obj.dir/auto_gen/tq_decode_npu/host_stub.cpp.o
+recompile: /usr/bin/c++ -fPIC -O3 -DNDEBUG -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -s -shared -Wl,-soname,libtq_decode_npu.so -o lib/libtq_decode_npu.so CMakeFiles/tq_decode_npu_host_stub_obj.dir/auto_gen/tq_decode_npu/host_stub.cpp.o /home/dmin/tq-production-npu-921/tq_decode_npu_host_dir/objects-Release/host_bisheng_obj/mnt/c/Ascend/turboquant-core/src/turboquant/decode/native/turboquant_fused_decode.cpp.o    -L/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64  -L/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib  -Wl,-rpath,"\$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib:" /home/dmin/Ascend-9.2.1/cann-9.2.1/lib64/libascendc_runtime.a -lascend_dump -lc_sec
+[ 96%] Built target tq_decode_npu
+[ 96%] Building CXX object CMakeFiles/bench_qwen35_decode.dir/tests/npu/bench_qwen35_decode.cpp.o
+[ 96%] Building CXX object CMakeFiles/test_fused_decode_e2e_npu.dir/tests/npu/test_fused_decode_e2e.cpp.o
+[ 97%] Building CXX object CMakeFiles/test_golden_decode_npu.dir/tests/npu/test_golden_dump.cpp.o
+[ 97%] Building CXX object CMakeFiles/bench_turboquant_production_npu.dir/benchmarks/benchmark_turboquant_production.cpp.o
+[ 98%] Building CXX object CMakeFiles/test_turboquant_production_npu.dir/benchmarks/benchmark_turboquant_production.cpp.o
+[ 98%] Linking CXX executable tests/bench_qwen35_decode
+[ 98%] Built target bench_qwen35_decode
+[ 98%] Linking CXX executable tests/test_golden_decode_npu
+[ 98%] Built target test_golden_decode_npu
+[ 98%] Linking CXX executable tests/test_fused_decode_e2e_npu
+[ 98%] Built target test_fused_decode_e2e_npu
+[100%] Linking CXX executable tests/bench_turboquant_production_npu
+[100%] Linking CXX executable tests/test_turboquant_production_npu
+[100%] Built target bench_turboquant_production_npu
+[100%] Built target test_turboquant_production_npu
+[100%] Built target tq_npu_production
+[100%] Built target tq_npu_kernels
+/home/dmin/tq-production-npu-921/tests/bench_turboquant_production_npu: ELF 64-bit LSB pie executable, x86-64, version 1 (GNU/Linux), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=73e8324c63d3df8767241fffe629f1a25ce6a00e, for GNU/Linux 3.2.0, not stripped
+/home/dmin/tq-production-npu-921/tests/test_fused_decode_e2e_npu:       ELF 64-bit LSB pie executable, x86-64, version 1 (GNU/Linux), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=cab82d294a9d2c4707cc8059dd424bc3b571b65c, for GNU/Linux 3.2.0, not stripped
+/home/dmin/tq-production-npu-921/tests/test_golden_decode_npu:          ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=1a785a3a70497d89700c2df3415b8b7338bda788, for GNU/Linux 3.2.0, not stripped
+/home/dmin/tq-production-npu-921/tests/test_golden_prefill_nz_npu:      ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=05bc9b3151d6107bc513684ae0cb7b4649feceee, for GNU/Linux 3.2.0, not stripped
+/home/dmin/tq-production-npu-921/tests/test_golden_prefill_strip_npu:   ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=bd8d39d1b18e51c924f46ac3f6af6eb8f10bbecc, for GNU/Linux 3.2.0, not stripped
+/home/dmin/tq-production-npu-921/tests/test_golden_scatter_npu:         ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a49811f31e6130834463d26a2c2d9e964c98a292, for GNU/Linux 3.2.0, not stripped
+/home/dmin/tq-production-npu-921/tests/test_live_write_npu:             ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=58308c4c513f7f60a17bffabb15e4bb229851ea8, for GNU/Linux 3.2.0, not stripped
+/home/dmin/tq-production-npu-921/tests/test_live_write_nz_npu:          ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=fd371d444ffa6ea288d576ea4c504fc573a68922, for GNU/Linux 3.2.0, not stripped
+/home/dmin/tq-production-npu-921/tests/test_nz_ingress_canary_npu:      ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=dbf2116cce5c3fef9c331a5ca77dcf8b011df537, for GNU/Linux 3.2.0, not stripped
+/home/dmin/tq-production-npu-921/tests/test_turboquant_production_npu:  ELF 64-bit LSB pie executable, x86-64, version 1 (GNU/Linux), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a3fbeb6fefecd74afebd8974d4275e2655069d52, for GNU/Linux 3.2.0, not stripped
+/home/dmin/tq-production-npu-921/tests/bench_qwen35_decode:             ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a8de9a668f79d29a11710b80f7a9a09587815d2b, for GNU/Linux 3.2.0, not stripped
+fd723dcfac4cd1c2a3c997882e6c177cbe1655af412cc221d318e09c3232e3ae  /home/dmin/tq-production-npu-921/tests/bench_turboquant_production_npu
+9297f9c6c7fabff319dd2abfc8d5c7bb8c08f21f586820715b1278fc46904efa  /home/dmin/tq-production-npu-921/tests/test_fused_decode_e2e_npu
+f6199a469d51f646eaa80ab5f12097eb22f32ad39666adb7ae7eb143d4e5ec24  /home/dmin/tq-production-npu-921/tests/test_golden_decode_npu
+a686be9ba164481f006cfc737556dca4674eff549365a78b69e0b26814fda994  /home/dmin/tq-production-npu-921/tests/test_golden_prefill_nz_npu
+84cbbaf111b7d4e7fa35e5572f1f2e37c9813862cc9398d28b30770b68414f53  /home/dmin/tq-production-npu-921/tests/test_golden_prefill_strip_npu
+2cb3f38bcd12963269969d4ee942ad7ab1bb406d31faeb81d6f53fe069131873  /home/dmin/tq-production-npu-921/tests/test_golden_scatter_npu
+e689c3f968b93378541bb9e1ef78a5294f7fa447c210c2e7c5c4080faabe9368  /home/dmin/tq-production-npu-921/tests/test_live_write_npu
+eb0ba2c59f157b05b68560c26c199357c8c0d366098db0b1f620947fb950686f  /home/dmin/tq-production-npu-921/tests/test_live_write_nz_npu
+53ad6a24e4beb10726be4abcf0c485489bfab6db78ab1b3e2b30ac72202ae141  /home/dmin/tq-production-npu-921/tests/test_nz_ingress_canary_npu
+ff2ec380eb35764d33e9ee9e25022eb0302edf22d4f2537bfd3535f7b43d7093  /home/dmin/tq-production-npu-921/tests/test_turboquant_production_npu
+610bd5ac312572239fa79503c4b18283b15647d224fa05cee11fc7ada7f5615b  /home/dmin/tq-production-npu-921/tests/bench_qwen35_decode
+43399adc41daab229336b4af9e1236f9ca7858363b90c9466f5cb1ddab7e9335  /home/dmin/tq-production-npu-921/lib/libtq_decode_npu.so
+49b6ab2052b1b21eb348668595295d1eedc1b54652950130d84116db57085933  /home/dmin/tq-production-npu-921/lib/libtq_e8_dequant.so
+98a6f3a274311d5de7866328b39a07c303780f21052e386c00fd83f294546ac7  /home/dmin/tq-production-npu-921/lib/libtq_e8_reader.so
+ae76fa72955d09d76162ba0af365ed53bc916f5142fc4efa335aeed68507b00c  /home/dmin/tq-production-npu-921/lib/libtq_prefill_npu.so
+7bbdf9b7281f7a4d8c0d4ae1d1857b3228953523cb94635a084c43958f4bd3d7  /home/dmin/tq-production-npu-921/lib/libtq_prefill_nz_npu.so
+6c11db0578bbfbe97d4dcc5a9d4a3a89193dc8560cc45a8b19bf566aa56eb79f  /home/dmin/tq-production-npu-921/lib/libtq_scatter_npu.so
+e7abf239904a0aed29913243d5a44b15c9762eb98e3496c19360f7b292f4975f  /home/dmin/tq-production-npu-921/lib/libtq_scatter_nz_npu.so

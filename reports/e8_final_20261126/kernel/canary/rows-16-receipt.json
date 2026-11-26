@@ -1,0 +1,149 @@
+{
+  "rows": 16,
+  "packet_sha256": "99866169988a2800ce1bb2722dd97be9763aa19e2536c9443d688141e97976a8",
+  "launch_receipt_sha256": "da5382fa2f5909fbe8140d66639ecc010a73cedb2e1fcf9100e5cc843d137d61",
+  "outcome": "watchdog_timeout",
+  "exit": {
+    "rows": 16,
+    "exit_code": 124,
+    "started_utc": "2026-11-26T10:14:23.0977189Z",
+    "finished_utc": "2026-11-26T10:30:19.9853691Z",
+    "outer_wall_seconds": 956.8876502
+  },
+  "launch": {
+    "rows": 16,
+    "started_utc": "2026-11-26T10:14:23.0977189Z",
+    "packet_sha256": "99866169988a2800ce1bb2722dd97be9763aa19e2536c9443d688141e97976a8",
+    "launch_receipt_sha256": "da5382fa2f5909fbe8140d66639ecc010a73cedb2e1fcf9100e5cc843d137d61",
+    "argv": [
+      "/usr/bin/env",
+      "-i",
+      "HOME=/home/dmin",
+      "PATH=/usr/bin:/bin",
+      "LANG=C",
+      "LC_ALL=C",
+      "/bin/bash",
+      "--noprofile",
+      "--norc",
+      "/mnt/c/ascend-micro-harness/scripts/camodel_build_phase_guard.sh",
+      "camodel",
+      "exec",
+      "/usr/bin/flock",
+      "--no-fork",
+      "--exclusive",
+      "/home/dmin/ascend-sync-schedule-ablation/queue/checkpoint1-exclusive.lock",
+      "/bin/bash",
+      "--noprofile",
+      "--norc",
+      "/mnt/c/Ascend/turboquant-integration-work/e8-r3r2-canary-20261126-v11/run_canary.sh",
+      "16",
+      "99866169988a2800ce1bb2722dd97be9763aa19e2536c9443d688141e97976a8"
+    ]
+  },
+  "expected_component_launches": 2,
+  "started_component_launches": [
+    "START layout=row-major row0=0"
+  ],
+  "completed_component_comparisons": [],
+  "label_mismatches": null,
+  "scale_mismatches": null,
+  "completed_guard_checks": [],
+  "all_packet_and_workspace_guards_passed": null,
+  "runtime_resource_guard_witness": "SIMT privateWarp=36864 divergenceWarp=2560 compiledFrame=48 compiledDivergence=2560",
+  "runner_reported_failure": [],
+  "completed_model_ticks": null,
+  "reported_ticks_at_model_exit": [
+    306432
+  ],
+  "backend": {
+    "compiled_soc_target": "Ascend950PR_9599",
+    "architecture": "dav-3510",
+    "driver_stub_soc_strings": [
+      "Ascend950PR_9589"
+    ],
+    "sdk_simulator_alias": "/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib",
+    "sdk_simulator_alias_resolved": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib",
+    "serial_mode_observed": true,
+    "pinned_pem_observed": true,
+    "sampled_mappings": [
+      {
+        "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libpem_davinci.so",
+        "sha256": "1a6420fe8123e88a120f0bbfc76710968e6708599c77d80a7b1097aca06eed33",
+        "mapping_inode_verified": true,
+        "pem_path_verified": true
+      },
+      {
+        "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libruntime_camodel.so",
+        "sha256": "28375f2d4b877f66f77d537d31aae2fb2bb2d142e5b09d6e8bb49c6f791a8aa3",
+        "mapping_inode_verified": true,
+        "pem_path_verified": true
+      },
+      {
+        "path": "/home/dmin/Ascend-9.2.1/cann-9.2.1/x86_64-linux/simulator/dav_3510/lib/libmodel_top.so",
+        "sha256": "9263f79799b8f49a5e05d7e34498eeebcd83f72a65279a503d0a556f5dfa14bf",
+        "mapping_inode_verified": true,
+        "pem_path_verified": true
+      }
+    ]
+  },
+  "serialized_retirement": {
+    "observed_model_namespaces": [
+      "pid:[4026532229]"
+    ],
+    "remaining_case_pids": [],
+    "locks": {
+      "checkpoint1-exclusive.lock": {
+        "device": 2096,
+        "inode": 150351,
+        "available_after_case": true
+      },
+      "phase-camodel.lock": {
+        "device": 2096,
+        "inode": 150347,
+        "available_after_case": true
+      },
+      "bisheng-vs-camodel.lock": {
+        "inode": 2769600,
+        "device": 2096,
+        "available_after_case": true
+      }
+    }
+  },
+  "native_run_dir": "/home/dmin/work/tq-e8-final-canary-v11/run/rows-16",
+  "raw_trace_evidence": {
+    "core0.veccore0.instr_log.dump": {
+      "path": "/home/dmin/work/tq-e8-final-canary-v11/run/rows-16/core0.veccore0.instr_log.dump",
+      "bytes": 21715993,
+      "sha256": "0fdd6a5d0bb0fc558f86274506a0cd425d356c3ddd6dbd058e15ec2ba13789ac",
+      "last_complete_tick": 306431
+    },
+    "core0.veccore0.instr_popped_log.dump": {
+      "path": "/home/dmin/work/tq-e8-final-canary-v11/run/rows-16/core0.veccore0.instr_popped_log.dump",
+      "bytes": 17149545,
+      "sha256": "305b73e8ed3f49ee224958df4bee1daa9e9edd01baaff1cdc7d9d5c3202b719e",
+      "last_complete_tick": 306432
+    }
+  },
+  "run_evidence": {
+    "measurement_manifest.json": {
+      "path": "/mnt/c/Ascend/turboquant-core/reports/e8_final_20261126/kernel/canary/rows-16-measurement_manifest.json",
+      "bytes": 561,
+      "sha256": "1f4bb3507d70f2f183c8f2c7524ad0eccbc0169560794a084368f38097a2cb8f"
+    },
+    "loaded_model_libraries.json": {
+      "path": "/mnt/c/Ascend/turboquant-core/reports/e8_final_20261126/kernel/canary/rows-16-loaded_model_libraries.json",
+      "bytes": 788,
+      "sha256": "0f459e966ea4cb1687c49af8b0eaa699f72c944c114b2995b93cb5393c79d1ec"
+    },
+    "stdout": {
+      "path": "/mnt/c/Ascend/turboquant-core/reports/e8_final_20261126/kernel/canary/rows-16-stdout.log",
+      "bytes": 4324,
+      "sha256": "b793f4f776081cee8b6f22eb7f66371249a06902ea199373dea04fecf06cb571"
+    },
+    "progress": {
+      "path": "/mnt/c/Ascend/turboquant-core/reports/e8_final_20261126/kernel/canary/rows-16-progress.jsonl",
+      "bytes": 14079,
+      "sha256": "2807cde58f708c818a92f63ab01272e009c04acc942965099c1fa24ac8a7adde"
+    }
+  }
+}

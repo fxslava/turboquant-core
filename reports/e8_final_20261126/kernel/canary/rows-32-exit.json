@@ -1,0 +1,17 @@
+{
+  "rows": 32,
+  "exit_code": 124,
+  "started_utc": "2026-11-26T10:32:06.3193930Z",
+  "finished_utc": "2026-11-26T10:48:03.5896289Z",
+  "outer_wall_seconds": 957.2702359,
+  "windows_stopwatch_seconds": 957.2599871,
+  "post_retirement_wsl_clocks": {
+    "realtime": 1795690084.65003,
+    "monotonic": 1167887.127274004,
+    "monotonic_raw": 1209542.7344395,
+    "boottime": 1167887.127282718
+  },
+  "wsl_monotonic_delta": 904.426109937951,
+  "wsl_monotonic_raw_delta": 957.4603777998127,
+  "wsl_realtime_delta": 958.4758794307709
+}

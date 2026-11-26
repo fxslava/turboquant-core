@@ -1,0 +1,16 @@
+Review B8 | Independent pass 2
+Candidate slot08-e8-r3-revision2 | 16/32-row GM packet canary v8 | REJECT
+Packet ea3fb51412b72381a0302fa94c88eb3cf7d206bf706d28d9ea7d7a931e6c2bab | Receipt f5283ee6f7190a9eed35ed1b8a14aaa03261d8efc331b801b89f9ddd6e842d9e
+Verified all 128 members, sealed argv substitution and the four recorded lock identities.
+B8-1 | Runtime seal hashing and receipt output run under both locks before the absolute timer starts. The exact seal process blocked in anon_pipe_write under bounded stdout saturation.
+B8-2 | SIGINT exits the outer timer owner while the admitted case survives the absolute deadline. A scratch phase/lane run reproduced lock retention by the now-unsupervised case after its deadline.
+CPU scope | Host-mode refusal, six individual retirement cases and mapped inode replacement exercised against the sealed supervisor/verifier. The six cases passed with a shortened parent witness wait. Cancellation remains unhandled.
+Backend check | Pinned child proc directory, mapped device/inode and completed canonical PEM hash are required for success. Mapping evidence covers completed samples of the runner process.
+Packet oracle | Exact 4352-byte comparison after each launch, including untouched payload and guards, plus normalized context and shortlist bounds. The requested 2+4 launches were statically confirmed.
+Scalar issue and fences | Matched MTE2-to-S, V-to-S, V-to-MTE3 and MTE3-to-S credits in each layout, with terminal retirement DSB. Phase A has MEMBAR/BAR and Phase B has BAR before END; disjoint UB regions and GM workspace owners.
+SIMT | Four warps run fixed row/query loops; each eight-lane group computes independent coordinates before shuffle reductions. Queue metadata insertion remains serialized in lane zero.
+Resources | 17728-byte UB arena, 48-byte maximum thread frame, 2560-byte divergence metadata, no emitted SIMT calls. Count fields 8516/2242/8442 match physical spans after excluding eight-byte NOPs. Historical fetch evidence applies to the row-major root only.
+AKA | Zero fatal and zero new warnings on both profiles against independently parsed baselines. Frontend IR alone leaves deep lane, arithmetic and fence behavior unproved.
+Cost model | Fixed six-strip INT4 reshape fit with 527.5 ticks leave-one-out MAE. E8 timing rank unsupported.
+Mutation hypothesis | Stage lane-zero queue metadata in aligned scratch or batch candidate insertions. Compare Phase A queue load-to-use stalls and retirement ticks while requiring exact packet parity.
+Worker delivery | Both blockers and bounded CPU witnesses sent directly to kernel_worker. No CAModel, project build or physical NPU execution.

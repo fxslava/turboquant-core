@@ -1,0 +1,2 @@
+dc6c03bb1cf4226c80bcb53328653bf387dfe7f60f6e4ebee944ffb0bb9b1a4f  src/turboquant/ingress/native/turboquant_reshape_scatter.cpp
+ab3f3f1ed26c87a8d84cf6b4896d1527d6a1495225433b3fa008400c0dea7153  src/turboquant/ingress/native/routine_reshape_batch_pipeline.hpp

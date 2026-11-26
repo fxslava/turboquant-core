@@ -1,0 +1,8 @@
+{
+  "scope": "12s follow-up, after 16-row retirement",
+  "wsl_realtime": 13.896047353744507,
+  "wsl_monotonic": 12.00818360503763,
+  "wsl_monotonic_raw": 12.413365400163457,
+  "wsl_boottime": 12.008121221093461,
+  "windows_stopwatch_with_wsl_invocation": 12.5625001
+}

@@ -1,0 +1,180 @@
+Independent Ascend cross-review A2, pass 1
+Verdict: REJECT for serialized CAModel admission.
+Candidate: slot08-e8-r3-revision2, frozen device component with 16/32-row packet canary v2.
+Packet SHA-256: c0c3e198a08d5370691c59aa6a5fb8c31781d849e274cc3f6e2b8960dfa6e6af
+Source SHA-256: 092830b8fcb730277dfa32fd346143bee4f565482de091ef4a097a5445c907cd
+Split device ELF SHA-256: 8bba9874f58287087d1ed9225dbaaf4764173426eb134e5ec8305f5efe2a4351
+Merged device ELF SHA-256: b6104833a01678d27999773dad2964aa6435703867cc147d869bd10775adfb49
+Component DSO SHA-256: 1e66ef76e195d82e3335ff263bbab2786244da5211285fb422c337f565351af8
+Native runner SHA-256: 0e705ad02ab1c27f5fd64de8b92c0fc52463fb8e1135a7892873281c92414237
+
+Blocking finding A2-01 - The canary accepts an unretired shortlist count
+
+encoder_canary.cpp:95-101 accepts all nonzero counts, clamps each count above
+128 to 128 before checking the unused shortlist, and initializes every workspace
+word to 0xDEADBEEF. ScoreB in cooperative_search.hpp interprets every count
+above 128 as an instruction to score all 65,536 codebook entries. If a context
+publishes the normalized query but fails to publish its count, the initialized
+count therefore makes Phase B choose the same label as the exhaustive CPU oracle.
+The host accepts the sentinel and checks zero unused shortlist bytes for that
+context. Exact packet labels and scales also permit this false pass. The existing
+checks of normalized values and reserved bytes cover distinct ranges and leave
+the count loophole open.
+
+SearchA can publish 1 from the fast path. Its seed collection adds at most four
+items. Each subsequent Collect increments at most once, and both enumeration
+paths return immediately after the first count above the capacity of 128.
+A valid nonzero published count is therefore at most 129. The host must fail
+on any count outside 1..129 before using it to define how much to guard. The
+device component can remain frozen. Rebuild and reseal the host canary and
+repeat review for the revised identity. The worker received the finding.
+
+An independent bounded CPU control used the sealed fixture and full 65,536-entry
+binary64 balanced-tree scan for query zero. Its winner was sealed oracle label
+63651. A count of 0xDEADBEEF passed the current host predicate and generated zero
+unused-shortlist-tail checks. An independent binary32 CPU recomputation matched
+all 32 prefix scales and 8192 normalized operands. These controls ran without
+building or starting the device binary.
+
+Sealing and exact binary linkage
+
+The local WSL seal_packet.py --verify command returned the expected packet hash
+after reading the source-provenance manifest and every listed member. Directly
+parsing the two ELF section tables gave byte-identical 80,712-byte .text sections.
+The exact merged ELF occurs as a contiguous image in the component DSO at file
+offset 372788. The runner's sealed dynamic table declares the component DSO,
+the CAModel driver, model and runtime. The duplicated runtime DSO has the same
+hash as the packet DSO. The launcher verifies the packet before simulation and
+runs the loaded timing-backend verification wrapper under GNU timeout (900
+seconds, TERM, with a 15-second kill escalation). The caller must acquire the
+sealed CAModel phase guard and the exclusive checkpoint1 execution lane.
+
+Compiled issue order, waits and ownership
+
+Row-major code first issues MTE2 GM-to-UB at 0x154. Event MTE2_S(0) is at
+0x198/0x1a8 followed by DSB at 0x1ac. The scalar parameter bundle targets Phase A
+at 0x1e4, V_S(1) set/wait is at 0x224/0x22c, and Phase B dispatches at 0x280.
+The first dispatch's parameter bundle is formed across the input wait only with
+independent register preparation. The Phase B parameter bundle is after the
+V_S drain. DSB at 0x294 and V_MTE3(0) at 0x2a0/0x2a8 precede label and scale
+DMAs at 0x2ac and 0x2c8. MTE3_S(0) at 0x2cc/0x2d0 drains both before the generated
+BAR.ALL, DSB, DCI and final DCCI/END sequence. The channel-major entry repeats that
+sequence with instruction PCs shifted by 0x364 and dispatches its own Phase A.
+The four event pairs have matched route/ID and single generation. The waits
+and generated kernel drain are schedule costs. The captured run also shows the
+scalar V_S wait while SIMT makes arithmetic progress; completion latency
+requires a completed run.
+
+UB input, label and scale allocations span [0,16384), [16384,17408), and
+[17408,17472), within the compiled 17728-byte 32-aligned arena in each entry.
+The metadata also reports compiler UB allocation 25920 bytes, distinct from
+the user arena. No L1 or Cube-memory ownership is involved. The kernel uses one
+AIV and one 128-thread SIMT block at a time. Each warp owns four distinct rows
+and 32 queries per row, each context 4480 bytes. Within a context the 512-key and
+512-ID heap spans [0,4096), the 128-entry shortlist [4096,4352), the normalized
+query [4352,4384), and the publication count [4384,4388). Lane 0 owns the heap,
+shortlist, count, scale and label stores for its work, while lanes 0..7 each own
+one distinct normalized coordinate. Phase A's global thread fence and block
+barrier compile to MEMBAR/BAR.THREAD_BLOCK at 0x8ff8/0x9000 and
+0x13b28/0x13b30. Phase B's block barrier at 0xb308 precedes END. The documented
+GM-cache loads and stores, the global fence and active-thread barrier, the
+scalar V_S drain, and the second VF's V-to-MTE3 publication edge cover the
+intended producer/consumer ownership. Per-launch host stream synchronization
+precedes readback and release.
+
+Uniform strip grinder and independent coordinate work
+
+Both layouts stage exactly 16 D256 rows per invocation. The two Phase A
+specializations differ in operand-address mapping. One warp traverses 32 queries
+on each of four rows; the four eight-lane groups replicate the same query. Indexed
+broadcasts and width-8 butterfly/prefix stages use 1/2/4 masks or in-group source
+lanes. The width-32 leader broadcast is beyond the lane-0-only metadata work.
+The RMS stage also uses the width-32 exchange at delta 8, with matching replicated
+halves. Data-dependent helper paths reconverge and return to the fixed query
+loop. All 128 lanes reach each VF's single final block barrier. The deployed
+split SIMT bodies show TID_X lane/coordinate masks in all three roots, width-8
+shuffle stages, per-coordinate GM/UB operations, and shared results reduced by
+butterflies. Each Phase A has 165 butterfly, 51 indexed and 33 upward shuffles.
+Phase B has six butterflies, two 32-bit words for each of three steps of the
+software binary64 distance tree. In Phase A, each lane evaluates the candidate
+replacement for its own coordinate and uses disjoint sibling subtrees in its
+cost. Gathering the eight keys feeds the single owner for heap pushes, so
+the unavoidable serialized heap metadata walk is distinct from coordinate
+arithmetic. The retained lane-stage CPU control checked 24,576 queries and
+37,760 parallel score cases with exact scale/normalized words, exact labels and
+preserved tie order. Its evidence is CPU-only.
+
+VF footprint and full call-stack closure
+
+A(row-major), B and A(channel-major) have physical .text spans 35144, 8968
+and 34856 bytes, with disjoint contiguous roots and emitted fields 8516, 2242
+and 8442. Across the three bodies the emitted field agrees with physical
+four-byte words after omitting 135, zero and 136 eight-byte NOP encodings.
+The independently rerun sealed trace analysis joined both historical log
+streams by full PC and instruction word, with 612 records at or beyond the
+row-major nominal 0x8bd8 cutoff in each stream. The largest joined relative PC
+was 0x8ff0, whose taken loop points back into the same VF. The first historical
+row-major run was watchdog-censored during Phase A. Terminal 0x8ff8, 0x9000 and
+0x9008 and Phase B dispatch were absent from the capture. This rules out the
+linear physical-cutoff hypothesis for that execution. Channel-major terminal
+retirement, complete publication, latency, and parity still require measurement.
+The observation is specific to the frozen artifact and CAModel backend.
+
+The entire three-root split CFG reaches only resolved in-root successors and
+contains no CALL. The two Phase A private frames subtract 48 bytes from the
+per-lane base. The largest referenced b16 element displacement is 22 (last byte
+45) and b32 displacement is 4 (last byte 19); Phase B has no stack accesses.
+Maximum simultaneous private frame length is 48 bytes. The highest named
+register is R126 (R119 in B), within the documented 127 registers for launch
+bounds 128. The two Phase A roots reach abstract START/END marker nesting 13
+and B reaches 9, with balanced exit at depth zero. Compiler metadata tags 9
+and 10 advertise 48 and 2560 respectively. The canary checks reported runtime
+capacity before dispatch, with the historical run printing 36864 bytes per warp
+private and 2560 bytes per warp divergence. At a 32-lane private-stack unit
+this leaves 1152 bytes per lane and zero divergence headroom at the advertised
+limit. UB/DataCache/private backing are separate resources. Historical private
+stack load/store retirement supplies additional same-backend empirical evidence.
+
+AKA and source/compiled closure
+
+Independent JSON fingerprint comparison by code, severity and message returns
+empty multisets both ways for both profiles. The reports contain zero fatal and
+warnings. Ascend351x has four inherited AKA3002 information items
+(baseline ab1403484c86226ad3258b72db0294c57aa0ff6bb88464c012f8744bce79bec9)
+and Ascend950pr has six inherited information items including two AKA3009
+(baseline 6ae78c5f19c6fcedd1eeee6fd9e0c717edad8df61ae36988dd44deb50900fc9d).
+The ledger records all-functions and no disabled checker/category suppressions.
+The front end parsed both phases and both scalar entries, and the scalar trace
+records the templated A VF launch while its inline expansion lists B alone.
+Push/Pop have zero analyzer operations despite parsed bodies. The source and
+no-CALL compiled roots cover the launch template specializations, helper
+arithmetic, loop and GM indexing, compiler-resolved split bodies and linked
+roots that the analyzer leaves opaque. The compiled arena covers the inherited
+unbounded allocation diagnostic.
+
+Packet scope and remaining empirical checks
+
+The 16-row runner uses two launches, row-major first. The 32-row runner uses
+four, channel-major first. Each layout owns one independently initialized
+4352-byte packet for the entire case. Hosts stage input x16 in exact layout and
+write 1024 label bytes at 64*row0 and 64 scale bytes at 4096+4*row0, at row0=0 or
+16. Both ranges and every DMA offset have the 32-byte alignment used by the
+actual emitted copies. Cumulative full guarded-packet equality protects
+previously written and untouched packet bytes. Inputs and codebook are checked
+read-only, buffers get outer guards and the context comparator checks normalized
+values and reserved tails. A2-01 compromises count publication and the unused
+shortlist check. The old 900-second run recorded 40 normalized-query entry
+stores among 512 required on its first launch and reached the watchdog before
+either VF finished. Each new case uses its own 900-second bound. A watchdog
+result carries partial progress and terminal/functional checks remain pending.
+
+The cost model d956a138411c24e0bfeb556d1419a5c3d1950b99dd46338729d47fcdde1e0017
+is calibrated on a fixed six-strip INT4 reshape, whose five-observation anchored
+mean has 527.5-tick leave-one-out MAE. It has zero aligned cross-workload
+validation pairs and supplies no encoder forecast or ranking. After the
+current frozen-probe question, one candidate for a separately reviewed mutation
+is moving four independent eight-lane queries onto a warp while keeping
+convergent shuffle and fallback handling, with query progress and Phase A ticks
+as the discriminator. A separate mutation is evaluating a per-warp UB heap to
+reduce serial GM heap traffic while preserving capacity, order and UB limits,
+with Phase A ticks and spill/DCache behavior as the discriminator.

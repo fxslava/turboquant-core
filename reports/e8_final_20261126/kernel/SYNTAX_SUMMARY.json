@@ -1,0 +1,198 @@
+{
+  "target": "CANN 9.2.1 dav-3510",
+  "results": {
+    "plugin-nz": 12,
+    "core-nz": 12,
+    "core-strip": 6
+  },
+  "all_exit_zero": true,
+  "sources": {
+    "plugin-nz": [
+      {
+        "source": "csrc/attention/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+        "role": "host",
+        "source_sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a",
+        "exit": 0
+      },
+      {
+        "source": "csrc/attention/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+        "role": "device",
+        "source_sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a",
+        "exit": 0
+      },
+      {
+        "source": "csrc/attention/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+        "role": "host",
+        "source_sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae",
+        "exit": 0
+      },
+      {
+        "source": "csrc/attention/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+        "role": "device",
+        "source_sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae",
+        "exit": 0
+      },
+      {
+        "source": "csrc/attention/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+        "role": "host",
+        "source_sha256": "dc6c03bb1cf4226c80bcb53328653bf387dfe7f60f6e4ebee944ffb0bb9b1a4f",
+        "exit": 0
+      },
+      {
+        "source": "csrc/attention/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+        "role": "device",
+        "source_sha256": "dc6c03bb1cf4226c80bcb53328653bf387dfe7f60f6e4ebee944ffb0bb9b1a4f",
+        "exit": 0
+      },
+      {
+        "source": "csrc/attention/turboquant/decode/native/turboquant_fused_decode.cpp",
+        "role": "host",
+        "source_sha256": "7024e81fa1fca81330dc4e425145efdd2e76b90fe5a83be35fc9683ef8f60e0e",
+        "exit": 0
+      },
+      {
+        "source": "csrc/attention/turboquant/decode/native/turboquant_fused_decode.cpp",
+        "role": "device",
+        "source_sha256": "7024e81fa1fca81330dc4e425145efdd2e76b90fe5a83be35fc9683ef8f60e0e",
+        "exit": 0
+      },
+      {
+        "source": "csrc/attention/turboquant/bindings/asc_e8_reader.cpp",
+        "role": "host",
+        "source_sha256": "f291d4246c50b943dd54ecc8b6bf134473a69ba121ac72eb9055411d589f54d9",
+        "exit": 0
+      },
+      {
+        "source": "csrc/attention/turboquant/bindings/asc_e8_reader.cpp",
+        "role": "device",
+        "source_sha256": "f291d4246c50b943dd54ecc8b6bf134473a69ba121ac72eb9055411d589f54d9",
+        "exit": 0
+      },
+      {
+        "source": "csrc/attention/turboquant/bindings/asc_e8_component.cpp",
+        "role": "host",
+        "source_sha256": "98d868ab5885c71f82573553e444adb704673ff6dd96b353e6471bb541b4396c",
+        "exit": 0
+      },
+      {
+        "source": "csrc/attention/turboquant/bindings/asc_e8_component.cpp",
+        "role": "device",
+        "source_sha256": "98d868ab5885c71f82573553e444adb704673ff6dd96b353e6471bb541b4396c",
+        "exit": 0
+      }
+    ],
+    "core-nz": [
+      {
+        "source": "src/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+        "role": "host",
+        "source_sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a",
+        "exit": 0
+      },
+      {
+        "source": "src/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+        "role": "device",
+        "source_sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a",
+        "exit": 0
+      },
+      {
+        "source": "src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+        "role": "host",
+        "source_sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae",
+        "exit": 0
+      },
+      {
+        "source": "src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+        "role": "device",
+        "source_sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae",
+        "exit": 0
+      },
+      {
+        "source": "src/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+        "role": "host",
+        "source_sha256": "dc6c03bb1cf4226c80bcb53328653bf387dfe7f60f6e4ebee944ffb0bb9b1a4f",
+        "exit": 0
+      },
+      {
+        "source": "src/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+        "role": "device",
+        "source_sha256": "dc6c03bb1cf4226c80bcb53328653bf387dfe7f60f6e4ebee944ffb0bb9b1a4f",
+        "exit": 0
+      },
+      {
+        "source": "src/turboquant/decode/native/turboquant_fused_decode.cpp",
+        "role": "host",
+        "source_sha256": "7024e81fa1fca81330dc4e425145efdd2e76b90fe5a83be35fc9683ef8f60e0e",
+        "exit": 0
+      },
+      {
+        "source": "src/turboquant/decode/native/turboquant_fused_decode.cpp",
+        "role": "device",
+        "source_sha256": "7024e81fa1fca81330dc4e425145efdd2e76b90fe5a83be35fc9683ef8f60e0e",
+        "exit": 0
+      },
+      {
+        "source": "src/turboquant/decode/e8/e8_fused_decode.cpp",
+        "role": "host",
+        "source_sha256": "1354868b479d3c2972f219a7012718e210c085ffcb38c6310056fcebb7f390ef",
+        "exit": 0
+      },
+      {
+        "source": "src/turboquant/decode/e8/e8_fused_decode.cpp",
+        "role": "device",
+        "source_sha256": "1354868b479d3c2972f219a7012718e210c085ffcb38c6310056fcebb7f390ef",
+        "exit": 0
+      },
+      {
+        "source": "src/turboquant/decode/e8/parallel_component.cpp",
+        "role": "host",
+        "source_sha256": "0fd04fcc15b476096eadcd2537b1365356d9bb29c8591c29f9a6db998b3ff017",
+        "exit": 0
+      },
+      {
+        "source": "src/turboquant/decode/e8/parallel_component.cpp",
+        "role": "device",
+        "source_sha256": "0fd04fcc15b476096eadcd2537b1365356d9bb29c8591c29f9a6db998b3ff017",
+        "exit": 0
+      }
+    ],
+    "core-strip": [
+      {
+        "source": "src/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+        "role": "host",
+        "source_sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a",
+        "exit": 0
+      },
+      {
+        "source": "src/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+        "role": "device",
+        "source_sha256": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a",
+        "exit": 0
+      },
+      {
+        "source": "src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+        "role": "host",
+        "source_sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae",
+        "exit": 0
+      },
+      {
+        "source": "src/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+        "role": "device",
+        "source_sha256": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae",
+        "exit": 0
+      },
+      {
+        "source": "src/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+        "role": "host",
+        "source_sha256": "dc6c03bb1cf4226c80bcb53328653bf387dfe7f60f6e4ebee944ffb0bb9b1a4f",
+        "exit": 0
+      },
+      {
+        "source": "src/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+        "role": "device",
+        "source_sha256": "dc6c03bb1cf4226c80bcb53328653bf387dfe7f60f6e4ebee944ffb0bb9b1a4f",
+        "exit": 0
+      }
+    ]
+  },
+  "syntax_only": true
+}

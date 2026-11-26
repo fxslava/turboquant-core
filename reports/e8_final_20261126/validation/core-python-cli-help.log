@@ -1,0 +1,30 @@
+usage: benchmark_turboquant_production.py [-h]
+                                          [--backend {host,npu,npu-test,torch-cpu,torch-npu}]
+                                          [--build-dir BUILD_DIR]
+                                          [--host-build-dir HOST_BUILD_DIR]
+                                          [--mode {all,lm4,lm3,e8}]
+                                          [--stage {all,ingress,dequant,decode}]
+                                          [--profile PROFILE]
+                                          [--block-size {64,128}]
+                                          [--device DEVICE] [--warmup WARMUP]
+                                          [--iterations ITERATIONS] [--list]
+                                          [--verify]
+
+Run the TurboQuant production matrix or compare staged PyTorch reference
+codecs.
+
+options:
+  -h, --help            show this help message and exit
+  --backend {host,npu,npu-test,torch-cpu,torch-npu}
+  --build-dir BUILD_DIR
+  --host-build-dir HOST_BUILD_DIR
+                        Host profile catalog, if built separately
+  --mode {all,lm4,lm3,e8}
+  --stage {all,ingress,dequant,decode}
+  --profile PROFILE     Profile name from --backend host --list
+  --block-size {64,128}
+  --device DEVICE
+  --warmup WARMUP
+  --iterations ITERATIONS
+  --list                Print applicable profiles and native launch limits
+  --verify              Run CPU golden and canary checks

@@ -1,0 +1,54 @@
+implementation=staged_reference mode=lm4 stage=ingress profile=h1 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=lm4 stage=dequant profile=h1 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=lm4 stage=decode profile=h1 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS rmse=3.2611777e-05 cosine=0.999998912 max_bf16_ulp=0
+implementation=staged_reference mode=lm3 stage=ingress profile=h1 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=lm3 stage=dequant profile=h1 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=lm3 stage=decode profile=h1 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS rmse=2.8904954e-05 cosine=0.999998720 max_bf16_ulp=0
+implementation=staged_reference mode=e8 stage=ingress profile=h1 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=e8 stage=dequant profile=h1 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=e8 stage=decode profile=h1 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS rmse=0.00010653676 cosine=0.999998966 max_bf16_ulp=0
+implementation=staged_reference mode=lm4 stage=ingress profile=h1 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=lm4 stage=dequant profile=h1 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=lm4 stage=decode profile=h1 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS rmse=2.7329521e-05 cosine=0.999998579 max_bf16_ulp=0
+implementation=staged_reference mode=lm3 stage=ingress profile=h1 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=lm3 stage=dequant profile=h1 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=lm3 stage=decode profile=h1 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS rmse=1.9772106e-05 cosine=0.999998945 max_bf16_ulp=0
+implementation=staged_reference mode=e8 stage=ingress profile=h1 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=e8 stage=dequant profile=h1 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=e8 stage=decode profile=h1 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS rmse=0.00011534889 cosine=0.999998753 max_bf16_ulp=0
+implementation=staged_reference mode=lm4 stage=ingress profile=qwen35-gqa6 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=lm4 stage=dequant profile=qwen35-gqa6 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=lm4 stage=decode profile=qwen35-gqa6 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=PASS rmse=3.8895204e-05 cosine=0.999998605 max_bf16_ulp=6
+implementation=staged_reference mode=lm3 stage=ingress profile=qwen35-gqa6 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=lm3 stage=dequant profile=qwen35-gqa6 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=lm3 stage=decode profile=qwen35-gqa6 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=PASS rmse=3.2781683e-05 cosine=0.999998642 max_bf16_ulp=1
+implementation=staged_reference mode=e8 stage=ingress profile=qwen35-gqa6 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=e8 stage=dequant profile=qwen35-gqa6 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=e8 stage=decode profile=qwen35-gqa6 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=PASS rmse=0.00011296286 cosine=0.999998861 max_bf16_ulp=22
+implementation=staged_reference mode=lm4 stage=ingress profile=qwen35-gqa6 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=lm4 stage=dequant profile=qwen35-gqa6 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=lm4 stage=decode profile=qwen35-gqa6 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=PASS rmse=2.7582397e-05 cosine=0.999998633 max_bf16_ulp=1
+implementation=staged_reference mode=lm3 stage=ingress profile=qwen35-gqa6 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=lm3 stage=dequant profile=qwen35-gqa6 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=lm3 stage=decode profile=qwen35-gqa6 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=PASS rmse=2.4265561e-05 cosine=0.999998623 max_bf16_ulp=3
+implementation=staged_reference mode=e8 stage=ingress profile=qwen35-gqa6 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=e8 stage=dequant profile=qwen35-gqa6 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=e8 stage=decode profile=qwen35-gqa6 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=PASS rmse=0.00011108205 cosine=0.999998862 max_bf16_ulp=37
+implementation=staged_reference mode=lm4 stage=ingress profile=split4 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=lm4 stage=dequant profile=split4 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=lm4 stage=decode profile=split4 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=PASS rmse=3.8927499e-05 cosine=0.999998603 max_bf16_ulp=1
+implementation=staged_reference mode=lm3 stage=ingress profile=split4 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=lm3 stage=dequant profile=split4 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=lm3 stage=decode profile=split4 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=PASS rmse=3.252404e-05 cosine=0.999998661 max_bf16_ulp=1
+implementation=staged_reference mode=e8 stage=ingress profile=split4 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=e8 stage=dequant profile=split4 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=e8 stage=decode profile=split4 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=PASS rmse=0.0001141029 cosine=0.999998836 max_bf16_ulp=0
+implementation=staged_reference mode=lm4 stage=ingress profile=split4 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=lm4 stage=dequant profile=split4 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=lm4 stage=decode profile=split4 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=PASS rmse=2.733865e-05 cosine=0.999998654 max_bf16_ulp=5
+implementation=staged_reference mode=lm3 stage=ingress profile=split4 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=lm3 stage=dequant profile=split4 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=lm3 stage=decode profile=split4 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=PASS rmse=2.419555e-05 cosine=0.999998627 max_bf16_ulp=3
+implementation=staged_reference mode=e8 stage=ingress profile=split4 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=reference_begins_with_prepacked_cache
+implementation=staged_reference mode=e8 stage=dequant profile=split4 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=PASS rmse=0 cosine=1.000000000 max_bf16_ulp=0
+implementation=staged_reference mode=e8 stage=decode profile=split4 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=PASS rmse=0.00011139151 cosine=0.999998854 max_bf16_ulp=1

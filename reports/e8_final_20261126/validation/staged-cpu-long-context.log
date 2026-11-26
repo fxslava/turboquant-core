@@ -1,0 +1,2 @@
+implementation=staged_reference mode=lm3 stage=decode profile=split16 block=64 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=PASS rmse=3.2717079e-05 cosine=0.999998647 max_bf16_ulp=1
+implementation=staged_reference mode=e8 stage=decode profile=deepseek-v4-flash-128k block=128 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=PASS rmse=0.00011116635 cosine=0.999998860 max_bf16_ulp=1

@@ -1,0 +1,125 @@
+{
+  "normal": {
+    "status": "PASS",
+    "scope_empty_on_lock_release": true,
+    "outer_bystander_unsignaled": true,
+    "reason": "child_exit",
+    "exit_code": 0,
+    "child_exit_code": 0,
+    "child_pid": 2,
+    "descendants_reaped": [
+      {
+        "pid": 3,
+        "exit": 0
+      }
+    ],
+    "used_sigkill": false,
+    "watchdog_seconds": 1.5,
+    "term_to_kill_grace_seconds": 1,
+    "wall_seconds": 0.201,
+    "term_pids": [],
+    "kill_pids": []
+  },
+  "resistant-leader": {
+    "status": "PASS",
+    "scope_empty_on_lock_release": true,
+    "outer_bystander_unsignaled": true,
+    "reason": "watchdog",
+    "exit_code": 124,
+    "child_exit_code": -9,
+    "child_pid": 2,
+    "descendants_reaped": [
+      {
+        "pid": 3,
+        "exit": -9
+      }
+    ],
+    "used_sigkill": true,
+    "watchdog_seconds": 1.5,
+    "term_to_kill_grace_seconds": 1,
+    "wall_seconds": 2.552,
+    "term_pids": [
+      2,
+      3
+    ],
+    "kill_pids": [
+      2,
+      3
+    ]
+  },
+  "zero-exit-leader": {
+    "status": "PASS",
+    "scope_empty_on_lock_release": true,
+    "outer_bystander_unsignaled": true,
+    "reason": "watchdog",
+    "exit_code": 124,
+    "child_exit_code": 0,
+    "child_pid": 2,
+    "descendants_reaped": [
+      {
+        "pid": 3,
+        "exit": -9
+      }
+    ],
+    "used_sigkill": true,
+    "watchdog_seconds": 1.5,
+    "term_to_kill_grace_seconds": 1,
+    "wall_seconds": 2.551,
+    "term_pids": [
+      3
+    ],
+    "kill_pids": [
+      3
+    ]
+  },
+  "non-utf8-comm": {
+    "status": "PASS",
+    "scope_empty_on_lock_release": true,
+    "outer_bystander_unsignaled": true,
+    "reason": "watchdog",
+    "exit_code": 124,
+    "child_exit_code": -9,
+    "child_pid": 2,
+    "descendants_reaped": [
+      {
+        "pid": 3,
+        "exit": -9
+      }
+    ],
+    "used_sigkill": true,
+    "watchdog_seconds": 1.5,
+    "term_to_kill_grace_seconds": 1,
+    "wall_seconds": 2.551,
+    "term_pids": [
+      2,
+      3
+    ],
+    "kill_pids": [
+      2,
+      3
+    ]
+  },
+  "deadline-pause": {
+    "status": "PASS",
+    "scope_empty_on_lock_release": true,
+    "outer_bystander_unsignaled": true,
+    "reason": "watchdog",
+    "exit_code": 124,
+    "child_exit_code": 0,
+    "child_pid": 2,
+    "descendants_reaped": [],
+    "used_sigkill": false,
+    "watchdog_seconds": 0.18,
+    "term_to_kill_grace_seconds": 1,
+    "wall_seconds": 0.351,
+    "term_pids": [],
+    "kill_pids": []
+  },
+  "cleanup-failure": {
+    "status": "PASS",
+    "scope_empty_on_lock_release": true,
+    "outer_bystander_unsignaled": true,
+    "exit_code": 1,
+    "injected_cleanup_failure": true
+  }
+}

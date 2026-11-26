@@ -1,0 +1,75 @@
+{
+  "normal": {
+    "status": "PASS",
+    "isolated_flock_busy_while_descendant_alive": true,
+    "leader_and_detached_descendant_reaped_before_lock_release": true,
+    "reason": "child_exit",
+    "exit_code": 0,
+    "child_exit_code": 0,
+    "child_pid": 1127824,
+    "descendants_reaped": [
+      {
+        "pid": 1127825,
+        "exit": 0
+      }
+    ],
+    "used_sigkill": false,
+    "watchdog_seconds": 1.5,
+    "term_to_kill_grace_seconds": 1,
+    "wall_seconds": 0.301,
+    "term_pids": [],
+    "kill_pids": []
+  },
+  "resistant-leader": {
+    "status": "PASS",
+    "isolated_flock_busy_while_descendant_alive": true,
+    "leader_and_detached_descendant_reaped_before_lock_release": true,
+    "reason": "watchdog",
+    "exit_code": 124,
+    "child_exit_code": -9,
+    "child_pid": 1127831,
+    "descendants_reaped": [
+      {
+        "pid": 1127832,
+        "exit": -9
+      }
+    ],
+    "used_sigkill": true,
+    "watchdog_seconds": 1.5,
+    "term_to_kill_grace_seconds": 1,
+    "wall_seconds": 2.578,
+    "term_pids": [
+      1127831,
+      1127832
+    ],
+    "kill_pids": [
+      1127831,
+      1127832
+    ]
+  },
+  "zero-exit-leader": {
+    "status": "PASS",
+    "isolated_flock_busy_while_descendant_alive": true,
+    "leader_and_detached_descendant_reaped_before_lock_release": true,
+    "reason": "watchdog",
+    "exit_code": 124,
+    "child_exit_code": 0,
+    "child_pid": 1127838,
+    "descendants_reaped": [
+      {
+        "pid": 1127839,
+        "exit": -9
+      }
+    ],
+    "used_sigkill": true,
+    "watchdog_seconds": 1.5,
+    "term_to_kill_grace_seconds": 1,
+    "wall_seconds": 2.572,
+    "term_pids": [
+      1127839
+    ],
+    "kill_pids": [
+      1127839
+    ]
+  }
+}

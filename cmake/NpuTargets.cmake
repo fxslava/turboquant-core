@@ -110,6 +110,18 @@ function(add_turboquant_npu_targets)
   add_npu_runner(test_fused_decode_e2e_npu tests/npu/test_fused_decode_e2e.cpp tq_decode_npu)
   add_npu_runner(bench_qwen35_decode tests/npu/bench_qwen35_decode.cpp tq_decode_npu)
 
+  if(TARGET tq_e8_reader AND TARGET tq_e8_dequant)
+    foreach(runner IN ITEMS test_turboquant_production_npu bench_turboquant_production_npu)
+      add_npu_runner(${runner} benchmarks/benchmark_turboquant_production.cpp
+          tq_decode_npu tq_scatter_nz_npu tq_e8_reader tq_e8_dequant)
+      target_include_directories(${runner} SYSTEM PRIVATE "${SRC}/tests/cpu/e8/frozen")
+      target_compile_options(${runner} PRIVATE -fno-fast-math -ffp-contract=off)
+    endforeach()
+    target_compile_definitions(test_turboquant_production_npu PRIVATE TQ_PRODUCTION_ACCURACY=1)
+    add_custom_target(tq_npu_production
+        DEPENDS test_turboquant_production_npu bench_turboquant_production_npu)
+  endif()
+
   # The golden-dump comparison runners on the physical device: the same source and the same
   # per-kernel split as the CAModel ones in SimTargets.cmake. The dumps are host-generated
   # (golden/generate_dumps.py), so a hardware run is: generate the dumps, then
@@ -132,4 +144,7 @@ function(add_turboquant_npu_targets)
               bench_qwen35_decode
               test_golden_prefill_strip_npu test_golden_prefill_nz_npu
               test_golden_scatter_npu test_golden_decode_npu)
+  if(TARGET tq_npu_production)
+    add_dependencies(tq_npu_kernels tq_npu_production)
+  endif()
 endfunction()

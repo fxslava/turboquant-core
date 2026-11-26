@@ -1,0 +1,201 @@
+tests/bench_qwen35_decode: OK
+tests/bench_turboquant_production_npu: OK
+tests/test_fused_decode_e2e_npu: OK
+tests/test_golden_decode_npu: OK
+tests/test_golden_prefill_nz_npu: OK
+tests/test_golden_prefill_strip_npu: OK
+tests/test_golden_scatter_npu: OK
+tests/test_live_write_npu: OK
+tests/test_live_write_nz_npu: OK
+tests/test_nz_ingress_canary_npu: OK
+tests/test_turboquant_production_host: OK
+tests/test_turboquant_production_npu: OK
+lib/libtq_decode_npu.so: OK
+lib/libtq_e8_dequant.so: OK
+lib/libtq_e8_reader.so: OK
+lib/libtq_prefill_npu.so: OK
+lib/libtq_prefill_nz_npu.so: OK
+lib/libtq_scatter_npu.so: OK
+lib/libtq_scatter_nz_npu.so: OK
+benchmarks/README.md: OK
+benchmarks/benchmark_turboquant_production.py: OK
+tests/bench_qwen35_decode: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a8de9a668f79d29a11710b80f7a9a09587815d2b, for GNU/Linux 3.2.0, not stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_decode_npu.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libascendcl.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libruntime.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [liberror_manager.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN:$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib]
+tests/bench_turboquant_production_npu: ELF 64-bit LSB pie executable, x86-64, version 1 (GNU/Linux), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=73e8324c63d3df8767241fffe629f1a25ce6a00e, for GNU/Linux 3.2.0, not stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_decode_npu.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_scatter_nz_npu.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_e8_reader.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_e8_dequant.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libascendcl.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libruntime.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [liberror_manager.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN:$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib]
+tests/test_fused_decode_e2e_npu: ELF 64-bit LSB pie executable, x86-64, version 1 (GNU/Linux), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=cab82d294a9d2c4707cc8059dd424bc3b571b65c, for GNU/Linux 3.2.0, not stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_decode_npu.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libascendcl.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libruntime.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [liberror_manager.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN:$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib]
+tests/test_golden_decode_npu: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=1a785a3a70497d89700c2df3415b8b7338bda788, for GNU/Linux 3.2.0, not stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_decode_npu.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libascendcl.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libruntime.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [liberror_manager.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN:$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib]
+tests/test_golden_prefill_nz_npu: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=05bc9b3151d6107bc513684ae0cb7b4649feceee, for GNU/Linux 3.2.0, not stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_prefill_nz_npu.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libascendcl.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libruntime.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [liberror_manager.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN:$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib]
+tests/test_golden_prefill_strip_npu: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=bd8d39d1b18e51c924f46ac3f6af6eb8f10bbecc, for GNU/Linux 3.2.0, not stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_prefill_npu.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libascendcl.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libruntime.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [liberror_manager.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN:$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib]
+tests/test_golden_scatter_npu: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a49811f31e6130834463d26a2c2d9e964c98a292, for GNU/Linux 3.2.0, not stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_scatter_npu.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libascendcl.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libruntime.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [liberror_manager.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN:$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib]
+tests/test_live_write_npu: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=58308c4c513f7f60a17bffabb15e4bb229851ea8, for GNU/Linux 3.2.0, not stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_prefill_npu.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_scatter_npu.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libascendcl.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libruntime.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [liberror_manager.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN:$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib]
+tests/test_live_write_nz_npu: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=fd371d444ffa6ea288d576ea4c504fc573a68922, for GNU/Linux 3.2.0, not stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_scatter_nz_npu.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libascendcl.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libruntime.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [liberror_manager.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN:$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib]
+tests/test_nz_ingress_canary_npu: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=dbf2116cce5c3fef9c331a5ca77dcf8b011df537, for GNU/Linux 3.2.0, not stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_prefill_nz_npu.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libascendcl.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libruntime.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [liberror_manager.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN:$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib]
+tests/test_turboquant_production_host: ELF 64-bit LSB pie executable, x86-64, version 1 (GNU/Linux), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=2d3dabc7fe3da23a11586555086e04f5de35375c, for GNU/Linux 3.2.0, not stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN/../lib]
+tests/test_turboquant_production_npu: ELF 64-bit LSB pie executable, x86-64, version 1 (GNU/Linux), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a3fbeb6fefecd74afebd8974d4275e2655069d52, for GNU/Linux 3.2.0, not stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_decode_npu.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_scatter_nz_npu.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_e8_reader.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libtq_e8_dequant.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libascendcl.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libruntime.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [liberror_manager.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN:$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib]
+lib/libtq_decode_npu.so: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, BuildID[sha1]=462e294a9317a6e1b812cf9c4089b839db183c62, stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libc_sec.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: ["\$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib:"]
+lib/libtq_e8_dequant.so: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, BuildID[sha1]=1da944bf8f8f257dc5539d2f633923bc7452fb31, stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libc_sec.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: ["\$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib:"]
+lib/libtq_e8_reader.so: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, BuildID[sha1]=061cbf34474fbd9a07da9c1172ce39594df303b8, stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libc_sec.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: ["\$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib:"]
+lib/libtq_prefill_npu.so: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, BuildID[sha1]=768c08fbdd45626ac2da55f945469d77fc0edc3b, stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libc_sec.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: ["\$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib:"]
+lib/libtq_prefill_nz_npu.so: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, BuildID[sha1]=f014add34a086e46649a2e19030444b20d50fbe2, stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libc_sec.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: ["\$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib:"]
+lib/libtq_scatter_npu.so: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, BuildID[sha1]=b4b95670b53724d2d3d41e1c7636ef46a0173e16, stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libc_sec.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: ["\$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib:"]
+lib/libtq_scatter_nz_npu.so: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, BuildID[sha1]=61b88e5cc584cf5850e2e62aa5415d8e9213ce22, stripped
+  Machine:                           Advanced Micro Devices X86-64
+ 0x0000000000000001 (NEEDED)             Shared library: [libc_sec.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: ["\$ORIGIN/../lib:/home/dmin/Ascend-9.2.1/cann-9.2.1/lib64:/home/dmin/Ascend-9.2.1/cann-9.2.1/tools/simulator/Ascend950PR_9599/lib:"]

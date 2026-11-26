@@ -1,0 +1,21 @@
+# Create the content-only snapshot from the plugin clone.
+Set-Location -LiteralPath 'C:/vllm-ascend'
+$snapshot='C:/Ascend/turboquant-integration-work/e8-plugin-9d4f1d3b-snapshot'
+$archive='C:/Ascend/turboquant-integration-work/e8-plugin-9d4f1d3b.tar'
+New-Item -ItemType Directory -Path $snapshot -Force | Out-Null
+git archive --format=tar "--output=$archive" 9d4f1d3b33726adef41473ff12fcfdc6b6b0afea
+tar.exe -xf $archive -C $snapshot
+
+# Guards apply to all four CPU test processes.
+Set-Location -LiteralPath $snapshot
+$env:TORCH_DEVICE_BACKEND_AUTOLOAD='0'
+$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'
+$env:PYTHONDONTWRITEBYTECODE='1'
+$env:OMP_NUM_THREADS='2'
+$env:MKL_NUM_THREADS='2'
+$py='C:/Users/Admin/AppData/Local/Python/pythoncore-3.14-64/python.exe'
+$report='C:/Ascend/turboquant-core/reports/e8_final_20261126/python-committed'
+& $py tests/ut/attention/run_turboquant_device_free.py -q --junitxml="$report/device-free.junit.xml" | Tee-Object -FilePath "$report/device-free.log"
+& $py tests/ut/attention/run_turboquant_device_free.py -q -k e8 --junitxml="$report/e8-targeted.junit.xml" | Tee-Object -FilePath "$report/e8-targeted.log"
+& $py "$report/guarded_host_gates.py" --junitxml="$report/host-gates.junit.xml" | Tee-Object -FilePath "$report/host-gates.log"
+& $py "$report/encoder_reference.py" "$env:Temp" "$report/encoder-reference.json" | Tee-Object -FilePath "$report/encoder-reference.log"

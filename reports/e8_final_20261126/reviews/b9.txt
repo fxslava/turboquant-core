@@ -1,0 +1,15 @@
+Fresh Ascend cross-review B9 — slot08-e8-r3-revision2, v9
+REJECT — exact receipt loses cancellation and retirement status at its outer process.
+Packet SHA-256 bac69a1cad36be5f37a82ccd8c3b6361d9bb806822727f1de8e06d4fdeb88167
+Receipt SHA-256 170b4b4a00b80882213e3bf681a5bb339f92ef65ae52bfc4e1eb0a16389f72f9
+Verified all 127 members, provenance, receipt argv, four recorded lock inodes, encoder 1e66ef76e195d, runner 5ea6f8110de4, supervisor 92fa2de77ff7.
+B9-CANCEL — a direct TERM to the receipt PID returned -15 at 0.053 s with both locks held and no case TERM. The original shortened watchdog retired the case at 1.237 s.
+B9-CANCEL — a group TERM after observed watchdog TERM returned -15 at 0.855 s. Both locks stayed held until retirement at 1.258 s. The receipt lost the earlier timeout status 124.
+Native supervisor — silent preflight and output are inside the absolute 900 s/15 s timer. Private-init PIDFD readiness precedes case work. Scratch controls confirmed direct-owner interruption, blocked output, descendant cleanup, scoped locks and inode-bound PEM sampling.
+Canary — 16/2 then 32/4 with opposite first layouts, six tiles total, exact 4352-byte packet oracle, untouched bytes plus GM/context guards. Backend proof covers completed mappings of the pinned runner; parity and actual backend mapping remain pending.
+ISA/ownership — balanced MTE2/S, V/S, V/MTE3 and MTE3/S edges plus DSB; Phase A MEMBAR/block barrier and Phase B block barrier. 128 threads, replicated eight-coordinate shuffle groups and unique lane-owned heap/context updates; one AIV, static UB, no L1/L0 allocations.
+Resource closure — split/merged roots byte-identical, 35,144/8,968/34,856 bytes, inline call closure, 48/0/48-byte private frames, R126/R119/R126, divergence metadata 2560. Dispatch extents match NOP-excluded word counts; runtime capacity is guarded.
+AKA — zero fatal and zero new fingerprints on independent ascend351x and ascend950pr baselines. Frontend arithmetic and leaf coverage is partial; source and split ISA supply the manual checks.
+Cost — d956a138411c fixed INT4 six-strip fit, leave-one-out MAE 527.5 ticks. Abstains for E8 rankings.
+Bottleneck hypotheses — compare Phase A lane-0 heap GM dependency stalls with a reduced-traffic queue layout, and Phase B exhaustive-fallback score ticks with parity-preserving table-access coalescing.
+Worker received reproduction and corrective handoff guidance. CPU-only checks performed.

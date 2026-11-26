@@ -1,0 +1,30 @@
+{
+  "rows": 16,
+  "started_utc": "2026-11-26T10:14:23.0977189Z",
+  "packet_sha256": "99866169988a2800ce1bb2722dd97be9763aa19e2536c9443d688141e97976a8",
+  "launch_receipt_sha256": "da5382fa2f5909fbe8140d66639ecc010a73cedb2e1fcf9100e5cc843d137d61",
+  "argv": [
+    "/usr/bin/env",
+    "-i",
+    "HOME=/home/dmin",
+    "PATH=/usr/bin:/bin",
+    "LANG=C",
+    "LC_ALL=C",
+    "/bin/bash",
+    "--noprofile",
+    "--norc",
+    "/mnt/c/ascend-micro-harness/scripts/camodel_build_phase_guard.sh",
+    "camodel",
+    "exec",
+    "/usr/bin/flock",
+    "--no-fork",
+    "--exclusive",
+    "/home/dmin/ascend-sync-schedule-ablation/queue/checkpoint1-exclusive.lock",
+    "/bin/bash",
+    "--noprofile",
+    "--norc",
+    "/mnt/c/Ascend/turboquant-integration-work/e8-r3r2-canary-20261126-v11/run_canary.sh",
+    "16",
+    "99866169988a2800ce1bb2722dd97be9763aa19e2536c9443d688141e97976a8"
+  ]
+}

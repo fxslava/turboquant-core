@@ -1,0 +1,25 @@
+{
+  "fixture_root": "C:\\Users\\Admin\\AppData\\Local\\Temp",
+  "retained_fixture_root": "/home/dmin/work/checkpoint2_20261123/parallel_encoder/raw/fixture",
+  "input_basis": "Retained rows are in cache basis. Multiply by 16 exactly in FP32 to supply the unnormalized producer output expected by encode_e8_rotated.",
+  "fixture_sha256": {
+    "six_strip_rotated.f32le": "cfdb21123a2a059784e458e1d1599f0d798fb4121f113f4f71b0adda029558c4",
+    "six_labels_oracle.u16le": "8ba124a48e5677f9fa8a890fe0baf9e188fdb68be280377cca2e2fa6b9296889",
+    "six_scales.f32le": "00bf18aa87d465926dc51e3a52137bbd01e208652c49c64c183065d057d89f44"
+  },
+  "source": "vllm_ascend\\attention\\turboquant_reference_cache.py",
+  "source_sha256": "86ca1cb04f6b1fd8a5f8be6aa3041be1ab69dfdf6706594ab982da53652fc9f6",
+  "cases": [
+    {
+      "rows": 16,
+      "label_mismatches": 0,
+      "scale_mismatches": 0
+    },
+    {
+      "rows": 32,
+      "label_mismatches": 0,
+      "scale_mismatches": 0
+    }
+  ],
+  "device_launches": 0
+}

@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "isolated_flock_busy_during_TERM_grace": true,
+  "detached_descendant_received_TERM_while_resistant_leader_alive": true,
+  "leader_and_detached_descendant_reaped_before_lock_release": true,
+  "reason": "watchdog",
+  "exit_code": 124,
+  "child_exit_code": -9,
+  "child_pid": 1127609,
+  "descendants_reaped": [
+    {
+      "pid": 1127610,
+      "exit": -9
+    }
+  ],
+  "used_sigkill": true,
+  "watchdog_seconds": 1.25,
+  "term_to_kill_grace_seconds": 1,
+  "wall_seconds": 2.381,
+  "term_pids": [
+    1127609,
+    1127610
+  ],
+  "kill_pids": [
+    1127609,
+    1127610
+  ]
+}

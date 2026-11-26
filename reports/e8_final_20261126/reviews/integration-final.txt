@@ -1,0 +1,87 @@
+PASS — independent final staged source and guarded CPU integration review
+
+Scope
+Core base 29274d52c6e1d1d1b70e0a0ccc3a9ca70d006001 and plugin base
+7ee3e928078fc7e5d6e1b191b3ee5b953c8e7fd8. Reviewed their staged production
+and validation changes. The admissible release is E8 host-packed read/dequant
+with device encoder ingress gated. This is not CAModel admission or an NPU
+correctness/performance verdict. Real torch_npu and the full extension were
+blocked by the CPU harness. No compiler lane, CAModel, NPU, or full-plugin
+build was launched during this review. Candidate files were read-only.
+
+Configuration and allocation
+- Mode 2 binds to VLLM_ASCEND_TURBOQUANT_QUANT_MODE and the existing
+  ENABLE_TURBOQUANT and TURBOQUANT_KERNEL_STAGES settings. Modes 0 and 1
+  retain the native INT4 branches. No serving knob was introduced.
+- E8 requires BF16, D=256, 64-row block multiples, unsharded context and
+  the V1 runner. PCP and connector restrictions are inherited. The pinned
+  vLLM commit ced6857afa0ea7b2e3f0846a62e1394e90f15607 calls the zero-argument
+  supported kernel block sizes method and preserves the manager block size for
+  these E8 geometries. A newer separate vLLM checkout passes a cache spec,
+  which is outside the pinned compatibility claim and also affects legacy
+  Ascend backends with zero-argument overrides.
+- Each tile/head has UINT8 views over 4352 bytes per plane, with UINT16 labels
+  occupying 0..4095 and FP32 scales at 4096 + 4*row. At block size 128 each
+  block owns two tiles. E8 pages contain only the K/V packet planes, each
+  plane is block-major, and the hybrid carve uses the layer's private dense-
+  padded budget. Generic block copies and zeroing traverse both complete
+  packets, including scales, without the legacy NZ scale reinterpretation.
+
+Metadata and forward
+- The V1 runner supplies each cache group's existing CPU block-table mirror;
+  its base builder provides CPU query lengths and sequence lengths. Async
+  speculative correction is inherited through AscendAttentionBackend and
+  consumes the already staged scheduler accepted-count copy. The E8 builder
+  refuses paths that would select device sequence lengths, including parallel
+  drafting. Plans stop at num_actual_tokens before SP dummy rows can reach
+  the table, and dummy runs use empty plans. Metadata and its H2D offset upload
+  are shared by the layers in an attention group without a new D2H transfer.
+- The planner constructs INT64 packet indices and byte offsets, tests capacity,
+  and aligns each fused offset table to one 32-byte burst. The reader supports
+  even 4..256-tile contexts for single live queries. Each KV head supplies up
+  to six query heads per launch, with padding cleared, live outputs copied and
+  inverse rotation applied. Other requests use dense attention after gathering
+  and dequantizing cache-basis packets. Device fallback correctness remains a
+  physical-server verification item.
+- Caller-owned host packets are installed with the adapter, and the prepared
+  read branch consumes preloaded cache with key/value absent. This is an
+  explicit prepared tensor API. Ordinary model requests that supply fresh NPU
+  K/V, V2 cache setup, and KV-transfer connectors do not supply prepacked E8
+  cache. Raw NPU writes fail before packet mutation. CPU golden encoding and
+  packet packing are controls. Both C++ legacy ingress dispatchers also reject
+  mode 2 before launch. The CPU oracle receipt lists zero label and scale
+  differences for the 16-row and 32-row fixtures.
+
+C++ and ABI
+- Packed dequant validates matching contiguous UINT8/BF16/INT8 geometry,
+  device, 32-byte bases and runtime byte-range disjointness. It launches the
+  sealed 16-row component four times per packet. Packet, label, scale and
+  output offsets widen before multiplication. Meta/FakeTensor validates dtype
+  and geometry and leaves address checks to actual tensors. Reader witness
+  buffers are explicit outputs, with no external scratch ABI, and the 1056 B
+  stride remains internal to the unchanged reader.
+- Native batch and scatter writer offsets widen before GM products. The legacy
+  frozen batch path retains a narrow state carrier behind the existing
+  geometry predicate, while the wide path carries large cache offsets.
+  Source sync independently matched all 36 shared C++ files and one sidecar.
+  Staged whitespace checks passed in both trees.
+
+Validation
+- Independently reran the guarded host attention harness with
+  TORCH_DEVICE_BACKEND_AUTOLOAD=0 and PYTEST_DISABLE_PLUGIN_AUTOLOAD=1.
+  Full suite: 623 passed in 24.24s. E8 subset: 32 passed in 7.17s.
+- Receipts passed 14 host plugin checks, 10 CTests, 216 C++ host matrix rows,
+  38 staged-reference rows, and three metric controls. Binding receipt records
+  five syntax translation units, Meta/FakeTensor/Dynamo fullgraph validation,
+  and zero device launches. Kernel receipts cover 30 CANN syntax cases and 16
+  analyzer comparisons with zero added diagnostics relative to fingerprints.
+- Validation geometry is synthetic and spans 64/128 blocks, 1/4/16/32
+  sequences, 2K..128K contexts, grouped heads and Split-K 1/4/8/16. Native
+  coverage reports unavailable modes honestly. LM3 is staged-reference only,
+  and native E8 has neither device ingress nor Split-K. Native LM4 and E8
+  run only their supported geometry. Accuracy and timed device paths are
+  distinct, both check guard bands, and bandwidth counts logical bytes.
+  The sealed CANN 9.2.1 Ascend950PR compile-only bundle receipt verifies 11
+  Linux x86-64 physical executables, seven kernel DSOs and one host catalog.
+
+Blocking findings within this scope: none.

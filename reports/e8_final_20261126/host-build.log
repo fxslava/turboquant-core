@@ -1,0 +1,31 @@
+[  9%] Building CXX object tests/cpu/e8/CMakeFiles/e8_decode_cpu_check.dir/decode_cpu_check.cpp.o
+[  9%] Building CXX object CMakeFiles/turboquant_host.dir/src/turboquant/common/turboquant_tiling.cpp.o
+[ 14%] Building CXX object CMakeFiles/turboquant_host.dir/src/turboquant/common/turboquant_telemetry.cpp.o
+[ 19%] Linking CXX static library libturboquant_host.a
+[ 19%] Built target turboquant_host
+[ 23%] Building CXX object tests/cpu/e8/CMakeFiles/e8_layout_check.dir/layout_check.cpp.o
+[ 28%] Linking CXX executable ../../e8_layout_check
+[ 33%] Linking CXX executable ../../e8_decode_cpu_check
+[ 33%] Built target e8_layout_check
+[ 38%] Building CXX object CMakeFiles/test_contract_gates.dir/tests/cpu/test_contract_gates.cpp.o
+[ 38%] Built target e8_decode_cpu_check
+[ 42%] Building CXX object CMakeFiles/test_layout_bridge.dir/tests/cpu/test_layout_bridge.cpp.o
+[ 47%] Linking CXX executable tests/test_layout_bridge
+[ 52%] Linking CXX executable tests/test_contract_gates
+[ 52%] Built target test_layout_bridge
+[ 57%] Building CXX object CMakeFiles/test_golden_decode_oracle.dir/tests/cpu/test_golden_decode_oracle.cpp.o
+[ 57%] Built target test_contract_gates
+[ 61%] Building CXX object CMakeFiles/test_telemetry_dump.dir/tests/cpu/test_telemetry_dump.cpp.o
+[ 66%] Linking CXX executable tests/test_telemetry_dump
+[ 66%] Built target test_telemetry_dump
+[ 71%] Building CXX object CMakeFiles/test_qwen35_decode.dir/tests/cpu/test_qwen35_decode.cpp.o
+[ 76%] Linking CXX executable tests/test_golden_decode_oracle
+[ 80%] Linking CXX executable tests/test_qwen35_decode
+[ 80%] Built target test_golden_decode_oracle
+[ 85%] Building CXX object CMakeFiles/test_decode_reduce.dir/tests/cpu/test_decode_reduce.cpp.o
+[ 85%] Built target test_qwen35_decode
+[ 90%] Building CXX object CMakeFiles/test_qwen35_telemetry.dir/tests/cpu/test_qwen35_telemetry.cpp.o
+[ 95%] Linking CXX executable tests/test_decode_reduce
+[ 95%] Built target test_decode_reduce
+[100%] Linking CXX executable tests/test_qwen35_telemetry
+[100%] Built target test_qwen35_telemetry

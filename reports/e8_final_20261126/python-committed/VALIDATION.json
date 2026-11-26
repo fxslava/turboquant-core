@@ -1,0 +1,46 @@
+{
+  "plugin_commit": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+  "plugin_tree": "ae7438ad07e80245597f166420959ff5edfdd1a4",
+  "snapshot": "C:/Ascend/turboquant-integration-work/e8-plugin-9d4f1d3b-snapshot",
+  "baseline": {
+    "passed": 606,
+    "seconds": 19.873,
+    "junit_sha256": "9307c7c0a1c70f706acad3f044708757d9b83872acdfcbb71a034456013a2bbc"
+  },
+  "full": {
+    "passed": 623,
+    "seconds": 43.3,
+    "junit_sha256": "3b854f87e2a0213bad2b79d8fb5a17ef06b49162dc2b59a84fdb1c86bc79c36e"
+  },
+  "e8_focused": {
+    "passed": 32,
+    "seconds": 19.067,
+    "junit_sha256": "870a406c53ce58df8a10ded04b92dea5bea3ae498ac2008e22dee8c5b3178352"
+  },
+  "source_and_build": {
+    "passed": 14,
+    "seconds": 0.824,
+    "junit_sha256": "286f36c825e6ce38b17cec1c3bba3140697b03f0541f12d156450cadba8aa64a"
+  },
+  "all_606_baseline_node_ids_retained": true,
+  "all_32_e8_node_ids_in_full_run": true,
+  "retained_oracle_fixture_hashes_match": true,
+  "retained_oracle": [
+    {
+      "rows": 16,
+      "label_mismatches": 0,
+      "scale_mismatches": 0
+    },
+    {
+      "rows": 32,
+      "label_mismatches": 0,
+      "scale_mismatches": 0
+    }
+  ],
+  "device_backend_autoload": 0,
+  "blocked_imports": [
+    "torch_npu",
+    "vllm_ascend.vllm_ascend_C"
+  ],
+  "device_launches": 0
+}

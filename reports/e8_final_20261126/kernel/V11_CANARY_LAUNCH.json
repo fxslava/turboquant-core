@@ -1,0 +1,55 @@
+{
+  "packet": "/mnt/c/Ascend/turboquant-integration-work/e8-r3r2-canary-20261126-v11/REVIEW_PACKET.json",
+  "packet_sha256": "99866169988a2800ce1bb2722dd97be9763aa19e2536c9443d688141e97976a8",
+  "device": "CANN 9.2.1 CAModel Ascend950PR_9599 (dav-3510)",
+  "case_parameter": "16 or 32; run separately in order under the identical two locks",
+  "argv": [
+    "/usr/bin/env",
+    "-i",
+    "HOME=/home/dmin",
+    "PATH=/usr/bin:/bin",
+    "LANG=C",
+    "LC_ALL=C",
+    "/bin/bash",
+    "--noprofile",
+    "--norc",
+    "/mnt/c/ascend-micro-harness/scripts/camodel_build_phase_guard.sh",
+    "camodel",
+    "exec",
+    "/usr/bin/flock",
+    "--no-fork",
+    "--exclusive",
+    "/home/dmin/ascend-sync-schedule-ablation/queue/checkpoint1-exclusive.lock",
+    "/bin/bash",
+    "--noprofile",
+    "--norc",
+    "/mnt/c/Ascend/turboquant-integration-work/e8-r3r2-canary-20261126-v11/run_canary.sh",
+    "<rows>",
+    "99866169988a2800ce1bb2722dd97be9763aa19e2536c9443d688141e97976a8"
+  ],
+  "lock_identity_observed": {
+    "checkpoint1-exclusive.lock": {
+      "device": 2096,
+      "inode": 150351
+    },
+    "phase-admission.lock": {
+      "device": 2096,
+      "inode": 150345
+    },
+    "phase-compile.lock": {
+      "device": 2096,
+      "inode": 150346
+    },
+    "phase-camodel.lock": {
+      "device": 2096,
+      "inode": 150347
+    },
+    "bisheng-vs-camodel.lock": {
+      "inode": 2769600,
+      "device": 2096
+    }
+  },
+  "watchdog_seconds_per_case": 900,
+  "term_to_kill_grace_seconds": 15,
+  "max_component_launches_per_case": 4
+}

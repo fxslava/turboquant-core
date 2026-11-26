@@ -1,0 +1,26 @@
+ascend950pr-cann921-x86_64.tar.gz: OK
+tests/bench_qwen35_decode: OK
+tests/bench_turboquant_production_npu: OK
+tests/test_fused_decode_e2e_npu: OK
+tests/test_golden_decode_npu: OK
+tests/test_golden_prefill_nz_npu: OK
+tests/test_golden_prefill_strip_npu: OK
+tests/test_golden_scatter_npu: OK
+tests/test_live_write_npu: OK
+tests/test_live_write_nz_npu: OK
+tests/test_nz_ingress_canary_npu: OK
+tests/test_turboquant_production_host: OK
+tests/test_turboquant_production_npu: OK
+lib/libtq_decode_npu.so: OK
+lib/libtq_e8_dequant.so: OK
+lib/libtq_e8_reader.so: OK
+lib/libtq_prefill_npu.so: OK
+lib/libtq_prefill_nz_npu.so: OK
+lib/libtq_scatter_npu.so: OK
+lib/libtq_scatter_nz_npu.so: OK
+benchmarks/README.md: OK
+benchmarks/benchmark_turboquant_production.py: OK
+PASS 11 physical Linux x86-64 executables, seven standalone kernel DSOs, one host catalog
+PASS physical runner origin-relative library search and standalone ACL dependencies
+mode=e8 stage=decode profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS live_tiles=32 rmse=0.00010653676 cosine=0.999998966 relative_l2=0.0014467279 max_bf16_ulp=0 host_validation_us=3886.005
+mode=e8 stage=decode profile=h1 dim=256 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS live_tiles=32 rmse=0.00011534889 cosine=0.999998753 relative_l2=0.0015888814 max_bf16_ulp=0 host_validation_us=8832.804

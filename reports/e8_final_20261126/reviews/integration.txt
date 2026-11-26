@@ -1,0 +1,85 @@
+Independent staged integration review
+
+Verdict: REJECT the reviewed snapshot. The vLLM GQA E8 path has two
+reproducible configuration or metadata failures. The review covers the changes
+staged against core 29274d52c6e1d1d1b70e0a0ccc3a9ca70d006001 and vLLM Ascend
+7ee3e928078fc7e5d6e1b191b3ee5b953c8e7fd8. The corrective follow-up was not part
+of this snapshot.
+
+1. Reject the V2 model runner early for GQA E8 unless its allocator and metadata
+   are wired. vllm_ascend/platform.py:343 selects the GQA TurboQuant backend
+   without checking the runner, and :1273 validates mode, shape, context
+   sharding and KV transfer without rejecting v2. worker/worker.py:511 routes
+   that configuration into V2. worker/v2/attn_utils.py:200 uses the separate
+   quantized cache-dtype integration and does not emit the GQA packet spec.
+   Its common attention metadata at :512 also lacks the host block table and
+   block count set by the V1 runner at worker/model_runner_v1.py:3736-3739.
+   Early refusal can be specific to ENABLE_TURBOQUANT mode 2. Keep the existing
+   MLA cache dtype independent.
+
+2. Ignore the padded suffix of V1 E8 queries before requiring matching host
+   metadata rows. worker/model_runner_v1.py:2487-2502 applies the FIA padding
+   helper in the sequence-parallel path even when E8 disables full graphs.
+   At :1110-1112 a mixed batch gets one additional dummy query-prefix entry.
+   At scheduler capacity the CPU block table has only max_num_reqs rows. The
+   base builder pads lengths and the device block table in attention_v1.py:
+   366-399, while E8 correctly uses the raw host table. The unconditional check
+   in attention/turboquant_e8.py:78 raises before the loop can discard the dummy
+   row beyond num_actual_tokens. A guarded CPU PyTorch 2.14.0 execution of the
+   exact Git-index sources reproduced this with block table [[0], [1]],
+   seq_lens=[1,1,1], query_lens=[1,1,2], num_tokens=2, block_size=64 and one
+   KV head. The [1,1] control produced two requests. The padded input raised
+   'E8 metadata requires one block table and context length per request'.
+   Validate row availability only when consuming a live request. Include
+   missing live block and length controls so padding tolerance cannot hide
+   incomplete metadata.
+
+Reviewed behavior and evidence
+
+- The existing quantization mode selects E8. E8 GQA requires D256, BF16, a
+  block size divisible by 64, unsharded context and the existing GQA backend
+  restrictions. No new production environment variable or CLI switch appeared.
+- In V1, the packet spec accounts for 4,352 bytes per plane and 8,704 bytes
+  per 64-token head tile. Hybrid full-attention layers keep private K/V
+  allocations within the established page accounting. The two views have the
+  block/tile/head/byte order and generic block moves/zeroing operate on both
+  planes. The pinned upstream common-block selector tries the physical block
+  size first, and the E8 backend accepts both 64 and 128 directly.
+- The graph restrictions and metadata assembly keep live E8 offsets outside
+  the captured graph. The V1 builder consumes CPU mirrors and the existing
+  async-spec length correction for AscendAttentionBackend subclasses. It
+  uploads one aligned INT64 plan per attention group shared by its layers.
+  No added device-to-host conversion is used by planning or forward. The
+  padded-suffix defect above occurs within this host-only preparation.
+- The prepared path installs complete CPU-packed packets and calls attention
+  with prepacked planes and no incoming K/V. Direct device K/V ingress stays
+  gated. The fused reader runs single-query requests at even 4–256 tiles,
+  paging through prepared offsets and issuing six-head groups with padded
+  remainders. Dense fallback covers other tile counts and multi-token requests
+  with a bottom-right causal mask. The sealed reader and component source
+  remained unchanged in the staged integration. Required output witnesses
+  remain in the existing reader ABI, with no additional kernel scratch operand.
+- The new packet dequant binding checks UINT8 input, BF16/INT8 output, shape,
+  contiguous layout, matching device, real-buffer alignment and runtime range
+  overlap. All packet and output pointer offsets widen before products and
+  preserve the four aligned 16-row component calls per packet. The staged
+  writer uses wide intermediate offset products. The retained narrow strip
+  representation is selected under FrozenBatchGeometry's explicit bounds.
+- The compile-only harness distinguishes native readiness from unsupported
+  LM3, gated E8 ingress, native E8 Split-K and reader geometry limits. The
+  staged reference compares all three codecs through dequant and decode,
+  including long-context profiles. Native timing reports ACL event p50/p95/
+  mean and documented logical effective bandwidth, rather than physical
+  witness/reread traffic. Representative full packet bytes, E8 dequant
+  witnesses, BF16 output errors and GM guard bands are checked.
+- Independently reran the synchronization script and got matching inventories,
+  comment checks and shared byte hashes. Observed recorded 621 guarded
+  attention tests, 14 host tests, 10 core CTests, extracted C++ binding syntax/
+  FakeTensor/fullgraph checks and zero new analyzer diagnostics. The standalone
+  Ascend950PR archive receipt lists 11 compiled executables and seven kernel
+  DSOs with verified hashes. The recorded tests are evidence for their review
+  snapshot, and currently omit the reproduced dummy-suffix case.
+
+Source and CPU review only. The independent control set backend autoload to
+zero and hard-blocked torch_npu and the full extension import. No NPU,
+CAModel, full plugin build or encoder promotion was part of this review.

@@ -1,0 +1,22 @@
+Review B10 | Fresh independent cross-review, pass B | REJECT
+Candidate slot08-e8-r3-revision2, canary v10, CANN 9.2.1 dav-3510 / Ascend950PR_9599
+Packet SHA-256 71314284b0a6f0ae92ca0b0294468bc41e8582654a26b3dd782467a79739b20e
+Launch receipt SHA-256 60a54a523e4cf65a56014bab27852d43303eda478939847574359b4709ef4497
+Supervisor SHA-256 92fa2de77ff7b344b854fb14aa98f8284bf361a0da71494b12e827dbfedffab2
+Matched all 127 packet members, source provenance, exact receipt argv substitution and five lock identities.
+Blocker | Native lines 219–232 can replace the first cancellation status before the polling loop consumes it.
+CPU evidence | Queued direct TERM, then group HUP before deadline. Resume returned 129 instead of first TERM's 143.
+CPU evidence | Queued only TERM before deadline. Resume inside the grace period returned 124 instead of 143.
+Ordinary controls | The launch PID became the supervisor. Direct INT, group TERM, completed adoption, blocked preflight and watchdog-grace cases retained all three active locks through teardown.
+Cleanup | Private proc and PIDFD handshake gates admission. TERM broadcast reaches detached descendants. Absolute KILL and reap-through-ECHILD precede release of lane, CAModel phase and compatibility locks.
+Backend | Runner mapping control accepted the matching inode and digest and rejected a same-bytes replacement inode. Evidence scope is sampled runner mappings.
+Probe | 16 rows / 2 launches and 32 rows / 4 launches, serialized, with exact 4,352-byte packet, label, scale, normalized data and guard checks.
+Scalar and lifetime | Both compiled entries retain MTE2→S, V→S, V→MTE3 and MTE3→S waits, DSB and terminal drain. One 17,728-byte UB arena holds distinct input, label and scale regions.
+SIMT | Four warps each process four rows and 32 fixed queries per row. Width-eight shuffle reductions operate on separate coordinate lanes. Lane zero owns per-query heap metadata.
+Publication | Phase A GM writers reach MEMBAR and a uniform block barrier before V→S handoff. Phase B drains before labels and scales reach MTE3.
+Resources | Split and merged SIMT roots are byte-identical, 35,144 / 8,968 / 34,856 bytes, with no calls and 48-byte maximum private frame. The runner gates private and divergence backing. Historical row-major trace evidence is partial.
+AKA | Zero fatal or new warnings against both independent baselines. Frontend coverage is limited. Source and compiled roots were checked for SIMT execution and synchronization.
+Cost model | Fixed six-strip INT4 replay only. Leave-one-out MAE 527.5 ticks and all ten pair rankings tied. Abstain on E8 timing.
+Hypothesis | Phase A lane-zero GM heap traffic may dominate the slow path. Compare memory stalls and exact shortlist parity with an on-chip heap in a future variant.
+Hypothesis | Compare Phase A/B launch and scalar drain spans before testing a fused handoff with an explicit publication proof.
+Defect and CPU reproductions delivered to the kernel worker. No build or simulator was run.

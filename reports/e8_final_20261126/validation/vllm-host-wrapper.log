@@ -1,0 +1,2 @@
+mode=e8 stage=decode profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS live_tiles=32 rmse=0.00010653676 cosine=0.999998966 relative_l2=0.0014467279 max_bf16_ulp=0 host_validation_us=4680.119
+mode=e8 stage=decode profile=h1 dim=256 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=PASS live_tiles=32 rmse=0.00011534889 cosine=0.999998753 relative_l2=0.0015888814 max_bf16_ulp=0 host_validation_us=11135.943

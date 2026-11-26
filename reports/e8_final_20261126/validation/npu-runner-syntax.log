@@ -1,0 +1,1 @@
+PASS GNU C++17 -Wall -Wextra -Werror -fsyntax-only with CANN 9.2.1 ACL headers, TQ_PRODUCTION_ACCURACY=1

@@ -1,0 +1,38 @@
+{
+  "device": "CANN 9.2.1 CAModel Ascend950PR_9599 (dav-3510)",
+  "layout": {
+    "packet_bytes_per_plane": 4352,
+    "packet_bytes_for_k_and_v": 8704,
+    "label_range_bytes": [0, 4096],
+    "scale_range_bytes": [4096, 4352],
+    "external_decode_workspace_bytes": 0,
+    "internal_reader_k_group_stride_bytes": 1056
+  },
+  "timing_scope": "Historical Wave-3 CAModel process ticks on the archived compiled artifacts and fixtures. The current work retained the mirrored reader and component code.",
+  "reader": {
+    "historical_process_ticks": 287101,
+    "current_shared_source": "decode/e8/e8_fused_decode.cpp",
+    "current_sha256": "1354868b479d3c2972f219a7012718e210c085ffcb38c6310056fcebb7f390ef",
+    "wave3_source_sha256": "e5fdf887471664c8930079fb891303094b91486adc8334b050a5648a3b407a38",
+    "historical_result": {
+      "path": "C:/ascend-micro-harness/reports/checkpoint2_20261123/wave3/w3_e8_dec/E8_FINAL_RESULTS_V5.json",
+      "sha256": "e4c5b399ece0beffad65a357f1e63ab9832dc96fbc961fd0004774c25bcf348b"
+    }
+  },
+  "simt_dequantizer": {
+    "historical_process_ticks": 14252,
+    "current_shared_source": "decode/e8/parallel_component.cpp",
+    "current_sha256": "0fd04fcc15b476096eadcd2537b1365356d9bb29c8591c29f9a6db998b3ff017",
+    "wave3_source_sha256": "47ff8c5c19bb5f532a7f86484cc9826837511edf7e2a459bcdaa08341d7dc789",
+    "historical_result": {
+      "path": "C:/ascend-micro-harness/reports/checkpoint2_20261123/wave3/w3_e8_dec/COMPONENT_OBSERVED.json",
+      "sha256": "6306f7074a4f3e7fc5123561e90c77338a08a1928ee51b1061f681ad4889e883"
+    }
+  },
+  "archived_reader_dequant_packet_sha256": "46c3ec1333d61f0506e2da27aedba9fe8f2986e288cc8183c084c483948d5038",
+  "source_equivalence": {
+    "path": "../../deadlock_20261125/abi/EVIDENCE.json",
+    "sha256": "523f5da79c64d28c1c325c498efe55c93ab102f05fd845ff62a4f3a1d8865752",
+    "scope": "Recorded token equivalence after line splicing, removal of comments and include directives, and substitution of the verified 4352-byte packet constant. Current matching mirror SHA-256 values above bind the deployed source to that audit."
+  }
+}

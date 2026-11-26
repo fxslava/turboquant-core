@@ -109,6 +109,12 @@ set_tests_properties(golden_decode_oracle PROPERTIES
 # Sealed Wave-3 decoder arithmetic and padded UB address mapping, CPU only.
 add_subdirectory(tests/cpu/e8)
 
+add_executable(test_turboquant_production_host tests/cpu/test_turboquant_production.cpp)
+target_link_libraries(test_turboquant_production_host PRIVATE turboquant_host)
+target_compile_options(test_turboquant_production_host PRIVATE -fno-fast-math -ffp-contract=off)
+target_include_directories(test_turboquant_production_host SYSTEM PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/tests/cpu/e8/frozen")
+add_test(NAME turboquant_production_host COMMAND test_turboquant_production_host)
+
 # ------------------------------------------------------------------ the device legs
 option(TQ_BUILD_KERNELS "Configure the BiSheng device legs (tens of minutes to build)" OFF)
 if(NOT TQ_BUILD_KERNELS)
