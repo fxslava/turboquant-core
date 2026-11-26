@@ -4,3 +4,5 @@
 reports/e8_final_20261126/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 reports/e8_final_20261126/**/*.log -whitespace
 reports/e8_final_20261126/reviews/*.txt -whitespace
+reports/promotion_20261126/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+reports/promotion_20261126/*.log -whitespace

@@ -1,0 +1,15 @@
+live-strip 0
+live-nz 0
+nz-ingress 0
+decode 0
+qwen35 0
+qwen35-sim 0
+qwen35-reduce 0
+qwen35-tail 0
+dirty-data 0
+golden-prefill-strip 0
+golden-prefill-nz 0
+golden-scatter 0
+golden-decode 0
+production-accuracy 0
+production-benchmark 0

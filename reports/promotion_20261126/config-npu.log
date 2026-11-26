@@ -1,0 +1,12 @@
+-- Compiler cache: /usr/bin/ccache
+CMake Warning at cmake/NpuTargets.cmake:85 (message):
+  No Ascend driver lib dir found under /usr/local/Ascend/driver; NPU runner
+  links may fail on libruntime.so's indirect driver dependencies.
+Call Stack (most recent call first):
+  CMakeLists.txt:132 (add_turboquant_npu_targets)
+
+
+-- Device leg: physical Ascend950PR_9599, target tq_npu_kernels.
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /tmp/tq-promotion-config-npu-20261126

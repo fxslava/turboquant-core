@@ -1,0 +1,353 @@
+{
+  "mode": "syntax",
+  "before": {
+    "core_head": "c50b7582571921ba96ee00001f81ffe27858aaa0",
+    "plugin_head": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+    "files": {
+      "common/e8_component.hpp": "f57ee6cc867ac998bbd2a70b0d2b8136df9dfa13e1887262805266e78ba2dc45",
+      "common/e8_decode.hpp": "4cfbecd3da6854c433c3a9caf0aaede572748f74fc60aad3c21519e00e3bb050",
+      "common/e8_packet_layout.hpp": "eec52cf40c4e0f8c559e348f8816847e81be6086d3e0d8e987335caf0c13b24e",
+      "common/turboquant_codec_950.h": "499b5718ad89b22827adb73d3d69f299783b3e9954208dc7e854a2301e383993",
+      "common/turboquant_codec_mx.h": "85b6dbc54432dd9ee6c725229f3448a7adb17781752258a2039e3c1ef726e62b",
+      "common/turboquant_common.h": "93c3d0a1df371bdc6234629a38285a0ebdfeed8dc1d562b7d101a76fe4428e4a",
+      "common/turboquant_fused_decode_opt.hpp": "3e168758eca35140ecfce89b9b3da65f8b21d5d03eb9b76e991517dc04d61a3d",
+      "common/turboquant_gemm_reduce.hpp": "406d06baf0a8ed54ce495e28024bf2ea8ba173110cd0e7c359f2fc8f9ae0d7f9",
+      "common/turboquant_launch.h": "53eea2aec1326fe327767807b28b74776e763e1de78e8686e88d121ef9a46332",
+      "common/turboquant_layout.h": "c0403ad5ffbda5b5fbf59ff6bb01f86c7a176257bdba17c2366a621d2c7f5e02",
+      "common/turboquant_mode.h": "64e9b5afac0e4b69fc2dcb23d2b809d84a10ed0689a1f6204326ef4cb4421c32",
+      "common/turboquant_splitk_contract.hpp": "82c3697045e818f43196faeb5aae5867bdd41e9042c50b678ccde0a74acdbb30",
+      "common/turboquant_tiling.cpp": "a2d9c0c5b846fb3bbbb341994177d8be762d5034a06a492de0b04106fbc6f2ce",
+      "common/turboquant_tiling.h": "5e538d8d5ed7c2dd576f54562eee44879857e55af2d5c98bba07373294c14837",
+      "common/turboquant_types.h": "cb2e4abeecec6ffe85711648487e9e668c29b9306a16913820ca6024d66eb597",
+      "common/turboquant_wave_protocol.hpp": "f91b9f092d8f4b04e54ec1b0031fd94717feb4d6dffac57fb4627b41c22ceaa4",
+      "decode/e8/e8_fused_decode.cpp": "1354868b479d3c2972f219a7012718e210c085ffcb38c6310056fcebb7f390ef",
+      "decode/e8/e8_parallel_decode.hpp": "78ad1016f9abaa38672107dcc971485ecca4985fd02ee8acb1df671fcd0da9d1",
+      "decode/e8/parallel_component.cpp": "0fd04fcc15b476096eadcd2537b1365356d9bb29c8591c29f9a6db998b3ff017",
+      "decode/e8/routines/routine_e8_bf16_dequant_simt.hpp": "d6d5eb2014b24fe503e78e0824742b5833193737846bf02d61df84e3ae52f313",
+      "decode/e8/routines/routine_e8_int8_dequant_simt.hpp": "c673a4fd5bf235b29f28d3cf1bbf763d258aa18b99849a27da5dbe59685a704d",
+      "decode/native/cube/routine_vector_rotate_butterfly.hpp": "b9c395ad2a374072560eb66a5f9980833146e2732447607481b77a09b01c3fe2",
+      "decode/native/cube/turboquant_cube_service.h": "c6738f0e63bc772cfc213db395db78825a3055bdc31ff8a64e6df7c6aa9f9307",
+      "decode/native/cube/turboquant_gemm_reduce_service.h": "d4003c309b6ec4763ef483a0c47970b921706e99f3f702ba9c189f13467aad5c",
+      "decode/native/cube/turboquant_query_basis.h": "f1495de2d19e52e072b88bd69a35f991838ceb88763e20d61953aea79acbc8c9",
+      "decode/native/routine/routine_turboquant_dequant4.hpp": "f41dd0cdf11d3da1060dbd423746d957f240cbbcfd134e1bb523448c32da9d0e",
+      "decode/native/turboquant_fused_decode.cpp": "7024e81fa1fca81330dc4e425145efdd2e76b90fe5a83be35fc9683ef8f60e0e",
+      "decode/native/vector/routine_vector_cube_softmax.hpp": "0628ea40897555b2b830f00c26c88e988f8d849bbb7e6bc7ccf2a497c053b573",
+      "decode/native/vector/routine_vector_online_softmax.hpp": "49d13afabff882e3718e7c0f7ed9709ea79f0e1c8904ab7e0d4860bb4a8bca6f",
+      "decode/native/vector/turboquant_vector_service.h": "1dc455966e81fddf27462e8ad8144de1d9e607cb466255f7c927646b74b3606e",
+      "ingress/native/routine_reshape_batch_pipeline.hpp": "ab3f3f1ed26c87a8d84cf6b4896d1527d6a1495225433b3fa008400c0dea7153",
+      "ingress/native/routine_stage_page_zn_bf16.hpp": "b9ff832b30446a91de963745638ece32e4754499dc6d3cefe3496b9e745ffec7",
+      "ingress/native/routine_vector_rotate_butterfly.hpp": "b9c395ad2a374072560eb66a5f9980833146e2732447607481b77a09b01c3fe2",
+      "ingress/native/turboquant_reshape_batch.cpp": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a",
+      "ingress/native/turboquant_reshape_batch_wide.cpp": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae",
+      "ingress/native/turboquant_reshape_scatter.cpp": "dc6c03bb1cf4226c80bcb53328653bf387dfe7f60f6e4ebee944ffb0bb9b1a4f",
+      "decode/e8/reader_layout.aka": "d470c1b6d8c0be5de95a00d4f81d887c901cc911f04524d3c18ef973c91fd6d3"
+    }
+  },
+  "after": {
+    "core_head": "c50b7582571921ba96ee00001f81ffe27858aaa0",
+    "plugin_head": "9d4f1d3b33726adef41473ff12fcfdc6b6b0afea",
+    "files": {
+      "common/e8_component.hpp": "f57ee6cc867ac998bbd2a70b0d2b8136df9dfa13e1887262805266e78ba2dc45",
+      "common/e8_decode.hpp": "4cfbecd3da6854c433c3a9caf0aaede572748f74fc60aad3c21519e00e3bb050",
+      "common/e8_packet_layout.hpp": "eec52cf40c4e0f8c559e348f8816847e81be6086d3e0d8e987335caf0c13b24e",
+      "common/turboquant_codec_950.h": "499b5718ad89b22827adb73d3d69f299783b3e9954208dc7e854a2301e383993",
+      "common/turboquant_codec_mx.h": "85b6dbc54432dd9ee6c725229f3448a7adb17781752258a2039e3c1ef726e62b",
+      "common/turboquant_common.h": "93c3d0a1df371bdc6234629a38285a0ebdfeed8dc1d562b7d101a76fe4428e4a",
+      "common/turboquant_fused_decode_opt.hpp": "3e168758eca35140ecfce89b9b3da65f8b21d5d03eb9b76e991517dc04d61a3d",
+      "common/turboquant_gemm_reduce.hpp": "406d06baf0a8ed54ce495e28024bf2ea8ba173110cd0e7c359f2fc8f9ae0d7f9",
+      "common/turboquant_launch.h": "53eea2aec1326fe327767807b28b74776e763e1de78e8686e88d121ef9a46332",
+      "common/turboquant_layout.h": "c0403ad5ffbda5b5fbf59ff6bb01f86c7a176257bdba17c2366a621d2c7f5e02",
+      "common/turboquant_mode.h": "64e9b5afac0e4b69fc2dcb23d2b809d84a10ed0689a1f6204326ef4cb4421c32",
+      "common/turboquant_splitk_contract.hpp": "82c3697045e818f43196faeb5aae5867bdd41e9042c50b678ccde0a74acdbb30",
+      "common/turboquant_tiling.cpp": "a2d9c0c5b846fb3bbbb341994177d8be762d5034a06a492de0b04106fbc6f2ce",
+      "common/turboquant_tiling.h": "5e538d8d5ed7c2dd576f54562eee44879857e55af2d5c98bba07373294c14837",
+      "common/turboquant_types.h": "cb2e4abeecec6ffe85711648487e9e668c29b9306a16913820ca6024d66eb597",
+      "common/turboquant_wave_protocol.hpp": "f91b9f092d8f4b04e54ec1b0031fd94717feb4d6dffac57fb4627b41c22ceaa4",
+      "decode/e8/e8_fused_decode.cpp": "1354868b479d3c2972f219a7012718e210c085ffcb38c6310056fcebb7f390ef",
+      "decode/e8/e8_parallel_decode.hpp": "78ad1016f9abaa38672107dcc971485ecca4985fd02ee8acb1df671fcd0da9d1",
+      "decode/e8/parallel_component.cpp": "0fd04fcc15b476096eadcd2537b1365356d9bb29c8591c29f9a6db998b3ff017",
+      "decode/e8/routines/routine_e8_bf16_dequant_simt.hpp": "d6d5eb2014b24fe503e78e0824742b5833193737846bf02d61df84e3ae52f313",
+      "decode/e8/routines/routine_e8_int8_dequant_simt.hpp": "c673a4fd5bf235b29f28d3cf1bbf763d258aa18b99849a27da5dbe59685a704d",
+      "decode/native/cube/routine_vector_rotate_butterfly.hpp": "b9c395ad2a374072560eb66a5f9980833146e2732447607481b77a09b01c3fe2",
+      "decode/native/cube/turboquant_cube_service.h": "c6738f0e63bc772cfc213db395db78825a3055bdc31ff8a64e6df7c6aa9f9307",
+      "decode/native/cube/turboquant_gemm_reduce_service.h": "d4003c309b6ec4763ef483a0c47970b921706e99f3f702ba9c189f13467aad5c",
+      "decode/native/cube/turboquant_query_basis.h": "f1495de2d19e52e072b88bd69a35f991838ceb88763e20d61953aea79acbc8c9",
+      "decode/native/routine/routine_turboquant_dequant4.hpp": "f41dd0cdf11d3da1060dbd423746d957f240cbbcfd134e1bb523448c32da9d0e",
+      "decode/native/turboquant_fused_decode.cpp": "7024e81fa1fca81330dc4e425145efdd2e76b90fe5a83be35fc9683ef8f60e0e",
+      "decode/native/vector/routine_vector_cube_softmax.hpp": "0628ea40897555b2b830f00c26c88e988f8d849bbb7e6bc7ccf2a497c053b573",
+      "decode/native/vector/routine_vector_online_softmax.hpp": "49d13afabff882e3718e7c0f7ed9709ea79f0e1c8904ab7e0d4860bb4a8bca6f",
+      "decode/native/vector/turboquant_vector_service.h": "1dc455966e81fddf27462e8ad8144de1d9e607cb466255f7c927646b74b3606e",
+      "ingress/native/routine_reshape_batch_pipeline.hpp": "ab3f3f1ed26c87a8d84cf6b4896d1527d6a1495225433b3fa008400c0dea7153",
+      "ingress/native/routine_stage_page_zn_bf16.hpp": "b9ff832b30446a91de963745638ece32e4754499dc6d3cefe3496b9e745ffec7",
+      "ingress/native/routine_vector_rotate_butterfly.hpp": "b9c395ad2a374072560eb66a5f9980833146e2732447607481b77a09b01c3fe2",
+      "ingress/native/turboquant_reshape_batch.cpp": "af1434688466b22b55ea83e659f6934d633de65bd330d905dfbfa639b425f82a",
+      "ingress/native/turboquant_reshape_batch_wide.cpp": "21aa02edb2a91c7353bb5b82bf57c7af7dee414dd83f96ad1b3a2b2248b8e7ae",
+      "ingress/native/turboquant_reshape_scatter.cpp": "dc6c03bb1cf4226c80bcb53328653bf387dfe7f60f6e4ebee944ffb0bb9b1a4f",
+      "decode/e8/reader_layout.aka": "d470c1b6d8c0be5de95a00d4f81d887c901cc911f04524d3c18ef973c91fd6d3"
+    }
+  },
+  "results": {
+    "plugin-nz": {
+      "argv": [
+        "bash",
+        "/mnt/c/ascend-micro-harness/scripts/camodel_build_phase_guard.sh",
+        "compile",
+        "flock",
+        "--shared",
+        "/home/dmin/ascend-sync-schedule-ablation/queue/checkpoint1-exclusive.lock",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=60s",
+        "2400s",
+        "/usr/bin/python3",
+        "-B",
+        "/mnt/c/Users/Admin/.codex/worktrees/tq-product-promotion/vllm-ascend/tests/host/turboquant/check_kernels.py",
+        "--sdk",
+        "/home/dmin/Ascend-9.2.1/cann-9.2.1",
+        "--out",
+        "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/plugin-nz"
+      ],
+      "exit": 0,
+      "log": {
+        "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/plugin-nz.log",
+        "bytes": 1292,
+        "sha256": "5526f75a866d303cb7661829c1fcf3aaa62a45fd1ff20a0a9087cc9a064bea14"
+      },
+      "rows": 12,
+      "summary": {
+        "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/plugin-nz/syntax.json",
+        "bytes": 1003032,
+        "sha256": "4ea28af0b2d4c41e8ae1db3824f20df3310dfb2a043e1e7b6d84dd82f4b4cb99"
+      },
+      "diagnostic_logs": [
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/plugin-nz/turboquant_reshape_batch-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/plugin-nz/turboquant_reshape_batch-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/plugin-nz/turboquant_reshape_batch_wide-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/plugin-nz/turboquant_reshape_batch_wide-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/plugin-nz/turboquant_reshape_scatter-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/plugin-nz/turboquant_reshape_scatter-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/plugin-nz/turboquant_fused_decode-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/plugin-nz/turboquant_fused_decode-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/plugin-nz/asc_e8_reader-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/plugin-nz/asc_e8_reader-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/plugin-nz/asc_e8_component-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/plugin-nz/asc_e8_component-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    "core-nz": {
+      "argv": [
+        "bash",
+        "/mnt/c/ascend-micro-harness/scripts/camodel_build_phase_guard.sh",
+        "compile",
+        "flock",
+        "--shared",
+        "/home/dmin/ascend-sync-schedule-ablation/queue/checkpoint1-exclusive.lock",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=60s",
+        "2400s",
+        "/usr/bin/python3",
+        "-B",
+        "/mnt/c/Users/Admin/.codex/worktrees/tq-product-promotion/vllm-ascend/tests/host/turboquant/check_kernels.py",
+        "--sdk",
+        "/home/dmin/Ascend-9.2.1/cann-9.2.1",
+        "--out",
+        "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-nz",
+        "--core",
+        "/mnt/c/Ascend/turboquant-core"
+      ],
+      "exit": 0,
+      "log": {
+        "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-nz.log",
+        "bytes": 1172,
+        "sha256": "534e337c83d955f2e5edcdf7e1c1fa92bf8d1da79edcc44ecccd3027422c3307"
+      },
+      "rows": 12,
+      "summary": {
+        "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-nz/syntax.json",
+        "bytes": 1002652,
+        "sha256": "e8ed7c2d9e14f08f8a4753612aaecfe207ea63ae0a59cf36efc3eedb3274d234"
+      },
+      "diagnostic_logs": [
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-nz/turboquant_reshape_batch-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-nz/turboquant_reshape_batch-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-nz/turboquant_reshape_batch_wide-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-nz/turboquant_reshape_batch_wide-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-nz/turboquant_reshape_scatter-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-nz/turboquant_reshape_scatter-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-nz/turboquant_fused_decode-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-nz/turboquant_fused_decode-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-nz/e8_fused_decode-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-nz/e8_fused_decode-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-nz/parallel_component-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-nz/parallel_component-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    "core-strip": {
+      "argv": [
+        "bash",
+        "/mnt/c/ascend-micro-harness/scripts/camodel_build_phase_guard.sh",
+        "compile",
+        "flock",
+        "--shared",
+        "/home/dmin/ascend-sync-schedule-ablation/queue/checkpoint1-exclusive.lock",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=60s",
+        "2400s",
+        "/usr/bin/python3",
+        "-B",
+        "/mnt/c/Users/Admin/.codex/worktrees/tq-product-promotion/vllm-ascend/tests/host/turboquant/check_kernels.py",
+        "--sdk",
+        "/home/dmin/Ascend-9.2.1/cann-9.2.1",
+        "--out",
+        "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-strip",
+        "--core",
+        "/mnt/c/Ascend/turboquant-core",
+        "--strip"
+      ],
+      "exit": 0,
+      "log": {
+        "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-strip.log",
+        "bytes": 620,
+        "sha256": "e9fcee42df28ef7265abe9cacf4447a038864a1c6642925193ff380f81c89c87"
+      },
+      "rows": 6,
+      "summary": {
+        "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-strip/syntax.json",
+        "bytes": 501134,
+        "sha256": "23676374585cad79982416838cd1a84f1d873818aecbed24964922c75c68b687"
+      },
+      "diagnostic_logs": [
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-strip/turboquant_reshape_batch-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-strip/turboquant_reshape_batch-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-strip/turboquant_reshape_batch_wide-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-strip/turboquant_reshape_batch_wide-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-strip/turboquant_reshape_scatter-host.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/mnt/c/Ascend/turboquant-integration-work/promotion-20261126/syntax/core-strip/turboquant_reshape_scatter-device.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  },
+  "checker_sha256": "cfd87bbf3908a28cae1a1b0f9d06ed06276ac78aa6cb46217226afb317972d26",
+  "analyzer_commit": "46f16829ee37b4a31961832595e96b280d7f053e"
+}

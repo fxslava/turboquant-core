@@ -1,0 +1,733 @@
+{
+  "range": "b92cba0714f5b4ca11114ab70f7914afd0137a10..c50b7582571921ba96ee00001f81ffe27858aaa0",
+  "commits": [
+    "7880e9443da85f9ba9c7773dad1bf8df16465e55 feat(turboquant): integrate verified Wave-1 and Wave-3 champions",
+    "47abf6526259047bdfbb17bab25de7bd7a893661 refactor(turboquant): synchronize categorized kernel modules",
+    "9822714d7ebeebc9d2b2a9907fc1aea3d90d1fe1 chore(turboquant): checkpoint synchronized R1 R2 deadlock baseline",
+    "d6c63d8ce1c548360979a43e4c2d0f1243dceca9 fix(turboquant): preserve NZ staging in native decode matmul",
+    "043bcc43aa2e5d6ffa1d97930e0a31145731322f feat(turboquant): restore Frozen03 batch champion with wide fallback",
+    "29274d52c6e1d1d1b70e0a0ccc3a9ca70d006001 docs(turboquant): record P6 waiver and final verification evidence",
+    "c50b7582571921ba96ee00001f81ffe27858aaa0 feat(turboquant): seal E8 packet validation and server harness"
+  ],
+  "changes": [
+    "M\t.gitattributes",
+    "M\tCMakeLists.txt",
+    "M\tREADME.md",
+    "A\tbenchmarks/README.md",
+    "A\tbenchmarks/benchmark_turboquant_production.cpp",
+    "A\tbenchmarks/benchmark_turboquant_production.py",
+    "M\tcmake/CannToolchain.cmake",
+    "M\tcmake/NpuTargets.cmake",
+    "M\tcmake/SimTargets.cmake",
+    "M\tcmake/VendoredDecodeProbe.cmake",
+    "M\tgolden/turboquant_golden.py",
+    "D\tinclude/turboquant/turboquant_gemm_reduce.hpp",
+    "D\tinclude/turboquant/turboquant_layout.h",
+    "D\tinclude/turboquant/turboquant_splitk_contract.hpp",
+    "D\tinclude/turboquant/turboquant_types.h",
+    "A\treports/deadlock_20261125/.gitattributes",
+    "A\treports/deadlock_20261125/BASELINE.json",
+    "A\treports/deadlock_20261125/EXECUTION_STATE.json",
+    "A\treports/deadlock_20261125/INTERMEDIATE_RESULTS.md",
+    "A\treports/deadlock_20261125/RESUME.md",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/AKA_HOST_SCOPE_FAILURE_AUDIT.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/AKA_TAIL_FROZEN_INPUTS.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/AKA_TAIL_ROOT_RECIPE.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/CHECK_ANALYZER_PREIMAGE.py",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/DEPLOYED_AKA_SYNTAX.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/FINAL_ACCEPTANCE.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/FINAL_HANDOFF.md",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/FINAL_HOST_RESULTS.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/FINAL_SOL62_RELEASE_REVIEW.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/FUNCTIONAL.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/FUNCTIONAL_RELEASE_MAP.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/PERFORMANCE.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/PRODUCT_COMMITS.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/RELEASE_REVIEW_INPUTS.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/REMAINING_MODEL_ADMISSION.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/USER_WAIVER.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/WINNING_RELEASE.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/analyzer-hygiene/CONSUMER_HYGIENE_DELTA.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/analyzer-hygiene/FINAL_SOL62_CONSUMER_HYGIENE_REVIEW.json",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/analyzer-hygiene/check_analyzer.py",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/analyzer-hygiene/check_analyzer_source_join.patch",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/analyzer-hygiene/check_mock.py",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/analyzer-hygiene/mock.log",
+    "A\treports/deadlock_20261125/finalize_p6_20261126/resume_deployed_aka.py",
+    "A\treports/deadlock_20261125/slots/P/r6/canary/P6_WAIVER_RESUMED_REMAINING_CANARY_PLAN.json",
+    "A\treports/deadlock_20261125/slots/P/r6/canary/audit_resumed_canaries.py",
+    "A\treports/deadlock_20261125/slots/P/r6/canary/batch-p-nz-narrow-lloyd_ACTUAL_AUDIT.json",
+    "A\treports/deadlock_20261125/slots/P/r6/canary/batch-p-nz-wide-uniform_ACTUAL_AUDIT.json",
+    "A\treports/deadlock_20261125/slots/P/r6/canary/batch-p-strip-wide-lloyd_ACTUAL_AUDIT.json",
+    "A\treports/deadlock_20261125/slots/P/r6/promotion/USER_WAIVER_RELEASE.md",
+    "A\treports/deadlock_20261125/slots/P/r6/promotion/USER_WAIVER_RELEASE_PLAN.json",
+    "A\treports/deadlock_20261125/slots/P/r6/promotion/promote_p6_user_waiver.py",
+    "A\treports/e8_final_20261126/FROZEN_SOURCES.json",
+    "A\treports/e8_final_20261126/HOST_VALIDATION.json",
+    "A\treports/e8_final_20261126/REPORT.md",
+    "A\treports/e8_final_20261126/attention-baseline.log",
+    "A\treports/e8_final_20261126/attention-baseline.xml",
+    "A\treports/e8_final_20261126/attention-final.log",
+    "A\treports/e8_final_20261126/attention-final.xml",
+    "A\treports/e8_final_20261126/baseline-host14.log",
+    "A\treports/e8_final_20261126/baseline-sync.log",
+    "A\treports/e8_final_20261126/bindings-baseline.log",
+    "A\treports/e8_final_20261126/bindings-final.log",
+    "A\treports/e8_final_20261126/contracts.log",
+    "A\treports/e8_final_20261126/contracts.xml",
+    "A\treports/e8_final_20261126/host-build.log",
+    "A\treports/e8_final_20261126/host-config.log",
+    "A\treports/e8_final_20261126/host-ctest.log",
+    "A\treports/e8_final_20261126/host14-final.log",
+    "A\treports/e8_final_20261126/host14-final.xml",
+    "A\treports/e8_final_20261126/host14.log",
+    "A\treports/e8_final_20261126/kernel/ANALYZER_RECEIPT.json",
+    "A\treports/e8_final_20261126/kernel/ANALYZER_SUMMARY.json",
+    "A\treports/e8_final_20261126/kernel/CANARY_RESULTS.json",
+    "A\treports/e8_final_20261126/kernel/HISTORICAL_E8.json",
+    "A\treports/e8_final_20261126/kernel/SYNTAX_RECEIPT.json",
+    "A\treports/e8_final_20261126/kernel/SYNTAX_SUMMARY.json",
+    "A\treports/e8_final_20261126/kernel/V10_CANARY_LAUNCH.json",
+    "A\treports/e8_final_20261126/kernel/V10_WATCHDOG_CPU_CONTROL.json",
+    "A\treports/e8_final_20261126/kernel/V11_CANARY_LAUNCH.json",
+    "A\treports/e8_final_20261126/kernel/V11_WATCHDOG_CPU_CONTROL.json",
+    "A\treports/e8_final_20261126/kernel/V3_CANARY_LAUNCH.json",
+    "A\treports/e8_final_20261126/kernel/V4_CANARY_LAUNCH.json",
+    "A\treports/e8_final_20261126/kernel/V4_WATCHDOG_CPU_CONTROL.json",
+    "A\treports/e8_final_20261126/kernel/V5_CANARY_LAUNCH.json",
+    "A\treports/e8_final_20261126/kernel/V5_WATCHDOG_CPU_CONTROL.json",
+    "A\treports/e8_final_20261126/kernel/V6_CANARY_LAUNCH.json",
+    "A\treports/e8_final_20261126/kernel/V6_WATCHDOG_CPU_CONTROL.json",
+    "A\treports/e8_final_20261126/kernel/V7_CANARY_LAUNCH.json",
+    "A\treports/e8_final_20261126/kernel/V7_WATCHDOG_CPU_CONTROL.json",
+    "A\treports/e8_final_20261126/kernel/V8_CANARY_LAUNCH.json",
+    "A\treports/e8_final_20261126/kernel/V8_WATCHDOG_CPU_CONTROL.json",
+    "A\treports/e8_final_20261126/kernel/V9_CANARY_LAUNCH.json",
+    "A\treports/e8_final_20261126/kernel/V9_WATCHDOG_CPU_CONTROL.json",
+    "A\treports/e8_final_20261126/kernel/canary/clock-domain-probe-after-16.json",
+    "A\treports/e8_final_20261126/kernel/canary/rows-16-exit.json",
+    "A\treports/e8_final_20261126/kernel/canary/rows-16-loaded_model_libraries.json",
+    "A\treports/e8_final_20261126/kernel/canary/rows-16-measurement_manifest.json",
+    "A\treports/e8_final_20261126/kernel/canary/rows-16-progress.jsonl",
+    "A\treports/e8_final_20261126/kernel/canary/rows-16-receipt.json",
+    "A\treports/e8_final_20261126/kernel/canary/rows-16-start.json",
+    "A\treports/e8_final_20261126/kernel/canary/rows-16-stdout.log",
+    "A\treports/e8_final_20261126/kernel/canary/rows-32-exit.json",
+    "A\treports/e8_final_20261126/kernel/canary/rows-32-loaded_model_libraries.json",
+    "A\treports/e8_final_20261126/kernel/canary/rows-32-measurement_manifest.json",
+    "A\treports/e8_final_20261126/kernel/canary/rows-32-progress.jsonl",
+    "A\treports/e8_final_20261126/kernel/canary/rows-32-receipt.json",
+    "A\treports/e8_final_20261126/kernel/canary/rows-32-start.json",
+    "A\treports/e8_final_20261126/kernel/canary/rows-32-stdout.log",
+    "A\treports/e8_final_20261126/python-committed/VALIDATION.json",
+    "A\treports/e8_final_20261126/python-committed/commands.ps1.txt",
+    "A\treports/e8_final_20261126/python-committed/device-free.junit.xml",
+    "A\treports/e8_final_20261126/python-committed/device-free.log",
+    "A\treports/e8_final_20261126/python-committed/e8-targeted.junit.xml",
+    "A\treports/e8_final_20261126/python-committed/e8-targeted.log",
+    "A\treports/e8_final_20261126/python-committed/encoder-reference.json",
+    "A\treports/e8_final_20261126/python-committed/encoder-reference.log",
+    "A\treports/e8_final_20261126/python-committed/encoder_reference.py",
+    "A\treports/e8_final_20261126/python-committed/guarded_host_gates.py",
+    "A\treports/e8_final_20261126/python-committed/host-gates.junit.xml",
+    "A\treports/e8_final_20261126/python-committed/host-gates.log",
+    "A\treports/e8_final_20261126/python-committed/snapshot-source.json",
+    "A\treports/e8_final_20261126/python/allocation-spec.json",
+    "A\treports/e8_final_20261126/python/baseline-retention.json",
+    "A\treports/e8_final_20261126/python/device-free.command.txt",
+    "A\treports/e8_final_20261126/python/device-free.junit.xml",
+    "A\treports/e8_final_20261126/python/device-free.log",
+    "A\treports/e8_final_20261126/python/e8-targeted.junit.xml",
+    "A\treports/e8_final_20261126/python/e8-targeted.log",
+    "A\treports/e8_final_20261126/python/encoder-reference.json",
+    "A\treports/e8_final_20261126/reviews/a.txt",
+    "A\treports/e8_final_20261126/reviews/a2.txt",
+    "A\treports/e8_final_20261126/reviews/a3.txt",
+    "A\treports/e8_final_20261126/reviews/a4.txt",
+    "A\treports/e8_final_20261126/reviews/b.txt",
+    "A\treports/e8_final_20261126/reviews/b10.txt",
+    "A\treports/e8_final_20261126/reviews/b11.txt",
+    "A\treports/e8_final_20261126/reviews/b4.txt",
+    "A\treports/e8_final_20261126/reviews/b5.txt",
+    "A\treports/e8_final_20261126/reviews/b6.txt",
+    "A\treports/e8_final_20261126/reviews/b7.txt",
+    "A\treports/e8_final_20261126/reviews/b8.txt",
+    "A\treports/e8_final_20261126/reviews/b9.txt",
+    "A\treports/e8_final_20261126/reviews/final.txt",
+    "A\treports/e8_final_20261126/reviews/final11.txt",
+    "A\treports/e8_final_20261126/reviews/integration-final.txt",
+    "A\treports/e8_final_20261126/reviews/integration.txt",
+    "A\treports/e8_final_20261126/ruff-final.log",
+    "A\treports/e8_final_20261126/ruff-frozen.log",
+    "A\treports/e8_final_20261126/seal_host.py",
+    "A\treports/e8_final_20261126/validation-frozen/commands.log",
+    "A\treports/e8_final_20261126/validation-frozen/host-build.log",
+    "A\treports/e8_final_20261126/validation-frozen/host-config.log",
+    "A\treports/e8_final_20261126/validation-frozen/host-ctest.log",
+    "A\treports/e8_final_20261126/validation-frozen/host-production-matrix.log",
+    "A\treports/e8_final_20261126/validation-frozen/host-profile-catalog.log",
+    "A\treports/e8_final_20261126/validation-frozen/source-inventories.sha256",
+    "A\treports/e8_final_20261126/validation-frozen/sync.log",
+    "A\treports/e8_final_20261126/validation/cann-compiler-version.info",
+    "A\treports/e8_final_20261126/validation/core-python-cli-help.log",
+    "A\treports/e8_final_20261126/validation/host-build.log",
+    "A\treports/e8_final_20261126/validation/host-config.log",
+    "A\treports/e8_final_20261126/validation/host-ctest.log",
+    "A\treports/e8_final_20261126/validation/host-production-matrix.log",
+    "A\treports/e8_final_20261126/validation/host-profile-catalog.log",
+    "A\treports/e8_final_20261126/validation/npu-artifacts.sha256",
+    "A\treports/e8_final_20261126/validation/npu-bundle-verification.log",
+    "A\treports/e8_final_20261126/validation/npu-bundle.sha256",
+    "A\treports/e8_final_20261126/validation/npu-compile.log",
+    "A\treports/e8_final_20261126/validation/npu-elf-manifest.log",
+    "A\treports/e8_final_20261126/validation/npu-runner-syntax.log",
+    "A\treports/e8_final_20261126/validation/npu-target-config.log",
+    "A\treports/e8_final_20261126/validation/npu-writer-inputs.sha256",
+    "A\treports/e8_final_20261126/validation/npu-writer-refresh.log",
+    "A\treports/e8_final_20261126/validation/staged-cpu-long-context.log",
+    "A\treports/e8_final_20261126/validation/staged-cpu-metric-controls.log",
+    "A\treports/e8_final_20261126/validation/staged-cpu-reference.log",
+    "A\treports/e8_final_20261126/validation/vllm-host-wrapper.log",
+    "A\treports/e8_final_20261126/validation/vllm-python-cli-help.log",
+    "A\treports/wave_champions_20261125/ANALYZER_SUMMARY.json",
+    "A\treports/wave_champions_20261125/MODIFIED_FILES.json",
+    "A\treports/wave_champions_20261125/REPORT.md",
+    "A\treports/wave_champions_20261125/SOURCE_MANIFEST.json",
+    "A\treports/wave_champions_20261125/VALIDATION.json",
+    "D\tsrc/decode/cube/routine_vector_rotate_butterfly.hpp",
+    "D\tsrc/decode/vector/routine_vector_online_softmax.hpp",
+    "A\tsrc/host/turboquant_sim_binary_lifetime.cpp",
+    "D\tsrc/host/turboquant_telemetry.h",
+    "D\tsrc/host/turboquant_tiling.h",
+    "D\tsrc/prefill/routine_stage_page_zn_bf16.hpp",
+    "D\tsrc/scatter/routine_vector_rotate_butterfly.hpp",
+    "A\tsrc/turboquant/NOTICE",
+    "A\tsrc/turboquant/SOURCE_SYNC.json",
+    "A\tsrc/turboquant/common/e8_component.hpp",
+    "A\tsrc/turboquant/common/e8_decode.hpp",
+    "A\tsrc/turboquant/common/e8_packet_layout.hpp",
+    "R082\tsrc/common/turboquant_codec_950.h\tsrc/turboquant/common/turboquant_codec_950.h",
+    "R076\tsrc/common/turboquant_codec_mx.h\tsrc/turboquant/common/turboquant_codec_mx.h",
+    "R069\tinclude/turboquant/turboquant_common.h\tsrc/turboquant/common/turboquant_common.h",
+    "R050\tinclude/turboquant/turboquant_fused_decode_opt.hpp\tsrc/turboquant/common/turboquant_fused_decode_opt.hpp",
+    "A\tsrc/turboquant/common/turboquant_gemm_reduce.hpp",
+    "A\tsrc/turboquant/common/turboquant_launch.h",
+    "A\tsrc/turboquant/common/turboquant_layout.h",
+    "R063\tinclude/turboquant/turboquant_mode.h\tsrc/turboquant/common/turboquant_mode.h",
+    "A\tsrc/turboquant/common/turboquant_splitk_contract.hpp",
+    "R083\tsrc/host/turboquant_telemetry.cpp\tsrc/turboquant/common/turboquant_telemetry.cpp",
+    "A\tsrc/turboquant/common/turboquant_telemetry.h",
+    "R076\tsrc/host/turboquant_tiling.cpp\tsrc/turboquant/common/turboquant_tiling.cpp",
+    "A\tsrc/turboquant/common/turboquant_tiling.h",
+    "A\tsrc/turboquant/common/turboquant_types.h",
+    "R051\tinclude/turboquant/turboquant_wave_protocol.hpp\tsrc/turboquant/common/turboquant_wave_protocol.hpp",
+    "A\tsrc/turboquant/decode/e8/.gitattributes",
+    "A\tsrc/turboquant/decode/e8/e8_fused_decode.cpp",
+    "A\tsrc/turboquant/decode/e8/e8_parallel_decode.hpp",
+    "A\tsrc/turboquant/decode/e8/parallel_component.cpp",
+    "A\tsrc/turboquant/decode/e8/reader_layout.aka",
+    "A\tsrc/turboquant/decode/e8/routines/routine_e8_bf16_dequant_simt.hpp",
+    "A\tsrc/turboquant/decode/e8/routines/routine_e8_int8_dequant_simt.hpp",
+    "A\tsrc/turboquant/decode/native/cube/routine_vector_rotate_butterfly.hpp",
+    "R080\tsrc/decode/cube/turboquant_cube_service.h\tsrc/turboquant/decode/native/cube/turboquant_cube_service.h",
+    "R052\tsrc/decode/cube/turboquant_gemm_reduce_service.h\tsrc/turboquant/decode/native/cube/turboquant_gemm_reduce_service.h",
+    "R095\tsrc/decode/cube/turboquant_query_basis.h\tsrc/turboquant/decode/native/cube/turboquant_query_basis.h",
+    "R057\tsrc/common/routine_turboquant_dequant4.hpp\tsrc/turboquant/decode/native/routine/routine_turboquant_dequant4.hpp",
+    "R082\tsrc/decode/turboquant_fused_decode.cpp\tsrc/turboquant/decode/native/turboquant_fused_decode.cpp",
+    "R055\tsrc/decode/vector/routine_vector_cube_softmax.hpp\tsrc/turboquant/decode/native/vector/routine_vector_cube_softmax.hpp",
+    "A\tsrc/turboquant/decode/native/vector/routine_vector_online_softmax.hpp",
+    "R060\tsrc/decode/vector/turboquant_vector_service.h\tsrc/turboquant/decode/native/vector/turboquant_vector_service.h",
+    "R064\tsrc/prefill/turboquant_reshape_batch.cpp\tsrc/turboquant/ingress/native/routine_reshape_batch_pipeline.hpp",
+    "A\tsrc/turboquant/ingress/native/routine_stage_page_zn_bf16.hpp",
+    "A\tsrc/turboquant/ingress/native/routine_vector_rotate_butterfly.hpp",
+    "A\tsrc/turboquant/ingress/native/turboquant_reshape_batch.cpp",
+    "A\tsrc/turboquant/ingress/native/turboquant_reshape_batch_wide.cpp",
+    "R059\tsrc/scatter/turboquant_reshape_scatter.cpp\tsrc/turboquant/ingress/native/turboquant_reshape_scatter.cpp",
+    "M\ttests/common/decode_tiling_gate.hpp",
+    "M\ttests/common/fused_decode_fixture.hpp",
+    "M\ttests/common/qwen35_decode_benchmark.hpp",
+    "M\ttests/common/rotate_butterfly_oracle.hpp",
+    "M\ttests/common/turboquant_golden_oracle.hpp",
+    "A\ttests/common/turboquant_production.hpp",
+    "M\ttests/common/turboquant_test_common.hpp",
+    "A\ttests/cpu/check_semantic_goldens.py",
+    "A\ttests/cpu/e8/CMakeLists.txt",
+    "A\ttests/cpu/e8/README.md",
+    "A\ttests/cpu/e8/decode_cpu_check.cpp",
+    "A\ttests/cpu/e8/frozen/routine_e8_bf16_dequant_simt.hpp",
+    "A\ttests/cpu/e8/frozen/routine_e8_int8_dequant_simt.hpp",
+    "A\ttests/cpu/e8/layout_check.cpp",
+    "M\ttests/cpu/test_contract_gates.cpp",
+    "M\ttests/cpu/test_decode_reduce.cpp",
+    "M\ttests/cpu/test_telemetry_dump.cpp",
+    "A\ttests/cpu/test_turboquant_benchmark_metrics.py",
+    "A\ttests/cpu/test_turboquant_production.cpp",
+    "M\ttests/npu/qwen35_reduce_canary.cpp",
+    "M\ttests/npu/qwen35_tail_canary.cpp",
+    "M\ttests/npu/test_dirty_data_canary.cpp",
+    "M\ttests/npu/test_fused_decode_e2e.cpp",
+    "M\ttests/npu/test_golden_dump.cpp",
+    "M\ttests/npu/test_live_write.cpp",
+    "M\ttests/npu/test_nz_ingress_canary.cpp"
+  ],
+  "writer_commit_in_product": false,
+  "staging_paths_at_product_head": [],
+  "requested_test_paths": {
+    "tests/npu/test_wave_champions.cpp": false,
+    "tests/npu/test_e8_packet.cpp": false,
+    "tests/npu/e8_packet.cpp": false
+  },
+  "reports": [
+    {
+      "path": "reports/checkpoint1_20261123_i1",
+      "files_on_disk": 1,
+      "tracked_files": 0,
+      "bytes_on_disk": 5139
+    },
+    {
+      "path": "reports/deadlock_20261125",
+      "files_on_disk": 2542,
+      "tracked_files": 37,
+      "bytes_on_disk": 170358911
+    },
+    {
+      "path": "reports/e8_final_20261126",
+      "files_on_disk": 127,
+      "tracked_files": 127,
+      "bytes_on_disk": 1157901
+    },
+    {
+      "path": "reports/wave_champions_20261125",
+      "files_on_disk": 5,
+      "tracked_files": 5,
+      "bytes_on_disk": 47819
+    }
+  ],
+  "checkpoint2_tracked": [],
+  "active_references": [
+    {
+      "path": "cmake/SimTargets.cmake",
+      "line": 147,
+      "text": "  ascendc_library(tq_qwen35_reduce_canary_sim SHARED tests/npu/qwen35_reduce_canary.cpp)"
+    },
+    {
+      "path": "cmake/SimTargets.cmake",
+      "line": 148,
+      "text": "  ascendc_compile_definitions(tq_qwen35_reduce_canary_sim PRIVATE ASCEND_MICRO_CANN_LAUNCH)"
+    },
+    {
+      "path": "cmake/SimTargets.cmake",
+      "line": 149,
+      "text": "  ascendc_compile_options(tq_qwen35_reduce_canary_sim PRIVATE"
+    },
+    {
+      "path": "cmake/SimTargets.cmake",
+      "line": 153,
+      "text": "  tq_scope_cann_wrapper_warnings(tq_qwen35_reduce_canary_sim)"
+    },
+    {
+      "path": "cmake/SimTargets.cmake",
+      "line": 161,
+      "text": "  foreach(canary IN ITEMS bench_qwen35_decode_sim test_qwen35_reduce_canary_sim test_qwen35_tail_canary_sim)"
+    },
+    {
+      "path": "cmake/SimTargets.cmake",
+      "line": 169,
+      "text": "      set(canary_source tests/npu/test_qwen35_reduce_canary.cpp)"
+    },
+    {
+      "path": "cmake/SimTargets.cmake",
+      "line": 170,
+      "text": "      set(canary_kernel tq_qwen35_reduce_canary_sim)"
+    },
+    {
+      "path": "src/turboquant/SOURCE_SYNC.json",
+      "line": 14,
+      "text": "        \"path\": \"components/e8_parallel_decode/e8_component.hpp\","
+    },
+    {
+      "path": "src/turboquant/SOURCE_SYNC.json",
+      "line": 25,
+      "text": "        \"path\": \"components/e8_parallel_decode/e8_decode.hpp\","
+    },
+    {
+      "path": "src/turboquant/SOURCE_SYNC.json",
+      "line": 36,
+      "text": "        \"path\": \"components/e8_parallel_decode/e8_packet_layout.hpp\","
+    },
+    {
+      "path": "src/turboquant/SOURCE_SYNC.json",
+      "line": 190,
+      "text": "        \"path\": \"components/e8_parallel_decode/e8_fused_decode.cpp\","
+    },
+    {
+      "path": "src/turboquant/SOURCE_SYNC.json",
+      "line": 201,
+      "text": "        \"path\": \"components/e8_parallel_decode/e8_parallel_decode.hpp\","
+    },
+    {
+      "path": "src/turboquant/SOURCE_SYNC.json",
+      "line": 212,
+      "text": "        \"path\": \"components/e8_parallel_decode/parallel_component.cpp\","
+    },
+    {
+      "path": "src/turboquant/SOURCE_SYNC.json",
+      "line": 223,
+      "text": "        \"path\": \"components/e8_parallel_decode/routines/routine_e8_bf16_dequant_simt.hpp\","
+    },
+    {
+      "path": "src/turboquant/SOURCE_SYNC.json",
+      "line": 234,
+      "text": "        \"path\": \"components/e8_parallel_decode/routines/routine_e8_int8_dequant_simt.hpp\","
+    },
+    {
+      "path": "tests/npu/qwen35_reduce_canary.cpp",
+      "line": 11,
+      "text": "extern \"C\" __global__ __aicore__ void qwen35_reduce_canary(GM_ADDR workspace, GM_ADDR output,"
+    },
+    {
+      "path": "tests/npu/qwen35_reduce_canary.cpp",
+      "line": 33,
+      "text": "extern \"C\" __global__ __aicore__ void qwen35_reduce_canary(GM_ADDR, GM_ADDR, uint32_t);"
+    },
+    {
+      "path": "tests/npu/qwen35_reduce_canary.cpp",
+      "line": 34,
+      "text": "extern \"C\" void launch_qwen35_reduce_canary(void* stream, void* workspace, void* output,"
+    },
+    {
+      "path": "tests/npu/qwen35_reduce_canary.cpp",
+      "line": 37,
+      "text": "    qwen35_reduce_canary<<<2, nullptr, stream>>>(static_cast<uint8_t*>(workspace),"
+    },
+    {
+      "path": "tests/npu/test_qwen35_reduce_canary.cpp",
+      "line": 10,
+      "text": "extern \"C\" void launch_qwen35_reduce_canary(void*, void*, void*, std::uint32_t);"
+    },
+    {
+      "path": "tests/npu/test_qwen35_reduce_canary.cpp",
+      "line": 16,
+      "text": "            throw std::invalid_argument(\"usage: test_qwen35_reduce_canary_sim 1|2\");"
+    },
+    {
+      "path": "tests/npu/test_qwen35_reduce_canary.cpp",
+      "line": 44,
+      "text": "            launch_qwen35_reduce_canary(session.stream, device_workspace.ptr, output.ptr, splits);"
+    }
+  ],
+  "duplicates": [
+    {
+      "root": "C:\\Ascend\\turboquant-core",
+      "groups": [
+        [
+          "src/turboquant/decode/native/cube/routine_vector_rotate_butterfly.hpp",
+          "src/turboquant/ingress/native/routine_vector_rotate_butterfly.hpp"
+        ]
+      ]
+    },
+    {
+      "root": "C:\\Users\\Admin\\.codex\\worktrees\\tq-product-promotion\\vllm-ascend",
+      "groups": [
+        [
+          "csrc/attention/k2q_csr/k2q_csr_common/op_kernel/arch35/k2q_csr_simt_common_arch35.h",
+          "csrc/attention/k2q_csr/k2q_csr_hist/op_kernel/common/arch35/k2q_csr_simt_common_arch35.h",
+          "csrc/attention/k2q_csr/k2q_csr_meta/op_kernel/common/arch35/k2q_csr_simt_common_arch35.h",
+          "csrc/attention/k2q_csr/k2q_csr_row_prefix/op_kernel/common/arch35/k2q_csr_simt_common_arch35.h",
+          "csrc/attention/k2q_csr/k2q_csr_scatter/op_kernel/common/arch35/k2q_csr_simt_common_arch35.h",
+          "csrc/attention/k2q_csr/k2q_csr_tile_prefix/op_kernel/common/arch35/k2q_csr_simt_common_arch35.h"
+        ],
+        [
+          "csrc/attention/k2q_csr/k2q_csr_common/op_kernel/arch35/k2q_csr_simt_hist_arch35.h",
+          "csrc/attention/k2q_csr/k2q_csr_hist/op_kernel/common/arch35/k2q_csr_simt_hist_arch35.h",
+          "csrc/attention/k2q_csr/k2q_csr_meta/op_kernel/common/arch35/k2q_csr_simt_hist_arch35.h",
+          "csrc/attention/k2q_csr/k2q_csr_row_prefix/op_kernel/common/arch35/k2q_csr_simt_hist_arch35.h",
+          "csrc/attention/k2q_csr/k2q_csr_scatter/op_kernel/common/arch35/k2q_csr_simt_hist_arch35.h",
+          "csrc/attention/k2q_csr/k2q_csr_tile_prefix/op_kernel/common/arch35/k2q_csr_simt_hist_arch35.h"
+        ],
+        [
+          "csrc/attention/k2q_csr/k2q_csr_common/op_kernel/arch35/k2q_csr_simt_scatter_arch35.h",
+          "csrc/attention/k2q_csr/k2q_csr_hist/op_kernel/common/arch35/k2q_csr_simt_scatter_arch35.h",
+          "csrc/attention/k2q_csr/k2q_csr_meta/op_kernel/common/arch35/k2q_csr_simt_scatter_arch35.h",
+          "csrc/attention/k2q_csr/k2q_csr_row_prefix/op_kernel/common/arch35/k2q_csr_simt_scatter_arch35.h",
+          "csrc/attention/k2q_csr/k2q_csr_scatter/op_kernel/common/arch35/k2q_csr_simt_scatter_arch35.h",
+          "csrc/attention/k2q_csr/k2q_csr_tile_prefix/op_kernel/common/arch35/k2q_csr_simt_scatter_arch35.h"
+        ],
+        [
+          "csrc/attention/k2q_csr/k2q_csr_common/op_kernel/k2q_csr_common.h",
+          "csrc/attention/k2q_csr/k2q_csr_hist/op_kernel/common/k2q_csr_common.h",
+          "csrc/attention/k2q_csr/k2q_csr_meta/op_kernel/common/k2q_csr_common.h",
+          "csrc/attention/k2q_csr/k2q_csr_row_prefix/op_kernel/common/k2q_csr_common.h",
+          "csrc/attention/k2q_csr/k2q_csr_scatter/op_kernel/common/k2q_csr_common.h",
+          "csrc/attention/k2q_csr/k2q_csr_tile_prefix/op_kernel/common/k2q_csr_common.h"
+        ],
+        [
+          "csrc/attention/k2q_csr/k2q_csr_common/op_kernel/k2q_csr_mc.h",
+          "csrc/attention/k2q_csr/k2q_csr_hist/op_kernel/common/k2q_csr_mc.h",
+          "csrc/attention/k2q_csr/k2q_csr_meta/op_kernel/common/k2q_csr_mc.h",
+          "csrc/attention/k2q_csr/k2q_csr_row_prefix/op_kernel/common/k2q_csr_mc.h",
+          "csrc/attention/k2q_csr/k2q_csr_scatter/op_kernel/common/k2q_csr_mc.h",
+          "csrc/attention/k2q_csr/k2q_csr_tile_prefix/op_kernel/common/k2q_csr_mc.h"
+        ],
+        [
+          "csrc/attention/k2q_csr/k2q_csr_common/op_kernel/k2q_csr_prefix.h",
+          "csrc/attention/k2q_csr/k2q_csr_hist/op_kernel/common/k2q_csr_prefix.h",
+          "csrc/attention/k2q_csr/k2q_csr_meta/op_kernel/common/k2q_csr_prefix.h",
+          "csrc/attention/k2q_csr/k2q_csr_row_prefix/op_kernel/common/k2q_csr_prefix.h",
+          "csrc/attention/k2q_csr/k2q_csr_scatter/op_kernel/common/k2q_csr_prefix.h",
+          "csrc/attention/k2q_csr/k2q_csr_tile_prefix/op_kernel/common/k2q_csr_prefix.h"
+        ],
+        [
+          "csrc/attention/k2q_csr/k2q_csr_common/op_kernel/k2q_csr_scratch.h",
+          "csrc/attention/k2q_csr/k2q_csr_hist/op_kernel/common/k2q_csr_scratch.h",
+          "csrc/attention/k2q_csr/k2q_csr_meta/op_kernel/common/k2q_csr_scratch.h",
+          "csrc/attention/k2q_csr/k2q_csr_row_prefix/op_kernel/common/k2q_csr_scratch.h",
+          "csrc/attention/k2q_csr/k2q_csr_scatter/op_kernel/common/k2q_csr_scratch.h",
+          "csrc/attention/k2q_csr/k2q_csr_tile_prefix/op_kernel/common/k2q_csr_scratch.h"
+        ],
+        [
+          "csrc/attention/k2q_csr/k2q_csr_common/op_kernel/k2q_csr_stage_meta.h",
+          "csrc/attention/k2q_csr/k2q_csr_hist/op_kernel/common/k2q_csr_stage_meta.h",
+          "csrc/attention/k2q_csr/k2q_csr_meta/op_kernel/common/k2q_csr_stage_meta.h",
+          "csrc/attention/k2q_csr/k2q_csr_row_prefix/op_kernel/common/k2q_csr_stage_meta.h",
+          "csrc/attention/k2q_csr/k2q_csr_scatter/op_kernel/common/k2q_csr_stage_meta.h",
+          "csrc/attention/k2q_csr/k2q_csr_tile_prefix/op_kernel/common/k2q_csr_stage_meta.h"
+        ],
+        [
+          "csrc/attention/k2q_csr/k2q_csr_common/op_kernel/k2q_csr_tiling.h",
+          "csrc/attention/k2q_csr/k2q_csr_hist/op_kernel/common/k2q_csr_tiling.h",
+          "csrc/attention/k2q_csr/k2q_csr_meta/op_kernel/common/k2q_csr_tiling.h",
+          "csrc/attention/k2q_csr/k2q_csr_row_prefix/op_kernel/common/k2q_csr_tiling.h",
+          "csrc/attention/k2q_csr/k2q_csr_scatter/op_kernel/common/k2q_csr_tiling.h",
+          "csrc/attention/k2q_csr/k2q_csr_tile_prefix/op_kernel/common/k2q_csr_tiling.h"
+        ],
+        [
+          "csrc/attention/quant_lightning_indexer_v2_metadata/op_api/aclnn_quant_lightning_indexer_v2_metadata.h",
+          "csrc/attention/quant_lightning_indexer_v2_metadata/op_host/op_api/aclnn_quant_lightning_indexer_v2_metadata.h"
+        ],
+        [
+          "csrc/attention/quant_lightning_indexer_v2_metadata/op_api/quant_lightning_indexer_v2_metadata.cpp",
+          "csrc/attention/quant_lightning_indexer_v2_metadata/op_host/op_api/quant_lightning_indexer_v2_metadata.cpp"
+        ],
+        [
+          "csrc/attention/recurrent_gated_delta_rule_v310/op_host/math_util.h",
+          "csrc/moe/causal_conv1d_v310/op_host/math_util.h"
+        ],
+        [
+          "csrc/attention/turboquant/decode/native/cube/routine_vector_rotate_butterfly.hpp",
+          "csrc/attention/turboquant/ingress/native/routine_vector_rotate_butterfly.hpp"
+        ],
+        [
+          "csrc/common/include/external/aclnn_kernels/cast.h",
+          "csrc/common/stub/op_api/aclnn_kernels/cast.h"
+        ],
+        [
+          "csrc/common/include/external/aclnn_kernels/common/op_error_check.h",
+          "csrc/common/stub/op_api/aclnn_kernels/common/op_error_check.h"
+        ],
+        [
+          "csrc/common/include/external/aclnn_kernels/contiguous.h",
+          "csrc/common/stub/op_api/aclnn_kernels/contiguous.h"
+        ],
+        [
+          "csrc/common/include/external/aclnn_kernels/pad.h",
+          "csrc/common/stub/op_api/aclnn_kernels/pad.h"
+        ],
+        [
+          "csrc/common/include/external/aclnn_kernels/reshape.h",
+          "csrc/common/stub/op_api/aclnn_kernels/reshape.h"
+        ],
+        [
+          "csrc/common/include/external/aclnn_kernels/slice.h",
+          "csrc/common/stub/op_api/aclnn_kernels/slice.h"
+        ],
+        [
+          "csrc/common/include/external/aclnn_kernels/transdata.h",
+          "csrc/common/stub/op_api/aclnn_kernels/transdata.h"
+        ],
+        [
+          "csrc/common/include/external/aclnn_kernels/transpose.h",
+          "csrc/common/stub/op_api/aclnn_kernels/transpose.h"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_host/hcom_topo_info.h",
+          "csrc/mc2/dispatch_ffn_combine_bf16/op_host/hcom_topo_info.h",
+          "csrc/mc2/dispatch_ffn_combine_w4_a8/op_host/hcom_topo_info.h"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_host/tiling_args.h",
+          "csrc/mc2/dispatch_ffn_combine_bf16/op_host/tiling_args.h",
+          "csrc/mc2/dispatch_ffn_combine_w4_a8/op_host/tiling_args.h"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_kernel/moe_init_routing_quant_v2/moe_init_routing_quant_v2.cpp",
+          "csrc/mc2/dispatch_ffn_combine_w4_a8/op_kernel/moe_init_routing_quant_v2/moe_init_routing_quant_v2.cpp"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_kernel/moe_init_routing_quant_v2/moe_v2_common.h",
+          "csrc/mc2/dispatch_ffn_combine_w4_a8/op_kernel/moe_init_routing_quant_v2/moe_v2_common.h"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_kernel/moe_init_routing_quant_v2/moe_v2_expert_token_out.h",
+          "csrc/mc2/dispatch_ffn_combine_w4_a8/op_kernel/moe_init_routing_quant_v2/moe_v2_expert_token_out.h"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_kernel/moe_init_routing_quant_v2/moe_v2_gather_out.h",
+          "csrc/mc2/dispatch_ffn_combine_w4_a8/op_kernel/moe_init_routing_quant_v2/moe_v2_gather_out.h"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_kernel/moe_init_routing_quant_v2/moe_v2_mrgsort.h",
+          "csrc/mc2/dispatch_ffn_combine_w4_a8/op_kernel/moe_init_routing_quant_v2/moe_v2_mrgsort.h"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_kernel/moe_init_routing_quant_v2/moe_v2_sort_base.h",
+          "csrc/mc2/dispatch_ffn_combine_w4_a8/op_kernel/moe_init_routing_quant_v2/moe_v2_sort_base.h"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_kernel/moe_init_routing_quant_v2/moe_v2_src_to_dst_with_capacity.h",
+          "csrc/mc2/dispatch_ffn_combine_w4_a8/op_kernel/moe_init_routing_quant_v2/moe_v2_src_to_dst_with_capacity.h"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_kernel/unpermute/moe_token_unpermute_tiling.h",
+          "csrc/mc2/dispatch_ffn_combine_bf16/op_kernel/unpermute/moe_token_unpermute_tiling.h",
+          "csrc/mc2/dispatch_ffn_combine_w4_a8/op_kernel/unpermute/moe_token_unpermute_tiling.h"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_kernel/utils/const_args.hpp",
+          "csrc/mc2/dispatch_ffn_combine_w4_a8/op_kernel/utils/const_args.hpp"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_kernel/utils/copy_gm_to_l1_custom.hpp",
+          "csrc/mc2/dispatch_ffn_combine_bf16/op_kernel/utils/copy_gm_to_l1_custom.hpp",
+          "csrc/mc2/dispatch_ffn_combine_w4_a8/op_kernel/utils/copy_gm_to_l1_custom.hpp"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_kernel/utils/copy_l0c_to_gm_custom.hpp",
+          "csrc/mc2/dispatch_ffn_combine_bf16/op_kernel/utils/copy_l0c_to_gm_custom.hpp"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_kernel/utils/get_tensor_addr.hpp",
+          "csrc/mc2/dispatch_ffn_combine_bf16/op_kernel/utils/get_tensor_addr.hpp",
+          "csrc/mc2/dispatch_ffn_combine_w4_a8/op_kernel/utils/get_tensor_addr.hpp"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_kernel/utils/layout3d.hpp",
+          "csrc/mc2/dispatch_ffn_combine_bf16/op_kernel/utils/layout3d.hpp"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_kernel/utils/moe_distribute_base.h",
+          "csrc/mc2/dispatch_ffn_combine_bf16/op_kernel/utils/moe_distribute_base.h"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine/op_kernel/utils/select_helper.hpp",
+          "csrc/mc2/dispatch_ffn_combine_bf16/op_kernel/utils/select_helper.hpp",
+          "csrc/mc2/dispatch_ffn_combine_w4_a8/op_kernel/utils/select_helper.hpp"
+        ],
+        [
+          "csrc/mc2/dispatch_ffn_combine_bf16/op_kernel/unpermute/moe_token_unpermute.h",
+          "csrc/mc2/dispatch_ffn_combine_w4_a8/op_kernel/unpermute/moe_token_unpermute.h"
+        ],
+        [
+          "csrc/moe/chunk_fwd_o_vllm/op_kernel/arch20/compat_310p.h",
+          "csrc/moe/chunk_gated_delta_rule_fwd_h_vllm/op_kernel/arch20/compat_310p.h"
+        ],
+        [
+          "csrc/moe/chunk_fwd_o_vllm/tiling_base/data_copy_transpose_tiling.h",
+          "csrc/moe/chunk_gated_delta_rule_fwd_h_vllm/tiling_base/data_copy_transpose_tiling.h"
+        ],
+        [
+          "csrc/moe/chunk_fwd_o_vllm/tiling_base/data_copy_transpose_tiling_def.h",
+          "csrc/moe/chunk_gated_delta_rule_fwd_h_vllm/tiling_base/data_copy_transpose_tiling_def.h"
+        ],
+        [
+          "csrc/moe/chunk_fwd_o_vllm/tiling_base/error_log.h",
+          "csrc/moe/chunk_gated_delta_rule_fwd_h_vllm/tiling_base/error_log.h"
+        ],
+        [
+          "csrc/moe/chunk_fwd_o_vllm/tiling_base/tiling_base.h",
+          "csrc/moe/chunk_gated_delta_rule_fwd_h_vllm/tiling_base/tiling_base.h"
+        ],
+        [
+          "csrc/moe/chunk_fwd_o_vllm/tiling_base/tiling_key.h",
+          "csrc/moe/chunk_gated_delta_rule_fwd_h_vllm/tiling_base/tiling_key.h"
+        ],
+        [
+          "csrc/moe/chunk_fwd_o_vllm/tiling_base/tiling_templates_registry.h",
+          "csrc/moe/chunk_gated_delta_rule_fwd_h_vllm/tiling_base/tiling_templates_registry.h"
+        ],
+        [
+          "csrc/moe/chunk_fwd_o_vllm/tiling_base/tiling_type.h",
+          "csrc/moe/chunk_gated_delta_rule_fwd_h_vllm/tiling_base/tiling_type.h"
+        ],
+        [
+          "csrc/moe/chunk_fwd_o_vllm/tiling_base/tiling_util.h",
+          "csrc/moe/chunk_gated_delta_rule_fwd_h_vllm/tiling_base/tiling_util.h"
+        ],
+        [
+          "csrc/moe/chunk_gated_delta_rule_fwd_h_vllm/op_kernel/arch20/epilogue/gdn_fwd_h_epilogue_policies.hpp",
+          "csrc/moe/chunk_gated_delta_rule_fwd_h_vllm/op_kernel/arch22/epilogue/gdn_fwd_h_epilogue_policies.hpp",
+          "csrc/moe/chunk_gated_delta_rule_fwd_h_vllm/op_kernel/epilogue/gdn_fwd_h_epilogue_policies.hpp"
+        ],
+        [
+          "csrc/moe/moe_gating_top_k_hash/op_kernel/arch35/common.h",
+          "csrc/moe/moe_gating_top_k_hash/op_kernel/common_regbase.h"
+        ],
+        [
+          "csrc/scripts/package/common/__init__.py",
+          "csrc/scripts/package/common/py/__init__.py"
+        ],
+        [
+          "tests/e2e/cases/features/structured_output/__init__.py",
+          "tests/e2e/common/multi_node/__init__.py",
+          "tests/e2e/pull_request/four_card/model_runner_v2/__init__.py",
+          "tests/ut/tools/__init__.py",
+          "tests/ut/tools/bisect/__init__.py",
+          "vllm_ascend/distributed/kv_transfer/kv_pool/kv_offload/preempt_offload/__init__.py",
+          "vllm_ascend/ec_manager/__init__.py"
+        ],
+        [
+          "tests/e2e/pull_request/one_card/attention_utils.py",
+          "tests/ut/attention/utils.py"
+        ],
+        [
+          "tests/e2e/pull_request/one_card/rlhf/state_transitions/__init__.py",
+          "tests/e2e/pull_request/two_card/rlhf/consistency/__init__.py"
+        ],
+        [
+          "tests/e2e/pull_request/rlhf/__init__.py",
+          "tests/e2e/pull_request/two_card/rlhf/state_transitions/__init__.py",
+          "tests/helpers/__init__.py",
+          "vllm_ascend/models/common/__init__.py",
+          "vllm_ascend/models/glm5next/__init__.py",
+          "vllm_ascend/models/glm5next/ops/__init__.py",
+          "vllm_ascend/ops/triton/compressor/__init__.py",
+          "vllm_ascend/ops/triton/msa/__init__.py"
+        ],
+        [
+          "tests/ut/distributed/eplb/__init__.py",
+          "tests/ut/distributed/eplb/policy/__init__.py"
+        ],
+        [
+          "vllm_ascend/_310p/worker/__init__.py",
+          "vllm_ascend/_310p/worker/v2/__init__.py"
+        ],
+        [
+          "vllm_ascend/models/minimax_m3/ops/__init__.py",
+          "vllm_ascend/ops/triton/dcp/__init__.py"
+        ],
+        [
+          "vllm_ascend/ops/triton/mul_add.py",
+          "vllm_ascend/ops/triton/muls_add.py"
+        ]
+      ]
+    }
+  ],
+  "snapshot_blob_mismatches": [],
+  "checkout_crlf_files": 4320,
+  "snapshot_regular_file_count": 4599,
+  "core_initial_head": "c50b7582571921ba96ee00001f81ffe27858aaa0",
+  "plugin_initial_head": "ec6771ff099b8d07f23e6bd581e3b23c12f78ab6",
+  "core_main_initial": "9d4ce7b73b9b8a75d376d07773f27a770242eb8c",
+  "plugin_main_initial": "a1df499e0762621c2b9561e2ee66c498a70d0328",
+  "plugin_swa_sink_initial": "ec6771ff099b8d07f23e6bd581e3b23c12f78ab6"
+}

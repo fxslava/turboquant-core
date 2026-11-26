@@ -1,0 +1,85 @@
+    key: nibble levels covered 16/16, clamped codes 315, zero rows 4, distinct scale exponents 5
+    value: nibble levels covered 16/16, clamped codes 309, zero rows 4, distinct scale exponents 5
+  prefill: 128 tokens, 8 strips, 18 blocks, page 2s+1
+    key: nibble levels covered 16/16, clamped codes 18, zero rows 4, distinct scale exponents 4
+    value: nibble levels covered 16/16, clamped codes 9, zero rows 4, distinct scale exponents 4
+    key: nibble levels covered 16/16, clamped codes 3, zero rows 4, distinct scale exponents 5
+    value: nibble levels covered 16/16, clamped codes 7, zero rows 4, distinct scale exponents 4
+  scatter: page 3, steps 6+4 tokens, RMW on the odd lanes
+    key: nibble levels covered 16/16, clamped codes 304, zero rows 4, distinct scale exponents 5
+    value: nibble levels covered 16/16, clamped codes 348, zero rows 4, distinct scale exponents 5
+  decode_ctx128: context 128, 1 page(s), tail 64 rows, physical_pages 4
+    key: nibble levels covered 16/16, clamped codes 498, zero rows 4, distinct scale exponents 5
+    value: nibble levels covered 16/16, clamped codes 508, zero rows 4, distinct scale exponents 5
+  decode_ctx200: context 200, 2 page(s), tail 8 rows, physical_pages 6
+{
+  "e8_python_model": {
+    "labels": 65536,
+    "scales": 16,
+    "coordinate_scale_pairs": 8388608,
+    "key_addresses": 16384
+  },
+  "native_python_fixtures": {
+    "prefill/expected_key_nz.bin": "17ab6a0da9149b4734d712ec18e0683b693826ab0871f609b95fa434babd7db4",
+    "prefill/expected_key_strip.bin": "29cc46aedc3dc2df8a65c2fcdce5c02e8f6541853db1e8f3f53b4421dcdb69a0",
+    "prefill/expected_scale_nz.bin": "47af95795023552bd12010732201ece2e333939397bf7c88fa05cb5abcedb8b5",
+    "prefill/expected_scale_strip.bin": "202f348453bd4bf536b46702c3ca51a979547d5e8429f2e8c611f73b87a6cdd4",
+    "prefill/expected_value_nz.bin": "dca60e014b8be436063b64b1820984384f4e074e5b2467398843a0db4c3a4b2d",
+    "prefill/expected_value_strip.bin": "8fc234e0aa5d211d3e4f782f5931e7e1fdf3546737bdfb7108cff49b1adc4e86",
+    "prefill/key.bin": "db24bb7f9b44d3fcc51a9eefbd825e8962d901c2c8042bf777613946b2598178",
+    "prefill/pi_signs.bin": "60a8154f2c042cb2d7272a7c6dd2f591432ea776903b5b3a8dcc538e7f73c9a4",
+    "prefill/slot_mapping.bin": "6e857cbcc758dd68a276caaf2cae43ae5914d2359f0f56661d1ec4ba1f69682b",
+    "prefill/tables.bin": "fbc357cb7d8a27c9eef111719ab9c4ecdb04370cdd8286575a82c591a3bf2443",
+    "prefill/value.bin": "fc67d857012b2b8c0dca1624133506d33bd3c172e255b849a28ac70542e3611a",
+    "scatter/expected_key_step1.bin": "b065de8b5a4194621dda78b0c93b49569a487e8d9554b7d984867a4879b59181",
+    "scatter/expected_key_step2.bin": "d01631b632938da9879c88f41daa9ee4265f9dc8c226d715768e7ca7393ae44e",
+    "scatter/expected_scale_step1.bin": "b2750944d29a2a0bb50d6f0683e565f92068725c86149984b078d9a89c964763",
+    "scatter/expected_scale_step2.bin": "3ec9310ecd082dadad8ad386fd66ee95144c81116fe1d67434e6b049049b38fb",
+    "scatter/expected_value_step1.bin": "5505e1a79f036657c23d6435e64a5084e5021d1bed19b284a9a5652c2d40793b",
+    "scatter/expected_value_step2.bin": "9eafee10422bb79bf0f7bd34de8a288789679ba9101ac89785ad88b1d244938d",
+    "scatter/init_key.bin": "cb7864320e78d2519a8f81a0fcc184de1f441f320e2c8e1822a8db4d8ebb2b92",
+    "scatter/init_scale.bin": "36a3a8058f85d946c216205317ad09ba90a0fb9e1c65f020e87da72c4532c60f",
+    "scatter/init_value.bin": "cb7864320e78d2519a8f81a0fcc184de1f441f320e2c8e1822a8db4d8ebb2b92",
+    "scatter/key_a.bin": "a13050b9ed8b1899c8dac737b44f6f5e25f10a4ce06ef8e29236a83d5b497c31",
+    "scatter/key_b.bin": "4de9beb4c8af6a2d1109c19935d6fdf737bae37c9ae401acd88b4dbba066f15f",
+    "scatter/pi_signs.bin": "60a8154f2c042cb2d7272a7c6dd2f591432ea776903b5b3a8dcc538e7f73c9a4",
+    "scatter/slots_a.bin": "795039a24b4bce93b6d512c761b3d1e19eff96ed0e6e5adc744002feb2e571d3",
+    "scatter/slots_b.bin": "6bd2f0f0fe12e192e5f335d8d57d113313811cc16f1813d4ff6e4ccbb89bc470",
+    "scatter/value_a.bin": "66fa758ae726fc8a35555afc9ea468a0faeed2f7cc05acd8b5a36f891f699e30",
+    "scatter/value_b.bin": "fcf78fa257d47e53c53bb418e00dc6cd58de45a94d5dc9c9e97eced15992862c",
+    "decode_ctx128/block_table.bin": "c79eee14f4d2e7a7cdf2411c9fc7841ae32c778a486a12c461b6316db8df93ba",
+    "decode_ctx128/context_lens.bin": "50c8ba3a6170f0a2fb6736ece8a603576ef6309a35e810911599bc6211b554a9",
+    "decode_ctx128/expected_stage0.bin": "5f62baef8d48f7854b922d3b1f53aeb1061e46b0da81ec3bac2dbdc7cb43dbb3",
+    "decode_ctx128/expected_stage1.bin": "52a0c8dda02c6a41c5d49730c6e606c5c9d7fb56344a53eca0a9e339782df589",
+    "decode_ctx128/h16.bin": "186cb9e8c6a34e0e384ff9b8146e62d927f3d0690615a8cbc979b3b6c43d87fd",
+    "decode_ctx128/kernel_stage0.bin": "d11f56d7bb765dc6bb32ab98eab382fa15301c870e83d3c3d44c7448e9f6a3e2",
+    "decode_ctx128/kernel_stage1.bin": "cf251c529059945419de18b8b4eb42da3fb7b7a80fdfcb9aadb7dbb80df954f5",
+    "decode_ctx128/key_cache.bin": "93b2f8c17303d1b37249b500ad198836e3dc0fbb3598eddd76de618ab1acdb2d",
+    "decode_ctx128/mode_tables.bin": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+    "decode_ctx128/pi_signs.bin": "60a8154f2c042cb2d7272a7c6dd2f591432ea776903b5b3a8dcc538e7f73c9a4",
+    "decode_ctx128/query_rot.bin": "95ed718479407e1c8b7623b4e8164b69f0868a9159f9af37dacb818d59c4a028",
+    "decode_ctx128/raw_query.bin": "7262b9bf711065b6dfda52dd1771081005922604992dd3132ea1fc83a51e0354",
+    "decode_ctx128/rot_tables.bin": "fbc357cb7d8a27c9eef111719ab9c4ecdb04370cdd8286575a82c591a3bf2443",
+    "decode_ctx128/scale_cache.bin": "faaee65952fe0e4c77be248043f695c727597c482bcf8804f03115e8cea8e734",
+    "decode_ctx128/value_cache.bin": "49e9d03a3aec53606ca369400bd9ba95c523bf87e228d26031c801541fdc4f24",
+    "decode_ctx200/block_table.bin": "c9fb1af5448b4c1617110984db88708ab631c11941ec029e2d2b8fbd0202c93e",
+    "decode_ctx200/context_lens.bin": "a77802d8305178be2db1ab04fdd5ca3b8c03ad5d45ca35132ff6a04c7faec115",
+    "decode_ctx200/expected_stage0.bin": "c84574570c7e7976f9e9d5608e578c144cc208eb120469e36933fee7da35e7d8",
+    "decode_ctx200/expected_stage1.bin": "0afa8b9ef15b8425d67260f8c4ca065e12e0ac5d9177ea7afa5840093d6b177a",
+    "decode_ctx200/h16.bin": "186cb9e8c6a34e0e384ff9b8146e62d927f3d0690615a8cbc979b3b6c43d87fd",
+    "decode_ctx200/kernel_stage0.bin": "b02e56dd30d4fdfc27e76b6b23cdc85e9e5fde85d158b4cb9165e622c0da862f",
+    "decode_ctx200/kernel_stage1.bin": "b05851bcedf17b7ced0412dd09419e7ec70a22ccafb635047bcb7218ac11f2d0",
+    "decode_ctx200/key_cache.bin": "1e9428583b84031bd3b2d3a67e5841f8b617aacf2a12bcdc555a7b8dd59eefbc",
+    "decode_ctx200/mode_tables.bin": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+    "decode_ctx200/pi_signs.bin": "60a8154f2c042cb2d7272a7c6dd2f591432ea776903b5b3a8dcc538e7f73c9a4",
+    "decode_ctx200/query_rot.bin": "2f60066588e25d2769e266ec2d13c9c088b78cc28313bb8e177bb34883ad8787",
+    "decode_ctx200/raw_query.bin": "5e4faeab319e99a4863a557baca8ff4cda536e9454ee5e7aec5dc906b1379ea8",
+    "decode_ctx200/rot_tables.bin": "fbc357cb7d8a27c9eef111719ab9c4ecdb04370cdd8286575a82c591a3bf2443",
+    "decode_ctx200/scale_cache.bin": "3dfc54f772c8193dd1b0acfa4cea9e69703ac8d1874de58f746101445d9bea0e",
+    "decode_ctx200/value_cache.bin": "15fe066210da2b38c2e8bc13600c35295f763910a5038eead761065dc415eadd"
+  },
+  "torch": "2.10.0+cpu",
+  "numpy": "1.26.4",
+  "cpp_builds": 0,
+  "device_launches": 0
+}

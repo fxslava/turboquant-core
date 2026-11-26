@@ -1,0 +1,20 @@
+  codex/e8-final-integration-20261126
++ codex/e8-packet-writers
+  codex/finite-spike-tail
+* codex/product-audit-20261126
++ codex/reshape-wave1-selected
+  codex/verified-wave-champions
++ codex/wave-v11-integration
+  feat/perf-mode
++ main
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/codex/e8-final-integration-20261126
+  remotes/origin/codex/e8-packet-writers
+  remotes/origin/codex/finite-spike-tail
+  remotes/origin/codex/reshape-wave1-selected
+  remotes/origin/codex/verified-wave-champions
+  remotes/origin/codex/wave-v11-integration
+  remotes/origin/codex/wave-v11-production-port
+  remotes/origin/feat/perf-mode
+  remotes/origin/main
+  remotes/origin/master

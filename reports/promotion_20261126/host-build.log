@@ -1,0 +1,22 @@
+Consolidate compiler generated dependencies of target e8_layout_check
+Consolidate compiler generated dependencies of target turboquant_host
+Consolidate compiler generated dependencies of target e8_decode_cpu_check
+[  8%] Built target e8_layout_check
+[ 21%] Built target turboquant_host
+[ 30%] Built target e8_decode_cpu_check
+Consolidate compiler generated dependencies of target test_contract_gates
+Consolidate compiler generated dependencies of target test_telemetry_dump
+Consolidate compiler generated dependencies of target test_golden_decode_oracle
+Consolidate compiler generated dependencies of target test_layout_bridge
+Consolidate compiler generated dependencies of target test_qwen35_telemetry
+Consolidate compiler generated dependencies of target test_decode_reduce
+Consolidate compiler generated dependencies of target test_qwen35_decode
+Consolidate compiler generated dependencies of target test_turboquant_production_host
+[ 39%] Built target test_layout_bridge
+[ 56%] Built target test_decode_reduce
+[ 56%] Built target test_telemetry_dump
+[ 65%] Built target test_golden_decode_oracle
+[ 73%] Built target test_qwen35_telemetry
+[ 82%] Built target test_qwen35_decode
+[ 91%] Built target test_contract_gates
+[100%] Built target test_turboquant_production_host

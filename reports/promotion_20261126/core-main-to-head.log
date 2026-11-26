@@ -1,0 +1,16 @@
+de29d8e merge(turboquant): retain main tail regression in verified product state
+c50b758 feat(turboquant): seal E8 packet validation and server harness
+29274d5 docs(turboquant): record P6 waiver and final verification evidence
+043bcc4 feat(turboquant): restore Frozen03 batch champion with wide fallback
+d6c63d8 fix(turboquant): preserve NZ staging in native decode matmul
+9822714 chore(turboquant): checkpoint synchronized R1 R2 deadlock baseline
+47abf65 refactor(turboquant): synchronize categorized kernel modules
+7880e94 feat(turboquant): integrate verified Wave-1 and Wave-3 champions
+b92cba0 test: verify telemetry predicate isolation on CAModel
+630c47e docs: record bounded Qwen3.5 simulator results
+cfe262f test: add bounded Qwen3.5 CAModel reduction canaries
+1d4b754 test: reproduce Qwen3.5 telemetry corruption on the host
+3a64bea fix: preserve Split-K statistics during telemetry publication
+8e33051 test: label Qwen3.5 golden checks and bound simulator canaries
+71b43d3 feat: add Qwen3.5 decode benchmark and static feasibility report
+934dd84 fix: isolate CANN wrapper warnings and complete standard includes

@@ -1,0 +1,52 @@
+fa3a316cd33d3efe6aae28c5ac8c4f0f5b8016fa
+100644 76fae7ffdffeffd326081cb7127bfb88c2b5aa52 1	CMakeLists.txt
+100644 fa4dc48dd786fefb84ce2a0891b5c8aeba1ab2b9 2	CMakeLists.txt
+100644 d959242078ee563282a9568e8bcf86a57be49fdf 3	CMakeLists.txt
+100644 b5cb4a55a1cf9f6e1bb96669ebe9d9b6e48e23b1 1	tests/ut/patch/platform/test_patch_mamba_config.py
+100644 6fde38e6059deed6dac96328a52f62abf07226f1 2	tests/ut/patch/platform/test_patch_mamba_config.py
+100644 5d79e7206248ee2304b3c874be2206c27c7955a6 3	tests/ut/patch/platform/test_patch_mamba_config.py
+100644 352da291c370d1c4181c7b2fd514ce198da6cc41 1	tests/ut/worker/test_kv_block_zeroer.py
+100644 d61ed74376cfe38c28638ee33094539c0d7951d6 3	tests/ut/worker/test_kv_block_zeroer.py
+100644 14b5cd0abc3c0139509aae290c4e4abb06ba1c47 1	tests/ut/worker/test_worker_v1.py
+100644 a3578be246487ad20fb15e9c1b86250e53bfacf8 2	tests/ut/worker/test_worker_v1.py
+100644 c733c25003efd57613ff183f3eb58fe475d67852 3	tests/ut/worker/test_worker_v1.py
+100644 c057af8d26180145a22e5c12a6dc1a00e9e2d5c7 1	vllm_ascend/core/kv_cache_interface.py
+100644 ace91ff0bc4ce9f73a01d4221b8f9540343ebec5 2	vllm_ascend/core/kv_cache_interface.py
+100644 92088a8dc3bf1103f05ceba19956a5f98f4f8654 3	vllm_ascend/core/kv_cache_interface.py
+100644 ed5ae961331d30a8178fad0707575828d03bd8d0 1	vllm_ascend/envs.py
+100644 c05dc7ef024dd232d573ed1d53859be108a05781 2	vllm_ascend/envs.py
+100644 39675109b38555d99165e0198e7069be3d307fc1 3	vllm_ascend/envs.py
+100644 30c76975b5ec629e97a95f274e1765f5483efd21 1	vllm_ascend/worker/model_runner_v1.py
+100644 3e9f9826a91b7acc8f67da46b6e6569df8402785 3	vllm_ascend/worker/model_runner_v1.py
+100644 8d80e2b0589dde5ed6115e36b508d2d240262646 1	vllm_ascend/worker/utils.py
+100644 6c797fbd33860fe273a3e3c722c3d04713eae519 2	vllm_ascend/worker/utils.py
+100644 6a332b3c3b375419ec2c070e7ce747740f4e99b6 3	vllm_ascend/worker/utils.py
+100644 670a0bab94696507165867dcd2ff675556d0a040 1	vllm_ascend/worker/worker.py
+100644 f24c88794fa87102611bc0989be2b2ac487edbfa 2	vllm_ascend/worker/worker.py
+100644 fc24f1fc491b58399d5693fe9e89e9bfe5aa6014 3	vllm_ascend/worker/worker.py
+
+Auto-merging CMakeLists.txt
+CONFLICT (content): Merge conflict in CMakeLists.txt
+Auto-merging csrc/build_aclnn.sh
+Auto-merging docs/source/developer_guide/performance_and_debug/service_profiling_guide.md
+Auto-merging docs/source/user_guide/feature_guide/graph_mode.md
+Auto-merging setup.py
+Auto-merging tests/ut/conftest.py
+Auto-merging tests/ut/patch/platform/test_patch_mamba_config.py
+CONFLICT (content): Merge conflict in tests/ut/patch/platform/test_patch_mamba_config.py
+CONFLICT (modify/delete): tests/ut/worker/test_kv_block_zeroer.py deleted in main and modified in 9d4f1d3b3372.  Version 9d4f1d3b3372 of tests/ut/worker/test_kv_block_zeroer.py left in tree.
+Auto-merging tests/ut/worker/test_worker_v1.py
+CONFLICT (content): Merge conflict in tests/ut/worker/test_worker_v1.py
+Auto-merging vllm_ascend/attention/attention_v1.py
+Auto-merging vllm_ascend/attention/utils.py
+Auto-merging vllm_ascend/core/kv_cache_interface.py
+CONFLICT (content): Merge conflict in vllm_ascend/core/kv_cache_interface.py
+Auto-merging vllm_ascend/envs.py
+CONFLICT (content): Merge conflict in vllm_ascend/envs.py
+Auto-merging vllm_ascend/platform.py
+Auto-merging vllm_ascend/utils.py
+CONFLICT (modify/delete): vllm_ascend/worker/model_runner_v1.py deleted in main and modified in 9d4f1d3b3372.  Version 9d4f1d3b3372 of vllm_ascend/worker/model_runner_v1.py left in tree.
+Auto-merging vllm_ascend/worker/utils.py
+CONFLICT (content): Merge conflict in vllm_ascend/worker/utils.py
+Auto-merging vllm_ascend/worker/worker.py
+CONFLICT (content): Merge conflict in vllm_ascend/worker/worker.py

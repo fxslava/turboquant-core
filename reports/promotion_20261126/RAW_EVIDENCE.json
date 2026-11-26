@@ -1,0 +1,1717 @@
+[
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer.log",
+    "sha256": "be7fb8ff531ff587af08a547e9db571212ff515b082a5004479d1b569da1fcae",
+    "bytes": 149
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\AUDIT.json",
+    "sha256": "337c884fd85e613777e2ff0e93d40ba2227a98dd781470ac8151b5b40583a0f1",
+    "bytes": 39670
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\audit.log",
+    "sha256": "23f4982c4b28601827505c8c877754b84d987cd1d6fb60f7667206da63ca9751",
+    "bytes": 17421
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\audit.py",
+    "sha256": "3306e73f361d1fdcda2401b4a3a62259302a3b3e61515bcac50e9fa8b99f96ff",
+    "bytes": 5012
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\benchmark-metrics.log",
+    "sha256": "30364e2504ee04e69a65687ea4079544962ac2f8fee56301387809f1182e8123",
+    "bytes": 106
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\bindings-container.log",
+    "sha256": "ec94afc6df590522ac444e9ba4aa587c12f126645e0d1804e8594671250e0af3",
+    "bytes": 2833
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\bindings.log",
+    "sha256": "b7cb7d40c1071900cfa6d93825c2ab09d9697ca5e362beb0d8ce8afa922e2028",
+    "bytes": 390
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\config-npu.log",
+    "sha256": "f88fe135d9e854f56315135b04c8d3c9260be835586568174631e86503735ec9",
+    "bytes": 499
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\config-sim.log",
+    "sha256": "4445a5f8980f32c44991428ecab947fdedd908c1e59a81f2efa0668b13441d54",
+    "bytes": 213
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\configure.sh",
+    "sha256": "4f82d486e75d84cf9648be5c4f918e481ca03dca6efba51a1db4bb5f3c648726",
+    "bytes": 428
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\container_host.sh",
+    "sha256": "4b41c472718468a33615243deb957d131e2f7c0173f9e9ca142d58f0f643f146",
+    "bytes": 329
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\core-branches.log",
+    "sha256": "226bc0e790f02cbe68323c83e9c1e39797c16478f814216b61df431562a24616",
+    "bytes": 674
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\core-main-to-head.log",
+    "sha256": "25d4c063bddda00bbbf03c78804e5ce70d8a766263a493beceb0ce911ad2ce9e",
+    "bytes": 1121
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\core-status.log",
+    "sha256": "2a842e080fa53306cae96ecadbd6268b9fc93ffdd5620dbc85e572fe4a53c775",
+    "bytes": 6985
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\cpp-contracts.log",
+    "sha256": "20c9e1cd194f2b1c4c67568aad180322254c3314f43584c1605abf26960242b3",
+    "bytes": 101
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\cpp-contracts.xml",
+    "sha256": "75a2cbd20313d61edc2642db4af26680403a4df5957f0b091d43121178a22a68",
+    "bytes": 1213
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\device-free.log",
+    "sha256": "d8a7baf51f51c5bf21a5fb08abf4e841453d2c8574910ccf40832882d27cf7f9",
+    "bytes": 751
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\device-free.xml",
+    "sha256": "11884b68ea92544a393552683ced074bf713f61aa9a525df1ad8bb84b14e8895",
+    "bytes": 97011
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\generate-goldens.log",
+    "sha256": "b5b7e44b791d534402c31ea32fd860bf65b679f7e691ffe59eb739702fd3eaf5",
+    "bytes": 3079
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\host-build.log",
+    "sha256": "e148c8a0dc730c216516eb5e0cc2b70b507d404147c90566aba40a7191b03632",
+    "bytes": 1294
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\host-config.log",
+    "sha256": "64ebbf6e5d140ea018836bbf3b454a3c9ab9ddeda854959813eb32ecd1f451b5",
+    "bytes": 293
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\host-ctest.log",
+    "sha256": "72caa3d273623862afc7c0fb3c0057182724fc477c840d83427153edc83970c4",
+    "bytes": 1278
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\host-gates.log",
+    "sha256": "97ce0f85d4bbb106c80da922497686ad8f127df276b396db02ce60d134614ff0",
+    "bytes": 101
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\host-gates.xml",
+    "sha256": "2643aeb172bc8cf95a07693f86948e680f733ba712cac62229c4ffa91ffd6fb5",
+    "bytes": 2028
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\merged-canary-syntax.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\merged-dirty-runner.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\platform-product.diff",
+    "sha256": "1abc448c1195bfca147e045d32afa1eef02c0728c16ce3339fe6f04b19591dab",
+    "bytes": 14967
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\plugin-branches.log",
+    "sha256": "cfd7ce0c97e66bd147fb14123a109da8ac4bca0397e35215cd1575c276a81257",
+    "bytes": 2528
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\plugin-candidate-branches.log",
+    "sha256": "0eab5f2a23071d8c0f3f7c79d0b37daa1c07ffe3d957d0deb2553912e1b7ab99",
+    "bytes": 2528
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\plugin-candidate-main-to-head.log",
+    "sha256": "d33686d11c5e759c9e8bd2dd55dd26d4e3eb0bea62d0b3e119e9937e7c949c7e",
+    "bytes": 39661
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\plugin-candidate-status.log",
+    "sha256": "cbbf17542ccb15068f638dfc2a7db625eedc548c25976b1b308ff6d064422b73",
+    "bytes": 36
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\plugin-main-to-head.log",
+    "sha256": "8de5c5517e35ee45226b4934668fa580b672d7738aa98fd4046ec5d0978c37b5",
+    "bytes": 39661
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\plugin-merge-tree.txt",
+    "sha256": "9aaaefaab8f91e6762075b31fdd0f25770e21c8ea9855a130167443f49174632",
+    "bytes": 201896
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\plugin-product-port-tree.txt",
+    "sha256": "3c26293c0283d06a9d25f2c48d07d92d79c678cda2735c9221a9b984c6cfe14b",
+    "bytes": 3672
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\plugin-status.log",
+    "sha256": "5715db0e62aa5cfa32f827355ca3b9e394f15c33fa11cd6941822e75881186f2",
+    "bytes": 40
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\PORT_BLOCKER.json",
+    "sha256": "209b132c76f4fe71f348431891e202f44ef10b47555023e4cc49dcd51850584e",
+    "bytes": 21033
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners.log",
+    "sha256": "690caea9af4983a31bd00a344eeb49dd1b20576f3c141a1182a6841369ab6662",
+    "bytes": 246
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runner_syntax.py",
+    "sha256": "c9ef54f8e0bcaed8ac89528f5f157dbb8b7bdeece0161b1a48cdc30556fdf289",
+    "bytes": 2263
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\run_checks.py",
+    "sha256": "5ae9fad3d43cba5099eabf87e5e30e7a889bf4ebe8b39bab349ea03910ffd648",
+    "bytes": 1930
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\seal_report.py",
+    "sha256": "a63c5d224a28968f8e853f5e789dc8e4f27bf06923ccb55d6be97b7a2f1c92da",
+    "bytes": 5559
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\semantic-container.log",
+    "sha256": "d76b2b7ac71a2ac5a0b6a36f7934e0f70753c5c32badfc54dbe2de7a6bcfc61d",
+    "bytes": 7419
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\semantic-goldens.log",
+    "sha256": "bea2a7fdc8c91b01cdd46c62a69f2569e06cf3c1bb599421c1459368f779f36d",
+    "bytes": 1785
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax.log",
+    "sha256": "2e748dd7d5bec3c38e41592778930836b32f7d9904612d075fa9d06bf92affa4",
+    "bytes": 147
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\turboquant-only-port.patch",
+    "sha256": "2f0e20d7c9bac0f0ed0b87120a50b7e1716bad8e2e528ac766d35ac6311ce7bb",
+    "bytes": 2102483
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\worktree-device-free.log",
+    "sha256": "3bd54b1f5d12169575285c0fe74185e4e20f959b39105a6ed6d9c95f26a5e92a",
+    "bytes": 751
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\worktree-device-free.xml",
+    "sha256": "a478bea04a2f1180de2e8e73529f5ecb6d7082019249c1da83f8d8b75d60c1a7",
+    "bytes": 97011
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected.log",
+    "sha256": "a42dc1fe348272aecea3e79aedc644ef955625c06f76e02e6fb3a568d6e96861",
+    "bytes": 1726
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\narrow-nz-baseline.cpp",
+    "sha256": "268f4edef853157a0c3978e8734c8885d68445426c1ecb9939d513093664a029",
+    "bytes": 258
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\narrow-nz-baseline.json",
+    "sha256": "37cf838510e6e4927cf87a7dbe5f89c983a46643bd3628c0c351ff9eccc8724d",
+    "bytes": 6567113
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\narrow-nz-baseline.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\narrow-nz-deployed.cpp",
+    "sha256": "b42de6aa427b84e3378afdd8f6c065b8793a7d58e9b2ccc08b30cad81e83b1db",
+    "bytes": 308
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\narrow-nz-deployed.json",
+    "sha256": "3dbd4df6613a48af4b3f806cdd7b44dfeb19a80635a0763938ae70a4ab32be61",
+    "bytes": 6847992
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\narrow-nz-deployed.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\narrow-nz.comparison.json",
+    "sha256": "e78745bde3e76490adaef535e81e19c882c39a1e8b7f71e17f172a59ea0b327b",
+    "bytes": 3759
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\narrow-strip-baseline.cpp",
+    "sha256": "3a3300d57b509e3b37e69fb9e76ee971c8233684d2d0376ee825362f388117a4",
+    "bytes": 258
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\narrow-strip-baseline.json",
+    "sha256": "1c10f242d55a28f1f805ac21ee5c3a91399d95e6a8e3097006b157413a7de659",
+    "bytes": 6220950
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\narrow-strip-baseline.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\narrow-strip-deployed.cpp",
+    "sha256": "63620a1a1857f722b4ca637efd9d4d83e291823abbc2f2e2a3273f0bd0ea2f5b",
+    "bytes": 308
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\narrow-strip-deployed.json",
+    "sha256": "bb17f6d701e908b858d06bb3986646e997f1366cbc7530affa94c2258e03c363",
+    "bytes": 6486751
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\narrow-strip-deployed.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\narrow-strip.comparison.json",
+    "sha256": "97d8c235a088a59036ccd35bd69dbc603fc60b9a81e507c649d4be51c36cafd6",
+    "bytes": 3789
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\RECEIPT.json",
+    "sha256": "50a11414c2f74e92241ce96b74e27ccdfb0272b0e5bfb6e9e0db1985e4a42df6",
+    "bytes": 21110
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\strict-wide.log",
+    "sha256": "4bcca0ca453da0a02bf8b509a713164809dae2c8b106ae42d7d09bfc3a40f398",
+    "bytes": 367
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\wide-nz-baseline.cpp",
+    "sha256": "38f336a4641d38eda597103664f23f081c2956b4ad6c970742d675d897a16575",
+    "bytes": 288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\wide-nz-baseline.json",
+    "sha256": "675f87d3719413663296d23d8b36f9a8e7f160edc2df6da2b59ef4e4b9794c7a",
+    "bytes": 6729937
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\wide-nz-baseline.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\wide-nz-deployed.cpp",
+    "sha256": "471e349fd0284a49665a2c90a90be889414eb40fed62d616808aaf11e9d6407e",
+    "bytes": 313
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\wide-nz-deployed.json",
+    "sha256": "957c354489b6e376d1877b6eace98e4fd38f03aeeaf6a07daae7f4e66843ceaf",
+    "bytes": 6862908
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\wide-nz-deployed.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\wide-nz.comparison.json",
+    "sha256": "58964a23f1be13cd2b32e6eb8a2317ad53e93bdc517cdfcc18501329a25f4daa",
+    "bytes": 3779
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\wide-strip-baseline.cpp",
+    "sha256": "9a175430f942cc8dc2c7291c25d2c08da9918f54ade466f7f94df83d952dee2b",
+    "bytes": 288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\wide-strip-baseline.json",
+    "sha256": "cd069e6d961645bd021bf0560101ed1a3f174dea21d14cea895d6e316c8ab43e",
+    "bytes": 6375048
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\wide-strip-baseline.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\wide-strip-deployed.cpp",
+    "sha256": "d10eba3b401ce728235b7052efd938516ab6679843d0bd82b55f29d58c85cb0e",
+    "bytes": 313
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\wide-strip-deployed.json",
+    "sha256": "964cb955fde471cc3ee693ba0e723f2f2f2fe8827888dfc311466dcaf946ed7e",
+    "bytes": 6500857
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\wide-strip-deployed.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\wide-strip.comparison.json",
+    "sha256": "566dc745807b83fd09d31ab4aa76f34471583352e0552989c3155ea4a6e25b14",
+    "bytes": 3809
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\dumps.json",
+    "sha256": "94b53885fd4f9fac5da685b7564d32ed80ddf9c3484104c0928dc39a88be67b3",
+    "bytes": 143
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners\\decode.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners\\dirty-data.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners\\golden-decode.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners\\golden-prefill-nz.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners\\golden-prefill-strip.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners\\golden-scatter.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners\\live-nz.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners\\live-strip.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners\\nz-ingress.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners\\production-accuracy.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners\\production-benchmark.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners\\qwen35-reduce.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners\\qwen35-sim.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners\\qwen35-tail.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners\\qwen35.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\runners\\syntax.json",
+    "sha256": "8024d2170f4d18e3060ca01ac975790024fe079a50aad4c47b2782a736fdf322",
+    "bytes": 9984
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-nz.log",
+    "sha256": "534e337c83d955f2e5edcdf7e1c1fa92bf8d1da79edcc44ecccd3027422c3307",
+    "bytes": 1172
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-strip.log",
+    "sha256": "e9fcee42df28ef7265abe9cacf4447a038864a1c6642925193ff380f81c89c87",
+    "bytes": 620
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\plugin-nz.log",
+    "sha256": "5526f75a866d303cb7661829c1fcf3aaa62a45fd1ff20a0a9087cc9a064bea14",
+    "bytes": 1292
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\RECEIPT.json",
+    "sha256": "b573c69e389abd8b901a9048f130d2ec52345ccde8c0f86e35d37042c41b047b",
+    "bytes": 20836
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-nz\\e8_fused_decode-device.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-nz\\e8_fused_decode-host.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-nz\\parallel_component-device.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-nz\\parallel_component-host.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-nz\\syntax.json",
+    "sha256": "e8ed7c2d9e14f08f8a4753612aaecfe207ea63ae0a59cf36efc3eedb3274d234",
+    "bytes": 1002652
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-nz\\turboquant_fused_decode-device.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-nz\\turboquant_fused_decode-host.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-nz\\turboquant_reshape_batch-device.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-nz\\turboquant_reshape_batch-host.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-nz\\turboquant_reshape_batch_wide-device.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-nz\\turboquant_reshape_batch_wide-host.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-nz\\turboquant_reshape_scatter-device.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-nz\\turboquant_reshape_scatter-host.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-strip\\syntax.json",
+    "sha256": "23676374585cad79982416838cd1a84f1d873818aecbed24964922c75c68b687",
+    "bytes": 501134
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-strip\\turboquant_reshape_batch-device.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-strip\\turboquant_reshape_batch-host.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-strip\\turboquant_reshape_batch_wide-device.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-strip\\turboquant_reshape_batch_wide-host.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-strip\\turboquant_reshape_scatter-device.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\core-strip\\turboquant_reshape_scatter-host.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\plugin-nz\\asc_e8_component-device.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\plugin-nz\\asc_e8_component-host.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\plugin-nz\\asc_e8_reader-device.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\plugin-nz\\asc_e8_reader-host.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\plugin-nz\\syntax.json",
+    "sha256": "4ea28af0b2d4c41e8ae1db3824f20df3310dfb2a043e1e7b6d84dd82f4b4cb99",
+    "bytes": 1003032
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\plugin-nz\\turboquant_fused_decode-device.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\plugin-nz\\turboquant_fused_decode-host.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\plugin-nz\\turboquant_reshape_batch-device.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\plugin-nz\\turboquant_reshape_batch-host.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\plugin-nz\\turboquant_reshape_batch_wide-device.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\plugin-nz\\turboquant_reshape_batch_wide-host.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\plugin-nz\\turboquant_reshape_scatter-device.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\syntax\\plugin-nz\\turboquant_reshape_scatter-host.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx128\\block_table.bin",
+    "sha256": "c79eee14f4d2e7a7cdf2411c9fc7841ae32c778a486a12c461b6316db8df93ba",
+    "bytes": 32
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx128\\context_lens.bin",
+    "sha256": "50c8ba3a6170f0a2fb6736ece8a603576ef6309a35e810911599bc6211b554a9",
+    "bytes": 4
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx128\\expected_stage0.bin",
+    "sha256": "5f62baef8d48f7854b922d3b1f53aeb1061e46b0da81ec3bac2dbdc7cb43dbb3",
+    "bytes": 65536
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx128\\expected_stage1.bin",
+    "sha256": "efd23c38215288c2d570b6672eb58147269cdd649b7fc34f867579f8c1fb8aa1",
+    "bytes": 65536
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx128\\h16.bin",
+    "sha256": "186cb9e8c6a34e0e384ff9b8146e62d927f3d0690615a8cbc979b3b6c43d87fd",
+    "bytes": 512
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx128\\kernel_stage0.bin",
+    "sha256": "d11f56d7bb765dc6bb32ab98eab382fa15301c870e83d3c3d44c7448e9f6a3e2",
+    "bytes": 65536
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx128\\kernel_stage1.bin",
+    "sha256": "cf251c529059945419de18b8b4eb42da3fb7b7a80fdfcb9aadb7dbb80df954f5",
+    "bytes": 65536
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx128\\key_cache.bin",
+    "sha256": "93b2f8c17303d1b37249b500ad198836e3dc0fbb3598eddd76de618ab1acdb2d",
+    "bytes": 262144
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx128\\manifest.txt",
+    "sha256": "37e599d9e196c314b21e7f948808edb5bab2cfc02b903f341bfc9c0e80b5a75d",
+    "bytes": 1109
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx128\\mode_tables.bin",
+    "sha256": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+    "bytes": 32
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx128\\pi_signs.bin",
+    "sha256": "60a8154f2c042cb2d7272a7c6dd2f591432ea776903b5b3a8dcc538e7f73c9a4",
+    "bytes": 1024
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx128\\query_rot.bin",
+    "sha256": "95ed718479407e1c8b7623b4e8164b69f0868a9159f9af37dacb818d59c4a028",
+    "bytes": 65536
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx128\\raw_query.bin",
+    "sha256": "7262b9bf711065b6dfda52dd1771081005922604992dd3132ea1fc83a51e0354",
+    "bytes": 32768
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx128\\rot_tables.bin",
+    "sha256": "fbc357cb7d8a27c9eef111719ab9c4ecdb04370cdd8286575a82c591a3bf2443",
+    "bytes": 32768
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx128\\scale_cache.bin",
+    "sha256": "faaee65952fe0e4c77be248043f695c727597c482bcf8804f03115e8cea8e734",
+    "bytes": 16384
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx128\\value_cache.bin",
+    "sha256": "49e9d03a3aec53606ca369400bd9ba95c523bf87e228d26031c801541fdc4f24",
+    "bytes": 262144
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx200\\block_table.bin",
+    "sha256": "c9fb1af5448b4c1617110984db88708ab631c11941ec029e2d2b8fbd0202c93e",
+    "bytes": 32
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx200\\context_lens.bin",
+    "sha256": "a77802d8305178be2db1ab04fdd5ca3b8c03ad5d45ca35132ff6a04c7faec115",
+    "bytes": 4
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx200\\expected_stage0.bin",
+    "sha256": "c84574570c7e7976f9e9d5608e578c144cc208eb120469e36933fee7da35e7d8",
+    "bytes": 65536
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx200\\expected_stage1.bin",
+    "sha256": "afe527ba561a0027ecbe994a81fe2cf770eba0aba2e109d41b952fbf9e5b3b11",
+    "bytes": 65536
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx200\\h16.bin",
+    "sha256": "186cb9e8c6a34e0e384ff9b8146e62d927f3d0690615a8cbc979b3b6c43d87fd",
+    "bytes": 512
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx200\\kernel_stage0.bin",
+    "sha256": "b02e56dd30d4fdfc27e76b6b23cdc85e9e5fde85d158b4cb9165e622c0da862f",
+    "bytes": 65536
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx200\\kernel_stage1.bin",
+    "sha256": "b05851bcedf17b7ced0412dd09419e7ec70a22ccafb635047bcb7218ac11f2d0",
+    "bytes": 65536
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx200\\key_cache.bin",
+    "sha256": "1e9428583b84031bd3b2d3a67e5841f8b617aacf2a12bcdc555a7b8dd59eefbc",
+    "bytes": 393216
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx200\\manifest.txt",
+    "sha256": "e32ea82d1462583af136b61f08202607174230476f94f14b3b8a0cbef9e7f729",
+    "bytes": 1112
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx200\\mode_tables.bin",
+    "sha256": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+    "bytes": 32
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx200\\pi_signs.bin",
+    "sha256": "60a8154f2c042cb2d7272a7c6dd2f591432ea776903b5b3a8dcc538e7f73c9a4",
+    "bytes": 1024
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx200\\query_rot.bin",
+    "sha256": "2f60066588e25d2769e266ec2d13c9c088b78cc28313bb8e177bb34883ad8787",
+    "bytes": 65536
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx200\\raw_query.bin",
+    "sha256": "5e4faeab319e99a4863a557baca8ff4cda536e9454ee5e7aec5dc906b1379ea8",
+    "bytes": 32768
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx200\\rot_tables.bin",
+    "sha256": "fbc357cb7d8a27c9eef111719ab9c4ecdb04370cdd8286575a82c591a3bf2443",
+    "bytes": 32768
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx200\\scale_cache.bin",
+    "sha256": "3dfc54f772c8193dd1b0acfa4cea9e69703ac8d1874de58f746101445d9bea0e",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_ctx200\\value_cache.bin",
+    "sha256": "15fe066210da2b38c2e8bc13600c35295f763910a5038eead761065dc415eadd",
+    "bytes": 393216
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\block_table.bin",
+    "sha256": "127d5192d1e1b2a613fbdc5f74230e51e15b35f343a67f5450434b6e4c219796",
+    "bytes": 2048
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\context_lens.bin",
+    "sha256": "ff8f5c9ad851bb8694ace7dd8dbe3d0c6a356b0e88d06765df14f1acd865d806",
+    "bytes": 4
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\expected_stage0.bin",
+    "sha256": "3bb1f0a35133b0af666ff1347d50c36582833696674241e5816906a75d6376c9",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\expected_stage1.bin",
+    "sha256": "c4638f98d4d6995877fe515b41e88fb237ec57e9d39b4d9eace241a8e639abf0",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\h16.bin",
+    "sha256": "186cb9e8c6a34e0e384ff9b8146e62d927f3d0690615a8cbc979b3b6c43d87fd",
+    "bytes": 512
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\kernel_stage0.bin",
+    "sha256": "422224cc453e148bf8b3236e879a7342adbff0817a25d05d3f1718906617c1b6",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\kernel_stage1.bin",
+    "sha256": "9ece815dc74025782e7267ac9bebb076fef3da761301b7e44dad56de12b8a437",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\key_cache.bin",
+    "sha256": "1ea377541dc1adcd6ea80a3586a6608533f21f7fded625b4b86444b57278aa21",
+    "bytes": 589824
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\key_cache.index.bin",
+    "sha256": "7de2bc319a6a4100dff14bfa4cd3480d63e0113bab69980d46d5943b5bfa7a7d",
+    "bytes": 144
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\manifest.txt",
+    "sha256": "d76822e113ae714c5eb5ed9706eb5f67c5975bf790f224b50fa4e3cc460ae4db",
+    "bytes": 1476
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\mode_tables.bin",
+    "sha256": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+    "bytes": 32
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\pi_signs.bin",
+    "sha256": "60a8154f2c042cb2d7272a7c6dd2f591432ea776903b5b3a8dcc538e7f73c9a4",
+    "bytes": 1024
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\query_rot.bin",
+    "sha256": "c0a327421c9405dc1e5a8e9826fb7b51c5191beebdf2fbdbe97e4534fa6855f6",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\raw_query.bin",
+    "sha256": "cedb328bb67cb56dad27c92b5806881565a417e1966db3d97ab8ceb77e7e3bdc",
+    "bytes": 12288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\rot_tables.bin",
+    "sha256": "fbc357cb7d8a27c9eef111719ab9c4ecdb04370cdd8286575a82c591a3bf2443",
+    "bytes": 32768
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\scale_cache.bin",
+    "sha256": "d48a5ffb1f2b49542e447ca8fdcf076cf8f69a61f865b3a55c98bf31a984472f",
+    "bytes": 36864
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\scale_cache.index.bin",
+    "sha256": "213cecf0174ee2608d8d222a1fe9af95c0cfdb4ba6a6c9b2a160fcd94fd80e8c",
+    "bytes": 144
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\value_cache.bin",
+    "sha256": "39c41eb469903f587c0da3c4af677b95a2174125a25545927a34f124dea6a826",
+    "bytes": 589824
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx1055\\value_cache.index.bin",
+    "sha256": "7de2bc319a6a4100dff14bfa4cd3480d63e0113bab69980d46d5943b5bfa7a7d",
+    "bytes": 144
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\block_table.bin",
+    "sha256": "aa632bd21c40bd09aea3c3f46bceff891a7419f22f7836b534335487c2a7d492",
+    "bytes": 2048
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\context_lens.bin",
+    "sha256": "50c8ba3a6170f0a2fb6736ece8a603576ef6309a35e810911599bc6211b554a9",
+    "bytes": 4
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\expected_stage0.bin",
+    "sha256": "1db7907d12b4510ac8a224e3431be44e0387b8ca3ac4f54d2fcadef4528eaa22",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\expected_stage1.bin",
+    "sha256": "748e5e21f2f126725019a8f4616234af6250455578a490f19c30bd886dc91df0",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\h16.bin",
+    "sha256": "186cb9e8c6a34e0e384ff9b8146e62d927f3d0690615a8cbc979b3b6c43d87fd",
+    "bytes": 512
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\kernel_stage0.bin",
+    "sha256": "9404cc82d10fff8824a07858558d720482c814c87d9081b7af12f3d2e378bdd1",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\kernel_stage1.bin",
+    "sha256": "8e60c2109431ca7961766da56d86eee8d814c29f9e0142ad715db87e46d78170",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\key_cache.bin",
+    "sha256": "85e502a618a14d3d992f07d625653c10a21a2c9813b529b6ac49070f98c7b08d",
+    "bytes": 65536
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\key_cache.index.bin",
+    "sha256": "d05e4ba1495455f01bd2414525b857c4ea6d63025c7fdeea88a0aebc576ca056",
+    "bytes": 16
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\manifest.txt",
+    "sha256": "b93095dcb41e068c3b42d24ea5fee0253f38cd24d316d81d7c87af52512f683a",
+    "bytes": 1474
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\mode_tables.bin",
+    "sha256": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+    "bytes": 32
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\pi_signs.bin",
+    "sha256": "60a8154f2c042cb2d7272a7c6dd2f591432ea776903b5b3a8dcc538e7f73c9a4",
+    "bytes": 1024
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\query_rot.bin",
+    "sha256": "b2167619ca747319e25001a912152607bef0ab9ed1d960f2da5c44e60a30cbc4",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\raw_query.bin",
+    "sha256": "362f170d0ace7be32697da222fc9a82d5383248e4cd4fa433d1e5a344c44d895",
+    "bytes": 12288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\rot_tables.bin",
+    "sha256": "fbc357cb7d8a27c9eef111719ab9c4ecdb04370cdd8286575a82c591a3bf2443",
+    "bytes": 32768
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\scale_cache.bin",
+    "sha256": "711a9dc47cef7fbb714eaa4f24e7e837bedc815700be34e61cb959972f67e911",
+    "bytes": 4096
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\scale_cache.index.bin",
+    "sha256": "a0e6a709ec7216fa2ecb33d85e628865e5d5b739802f7f2666569282692e405f",
+    "bytes": 16
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\value_cache.bin",
+    "sha256": "558a8aa6f7fafc6741601ada657c0a4c585f194a253a8925e5469d3ca48c230e",
+    "bytes": 65536
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx128\\value_cache.index.bin",
+    "sha256": "d05e4ba1495455f01bd2414525b857c4ea6d63025c7fdeea88a0aebc576ca056",
+    "bytes": 16
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\block_table.bin",
+    "sha256": "25f16544b8fa8cbf4b84dea7ff78ef434be6ed9d095cbb0293a59ed0fe389a02",
+    "bytes": 2048
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\context_lens.bin",
+    "sha256": "a77802d8305178be2db1ab04fdd5ca3b8c03ad5d45ca35132ff6a04c7faec115",
+    "bytes": 4
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\expected_stage0.bin",
+    "sha256": "8a134e5facadf67588ac53c8cb2589a363443b7b6b05b94e203bb808b2ef8ac3",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\expected_stage1.bin",
+    "sha256": "2781f4ef5ce07cc24f50eac5900894e4d1d3fa3bf9425f0f81aa8bcc935f40d1",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\h16.bin",
+    "sha256": "186cb9e8c6a34e0e384ff9b8146e62d927f3d0690615a8cbc979b3b6c43d87fd",
+    "bytes": 512
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\kernel_stage0.bin",
+    "sha256": "f9540761f1e05319e000383cd0e4ba1b95a774c574ac3268eebb5e93cdaa6cd3",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\kernel_stage1.bin",
+    "sha256": "4122789a017a101bb919bd5a9dd31fbffa04fa66b76358bd34b568bc255a1bce",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\key_cache.bin",
+    "sha256": "88d8089829f6fca9e13863315a600c7ec90dfca050291a4ea9df896475cf6ad3",
+    "bytes": 131072
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\key_cache.index.bin",
+    "sha256": "31abad740c727d22bc134f91d9e806d449876fd3e97942fa06a4b4b486287b13",
+    "bytes": 32
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\manifest.txt",
+    "sha256": "42d9b35d4db55eaa9bec87da75f71c80dd8a38cc2090e793eba59bb9b108d626",
+    "bytes": 1474
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\mode_tables.bin",
+    "sha256": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+    "bytes": 32
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\pi_signs.bin",
+    "sha256": "60a8154f2c042cb2d7272a7c6dd2f591432ea776903b5b3a8dcc538e7f73c9a4",
+    "bytes": 1024
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\query_rot.bin",
+    "sha256": "43f9010b1188973a3784a52bd418c330b56376567abddf5df8cb43f2897594b9",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\raw_query.bin",
+    "sha256": "f21895b904da87feaa24bb177ef94e7ba05aeb9a42af235bac99fc96f9f36e53",
+    "bytes": 12288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\rot_tables.bin",
+    "sha256": "fbc357cb7d8a27c9eef111719ab9c4ecdb04370cdd8286575a82c591a3bf2443",
+    "bytes": 32768
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\scale_cache.bin",
+    "sha256": "ca23b189eb6571b83a8e7b5ab9f39a78c97910c08da26828eac5c34530ea00c1",
+    "bytes": 8192
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\scale_cache.index.bin",
+    "sha256": "84268a092d2d2a5bc28d0d79d5f8859346c7ddba4f53364fda2d0a47b7a66acd",
+    "bytes": 32
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\value_cache.bin",
+    "sha256": "4804e3d246ca0a36ced3ecaaae0d3d81a036832252a5c44e9adb862ca972713e",
+    "bytes": 131072
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx200\\value_cache.index.bin",
+    "sha256": "31abad740c727d22bc134f91d9e806d449876fd3e97942fa06a4b4b486287b13",
+    "bytes": 32
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\block_table.bin",
+    "sha256": "aa632bd21c40bd09aea3c3f46bceff891a7419f22f7836b534335487c2a7d492",
+    "bytes": 2048
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\context_lens.bin",
+    "sha256": "c31425b44a7ed682a3356bf6820141e1584a15c43b6d6793f552e5d4621586f7",
+    "bytes": 4
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\expected_stage0.bin",
+    "sha256": "7e80ea652873bf2ac194c1eda3a62a1f9ecde5c0293b639274cea397263b7dd8",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\expected_stage1.bin",
+    "sha256": "5dca9c23fb73534b969795ad0c194e5124626fca1b109d99164d9e97c1047d8a",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\h16.bin",
+    "sha256": "186cb9e8c6a34e0e384ff9b8146e62d927f3d0690615a8cbc979b3b6c43d87fd",
+    "bytes": 512
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\kernel_stage0.bin",
+    "sha256": "bb8da727aea1188a76764872ce93e71c9417fdbc910a9e4ee1bc5376d5502863",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\kernel_stage1.bin",
+    "sha256": "1acc6f0758ed75c63e646be13cac73179ebb4202bc1bd27c112d7df8214bb3d1",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\key_cache.bin",
+    "sha256": "bd28fbe4fe4d7f69f75f1895ff253091d44371759712586d484e7cc9093f281d",
+    "bytes": 65536
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\key_cache.index.bin",
+    "sha256": "d05e4ba1495455f01bd2414525b857c4ea6d63025c7fdeea88a0aebc576ca056",
+    "bytes": 16
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\manifest.txt",
+    "sha256": "3599653bea436893ec5d561bfe273d53485592d39c8dc5d29334c5c99d60bfad",
+    "bytes": 1472
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\mode_tables.bin",
+    "sha256": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+    "bytes": 32
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\pi_signs.bin",
+    "sha256": "60a8154f2c042cb2d7272a7c6dd2f591432ea776903b5b3a8dcc538e7f73c9a4",
+    "bytes": 1024
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\query_rot.bin",
+    "sha256": "aac3bc942b1375000745001f85900a3b3255a792ea346b6b56b2428a4ffa2a39",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\raw_query.bin",
+    "sha256": "b4c7bc3b6ffa31b645faee3157a7721745422949643ba58e06a444e1baa4ff43",
+    "bytes": 12288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\rot_tables.bin",
+    "sha256": "fbc357cb7d8a27c9eef111719ab9c4ecdb04370cdd8286575a82c591a3bf2443",
+    "bytes": 32768
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\scale_cache.bin",
+    "sha256": "cff2aabb5197eb3c4b92ce40e8ddb2fefb58379de09daab64865a4a2e7c96f09",
+    "bytes": 4096
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\scale_cache.index.bin",
+    "sha256": "a0e6a709ec7216fa2ecb33d85e628865e5d5b739802f7f2666569282692e405f",
+    "bytes": 16
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\value_cache.bin",
+    "sha256": "bb219f0006f6db395dd2924f89750d3b304a96fb779faf01edf727a6451a7153",
+    "bytes": 65536
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_real_ctx64\\value_cache.index.bin",
+    "sha256": "d05e4ba1495455f01bd2414525b857c4ea6d63025c7fdeea88a0aebc576ca056",
+    "bytes": 16
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx272\\block_table.bin",
+    "sha256": "3dad61248adb4bb2c83a263316f1fabfaf48d1a8be36ae75cc4ec723b18f78e3",
+    "bytes": 32
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx272\\context_lens.bin",
+    "sha256": "f07ceeff8b659c36d11b8dfaad70c4b861d10b6ada4be2958ce0e3562ee9b999",
+    "bytes": 4
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx272\\expected_stage0.bin",
+    "sha256": "350889b764c39c7724f18f3b6454004d036665a12f7e442f15c5a40ec4ac0431",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx272\\expected_stage1.bin",
+    "sha256": "53dab94a66b40603502df1495f5d9c4e0c2a1abeba8b78298e8e9f7407999610",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx272\\h16.bin",
+    "sha256": "186cb9e8c6a34e0e384ff9b8146e62d927f3d0690615a8cbc979b3b6c43d87fd",
+    "bytes": 512
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx272\\kernel_stage0.bin",
+    "sha256": "9ecb500ca8423e40ad08bb81b6f29ccaacb129561d0c9bb46265fbfc23535224",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx272\\kernel_stage1.bin",
+    "sha256": "8d396e17582f9aee50c9ea4849dcba186733fb50927589a102d56c607bd9ff53",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx272\\key_cache.bin",
+    "sha256": "470e5b7d5360e354b6c80296e3e5f0533f121f84413d70e1c4f46db6ba2eed76",
+    "bytes": 524288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx272\\manifest.txt",
+    "sha256": "46c73d455429cc00e0c107aa973fae04f65d4bc22d0860c4a0fef8fe86dc142d",
+    "bytes": 1106
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx272\\mode_tables.bin",
+    "sha256": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+    "bytes": 32
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx272\\pi_signs.bin",
+    "sha256": "60a8154f2c042cb2d7272a7c6dd2f591432ea776903b5b3a8dcc538e7f73c9a4",
+    "bytes": 1024
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx272\\query_rot.bin",
+    "sha256": "f425a368e7b5ff7c8e7daa93876f72632a768ed7322af5ce6e61c94625336fb1",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx272\\raw_query.bin",
+    "sha256": "b76400b9b7b9c4d467e509cc864b524660d0573a53c4681e1a774678c8bade00",
+    "bytes": 12288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx272\\rot_tables.bin",
+    "sha256": "fbc357cb7d8a27c9eef111719ab9c4ecdb04370cdd8286575a82c591a3bf2443",
+    "bytes": 32768
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx272\\scale_cache.bin",
+    "sha256": "0e0e8cafae78469a1545fa2028813ad300d1d5a9ddb8d108df80713937bdd90d",
+    "bytes": 32768
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx272\\value_cache.bin",
+    "sha256": "ea8e91b536809659d275ac1ce9dd1e600bded81bd8fdc6ba6dac036e492f4832",
+    "bytes": 524288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx316\\block_table.bin",
+    "sha256": "3dad61248adb4bb2c83a263316f1fabfaf48d1a8be36ae75cc4ec723b18f78e3",
+    "bytes": 32
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx316\\context_lens.bin",
+    "sha256": "19e7f449445644f91189c6c932f70d49e14ba38f47d90b3854c32f216111ee47",
+    "bytes": 4
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx316\\expected_stage0.bin",
+    "sha256": "f9ebec3abf3a36331875bceb989efa22c8c86c0775093e93c489554852d10a75",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx316\\expected_stage1.bin",
+    "sha256": "944887ba2c4bf017bdca242cf17b1d795369c7c1766e5e7472fd0124d50e8beb",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx316\\h16.bin",
+    "sha256": "186cb9e8c6a34e0e384ff9b8146e62d927f3d0690615a8cbc979b3b6c43d87fd",
+    "bytes": 512
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx316\\kernel_stage0.bin",
+    "sha256": "4f67c725f34450f5022f25201d4da3b67461171b3ddb6e324886fb57406d99fc",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx316\\kernel_stage1.bin",
+    "sha256": "67d97550a844e4cd3a318a94d77ac0f37dadf582e388102b5e242cd39831a19e",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx316\\key_cache.bin",
+    "sha256": "3637f8d676c9945f3421bb0b7d7926b4b17f4ed99ff9ffca1449cd7db5289ce9",
+    "bytes": 524288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx316\\manifest.txt",
+    "sha256": "f4157bdc7dec5b6035f2339c1f4fa96dc6a478c86f14199ac32ea534bcf9266c",
+    "bytes": 1106
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx316\\mode_tables.bin",
+    "sha256": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+    "bytes": 32
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx316\\pi_signs.bin",
+    "sha256": "60a8154f2c042cb2d7272a7c6dd2f591432ea776903b5b3a8dcc538e7f73c9a4",
+    "bytes": 1024
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx316\\query_rot.bin",
+    "sha256": "af37022caa43ca23ffd70b069abf5d377c91625aa04511a2f457c27ce11cfe0a",
+    "bytes": 24576
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx316\\raw_query.bin",
+    "sha256": "637ca6a0618c5f2b4b6d46276a55657742b32ec464d7df59263e61cabb0df56f",
+    "bytes": 12288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx316\\rot_tables.bin",
+    "sha256": "fbc357cb7d8a27c9eef111719ab9c4ecdb04370cdd8286575a82c591a3bf2443",
+    "bytes": 32768
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx316\\scale_cache.bin",
+    "sha256": "ecd3fe9eec17439c1d6051242730594259c4b90a444aa740e93214882274b9f8",
+    "bytes": 32768
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\decode_serving_ctx316\\value_cache.bin",
+    "sha256": "0195cb865b23f74e8bc44c376c00a37eeeb46cf85cd88d6ef5f67bcad16be301",
+    "bytes": 524288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\prefill\\expected_key_nz.bin",
+    "sha256": "17ab6a0da9149b4734d712ec18e0683b693826ab0871f609b95fa434babd7db4",
+    "bytes": 1179648
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\prefill\\expected_key_strip.bin",
+    "sha256": "29cc46aedc3dc2df8a65c2fcdce5c02e8f6541853db1e8f3f53b4421dcdb69a0",
+    "bytes": 1179648
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\prefill\\expected_scale_nz.bin",
+    "sha256": "47af95795023552bd12010732201ece2e333939397bf7c88fa05cb5abcedb8b5",
+    "bytes": 73728
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\prefill\\expected_scale_strip.bin",
+    "sha256": "202f348453bd4bf536b46702c3ca51a979547d5e8429f2e8c611f73b87a6cdd4",
+    "bytes": 73728
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\prefill\\expected_value_nz.bin",
+    "sha256": "dca60e014b8be436063b64b1820984384f4e074e5b2467398843a0db4c3a4b2d",
+    "bytes": 1179648
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\prefill\\expected_value_strip.bin",
+    "sha256": "8fc234e0aa5d211d3e4f782f5931e7e1fdf3546737bdfb7108cff49b1adc4e86",
+    "bytes": 1179648
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\prefill\\key.bin",
+    "sha256": "db24bb7f9b44d3fcc51a9eefbd825e8962d901c2c8042bf777613946b2598178",
+    "bytes": 262144
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\prefill\\manifest.txt",
+    "sha256": "d7b20e3347cac4dc29bc5affcd8a4bf8bc342540167c05c5f24fbead7068218f",
+    "bytes": 871
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\prefill\\pi_signs.bin",
+    "sha256": "60a8154f2c042cb2d7272a7c6dd2f591432ea776903b5b3a8dcc538e7f73c9a4",
+    "bytes": 1024
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\prefill\\slot_mapping.bin",
+    "sha256": "6e857cbcc758dd68a276caaf2cae43ae5914d2359f0f56661d1ec4ba1f69682b",
+    "bytes": 512
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\prefill\\tables.bin",
+    "sha256": "fbc357cb7d8a27c9eef111719ab9c4ecdb04370cdd8286575a82c591a3bf2443",
+    "bytes": 32768
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\prefill\\value.bin",
+    "sha256": "fc67d857012b2b8c0dca1624133506d33bd3c172e255b849a28ac70542e3611a",
+    "bytes": 262144
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\expected_key_step1.bin",
+    "sha256": "b065de8b5a4194621dda78b0c93b49569a487e8d9554b7d984867a4879b59181",
+    "bytes": 524288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\expected_key_step2.bin",
+    "sha256": "d01631b632938da9879c88f41daa9ee4265f9dc8c226d715768e7ca7393ae44e",
+    "bytes": 524288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\expected_scale_step1.bin",
+    "sha256": "b2750944d29a2a0bb50d6f0683e565f92068725c86149984b078d9a89c964763",
+    "bytes": 32768
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\expected_scale_step2.bin",
+    "sha256": "3ec9310ecd082dadad8ad386fd66ee95144c81116fe1d67434e6b049049b38fb",
+    "bytes": 32768
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\expected_value_step1.bin",
+    "sha256": "5505e1a79f036657c23d6435e64a5084e5021d1bed19b284a9a5652c2d40793b",
+    "bytes": 524288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\expected_value_step2.bin",
+    "sha256": "9eafee10422bb79bf0f7bd34de8a288789679ba9101ac89785ad88b1d244938d",
+    "bytes": 524288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\init_key.bin",
+    "sha256": "cb7864320e78d2519a8f81a0fcc184de1f441f320e2c8e1822a8db4d8ebb2b92",
+    "bytes": 524288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\init_scale.bin",
+    "sha256": "36a3a8058f85d946c216205317ad09ba90a0fb9e1c65f020e87da72c4532c60f",
+    "bytes": 32768
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\init_value.bin",
+    "sha256": "cb7864320e78d2519a8f81a0fcc184de1f441f320e2c8e1822a8db4d8ebb2b92",
+    "bytes": 524288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\key_a.bin",
+    "sha256": "a13050b9ed8b1899c8dac737b44f6f5e25f10a4ce06ef8e29236a83d5b497c31",
+    "bytes": 12288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\key_b.bin",
+    "sha256": "4de9beb4c8af6a2d1109c19935d6fdf737bae37c9ae401acd88b4dbba066f15f",
+    "bytes": 8192
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\manifest.txt",
+    "sha256": "8086c8fa8f45ddc76dc9422f1439d76ce74cd65bfa60a5ca0f2c4549c32f6acb",
+    "bytes": 1196
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\pi_signs.bin",
+    "sha256": "60a8154f2c042cb2d7272a7c6dd2f591432ea776903b5b3a8dcc538e7f73c9a4",
+    "bytes": 1024
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\slots_a.bin",
+    "sha256": "795039a24b4bce93b6d512c761b3d1e19eff96ed0e6e5adc744002feb2e571d3",
+    "bytes": 24
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\slots_b.bin",
+    "sha256": "6bd2f0f0fe12e192e5f335d8d57d113313811cc16f1813d4ff6e4ccbb89bc470",
+    "bytes": 16
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\value_a.bin",
+    "sha256": "66fa758ae726fc8a35555afc9ea468a0faeed2f7cc05acd8b5a36f891f699e30",
+    "bytes": 12288
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\golden-dumps\\scatter\\value_b.bin",
+    "sha256": "fcf78fa257d47e53c53bb418e00dc6cd58de45a94d5dc9c9e97eced15992862c",
+    "bytes": 8192
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\decode-integrated.json",
+    "sha256": "92be1445de6824426b503c9e4b87af50badee7d91295f751d77974af3557d513",
+    "bytes": 15922185
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\decode-verified.json",
+    "sha256": "2f3252d420f0a3a5a565f6c6957f24856cf14a3b9eba9660525c3933df7a9064",
+    "bytes": 16899693
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\e8_component-integrated.json",
+    "sha256": "86bc68090943425a6dc9003408f47ad2874881ce02c0de2e4ff6afe5d8b782eb",
+    "bytes": 103430
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\e8_component-verified.json",
+    "sha256": "df860334d8e94969002122b38258817d4f89ee9290959e36837825401b9e5ead",
+    "bytes": 103359
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\e8_reader-integrated.json",
+    "sha256": "af24761f5bc17a10360d241932c702c376aedc8ea3727401cb671d1c31dc2721",
+    "bytes": 2568001
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\e8_reader-verified.json",
+    "sha256": "29fe722534a6ef33902262c6c4c224d136fe280437c63d73f6b8d0f64f15f41c",
+    "bytes": 2434551
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\e8_reader_unannotated-integrated.json",
+    "sha256": "9725374b64573d4f77d2505c8864207ef779bae9003937248ff7187cda7b5def",
+    "bytes": 1991655
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\e8_reader_unannotated-verified.json",
+    "sha256": "f3c12a91f41471f779d8e58f7763fd43e3d21771b9d56190709d41f9d77e7b1f",
+    "bytes": 1996129
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\reader-layout-integrated.cpp",
+    "sha256": "36d72bbca66625bb30439b61b947b9277c08a706c431a3bc4fb4f46f30d433d5",
+    "bytes": 827
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\reader-layout-verified-raw.cpp",
+    "sha256": "e2177b5f80779b0db98e6fcc8c5651e6692978f01ab862363fe92d835197ddf2",
+    "bytes": 21268
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\reshape-integrated.json",
+    "sha256": "88a6ae2b179177aa38b9433d6c6a9b9db816af8c3bdd713ada89ed31ac9ffc48",
+    "bytes": 14835158
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\reshape-nz-integrated.cpp",
+    "sha256": "bd37ed8181d5da7ba3e82919de1063fe4fe83d1a61f90aa265157561fbc0c5e5",
+    "bytes": 182
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\reshape-nz-verified.cpp",
+    "sha256": "238ba4b1e6d0c1f961bd35ae98486863c6cd3700b3885fea5b3ae0cb198e4849",
+    "bytes": 132
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\reshape-verified.json",
+    "sha256": "d80cf441a53d2f33fc7f9338c9820b94152f0595325fe2a1ec4e239ffb02d0cb",
+    "bytes": 6424129
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\reshape_nz-integrated.json",
+    "sha256": "b56eea58568a65c02de9c96a0ce8656add393a24dd82a5f0175bc773c2833920",
+    "bytes": 16543433
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\reshape_nz-verified.json",
+    "sha256": "227b3cd07e8cff8cf847cf3b65ae433e0c3d15cc583f25cd2e379898ce928b65",
+    "bytes": 7110003
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\reshape_wide-nz-integrated.cpp",
+    "sha256": "1bcfe93893d9b58b47ed87cbbf43dbfa22562c3157599552287e01eff6b666e2",
+    "bytes": 187
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\reshape_wide-nz-verified.cpp",
+    "sha256": "238ba4b1e6d0c1f961bd35ae98486863c6cd3700b3885fea5b3ae0cb198e4849",
+    "bytes": 132
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\scatter-integrated.json",
+    "sha256": "3eb811b1bf79441af5cdbbb9c0a9703e6f350f941ab07854379b2e9c239ada4d",
+    "bytes": 7316673
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\scatter-nz-integrated.cpp",
+    "sha256": "88a0d6a1a5c252ec704edd5c46bb20dc21fe373e97552b5279151350d24fff25",
+    "bytes": 184
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\scatter-nz-verified.cpp",
+    "sha256": "b48de10100bc5afa4e235e0c4b7b76acfef690045735cd8021830759d103b4fe",
+    "bytes": 159
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\scatter-verified.json",
+    "sha256": "5fba466c636c70c0c464369520e1f94dda37edd4ca3ad14ef69dd7e8e7715387",
+    "bytes": 7067724
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\scatter_nz-integrated.json",
+    "sha256": "d4d5cf721b3895c9778cca0bfc9876a7a7b8d6ed55340915250f0991c9921a19",
+    "bytes": 6382179
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\scatter_nz-verified.json",
+    "sha256": "7ccae63f6eb90e4714e670a985bb5093e005eae42df81f30e7c68296bc965cce",
+    "bytes": 6141154
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\softmax-integrated.json",
+    "sha256": "f3197748f0c6070827cddbfe480a164519e6247b2bb664b2632cdb686259e5fd",
+    "bytes": 952624
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\softmax-verified.json",
+    "sha256": "121cd37464f7ad6845a8b5bd1e2da2c0d1c76dba72411497138075ee5322a335",
+    "bytes": 932560
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\summary.json",
+    "sha256": "f3bbbcf7a3d891d16a1cf28bb6d724de2e5f2e13c857287b17e6d759555f0c97",
+    "bytes": 10544
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\vector-integrated.json",
+    "sha256": "6e4b921effafd1b598646502567965e4da3f629c051af00c3832a8d0cc167c98",
+    "bytes": 4444308
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\frozen-and-unaffected\\vector-verified.json",
+    "sha256": "0bd51afdc0f8ce01f66cfb6c596edeb4e2b885862fe32eedc343cda6fb128ba7",
+    "bytes": 4351233
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\strict-wide\\reader-layout-integrated.cpp",
+    "sha256": "36d72bbca66625bb30439b61b947b9277c08a706c431a3bc4fb4f46f30d433d5",
+    "bytes": 827
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\strict-wide\\reader-layout-verified-raw.cpp",
+    "sha256": "e2177b5f80779b0db98e6fcc8c5651e6692978f01ab862363fe92d835197ddf2",
+    "bytes": 21268
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\strict-wide\\reshape-nz-integrated.cpp",
+    "sha256": "bd37ed8181d5da7ba3e82919de1063fe4fe83d1a61f90aa265157561fbc0c5e5",
+    "bytes": 182
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\strict-wide\\reshape-nz-verified.cpp",
+    "sha256": "91f4f896ddf0cbd1bc81cd1311c000d63880121336be16959383887365f2168d",
+    "bytes": 171
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\strict-wide\\reshape_wide-integrated.json",
+    "sha256": "98534212ebebea0882fe16c88a9b09d8ca9ddfbd1fe73b14aba3ef94d97de6e9",
+    "bytes": 6235551
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\strict-wide\\reshape_wide-nz-integrated.cpp",
+    "sha256": "1bcfe93893d9b58b47ed87cbbf43dbfa22562c3157599552287e01eff6b666e2",
+    "bytes": 187
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\strict-wide\\reshape_wide-nz-verified.cpp",
+    "sha256": "91f4f896ddf0cbd1bc81cd1311c000d63880121336be16959383887365f2168d",
+    "bytes": 171
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\strict-wide\\reshape_wide-verified.json",
+    "sha256": "eea8eb8d71609c199bb9959aaf3e57658c644e7e518ba95792127cc71a5e3c9e",
+    "bytes": 6699979
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\strict-wide\\reshape_wide_nz-integrated.json",
+    "sha256": "1c0812cb02c7fbab6b8573c6b205d7be70ca24b2c740dde743f7f9b7a646a1a0",
+    "bytes": 6985469
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\strict-wide\\reshape_wide_nz-verified.json",
+    "sha256": "43c17860edc1699a265ba35c56a9a59286ba16401fee13b3fea008c5a4ba8cd0",
+    "bytes": 7507081
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\strict-wide\\scatter-nz-integrated.cpp",
+    "sha256": "88a0d6a1a5c252ec704edd5c46bb20dc21fe373e97552b5279151350d24fff25",
+    "bytes": 184
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\strict-wide\\scatter-nz-verified.cpp",
+    "sha256": "b48de10100bc5afa4e235e0c4b7b76acfef690045735cd8021830759d103b4fe",
+    "bytes": 159
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\strict-wide\\summary.json",
+    "sha256": "fa26b253c3780343c651f768926f2246eb107860e3bc835edab45208e8f0e7b1",
+    "bytes": 2049
+  },
+  {
+    "path": "C:\\Ascend\\turboquant-integration-work\\promotion-20261126\\analyzer\\strict-reference\\src\\prefill\\turboquant_reshape_batch.cpp",
+    "sha256": "dd7f028d73e9290fee79fed895bbdad2f3be8242584c8238cb56ac0ea754971a",
+    "bytes": 130
+  }
+]
