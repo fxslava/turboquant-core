@@ -1,0 +1,8 @@
+❓❓pre-commit is not installed, please run:
+# Install lint deps
+pip install -r requirements-lint.txt
+# (optional) Enable git commit pre check
+pre-commit install
+
+See step by step contribution guide:
+https://docs.vllm.ai/projects/ascend/en/latest/developer_guide/contribution

@@ -1,0 +1,158 @@
+{
+  "host": {
+    "root": "/home/dmin/tq-e8-splitk-20261126/build-host",
+    "configuration": [
+      "RUN_MODE:STRING=sim",
+      "SOC_VERSION:STRING=Ascend950PR_9599",
+      "TQ_BUILD_E8_KERNELS:BOOL=OFF",
+      "TQ_BUILD_KERNELS:BOOL=OFF"
+    ],
+    "files": [
+      {
+        "path": "/home/dmin/tq-e8-splitk-20261126/build-host/bin/test_turboquant_production_host",
+        "bytes": 56384,
+        "sha256": "d935a7d62c961b58e5130f7d7968549854fe2fd2b8fb47286c180f46cef78c51",
+        "relevant_dynamic_symbols": []
+      }
+    ]
+  },
+  "sim": {
+    "root": "/home/dmin/tq-release-final2-20261126/build-sim",
+    "configuration": [
+      "RUN_MODE:STRING=sim",
+      "SOC_VERSION:STRING=Ascend950PR_9599",
+      "TQ_BUILD_E8_KERNELS:BOOL=ON",
+      "TQ_BUILD_KERNELS:BOOL=ON"
+    ],
+    "files": [
+      {
+        "path": "/home/dmin/tq-release-final2-20261126/build-sim/bin/bench_turboquant_production_sim",
+        "bytes": 116192,
+        "sha256": "dabcceb244dc0529307f3fcf0a19c5948141085178a321df80eaf87cdb0d05bf",
+        "relevant_dynamic_symbols": [
+          "                 U launch_e8_fused_decode_fp32",
+          "                 U launch_e8_parallel_component"
+        ]
+      },
+      {
+        "path": "/home/dmin/tq-release-final2-20261126/build-sim/bin/test_turboquant_production_sim",
+        "bytes": 116192,
+        "sha256": "39f2c65351bca3214d5e6a771a073b49c0a873ebe66b3b9a5b263c6b5e3d3851",
+        "relevant_dynamic_symbols": [
+          "                 U launch_e8_fused_decode_fp32",
+          "                 U launch_e8_parallel_component"
+        ]
+      },
+      {
+        "path": "/home/dmin/tq-release-final2-20261126/build-sim/lib/libtq_e8_reader.so",
+        "bytes": 1526200,
+        "sha256": "381ed018a386d0183f33f0236021675b7626053ff81354ecc36f8f51b26a205a",
+        "relevant_dynamic_symbols": [
+          "00000000000b2c00 W _ZN9e8_decode12valid_launchERKNS_6LaunchERKNS_7BuffersE",
+          "                 U aclrtRecordEvent",
+          "00000000000b2710 T e8_fused_decode_fp32",
+          "00000000000b2840 T e8_splitk_reduce_fp32",
+          "00000000000b28b0 T launch_e8_fused_decode_fp32"
+        ]
+      }
+    ]
+  },
+  "npu": {
+    "root": "/home/dmin/tq-release-npu-20261126/build-npu",
+    "configuration": [
+      "RUN_MODE:STRING=npu",
+      "SOC_VERSION:STRING=Ascend950PR_9599",
+      "TQ_BUILD_E8_KERNELS:BOOL=ON",
+      "TQ_BUILD_KERNELS:BOOL=ON"
+    ],
+    "files": [
+      {
+        "path": "/home/dmin/tq-release-npu-20261126/build-npu/bin/bench_turboquant_production_npu",
+        "bytes": 121808,
+        "sha256": "70357baf8f2a0fef31c1733370ef4c8cd3ff4402d7f21009e00295719cc33985",
+        "relevant_dynamic_symbols": [
+          "                 U aclmdlRICaptureBegin",
+          "                 U aclmdlRICaptureEnd",
+          "                 U aclmdlRIDestroy",
+          "                 U aclmdlRIExecuteAsync",
+          "                 U aclrtEventElapsedTime",
+          "                 U aclrtRecordEvent",
+          "                 U aclrtRecordEventWithFlag",
+          "                 U aclrtSynchronizeEvent",
+          "                 U launch_e8_fused_decode_fp32",
+          "                 U launch_e8_parallel_component"
+        ]
+      },
+      {
+        "path": "/home/dmin/tq-release-npu-20261126/build-npu/bin/test_turboquant_production_npu",
+        "bytes": 121808,
+        "sha256": "2c7b329d37d292918cce5da4be8d82cdf8fe1bf833f17e45c529c466056f409e",
+        "relevant_dynamic_symbols": [
+          "                 U aclmdlRICaptureBegin",
+          "                 U aclmdlRICaptureEnd",
+          "                 U aclmdlRIDestroy",
+          "                 U aclmdlRIExecuteAsync",
+          "                 U aclrtEventElapsedTime",
+          "                 U aclrtRecordEvent",
+          "                 U aclrtRecordEventWithFlag",
+          "                 U aclrtSynchronizeEvent",
+          "                 U launch_e8_fused_decode_fp32",
+          "                 U launch_e8_parallel_component"
+        ]
+      },
+      {
+        "path": "/home/dmin/tq-release-npu-20261126/build-npu/lib/libtq_e8_reader.so",
+        "bytes": 1526056,
+        "sha256": "b43bdec492ddc7bf9a6ddcd056a9df62efcd19356bf1edeadacbe3d2fd7e9592",
+        "relevant_dynamic_symbols": [
+          "00000000000b2ba0 W _ZN9e8_decode12valid_launchERKNS_6LaunchERKNS_7BuffersE",
+          "                 U aclrtRecordEvent",
+          "00000000000b26b0 T e8_fused_decode_fp32",
+          "00000000000b27e0 T e8_splitk_reduce_fp32",
+          "00000000000b2850 T launch_e8_fused_decode_fp32"
+        ]
+      }
+    ]
+  },
+  "noe8": {
+    "root": "/home/dmin/tq-release-noe8-20261126/build-noe8",
+    "configuration": [
+      "RUN_MODE:STRING=npu",
+      "SOC_VERSION:STRING=Ascend950PR_9599",
+      "TQ_BUILD_E8_KERNELS:BOOL=OFF",
+      "TQ_BUILD_KERNELS:BOOL=ON"
+    ],
+    "files": [
+      {
+        "path": "/home/dmin/tq-release-noe8-20261126/build-noe8/bin/bench_turboquant_production_npu",
+        "bytes": 92632,
+        "sha256": "a4b1c405fd64a775cb88999177bfdd89baec1b038075ca62cfa19b2ab7ac6213",
+        "relevant_dynamic_symbols": [
+          "                 U aclmdlRICaptureBegin",
+          "                 U aclmdlRICaptureEnd",
+          "                 U aclmdlRIDestroy",
+          "                 U aclmdlRIExecuteAsync",
+          "                 U aclrtEventElapsedTime",
+          "                 U aclrtRecordEvent",
+          "                 U aclrtRecordEventWithFlag",
+          "                 U aclrtSynchronizeEvent"
+        ]
+      },
+      {
+        "path": "/home/dmin/tq-release-noe8-20261126/build-noe8/bin/test_turboquant_production_npu",
+        "bytes": 92632,
+        "sha256": "af42f67b3e56c7ede0222cb6c9fb8f032d9d5abe911f88c3378ce0fc52e35b83",
+        "relevant_dynamic_symbols": [
+          "                 U aclmdlRICaptureBegin",
+          "                 U aclmdlRICaptureEnd",
+          "                 U aclmdlRIDestroy",
+          "                 U aclmdlRIExecuteAsync",
+          "                 U aclrtEventElapsedTime",
+          "                 U aclrtRecordEvent",
+          "                 U aclrtRecordEventWithFlag",
+          "                 U aclrtSynchronizeEvent"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "README.md": "4d775460be88c6d1c382b5e12defb232fa95316e84029df05b8f829760ad1b29",
+  "benchmarks/README.md": "87d2fe5f42a13412eafe0b6060d4e7b16696a5b1b58235a849af1fb6294f4a6b",
+  "benchmarks/benchmark_turboquant_production.cpp": "90faa7a5988533cccad674ba844c15cf2e63f6fbbfac8bb9853e529740e31390",
+  "benchmarks/benchmark_turboquant_production.py": "14d3c27cda234fedd5922733a497e9f0eceb48b17f9a8c91d7e7f58c66ec2142",
+  "cmake/AscendKernelHelpers.cmake": "03f6ff2ba99088f845b186a2c81da843d2d3db4354f5ae8ac1ed3e75dce69b29",
+  "cmake/HostTargets.cmake": "386207b91022e95cb59485490bdf80168f2c39709bfaba6a277fad93b97dcb01",
+  "docs/BUILD.md": "36bd8365bba59f4b096c6fb7e9a4e9db45ec20581787759a23f1a0680f8fda5b",
+  "docs/E8_SPLITK.md": "81dee653b24211c5c6a9f1ced2f74c4eff2352152253dcaed5e0fa6ca82bd1a9",
+  "scripts/profile_e8_decode.sh": "d831fd7b89741422ea2ba7f783ac1e4130bf11f184d99d58eec89b6385e843e1",
+  "scripts/summarize_e8_profile.py": "a7362089a075de21a6fd6470f4696bf6b301a8e6523021712c7dd9289d37e6cb",
+  "src/host/asc_e8_reader.cpp": "c59b550964869c4c08d90ab69ce878ff017d7c4cef472f17308849b03ddd49cd",
+  "src/turboquant/SOURCE_SYNC.json": "674ea2d0e538dbcc01d8bc5adebbf7d0df6567eca6a66cc7b75a6ce6d8d6bab0",
+  "src/turboquant/common/e8_decode.hpp": "addb2128bbf528b27426183044997ef907e7941f16747ad8a1e52ebc607bdf73",
+  "src/turboquant/decode/e8/e8_fused_decode.cpp": "2962391e1cf7c9ba7451d34c08fb9773d4df30fb5e91648c26aefd14300fc374",
+  "tests/README.md": "435f77df7beeb2af540da1df2f7c5ac933974ede2ffc30930711a10890a141b3",
+  "tests/common/turboquant_production.hpp": "bff2330b2157846a42a66bebb180716d1cd1d4135282057ee105b0778f577330",
+  "tests/cpu/test_benchmark_cli.py": "9878af0f2ea1da54ddeead3fd9e5931c9a740e363f01a0842af111c354941216",
+  "tests/cpu/test_e8_profile_summary.py": "3207199efc5c7470cde4bb3ac13b3f718cf3bae7813fcd28ff7b90214ada6ce5",
+  "tests/cpu/test_e8_splitk.cpp": "bff8e61ed80e24fa78e4c600d5a7489d6aa005e3df52845d71fda8d46407f988"
+}

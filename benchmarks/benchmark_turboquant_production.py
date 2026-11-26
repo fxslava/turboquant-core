@@ -59,6 +59,9 @@ def cli_parser():
     )
     parser.add_argument("--block-size", type=int, choices=(64, 128))
     parser.add_argument("--device", type=int, default=0)
+    parser.add_argument("--split-k", type=int, choices=range(1, 9))
+    parser.add_argument("--timing", choices=("graph", "events"), default="graph")
+    parser.add_argument("--samples", action="store_true")
     parser.add_argument("--warmup", type=int, default=10)
     parser.add_argument("--iterations", type=int, default=50)
     parser.add_argument(
@@ -107,8 +110,13 @@ def command_options(args):
         "--iterations",
         str(args.iterations),
     ]
+    if args.split_k is not None:
+        options += ["--split-k", str(args.split_k)]
     if args.block_size is not None:
         options += ["--block-size", str(args.block_size)]
+    options += ["--timing", args.timing]
+    if args.samples:
+        options.append("--samples")
     if args.list:
         options.append("--list")
     if args.verify:
@@ -126,6 +134,8 @@ def catalog(args):
         "--profile",
         args.profile,
     ]
+    if args.split_k is not None:
+        options += ["--split-k", str(args.split_k)]
     if args.block_size is not None:
         options += ["--block-size", str(args.block_size)]
     host = executable(args.host_build_dir or args.build_dir, "host")

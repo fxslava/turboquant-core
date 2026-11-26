@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-26",
+  "core_branch": "codex/e8-splitk-batched-timing",
+  "core_base": "00586200bd89490662e0840a3856140ec36aa20b",
+  "core_main": "00586200bd89490662e0840a3856140ec36aa20b",
+  "plugin_branch": "codex/e8-splitk-shared",
+  "plugin_feature_commit": "a15b21c96ae65d6ad909789b10647031af9ac136",
+  "plugin_main": "a1df499e0762621c2b9561e2ee66c498a70d0328",
+  "protected_swa_sink": "ec6771ff099b8d07f23e6bd581e3b23c12f78ab6",
+  "host_ctests": {
+    "passed": 11,
+    "failed": 0
+  },
+  "python_tests": {
+    "cli": 6,
+    "profile_parser": 4,
+    "accuracy_metrics": 3,
+    "attention": 623,
+    "build_sync": 14
+  },
+  "device_builds": {
+    "sim": "PASS_BUILD_AND_NONLAUNCHING_CATALOG",
+    "npu": "PASS_COMPILE_LINK_AND_NONLAUNCHING_CATALOG",
+    "e8_disabled": "PASS_BUILD_AND_CATALOG"
+  },
+  "cann_syntax": {
+    "core_host_device": "PASS",
+    "plugin_host_device": "PASS"
+  },
+  "torch_bindings": "PASS_CPU_SYNTAX_LINK_META_FAKE_FULLGRAPH",
+  "source_sync": "PASS_36_SHARED_CPP_AND_READER_LAYOUT",
+  "analyzer": {
+    "status": "FAIL_ZERO_NEW_DIAGNOSTICS_GATE",
+    "annotated_new": 12,
+    "unannotated_new": 17,
+    "commit": "46f16829ee37b4a31961832595e96b280d7f053e",
+    "suppression_applied": false
+  },
+  "format_ci": "UNAVAILABLE_PRE_COMMIT_NOT_INSTALLED",
+  "camodel_numerical_execution": null,
+  "physical_accuracy": null,
+  "aclrt_event_samples": null,
+  "msprof_counters": null,
+  "promotion_status": "FEATURE_BRANCH_ONLY_PENDING_ANALYZER_AND_DEVICE_VALIDATION"
+}

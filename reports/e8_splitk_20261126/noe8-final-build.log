@@ -1,0 +1,15 @@
+[ 33%] Built target turboquant_host
+[ 55%] Built target tq_scatter_nz_npu
+[ 77%] Built target tq_decode_npu
+[ 88%] Building CXX object cmake/device/CMakeFiles/test_turboquant_production_npu.dir/__/__/benchmarks/benchmark_turboquant_production.cpp.o
+[100%] Linking CXX executable ../../bin/test_turboquant_production_npu
+[100%] Built target test_turboquant_production_npu
+[ 27%] Built target turboquant_host
+[ 45%] Built target tq_scatter_nz_npu
+[ 63%] Built target tq_decode_npu
+[ 81%] Built target bench_qwen35_decode
+[ 90%] Building CXX object cmake/device/CMakeFiles/bench_turboquant_production_npu.dir/__/__/benchmarks/benchmark_turboquant_production.cpp.o
+[100%] Linking CXX executable ../../bin/bench_turboquant_production_npu
+[100%] Built target bench_turboquant_production_npu
+[100%] Built target tq_npu_benchmarks
+[100%] Built target tq_benchmarks

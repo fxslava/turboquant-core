@@ -3,7 +3,7 @@ set(TQ_GOLDEN_DUMP_ROOT "${CMAKE_BINARY_DIR}/golden-dumps" CACHE PATH
     "Complete CPU-generated fixtures used by host and device golden tests")
 set(TQ_HOST_TEST_TARGETS)
 foreach(gate IN ITEMS contract_gates layout_bridge telemetry_dump qwen35_decode
-                      decode_reduce qwen35_telemetry golden_decode_oracle turboquant_production_host)
+                      decode_reduce e8_splitk qwen35_telemetry golden_decode_oracle turboquant_production_host)
   if(gate STREQUAL "turboquant_production_host")
     set(source tests/cpu/test_turboquant_production.cpp)
   else()
@@ -22,6 +22,8 @@ foreach(gate IN ITEMS contract_gates layout_bridge telemetry_dump qwen35_decode
 endforeach()
 target_compile_options(test_turboquant_production_host PRIVATE -fno-fast-math -ffp-contract=off)
 target_include_directories(test_turboquant_production_host SYSTEM PRIVATE "${PROJECT_SOURCE_DIR}/tests/cpu/e8/frozen")
+target_include_directories(test_e8_splitk SYSTEM PRIVATE "${PROJECT_SOURCE_DIR}/tests/cpu/e8/frozen")
+target_compile_options(test_e8_splitk PRIVATE -fno-fast-math -ffp-contract=off)
 add_subdirectory(tests/cpu/e8)
 list(APPEND TQ_HOST_TEST_TARGETS e8_decode_cpu_check e8_layout_check)
 add_custom_target(tq_host_tests DEPENDS ${TQ_HOST_TEST_TARGETS})

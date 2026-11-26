@@ -1,0 +1,32 @@
+[  7%] Built target turboquant_host
+[ 17%] Built target tq_scatter_nz_npu
+[ 17%] Built target tq_scatter_npu
+[ 23%] Built target tq_e8_reader
+[ 35%] Built target tq_e8_dequant
+[ 35%] Built target tq_prefill_npu
+[ 43%] Built target tq_prefill_nz_npu
+[ 48%] Built target tq_decode_npu
+[ 58%] Built target test_golden_prefill_strip_npu
+[ 58%] Built target test_golden_scatter_npu
+[ 64%] Built target test_live_write_nz_npu
+[ 69%] Built target test_live_write_npu
+[ 74%] Built target test_golden_prefill_nz_npu
+[ 79%] Built target test_nz_ingress_canary_npu
+[ 84%] Built target test_fused_decode_e2e_npu
+[ 87%] Building CXX object cmake/device/CMakeFiles/test_turboquant_production_npu.dir/__/__/benchmarks/benchmark_turboquant_production.cpp.o
+[ 92%] Built target test_dirty_data_canary_npu
+[ 97%] Built target test_golden_decode_npu
+[100%] Linking CXX executable ../../bin/test_turboquant_production_npu
+[100%] Built target test_turboquant_production_npu
+[100%] Built target tq_npu_tests
+[ 20%] Built target turboquant_host
+[ 46%] Built target tq_scatter_nz_npu
+[ 46%] Built target tq_e8_dequant
+[ 60%] Built target tq_e8_reader
+[ 73%] Built target tq_decode_npu
+[ 86%] Built target bench_qwen35_decode
+[ 93%] Building CXX object cmake/device/CMakeFiles/bench_turboquant_production_npu.dir/__/__/benchmarks/benchmark_turboquant_production.cpp.o
+[100%] Linking CXX executable ../../bin/bench_turboquant_production_npu
+[100%] Built target bench_turboquant_production_npu
+[100%] Built target tq_npu_benchmarks
+[100%] Built target tq_benchmarks

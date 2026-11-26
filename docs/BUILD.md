@@ -15,7 +15,7 @@ cmake --build build --target tq_host_tests -j16
 ./build/bin/test_turboquant_production_host --list --mode all --stage all
 ```
 
-For all 10 CPU CTests, first generate complete fixtures with a torch-enabled
+For all 11 CPU CTests, first generate complete fixtures with a torch-enabled
 Python, then run the host check target:
 
 ```bash
@@ -25,7 +25,7 @@ cmake --build build --target tq_check_host -j16
 
 To reuse fixtures, configure `-DTQ_GOLDEN_DUMP_ROOT=/absolute/fixture/path`.
 To select the Python used for generation, set `Python3_EXECUTABLE` at configure.
-Without torch, use `ctest --test-dir build -L host -LE golden` for nine gates.
+Without torch, use `ctest --test-dir build -L host -LE golden` for ten gates.
 
 ## WSL container wrapper
 
@@ -106,7 +106,7 @@ All executables are in `<build>/bin/`; shared libraries are in `<build>/lib/`.
 
 | Target | Result |
 | --- | --- |
-| `tq_host_tests` | 10 CPU contract/production executables |
+| `tq_host_tests` | 11 CPU contract/production executables |
 | `tq_check_host` | Builds and runs host CTests |
 | `tq_sim_kernels` / `tq_npu_kernels` | Selected-runtime device libraries only |
 | `tq_sim_tests` / `tq_npu_tests` | Selected-runtime correctness runners |

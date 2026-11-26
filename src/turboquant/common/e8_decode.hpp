@@ -1,6 +1,9 @@
 #pragma once
 #include <cstddef>
 #include <cstdint>
+#if defined(__CCE_AICORE__)
+#include "kernel_operator.h"
+#endif
 
 #include "e8_packet_layout.hpp"
 
@@ -8,6 +11,8 @@ namespace e8_decode {
 constexpr std::uint32_t kRows = 64, kHalfRows = 32, kChannels = 256;
 constexpr std::uint32_t kHeads = 6, kLocalHeads = 3, kPaddedHeads = 16;
 constexpr std::uint32_t kRing = 2, kMaxTiles = 256, kPacketBytes = e8_packet_abi::kPacketBytes;
+constexpr std::uint32_t kMaxSplits = 8, kPartialTail = 16, kPartialStride = kChannels + kPartialTail;
+constexpr std::uint32_t kMaxGrid = 65535;
 constexpr std::uint32_t kPad = 256;
 constexpr std::uint32_t Round32(std::uint32_t n) { return (n + 31u) & ~31u; }
 constexpr std::uint32_t kLabelAllocation = 2048 + kPad;
@@ -53,11 +58,53 @@ struct Launch {
     std::uint32_t tiles = 6;
     std::uint32_t last_rows = 32;
     float attention_scale = 0.0625f;
+    std::uint32_t lanes = 1, groups = 1, splits = 1, context_tiles = 0;
 };
+struct SplitRange {
+    std::uint32_t first_tile, tiles, last_rows;
+};
+constexpr SplitRange split_range(std::uint32_t length, std::uint32_t block,
+                                 std::uint32_t splits, std::uint32_t split) {
+    if ((block != 64 && block != 128) || !splits || splits > kMaxSplits || split >= splits)
+        return {0, 0, 0};
+    const auto pages = (std::uint64_t{length} + block - 1) / block;
+    const auto first = pages * split / splits * block;
+    const auto limit = pages * (split + 1) / splits * block;
+    const auto begin = first < length ? first : length;
+    const auto end = limit < length ? limit : length;
+    const auto tiles = static_cast<std::uint32_t>((end - begin + kRows - 1) / kRows);
+    return {static_cast<std::uint32_t>(first / kRows), tiles,
+            tiles ? static_cast<std::uint32_t>(end - begin - (tiles - 1) * kRows) : 0};
+}
+struct alignas(32) Task {
+    std::uint64_t offsets_index, witness_tile, score_tile;
+    std::uint32_t tiles, last_rows, lane, reserved = 0;
+};
+static_assert(sizeof(Task) == 64);
+constexpr std::uint64_t workspace_floats(std::uint32_t lanes, std::uint32_t groups, std::uint32_t splits) {
+    return splits == 1 ? 0 : std::uint64_t{lanes} * groups * kHeads * splits * kPartialStride;
+}
+#if defined(__CCE_AICORE__)
+__aicore__
+#endif
+constexpr std::uint64_t partial_offset(std::uint64_t head, std::uint32_t split, std::uint32_t splits) {
+    return (head * splits + split) * kPartialStride;
+}
 struct Buffers {
     void *key_packets, *value_packets, *packet_offsets, *query_padded;
     void *output, *key_witness, *value_witness, *score_witness;
+    void *tasks = nullptr, *workspace = nullptr;
 };
+constexpr bool valid_launch(const Launch& c, const Buffers& b) {
+    return c.lanes && c.groups && c.splits && c.splits <= kMaxSplits &&
+        std::uint64_t{c.lanes} * c.splits <= kMaxGrid &&
+        std::uint64_t{c.lanes} * c.groups <= kMaxGrid / kHeads &&
+        c.tiles <= kMaxTiles && c.last_rows && c.last_rows <= kRows &&
+        c.attention_scale > 0 && c.attention_scale <= 3.4028235e38f &&
+        b.key_packets && b.value_packets && b.packet_offsets && b.query_padded && b.output &&
+        (c.splits == 1 || b.workspace) &&
+        (b.tasks ? c.context_tiles >= c.tiles : (c.lanes == 1 && c.groups == 1 && c.splits == 1 && c.tiles));
+}
 }
 extern "C" void launch_e8_fused_decode_fp32(void* stream, const e8_decode::Launch* launch,
                                             const e8_decode::Buffers* buffers);

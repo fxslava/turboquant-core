@@ -10,6 +10,8 @@ and are mirrored into vLLM Ascend through `SOURCE_SYNC.json`.
   host tests, physical NPU tests and bounded CAModel checks.
 - [Performance guide](benchmarks/README.md): the production LM4/E8 benchmark,
   Qwen3.5 decode sweep, staged PyTorch comparison, profiling and metrics.
+- [E8 Split-K and profiling](docs/E8_SPLITK.md): batched decode, captured
+  device events and physical-server counter collection.
 - [E8 packet/decoder contract](tests/cpu/e8/README.md): sealed layout and
   independent CPU oracle provenance.
 
@@ -29,7 +31,7 @@ Fixtures are generated under `build-host/golden-dumps`; override
 `TQ_GOLDEN_DUMP_ROOT` to reuse a complete fixture set. Select a torch-enabled
 interpreter with `-DPython3_EXECUTABLE=/absolute/path/to/python`. Without torch,
 build `tq_host_tests` and run `ctest --test-dir build-host -L host -LE golden`
-for the nine tests that do not consume generated dumps.
+for the ten tests that do not consume generated dumps.
 
 ## Quick physical benchmark build
 
@@ -77,7 +79,8 @@ flag and clean container commands.
 
 Native LM4 supports the current scatter/decoder contracts. The sealed E8
 dequantizer and fused reader consume CPU-prepared packets. Raw device E8
-encoding remains gated; native LM3 and native E8 Split-K are unsupported.
+encoding remains gated; native LM3 remains unsupported. E8 decode supports
+one to eight splits and a batched reader launch with an FP32 reduction pass.
 The performance guide lists shape limits and what each timing includes.
 
 The latest promotion audit records CPU, syntax and analyzer checks in

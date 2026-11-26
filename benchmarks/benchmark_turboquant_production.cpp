@@ -127,6 +127,35 @@ private:
     std::uint64_t bytes_;
 };
 
+class CapturedTimeline {
+public:
+    explicit CapturedTimeline(aclrtStream stream) : stream_(stream)
+    {
+        check(aclmdlRICaptureBegin(stream_, ACL_MODEL_RI_CAPTURE_MODE_THREAD_LOCAL), "ACL graph capture begin");
+        capturing_ = true;
+    }
+    ~CapturedTimeline()
+    {
+        if (capturing_) aclmdlRICaptureEnd(stream_, &model_);
+        if (executed_) aclrtSynchronizeStream(stream_);
+        if (model_) aclmdlRIDestroy(model_);
+    }
+    CapturedTimeline(const CapturedTimeline&) = delete;
+    CapturedTimeline& operator=(const CapturedTimeline&) = delete;
+    void execute()
+    {
+        const auto status = aclmdlRICaptureEnd(stream_, &model_);
+        capturing_ = false;
+        check(status, "ACL graph capture end");
+        executed_ = true;
+        check(aclmdlRIExecuteAsync(model_, stream_), "ACL graph execute");
+    }
+private:
+    aclrtStream stream_;
+    aclmdlRI model_ = nullptr;
+    bool capturing_ = false, executed_ = false;
+};
+
 class Event {
 public:
     Event() { check(aclrtCreateEventWithFlag(&event_, ACL_EVENT_TIME_LINE), "aclrtCreateEventWithFlag"); }
@@ -142,25 +171,44 @@ private:
 template<class Launch>
 void time_case(const Session& session, const Filters& f, std::uint64_t bytes, Launch launch)
 {
-    for (unsigned i = 0; i < f.warmup; ++i) launch();
+#ifdef TQ_PRODUCTION_SIM
+    throw std::runtime_error("CAModel timings are not NPU performance; use --verify or the accuracy runner");
+#endif
+    for (unsigned i = 0; i < std::max(1u, f.warmup); ++i) launch();
     session.synchronize();
 
     const auto events = std::make_unique<Event[]>(std::uint64_t{2} * f.iterations);
+    std::unique_ptr<CapturedTimeline> graph;
+    if (f.timing == "graph") graph = std::make_unique<CapturedTimeline>(session.stream);
     for (unsigned i = 0; i < f.iterations; ++i) {
-        check(aclrtRecordEvent(events[std::uint64_t{2} * i].get(), session.stream), "record start event");
+        const auto record = [&](aclrtEvent event) {
+            check(graph ? aclrtRecordEventWithFlag(event, session.stream, ACL_EVENT_RECORD_EXTERNAL)
+                        : aclrtRecordEvent(event, session.stream), "record device timeline event");
+        };
+        record(events[std::uint64_t{2} * i].get());
         launch();
-        check(aclrtRecordEvent(events[std::uint64_t{2} * i + 1].get(), session.stream), "record stop event");
+        record(events[std::uint64_t{2} * i + 1].get());
     }
-    check(aclrtSynchronizeEvent(events[std::uint64_t{2} * f.iterations - 1].get()), "timed events synchronize");
+    if (graph) graph->execute();
+    session.synchronize();
     std::vector<double> samples;
     samples.reserve(f.iterations);
     for (unsigned i = 0; i < f.iterations; ++i) {
         float ms = 0;
+        check(aclrtSynchronizeEvent(events[std::uint64_t{2} * i + 1].get()), "aclrtSynchronizeEvent");
         check(aclrtEventElapsedTime(&ms, events[std::uint64_t{2} * i].get(),
             events[std::uint64_t{2} * i + 1].get()), "aclrtEventElapsedTime");
         samples.push_back(1000.0 * ms);
+        require(std::isfinite(ms) && ms > 0, "device event has no positive finite elapsed time");
     }
-    print_timing(summarize(samples), bytes);
+    std::printf(" timing_source=aclrtEventElapsedTime timing_scope=%s samples=%u warmup=%u", graph ? "captured_device_stream" : "eager_device_stream", f.iterations, std::max(1u, f.warmup));
+    const auto timing = summarize(samples);
+    std::printf(" device_p50_us=%.3f device_p95_us=%.3f device_mean_us=%.3f effective_bytes=%llu device_effective_GB_s=%.3f",
+        timing.p50, timing.p95, timing.mean, static_cast<unsigned long long>(bytes), bytes / timing.p50 / 1000);
+    if (f.samples) {
+        std::printf(" device_samples_us=");
+        for (unsigned i = 0; i < samples.size(); ++i) std::printf("%s%.6f", i ? "," : "", samples[i]);
+    }
 }
 
 void verify_attention(const Plan& plan, Mode mode, const std::vector<std::uint16_t>& actual)
@@ -170,11 +218,13 @@ void verify_attention(const Plan& plan, Mode mode, const std::vector<std::uint16
     const double limit = mode == Mode::e8 ? 0.025 : 0.075;
     require(m.relative_l2 < limit && m.cosine > 1 - limit * limit,
         "BF16 context differs from CPU attention");
+    constexpr double kE8MinimumCosine = 0.99999;
+    if (mode == Mode::e8) require(m.cosine >= kE8MinimumCosine, "E8 cosine must be at least 0.99999");
 }
 
 void verify_all(std::initializer_list<const Gm*> buffers)
 {
-    for (const auto* buffer : buffers) buffer->verify();
+    for (const auto* buffer : buffers) if (buffer) buffer->verify();
 }
 
 constexpr std::uint32_t kLm4RowBytes = kDim / 2;
@@ -294,11 +344,11 @@ void upload_e8(const Plan& plan, const Gm& key, const Gm& value, bool verify)
     }
 }
 
-void verify_e8_witness(const Plan& plan, const Gm& witness, unsigned seq, unsigned kv, unsigned plane)
+void verify_e8_witness(const Plan& plan, const Gm& witness, unsigned seq, unsigned kv, unsigned plane, std::uint64_t offset = 0)
 {
     const auto tiles = ceil_div(plan.lengths[seq], kTileRows);
     std::vector<std::uint16_t> reconstructed(std::uint64_t{tiles} * kTileRows * kDim);
-    witness.download(reconstructed);
+    witness.download(reconstructed.data(), reconstructed.size(), offset);
     std::array<float, kDim> expected{};
     for (unsigned row = 0; row < tiles * kTileRows; ++row) {
         if (row < static_cast<unsigned>(plan.lengths[seq])) reconstruct(Mode::e8, plan.pattern_row(seq, row), kv, plane, expected.data());
@@ -316,85 +366,85 @@ void e8_decode_case(const Session& session, const Filters& f, const Plan& plan)
     Gm key(packet_bytes), value(packet_bytes);
     upload_e8(plan, key, value, f.verify);
     const auto max_tiles = ceil_div(plan.p.context, kTileRows);
-    Gm kw(std::uint64_t{max_tiles} * kTileRows * kDim * sizeof(std::uint16_t));
-    Gm vw(std::uint64_t{max_tiles} * kTileRows * kDim * sizeof(std::uint16_t));
-    Gm sw(std::uint64_t{max_tiles} * kTileRows * e8_decode::kHeads * sizeof(float));
-    const auto chunks = ceil_div(plan.p.group, e8_decode::kHeads);
-    const auto lanes = std::uint64_t{plan.p.sequences} * plan.p.kv_heads;
-    const auto launches = lanes * chunks;
-    const auto stride = std::uint64_t{ceil_div(max_tiles, 4)} * 4;
-    std::vector<std::uint64_t> offset_map(lanes * stride);
-    std::vector<float> query(launches * kE8QueryFloats);
-    Gm offsets(offset_map.size() * sizeof(std::uint64_t)), q(query.size() * sizeof(float));
-    Gm output(launches * kE8OutputElements * sizeof(std::uint16_t));
-    std::vector<e8_decode::Buffers> buffers;
-    std::vector<e8_decode::Launch> launch_params;
-    for (unsigned seq = 0; seq < plan.p.sequences; ++seq) {
-        const auto tiles = ceil_div(plan.lengths[seq], kTileRows);
-        const auto last_rows = static_cast<unsigned>(plan.lengths[seq]) - (tiles - 1) * kTileRows;
+    const auto groups = ceil_div(plan.p.group, e8_decode::kHeads);
+    const auto lanes = plan.p.sequences * plan.p.kv_heads;
+    const auto jobs = std::uint64_t{lanes} * groups;
+    const auto grid = lanes * plan.p.splits;
+    unsigned max_split_tiles = 0;
+    for (auto length : plan.lengths)
+        for (unsigned split = 0; split < plan.p.splits; ++split)
+            max_split_tiles = std::max(max_split_tiles, e8_decode::split_range(length, plan.block, plan.p.splits, split).tiles);
+    const auto stride = std::uint64_t{ceil_div(max_split_tiles, 4)} * 4;
+    std::vector<std::uint64_t> offset_map(grid * stride);
+    std::vector<e8_decode::Task> task_map(grid);
+    std::vector<float> query(jobs * kE8QueryFloats);
+    for (unsigned seq = 0; seq < plan.p.sequences; ++seq)
         for (unsigned kv = 0; kv < plan.p.kv_heads; ++kv) {
-            const auto slot = (std::uint64_t{seq} * plan.p.kv_heads + kv) * stride;
-            for (unsigned t = 0; t < tiles; ++t) {
-                const auto pg = plan.physical(seq, t / tiles_per_page);
-                offset_map[slot + t] = packet_offset(pg, t % tiles_per_page, kv, tiles_per_page, plan.p.kv_heads);
-            }
-            for (unsigned chunk = 0; chunk < chunks; ++chunk) {
-                const auto job = buffers.size();
-                const auto begin = chunk * e8_decode::kHeads;
-                const auto end = std::min(begin + e8_decode::kHeads, plan.p.group);
-                for (unsigned gh = begin; gh < end; ++gh) {
-                    const auto head = kv * plan.p.group + gh;
-                    query[job * kE8QueryFloats + std::uint64_t{gh - begin} * kDim + query_channel(seq, head)] =
-                        query_value(seq, head);
+            const auto lane = seq * plan.p.kv_heads + kv;
+            for (unsigned split = 0; split < plan.p.splits; ++split) {
+                const auto range = e8_decode::split_range(plan.lengths[seq], plan.block, plan.p.splits, split);
+                const auto task = lane * plan.p.splits + split;
+                task_map[task] = {task * stride, std::uint64_t{lane} * max_tiles + range.first_tile,
+                                  std::uint64_t{lane} * groups * max_tiles + range.first_tile,
+                                  range.tiles, range.last_rows, lane, 0};
+                for (unsigned tile = 0; tile < range.tiles; ++tile) {
+                    const auto logical_tile = range.first_tile + tile;
+                    const auto page = plan.physical(seq, logical_tile / tiles_per_page);
+                    offset_map[task * stride + tile] = packet_offset(page, logical_tile % tiles_per_page,
+                                                                     kv, tiles_per_page, plan.p.kv_heads);
                 }
-                buffers.push_back({key.ptr(), value.ptr(), offsets.ptr(slot * sizeof(std::uint64_t)),
-                    q.ptr(job * kE8QueryFloats * sizeof(float)), output.ptr(job * kE8OutputElements * sizeof(std::uint16_t)),
-                    kw.ptr(), vw.ptr(), sw.ptr()});
-                launch_params.push_back({tiles, last_rows, kAttentionScale});
+            }
+            for (unsigned gh = 0; gh < plan.p.group; ++gh) {
+                const auto job = std::uint64_t{lane} * groups + gh / e8_decode::kHeads;
+                const auto head = kv * plan.p.group + gh;
+                query[job * kE8QueryFloats + std::uint64_t{gh % e8_decode::kHeads} * kDim + query_channel(seq, head)] = query_value(seq, head);
             }
         }
+    Gm offsets(offset_map.size() * sizeof(std::uint64_t)), tasks(task_map.size() * sizeof(e8_decode::Task));
+    Gm q(query.size() * sizeof(float)), output(jobs * kE8OutputElements * sizeof(std::uint16_t));
+    const auto workspace_bytes = e8_decode::workspace_floats(lanes, groups, plan.p.splits) * sizeof(float);
+    std::unique_ptr<Gm> work, kw, vw, sw;
+    if (workspace_bytes) work = std::make_unique<Gm>(workspace_bytes);
+    if (f.verify) {
+        const auto witness_bytes = std::uint64_t{lanes} * max_tiles * kTileRows * kDim * sizeof(std::uint16_t);
+        kw = std::make_unique<Gm>(witness_bytes);
+        vw = std::make_unique<Gm>(witness_bytes);
+        sw = std::make_unique<Gm>(jobs * max_tiles * kTileRows * e8_decode::kHeads * sizeof(float));
     }
     offsets.upload(offset_map);
+    tasks.upload(task_map);
     q.upload(query);
     output.reset(0xff);
-    auto launch_job = [&](std::uint64_t job) {
-        launch_e8_fused_decode_fp32(session.stream, &launch_params[job], &buffers[job]);
-    };
-    std::printf(" launches=%llu physical_query_heads=%llu",
-        static_cast<unsigned long long>(launches), static_cast<unsigned long long>(launches * e8_decode::kHeads));
+    const e8_decode::Launch params{max_split_tiles, 64, kAttentionScale, lanes, groups, plan.p.splits, max_tiles};
+    const e8_decode::Buffers buffers{key.ptr(), value.ptr(), offsets.ptr(), q.ptr(), output.ptr(),
+        kw ? kw->ptr() : nullptr, vw ? vw->ptr() : nullptr, sw ? sw->ptr() : nullptr,
+        tasks.ptr(), work ? work->ptr() : nullptr};
+    const auto launch = [&] { launch_e8_fused_decode_fp32(session.stream, &params, &buffers); };
+    std::printf(" launches=%u reader_launches=1 reduce_launches=%u grid=%u query_groups=%u workspace_bytes=%llu witnesses=%s physical_query_heads=%llu",
+        1 + unsigned(plan.p.splits > 1), unsigned(plan.p.splits > 1), grid, groups,
+        static_cast<unsigned long long>(workspace_bytes), f.verify ? "on" : "off",
+        static_cast<unsigned long long>(jobs * e8_decode::kHeads));
     if (f.verify) {
-        for (std::uint64_t job = 0; job < launches; ++job) {
-            launch_job(job);
-            if (job % chunks != 0) continue;
-            session.synchronize();
-            const auto seq = job / chunks / plan.p.kv_heads;
-            const auto kv = job / chunks % plan.p.kv_heads;
-            verify_e8_witness(plan, kw, seq, kv, 0);
-            verify_e8_witness(plan, vw, seq, kv, 1);
-            for (unsigned plane = 0; plane < 2; ++plane) {
-                Packet host{};
-                const auto base = offset_map[(std::uint64_t{seq} * plan.p.kv_heads + kv) * stride];
-                (plane ? value : key).download(host.data(), host.size(), base);
-                verify_packet(host, plan.pattern_row(seq, 0), kv, plane);
-            }
-        }
+        launch();
         session.synchronize();
-        std::vector<std::uint16_t> padded(launches * kE8OutputElements);
+        for (unsigned seq = 0; seq < plan.p.sequences; ++seq)
+            for (unsigned kv = 0; kv < plan.p.kv_heads; ++kv) {
+                const auto lane = seq * plan.p.kv_heads + kv;
+                const auto offset = std::uint64_t{lane} * max_tiles * kTileRows * kDim * sizeof(std::uint16_t);
+                verify_e8_witness(plan, *kw, seq, kv, 0, offset);
+                verify_e8_witness(plan, *vw, seq, kv, 1, offset);
+            }
+        std::vector<std::uint16_t> padded(jobs * kE8OutputElements);
         output.download(padded);
         std::vector<std::uint16_t> actual(std::uint64_t{plan.p.sequences} * plan.heads() * kDim);
-        for (std::uint64_t lane = 0; lane < lanes; ++lane)
+        for (unsigned lane = 0; lane < lanes; ++lane)
             for (unsigned h = 0; h < plan.p.group; ++h) {
-                const auto source = (lane * chunks + h / e8_decode::kHeads) * kE8OutputElements +
-                    std::uint64_t{h % e8_decode::kHeads} * kDim;
-                std::copy_n(padded.data() + source, kDim, actual.data() + (lane * plan.p.group + h) * kDim);
+                const auto source = (std::uint64_t{lane} * groups + h / e8_decode::kHeads) * kE8OutputElements + std::uint64_t{h % e8_decode::kHeads} * kDim;
+                std::copy_n(padded.data() + source, kDim, actual.data() + (std::uint64_t{lane} * plan.p.group + h) * kDim);
             }
         verify_attention(plan, Mode::e8, actual);
-    } else {
-        time_case(session, f, plan.kv_bytes(Mode::e8, false), [&] {
-            for (std::uint64_t job = 0; job < launches; ++job) launch_job(job);
-        });
-    }
-    verify_all({&key, &value, &offsets, &q, &output, &kw, &vw, &sw});
+    } else time_case(session, f, plan.kv_bytes(Mode::e8, false), launch);
+    verify_all({&key, &value, &offsets, &tasks, &q, &output, work.get(), kw.get(), vw.get(), sw.get()});
 }
 
 void e8_dequant(const Session& session, const Filters& f, const Plan& plan)
@@ -553,6 +603,9 @@ int main(int argc, char** argv) try
     f.verify = true;
 #endif
     if (f.help) { f.usage(argv[0]); return 0; }
+#ifdef TQ_PRODUCTION_SIM
+    require(f.list || f.verify, "CAModel timing is not NPU performance; use --verify or the accuracy runner");
+#endif
     std::unique_ptr<Session> session;
     unsigned executed = 0;
     f.visit([&](const Plan& plan, Mode mode, std::string_view stage) {

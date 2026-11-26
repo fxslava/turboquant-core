@@ -1,0 +1,32 @@
+Test project /workspace/build/build-host
+      Start  1: contract_gates
+ 1/11 Test  #1: contract_gates ...................   Passed    0.01 sec
+      Start  2: layout_bridge
+ 2/11 Test  #2: layout_bridge ....................   Passed    0.03 sec
+      Start  3: telemetry_dump
+ 3/11 Test  #3: telemetry_dump ...................   Passed    0.01 sec
+      Start  4: qwen35_decode
+ 4/11 Test  #4: qwen35_decode ....................   Passed    0.36 sec
+      Start  5: decode_reduce
+ 5/11 Test  #5: decode_reduce ....................   Passed    0.01 sec
+      Start  6: e8_splitk
+ 6/11 Test  #6: e8_splitk ........................   Passed    0.12 sec
+      Start  7: qwen35_telemetry
+ 7/11 Test  #7: qwen35_telemetry .................   Passed    0.09 sec
+      Start  8: golden_decode_oracle
+ 8/11 Test  #8: golden_decode_oracle .............   Passed    2.93 sec
+      Start  9: turboquant_production_host
+ 9/11 Test  #9: turboquant_production_host .......   Passed    4.85 sec
+      Start 10: e8_decode_cpu_check
+10/11 Test #10: e8_decode_cpu_check ..............   Passed    0.21 sec
+      Start 11: e8_layout_check
+11/11 Test #11: e8_layout_check ..................   Passed    0.00 sec
+
+100% tests passed out of 11
+
+Label Time Summary:
+e8        =   0.21 sec*proc (2 tests)
+golden    =   2.93 sec*proc (1 test)
+host      =   8.61 sec*proc (11 tests)
+
+Total Test time (real) =   8.61 sec

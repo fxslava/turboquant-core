@@ -18,7 +18,7 @@ cmake --build build-host --target tq_help
 
 | Target | Builds or executes |
 | --- | --- |
-| `tq_host_tests` | All 10 CPU C++ executables |
+| `tq_host_tests` | All 11 CPU C++ executables |
 | `tq_generate_goldens` | Generates complete fixtures with `Python3_EXECUTABLE` and CPU torch |
 | `tq_check_host` | Builds host tests, then executes `ctest -L host` |
 | `tq_tests` | Builds host tests and selected-runtime device tests, if configured |
@@ -58,7 +58,7 @@ Host and device golden tests share that path. The tracked `golden/dumps` has
 only the original synthetic subset; it cannot satisfy the complete oracle gate.
 Missing `manifest.txt` errors mean fixture preparation is incomplete.
 
-Without torch or complete fixtures, build the C++ tests and run the nine gates
+Without torch or complete fixtures, build the C++ tests and run the ten gates
 that do not read generated dumps:
 
 ```bash
@@ -73,6 +73,7 @@ ctest --test-dir build-host -L host -LE golden --output-on-failure
 | `telemetry_dump` | Telemetry ABI and host parsing |
 | `qwen35_decode` | Qwen-shaped decode planning |
 | `decode_reduce` | Split-K/reduction coverage and padding |
+| `e8_splitk` | Page-aligned E8 splits, FP32 merge, odd/empty tails and launch validation |
 | `qwen35_telemetry` | Telemetry isolation from Split-K statistics |
 | `golden_decode_oracle` | C++ oracle against all eight generated decode cases |
 | `turboquant_production_host` | 216 profile/format/block/stage validation rows |

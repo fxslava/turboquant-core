@@ -1,0 +1,38 @@
+[  6%] Built target turboquant_host
+[ 10%] Built target tq_scatter_nz_sim
+[ 14%] Built target tq_scatter_sim
+[ 20%] Built target tq_prefill_nz_sim
+[ 26%] Built target tq_prefill_sim
+[ 30%] Built target tq_e8_reader
+[ 34%] Built target tq_e8_dequant
+[ 38%] Built target tq_decode_sim
+[ 42%] Built target tq_qwen35_reduce_canary_sim
+[ 46%] Built target tq_qwen35_tail_canary_sim
+[ 51%] Built target test_golden_prefill_nz_sim
+[ 55%] Built target test_golden_scatter_sim
+[ 59%] Built target test_golden_prefill_strip_sim
+[ 63%] Built target test_live_write_nz_sim
+[ 67%] Built target test_live_write_sim
+[ 71%] Built target test_nz_ingress_canary_sim
+[ 75%] Built target test_qwen35_reduce_canary_sim
+[ 79%] Built target test_dirty_data_canary_sim
+[ 83%] Built target test_qwen35_tail_canary_sim
+[ 87%] Built target test_fused_decode_e2e_sim
+[ 89%] Building CXX object cmake/device/CMakeFiles/test_turboquant_production_sim.dir/__/__/benchmarks/benchmark_turboquant_production.cpp.o
+[ 93%] Built target test_golden_decode_sim
+[ 97%] Built target bench_qwen35_decode_sim
+[ 97%] Built target tq_golden_sim
+[100%] Linking CXX executable ../../bin/test_turboquant_production_sim
+[100%] Built target test_turboquant_production_sim
+[100%] Built target tq_sim_tests
+[ 33%] Built target tq_scatter_nz_sim
+[ 33%] Built target turboquant_host
+[ 46%] Built target tq_e8_dequant
+[ 60%] Built target tq_e8_reader
+[ 73%] Built target tq_decode_sim
+[ 86%] Built target bench_qwen35_decode_sim
+[ 93%] Building CXX object cmake/device/CMakeFiles/bench_turboquant_production_sim.dir/__/__/benchmarks/benchmark_turboquant_production.cpp.o
+[100%] Linking CXX executable ../../bin/bench_turboquant_production_sim
+[100%] Built target bench_turboquant_production_sim
+[100%] Built target tq_sim_benchmarks
+[100%] Built target tq_benchmarks

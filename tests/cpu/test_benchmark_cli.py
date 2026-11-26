@@ -14,6 +14,13 @@ CLI = runpy.run_path(
 
 
 class ExecutableSelectionTest(unittest.TestCase):
+    def test_forwards_native_split_and_device_timing_options(self):
+        args = CLI["cli_parser"]().parse_args(["--split-k", "8", "--samples"])
+        options = CLI["command_options"](args)
+        self.assertEqual(options[options.index("--split-k") + 1], "8")
+        self.assertEqual(options[options.index("--timing") + 1], "graph")
+        self.assertIn("--samples", options)
+
     def setUp(self):
         self.directory = tempfile.TemporaryDirectory()
         self.addCleanup(self.directory.cleanup)

@@ -16,7 +16,7 @@
       }
     },
     "common/e8_decode.hpp": {
-      "sha256": "4cfbecd3da6854c433c3a9caf0aaede572748f74fc60aad3c21519e00e3bb050",
+      "sha256": "addb2128bbf528b27426183044997ef907e7941f16747ad8a1e52ebc607bdf73",
       "plugin_baseline": {
         "path": "csrc/attention/turboquant/e8/e8_decode.hpp",
         "sha256": "5e890555adcb5e64a962519bbfd749bfbeb3ee5208a044060887f3f2df95c1ac"
@@ -181,7 +181,7 @@
       }
     },
     "decode/e8/e8_fused_decode.cpp": {
-      "sha256": "1354868b479d3c2972f219a7012718e210c085ffcb38c6310056fcebb7f390ef",
+      "sha256": "2962391e1cf7c9ba7451d34c08fb9773d4df30fb5e91648c26aefd14300fc374",
       "plugin_baseline": {
         "path": "csrc/attention/turboquant/e8/e8_fused_decode.cpp",
         "sha256": "e5fdf887471664c8930079fb891303094b91486adc8334b050a5648a3b407a38"
@@ -396,7 +396,7 @@
       "sha256": "98d868ab5885c71f82573553e444adb704673ff6dd96b353e6471bb541b4396c"
     },
     "bindings/asc_e8_reader.cpp": {
-      "sha256": "f291d4246c50b943dd54ecc8b6bf134473a69ba121ac72eb9055411d589f54d9"
+      "sha256": "17ade51b8c83ff2813c0eff4560df082d609980eb4dc8f065d051b2c8cf0c568"
     },
     "bindings/torch_bindings.cpp": {
       "sha256": "437f89c4481a7236b6e515385b9775690453b668e0dc8e352b234ef8aa4fcb80"

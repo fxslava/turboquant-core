@@ -168,12 +168,11 @@ struct Plan {
                 return "native fused launch requires at most 4 KV heads and 8 splits";
             return nullptr;
         }
-        if (p.splits != 1) return "sealed E8 reader has no Split-K merge";
-        for (const auto length : lengths) {
-            const auto tiles = ceil_div(length, kTileRows);
-            if (tiles < 4 || tiles > e8_decode::kMaxTiles || tiles % 2)
-                return "sealed E8 reader requires an even 4..256 tiles per sequence";
-        }
+        if (!p.splits || p.splits > e8_decode::kMaxSplits) return "sealed E8 reader requires split_k in [1, 8]";
+        for (const auto length : lengths)
+            for (unsigned split = 0; split < p.splits; ++split)
+                if (e8_decode::split_range(length, block, p.splits, split).tiles > e8_decode::kMaxTiles)
+                    return "sealed E8 reader requires at most 256 tiles per split";
         return nullptr;
     }
 
@@ -399,8 +398,9 @@ inline Metrics metrics(const std::vector<std::uint16_t>& actual, const std::vect
 
 struct Filters {
     std::string_view mode = "all", stage = "all", profile = "all";
-    unsigned block = 0, device = 0, warmup = 10, iterations = 50;
-    bool list = false, help = false, verify = false;
+    unsigned block = 0, device = 0, warmup = 10, iterations = 50, splits = 0;
+    std::string_view timing = "graph";
+    bool list = false, help = false, verify = false, samples = false;
 
     Filters(int argc, char** argv)
     {
@@ -409,11 +409,13 @@ struct Filters {
             if (flag == "--help" || flag == "-h") { help = true; continue; }
             if (flag == "--list") { list = true; continue; }
             if (flag == "--verify") { verify = true; continue; }
+            if (flag == "--samples") { samples = true; continue; }
             require(i + 1 < argc, "missing filter value (see --help)");
             const std::string_view value(argv[++i]);
             if (flag == "--mode") mode = value;
             else if (flag == "--stage") stage = value;
             else if (flag == "--profile") profile = value;
+            else if (flag == "--timing") timing = value;
             else {
                 require(!value.empty() && value.size() <= 5 &&
                         value.find_first_not_of("0123456789") == std::string_view::npos,
@@ -423,6 +425,7 @@ struct Filters {
                 else if (flag == "--device") device = number;
                 else if (flag == "--warmup") warmup = number;
                 else if (flag == "--iterations") iterations = number;
+                else if (flag == "--split-k") { require(number >= 1, "--split-k must be in [1, 8]"); splits = number; }
                 else throw std::invalid_argument("unknown option (see --help)");
             }
         }
@@ -431,6 +434,8 @@ struct Filters {
         require(profile == "all" || std::any_of(std::begin(kProfiles), std::end(kProfiles),
             [&](const auto& p) { return p.name == profile; }), "unknown --profile (see --list)");
         require(block == 0 || block == 64 || block == 128, "block-size must be 64 or 128");
+        require(splits <= e8_decode::kMaxSplits, "--split-k must be in [1, 8]");
+        require(timing == "graph" || timing == "events", "--timing must be graph or events");
         require(iterations > 0 && iterations <= 512, "iterations must be in [1, 512]");
     }
 
@@ -439,7 +444,7 @@ struct Filters {
         std::printf("Usage: %s [--list] [--mode all|lm4|lm3|e8]"
                     " [--stage all|ingress|dequant|decode] [--profile NAME]"
                     " [--block-size 64|128] [--verify] [--device ID]"
-                    " [--warmup N] [--iterations N]\n", program);
+                    " [--warmup N] [--iterations N] [--split-k 1..8] [--samples] [--timing graph|events]\n", program);
     }
 
     template<class Visitor>
@@ -449,7 +454,9 @@ struct Filters {
             if (profile != "all" && profile != candidate.name) continue;
             for (const auto size : kBlocks) {
                 if (block && block != size) continue;
-                const Plan plan(candidate, size);
+                auto selected = candidate;
+                if (splits) selected.splits = splits;
+                const Plan plan(selected, size);
                 for (const auto codec : kModes) {
                     if (mode != "all" && mode != name(codec)) continue;
                     for (const std::string_view s : {"ingress", "dequant", "decode"})

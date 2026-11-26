@@ -1,0 +1,9 @@
+TurboQuant source inventories, byte hashes and shared files match
+Traceback (most recent call last):
+  File "/mnt/c/Ascend/turboquant-integration-work/e8-splitk-20261126/run_checks.py", line 39, in <module>
+    result = {'ordinary': gates.check_deployed_analyzer(target),
+  File "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/promotion/deployed_aka_and_syntax.py", line 105, in check_deployed_analyzer
+    execution = execute(bounded(2400, command), out / f"{label}.log")
+  File "/mnt/c/Ascend/turboquant-core/reports/deadlock_20261125/slots/P/r6/promotion/deployed_aka_and_syntax.py", line 54, in execute
+    assert result.returncode in allowed, (result.returncode, log)
+AssertionError: (1, PosixPath('/mnt/c/Ascend/turboquant-integration-work/e8-splitk-20261126/analyzer/frozen-and-unaffected.log'))

@@ -74,13 +74,19 @@ GLM/DeepSeek profile labels describe workload shapes, not model accuracy.
 
 ## Read and compare the measurements
 
-ACL stream events after warmup report `p50_us`, `p95_us`, `mean_us`,
-`effective_bytes` and `effective_GB_s`. Allocation, input upload and CPU checks
-are outside the timed launch. E8 decode serializes a reader launch for each
-group of up to six query heads sharing a KV head; its case timing includes all
-those launches.
+The native runner's ACL stream events after warmup report `device_p50_us`,
+`device_p95_us`, `device_mean_us`, `effective_bytes` and
+`device_effective_GB_s`. Allocation, input upload and CPU checks
+are outside the timed launch. E8 decode uses one batched reader grid across
+sequences, KV heads and splits, followed by one reduction launch when split_k
+is greater than one. Query groups of six are processed inside each block.
+`--split-k 1..8` overrides a profile's split count. Default `--timing graph`
+captures all start/reader/reduction/stop tasks before replay; `--samples`
+prints every ACL-event sample. Witness writes are disabled in timing runs.
+See [E8 Split-K and profiling](../docs/E8_SPLITK.md) for physical-server
+accuracy, unprofiled timing, and `msprof` counter collection commands.
 
-Effective GB/s is `effective_bytes / (mean_us * 1000)` in decimal units. Decode
+Device effective GB/s is `effective_bytes / (device_p50_us * 1000)` in decimal units. Decode
 counts unique live K/V tiles and scales, including final-tile row padding. It
 excludes query/output/workspace, E8 witness traffic and repeated reads caused
 by padded head groups. Ingress counts BF16 reads and packed/scale writes.
@@ -103,7 +109,7 @@ msprof --application="./build-npu/bin/bench_turboquant_production_npu --device 0
 | --- | --- | --- | --- |
 | LM4 | Scatter writer, including ragged writes | No standalone kernel | At most 4 KV heads and 8 splits, subject to launch validation |
 | LM3 | Unsupported | Unsupported | Unsupported |
-| E8 | Raw device encoder remains gated | Sealed packet component | Prepared packets; even 4–256 tiles per sequence; no Split-K merge |
+| E8 | Raw device encoder remains gated | Sealed packet component | Prepared packets; 1–8 splits, at most 256 tiles per slice; odd/empty slices supported |
 
 E8 uses D256, 4,352-byte packets per 64-token K or V plane and host-prepared
 labels/scales. Native ingress writes up to two pages per sequence.

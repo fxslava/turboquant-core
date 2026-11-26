@@ -6,6 +6,7 @@
 #include "simt_api/asc_bf16.h"
 #include "simt_api/asc_simt.h"
 #include "e8_parallel_decode.hpp"
+#include "../native/vector/routine_vector_online_softmax.hpp"
 
 namespace e8_decode {
 
@@ -32,7 +33,7 @@ __simt_callee__ inline void StoreCoordinate(unsigned block, int doubled, float s
     const unsigned dst = Value ? (row / 8) * 256 * 8 + channel * 8 + row % 8
                                : (channel / 8) * (kKeyGroupStrideBytes / 4) + row * 8 + channel % 8;
     packed[dst] = __bfloat162float(rounded);
-    witness[row * 256 + channel] = rounded;
+    if (witness) witness[row * 256 + channel] = rounded;
 }
 
 template <bool Value>
@@ -131,6 +132,7 @@ __simd_callee__ inline void NormalizeHead(__ubuf__ float* accumulator, __ubuf__ 
     r::RegTensor<float> l, one, inverse, acc;
     r::LoadAlign<float, r::LoadDist::DIST_BRC_B32>(l, sum + Head * 8);
     r::Duplicate<float>(one, 1.0f);
+    r::Max(l, l, one, all);
     r::Div<float, r::MaskMergeMode::ZEROING>(inverse, one, l, all);
 #define E8_NORMALIZE(C)                              \
     r::LoadAlign(acc, accumulator + Head * 256 + C); \
@@ -199,7 +201,7 @@ __aicore__ inline void StagePlane(VectorBuffers& b, __gm__ std::uint8_t* packets
     asc_vf_call<DecodePacked<(Plane == 1)>>(
         dim3(256), reinterpret_cast<__ubuf__ std::uint16_t*>(b.labels[Slot][Plane].GetPhyAddr()),
         reinterpret_cast<__ubuf__ float*>(b.scales[Slot][Plane].GetPhyAddr()),
-        reinterpret_cast<__ubuf__ float*>(b.packed[Slot][Plane].GetPhyAddr()), witness + begin * 256,
+        reinterpret_cast<__ubuf__ float*>(b.packed[Slot][Plane].GetPhyAddr()), witness ? witness + begin * 256 : nullptr,
         local_valid);
     AscendC::DataSyncBarrier<AscendC::MemDsbT::ALL>();
     Sync<AscendC::HardEvent::V_MTE3>();
@@ -218,8 +220,8 @@ __aicore__ inline void StageTile(VectorBuffers& b, __gm__ std::uint8_t* keys, __
                                  __gm__ bfloat16_t* key_witness, __gm__ bfloat16_t* value_witness) {
     const std::uint64_t offset = b.offsets.GetValue(tile);
     const unsigned valid = tile + 1 == tiles ? last : 64;
-    StagePlane<Slot, 0>(b, keys, offset, owner, valid, key_witness + tile * 64 * 256);
-    StagePlane<Slot, 1>(b, values, offset, owner, valid, value_witness + tile * 64 * 256);
+    StagePlane<Slot, 0>(b, keys, offset, owner, valid, key_witness ? key_witness + tile * 64 * 256 : nullptr);
+    StagePlane<Slot, 1>(b, values, offset, owner, valid, value_witness ? value_witness + tile * 64 * 256 : nullptr);
     AscendC::CrossCoreSetFlag<2, PIPE_MTE3>(Slot);
 }
 __aicore__ inline void StageQuery(VectorBuffers& b, __gm__ float* query, unsigned owner) {
@@ -245,12 +247,15 @@ __aicore__ inline void VectorTile(VectorBuffers& b, __gm__ std::uint8_t* keys, _
                                   __gm__ float* score_witness) {
     AscendC::CrossCoreWaitFlag<2, PIPE_V>(4);
 
-    Sync<AscendC::HardEvent::V_MTE3>();
-    AscendC::GlobalTensor<float> score_output;
-    score_output.SetGlobalBuffer(score_witness + (tile * 6 + owner * 3) * 64);
-    AscendC::DataCopy(score_output, b.scores, 3 * 64);
-    Sync<AscendC::HardEvent::MTE3_V>();
+    if (score_witness) {
+        Sync<AscendC::HardEvent::V_MTE3>();
+        AscendC::GlobalTensor<float> score_output;
+        score_output.SetGlobalBuffer(score_witness + (tile * 6 + owner * 3) * 64);
+        AscendC::DataCopy(score_output, b.scores, 3 * 64);
+        Sync<AscendC::HardEvent::MTE3_V>();
+    }
     const unsigned valid = tile + 1 == tiles ? last : 64;
+    AscendC::PipeBarrier<PIPE_V>();
     Softmax(reinterpret_cast<__ubuf__ float*>(b.scores.GetPhyAddr()),
             reinterpret_cast<__ubuf__ float*>(b.maximum.GetPhyAddr()),
             reinterpret_cast<__ubuf__ float*>(b.sum.GetPhyAddr()),
@@ -316,20 +321,12 @@ __aicore__ inline void CubeTile(__ca__ float* l0a, __cb__ float* l0b, __cc__ flo
     AscendC::CrossCoreSetFlag<2, PIPE_FIX>(6);
     if constexpr (Release) AscendC::CrossCoreSetFlag<2, PIPE_FIX>(2 + Slot);
 }
-}
-
-extern "C" __global__ __aicore__ void e8_fused_decode_fp32(GM_ADDR gm_keys, GM_ADDR gm_values,
-                                                           GM_ADDR gm_offsets, GM_ADDR gm_query,
-                                                           GM_ADDR gm_output, GM_ADDR gm_key_witness,
-                                                           GM_ADDR gm_value_witness, GM_ADDR gm_score_witness,
-                                                           uint32_t tiles, uint32_t last_rows, float scale) {
-    KERNEL_TASK_TYPE_DEFAULT(KERNEL_TYPE_MIX_AIC_1_2);
-    AscendC::InitSocState();
-    using namespace e8_decode;
-
-    __ubuf__ std::uint8_t arena[kUbStorageBytes] __attribute__((aligned(32)));
-    const std::uint32_t ub_base = static_cast<std::uint32_t>(reinterpret_cast<std::uint64_t>(arena));
+__aicore__ inline void ReaderTask(GM_ADDR gm_keys, GM_ADDR gm_values, GM_ADDR gm_offsets,
+    GM_ADDR gm_query, GM_ADDR gm_output, GM_ADDR gm_key_witness, GM_ADDR gm_value_witness,
+    GM_ADDR gm_score_witness, GM_ADDR gm_workspace, unsigned tiles, unsigned last_rows,
+    float scale, unsigned split, unsigned splits, std::uint64_t first_head, std::uint32_t ub_base) {
     if ASCEND_IS_AIC {
+        if (!tiles) return;
         AscendC::SetMMRowMajor();
         AscendC::SetHF32Mode(AscendC::HF32Mode::DISABLE);
         __ca__ float l0a[16 * 256] __attribute__((aligned(512)));
@@ -340,12 +337,15 @@ extern "C" __global__ __aicore__ void e8_fused_decode_fp32(GM_ADDR gm_keys, GM_A
         zeros.SetGlobalBuffer(reinterpret_cast<__gm__ float*>(gm_query) + 6 * 256);
         AscendC::DataCopy(e8_decode::L1<float>(kL1Probabilities, 16 * 64), zeros, 16 * 64);
         Sync<AscendC::HardEvent::MTE2_MTE1>();
-        for (unsigned tile = 0; tile + 2 < tiles; tile += 2) {
-            CubeTile<0, true>(l0a, l0b, l0c, ub_base);
-            CubeTile<1, true>(l0a, l0b, l0c, ub_base);
+        for (unsigned tile = 0; tile < tiles; ++tile) {
+            if (tile % 2 == 0) {
+                if (tile + 2 < tiles) CubeTile<0, true>(l0a, l0b, l0c, ub_base);
+                else CubeTile<0, false>(l0a, l0b, l0c, ub_base);
+            } else {
+                if (tile + 2 < tiles) CubeTile<1, true>(l0a, l0b, l0c, ub_base);
+                else CubeTile<1, false>(l0a, l0b, l0c, ub_base);
+            }
         }
-        CubeTile<0, false>(l0a, l0b, l0c, ub_base);
-        CubeTile<1, false>(l0a, l0b, l0c, ub_base);
         AscendC::CrossCoreSetFlag<2, PIPE_FIX>(7);
         AscendC::CrossCoreWaitFlag<2, PIPE_FIX>(8);
         Sync<AscendC::HardEvent::FIX_S>();
@@ -356,27 +356,43 @@ extern "C" __global__ __aicore__ void e8_fused_decode_fp32(GM_ADDR gm_keys, GM_A
         const unsigned owner = AscendC::GetSubBlockIdx();
         AscendC::GlobalTensor<std::uint64_t> map;
         map.SetGlobalBuffer(reinterpret_cast<__gm__ std::uint64_t*>(gm_offsets));
-        AscendC::DataCopy(b.offsets, map, ((tiles * 8 + 31u) & ~31u) / 8);
+        if (tiles) AscendC::DataCopy(b.offsets, map, ((tiles * 8 + 31u) & ~31u) / 8);
         Sync<AscendC::HardEvent::MTE2_S>();
         AscendC::Duplicate(b.maximum, -3.4028235e38f, 24);
         AscendC::Duplicate(b.sum, 0.0f, 24);
         AscendC::Duplicate(b.accumulator, 0.0f, 3 * 256);
-        StageQuery(b, reinterpret_cast<__gm__ float*>(gm_query), owner);
         auto* kw = reinterpret_cast<__gm__ bfloat16_t*>(gm_key_witness);
         auto* vw = reinterpret_cast<__gm__ bfloat16_t*>(gm_value_witness);
-        StageTile<0>(b, gm_keys, gm_values, 0, tiles, last_rows, owner, kw, vw);
-        StageTile<1>(b, gm_keys, gm_values, 1, tiles, last_rows, owner, kw, vw);
-        for (unsigned tile = 0; tile + 2 < tiles; tile += 2) {
-            VectorTile<0, true>(b, gm_keys, gm_values, tile, tiles, last_rows, owner, scale, kw, vw,
-                                reinterpret_cast<__gm__ float*>(gm_score_witness));
-            VectorTile<1, true>(b, gm_keys, gm_values, tile + 1, tiles, last_rows, owner, scale, kw, vw,
-                                reinterpret_cast<__gm__ float*>(gm_score_witness));
+        if (tiles) {
+            StageQuery(b, reinterpret_cast<__gm__ float*>(gm_query), owner);
+            StageTile<0>(b, gm_keys, gm_values, 0, tiles, last_rows, owner, kw, vw);
+            if (tiles > 1) StageTile<1>(b, gm_keys, gm_values, 1, tiles, last_rows, owner, kw, vw);
+            for (unsigned tile = 0; tile < tiles; ++tile) {
+                if (tile % 2 == 0) {
+                    if (tile + 2 < tiles) VectorTile<0, true>(b, gm_keys, gm_values, tile, tiles, last_rows, owner, scale, kw, vw, reinterpret_cast<__gm__ float*>(gm_score_witness));
+                    else VectorTile<0, false>(b, gm_keys, gm_values, tile, tiles, last_rows, owner, scale, kw, vw, reinterpret_cast<__gm__ float*>(gm_score_witness));
+                } else {
+                    if (tile + 2 < tiles) VectorTile<1, true>(b, gm_keys, gm_values, tile, tiles, last_rows, owner, scale, kw, vw, reinterpret_cast<__gm__ float*>(gm_score_witness));
+                    else VectorTile<1, false>(b, gm_keys, gm_values, tile, tiles, last_rows, owner, scale, kw, vw, reinterpret_cast<__gm__ float*>(gm_score_witness));
+                }
+            }
+            AscendC::CrossCoreWaitFlag<2, PIPE_V>(7);
         }
-        VectorTile<0, false>(b, gm_keys, gm_values, tiles - 2, tiles, last_rows, owner, scale, kw, vw,
-                             reinterpret_cast<__gm__ float*>(gm_score_witness));
-        VectorTile<1, false>(b, gm_keys, gm_values, tiles - 1, tiles, last_rows, owner, scale, kw, vw,
-                             reinterpret_cast<__gm__ float*>(gm_score_witness));
-        AscendC::CrossCoreWaitFlag<2, PIPE_V>(7);
+        if (splits > 1) {
+            AscendC::GlobalTensor<float> partial;
+            partial.SetGlobalBuffer(reinterpret_cast<__gm__ float*>(gm_workspace));
+            Sync<AscendC::HardEvent::V_MTE3>();
+            for (unsigned head = 0; head < kLocalHeads; ++head) {
+                const auto offset = partial_offset(first_head + owner * kLocalHeads + head, split, splits);
+                AscendC::DataCopy(partial[offset], b.accumulator[head * kChannels], kChannels);
+                AscendC::DataCopy(partial[offset + kChannels], b.maximum[head * 8], 8);
+                AscendC::DataCopy(partial[offset + kChannels + 8], b.sum[head * 8], 8);
+            }
+            Sync<AscendC::HardEvent::MTE3_S>();
+            if (tiles) AscendC::CrossCoreSetFlag<2, PIPE_MTE3>(8);
+            return;
+        }
+        AscendC::PipeBarrier<PIPE_V>();
         Normalize(reinterpret_cast<__ubuf__ float*>(b.accumulator.GetPhyAddr()),
                   reinterpret_cast<__ubuf__ float*>(b.sum.GetPhyAddr()));
         AscendC::PipeBarrier<PIPE_V>();
@@ -386,27 +402,112 @@ extern "C" __global__ __aicore__ void e8_fused_decode_fp32(GM_ADDR gm_keys, GM_A
         destination.SetGlobalBuffer(reinterpret_cast<__gm__ bfloat16_t*>(gm_output) + owner * 3 * 256);
         AscendC::DataCopy(destination, b.output, 3 * 256);
         Sync<AscendC::HardEvent::MTE3_S>();
-        AscendC::CrossCoreSetFlag<2, PIPE_MTE3>(8);
+        if (tiles) AscendC::CrossCoreSetFlag<2, PIPE_MTE3>(8);
     }
+}
+
+[[maybe_unused]] __simd_vf__ inline void NormalizeOne(__ubuf__ float* acc, __ubuf__ float* sum) {
+    NormalizeHead<0>(acc, sum);
+}
+}
+
+extern "C" __global__ __aicore__ void e8_fused_decode_fp32(
+    GM_ADDR keys, GM_ADDR values, GM_ADDR offsets, GM_ADDR query, GM_ADDR output,
+    GM_ADDR key_witness, GM_ADDR value_witness, GM_ADDR score_witness, GM_ADDR tasks, GM_ADDR workspace,
+    uint32_t tiles, uint32_t last_rows, uint32_t groups, uint32_t splits, uint32_t context_tiles, float scale) {
+    KERNEL_TASK_TYPE_DEFAULT(KERNEL_TYPE_MIX_AIC_1_2);
+    AscendC::InitSocState();
+    using namespace e8_decode;
+    const auto block = static_cast<std::uint32_t>(AscendC::GetBlockIdx() / AscendC::GetSubBlockNum());
+    const auto split = block % splits;
+    const auto lane = block / splits;
+    Task task{0, 0, 0, tiles, last_rows, 0, 0};
+    if (tasks) {
+        const auto* descriptor = reinterpret_cast<__gm__ const Task*>(tasks) + block;
+        task.offsets_index = descriptor->offsets_index;
+        task.witness_tile = descriptor->witness_tile;
+        task.score_tile = descriptor->score_tile;
+        task.tiles = descriptor->tiles;
+        task.last_rows = descriptor->last_rows;
+        task.lane = descriptor->lane;
+    }
+    if (task.tiles > tiles || task.tiles > kMaxTiles || task.last_rows > kRows ||
+        (task.tiles && !task.last_rows) || task.lane != lane) return;
+    __ubuf__ std::uint8_t arena[kUbStorageBytes] __attribute__((aligned(32)));
+    const auto ub_base = static_cast<std::uint32_t>(reinterpret_cast<std::uint64_t>(arena));
+    for (unsigned group = 0; group < groups; ++group) {
+        const std::uint64_t job = std::uint64_t{lane} * groups + group;
+        ReaderTask(keys, values, offsets + task.offsets_index * sizeof(std::uint64_t),
+            query + job * kPaddedHeads * kChannels * sizeof(float),
+            output + job * kHeads * kChannels * sizeof(bfloat16_t),
+            key_witness ? key_witness + task.witness_tile * kRows * kChannels * sizeof(bfloat16_t) : nullptr,
+            value_witness ? value_witness + task.witness_tile * kRows * kChannels * sizeof(bfloat16_t) : nullptr,
+            score_witness ? score_witness + (task.score_tile + std::uint64_t{group} * context_tiles) * kHeads * kRows * sizeof(float) : nullptr,
+            workspace, task.tiles, task.last_rows, scale, split, splits, job * kHeads, ub_base);
+    }
+}
+
+extern "C" __global__ __aicore__ void e8_splitk_reduce_fp32(GM_ADDR workspace, GM_ADDR output,
+                                                            uint32_t heads, uint32_t splits) {
+    KERNEL_TASK_TYPE_DEFAULT(KERNEL_TYPE_AIV_ONLY);
+    AscendC::InitSocState();
+    using namespace e8_decode;
+    const auto head = static_cast<std::uint32_t>(AscendC::GetBlockIdx());
+    if (head >= heads) return;
+    __ubuf__ float arena[1024] __attribute__((aligned(32)));
+    const auto base = static_cast<std::uint32_t>(reinterpret_cast<std::uint64_t>(arena));
+    auto acc = Ub<float>(base, 256);
+    auto part = Ub<float>(base + 256 * 4, kPartialStride);
+    auto state = Ub<float>(base + 528 * 4, 40);
+    auto blocks = Ub<float>(base + 576 * 4, 128);
+    auto result = Ub<bfloat16_t>(base + 704 * 4, 256);
+    AscendC::GlobalTensor<float> partial;
+    partial.SetGlobalBuffer(reinterpret_cast<__gm__ float*>(workspace));
+    ascend_micro::NativeMergeEngine merge{acc, part, state, state[8], part[256], part[264],
+                                          state[16], state[24], state[32], blocks, blocks[64], 256};
+    AscendC::Duplicate(acc, 0.0f, 256);
+    AscendC::Duplicate(state, 0.0f, 40);
+    AscendC::PipeBarrier<PIPE_V>();
+    AscendC::Duplicate(state, -3.4028235e38f, 1);
+    for (unsigned split = 0; split < splits; ++split) {
+        Sync<AscendC::HardEvent::V_MTE2>();
+        AscendC::DataCopy(part, partial[partial_offset(head, split, splits)], kPartialStride);
+        Sync<AscendC::HardEvent::MTE2_V>();
+        ascend_micro::vector_merge_partials(merge);
+    }
+    AscendC::Brcb(blocks, state[8], 1, {1, 8});
+    AscendC::PipeBarrier<PIPE_V>();
+    NormalizeOne(reinterpret_cast<__ubuf__ float*>(acc.GetPhyAddr()), reinterpret_cast<__ubuf__ float*>(blocks.GetPhyAddr()));
+    AscendC::PipeBarrier<PIPE_V>();
+    AscendC::Cast(result, acc, AscendC::RoundMode::CAST_RINT, 256);
+    Sync<AscendC::HardEvent::V_MTE3>();
+    AscendC::GlobalTensor<bfloat16_t> destination;
+    destination.SetGlobalBuffer(reinterpret_cast<__gm__ bfloat16_t*>(output) + std::uint64_t{head} * 256);
+    AscendC::DataCopy(destination, result, 256);
+    Sync<AscendC::HardEvent::MTE3_S>();
 }
 
 #elif defined(ASCEND_MICRO_CANN_LAUNCH)
 #include "kernel_operator.h"
 #include <stdexcept>
-extern "C" __global__ __aicore__ void e8_fused_decode_fp32(GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR,
-                                                           GM_ADDR, GM_ADDR, GM_ADDR, uint32_t, uint32_t,
-                                                           float);
+extern "C" __global__ __aicore__ void e8_fused_decode_fp32(
+    GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR, GM_ADDR,
+    uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, float);
+extern "C" __global__ __aicore__ void e8_splitk_reduce_fp32(GM_ADDR, GM_ADDR, uint32_t, uint32_t);
 extern "C" void launch_e8_fused_decode_fp32(void* stream, const e8_decode::Launch* c,
                                             const e8_decode::Buffers* b) {
-    if (!c || !b || c->tiles < 4 || c->tiles > e8_decode::kMaxTiles || c->tiles % 2 || !c->last_rows ||
-        c->last_rows > 64 || !b->key_packets || !b->value_packets || !b->packet_offsets || !b->query_padded ||
-        !b->output || !b->key_witness || !b->value_witness || !b->score_witness)
-        throw std::invalid_argument("invalid E8 D256 six-head even-tile launch");
-    e8_fused_decode_fp32<<<1, nullptr, stream>>>(
+    if (!c || !b || !e8_decode::valid_launch(*c, *b))
+        throw std::invalid_argument("invalid E8 batched Split-K launch");
+    e8_fused_decode_fp32<<<c->lanes * c->splits, nullptr, stream>>>(
         static_cast<std::uint8_t*>(b->key_packets), static_cast<std::uint8_t*>(b->value_packets),
         static_cast<std::uint8_t*>(b->packet_offsets), static_cast<std::uint8_t*>(b->query_padded),
         static_cast<std::uint8_t*>(b->output), static_cast<std::uint8_t*>(b->key_witness),
-        static_cast<std::uint8_t*>(b->value_witness), static_cast<std::uint8_t*>(b->score_witness), c->tiles,
-        c->last_rows, c->attention_scale);
+        static_cast<std::uint8_t*>(b->value_witness), static_cast<std::uint8_t*>(b->score_witness),
+        static_cast<std::uint8_t*>(b->tasks), static_cast<std::uint8_t*>(b->workspace),
+        c->tiles, c->last_rows, c->groups, c->splits, c->context_tiles, c->attention_scale);
+    if (c->splits > 1)
+        e8_splitk_reduce_fp32<<<c->lanes * c->groups * e8_decode::kHeads, nullptr, stream>>>(
+            static_cast<std::uint8_t*>(b->workspace), static_cast<std::uint8_t*>(b->output),
+            c->lanes * c->groups * e8_decode::kHeads, c->splits);
 }
 #endif

@@ -1,0 +1,216 @@
+[LOG_WARNING] can not create directory, directory: /ascend/log, possible reason: No such file or directory.mode=lm4 stage=ingress profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=READY
+mode=lm4 stage=dequant profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=READY
+mode=lm3 stage=ingress profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=h1 dim=256 block=64 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=h1 dim=256 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=READY
+mode=lm4 stage=dequant profile=h1 dim=256 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=h1 dim=256 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=READY
+mode=lm3 stage=ingress profile=h1 dim=256 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=h1 dim=256 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=h1 dim=256 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=h1 dim=256 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=h1 dim=256 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=h1 dim=256 block=128 seqs=1 context=2048 kv_heads=1 group=1 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=qwen35-gqa4 dim=256 block=64 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=READY
+mode=lm4 stage=dequant profile=qwen35-gqa4 dim=256 block=64 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=qwen35-gqa4 dim=256 block=64 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=READY
+mode=lm3 stage=ingress profile=qwen35-gqa4 dim=256 block=64 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=qwen35-gqa4 dim=256 block=64 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=qwen35-gqa4 dim=256 block=64 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=qwen35-gqa4 dim=256 block=64 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=qwen35-gqa4 dim=256 block=64 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=qwen35-gqa4 dim=256 block=64 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=qwen35-gqa4 dim=256 block=128 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=READY
+mode=lm4 stage=dequant profile=qwen35-gqa4 dim=256 block=128 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=qwen35-gqa4 dim=256 block=128 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=READY
+mode=lm3 stage=ingress profile=qwen35-gqa4 dim=256 block=128 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=qwen35-gqa4 dim=256 block=128 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=qwen35-gqa4 dim=256 block=128 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=qwen35-gqa4 dim=256 block=128 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=qwen35-gqa4 dim=256 block=128 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=qwen35-gqa4 dim=256 block=128 seqs=1 context=2048 kv_heads=4 group=4 split_k=1 ragged=0 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=qwen35-gqa6 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=READY
+mode=lm4 stage=dequant profile=qwen35-gqa6 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=qwen35-gqa6 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=READY
+mode=lm3 stage=ingress profile=qwen35-gqa6 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=qwen35-gqa6 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=qwen35-gqa6 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=qwen35-gqa6 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=qwen35-gqa6 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=qwen35-gqa6 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=qwen35-gqa6 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=READY
+mode=lm4 stage=dequant profile=qwen35-gqa6 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=qwen35-gqa6 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=READY
+mode=lm3 stage=ingress profile=qwen35-gqa6 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=qwen35-gqa6 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=qwen35-gqa6 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=qwen35-gqa6 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=qwen35-gqa6 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=qwen35-gqa6 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=6 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=glm4-gqa8 dim=256 block=64 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=READY
+mode=lm4 stage=dequant profile=glm4-gqa8 dim=256 block=64 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=glm4-gqa8 dim=256 block=64 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=UNSUPPORTED reason=native fused launch requires at most 4 KV heads and 8 splits
+mode=lm3 stage=ingress profile=glm4-gqa8 dim=256 block=64 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=glm4-gqa8 dim=256 block=64 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=glm4-gqa8 dim=256 block=64 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=glm4-gqa8 dim=256 block=64 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=glm4-gqa8 dim=256 block=64 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=glm4-gqa8 dim=256 block=64 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=glm4-gqa8 dim=256 block=128 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=READY
+mode=lm4 stage=dequant profile=glm4-gqa8 dim=256 block=128 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=glm4-gqa8 dim=256 block=128 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=UNSUPPORTED reason=native fused launch requires at most 4 KV heads and 8 splits
+mode=lm3 stage=ingress profile=glm4-gqa8 dim=256 block=128 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=glm4-gqa8 dim=256 block=128 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=glm4-gqa8 dim=256 block=128 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=glm4-gqa8 dim=256 block=128 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=glm4-gqa8 dim=256 block=128 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=glm4-gqa8 dim=256 block=128 seqs=4 context=2048 kv_heads=8 group=8 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=glm4-gqa16 dim=256 block=64 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=READY
+mode=lm4 stage=dequant profile=glm4-gqa16 dim=256 block=64 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=glm4-gqa16 dim=256 block=64 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=UNSUPPORTED reason=native fused launch requires at most 4 KV heads and 8 splits
+mode=lm3 stage=ingress profile=glm4-gqa16 dim=256 block=64 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=glm4-gqa16 dim=256 block=64 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=glm4-gqa16 dim=256 block=64 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=glm4-gqa16 dim=256 block=64 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=glm4-gqa16 dim=256 block=64 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=glm4-gqa16 dim=256 block=64 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=glm4-gqa16 dim=256 block=128 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=READY
+mode=lm4 stage=dequant profile=glm4-gqa16 dim=256 block=128 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=glm4-gqa16 dim=256 block=128 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=UNSUPPORTED reason=native fused launch requires at most 4 KV heads and 8 splits
+mode=lm3 stage=ingress profile=glm4-gqa16 dim=256 block=128 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=glm4-gqa16 dim=256 block=128 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=glm4-gqa16 dim=256 block=128 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=glm4-gqa16 dim=256 block=128 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=glm4-gqa16 dim=256 block=128 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=glm4-gqa16 dim=256 block=128 seqs=1 context=2048 kv_heads=8 group=16 split_k=1 ragged=0 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=split4 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=READY
+mode=lm4 stage=dequant profile=split4 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=split4 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=READY
+mode=lm3 stage=ingress profile=split4 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=split4 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=split4 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=split4 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=split4 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=split4 dim=256 block=64 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=split4 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=READY
+mode=lm4 stage=dequant profile=split4 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=split4 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=READY
+mode=lm3 stage=ingress profile=split4 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=split4 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=split4 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=split4 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=split4 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=split4 dim=256 block=128 seqs=4 context=4096 kv_heads=4 group=8 split_k=4 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=split8 dim=256 block=64 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=READY
+mode=lm4 stage=dequant profile=split8 dim=256 block=64 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=split8 dim=256 block=64 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=READY
+mode=lm3 stage=ingress profile=split8 dim=256 block=64 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=split8 dim=256 block=64 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=split8 dim=256 block=64 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=split8 dim=256 block=64 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=split8 dim=256 block=64 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=split8 dim=256 block=64 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=split8 dim=256 block=128 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=READY
+mode=lm4 stage=dequant profile=split8 dim=256 block=128 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=split8 dim=256 block=128 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=READY
+mode=lm3 stage=ingress profile=split8 dim=256 block=128 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=split8 dim=256 block=128 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=split8 dim=256 block=128 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=split8 dim=256 block=128 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=split8 dim=256 block=128 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=split8 dim=256 block=128 seqs=16 context=8192 kv_heads=1 group=6 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=split16 dim=256 block=64 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=READY
+mode=lm4 stage=dequant profile=split16 dim=256 block=64 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=split16 dim=256 block=64 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=UNSUPPORTED reason=native fused launch requires at most 4 KV heads and 8 splits
+mode=lm3 stage=ingress profile=split16 dim=256 block=64 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=split16 dim=256 block=64 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=split16 dim=256 block=64 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=split16 dim=256 block=64 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=split16 dim=256 block=64 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=split16 dim=256 block=64 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=split16 dim=256 block=128 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=READY
+mode=lm4 stage=dequant profile=split16 dim=256 block=128 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=split16 dim=256 block=128 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=UNSUPPORTED reason=native fused launch requires at most 4 KV heads and 8 splits
+mode=lm3 stage=ingress profile=split16 dim=256 block=128 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=split16 dim=256 block=128 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=split16 dim=256 block=128 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=split16 dim=256 block=128 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=split16 dim=256 block=128 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=split16 dim=256 block=128 seqs=32 context=16384 kv_heads=4 group=4 split_k=16 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=deepseek-v4-flash-16k dim=256 block=64 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=READY
+mode=lm4 stage=dequant profile=deepseek-v4-flash-16k dim=256 block=64 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=deepseek-v4-flash-16k dim=256 block=64 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=READY
+mode=lm3 stage=ingress profile=deepseek-v4-flash-16k dim=256 block=64 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=deepseek-v4-flash-16k dim=256 block=64 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=deepseek-v4-flash-16k dim=256 block=64 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=deepseek-v4-flash-16k dim=256 block=64 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=deepseek-v4-flash-16k dim=256 block=64 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=deepseek-v4-flash-16k dim=256 block=64 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=deepseek-v4-flash-16k dim=256 block=128 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=READY
+mode=lm4 stage=dequant profile=deepseek-v4-flash-16k dim=256 block=128 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=deepseek-v4-flash-16k dim=256 block=128 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=READY
+mode=lm3 stage=ingress profile=deepseek-v4-flash-16k dim=256 block=128 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=deepseek-v4-flash-16k dim=256 block=128 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=deepseek-v4-flash-16k dim=256 block=128 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=deepseek-v4-flash-16k dim=256 block=128 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=deepseek-v4-flash-16k dim=256 block=128 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=deepseek-v4-flash-16k dim=256 block=128 seqs=16 context=16384 kv_heads=4 group=4 split_k=1 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=deepseek-v4-flash-32k dim=256 block=64 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=READY
+mode=lm4 stage=dequant profile=deepseek-v4-flash-32k dim=256 block=64 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=deepseek-v4-flash-32k dim=256 block=64 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=READY
+mode=lm3 stage=ingress profile=deepseek-v4-flash-32k dim=256 block=64 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=deepseek-v4-flash-32k dim=256 block=64 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=deepseek-v4-flash-32k dim=256 block=64 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=deepseek-v4-flash-32k dim=256 block=64 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=deepseek-v4-flash-32k dim=256 block=64 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=deepseek-v4-flash-32k dim=256 block=64 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=deepseek-v4-flash-32k dim=256 block=128 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=READY
+mode=lm4 stage=dequant profile=deepseek-v4-flash-32k dim=256 block=128 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=deepseek-v4-flash-32k dim=256 block=128 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=READY
+mode=lm3 stage=ingress profile=deepseek-v4-flash-32k dim=256 block=128 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=deepseek-v4-flash-32k dim=256 block=128 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=deepseek-v4-flash-32k dim=256 block=128 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=deepseek-v4-flash-32k dim=256 block=128 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=deepseek-v4-flash-32k dim=256 block=128 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=deepseek-v4-flash-32k dim=256 block=128 seqs=32 context=32768 kv_heads=1 group=6 split_k=4 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=deepseek-v4-flash-64k dim=256 block=64 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=READY
+mode=lm4 stage=dequant profile=deepseek-v4-flash-64k dim=256 block=64 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=deepseek-v4-flash-64k dim=256 block=64 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=READY
+mode=lm3 stage=ingress profile=deepseek-v4-flash-64k dim=256 block=64 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=deepseek-v4-flash-64k dim=256 block=64 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=deepseek-v4-flash-64k dim=256 block=64 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=deepseek-v4-flash-64k dim=256 block=64 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=deepseek-v4-flash-64k dim=256 block=64 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=deepseek-v4-flash-64k dim=256 block=64 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=deepseek-v4-flash-64k dim=256 block=128 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=READY
+mode=lm4 stage=dequant profile=deepseek-v4-flash-64k dim=256 block=128 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=deepseek-v4-flash-64k dim=256 block=128 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=READY
+mode=lm3 stage=ingress profile=deepseek-v4-flash-64k dim=256 block=128 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=deepseek-v4-flash-64k dim=256 block=128 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=deepseek-v4-flash-64k dim=256 block=128 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=deepseek-v4-flash-64k dim=256 block=128 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=deepseek-v4-flash-64k dim=256 block=128 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=deepseek-v4-flash-64k dim=256 block=128 seqs=4 context=65536 kv_heads=1 group=8 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=deepseek-v4-flash-128k dim=256 block=64 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=READY
+mode=lm4 stage=dequant profile=deepseek-v4-flash-128k dim=256 block=64 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=deepseek-v4-flash-128k dim=256 block=64 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=READY
+mode=lm3 stage=ingress profile=deepseek-v4-flash-128k dim=256 block=64 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=deepseek-v4-flash-128k dim=256 block=64 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=deepseek-v4-flash-128k dim=256 block=64 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=deepseek-v4-flash-128k dim=256 block=64 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=deepseek-v4-flash-128k dim=256 block=64 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=deepseek-v4-flash-128k dim=256 block=64 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=lm4 stage=ingress profile=deepseek-v4-flash-128k dim=256 block=128 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=READY
+mode=lm4 stage=dequant profile=deepseek-v4-flash-128k dim=256 block=128 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=UNSUPPORTED reason=no standalone Lloyd-Max 4-bit dequantizer
+mode=lm4 stage=decode profile=deepseek-v4-flash-128k dim=256 block=128 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=READY
+mode=lm3 stage=ingress profile=deepseek-v4-flash-128k dim=256 block=128 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=dequant profile=deepseek-v4-flash-128k dim=256 block=128 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=lm3 stage=decode profile=deepseek-v4-flash-128k dim=256 block=128 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=UNSUPPORTED reason=no native Lloyd-Max 3-bit kernel
+mode=e8 stage=ingress profile=deepseek-v4-flash-128k dim=256 block=128 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=dequant profile=deepseek-v4-flash-128k dim=256 block=128 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
+mode=e8 stage=decode profile=deepseek-v4-flash-128k dim=256 block=128 seqs=1 context=131072 kv_heads=4 group=16 split_k=8 ragged=1 status=UNSUPPORTED reason=E8 kernels disabled at build time
